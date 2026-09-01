@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/HlslPerf.Core/HlslPerf.Core.csproj" />
+    <Project Path="src/HlslPerf.D3D12/HlslPerf.D3D12.csproj" />
+    <Project Path="src/HlslPerf.Cli/HlslPerf.Cli.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj" />
+  </Folder>
+</Solution>

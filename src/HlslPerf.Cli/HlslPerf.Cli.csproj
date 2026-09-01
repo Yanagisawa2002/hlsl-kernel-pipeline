@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>hlslperf</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../HlslPerf.Core/HlslPerf.Core.csproj" />
+    <ProjectReference Include="../HlslPerf.D3D12/HlslPerf.D3D12.csproj" />
+  </ItemGroup>
+</Project>
