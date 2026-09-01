@@ -12,6 +12,8 @@ public sealed class TuningManifest
     public string SchemaVersion { get; init; } = "1.0";
     public required string Name { get; init; }
     public required string KernelPath { get; init; }
+    public string KernelAbiVersion { get; init; } = KernelAbiV1.Id;
+    public WorkloadSpec? Workload { get; init; }
     public string EntryPoint { get; init; } = "CSMain";
     public string ShaderModel { get; init; } = "6_0";
     public int WorkItemCount { get; init; } = 1_048_576;
@@ -34,7 +36,7 @@ public sealed class TuningManifest
 
     public void Validate()
     {
-        if (SchemaVersion != "1.0")
+        if (SchemaVersion is not ("1.0" or "2.0"))
             throw new InvalidDataException($"Unsupported manifest schema '{SchemaVersion}'.");
         if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(KernelPath))
             throw new InvalidDataException("Manifest name and kernelPath are required.");
@@ -60,10 +62,21 @@ public sealed class TuningManifest
             if (!axis.Values.Contains(value))
                 throw new InvalidDataException($"Baseline value {value} is not present in axis '{key}'.");
         }
-        if (!Axes.Any(axis => axis.Name == ThreadsPerGroupParameter) && !FixedDefines.ContainsKey(ThreadsPerGroupParameter))
-            throw new InvalidDataException($"Missing threads-per-group parameter '{ThreadsPerGroupParameter}'.");
-        if (!Axes.Any(axis => axis.Name == ElementsPerThreadParameter) && !FixedDefines.ContainsKey(ElementsPerThreadParameter))
-            throw new InvalidDataException($"Missing elements-per-thread parameter '{ElementsPerThreadParameter}'.");
+        if (SchemaVersion == "1.0")
+        {
+            if (!Axes.Any(axis => axis.Name == ThreadsPerGroupParameter) && !FixedDefines.ContainsKey(ThreadsPerGroupParameter))
+                throw new InvalidDataException($"Missing threads-per-group parameter '{ThreadsPerGroupParameter}'.");
+            if (!Axes.Any(axis => axis.Name == ElementsPerThreadParameter) && !FixedDefines.ContainsKey(ElementsPerThreadParameter))
+                throw new InvalidDataException($"Missing elements-per-thread parameter '{ElementsPerThreadParameter}'.");
+        }
+        else
+        {
+            if (KernelAbiVersion != KernelAbiV1.Id)
+                throw new InvalidDataException($"Unsupported kernel ABI '{KernelAbiVersion}'.");
+            Workload?.Validate();
+            if (Workload is null)
+                throw new InvalidDataException("Schema 2.0 manifests require a workload object.");
+        }
     }
 
     public static TuningManifest Load(string path)
@@ -73,6 +86,32 @@ public sealed class TuningManifest
         manifest.Validate();
         return manifest;
     }
+}
+
+public sealed class WorkloadSpec
+{
+    public required string Id { get; init; }
+    public IReadOnlyDictionary<string, long> Parameters { get; init; } =
+        new ReadOnlyDictionary<string, long>(new Dictionary<string, long>());
+
+    internal void Validate()
+    {
+        if (string.IsNullOrWhiteSpace(Id))
+            throw new InvalidDataException("workload.id is required.");
+        if (Parameters.Any(pair => string.IsNullOrWhiteSpace(pair.Key) || pair.Value <= 0))
+            throw new InvalidDataException("Workload parameter names must be non-empty and values must be positive integers.");
+    }
+
+    public int GetRequiredInt32(string name)
+    {
+        if (!Parameters.TryGetValue(name, out long value))
+            throw new InvalidDataException($"Workload '{Id}' is missing parameter '{name}'.");
+        return checked((int)value);
+    }
+
+    public int GetInt32(string name, int fallback) => Parameters.TryGetValue(name, out long value)
+        ? checked((int)value)
+        : fallback;
 }
 
 public sealed class CandidateAxis
@@ -131,7 +170,39 @@ public sealed record CandidateResult(
     DistributionSummary? Timing,
     double? ThroughputMillionItemsPerSecond,
     bool Stable,
-    string? Error);
+    string? Error,
+    RgaCandidateAnalysis? StaticAnalysis = null);
+
+public sealed record RgaPassAnalysis(
+    string PassName,
+    string EntryPoint,
+    int? VgprsUsed,
+    int? VgprsAvailable,
+    int? PhysicalVgprs,
+    int? MaximumLiveVgprs,
+    int? AllocatedVgprs,
+    double? VgprUsageRatio,
+    int? SgprsUsed,
+    int? SgprsAvailable,
+    int? PhysicalSgprs,
+    double? SgprUsageRatio,
+    int? LdsBytes,
+    int? LdsAvailableBytes,
+    int? ScratchBytes,
+    int? ThreadGroupX,
+    int? ThreadGroupY,
+    int? ThreadGroupZ,
+    double? OccupancyWavesPerSimd,
+    string? IsaPath,
+    string? LiveVgprPath);
+
+public sealed record RgaCandidateAnalysis(
+    string Tool,
+    string? ToolVersion,
+    string? Target,
+    string Status,
+    IReadOnlyList<RgaPassAnalysis> Passes,
+    string? Diagnostic);
 
 public sealed record DeviceFingerprint(
     string AdapterName,
@@ -163,7 +234,11 @@ public sealed record TuningRunReport(
     DeviceFingerprint Device,
     string BaselineCandidateId,
     SelectionResult? Selection,
-    IReadOnlyList<CandidateResult> Candidates);
+    IReadOnlyList<CandidateResult> Candidates,
+    string WorkloadId = "legacy-v1",
+    string KernelAbiVersion = "legacy-v1");
+
+public sealed record ProfileDefine(string Name, int Value);
 
 public sealed record TuningProfile(
     string SchemaVersion,
@@ -177,7 +252,10 @@ public sealed record TuningProfile(
     double MedianGpuMilliseconds,
     double P95GpuMilliseconds,
     double ThroughputMillionItemsPerSecond,
-    double? SpeedupOverBaseline);
+    double? SpeedupOverBaseline,
+    string WorkloadId = "legacy-v1",
+    string KernelAbiVersion = "legacy-v1",
+    IReadOnlyList<ProfileDefine>? DefineValues = null);
 
 public static class JsonDefaults
 {

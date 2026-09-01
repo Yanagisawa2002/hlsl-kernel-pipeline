@@ -1,9 +1,17 @@
+#define HLSLPERF_ROOT_SIGNATURE "SRV(t0), SRV(t1), UAV(u0), UAV(u1), RootConstants(num32BitConstants=8, b0)"
+
 RWByteAddressBuffer Output : register(u0);
 
 cbuffer DispatchParameters : register(b0)
 {
     uint WorkItemCount;
     uint Seed;
+    uint Parameter2;
+    uint Parameter3;
+    uint Parameter4;
+    uint Parameter5;
+    uint Parameter6;
+    uint Parameter7;
 };
 
 #ifndef HLSLPERF_GROUP_SIZE
@@ -18,6 +26,7 @@ cbuffer DispatchParameters : register(b0)
 #define HLSLPERF_ALU_ROUNDS 64
 #endif
 
+[RootSignature(HLSLPERF_ROOT_SIGNATURE)]
 [numthreads(HLSLPERF_GROUP_SIZE, 1, 1)]
 void CSMain(uint3 dispatchThreadId : SV_DispatchThreadID)
 {

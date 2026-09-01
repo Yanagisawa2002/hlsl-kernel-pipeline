@@ -1,0 +1,224 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace EdwinLiu.HlslPerf
+{
+    public enum HlslPerfCompatibilityPolicy
+    {
+        ExactDeviceAndDriver,
+        ExactDevice,
+        BackendAndShaderModel
+    }
+
+    public sealed class HlslPerfRuntimeFingerprint
+    {
+        public HlslPerfRuntimeFingerprint(
+            long vendorId,
+            long deviceId,
+            string driverVersion,
+            string backend,
+            string shaderModel)
+        {
+            VendorId = vendorId;
+            DeviceId = deviceId;
+            DriverVersion = driverVersion ?? string.Empty;
+            Backend = backend ?? string.Empty;
+            ShaderModel = shaderModel ?? string.Empty;
+        }
+
+        public long VendorId { get; private set; }
+        public long DeviceId { get; private set; }
+        public string DriverVersion { get; private set; }
+        public string Backend { get; private set; }
+        public string ShaderModel { get; private set; }
+    }
+
+    public sealed class HlslPerfResolvedProfile
+    {
+        internal HlslPerfResolvedProfile(
+            bool isCompatible,
+            string reason,
+            string workloadId,
+            string candidateId,
+            string compatibilityKey,
+            HlslPerfDefineValue[] defines,
+            double medianGpuMilliseconds,
+            double p95GpuMilliseconds)
+        {
+            IsCompatible = isCompatible;
+            Reason = reason;
+            WorkloadId = workloadId;
+            CandidateId = candidateId;
+            CompatibilityKey = compatibilityKey;
+            Defines = defines ?? new HlslPerfDefineValue[0];
+            MedianGpuMilliseconds = medianGpuMilliseconds;
+            P95GpuMilliseconds = p95GpuMilliseconds;
+        }
+
+        public bool IsCompatible { get; private set; }
+        public string Reason { get; private set; }
+        public string WorkloadId { get; private set; }
+        public string CandidateId { get; private set; }
+        public string CompatibilityKey { get; private set; }
+        public HlslPerfDefineValue[] Defines { get; private set; }
+        public double MedianGpuMilliseconds { get; private set; }
+        public double P95GpuMilliseconds { get; private set; }
+    }
+
+    public interface IHlslPerfDefineSink
+    {
+        void SetInt(string name, int value);
+    }
+
+    public static class HlslPerfProfileConsumer
+    {
+        public const string SupportedSchema = "2.0";
+        public const string SupportedAbi = "hlslperf.raw-buffer.v1";
+
+        public static bool TryResolve(
+            TextAsset profile,
+            HlslPerfRuntimeFingerprint runtime,
+            string expectedWorkloadId,
+            HlslPerfCompatibilityPolicy policy,
+            out HlslPerfResolvedProfile resolved)
+        {
+            if (profile == null)
+            {
+                resolved = Failure("Profile TextAsset is null.");
+                return false;
+            }
+            return TryResolveJson(profile.text, runtime, expectedWorkloadId, policy, out resolved);
+        }
+
+        public static bool TryResolveJson(
+            string json,
+            HlslPerfRuntimeFingerprint runtime,
+            string expectedWorkloadId,
+            HlslPerfCompatibilityPolicy policy,
+            out HlslPerfResolvedProfile resolved)
+        {
+            if (runtime == null)
+            {
+                resolved = Failure("Runtime fingerprint is null.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(expectedWorkloadId))
+            {
+                resolved = Failure("Expected workload id is required.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                resolved = Failure("Profile JSON is empty.");
+                return false;
+            }
+
+            HlslPerfProfileData data;
+            try
+            {
+                data = JsonUtility.FromJson<HlslPerfProfileData>(json);
+            }
+            catch (ArgumentException exception)
+            {
+                resolved = Failure("Profile JSON is invalid: " + exception.Message);
+                return false;
+            }
+            if (data == null)
+            {
+                resolved = Failure("Profile JSON did not produce a profile.");
+                return false;
+            }
+
+            string validationError = Validate(data, runtime, expectedWorkloadId, policy);
+            if (validationError != null)
+            {
+                resolved = Failure(validationError);
+                return false;
+            }
+            resolved = new HlslPerfResolvedProfile(
+                true,
+                "Profile workload, ABI, and runtime fingerprint are compatible.",
+                data.workloadId,
+                data.candidateId,
+                data.compatibilityKey,
+                Clone(data.defineValues),
+                data.medianGpuMilliseconds,
+                data.p95GpuMilliseconds);
+            return true;
+        }
+
+        public static void Apply(HlslPerfResolvedProfile profile, IHlslPerfDefineSink sink)
+        {
+            if (profile == null)
+                throw new ArgumentNullException("profile");
+            if (sink == null)
+                throw new ArgumentNullException("sink");
+            if (!profile.IsCompatible)
+                throw new InvalidOperationException("Cannot apply an incompatible HLSL performance profile.");
+            foreach (HlslPerfDefineValue define in profile.Defines)
+                sink.SetInt(define.name, define.value);
+        }
+
+        private static string Validate(
+            HlslPerfProfileData data,
+            HlslPerfRuntimeFingerprint runtime,
+            string expectedWorkloadId,
+            HlslPerfCompatibilityPolicy policy)
+        {
+            if (!string.Equals(data.schemaVersion, SupportedSchema, StringComparison.Ordinal))
+                return "Unsupported profile schema '" + data.schemaVersion + "'.";
+            if (!string.Equals(data.kernelAbiVersion, SupportedAbi, StringComparison.Ordinal))
+                return "Unsupported kernel ABI '" + data.kernelAbiVersion + "'.";
+            if (!string.Equals(data.workloadId, expectedWorkloadId, StringComparison.Ordinal))
+                return "Profile workload does not match the requested workload.";
+            if (data.device == null)
+                return "Profile device fingerprint is missing.";
+            if (string.IsNullOrWhiteSpace(data.compatibilityKey) || string.IsNullOrWhiteSpace(data.candidateId))
+                return "Profile identity is incomplete.";
+            if (data.defineValues == null || data.defineValues.Length == 0)
+                return "Profile contains no define values.";
+            HashSet<string> names = new HashSet<string>(StringComparer.Ordinal);
+            foreach (HlslPerfDefineValue define in data.defineValues)
+            {
+                if (define == null || string.IsNullOrWhiteSpace(define.name))
+                    return "Profile contains an invalid define.";
+                if (!names.Add(define.name))
+                    return "Profile contains duplicate define '" + define.name + "'.";
+            }
+            if (!string.Equals(data.device.backend, runtime.Backend, StringComparison.OrdinalIgnoreCase) ||
+                !string.Equals(data.device.shaderModel, runtime.ShaderModel, StringComparison.OrdinalIgnoreCase))
+                return "Profile backend or shader model does not match the runtime.";
+            if (policy == HlslPerfCompatibilityPolicy.BackendAndShaderModel)
+                return null;
+            if (data.device.vendorId != runtime.VendorId || data.device.deviceId != runtime.DeviceId)
+                return "Profile GPU vendor/device id does not match the runtime.";
+            if (policy == HlslPerfCompatibilityPolicy.ExactDevice)
+                return null;
+            if (!string.Equals(data.device.driverVersion, runtime.DriverVersion, StringComparison.OrdinalIgnoreCase))
+                return "Profile driver version does not match the runtime.";
+            return null;
+        }
+
+        private static HlslPerfDefineValue[] Clone(HlslPerfDefineValue[] source)
+        {
+            HlslPerfDefineValue[] result = new HlslPerfDefineValue[source.Length];
+            for (int index = 0; index < source.Length; ++index)
+                result[index] = new HlslPerfDefineValue { name = source[index].name, value = source[index].value };
+            return result;
+        }
+
+        private static HlslPerfResolvedProfile Failure(string reason)
+        {
+            return new HlslPerfResolvedProfile(
+                false,
+                reason,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                new HlslPerfDefineValue[0],
+                0,
+                0);
+        }
+    }
+}

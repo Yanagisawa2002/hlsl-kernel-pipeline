@@ -6,8 +6,10 @@ HlslKernelPipeline uses, but does not copy or modify:
   for maintained .NET bindings to Direct3D 12, DXGI, and DXC.
 - [DirectX Shader Compiler](https://github.com/microsoft/DirectXShaderCompiler),
   distributed by Microsoft under its repository license.
+- [AMD Radeon GPU Analyzer](https://github.com/GPUOpen-Tools/radeon_gpu_analyzer),
+  MIT License, is an optional separately downloaded CLI used to produce static
+  evidence. No RGA binary or source is redistributed by this repository.
 
 The project intentionally does not reimplement a compiler, Direct3D binding,
-vendor ISA analyzer, or general-purpose autotuning search framework. Optional
-future integrations may consume reports from AMD Radeon GPU Analyzer, PIX, or
-other vendor tools without redistributing those tools.
+vendor ISA analyzer, or general-purpose autotuning search framework. The RGA
+adapter invokes an external installation and parses its documented output.

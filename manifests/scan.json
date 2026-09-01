@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "2.0",
+  "name": "full-u32-exclusive-scan",
+  "kernelPath": "../kernels/scan.hlsl",
+  "kernelAbiVersion": "hlslperf.raw-buffer.v1",
+  "shaderModel": "6_0",
+  "workItemCount": 4000000,
+  "warmupDispatches": 4,
+  "minimumWarmupMilliseconds": 75,
+  "measurementBatches": 15,
+  "dispatchesPerBatch": 4,
+  "minimumBatchMilliseconds": 10,
+  "maximumDispatchesPerBatch": 256,
+  "maximumCoefficientOfVariation": 0.05,
+  "minimumRequiredSpeedup": 1.01,
+  "workload": {
+    "id": "exclusive-scan-u32-v1",
+    "parameters": {
+      "elementCount": 4000000,
+      "seed": 19088743
+    }
+  },
+  "baselineDefines": {
+    "HLSLPERF_GROUP_SIZE": 256,
+    "HLSLPERF_ELEMENTS_PER_THREAD": 4
+  },
+  "axes": [
+    { "name": "HLSLPERF_GROUP_SIZE", "values": [64, 128, 256, 512] },
+    { "name": "HLSLPERF_ELEMENTS_PER_THREAD", "values": [1, 2, 4] }
+  ]
+}

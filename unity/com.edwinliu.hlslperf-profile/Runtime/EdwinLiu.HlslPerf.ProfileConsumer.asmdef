@@ -1,0 +1,14 @@
+{
+  "name": "EdwinLiu.HlslPerf.ProfileConsumer",
+  "rootNamespace": "EdwinLiu.HlslPerf",
+  "references": [],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

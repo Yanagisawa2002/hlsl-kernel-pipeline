@@ -1,45 +1,59 @@
 # Measurement methodology
 
 The pipeline separates an observed fast result from a deployable profile. A
-candidate is not deployable merely because one number is lower.
+candidate is not deployable merely because one sample is lower.
 
 ## Measurement contract
 
-1. DXC compiles each manifest-defined set of integer defines with O3, strict
-   mode, and warnings as errors.
-2. A CPU correctness oracle produces the expected output hash. Every GPU
-   candidate must match it byte for byte.
-3. Each candidate receives at least 75 ms of GPU warm-up in the sample
-   manifests.
-4. The runner doubles dispatches per timestamp batch until the interval is at
-   least 10 ms, capped by the manifest. Fences and readback are outside the
-   timestamp interval.
-5. Fifteen independent batches produce median, p95, sample standard deviation,
-   and coefficient of variation (CV). The sample manifests reject CV above 5%.
-6. The observed fastest stable candidate must be at least 1.01x faster than the
-   declared baseline and must not regress p95. Otherwise the emitted profile
-   keeps the baseline.
+1. DXC compiles every distinct pass entry point with O3, strict mode, and
+   warnings as errors.
+2. A workload provider supplies deterministic input and an independent CPU
+   oracle. Every candidate must match the verified output byte for byte.
+3. Each candidate receives at least 75 ms of warm-up in the bundled manifests.
+4. The runner doubles complete plan executions per timestamp batch until the
+   interval reaches at least 10 ms, capped by the manifest. A plan includes all
+   dispatches and required inter-pass resource barriers.
+5. Upload, command submission fences, timestamp resolve, readback, and CPU work
+   remain outside the measured interval.
+6. Fifteen independent batches produce median, interpolated p95, sample standard
+   deviation, and coefficient of variation (CV). Bundled manifests require CV
+   at or below 5%.
+7. The observed fastest stable candidate must be at least 1.01x faster than the
+   declared stable baseline and must not regress p95. Otherwise selection retains
+   the baseline.
 
 GPU timing is never cached. DXIL is cached by source hash, entry point, shader
-model, compiler version, compiler option schema, and sorted defines.
+model, compiler version, compiler option schema, ABI, and sorted defines.
+
+## Static evidence contract
+
+RGA runs after measured candidates pass correctness. Its DX12 live-driver mode
+compiles the same source, entry point, target, shader model, and defines. The
+report stores per-entry-point VGPR/SGPR usage, physical/available counts,
+LDS/scratch bytes, thread-group dimensions, ISA path, and live-VGPR used/allocated
+summary.
+
+RGA resource data is explanatory evidence. It never participates in winner
+selection because lower register count is not itself lower execution time.
+Likewise, no overall occupancy number is inferred when RGA does not emit one.
 
 ## Profile invalidation
 
 The compatibility key includes adapter identity, driver version, backend,
-shader model, compiler version, manifest hash, and kernel hash. A change in any
-of these inputs invalidates the profile.
+shader model, compiler version, manifest hash, and kernel hash. Schema 2.0 also
+stores workload and ABI ids. The Unity adapter rejects workload/ABI mismatches
+even under its least strict device policy.
 
-## What the v0.1 evidence does not prove
+## Limits of the current evidence
 
-- The bundled uint-mix kernel is synthetic. Its selected parameters must not be
-  copied into a production kernel without tuning that production kernel.
-- Results currently cover one Windows/D3D12 GPU and compute queue.
-- No claim is made about energy, temperature, register pressure, occupancy, or
-  instruction count; those require vendor evidence adapters such as RGA/PIX.
-- Candidate blocks are not yet interleaved or randomized, and the report does
-  not yet calculate confidence intervals.
-- The current correctness ABI is one UAV plus two root constants. General
-  resource-layout adapters are a post-v0.1 task.
+- Results cover one Windows/D3D12 GPU and compute queue.
+- Repeated input makes the reported kernels cache-warm steady-state tests; the
+  numbers are not a DRAM-bandwidth benchmark.
+- Candidate blocks are not interleaved or randomized and no confidence interval
+  is reported yet.
+- Energy, temperature, and runtime wave occupancy require dedicated telemetry or
+  an RGP/runtime-counter adapter.
+- The workload pack covers reusable primitives, not a complete application frame.
 
-These limitations are explicit so the pipeline remains a measurement tool,
-not a benchmark-marketing generator.
+These limits are explicit so the tool remains an optimization pipeline rather
+than a benchmark-marketing generator.

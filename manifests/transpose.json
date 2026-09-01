@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "2.0",
+  "name": "tiled-u32-matrix-transpose",
+  "kernelPath": "../kernels/transpose.hlsl",
+  "kernelAbiVersion": "hlslperf.raw-buffer.v1",
+  "shaderModel": "6_0",
+  "workItemCount": 4194304,
+  "warmupDispatches": 8,
+  "minimumWarmupMilliseconds": 75,
+  "measurementBatches": 15,
+  "dispatchesPerBatch": 8,
+  "minimumBatchMilliseconds": 10,
+  "maximumDispatchesPerBatch": 512,
+  "maximumCoefficientOfVariation": 0.05,
+  "minimumRequiredSpeedup": 1.01,
+  "workload": {
+    "id": "transpose-u32-v1",
+    "parameters": {
+      "width": 2048,
+      "height": 2048,
+      "seed": 19088743
+    }
+  },
+  "baselineDefines": {
+    "HLSLPERF_TILE_DIM": 16,
+    "HLSLPERF_BLOCK_ROWS": 8
+  },
+  "axes": [
+    { "name": "HLSLPERF_TILE_DIM", "values": [8, 16, 32] },
+    { "name": "HLSLPERF_BLOCK_ROWS", "values": [4, 8, 16] }
+  ]
+}

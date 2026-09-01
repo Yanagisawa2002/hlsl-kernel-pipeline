@@ -7,5 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="../HlslPerf.Core/HlslPerf.Core.csproj" />
     <ProjectReference Include="../HlslPerf.D3D12/HlslPerf.D3D12.csproj" />
+    <ProjectReference Include="../HlslPerf.Workloads/HlslPerf.Workloads.csproj" />
+    <ProjectReference Include="../HlslPerf.Rga/HlslPerf.Rga.csproj" />
   </ItemGroup>
 </Project>

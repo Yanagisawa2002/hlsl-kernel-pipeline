@@ -1,8 +1,8 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text.Json;
-using Microsoft.Win32;
 using HlslPerf.Core;
+using Microsoft.Win32;
 using SharpGen.Runtime;
 using Vortice.Direct3D;
 using Vortice.Direct3D12;
@@ -22,56 +22,53 @@ public sealed record TuningProgress(
 
 public sealed class D3D12Tuner : IDisposable
 {
-    private readonly ID3D12Device _device;
-    private readonly ID3D12CommandQueue _queue;
-    private readonly ID3D12CommandAllocator _allocator;
-    private readonly ID3D12GraphicsCommandList _commandList;
-    private readonly ID3D12Fence _fence;
-    private readonly AutoResetEvent _fenceEvent = new(false);
-    private readonly ID3D12RootSignature _rootSignature;
-    private readonly ID3D12QueryHeap _timestampQueryHeap;
-    private readonly ID3D12Resource _timestampReadback;
-    private readonly AdapterDescription1 _adapterDescription;
-    private readonly string _driverVersion;
-    private readonly ulong _timestampFrequency;
-    private ulong _fenceValue;
-    private bool _disposed;
+    private readonly ID3D12Device device;
+    private readonly ID3D12CommandQueue queue;
+    private readonly ID3D12CommandAllocator allocator;
+    private readonly ID3D12GraphicsCommandList commandList;
+    private readonly ID3D12Fence fence;
+    private readonly AutoResetEvent fenceEvent = new(false);
+    private readonly ID3D12RootSignature rootSignature;
+    private readonly ID3D12QueryHeap timestampQueryHeap;
+    private readonly ID3D12Resource timestampReadback;
+    private readonly AdapterDescription1 adapterDescription;
+    private readonly string driverVersion;
+    private readonly ulong timestampFrequency;
+    private ulong fenceValue;
+    private bool disposed;
 
     public D3D12Tuner(string? adapterNameContains = null)
     {
-        (_device, _adapterDescription, _driverVersion) = CreateDevice(adapterNameContains);
-
-        _queue = _device.CreateCommandQueue(
+        (device, adapterDescription, driverVersion) = CreateDevice(adapterNameContains);
+        queue = device.CreateCommandQueue(
             CommandListType.Compute,
             CommandQueuePriority.Normal,
             CommandQueueFlags.None,
             0);
-        _allocator = _device.CreateCommandAllocator(CommandListType.Compute);
-        _commandList = _device.CreateCommandList<ID3D12GraphicsCommandList>(
+        allocator = device.CreateCommandAllocator(CommandListType.Compute);
+        commandList = device.CreateCommandList<ID3D12GraphicsCommandList>(
             CommandListType.Compute,
-            _allocator,
+            allocator,
             null!);
-        _fence = _device.CreateFence(0, FenceFlags.None);
+        fence = device.CreateFence(0, FenceFlags.None);
 
-        Result frequencyResult = _queue.GetTimestampFrequency(out ulong frequency);
+        Result frequencyResult = queue.GetTimestampFrequency(out ulong frequency);
         if (frequencyResult.Failure || frequency == 0)
             throw new InvalidOperationException($"The D3D12 compute queue did not expose a timestamp frequency ({frequencyResult}).");
-        _timestampFrequency = frequency;
+        timestampFrequency = frequency;
 
         RootParameter1[] parameters =
         [
-            new(
-                RootParameterType.UnorderedAccessView,
-                new RootDescriptor1(0, 0, RootDescriptorFlags.DataVolatile),
-                ShaderVisibility.All),
-            new(new RootConstants(0, 0, 2), ShaderVisibility.All)
+            new(RootParameterType.ShaderResourceView, new RootDescriptor1(0, 0, RootDescriptorFlags.None), ShaderVisibility.All),
+            new(RootParameterType.ShaderResourceView, new RootDescriptor1(1, 0, RootDescriptorFlags.None), ShaderVisibility.All),
+            new(RootParameterType.UnorderedAccessView, new RootDescriptor1(0, 0, RootDescriptorFlags.None), ShaderVisibility.All),
+            new(RootParameterType.UnorderedAccessView, new RootDescriptor1(1, 0, RootDescriptorFlags.None), ShaderVisibility.All),
+            new(new RootConstants(0, 0, KernelAbiV1.RootConstantCount), ShaderVisibility.All)
         ];
-        RootSignatureDescription1 rootDescription = new(RootSignatureFlags.None, parameters, []);
-        _rootSignature = _device.CreateRootSignature(rootDescription);
+        rootSignature = device.CreateRootSignature(new RootSignatureDescription1(RootSignatureFlags.None, parameters, []));
 
-        QueryHeapDescription queryDescription = new(QueryHeapType.Timestamp, 2, 0);
-        _timestampQueryHeap = _device.CreateQueryHeap<ID3D12QueryHeap>(queryDescription);
-        _timestampReadback = _device.CreateCommittedResource(
+        timestampQueryHeap = device.CreateQueryHeap<ID3D12QueryHeap>(new QueryHeapDescription(QueryHeapType.Timestamp, 2, 0));
+        timestampReadback = device.CreateCommittedResource(
             HeapType.Readback,
             ResourceDescription.Buffer(2 * sizeof(ulong), ResourceFlags.None, 0),
             ResourceStates.CopyDest,
@@ -80,19 +77,21 @@ public sealed class D3D12Tuner : IDisposable
 
     public DeviceFingerprint DescribeDevice(string shaderModel = "6_0")
     {
-        ObjectDisposedException.ThrowIf(_disposed, this);
+        ObjectDisposedException.ThrowIf(disposed, this);
         return CreateFingerprint(shaderModel);
     }
 
     public TuningRunReport Run(
         TuningManifest manifest,
         string manifestPath,
+        IKernelWorkload workload,
         Action<TuningProgress>? progress = null,
         CancellationToken cancellationToken = default,
         string? compilerCacheDirectory = null)
     {
-        ObjectDisposedException.ThrowIf(_disposed, this);
+        ObjectDisposedException.ThrowIf(disposed, this);
         manifest.Validate();
+        ArgumentNullException.ThrowIfNull(workload);
 
         string fullManifestPath = Path.GetFullPath(manifestPath);
         string manifestDirectory = Path.GetDirectoryName(fullManifestPath)
@@ -103,7 +102,6 @@ public sealed class D3D12Tuner : IDisposable
         string kernelHash = ContentHash.Sha256(File.ReadAllBytes(kernelPath));
         IReadOnlyList<KernelCandidate> candidates = CandidateGenerator.Expand(manifest);
         KernelCandidate baseline = CandidateGenerator.ResolveBaseline(manifest, candidates);
-        string? expectedHash = CorrectnessOracle.BuildExpectedSha256(manifest);
         List<CandidateResult> results = new(candidates.Count);
         DateTimeOffset started = DateTimeOffset.UtcNow;
 
@@ -113,53 +111,53 @@ public sealed class D3D12Tuner : IDisposable
             KernelCandidate candidate = candidates[index];
             progress?.Invoke(new TuningProgress(index + 1, candidates.Count, candidate.Id, "compile", null));
 
-            CompilationOutput compilation = Compile(
+            KernelExecutionPlan plan;
+            try
+            {
+                plan = workload.Build(manifest, candidate);
+                plan.Validate();
+            }
+            catch (Exception exception) when (exception is not OperationCanceledException)
+            {
+                CandidateResult planFailure = Failure(candidate, false, null, $"Execution plan failed: {exception.Message}");
+                results.Add(planFailure);
+                progress?.Invoke(new TuningProgress(index + 1, candidates.Count, candidate.Id, "failed", planFailure));
+                continue;
+            }
+
+            CompilationSet compilation = CompilePasses(
                 shaderSource,
                 kernelPath,
                 kernelHash,
                 manifest,
                 candidate,
+                plan.Passes.Select(pass => pass.EntryPoint).Distinct(StringComparer.Ordinal),
                 compilerCacheDirectory);
             if (!compilation.Success)
             {
-                CandidateResult compileFailure = new(
-                    candidate.Id,
-                    candidate.Defines,
-                    false,
-                    compilation.Diagnostics,
-                    null,
-                    [],
-                    0,
-                    null,
-                    null,
-                    false,
-                    "DXC compilation failed.");
+                CandidateResult compileFailure = Failure(candidate, false, compilation.Diagnostics, "DXC compilation failed.");
                 results.Add(compileFailure);
                 progress?.Invoke(new TuningProgress(index + 1, candidates.Count, candidate.Id, "failed", compileFailure));
                 continue;
             }
 
             progress?.Invoke(new TuningProgress(index + 1, candidates.Count, candidate.Id, "measure", null));
-            CandidateResult result = MeasureCandidate(
-                manifest,
-                candidate,
-                compilation.Bytecode!,
-                compilation.Diagnostics,
-                expectedHash);
-
-            if (expectedHash is null && result.Correctness is not null)
-                expectedHash = result.Correctness.ActualSha256;
-
+            CandidateResult result;
+            try
+            {
+                result = MeasureCandidate(manifest, candidate, plan, compilation);
+            }
+            catch (Exception exception) when (exception is not OperationCanceledException)
+            {
+                result = Failure(candidate, true, compilation.Diagnostics, $"GPU execution failed: {exception.Message}");
+            }
             results.Add(result);
             progress?.Invoke(new TuningProgress(index + 1, candidates.Count, candidate.Id, "complete", result));
         }
 
-        SelectionResult? selection = CandidateSelector.Select(
-            results,
-            baseline.Id,
-            manifest.MinimumRequiredSpeedup);
+        SelectionResult? selection = CandidateSelector.Select(results, baseline.Id, manifest.MinimumRequiredSpeedup);
         return new TuningRunReport(
-            "1.0",
+            "2.0",
             started,
             DateTimeOffset.UtcNow,
             fullManifestPath,
@@ -168,184 +166,298 @@ public sealed class D3D12Tuner : IDisposable
             CreateFingerprint(manifest.ShaderModel),
             baseline.Id,
             selection,
-            results);
+            results,
+            workload.Id,
+            KernelAbiV1.Id);
     }
+
+    private static CandidateResult Failure(
+        KernelCandidate candidate,
+        bool compiled,
+        string? diagnostics,
+        string error) => new(
+            candidate.Id,
+            candidate.Defines,
+            compiled,
+            diagnostics,
+            null,
+            [],
+            0,
+            null,
+            null,
+            false,
+            error);
 
     private CandidateResult MeasureCandidate(
         TuningManifest manifest,
         KernelCandidate candidate,
-        ReadOnlyMemory<byte> bytecode,
-        string? compilerDiagnostics,
-        string? expectedHash)
+        KernelExecutionPlan plan,
+        CompilationSet compilation)
     {
-        int threadsPerGroup = candidate.GetRequired(manifest.ThreadsPerGroupParameter);
-        int elementsPerThread = candidate.GetRequired(manifest.ElementsPerThreadParameter);
-        if (threadsPerGroup is <= 0 or > 1024)
-            throw new InvalidDataException($"Candidate '{candidate.Id}' has invalid group size {threadsPerGroup}; D3D12 allows 1..1024 threads.");
-
-        long workItemsPerGroup = checked((long)threadsPerGroup * elementsPerThread);
-        uint dispatchGroups = checked((uint)((manifest.WorkItemCount + workItemsPerGroup - 1) / workItemsPerGroup));
-        if (dispatchGroups > 65_535)
-            throw new InvalidDataException($"Candidate '{candidate.Id}' requires {dispatchGroups} X groups; v0.1 supports at most 65,535.");
-
-        ComputePipelineStateDescription pipelineDescription = new()
-        {
-            RootSignature = _rootSignature,
-            ComputeShader = bytecode
-        };
-        using ID3D12PipelineState pipelineState = _device.CreateComputePipelineState(pipelineDescription);
-        int outputByteCount = checked(manifest.WorkItemCount * sizeof(uint));
-        using ID3D12Resource output = _device.CreateCommittedResource(
-            HeapType.Default,
-            ResourceDescription.Buffer((ulong)outputByteCount, ResourceFlags.AllowUnorderedAccess, 0),
-            ResourceStates.UnorderedAccess,
-            null);
-        using ID3D12Resource outputReadback = _device.CreateCommittedResource(
-            HeapType.Readback,
-            ResourceDescription.Buffer((ulong)outputByteCount, ResourceFlags.None, 0),
-            ResourceStates.CopyDest,
-            null);
+        using PipelineSet pipelines = CreatePipelines(compilation.Bytecodes);
+        using ResourceSet resources = CreateResources(plan);
 
         if (manifest.WarmupDispatches > 0)
         {
-            int warmupDispatches = manifest.WarmupDispatches;
+            int warmupRuns = manifest.WarmupDispatches;
             double accumulatedWarmupMilliseconds = 0;
             do
             {
-                accumulatedWarmupMilliseconds += MeasureBatch(
-                    pipelineState,
-                    output,
-                    manifest,
-                    dispatchGroups,
-                    warmupDispatches);
-                warmupDispatches = Math.Min(
-                    manifest.MaximumDispatchesPerBatch,
-                    checked(warmupDispatches * 2));
+                accumulatedWarmupMilliseconds += MeasureBatch(plan, pipelines, resources, warmupRuns);
+                warmupRuns = Math.Min(manifest.MaximumDispatchesPerBatch, checked(warmupRuns * 2));
             }
             while (accumulatedWarmupMilliseconds < manifest.MinimumWarmupMilliseconds &&
-                   warmupDispatches <= manifest.MaximumDispatchesPerBatch);
+                   warmupRuns <= manifest.MaximumDispatchesPerBatch);
         }
 
-        int measuredDispatchesPerBatch = manifest.DispatchesPerBatch;
+        int measuredRunsPerBatch = manifest.DispatchesPerBatch;
         while (true)
         {
-            double calibrationMilliseconds = MeasureBatch(
-                pipelineState,
-                output,
-                manifest,
-                dispatchGroups,
-                measuredDispatchesPerBatch);
+            double calibrationMilliseconds = MeasureBatch(plan, pipelines, resources, measuredRunsPerBatch);
             if (calibrationMilliseconds >= manifest.MinimumBatchMilliseconds ||
-                measuredDispatchesPerBatch >= manifest.MaximumDispatchesPerBatch)
+                measuredRunsPerBatch >= manifest.MaximumDispatchesPerBatch)
                 break;
-            measuredDispatchesPerBatch = Math.Min(
-                manifest.MaximumDispatchesPerBatch,
-                checked(measuredDispatchesPerBatch * 2));
+            measuredRunsPerBatch = Math.Min(manifest.MaximumDispatchesPerBatch, checked(measuredRunsPerBatch * 2));
         }
 
         List<double> samples = new(manifest.MeasurementBatches);
         for (int batch = 0; batch < manifest.MeasurementBatches; ++batch)
         {
-            double batchMilliseconds = MeasureBatch(
-                pipelineState,
-                output,
-                manifest,
-                dispatchGroups,
-                measuredDispatchesPerBatch);
-            samples.Add(batchMilliseconds / measuredDispatchesPerBatch);
+            double batchMilliseconds = MeasureBatch(plan, pipelines, resources, measuredRunsPerBatch);
+            samples.Add(batchMilliseconds / measuredRunsPerBatch);
         }
 
-        _commandList.ResourceBarrierTransition(output, ResourceStates.UnorderedAccess, ResourceStates.CopySource);
-        _commandList.CopyResource(outputReadback, output);
+        GpuBuffer verified = resources.Get(plan.VerifiedResource);
+        Transition(verified, ResourceStates.CopySource);
+        using ID3D12Resource readback = device.CreateCommittedResource(
+            HeapType.Readback,
+            ResourceDescription.Buffer((ulong)verified.ByteLength, ResourceFlags.None, 0),
+            ResourceStates.CopyDest,
+            null);
+        commandList.CopyResource(readback, verified.Resource);
         ExecuteAndWait();
 
-        Span<byte> outputBytes = outputReadback.Map<byte>(0, outputByteCount);
+        Span<byte> outputBytes = readback.Map<byte>(0, verified.ByteLength);
         string actualHash = ContentHash.Sha256(outputBytes);
-        outputReadback.Unmap(0);
-        string resolvedExpectedHash = expectedHash ?? actualHash;
-        bool correctnessPassed = string.Equals(actualHash, resolvedExpectedHash, StringComparison.Ordinal);
+        readback.Unmap(0);
+        bool correctnessPassed = string.Equals(actualHash, plan.ExpectedSha256, StringComparison.OrdinalIgnoreCase);
         CorrectnessResult correctness = new(
             correctnessPassed,
             actualHash,
-            resolvedExpectedHash,
-            expectedHash is null
-                ? "Established the cross-candidate reference hash."
-                : correctnessPassed
-                    ? "GPU output matched the correctness oracle."
-                    : "GPU output did not match the correctness oracle.");
+            plan.ExpectedSha256,
+            correctnessPassed
+                ? "GPU output matched the workload pack's CPU oracle."
+                : "GPU output did not match the workload pack's CPU oracle.");
 
         DistributionSummary timing = StableStatistics.Summarize(samples);
         bool stable = timing.CoefficientOfVariation <= manifest.MaximumCoefficientOfVariation;
-        double throughput = (manifest.WorkItemCount / (timing.MedianMilliseconds / 1000.0)) / 1_000_000.0;
+        double throughput = (plan.LogicalItemCount / (timing.MedianMilliseconds / 1000.0)) / 1_000_000.0;
         return new CandidateResult(
             candidate.Id,
             candidate.Defines,
             true,
-            compilerDiagnostics,
+            compilation.Diagnostics,
             correctness,
             samples,
-            measuredDispatchesPerBatch,
+            measuredRunsPerBatch,
             timing,
             throughput,
             stable,
             correctnessPassed ? null : "Correctness gate failed.");
     }
 
-    private void Bind(
-        ID3D12PipelineState pipelineState,
-        ID3D12Resource output,
-        TuningManifest manifest)
+    private ResourceSet CreateResources(KernelExecutionPlan plan)
     {
-        _commandList.SetPipelineState(pipelineState);
-        _commandList.SetComputeRootSignature(_rootSignature);
-        _commandList.SetComputeRootUnorderedAccessView(0, output.GPUVirtualAddress);
-        uint[] constants = [(uint)manifest.WorkItemCount, unchecked((uint)manifest.Correctness.Seed)];
-        _commandList.SetComputeRoot32BitConstants(1, constants, 0);
+        Dictionary<string, GpuBuffer> buffers = new(StringComparer.Ordinal);
+        List<ID3D12Resource> uploads = [];
+        try
+        {
+            foreach (KernelBufferSpec spec in plan.Buffers)
+            {
+                ResourceStates initialState = spec.InitialData is null
+                    ? ResourceStates.NonPixelShaderResource
+                    : ResourceStates.CopyDest;
+                ID3D12Resource resource = device.CreateCommittedResource(
+                    HeapType.Default,
+                    ResourceDescription.Buffer((ulong)spec.ByteLength, ResourceFlags.AllowUnorderedAccess, 0),
+                    initialState,
+                    null);
+                GpuBuffer buffer = new(spec.Name, spec.ByteLength, resource, initialState);
+                buffers.Add(spec.Name, buffer);
+
+                if (spec.InitialData is null)
+                    continue;
+                ID3D12Resource upload = device.CreateCommittedResource(
+                    HeapType.Upload,
+                    ResourceDescription.Buffer((ulong)spec.ByteLength, ResourceFlags.None, 0),
+                    ResourceStates.GenericRead,
+                    null);
+                uploads.Add(upload);
+                Span<byte> mapped = upload.Map<byte>(0, spec.ByteLength);
+                spec.InitialData.AsSpan().CopyTo(mapped);
+                upload.Unmap(0);
+                commandList.CopyResource(resource, upload);
+                Transition(buffer, ResourceStates.NonPixelShaderResource);
+            }
+
+            ID3D12Resource dummy = device.CreateCommittedResource(
+                HeapType.Default,
+                ResourceDescription.Buffer(256, ResourceFlags.AllowUnorderedAccess, 0),
+                ResourceStates.Common,
+                null);
+            ResourceSet result = new(buffers, new GpuBuffer("$dummy", 256, dummy, ResourceStates.Common));
+            if (uploads.Count > 0)
+                ExecuteAndWait();
+            return result;
+        }
+        catch
+        {
+            foreach (GpuBuffer buffer in buffers.Values)
+                buffer.Dispose();
+            throw;
+        }
+        finally
+        {
+            foreach (ID3D12Resource upload in uploads)
+                upload.Dispose();
+        }
     }
 
-    private double MeasureBatch(
-        ID3D12PipelineState pipelineState,
-        ID3D12Resource output,
-        TuningManifest manifest,
-        uint dispatchGroups,
-        int dispatchCount)
+    private PipelineSet CreatePipelines(IReadOnlyDictionary<string, byte[]> bytecodes)
     {
-        Bind(pipelineState, output, manifest);
-        _commandList.EndQuery(_timestampQueryHeap, QueryType.Timestamp, 0);
-        for (int dispatch = 0; dispatch < dispatchCount; ++dispatch)
-            _commandList.Dispatch(dispatchGroups, 1, 1);
-        _commandList.EndQuery(_timestampQueryHeap, QueryType.Timestamp, 1);
-        _commandList.ResolveQueryData(_timestampQueryHeap, QueryType.Timestamp, 0, 2, _timestampReadback, 0);
+        Dictionary<string, ID3D12PipelineState> pipelines = new(StringComparer.Ordinal);
+        try
+        {
+            foreach ((string entryPoint, byte[] bytecode) in bytecodes)
+            {
+                ComputePipelineStateDescription description = new()
+                {
+                    RootSignature = rootSignature,
+                    ComputeShader = bytecode
+                };
+                pipelines.Add(entryPoint, device.CreateComputePipelineState(description));
+            }
+            return new PipelineSet(pipelines);
+        }
+        catch
+        {
+            foreach (ID3D12PipelineState pipeline in pipelines.Values)
+                pipeline.Dispose();
+            throw;
+        }
+    }
+
+    private double MeasureBatch(KernelExecutionPlan plan, PipelineSet pipelines, ResourceSet resources, int runCount)
+    {
+        commandList.EndQuery(timestampQueryHeap, QueryType.Timestamp, 0);
+        for (int run = 0; run < runCount; ++run)
+            ExecutePlan(plan, pipelines, resources);
+        commandList.EndQuery(timestampQueryHeap, QueryType.Timestamp, 1);
+        commandList.ResolveQueryData(timestampQueryHeap, QueryType.Timestamp, 0, 2, timestampReadback, 0);
         ExecuteAndWait();
 
-        Span<ulong> timestamps = _timestampReadback.Map<ulong>(0, 2);
+        Span<ulong> timestamps = timestampReadback.Map<ulong>(0, 2);
         ulong start = timestamps[0];
         ulong end = timestamps[1];
-        _timestampReadback.Unmap(0);
+        timestampReadback.Unmap(0);
         if (end <= start)
             throw new InvalidOperationException("GPU timestamps were not monotonic.");
-        return (end - start) * 1000.0 / _timestampFrequency;
+        return (end - start) * 1000.0 / timestampFrequency;
+    }
+
+    private void ExecutePlan(KernelExecutionPlan plan, PipelineSet pipelines, ResourceSet resources)
+    {
+        foreach (KernelPassSpec pass in plan.Passes)
+        {
+            GpuBuffer input0 = resources.GetOrDummy(pass.Input0);
+            GpuBuffer input1 = resources.GetOrDummy(pass.Input1);
+            GpuBuffer output0 = resources.GetOrDummy(pass.Output0);
+            GpuBuffer output1 = resources.GetOrDummy(pass.Output1);
+            if (pass.Input0 is not null)
+                Transition(input0, ResourceStates.NonPixelShaderResource);
+            if (pass.Input1 is not null)
+                Transition(input1, ResourceStates.NonPixelShaderResource);
+            if (pass.Output0 is not null)
+                Transition(output0, ResourceStates.UnorderedAccess);
+            if (pass.Output1 is not null)
+                Transition(output1, ResourceStates.UnorderedAccess);
+
+            commandList.SetPipelineState(pipelines.Get(pass.EntryPoint));
+            commandList.SetComputeRootSignature(rootSignature);
+            commandList.SetComputeRootShaderResourceView(0, input0.Resource.GPUVirtualAddress);
+            commandList.SetComputeRootShaderResourceView(1, input1.Resource.GPUVirtualAddress);
+            commandList.SetComputeRootUnorderedAccessView(2, output0.Resource.GPUVirtualAddress);
+            commandList.SetComputeRootUnorderedAccessView(3, output1.Resource.GPUVirtualAddress);
+            uint[] constants = new uint[KernelAbiV1.RootConstantCount];
+            for (int index = 0; index < pass.Constants.Count; ++index)
+                constants[index] = pass.Constants[index];
+            commandList.SetComputeRoot32BitConstants(4, constants, 0);
+            commandList.Dispatch(pass.Dispatch.X, pass.Dispatch.Y, pass.Dispatch.Z);
+
+            if (pass.Output0 is not null)
+                Transition(output0, ResourceStates.NonPixelShaderResource);
+            if (pass.Output1 is not null)
+                Transition(output1, ResourceStates.NonPixelShaderResource);
+        }
+    }
+
+    private void Transition(GpuBuffer buffer, ResourceStates target)
+    {
+        if (buffer.State == target)
+            return;
+        commandList.ResourceBarrierTransition(buffer.Resource, buffer.State, target);
+        buffer.State = target;
     }
 
     private void ExecuteAndWait()
     {
-        _commandList.Close();
-        _queue.ExecuteCommandList(_commandList);
+        commandList.Close();
+        queue.ExecuteCommandList(commandList);
 
-        ulong target = ++_fenceValue;
-        Result signalResult = _queue.Signal(_fence, target);
+        ulong target = ++fenceValue;
+        Result signalResult = queue.Signal(fence, target);
         if (signalResult.Failure)
             throw new InvalidOperationException($"Could not signal the D3D12 fence ({signalResult}).");
-        if (_fence.CompletedValue < target)
+        if (fence.CompletedValue < target)
         {
-            Result eventResult = _fence.SetEventOnCompletion(target, _fenceEvent);
+            Result eventResult = fence.SetEventOnCompletion(target, fenceEvent);
             if (eventResult.Failure)
                 throw new InvalidOperationException($"Could not register the D3D12 fence event ({eventResult}).");
-            _fenceEvent.WaitOne();
+            fenceEvent.WaitOne();
         }
 
-        _allocator.Reset();
-        _commandList.Reset(_allocator);
+        allocator.Reset();
+        commandList.Reset(allocator);
+    }
+
+    private static CompilationSet CompilePasses(
+        string shaderSource,
+        string kernelPath,
+        string kernelHash,
+        TuningManifest manifest,
+        KernelCandidate candidate,
+        IEnumerable<string> entryPoints,
+        string? compilerCacheDirectory)
+    {
+        Dictionary<string, byte[]> bytecodes = new(StringComparer.Ordinal);
+        List<string> diagnostics = [];
+        foreach (string entryPoint in entryPoints)
+        {
+            CompilationOutput result = Compile(
+                shaderSource,
+                kernelPath,
+                kernelHash,
+                manifest,
+                candidate,
+                entryPoint,
+                compilerCacheDirectory);
+            if (!string.IsNullOrWhiteSpace(result.Diagnostics))
+                diagnostics.Add($"[{entryPoint}] {result.Diagnostics}");
+            if (!result.Success)
+                return new CompilationSet(false, bytecodes, string.Join(Environment.NewLine, diagnostics));
+            bytecodes.Add(entryPoint, result.Bytecode!);
+        }
+        return new CompilationSet(true, bytecodes, diagnostics.Count == 0 ? null : string.Join(Environment.NewLine, diagnostics));
     }
 
     private static CompilationOutput Compile(
@@ -354,6 +466,7 @@ public sealed class D3D12Tuner : IDisposable
         string kernelHash,
         TuningManifest manifest,
         KernelCandidate candidate,
+        string entryPoint,
         string? compilerCacheDirectory)
     {
         string? cachePath = null;
@@ -361,17 +474,16 @@ public sealed class D3D12Tuner : IDisposable
         {
             string cacheIdentity = JsonSerializer.Serialize(new
             {
-                schema = "dxc-cache-v1",
+                schema = "dxc-cache-v2",
                 kernelHash,
-                manifest.EntryPoint,
+                entryPoint,
                 manifest.ShaderModel,
+                abi = KernelAbiV1.Id,
                 compiler = typeof(DxcCompiler).Assembly.GetName().Version?.ToString(),
                 defines = candidate.Defines.OrderBy(pair => pair.Key, StringComparer.Ordinal).ToArray(),
                 options = "O3-strict-warnings-as-errors"
             }, JsonDefaults.Options);
-            cachePath = Path.Combine(
-                Path.GetFullPath(compilerCacheDirectory),
-                ContentHash.Sha256(cacheIdentity) + ".dxil");
+            cachePath = Path.Combine(Path.GetFullPath(compilerCacheDirectory), ContentHash.Sha256(cacheIdentity) + ".dxil");
             if (File.Exists(cachePath))
             {
                 byte[] cachedBytecode = File.ReadAllBytes(cachePath);
@@ -395,19 +507,18 @@ public sealed class D3D12Tuner : IDisposable
             EnableStrictness = true,
             WarningsAreErrors = true
         };
-
         using IDxcResult result = DxcCompiler.Compile(
             DxcShaderStage.Compute,
             shaderSource,
-            manifest.EntryPoint,
+            entryPoint,
             options,
             kernelPath,
             defines,
             null,
             []);
-        string diagnostics = result.GetErrors();
+        string compilerDiagnostics = result.GetErrors();
         if (result.GetStatus().Failure)
-            return new CompilationOutput(false, null, diagnostics);
+            return new CompilationOutput(false, null, compilerDiagnostics);
         byte[] bytecode = result.GetObjectBytecodeArray();
         if (cachePath is not null)
         {
@@ -417,7 +528,7 @@ public sealed class D3D12Tuner : IDisposable
         return new CompilationOutput(
             true,
             bytecode,
-            string.IsNullOrWhiteSpace(diagnostics) ? null : diagnostics.Trim());
+            string.IsNullOrWhiteSpace(compilerDiagnostics) ? null : compilerDiagnostics.Trim());
     }
 
     private static DxcShaderModel ParseShaderModel(string value) => value switch
@@ -437,13 +548,13 @@ public sealed class D3D12Tuner : IDisposable
     {
         Version? bindingVersion = typeof(DxcCompiler).Assembly.GetName().Version;
         return new DeviceFingerprint(
-            _adapterDescription.Description.TrimEnd('\0'),
-            _adapterDescription.VendorId,
-            _adapterDescription.DeviceId,
-            _adapterDescription.SubsystemId,
-            _adapterDescription.Revision,
-            _adapterDescription.Luid.ToString(),
-            _driverVersion,
+            adapterDescription.Description.TrimEnd('\0'),
+            adapterDescription.VendorId,
+            adapterDescription.DeviceId,
+            adapterDescription.SubsystemId,
+            adapterDescription.Revision,
+            adapterDescription.Luid.ToString(),
+            driverVersion,
             "D3D12",
             shaderModel,
             $"Vortice.Dxc/{bindingVersion}",
@@ -462,7 +573,6 @@ public sealed class D3D12Tuner : IDisposable
                 out IDXGIAdapter1? adapter);
             if (enumResult.Failure || adapter is null)
                 break;
-
             using (adapter)
             {
                 AdapterDescription1 description = adapter.Description1;
@@ -471,19 +581,13 @@ public sealed class D3D12Tuner : IDisposable
                 if (!string.IsNullOrWhiteSpace(adapterNameContains) &&
                     !description.Description.Contains(adapterNameContains, StringComparison.OrdinalIgnoreCase))
                     continue;
-
-                Result deviceResult = D3D12Api.D3D12CreateDevice(
-                    adapter,
-                    FeatureLevel.Level_11_0,
-                    out ID3D12Device? device);
-                if (deviceResult.Success && device is not null)
-                    return (device, description, ReadDriverVersion(adapter, description));
+                Result deviceResult = D3D12Api.D3D12CreateDevice(adapter, FeatureLevel.Level_11_0, out ID3D12Device? createdDevice);
+                if (deviceResult.Success && createdDevice is not null)
+                    return (createdDevice, description, ReadDriverVersion(adapter, description));
             }
         }
 
-        string suffix = string.IsNullOrWhiteSpace(adapterNameContains)
-            ? string.Empty
-            : $" matching '{adapterNameContains}'";
+        string suffix = string.IsNullOrWhiteSpace(adapterNameContains) ? string.Empty : $" matching '{adapterNameContains}'";
         throw new InvalidOperationException($"No hardware D3D12 adapter{suffix} was available.");
     }
 
@@ -517,9 +621,9 @@ public sealed class D3D12Tuner : IDisposable
                 if (hardwareId.Contains("SUBSYS_", StringComparison.OrdinalIgnoreCase) &&
                     !hardwareId.Contains(subsystemNeedle, StringComparison.OrdinalIgnoreCase))
                     continue;
-                if (adapterKey?.GetValue("DriverVersion") is string driverVersion &&
-                    !string.IsNullOrWhiteSpace(driverVersion))
-                    return driverVersion;
+                if (adapterKey?.GetValue("DriverVersion") is string foundDriverVersion &&
+                    !string.IsNullOrWhiteSpace(foundDriverVersion))
+                    return foundDriverVersion;
             }
         }
         catch (Exception exception) when (exception is UnauthorizedAccessException or IOException or System.Security.SecurityException)
@@ -531,50 +635,79 @@ public sealed class D3D12Tuner : IDisposable
 
     public void Dispose()
     {
-        if (_disposed)
+        if (disposed)
             return;
-        _disposed = true;
-        _timestampReadback.Dispose();
-        _timestampQueryHeap.Dispose();
-        _rootSignature.Dispose();
-        _commandList.Dispose();
-        _allocator.Dispose();
-        _queue.Dispose();
-        _fence.Dispose();
-        _device.Dispose();
-        _fenceEvent.Dispose();
+        disposed = true;
+        timestampReadback.Dispose();
+        timestampQueryHeap.Dispose();
+        rootSignature.Dispose();
+        commandList.Dispose();
+        allocator.Dispose();
+        queue.Dispose();
+        fence.Dispose();
+        device.Dispose();
+        fenceEvent.Dispose();
     }
 
     private sealed record CompilationOutput(bool Success, byte[]? Bytecode, string? Diagnostics);
-}
+    private sealed record CompilationSet(bool Success, IReadOnlyDictionary<string, byte[]> Bytecodes, string? Diagnostics);
 
-internal static class CorrectnessOracle
-{
-    public static string? BuildExpectedSha256(TuningManifest manifest)
+    private sealed class GpuBuffer : IDisposable
     {
-        if (manifest.Correctness.Kind == "cross-candidate-sha256")
-            return null;
-        if (manifest.Correctness.Kind != "uint-mix-v1")
-            throw new InvalidDataException($"Unsupported correctness oracle '{manifest.Correctness.Kind}'.");
-        if (!BitConverter.IsLittleEndian)
-            throw new PlatformNotSupportedException("The uint-mix-v1 oracle currently requires a little-endian CPU.");
-        if (!manifest.FixedDefines.TryGetValue("HLSLPERF_ALU_ROUNDS", out int rounds))
-            throw new InvalidDataException("uint-mix-v1 requires fixed define HLSLPERF_ALU_ROUNDS.");
-
-        uint[] expected = new uint[manifest.WorkItemCount];
-        uint seed = unchecked((uint)manifest.Correctness.Seed);
-        Parallel.For(0, expected.Length, index =>
+        public GpuBuffer(string name, int byteLength, ID3D12Resource resource, ResourceStates state)
         {
-            uint value = (uint)index ^ seed;
-            for (uint round = 0; round < rounds; ++round)
-            {
-                value ^= value << 13;
-                value ^= value >> 17;
-                value ^= value << 5;
-                value = unchecked(value * 1_664_525u + 1_013_904_223u + round);
-            }
-            expected[index] = value;
-        });
-        return ContentHash.Sha256(MemoryMarshal.AsBytes<uint>(expected.AsSpan()));
+            Name = name;
+            ByteLength = byteLength;
+            Resource = resource;
+            State = state;
+        }
+
+        public string Name { get; }
+        public int ByteLength { get; }
+        public ID3D12Resource Resource { get; }
+        public ResourceStates State { get; set; }
+        public void Dispose() => Resource.Dispose();
+    }
+
+    private sealed class ResourceSet : IDisposable
+    {
+        private readonly IReadOnlyDictionary<string, GpuBuffer> buffers;
+        private readonly GpuBuffer dummy;
+
+        public ResourceSet(IReadOnlyDictionary<string, GpuBuffer> buffers, GpuBuffer dummy)
+        {
+            this.buffers = buffers;
+            this.dummy = dummy;
+        }
+
+        public GpuBuffer Get(string name) => buffers.TryGetValue(name, out GpuBuffer? buffer)
+            ? buffer
+            : throw new InvalidDataException($"Unknown GPU buffer '{name}'.");
+
+        public GpuBuffer GetOrDummy(string? name) => name is null ? dummy : Get(name);
+
+        public void Dispose()
+        {
+            foreach (GpuBuffer buffer in buffers.Values)
+                buffer.Dispose();
+            dummy.Dispose();
+        }
+    }
+
+    private sealed class PipelineSet : IDisposable
+    {
+        private readonly IReadOnlyDictionary<string, ID3D12PipelineState> pipelines;
+
+        public PipelineSet(IReadOnlyDictionary<string, ID3D12PipelineState> pipelines) => this.pipelines = pipelines;
+
+        public ID3D12PipelineState Get(string entryPoint) => pipelines.TryGetValue(entryPoint, out ID3D12PipelineState? pipeline)
+            ? pipeline
+            : throw new InvalidDataException($"No compiled pipeline exists for entry point '{entryPoint}'.");
+
+        public void Dispose()
+        {
+            foreach (ID3D12PipelineState pipeline in pipelines.Values)
+                pipeline.Dispose();
+        }
     }
 }

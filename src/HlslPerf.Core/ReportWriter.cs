@@ -54,7 +54,7 @@ public static class ReportWriter
             : baseline.Timing.MedianMilliseconds / selected.Timing.MedianMilliseconds;
 
         return new TuningProfile(
-            "1.0",
+            "2.0",
             DateTimeOffset.UtcNow,
             ContentHash.CompatibilityKey(report.Device, report.ManifestSha256, report.KernelSha256),
             report.Device,
@@ -65,13 +65,18 @@ public static class ReportWriter
             selected.Timing.MedianMilliseconds,
             selected.Timing.P95Milliseconds,
             selected.ThroughputMillionItemsPerSecond.Value,
-            speedup);
+            speedup,
+            report.WorkloadId,
+            report.KernelAbiVersion,
+            selected.Defines.OrderBy(pair => pair.Key, StringComparer.Ordinal)
+                .Select(pair => new ProfileDefine(pair.Key, pair.Value))
+                .ToArray());
     }
 
     private static string BuildCsv(TuningRunReport report)
     {
         StringBuilder csv = new();
-        csv.AppendLine("candidate_id,compiled,correct,stable,dispatches_per_batch,median_gpu_ms,p95_gpu_ms,cv,throughput_mitems_s,speedup_vs_baseline,defines,samples_gpu_ms,error");
+        csv.AppendLine("candidate_id,compiled,correct,stable,rga_status,max_vgprs_used,max_live_vgprs,max_allocated_vgprs,max_sgprs_used,max_lds_bytes,max_scratch_bytes,min_occupancy_waves_per_simd,dispatches_per_batch,median_gpu_ms,p95_gpu_ms,cv,throughput_mitems_s,speedup_vs_baseline,defines,samples_gpu_ms,error");
         CandidateResult? baseline = report.Candidates.FirstOrDefault(candidate =>
             candidate.CandidateId == report.BaselineCandidateId);
         double? baselineMedian = baseline?.Timing?.MedianMilliseconds;
@@ -83,10 +88,19 @@ public static class ReportWriter
             string defines = string.Join(";", candidate.Defines.OrderBy(pair => pair.Key, StringComparer.Ordinal)
                 .Select(pair => $"{pair.Key}={pair.Value}"));
             string samples = string.Join(";", candidate.SamplesMilliseconds.Select(Format));
+            IReadOnlyList<RgaPassAnalysis> rga = candidate.StaticAnalysis?.Passes ?? [];
             csv.Append(Csv(candidate.CandidateId)).Append(',')
                 .Append(candidate.Compiled ? "true" : "false").Append(',')
                 .Append(candidate.Correctness?.Passed == true ? "true" : "false").Append(',')
                 .Append(candidate.Stable ? "true" : "false").Append(',')
+                .Append(Csv(candidate.StaticAnalysis?.Status ?? string.Empty)).Append(',')
+                .Append(Max(rga, pass => pass.VgprsUsed)).Append(',')
+                .Append(Max(rga, pass => pass.MaximumLiveVgprs)).Append(',')
+                .Append(Max(rga, pass => pass.AllocatedVgprs)).Append(',')
+                .Append(Max(rga, pass => pass.SgprsUsed)).Append(',')
+                .Append(Max(rga, pass => pass.LdsBytes)).Append(',')
+                .Append(Max(rga, pass => pass.ScratchBytes)).Append(',')
+                .Append(Min(rga, pass => pass.OccupancyWavesPerSimd)).Append(',')
                 .Append(candidate.MeasuredDispatchesPerBatch.ToString(CultureInfo.InvariantCulture)).Append(',')
                 .Append(candidate.Timing is null ? string.Empty : Format(candidate.Timing.MedianMilliseconds)).Append(',')
                 .Append(candidate.Timing is null ? string.Empty : Format(candidate.Timing.P95Milliseconds)).Append(',')
@@ -138,7 +152,8 @@ public static class ReportWriter
                 .Append(candidate.Timing is null ? "—" : Format(candidate.Timing.CoefficientOfVariation * 100) + "%").Append("</td><td>")
                 .Append(candidate.ThroughputMillionItemsPerSecond is null ? "—" : Format(candidate.ThroughputMillionItemsPerSecond.Value)).Append("</td><td>")
                 .Append(speedup is null ? "—" : Format(speedup.Value) + "×").Append("</td><td class=\"bar-cell\"><span style=\"width:")
-                .Append(width.ToString("0.##", CultureInfo.InvariantCulture)).Append("%\"></span></td></tr>");
+                .Append(width.ToString("0.##", CultureInfo.InvariantCulture)).Append("%\"></span></td><td>")
+                .Append(Html(StaticEvidence(candidate))).Append("</td></tr>");
         }
 
         string selection = winner is null
@@ -168,7 +183,7 @@ tr.winner{background:#173d35}tr.baseline{background:#172d4b}.ok{color:var(--gree
 </head>
 <body><main>
 <h1>HLSL kernel tuning</h1>
-<div class="sub">{{{Html(report.Device.AdapterName)}}} · {{{Html(report.Device.DriverVersion)}}} · {{{Html(report.Device.Backend)}}} / SM {{{Html(report.Device.ShaderModel)}}}</div>
+<div class="sub">{{{Html(report.Device.AdapterName)}}} · {{{Html(report.Device.DriverVersion)}}} · {{{Html(report.Device.Backend)}}} / SM {{{Html(report.Device.ShaderModel)}}} · {{{Html(report.WorkloadId)}}}</div>
 <section class="cards">
 <div class="card"><div class="label">Selected</div><div class="value">{{{selection}}}</div></div>
 <div class="card"><div class="label">Candidates</div><div class="value">{{{report.Candidates.Count}}}</div></div>
@@ -177,9 +192,9 @@ tr.winner{background:#173d35}tr.baseline{background:#172d4b}.ok{color:var(--gree
 </section>
 <div class="decision">{{{decision}}}</div>
 <section class="panel">
-<table><thead><tr><th>Compile-time defines</th><th>Gate</th><th>Median ms</th><th>P95 ms</th><th>CV</th><th>M items/s</th><th>vs baseline</th><th>Relative speedup</th></tr></thead>
+<table><thead><tr><th>Compile-time defines</th><th>Gate</th><th>Median ms</th><th>P95 ms</th><th>CV</th><th>M items/s</th><th>vs baseline</th><th>Relative speedup</th><th>RGA evidence</th></tr></thead>
 <tbody>{{{rows}}}</tbody></table>
-<div class="foot">GPU timestamp intervals contain dispatches only. Lower median/p95 is better; a longer bar means greater speedup over the declared baseline. Green is selected, blue is baseline.</div>
+<div class="foot">GPU timestamp intervals contain the complete execution plan: dispatches plus required inter-pass barriers. Upload, compilation, readback, and CPU verification are excluded. RGA data is static compiler evidence, not a substitute for measured GPU time. Green is selected, blue is baseline.</div>
 </section>
 </main>
 <script>
@@ -252,9 +267,75 @@ if (capture !== null) {
             : "<span class=\"bad\">correct · noisy</span>";
     }
 
+    private static string StaticEvidence(CandidateResult candidate)
+    {
+        IReadOnlyList<RgaPassAnalysis>? passes = candidate.StaticAnalysis?.Passes;
+        if (passes is null || passes.Count == 0)
+            return "—";
+        int? vgprs = NullableMax(passes.Select(pass => pass.VgprsUsed));
+        int? available = NullableMax(passes.Select(pass => pass.VgprsAvailable));
+        int? live = NullableMax(passes.Select(pass => pass.MaximumLiveVgprs));
+        int? allocated = NullableMax(passes.Select(pass => pass.AllocatedVgprs));
+        int? sgprs = NullableMax(passes.Select(pass => pass.SgprsUsed));
+        int? lds = NullableMax(passes.Select(pass => pass.LdsBytes));
+        int? scratch = NullableMax(passes.Select(pass => pass.ScratchBytes));
+        double? occupancy = NullableMin(passes.Select(pass => pass.OccupancyWavesPerSimd));
+        List<string> values = [];
+        if (vgprs.HasValue)
+            values.Add($"V {vgprs}/{available?.ToString(CultureInfo.InvariantCulture) ?? "?"}");
+        if (live.HasValue || allocated.HasValue)
+            values.Add($"live {live?.ToString(CultureInfo.InvariantCulture) ?? "?"}→{allocated?.ToString(CultureInfo.InvariantCulture) ?? "?"}");
+        if (sgprs.HasValue)
+            values.Add($"S {sgprs}");
+        if (lds > 0)
+            values.Add($"LDS {FormatBytes(lds.Value)}");
+        if (scratch > 0)
+            values.Add($"scratch {FormatBytes(scratch.Value)}");
+        if (occupancy.HasValue)
+            values.Add($"occupancy {Format(occupancy.Value)} waves/SIMD");
+        return values.Count == 0 ? candidate.StaticAnalysis?.Status ?? "—" : string.Join(" · ", values);
+    }
+
+    private static string FormatBytes(int bytes) => bytes >= 1024
+        ? (bytes / 1024.0).ToString("0.##", CultureInfo.InvariantCulture) + " KiB"
+        : bytes.ToString(CultureInfo.InvariantCulture) + " B";
+
+    private static string Max(IReadOnlyList<RgaPassAnalysis> passes, Func<RgaPassAnalysis, int?> selector)
+    {
+        int? value = NullableMax(passes.Select(selector));
+        return value?.ToString(CultureInfo.InvariantCulture) ?? string.Empty;
+    }
+
+    private static string Min(IReadOnlyList<RgaPassAnalysis> passes, Func<RgaPassAnalysis, double?> selector)
+    {
+        double? value = NullableMin(passes.Select(selector));
+        return value.HasValue ? Format(value.Value) : string.Empty;
+    }
+
+    private static int? NullableMax(IEnumerable<int?> values)
+    {
+        int[] present = values.Where(value => value.HasValue).Select(value => value!.Value).ToArray();
+        return present.Length == 0 ? null : present.Max();
+    }
+
+    private static double? NullableMin(IEnumerable<double?> values)
+    {
+        double[] present = values.Where(value => value.HasValue).Select(value => value!.Value).ToArray();
+        return present.Length == 0 ? null : present.Min();
+    }
+
     private static string Friendly(IReadOnlyDictionary<string, int> defines) => string.Join(" · ",
         defines.OrderBy(pair => pair.Key, StringComparer.Ordinal).Select(pair =>
-            $"{pair.Key.Replace("HLSLPERF_", string.Empty, StringComparison.Ordinal).ToLowerInvariant()}={pair.Value}"));
+            $"{FriendlyDefineName(pair.Key)}={pair.Value}"));
+
+    private static string FriendlyDefineName(string name) => name switch
+    {
+        "HLSLPERF_ELEMENTS_PER_THREAD" => "EPT",
+        "HLSLPERF_GROUP_SIZE" => "group",
+        "HLSLPERF_TILE_DIM" => "tile",
+        "HLSLPERF_BLOCK_ROWS" => "rows",
+        _ => name.Replace("HLSLPERF_", string.Empty, StringComparison.Ordinal).ToLowerInvariant()
+    };
 
     private static string Format(double value) => value.ToString("0.####", CultureInfo.InvariantCulture);
     private static string Html(string value) => WebUtility.HtmlEncode(value);

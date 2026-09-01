@@ -1,0 +1,24 @@
+{
+  "name": "com.edwinliu.hlslperf-profile",
+  "version": "0.2.0",
+  "displayName": "HLSL Performance Profile Consumer",
+  "description": "A read-only Unity adapter for validated HlslKernelPipeline device profiles. It does not compile, tune, benchmark, or depend on the pipeline core.",
+  "unity": "2022.3",
+  "author": {
+    "name": "Edwin Liu"
+  },
+  "license": "SEE LICENSE.md",
+  "keywords": [
+    "hlsl",
+    "gpu",
+    "performance",
+    "profile"
+  ],
+  "samples": [
+    {
+      "displayName": "Profile Consumer",
+      "description": "Resolve a profile and pass its integer defines to a project-owned sink.",
+      "path": "Samples~/ProfileConsumer"
+    }
+  ]
+}

@@ -3,6 +3,8 @@ using System.Text;
 using System.Text.Json;
 using HlslPerf.Core;
 using HlslPerf.D3D12;
+using HlslPerf.Workloads;
+using HlslPerf.Rga;
 
 namespace HlslPerf.Cli;
 
@@ -69,6 +71,7 @@ internal static class Program
         {
             using D3D12Tuner tuner = new(options.Adapter);
             DeviceFingerprint device = tuner.DescribeDevice(manifest.ShaderModel);
+            IKernelWorkload workload = BuiltinWorkloads.Resolve(manifest);
             Console.WriteLine($"Adapter: {device.AdapterName}");
             Console.WriteLine($"Driver:  {device.DriverVersion}");
             Console.WriteLine($"Run:     {manifest.Name}");
@@ -77,9 +80,37 @@ internal static class Program
             TuningRunReport report = tuner.Run(
                 manifest,
                 manifestPath,
+                workload,
                 progress => PrintProgress(progress),
                 cancellation.Token,
                 Path.Combine(Directory.GetCurrentDirectory(), ".hlslperf", "cache", "dxil"));
+            if (!string.Equals(options.Rga, "off", StringComparison.OrdinalIgnoreCase))
+            {
+                string? explicitRgaPath = string.Equals(options.Rga, "auto", StringComparison.OrdinalIgnoreCase)
+                    ? null
+                    : options.Rga;
+                RgaInstallation? installation = RgaLocator.Find(explicitRgaPath);
+                if (installation is null && explicitRgaPath is not null)
+                    throw new FileNotFoundException($"RGA was not found at '{explicitRgaPath}'.");
+                if (installation is null)
+                {
+                    Console.WriteLine("RGA:     optional analyzer not found; static evidence was not collected.");
+                }
+                else
+                {
+                    Console.WriteLine($"RGA:     {installation.Version ?? installation.ExecutablePath}");
+                    RgaCollector collector = new(installation);
+                    report = collector.Attach(
+                        report,
+                        manifest,
+                        workload,
+                        manifestPath,
+                        Path.Combine(outputDirectory, "rga"),
+                        options.RgaTarget,
+                        message => Console.WriteLine($"          {message}"),
+                        cancellation.Token);
+                }
+            }
             ReportArtifacts artifacts = ReportWriter.Write(report, outputDirectory);
             PrintSummary(report, artifacts);
             return report.Selection is null ? 2 : 0;
@@ -169,6 +200,8 @@ internal static class Program
         string? manifest = null;
         string? output = null;
         string? adapter = null;
+        string rga = "auto";
+        string? rgaTarget = null;
         for (int index = 0; index < args.Length; ++index)
         {
             string value = args[index];
@@ -179,6 +212,12 @@ internal static class Program
                     break;
                 case "--adapter":
                     adapter = RequireValue(args, ref index, value);
+                    break;
+                case "--rga":
+                    rga = RequireValue(args, ref index, value);
+                    break;
+                case "--rga-target":
+                    rgaTarget = RequireValue(args, ref index, value);
                     break;
                 default:
                     if (value.StartsWith("-", StringComparison.Ordinal))
@@ -191,7 +230,7 @@ internal static class Program
         }
         if (requiresManifest && manifest is null)
             throw new ArgumentException("tune requires a manifest path.");
-        return new ParsedOptions(manifest, output, adapter);
+        return new ParsedOptions(manifest, output, adapter, rga, rgaTarget);
     }
 
     private static string RequireValue(string[] args, ref int index, string option)
@@ -209,11 +248,13 @@ internal static class Program
 
               hlslperf doctor [--adapter <name-fragment>]
               hlslperf tune <manifest.json> [--adapter <name-fragment>] [--output <directory>]
+                            [--rga <auto|off|path>] [--rga-target <gfx-id>]
               hlslperf render <run.json> [--output <directory>]
 
             doctor verifies D3D12 device creation and prints the profile fingerprint.
             tune compiles candidates, rejects incorrect output, measures GPU timestamps,
-            and writes JSON, CSV, SVG, HTML, and a selected device profile.
+            optionally attaches RGA live-driver evidence, and writes JSON, CSV, SVG, HTML,
+            and a selected device profile. RGA defaults to auto-discovery and is never required.
             render rebuilds presentation artifacts from an existing immutable run.
             """);
         return 0;
@@ -226,5 +267,10 @@ internal static class Program
         return 64;
     }
 
-    private sealed record ParsedOptions(string? ManifestPath, string? OutputDirectory, string? Adapter);
+    private sealed record ParsedOptions(
+        string? ManifestPath,
+        string? OutputDirectory,
+        string? Adapter,
+        string Rga,
+        string? RgaTarget);
 }
