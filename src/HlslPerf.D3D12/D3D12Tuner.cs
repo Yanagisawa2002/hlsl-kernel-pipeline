@@ -87,7 +87,8 @@ public sealed class D3D12Tuner : IDisposable
         IKernelWorkload workload,
         Action<TuningProgress>? progress = null,
         CancellationToken cancellationToken = default,
-        string? compilerCacheDirectory = null)
+        string? compilerCacheDirectory = null,
+        Action<KernelCandidate, ReadOnlyMemory<byte>>? captureVerifiedOutput = null)
     {
         ObjectDisposedException.ThrowIf(disposed, this);
         manifest.Validate();
@@ -145,7 +146,7 @@ public sealed class D3D12Tuner : IDisposable
             CandidateResult result;
             try
             {
-                result = MeasureCandidate(manifest, candidate, plan, compilation);
+                result = MeasureCandidate(manifest, candidate, plan, compilation, captureVerifiedOutput);
             }
             catch (Exception exception) when (exception is not OperationCanceledException)
             {
@@ -192,7 +193,8 @@ public sealed class D3D12Tuner : IDisposable
         TuningManifest manifest,
         KernelCandidate candidate,
         KernelExecutionPlan plan,
-        CompilationSet compilation)
+        CompilationSet compilation,
+        Action<KernelCandidate, ReadOnlyMemory<byte>>? captureVerifiedOutput)
     {
         using PipelineSet pipelines = CreatePipelines(compilation.Bytecodes);
         using ResourceSet resources = CreateResources(plan);
@@ -239,7 +241,10 @@ public sealed class D3D12Tuner : IDisposable
 
         Span<byte> outputBytes = readback.Map<byte>(0, verified.ByteLength);
         string actualHash = ContentHash.Sha256(outputBytes);
+        byte[]? capturedOutput = captureVerifiedOutput is null ? null : outputBytes.ToArray();
         readback.Unmap(0);
+        if (capturedOutput is not null)
+            captureVerifiedOutput!(candidate, capturedOutput);
         bool correctnessPassed = string.Equals(actualHash, plan.ExpectedSha256, StringComparison.OrdinalIgnoreCase);
         CorrectnessResult correctness = new(
             correctnessPassed,

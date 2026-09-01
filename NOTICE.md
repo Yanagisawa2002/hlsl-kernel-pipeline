@@ -9,6 +9,9 @@ HlslKernelPipeline uses, but does not copy or modify:
 - [AMD Radeon GPU Analyzer](https://github.com/GPUOpen-Tools/radeon_gpu_analyzer),
   MIT License, is an optional separately downloaded CLI used to produce static
   evidence. No RGA binary or source is redistributed by this repository.
+- [FFmpeg](https://ffmpeg.org/legal.html) is an optional external CLI used to
+  encode showcase PNG frames as GIF/MP4. No FFmpeg binary or source is
+  redistributed by this repository.
 
 The project intentionally does not reimplement a compiler, Direct3D binding,
 vendor ISA analyzer, or general-purpose autotuning search framework. The RGA

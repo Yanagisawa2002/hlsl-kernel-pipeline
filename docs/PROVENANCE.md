@@ -9,7 +9,8 @@ The repository is clean-room:
   benchmark captures, or Git history are included;
 - the bundled workloads are synthetic and authored for this repository;
 - the reduction, exclusive-scan, transpose providers, CPU oracles, ABI, D3D12
-  executor, RGA adapter, and Unity profile consumer were authored here;
+  executor, RGA adapter, scan-particle showcase, and Unity profile consumer were
+  authored here;
 - external compiler and API bindings are consumed as packages and documented
   in NOTICE.md;
 - generated device profiles contain hardware and toolchain fingerprints, not

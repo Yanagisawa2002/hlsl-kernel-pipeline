@@ -25,6 +25,19 @@ candidate is not deployable merely because one sample is lower.
 GPU timing is never cached. DXIL is cached by source hash, entry point, shader
 model, compiler version, compiler option schema, ABI, and sorted defines.
 
+## Visual A/B contract
+
+The optional D3D12 verified-output callback copies the already-mapped oracle
+buffer after hashing. It does not widen the timestamp interval. The standalone
+showcase uses that callback to retain literal GPU RGBA frame atlases for the
+declared baseline and selected candidate.
+
+Visual comparisons run candidates sequentially with identical deterministic
+inputs. Composition aborts on any byte difference. GIF playback may pace atlas
+phase by measured median time to make a throughput difference visible, but it
+does not alter pixels, invent quality differences, or substitute CPU timing for
+GPU timestamps.
+
 ## Static evidence contract
 
 RGA runs after measured candidates pass correctness. Its DX12 live-driver mode
@@ -54,6 +67,8 @@ even under its least strict device policy.
 - Energy, temperature, and runtime wave occupancy require dedicated telemetry or
   an RGP/runtime-counter adapter.
 - The workload pack covers reusable primitives, not a complete application frame.
+- The particle showcase is a controlled compute-and-visualization plan, not a
+  claim about an entire Unity or game frame.
 
 These limits are explicit so the tool remains an optimization pipeline rather
 than a benchmark-marketing generator.

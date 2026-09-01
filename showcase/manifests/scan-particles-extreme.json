@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "2.0",
+  "name": "scan-particle-visual-extreme",
+  "kernelPath": "../scan-particles.hlsl",
+  "kernelAbiVersion": "hlslperf.raw-buffer.v1",
+  "shaderModel": "6_0",
+  "workItemCount": 16777216,
+  "warmupDispatches": 2,
+  "minimumWarmupMilliseconds": 75,
+  "measurementBatches": 15,
+  "dispatchesPerBatch": 1,
+  "minimumBatchMilliseconds": 10,
+  "maximumDispatchesPerBatch": 16,
+  "maximumCoefficientOfVariation": 0.05,
+  "minimumRequiredSpeedup": 1.01,
+  "workload": {
+    "id": "scan-particle-visual-v1",
+    "parameters": {
+      "elementCount": 16777216,
+      "scanRepeats": 8,
+      "width": 480,
+      "height": 270,
+      "frameCount": 24,
+      "seed": 19088743
+    }
+  },
+  "baselineDefines": {
+    "HLSLPERF_GROUP_SIZE": 256,
+    "HLSLPERF_ELEMENTS_PER_THREAD": 4
+  },
+  "axes": [
+    { "name": "HLSLPERF_GROUP_SIZE", "values": [64, 128, 256, 512] },
+    { "name": "HLSLPERF_ELEMENTS_PER_THREAD", "values": [1, 2, 4] }
+  ]
+}

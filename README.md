@@ -8,6 +8,27 @@ device-specific profile that Unity can consume without importing the tuner.
 This is clean-room personal work. It contains no employer/client project source,
 assets, configuration, benchmark capture, or Git history.
 
+## v0.3 actual-scene A/B showcase
+
+![R9700 extreme-pressure scan particle A/B](docs/results/r9700-scan-particles-extreme-ab.gif)
+
+This is the requested picture-level comparison, not a chart animation. Baseline
+and tuned kernels separately generate the same 24-frame particle-field atlas on
+the GPU. The runner captures their raw RGBA output, requires byte equality, and
+then composes the two sequential captures with measured GPU timing.
+
+| Pressure | Scan work per plan | Selected | Median | P95 | vs baseline |
+|---|---:|---|---:|---:|---:|
+| Low | 262K × 1 | retained baseline | 0.7266 ms | 0.7341 ms | 1.0000x |
+| Medium | 1M × 2 | group 512, EPT 1 | 0.8521 ms | 0.8550 ms | 1.0180x |
+| High | 4M × 4 | retained baseline | 1.4349 ms | 1.4408 ms | 1.0000x |
+| Extreme | 16M × 8 | group 256, EPT 2 | 4.3552 ms | 4.3866 ms | 1.0341x |
+
+All 48 candidates passed the GPU-output oracle and stability budget. Extreme
+pressure produced the largest deployable end-to-end improvement; low and high
+correctly retained the baseline under the 1.01x guard. See the
+[full visual evidence and all four GIFs](docs/results/R9700_VISUAL_SHOWCASE_2026-09-02.md).
+
 ## v0.2 result
 
 ![R9700 scan candidate comparison](docs/results/r9700-v02-scan.gif)
@@ -78,6 +99,7 @@ Requirements: Windows 10/11, a D3D12-capable GPU, and .NET 10 SDK.
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/reduction.json
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/scan.json
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/transpose.json
+    dotnet run --project src/HlslPerf.Showcase -c Release --no-build
 
 RGA is optional and never redistributed. If its CLI is installed or unpacked,
 attach live-driver evidence with:
@@ -91,6 +113,9 @@ Outputs go to `.hlslperf/runs/<timestamp>/`. GPU timing is never cached; only
 DXIL compilation is cached by source/compiler/options/entry-point/define
 identity. The profile compatibility key includes device, driver, backend,
 shader model, compiler, manifest hash, and kernel hash.
+
+The standalone showcase under `showcase/` references the public execution ABI
+and D3D12 backend, not Unity. Unity remains a read-only profile consumer.
 
 ## Deliberate non-goals
 
