@@ -16,7 +16,8 @@ internal static class Program
         try
         {
             string repositoryRoot = FindRepositoryRoot();
-            string outputRoot = ParseOutput(args) ?? Path.Combine(
+            ShowcaseOptions options = ParseOptions(args);
+            string outputRoot = options.OutputDirectory ?? Path.Combine(
                 repositoryRoot,
                 ".hlslperf",
                 "showcase",
@@ -29,6 +30,24 @@ internal static class Program
             Console.WriteLine($"Adapter: {device.AdapterName}");
             Console.WriteLine($"Driver:  {device.DriverVersion}");
             Console.WriteLine($"Output:  {outputRoot}");
+
+            if (options.StressGrid)
+            {
+                StressGridArtifacts artifacts = StressGridRunner.Run(
+                    repositoryRoot,
+                    outputRoot,
+                    tuner,
+                    device,
+                    options.BudgetMilliseconds);
+                Console.WriteLine();
+                Console.WriteLine($"Stress grid:     {artifacts.CsvPath}");
+                Console.WriteLine($"Heatmap:         {artifacts.SvgPath}");
+                Console.WriteLine(
+                    $"Budget:          {artifacts.EffectiveBudgetMilliseconds:0.0000} ms " +
+                    $"({(artifacts.EffectiveBudgetMilliseconds == artifacts.RequestedBudgetMilliseconds ? "requested" : "measured fit")})");
+                Console.WriteLine($"Budget crossing: {artifacts.BudgetCrossingGifPath ?? "not found"}");
+                return artifacts.BudgetCrossingGifPath is null ? 2 : 0;
+            }
 
             foreach (string level in Levels)
                 summaries.Add(RunLevel(repositoryRoot, outputRoot, level, tuner));
@@ -228,13 +247,35 @@ internal static class Program
 
     private static string Csv(string value) => '"' + value.Replace("\"", "\"\"") + '"';
 
-    private static string? ParseOutput(string[] args)
+    private static ShowcaseOptions ParseOptions(string[] args)
     {
-        if (args.Length == 0)
-            return null;
-        if (args.Length == 2 && args[0] == "--output")
-            return Path.GetFullPath(args[1]);
-        throw new ArgumentException("Usage: hlslperf-showcase [--output <directory>]");
+        string? output = null;
+        bool stressGrid = false;
+        double budgetMilliseconds = 1000.0 / 120.0;
+        for (int index = 0; index < args.Length; ++index)
+        {
+            switch (args[index])
+            {
+                case "--output":
+                    if (++index >= args.Length)
+                        throw new ArgumentException("--output requires a directory.");
+                    output = Path.GetFullPath(args[index]);
+                    break;
+                case "--stress-grid":
+                    stressGrid = true;
+                    break;
+                case "--budget-ms":
+                    if (++index >= args.Length ||
+                        !double.TryParse(args[index], NumberStyles.Float, CultureInfo.InvariantCulture, out budgetMilliseconds) ||
+                        !double.IsFinite(budgetMilliseconds) || budgetMilliseconds <= 0)
+                        throw new ArgumentException("--budget-ms requires a positive finite number.");
+                    break;
+                default:
+                    throw new ArgumentException(
+                        "Usage: hlslperf-showcase [--output <directory>] [--stress-grid] [--budget-ms <milliseconds>]");
+            }
+        }
+        return new ShowcaseOptions(output, stressGrid, budgetMilliseconds);
     }
 
     private static string FindRepositoryRoot()
@@ -249,6 +290,8 @@ internal static class Program
         throw new DirectoryNotFoundException("Run the showcase from inside the HlslKernelPipeline repository.");
     }
 }
+
+internal sealed record ShowcaseOptions(string? OutputDirectory, bool StressGrid, double BudgetMilliseconds);
 
 internal sealed record ShowcaseLevelSummary(
     string Level,

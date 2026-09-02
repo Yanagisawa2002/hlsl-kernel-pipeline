@@ -134,6 +134,152 @@ internal static class VisualComposer
         return new VisualArtifacts(gifPath, mp4Path, framesDirectory);
     }
 
+    public static VisualArtifacts WriteBudgetCrossing(
+        DeviceFingerprint device,
+        int elementCount,
+        int scanRepeats,
+        int sourceWidth,
+        int sourceHeight,
+        int sourceFrameCount,
+        double budgetMilliseconds,
+        CandidateResult baseline,
+        CandidateResult selected,
+        ReadOnlyMemory<byte> baselineAtlas,
+        ReadOnlyMemory<byte> selectedAtlas,
+        string outputDirectory)
+    {
+        if (!baselineAtlas.Span.SequenceEqual(selectedAtlas.Span))
+            throw new InvalidDataException("Baseline and tuned GPU frame atlases are not byte-identical.");
+        if (baseline.Timing is null || selected.Timing is null ||
+            baseline.SamplesMilliseconds.Count == 0 || selected.SamplesMilliseconds.Count == 0)
+            throw new InvalidDataException("Budget composition requires valid timings and recorded GPU samples.");
+        if (!double.IsFinite(budgetMilliseconds) || budgetMilliseconds <= 0)
+            throw new ArgumentOutOfRangeException(nameof(budgetMilliseconds));
+
+        Directory.CreateDirectory(outputDirectory);
+        string framesDirectory = Path.Combine(outputDirectory, "frames");
+        Directory.CreateDirectory(framesDirectory);
+        double speedup = baseline.Timing.MedianMilliseconds / selected.Timing.MedianMilliseconds;
+        double targetRate = 1000.0 / budgetMilliseconds;
+
+        using FrameAtlas baselineFrames = new(baselineAtlas, sourceWidth, sourceHeight, sourceFrameCount);
+        using FrameAtlas selectedFrames = new(selectedAtlas, sourceWidth, sourceHeight, sourceFrameCount);
+        using Font titleFont = new("Segoe UI", 25, FontStyle.Bold, GraphicsUnit.Pixel);
+        using Font subtitleFont = new("Segoe UI", 14, FontStyle.Regular, GraphicsUnit.Pixel);
+        using Font sectionFont = new("Segoe UI", 16, FontStyle.Bold, GraphicsUnit.Pixel);
+        using Font metricFont = new("Segoe UI", 22, FontStyle.Bold, GraphicsUnit.Pixel);
+        using Font bodyFont = new("Segoe UI", 13, FontStyle.Regular, GraphicsUnit.Pixel);
+        using Font smallFont = new("Segoe UI", 11, FontStyle.Regular, GraphicsUnit.Pixel);
+        using Font monoFont = new("Consolas", 13, FontStyle.Regular, GraphicsUnit.Pixel);
+
+        const int deadlinesPerOutputFrame = 4;
+        for (int outputFrame = 0; outputFrame < OutputFrameCount; ++outputFrame)
+        {
+            int submitted = (outputFrame + 1) * deadlinesPerOutputFrame;
+            CadenceSnapshot baselineCadence = ReplayCadence(
+                baseline.SamplesMilliseconds,
+                budgetMilliseconds,
+                submitted,
+                sourceFrameCount);
+            CadenceSnapshot selectedCadence = ReplayCadence(
+                selected.SamplesMilliseconds,
+                budgetMilliseconds,
+                submitted,
+                sourceFrameCount);
+            using Bitmap canvas = new(CanvasWidth, CanvasHeight, PixelFormat.Format32bppArgb);
+            using Graphics graphics = Graphics.FromImage(canvas);
+            Configure(graphics);
+            DrawBackground(graphics);
+
+            using SolidBrush primary = new(Color.FromArgb(239, 246, 255));
+            using SolidBrush muted = new(Color.FromArgb(148, 163, 184));
+            using SolidBrush cyan = new(Color.FromArgb(65, 210, 255));
+            using SolidBrush green = new(Color.FromArgb(63, 231, 164));
+            using SolidBrush amber = new(Color.FromArgb(255, 190, 92));
+            graphics.DrawString("GPU BUDGET CROSSING · ACTUAL FRAME ATLAS", titleFont, primary, 38, 26);
+            graphics.DrawString(
+                $"{device.AdapterName} · {targetRate:0.#} Hz / {budgetMilliseconds:0.0000} ms deadline · " +
+                $"{elementCount:N0} flags × {scanRepeats} scans per submitted update",
+                subtitleFont,
+                muted,
+                40,
+                65);
+
+            RectangleF leftPanel = new(38, 112, 548, 309);
+            RectangleF rightPanel = new(614, 112, 548, 309);
+            DrawPanel(graphics, baselineFrames[baselineCadence.SourceFrame], leftPanel, Color.FromArgb(63, 145, 255));
+            DrawPanel(graphics, selectedFrames[selectedCadence.SourceFrame], rightPanel, Color.FromArgb(63, 231, 164));
+
+            graphics.DrawString("BASELINE · OVER BUDGET", sectionFont, amber, 44, 88);
+            graphics.DrawString("TUNED · P95 IN BUDGET", sectionFont, green, 620, 88);
+            graphics.DrawString(ShortCandidate(baseline), monoFont, primary, 42, 431);
+            graphics.DrawString(ShortCandidate(selected), monoFont, primary, 618, 431);
+
+            DrawMetricCard(
+                graphics,
+                new RectangleF(38, 466, 548, 96),
+                baseline.Timing.MedianMilliseconds,
+                baseline.Timing.P95Milliseconds,
+                baseline.Timing.CoefficientOfVariation,
+                1,
+                metricFont,
+                bodyFont,
+                primary,
+                muted,
+                Color.FromArgb(63, 145, 255));
+            DrawMetricCard(
+                graphics,
+                new RectangleF(614, 466, 548, 96),
+                selected.Timing.MedianMilliseconds,
+                selected.Timing.P95Milliseconds,
+                selected.Timing.CoefficientOfVariation,
+                speedup,
+                metricFont,
+                bodyFont,
+                primary,
+                muted,
+                Color.FromArgb(63, 231, 164));
+
+            DrawCadenceStrip(
+                graphics,
+                new RectangleF(38, 570, 548, 43),
+                baselineCadence,
+                submitted,
+                smallFont,
+                Color.FromArgb(255, 190, 92));
+            DrawCadenceStrip(
+                graphics,
+                new RectangleF(614, 570, 548, 43),
+                selectedCadence,
+                submitted,
+                smallFont,
+                Color.FromArgb(63, 231, 164));
+
+            string equalityHash = selected.Correctness?.ActualSha256[..12] ?? "unavailable";
+            graphics.DrawString(
+                $"Same byte-identical GPU atlas · SHA-256 {equalityHash}… · frame advance replays recorded GPU samples",
+                bodyFont,
+                green,
+                40,
+                625);
+            graphics.DrawString(
+                "No synthetic delay or quality change · one update submitted per deadline · upload/readback/CPU composition excluded",
+                smallFont,
+                muted,
+                40,
+                651);
+
+            string framePath = Path.Combine(framesDirectory, $"frame-{outputFrame:D3}.png");
+            canvas.Save(framePath, ImageFormat.Png);
+        }
+
+        string gifPath = Path.Combine(outputDirectory, "scan-particles-budget-crossing.gif");
+        string mp4Path = Path.Combine(outputDirectory, "scan-particles-budget-crossing.mp4");
+        EncodeGif(framesDirectory, gifPath);
+        EncodeMp4(framesDirectory, mp4Path);
+        return new VisualArtifacts(gifPath, mp4Path, framesDirectory);
+    }
+
     private static void Configure(Graphics graphics)
     {
         graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -183,6 +329,59 @@ internal static class VisualComposer
         graphics.DrawString($"{median:0.0000} ms", metricFont, primary, bounds.X + 16, bounds.Y + 12);
         graphics.DrawString($"{speedup:0.000}× baseline", metricFont, speedBrush, bounds.X + 282, bounds.Y + 12);
         graphics.DrawString($"p95 {p95:0.0000} ms   ·   CV {cv:P2}", bodyFont, muted, bounds.X + 18, bounds.Y + 66);
+    }
+
+    private static void DrawCadenceStrip(
+        Graphics graphics,
+        RectangleF bounds,
+        CadenceSnapshot cadence,
+        int submitted,
+        Font font,
+        Color accent)
+    {
+        using SolidBrush card = new(Color.FromArgb(13, 26, 47));
+        using SolidBrush text = new(Color.FromArgb(226, 235, 247));
+        using SolidBrush accentBrush = new(accent);
+        using Pen border = new(Color.FromArgb(90, accent), 1);
+        graphics.FillRoundedRectangle(card, bounds, 9);
+        graphics.DrawRoundedRectangle(border, bounds, 9);
+        graphics.DrawString(
+            $"completed {cadence.Completed}/{submitted}   ·   backlog {cadence.Backlog}   ·   missed {cadence.MissedDeadlines}",
+            font,
+            text,
+            bounds.X + 12,
+            bounds.Y + 6);
+        float progress = submitted == 0 ? 0 : cadence.Completed / (float)submitted;
+        RectangleF rail = new(bounds.X + 12, bounds.Bottom - 10, bounds.Width - 24, 4);
+        using SolidBrush railBrush = new(Color.FromArgb(42, 59, 82));
+        graphics.FillRectangle(railBrush, rail);
+        graphics.FillRectangle(accentBrush, rail.X, rail.Y, rail.Width * progress, rail.Height);
+    }
+
+    private static CadenceSnapshot ReplayCadence(
+        IReadOnlyList<double> samplesMilliseconds,
+        double budgetMilliseconds,
+        int submitted,
+        int sourceFrameCount)
+    {
+        double availableAt = 0;
+        double now = submitted * budgetMilliseconds;
+        int completed = 0;
+        int missedDeadlines = 0;
+        for (int job = 0; job < submitted; ++job)
+        {
+            double submittedAt = job * budgetMilliseconds;
+            double startsAt = Math.Max(submittedAt, availableAt);
+            double duration = samplesMilliseconds[job % samplesMilliseconds.Count];
+            double completesAt = startsAt + duration;
+            availableAt = completesAt;
+            if (completesAt <= now)
+                completed++;
+            if (completesAt > (job + 1) * budgetMilliseconds)
+                missedDeadlines++;
+        }
+        int frame = Math.Max(0, completed - 1) % sourceFrameCount;
+        return new CadenceSnapshot(completed, submitted - completed, missedDeadlines, frame);
     }
 
     private static string ShortCandidate(CandidateResult candidate)
@@ -295,6 +494,8 @@ internal static class VisualComposer
             return bitmap;
         }
     }
+
+    private sealed record CadenceSnapshot(int Completed, int Backlog, int MissedDeadlines, int SourceFrame);
 
     private static void FillRoundedRectangle(this Graphics graphics, Brush brush, RectangleF bounds, float radius)
     {
