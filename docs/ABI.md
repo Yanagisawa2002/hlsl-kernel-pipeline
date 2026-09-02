@@ -39,6 +39,30 @@ hashing are outside the timestamp interval.
 The same resource cannot be bound as an SRV and UAV in one pass. An algorithm
 that needs in-place work can split it into passes or use a read/write UAV kernel.
 
+## Single-pass scan on ABI v1
+
+The bundled backend-3 scan remains inside ABI v1. Its timed execution plan has
+an O(1) `ResetSinglePassState` dispatch followed by one `SinglePassScan` data
+dispatch. The reset increments an epoch and resets a claim counter; it never
+walks the input or per-block state.
+
+`SinglePassScan` binds input at `t0`, final output at `u0`, and a globally
+coherent state buffer at `u1`. The state layout is an eight-byte header
+`[epoch, nextBlock]` followed by twelve bytes per logical block
+`[aggregate, inclusivePrefix, epoch|status]`.
+
+Physical groups atomically claim logical block ids. A claimed predecessor has
+therefore already started before a later block can observe its id. Each block
+publishes its aggregate, walks backward across ready aggregates, stops at the
+nearest completed prefix, publishes its own inclusive prefix, and writes final
+exclusive-scan values. This persistent claim order avoids waiting for an
+unlaunched group while decoupled look-back avoids a fully serialized prefix
+chain.
+
+The scale and persistent-group limit are ordinary integer defines and therefore
+participate in candidate identity, DXIL caching, reports, and emitted profiles.
+No D3D12 executor branch or Unity-specific binding is required.
+
 ## Schema migration
 
 Schema 1.0 manifests are still accepted through the `uint-mix-v1` workload

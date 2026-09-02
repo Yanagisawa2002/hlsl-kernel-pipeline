@@ -38,62 +38,98 @@ internal sealed class ScanParticleWorkload : IKernelWorkload
         int seed = spec.GetRequiredInt32("seed");
         int groupSize = candidate.GetRequired("HLSLPERF_GROUP_SIZE");
         int elementsPerThread = candidate.GetRequired("HLSLPERF_ELEMENTS_PER_THREAD");
+        int backend = candidate.Defines.TryGetValue("HLSLPERF_SCAN_BACKEND", out int selectedBackend)
+            ? selectedBackend
+            : 1;
         ValidateCandidate(candidate, groupSize, elementsPerThread);
         EnsureOracle(ElementCount, Width, Height, FrameCount, seed);
 
         long blockSize = checked((long)groupSize * elementsPerThread);
         List<KernelBufferSpec> buffers = [new("flags", checked(ElementCount * sizeof(uint)), flagsData)];
-        List<int> levelCounts = [];
-        List<uint> levelGroups = [];
-        int count = ElementCount;
-        int level = 0;
-        while (true)
-        {
-            uint groups = CeilDiv(count, blockSize);
-            buffers.Add(new KernelBufferSpec($"scan-{level}", checked(count * sizeof(uint))));
-            buffers.Add(new KernelBufferSpec($"sums-{level}", checked((int)groups * sizeof(uint))));
-            levelCounts.Add(count);
-            levelGroups.Add(groups);
-            if (groups == 1)
-                break;
-            count = checked((int)groups);
-            level++;
-        }
-
         List<KernelPassSpec> passes = [];
-        for (int repeat = 0; repeat < ScanRepeats; ++repeat)
+        if (backend == 3)
         {
-            string input = "flags";
-            for (int scanLevel = 0; scanLevel < levelCounts.Count; ++scanLevel)
+            long singlePassBlockSize = checked(blockSize * GetSinglePassItemsScale(candidate));
+            uint logicalBlocks = CeilDiv(ElementCount, singlePassBlockSize);
+            uint persistentGroups = Math.Min(logicalBlocks, checked((uint)GetPersistentGroupLimit(candidate)));
+            int stateBytes = checked(8 + checked((int)logicalBlocks) * 12);
+            buffers.Add(new KernelBufferSpec("scan-0", checked(ElementCount * sizeof(uint))));
+            buffers.Add(new KernelBufferSpec("single-pass-state", stateBytes, new byte[stateBytes]));
+            for (int repeat = 0; repeat < ScanRepeats; ++repeat)
             {
-                KernelDispatch dispatch = DispatchForGroups(levelGroups[scanLevel]);
                 passes.Add(new KernelPassSpec(
-                    $"scan-r{repeat}-level-{scanLevel}",
-                    "BlockScanPass",
-                    dispatch,
-                    input,
+                    $"single-pass-reset-r{repeat}",
+                    "ResetSinglePassState",
+                    new KernelDispatch(1),
                     null,
-                    $"scan-{scanLevel}",
-                    $"sums-{scanLevel}",
-                    [(uint)levelCounts[scanLevel], 0, 0, 0, 0, 0, dispatch.X, levelGroups[scanLevel]]));
-                input = $"sums-{scanLevel}";
+                    null,
+                    "single-pass-state",
+                    null,
+                    []));
+                passes.Add(new KernelPassSpec(
+                    $"single-pass-scan-r{repeat}",
+                    "SinglePassScan",
+                    new KernelDispatch(persistentGroups),
+                    "flags",
+                    null,
+                    "scan-0",
+                    "single-pass-state",
+                    [(uint)ElementCount, checked((uint)singlePassBlockSize), logicalBlocks]));
+            }
+        }
+        else
+        {
+            List<int> levelCounts = [];
+            List<uint> levelGroups = [];
+            int count = ElementCount;
+            int level = 0;
+            while (true)
+            {
+                uint groups = CeilDiv(count, blockSize);
+                buffers.Add(new KernelBufferSpec($"scan-{level}", checked(count * sizeof(uint))));
+                buffers.Add(new KernelBufferSpec($"sums-{level}", checked((int)groups * sizeof(uint))));
+                levelCounts.Add(count);
+                levelGroups.Add(groups);
+                if (groups == 1)
+                    break;
+                count = checked((int)groups);
+                level++;
             }
 
-            for (int childLevel = levelCounts.Count - 2; childLevel >= 0; --childLevel)
+            for (int repeat = 0; repeat < ScanRepeats; ++repeat)
             {
-                KernelDispatch dispatch = DispatchForGroups(levelGroups[childLevel]);
-                passes.Add(new KernelPassSpec(
-                    $"offset-r{repeat}-level-{childLevel}",
-                    "AddScanOffsets",
-                    dispatch,
-                    $"scan-{childLevel + 1}",
-                    null,
-                    $"scan-{childLevel}",
-                    null,
-                    [
-                        (uint)levelCounts[childLevel], checked((uint)blockSize), 0, 0, 0, 0,
-                        dispatch.X, levelGroups[childLevel]
-                    ]));
+                string input = "flags";
+                for (int scanLevel = 0; scanLevel < levelCounts.Count; ++scanLevel)
+                {
+                    KernelDispatch dispatch = DispatchForGroups(levelGroups[scanLevel]);
+                    passes.Add(new KernelPassSpec(
+                        $"scan-r{repeat}-level-{scanLevel}",
+                        "BlockScanPass",
+                        dispatch,
+                        input,
+                        null,
+                        $"scan-{scanLevel}",
+                        $"sums-{scanLevel}",
+                        [(uint)levelCounts[scanLevel], 0, 0, 0, 0, 0, dispatch.X, levelGroups[scanLevel]]));
+                    input = $"sums-{scanLevel}";
+                }
+
+                for (int childLevel = levelCounts.Count - 2; childLevel >= 0; --childLevel)
+                {
+                    KernelDispatch dispatch = DispatchForGroups(levelGroups[childLevel]);
+                    passes.Add(new KernelPassSpec(
+                        $"offset-r{repeat}-level-{childLevel}",
+                        "AddScanOffsets",
+                        dispatch,
+                        $"scan-{childLevel + 1}",
+                        null,
+                        $"scan-{childLevel}",
+                        null,
+                        [
+                            (uint)levelCounts[childLevel], checked((uint)blockSize), 0, 0, 0, 0,
+                            dispatch.X, levelGroups[childLevel]
+                        ]));
+                }
             }
         }
 
@@ -265,5 +301,23 @@ internal sealed class ScanParticleWorkload : IKernelWorkload
             throw new InvalidDataException($"Candidate '{candidate.Id}' group size must be a power of two in 1..1024.");
         if (elementsPerThread is <= 0 or > 16)
             throw new InvalidDataException($"Candidate '{candidate.Id}' elements per thread must be in 1..16.");
+    }
+
+    private static int GetPersistentGroupLimit(KernelCandidate candidate)
+    {
+        int limit = candidate.Defines.TryGetValue("HLSLPERF_SINGLE_PASS_GROUPS", out int value) ? value : 256;
+        if (limit is <= 0 or > 65_535)
+            throw new InvalidDataException(
+                $"Candidate '{candidate.Id}' persistent group limit must be in 1..65,535.");
+        return limit;
+    }
+
+    private static int GetSinglePassItemsScale(KernelCandidate candidate)
+    {
+        int scale = candidate.Defines.TryGetValue("HLSLPERF_SINGLE_PASS_ITEMS_SCALE", out int value) ? value : 1;
+        if (scale is <= 0 or > 64)
+            throw new InvalidDataException(
+                $"Candidate '{candidate.Id}' single-pass items scale must be in 1..64.");
+        return scale;
     }
 }

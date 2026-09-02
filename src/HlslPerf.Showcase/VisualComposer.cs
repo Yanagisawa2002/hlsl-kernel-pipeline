@@ -388,10 +388,20 @@ internal static class VisualComposer
     {
         int group = candidate.Defines["HLSLPERF_GROUP_SIZE"];
         int elementsPerThread = candidate.Defines["HLSLPERF_ELEMENTS_PER_THREAD"];
-        string backend = candidate.Defines.TryGetValue("HLSLPERF_SCAN_BACKEND", out int value) && value == 2
-            ? "wave"
+        string backend = candidate.Defines.TryGetValue("HLSLPERF_SCAN_BACKEND", out int value)
+            ? value switch
+            {
+                2 => "wave",
+                3 => "single-pass",
+                _ => "blelloch"
+            }
             : "blelloch";
-        return $"{backend} · group={group} · EPT={elementsPerThread}";
+        bool singlePass = value == 3;
+        int itemsPerThread = singlePass &&
+            candidate.Defines.TryGetValue("HLSLPERF_SINGLE_PASS_ITEMS_SCALE", out int scale)
+                ? checked(elementsPerThread * scale)
+                : elementsPerThread;
+        return $"{backend} · group={group} · {(singlePass ? "IPT" : "EPT")}={itemsPerThread}";
     }
 
     private static void EncodeGif(string framesDirectory, string outputPath)

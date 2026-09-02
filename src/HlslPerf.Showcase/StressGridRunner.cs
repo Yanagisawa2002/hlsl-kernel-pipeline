@@ -26,8 +26,11 @@ internal sealed record StressPointSummary(
     string BaselineCandidateId,
     string SelectedCandidateId,
     bool RetainedBaseline,
+    bool BaselineStable,
+    bool SelectedStable,
     double BaselineMedianMilliseconds,
     double BaselineP95Milliseconds,
+    double BaselineCoefficientOfVariation,
     double SelectedMedianMilliseconds,
     double SelectedP95Milliseconds,
     double SelectedCoefficientOfVariation,
@@ -35,6 +38,9 @@ internal sealed record StressPointSummary(
     int SelectedBackend,
     int SelectedGroupSize,
     int SelectedElementsPerThread,
+    int SelectedItemsPerThread,
+    int SelectedSinglePassGroups,
+    int SelectedSinglePassItemsScale,
     string OutputSha256,
     string RunJsonPath);
 
@@ -183,43 +189,84 @@ internal static class StressGridRunner
             JsonSerializer.Serialize(manifest, JsonDefaults.Options),
             new UTF8Encoding(false));
 
-        ScanParticleWorkload workload = new();
-        TuningRunReport report = tuner.Run(
-            manifest,
-            manifestPath,
-            workload,
-            null,
-            default,
-            Path.Combine(repositoryRoot, ".hlslperf", "cache", "dxil"));
-        ReportArtifacts artifacts = ReportWriter.Write(report, pointDirectory);
-        SelectionResult selection = report.Selection
-            ?? throw new InvalidDataException($"No deployable candidate was selected for stress point {pointName}.");
-        CandidateResult baseline = report.Candidates.Single(candidate => candidate.CandidateId == report.BaselineCandidateId);
-        CandidateResult selected = report.Candidates.Single(candidate => candidate.CandidateId == selection.CandidateId);
-        if (baseline.Timing is null || selected.Timing is null ||
-            baseline.Correctness?.Passed != true || selected.Correctness?.Passed != true)
-            throw new InvalidDataException($"Stress point {pointName} did not produce correct timed baseline and selected candidates.");
+        TuningRunReport? report = null;
+        SelectionResult? selection = null;
+        CandidateResult? baseline = null;
+        CandidateResult? selected = null;
+        const int maximumAttempts = 3;
+        for (int attempt = 1; attempt <= maximumAttempts; ++attempt)
+        {
+            ScanParticleWorkload workload = new();
+            report = tuner.Run(
+                manifest,
+                manifestPath,
+                workload,
+                null,
+                default,
+                Path.Combine(repositoryRoot, ".hlslperf", "cache", "dxil"));
+            selection = report.Selection
+                ?? throw new InvalidDataException($"No deployable candidate was selected for stress point {pointName}.");
+            baseline = report.Candidates.Single(candidate => candidate.CandidateId == report.BaselineCandidateId);
+            selected = report.Candidates.Single(candidate => candidate.CandidateId == selection.CandidateId);
+            if (baseline.Timing is null || selected.Timing is null ||
+                baseline.Correctness?.Passed != true || selected.Correctness?.Passed != true)
+                throw new InvalidDataException(
+                    $"Stress point {pointName} did not produce correct timed baseline and selected candidates.");
+            if (baseline.Stable && selected.Stable)
+                break;
+            if (attempt < maximumAttempts)
+            {
+                File.WriteAllText(
+                    Path.Combine(pointDirectory, $"run-rejected-attempt-{attempt}.json"),
+                    JsonSerializer.Serialize(report, JsonDefaults.Options),
+                    new UTF8Encoding(false));
+                Console.WriteLine(
+                    $"grid {elementCount,10:N0} × {scanRepeats,2}: retrying noisy " +
+                    $"{(!baseline.Stable ? "baseline" : "selected")} ({attempt}/{maximumAttempts})");
+            }
+        }
+        TuningRunReport finalReport = report
+            ?? throw new InvalidDataException($"Stress point {pointName} did not complete a tuning run.");
+        SelectionResult finalSelection = selection
+            ?? throw new InvalidDataException($"Stress point {pointName} did not complete selection.");
+        CandidateResult finalBaseline = baseline
+            ?? throw new InvalidDataException($"Stress point {pointName} lost its baseline candidate.");
+        CandidateResult finalSelected = selected
+            ?? throw new InvalidDataException($"Stress point {pointName} lost its selected candidate.");
+        DistributionSummary baselineTiming = finalBaseline.Timing
+            ?? throw new InvalidDataException($"Stress point {pointName} lost baseline timing data.");
+        DistributionSummary selectedTiming = finalSelected.Timing
+            ?? throw new InvalidDataException($"Stress point {pointName} lost selected timing data.");
+        CorrectnessResult selectedCorrectness = finalSelected.Correctness
+            ?? throw new InvalidDataException($"Stress point {pointName} lost selected correctness data.");
+        ReportArtifacts artifacts = ReportWriter.Write(finalReport, pointDirectory);
 
         StressPointSummary summary = new(
             elementCount,
             scanRepeats,
-            report.Candidates.Count,
-            report.Candidates.Count(candidate => candidate.Correctness?.Passed == true),
-            report.Candidates.Count(candidate => candidate.Stable),
-            baseline.CandidateId,
-            selected.CandidateId,
-            selection.RetainedBaseline,
-            baseline.Timing.MedianMilliseconds,
-            baseline.Timing.P95Milliseconds,
-            selected.Timing.MedianMilliseconds,
-            selected.Timing.P95Milliseconds,
-            selected.Timing.CoefficientOfVariation,
-            baseline.Timing.MedianMilliseconds / selected.Timing.MedianMilliseconds,
-            Define(selected, "HLSLPERF_SCAN_BACKEND"),
-            Define(selected, "HLSLPERF_GROUP_SIZE"),
-            Define(selected, "HLSLPERF_ELEMENTS_PER_THREAD"),
-            selected.Correctness.ActualSha256,
-            artifacts.RunJsonPath);
+            finalReport.Candidates.Count,
+            finalReport.Candidates.Count(candidate => candidate.Correctness?.Passed == true),
+            finalReport.Candidates.Count(candidate => candidate.Stable),
+            finalBaseline.CandidateId,
+            finalSelected.CandidateId,
+            finalSelection.RetainedBaseline,
+            finalBaseline.Stable,
+            finalSelected.Stable,
+            baselineTiming.MedianMilliseconds,
+            baselineTiming.P95Milliseconds,
+            baselineTiming.CoefficientOfVariation,
+            selectedTiming.MedianMilliseconds,
+            selectedTiming.P95Milliseconds,
+            selectedTiming.CoefficientOfVariation,
+            baselineTiming.MedianMilliseconds / selectedTiming.MedianMilliseconds,
+            Define(finalSelected, "HLSLPERF_SCAN_BACKEND"),
+            Define(finalSelected, "HLSLPERF_GROUP_SIZE"),
+            Define(finalSelected, "HLSLPERF_ELEMENTS_PER_THREAD"),
+            ActualItemsPerThread(finalSelected),
+            OptionalDefine(finalSelected, "HLSLPERF_SINGLE_PASS_GROUPS", 0),
+            OptionalDefine(finalSelected, "HLSLPERF_SINGLE_PASS_ITEMS_SCALE", 1),
+            selectedCorrectness.ActualSha256,
+            Path.GetRelativePath(Path.GetDirectoryName(pointsRoot)!, artifacts.RunJsonPath));
         File.WriteAllText(
             Path.Combine(pointDirectory, "point-summary.json"),
             JsonSerializer.Serialize(summary, JsonDefaults.Options),
@@ -228,8 +275,9 @@ internal static class StressGridRunner
             $"grid {elementCount,10:N0} × {scanRepeats,2}: " +
             $"{summary.BaselineMedianMilliseconds,8:0.0000} → {summary.SelectedMedianMilliseconds,8:0.0000} ms · " +
             $"{summary.Speedup:0.0000}× · {BackendName(summary.SelectedBackend)} " +
-            $"g{summary.SelectedGroupSize}/e{summary.SelectedElementsPerThread}");
-        return new StressPointRun(manifest, manifestPath, report, summary);
+            $"g{summary.SelectedGroupSize}/{(summary.SelectedBackend == 3 ? "ipt" : "e")}{summary.SelectedItemsPerThread}" +
+            $"{(!summary.BaselineStable || !summary.SelectedStable ? " · NOISY" : string.Empty)}");
+        return new StressPointRun(manifest, manifestPath, finalReport, summary);
     }
 
     private static TuningManifest CreateManifest(
@@ -292,6 +340,7 @@ internal static class StressGridRunner
         // lies between tuned p95 and baseline median; no duration is fabricated.
         crossing = points
             .Where(point => !point.Summary.RetainedBaseline &&
+                point.Summary.BaselineStable && point.Summary.SelectedStable &&
                 point.Summary.SelectedP95Milliseconds < point.Summary.BaselineMedianMilliseconds)
             .OrderByDescending(point =>
                 point.Summary.BaselineMedianMilliseconds / point.Summary.SelectedP95Milliseconds)
@@ -305,6 +354,8 @@ internal static class StressGridRunner
 
     private static bool IsCrossing(StressPointSummary point, double budgetMilliseconds) =>
         !point.RetainedBaseline &&
+        point.BaselineStable &&
+        point.SelectedStable &&
         point.BaselineMedianMilliseconds > budgetMilliseconds &&
         point.SelectedP95Milliseconds <= budgetMilliseconds;
 
@@ -389,9 +440,11 @@ internal static class StressGridRunner
     {
         StringBuilder csv = new();
         csv.AppendLine(
-            "element_count,scan_repeats,candidates,correct,stable,baseline_median_ms,baseline_p95_ms," +
+            "element_count,scan_repeats,candidates,correct,stable,baseline_stable,selected_stable," +
+            "baseline_median_ms,baseline_p95_ms,baseline_cv," +
             "selected_median_ms,selected_p95_ms,selected_cv,speedup,retained_baseline,backend,group_size," +
-            "elements_per_thread,baseline_candidate,selected_candidate,output_sha256,run_json");
+            "elements_per_thread,actual_items_per_thread,single_pass_groups,single_pass_items_scale," +
+            "baseline_candidate,selected_candidate,output_sha256,run_json");
         foreach (StressPointSummary point in points)
         {
             csv.AppendLine(string.Join(',',
@@ -400,8 +453,11 @@ internal static class StressGridRunner
                 Invariant(point.CandidateCount),
                 Invariant(point.CorrectCount),
                 Invariant(point.StableCount),
+                point.BaselineStable.ToString(CultureInfo.InvariantCulture),
+                point.SelectedStable.ToString(CultureInfo.InvariantCulture),
                 Invariant(point.BaselineMedianMilliseconds),
                 Invariant(point.BaselineP95Milliseconds),
+                Invariant(point.BaselineCoefficientOfVariation),
                 Invariant(point.SelectedMedianMilliseconds),
                 Invariant(point.SelectedP95Milliseconds),
                 Invariant(point.SelectedCoefficientOfVariation),
@@ -410,6 +466,9 @@ internal static class StressGridRunner
                 Csv(BackendName(point.SelectedBackend)),
                 Invariant(point.SelectedGroupSize),
                 Invariant(point.SelectedElementsPerThread),
+                Invariant(point.SelectedItemsPerThread),
+                Invariant(point.SelectedSinglePassGroups),
+                Invariant(point.SelectedSinglePassItemsScale),
                 Csv(point.BaselineCandidateId),
                 Csv(point.SelectedCandidateId),
                 Csv(point.OutputSha256),
@@ -488,7 +547,9 @@ internal static class StressGridRunner
                     svg.AppendLine($"<rect x=\"{x + 2}\" y=\"{y + 2}\" width=\"{cellWidth - 4}\" height=\"{cellHeight - 4}\" rx=\"6\" fill=\"#101e34\"/>");
                     continue;
                 }
-                string fill = HeatColor(point.Speedup, point.RetainedBaseline);
+                string fill = HeatColor(
+                    point.Speedup,
+                    point.RetainedBaseline || !point.BaselineStable || !point.SelectedStable);
                 bool isCrossing = crossing is not null &&
                     crossing.ElementCount == point.ElementCount && crossing.ScanRepeats == point.ScanRepeats;
                 string stroke = isCrossing ? "#ffbe5c" : "#263b58";
@@ -518,6 +579,17 @@ internal static class StressGridRunner
         candidate.Defines.TryGetValue(name, out int value)
             ? value
             : throw new InvalidDataException($"Candidate '{candidate.CandidateId}' is missing define '{name}'.");
+
+    private static int OptionalDefine(CandidateResult candidate, string name, int fallback) =>
+        candidate.Defines.TryGetValue(name, out int value) ? value : fallback;
+
+    private static int ActualItemsPerThread(CandidateResult candidate)
+    {
+        int elementsPerThread = Define(candidate, "HLSLPERF_ELEMENTS_PER_THREAD");
+        return OptionalDefine(candidate, "HLSLPERF_SCAN_BACKEND", 1) == 3
+            ? checked(elementsPerThread * OptionalDefine(candidate, "HLSLPERF_SINGLE_PASS_ITEMS_SCALE", 1))
+            : elementsPerThread;
+    }
 
     private static string BackendName(int backend) => backend switch
     {

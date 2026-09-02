@@ -18,10 +18,20 @@ internal sealed class ScanWorkload : IKernelWorkload
         int seed = spec.GetInt32("seed", 1_337_031);
         int groupSize = candidate.GetRequired("HLSLPERF_GROUP_SIZE");
         int elementsPerThread = candidate.GetRequired("HLSLPERF_ELEMENTS_PER_THREAD");
+        int backend = candidate.Defines.TryGetValue("HLSLPERF_SCAN_BACKEND", out int selectedBackend)
+            ? selectedBackend
+            : 1;
         WorkloadData.ValidatePowerOfTwoGroup(groupSize, candidate.Id);
         EnsureOracle(elementCount, seed);
 
         long blockSize = checked((long)groupSize * elementsPerThread);
+        if (backend == 3)
+        {
+            long singlePassBlockSize = checked(
+                (long)groupSize * elementsPerThread * GetSinglePassItemsScale(candidate));
+            return BuildSinglePass(candidate, elementCount, singlePassBlockSize);
+        }
+
         List<KernelBufferSpec> buffers = [new("input", checked(elementCount * sizeof(uint)), inputData)];
         List<KernelPassSpec> passes = [];
         List<int> levelCounts = [];
@@ -77,6 +87,68 @@ internal sealed class ScanWorkload : IKernelWorkload
             expectedHash!);
         plan.Validate();
         return plan;
+    }
+
+    private KernelExecutionPlan BuildSinglePass(KernelCandidate candidate, int elementCount, long blockSize)
+    {
+        uint logicalBlocks = WorkloadData.CeilDiv(elementCount, blockSize);
+        uint persistentGroups = Math.Min(logicalBlocks, checked((uint)GetPersistentGroupLimit(candidate)));
+        int stateBytes = checked(8 + checked((int)logicalBlocks) * 12);
+        List<KernelBufferSpec> buffers =
+        [
+            new("input", checked(elementCount * sizeof(uint)), inputData),
+            new("scan-0", checked(elementCount * sizeof(uint))),
+            new("single-pass-state", stateBytes, new byte[stateBytes])
+        ];
+        List<KernelPassSpec> passes =
+        [
+            new(
+                "single-pass-reset",
+                "ResetSinglePassState",
+                new KernelDispatch(1),
+                null,
+                null,
+                "single-pass-state",
+                null,
+                []),
+            new(
+                "single-pass-scan",
+                "SinglePassScan",
+                new KernelDispatch(persistentGroups),
+                "input",
+                null,
+                "scan-0",
+                "single-pass-state",
+                [(uint)elementCount, checked((uint)blockSize), logicalBlocks])
+        ];
+        KernelExecutionPlan plan = new(
+            Id,
+            KernelAbiV1.Id,
+            elementCount,
+            buffers,
+            passes,
+            "scan-0",
+            expectedHash!);
+        plan.Validate();
+        return plan;
+    }
+
+    private static int GetPersistentGroupLimit(KernelCandidate candidate)
+    {
+        int limit = candidate.Defines.TryGetValue("HLSLPERF_SINGLE_PASS_GROUPS", out int value) ? value : 256;
+        if (limit is <= 0 or > 65_535)
+            throw new InvalidDataException(
+                $"Candidate '{candidate.Id}' persistent group limit must be in 1..65,535.");
+        return limit;
+    }
+
+    private static int GetSinglePassItemsScale(KernelCandidate candidate)
+    {
+        int scale = candidate.Defines.TryGetValue("HLSLPERF_SINGLE_PASS_ITEMS_SCALE", out int value) ? value : 1;
+        if (scale is <= 0 or > 64)
+            throw new InvalidDataException(
+                $"Candidate '{candidate.Id}' single-pass items scale must be in 1..64.");
+        return scale;
     }
 
     private void EnsureOracle(int elementCount, int seed)

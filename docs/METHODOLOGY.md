@@ -22,6 +22,13 @@ candidate is not deployable merely because one sample is lower.
    declared stable baseline and must not regress p95. Otherwise selection retains
    the baseline.
 
+The showcase and stress-grid runners add a stricter comparison-level gate: both
+the declared baseline and selected candidate must be stable. A noisy pair is
+remeasured up to three times and each rejected raw run is retained for audit.
+The four-level showcase refuses an unstable level; the stress grid renders an
+unstable cell as neutral gray and excludes it from budget-crossing selection.
+This prevents a transiently slow baseline from becoming an inflated A/B claim.
+
 GPU timing is never cached. DXIL is cached by source hash, entry point, shader
 model, compiler version, compiler option schema, ABI, and sorted defines.
 
@@ -37,6 +44,17 @@ inputs. Composition aborts on any byte difference. GIF playback may pace atlas
 phase by measured median time to make a throughput difference visible, but it
 does not alter pixels, invent quality differences, or substitute CPU timing for
 GPU timestamps.
+
+The budget-crossing mode is stricter than median-paced playback. It submits one
+logical update per requested deadline and replays each candidate's recorded GPU
+sample sequence through a serial completion queue. The displayed completed,
+backlog, and missed-deadline counts are derived from those samples. The two
+atlases must still be byte-identical; no synthetic sleep, duplicated quality
+setting, or fabricated duration is used.
+
+For the single-pass backend, the constant-cost epoch/reset dispatch is inside
+every timed plan execution. “Single-pass” means one dispatch traverses the data
+and writes the final scan; it does not mean setup is hidden outside timestamps.
 
 ## Static evidence contract
 

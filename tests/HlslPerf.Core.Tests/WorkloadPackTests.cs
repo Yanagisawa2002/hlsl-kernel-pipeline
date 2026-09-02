@@ -53,6 +53,35 @@ public sealed class WorkloadPackTests
     }
 
     [Fact]
+    public void ScanSinglePassBuildsEpochResetAndOneDataDispatch()
+    {
+        TuningManifest manifest = Manifest(
+            "exclusive-scan-u32-v1",
+            new Dictionary<string, long> { ["elementCount"] = 1000, ["seed"] = 7 },
+            [
+                new CandidateAxis { Name = "HLSLPERF_GROUP_SIZE", Values = [64] },
+                new CandidateAxis { Name = "HLSLPERF_ELEMENTS_PER_THREAD", Values = [2] },
+                new CandidateAxis { Name = "HLSLPERF_SCAN_BACKEND", Values = [3] }
+            ]);
+        KernelExecutionPlan plan = BuiltinWorkloads.Resolve(manifest).Build(
+            manifest,
+            new KernelCandidate(new Dictionary<string, int>
+            {
+                ["HLSLPERF_GROUP_SIZE"] = 64,
+                ["HLSLPERF_ELEMENTS_PER_THREAD"] = 2,
+                ["HLSLPERF_SCAN_BACKEND"] = 3
+            }));
+
+        Assert.Collection(
+            plan.Passes,
+            pass => Assert.Equal("ResetSinglePassState", pass.EntryPoint),
+            pass => Assert.Equal("SinglePassScan", pass.EntryPoint));
+        Assert.Equal(8u, plan.Passes[1].Dispatch.X);
+        Assert.Equal(8 + 8 * 12, plan.Buffers.Single(buffer => buffer.Name == "single-pass-state").ByteLength);
+        Assert.Equal(4000, plan.Buffers.Single(buffer => buffer.Name == plan.VerifiedResource).ByteLength);
+    }
+
+    [Fact]
     public void TransposeUsesTwoDimensionalDispatchAndCandidateSpecificTile()
     {
         TuningManifest manifest = Manifest(
