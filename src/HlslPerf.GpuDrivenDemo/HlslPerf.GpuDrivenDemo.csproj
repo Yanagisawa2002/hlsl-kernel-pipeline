@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>hlslperf-gpu-driven-demo</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Vortice.Dxc" Version="3.8.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../HlslPerf.Core/HlslPerf.Core.csproj" />
+    <ProjectReference Include="../HlslPerf.D3D12/HlslPerf.D3D12.csproj" />
+    <ProjectReference Include="../HlslPerf.GpuDriven/HlslPerf.GpuDriven.csproj" />
+  </ItemGroup>
+</Project>

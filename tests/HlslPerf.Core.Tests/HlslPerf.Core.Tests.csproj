@@ -10,6 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/HlslPerf.Core/HlslPerf.Core.csproj" />
+    <ProjectReference Include="../../src/HlslPerf.GpuDriven/HlslPerf.GpuDriven.csproj" />
     <ProjectReference Include="../../src/HlslPerf.Workloads/HlslPerf.Workloads.csproj" />
     <ProjectReference Include="../../src/HlslPerf.Rga/HlslPerf.Rga.csproj" />
   </ItemGroup>

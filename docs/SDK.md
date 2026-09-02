@@ -11,6 +11,10 @@ the engine integration never needs to own the tuner.
 | `EdwinLiu.HlslPerf.Rga` | optional AMD RGA static-evidence adapter |
 | `EdwinLiu.HlslPerf.Cli` | `hlslperf` .NET tool that composes the packages |
 
+`HlslPerf.GpuDriven` is a standalone example of the external plugin boundary:
+it supplies a complete Crowd/VFX application workload without adding that
+application to the core or built-in primitive package.
+
 The SDK contains no Unity references. The UPM package is a separate read-only
 consumer of a selected profile.
 

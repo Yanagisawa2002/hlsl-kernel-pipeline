@@ -26,6 +26,19 @@ the repository owner's tag and NuGet credential.
 - [x] Wave32/64, scalar/`uint4`, persistent-group, item-scale, and LDS-replica axes.
 - [x] Post-timing poison/re-execute correctness gate for repeated-plan integrity.
 
+### v0.6 application proof harness — implemented, GPU evidence pending
+
+- [x] External Crowd/VFX workload plugin over the public kernel ABI.
+- [x] Complete visibility -> compaction -> tile offsets -> bin scatter -> raster plan.
+- [x] Materialized/global-atomic baseline versus fused/replicated-LDS family.
+- [x] Low, medium, high, and extreme pressure manifests with conditional axes.
+- [x] CPU atlas oracle, strict DXC-only validation, and regression tests.
+- [x] Whole-plan pressure grid and deadline/backlog GIF/MP4 compositor.
+- [ ] Run the explicit four-level GPU matrix and publish only guarded evidence.
+
+Implementation readiness is not recorded as a performance result. The pending
+checkbox requires a named GPU/driver run with correctness and stability gates.
+
 ## v0.7 evidence credibility — TODO, not claimed
 
 - [ ] AMD, NVIDIA, and Intel multi-GPU matrix.

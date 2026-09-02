@@ -136,6 +136,26 @@ The core and workload pack reference no Unity assemblies. The package under
 profile. Project code owns the final mapping from integer defines to its shader
 variant system through `IHlslPerfDefineSink`.
 
+## v0.6 GPU-driven Crowd/VFX application proof — ready to measure
+
+The new standalone `HlslPerf.GpuDriven` plugin turns the fused primitives into a
+complete picture-producing application plan: moving-agent visibility, visible-
+list compaction, screen-tile histogram and offsets, tile scatter, and a tiled
+compute raster into a twelve-frame RGBA atlas. Its baseline materializes flags
+and prefixes and uses global tile atomics; its optimized family fuses
+producer -> scan -> scatter and merges replicated LDS histograms.
+
+The implementation deliberately has no published Crowd/VFX speedup yet. The
+CPU-only validator checks all manifests and compiles the baseline/fused shader
+entry points without creating a D3D12 device:
+
+    dotnet run --project src/HlslPerf.GpuDrivenDemo -c Release -- validate
+
+GPU work requires an explicit `run`. When executed, four pressure levels will
+select the strongest guarded whole-plan interval and produce an actual-frame
+deadline/backlog GIF and MP4; a measured-fit deadline is labeled as such and is
+never presented as 120 Hz. See the [design and evidence contract](docs/GPU_DRIVEN_CROWD_VFX.md).
+
 ## Real workload pack
 
 - `reduction-u32-v1`: recursively reduces all input elements to one uint.
@@ -169,6 +189,11 @@ Requirements: Windows 10/11, a D3D12-capable GPU, and .NET 10 SDK.
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/transpose.json
     dotnet run --project src/HlslPerf.Showcase -c Release --no-build
     dotnet run --project src/HlslPerf.Showcase -c Release --no-build -- --stress-grid --budget-ms 8.333333
+    dotnet run --project src/HlslPerf.GpuDrivenDemo -c Release --no-build -- validate
+
+The Crowd/VFX GPU matrix is intentionally a separate explicit action:
+
+    dotnet run --project src/HlslPerf.GpuDrivenDemo -c Release --no-build -- run --level all --budget-ms 8.333333
 
 RGA is optional and never redistributed. If its CLI is installed or unpacked,
 attach live-driver evidence with:

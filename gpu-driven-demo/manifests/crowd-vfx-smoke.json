@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "3.0",
+  "name": "crowd-vfx-gpu-driven-smoke",
+  "kernelPath": "../crowd-vfx.hlsl",
+  "kernelAbiVersion": "hlslperf.raw-buffer.v1",
+  "shaderModel": "6_6",
+  "workItemCount": 12288,
+  "warmupDispatches": 1,
+  "minimumWarmupMilliseconds": 1,
+  "measurementBatches": 3,
+  "dispatchesPerBatch": 1,
+  "minimumBatchMilliseconds": 1,
+  "maximumDispatchesPerBatch": 2,
+  "maximumCoefficientOfVariation": 0.08,
+  "minimumRequiredSpeedup": 1.01,
+  "workload": {
+    "id": "crowd-vfx-gpu-driven-v1",
+    "parameters": {
+      "agentCount": 4096,
+      "width": 128,
+      "height": 64,
+      "frameCount": 3,
+      "seed": 19088743,
+      "visibilityMask": 15,
+      "tileSize": 16
+    }
+  },
+  "fixedDefines": {
+    "HLSLPERF_SCAN_BACKEND": 1,
+    "HLSLPERF_CROWD_TILE_BINS": 32,
+    "HLSLPERF_CROWD_TILE_SIZE": 16
+  },
+  "baselineDefines": {
+    "HLSLPERF_CROWD_BACKEND": 1,
+    "HLSLPERF_GROUP_SIZE": 128,
+    "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+    "HLSLPERF_VECTOR_WIDTH": 1
+  },
+  "axes": [
+    { "name": "HLSLPERF_CROWD_BACKEND", "values": [1, 2] },
+    { "name": "HLSLPERF_GROUP_SIZE", "values": [128] },
+    { "name": "HLSLPERF_ELEMENTS_PER_THREAD", "values": [4] },
+    { "name": "HLSLPERF_VECTOR_WIDTH", "values": [1] },
+    { "name": "HLSLPERF_WAVE_SIZE", "values": [32], "when": { "HLSLPERF_CROWD_BACKEND": [2] } },
+    { "name": "HLSLPERF_SINGLE_PASS_ITEMS_SCALE", "values": [2], "when": { "HLSLPERF_CROWD_BACKEND": [2] } },
+    { "name": "HLSLPERF_SINGLE_PASS_GROUPS", "values": [16], "when": { "HLSLPERF_CROWD_BACKEND": [2] } },
+    { "name": "HLSLPERF_CROWD_TILE_REPLICAS", "values": [2], "when": { "HLSLPERF_CROWD_BACKEND": [2] } }
+  ]
+}
