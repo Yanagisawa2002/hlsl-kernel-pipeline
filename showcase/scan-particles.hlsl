@@ -123,19 +123,66 @@ uint3 AddSaturated(uint3 left, uint3 right)
     return min(left + right, uint3(255, 255, 255));
 }
 
+#define HLSLPERF_VISUAL_TILE_WIDTH 16
+#define HLSLPERF_VISUAL_TILE_HEIGHT 16
+#define HLSLPERF_VISUAL_TRAIL_COUNT 6
+
+groupshared uint VisualTrailSamples[HLSLPERF_VISUAL_TILE_WIDTH * HLSLPERF_VISUAL_TRAIL_COUNT];
+groupshared uint VisualTrailCenters[HLSLPERF_VISUAL_TILE_WIDTH * HLSLPERF_VISUAL_TRAIL_COUNT];
+groupshared uint VisualTrailFlags[HLSLPERF_VISUAL_TILE_WIDTH * HLSLPERF_VISUAL_TRAIL_COUNT];
+groupshared uint VisualTrailRadii[HLSLPERF_VISUAL_TILE_WIDTH * HLSLPERF_VISUAL_TRAIL_COUNT];
+
 [RootSignature(HLSLPERF_ROOT_SIGNATURE)]
-[numthreads(256, 1, 1)]
-void VisualizeScan(uint3 dispatchThreadId : SV_DispatchThreadID)
+[numthreads(HLSLPERF_VISUAL_TILE_WIDTH, HLSLPERF_VISUAL_TILE_HEIGHT, 1)]
+void VisualizeScan(
+    uint3 groupId : SV_GroupID,
+    uint3 groupThreadId : SV_GroupThreadID,
+    uint3 dispatchThreadId : SV_DispatchThreadID)
 {
-    const uint pixelCount = Width * Height;
-    const uint totalPixels = pixelCount * FrameCount;
-    if (dispatchThreadId.x >= totalPixels)
+    const uint frame = groupId.z;
+    const uint x = dispatchThreadId.x;
+    const uint y = dispatchThreadId.y;
+    const uint stride = max(1, ElementCount / Width);
+    const uint scale = max(1, ElementCount / max(1, Height * 2));
+    const uint segment = max(1, ElementCount / HLSLPERF_VISUAL_TRAIL_COUNT);
+
+    // Every trail descriptor is constant across all Y lanes for one X column.
+    // One row loads it once and the 16x16 tile reuses it from groupshared memory.
+    if (groupThreadId.y == 0)
+    {
+        [unroll]
+        for (uint trail = 0; trail < HLSLPERF_VISUAL_TRAIL_COUNT; ++trail)
+        {
+            const uint descriptor = groupThreadId.x * HLSLPERF_VISUAL_TRAIL_COUNT + trail;
+            if (x < Width && frame < FrameCount)
+            {
+                const uint sample =
+                    (x * stride + trail * segment + frame * (stride * 3 + 17)) % ElementCount;
+                const uint prefix = Input0.Load(sample * 4);
+                VisualTrailSamples[descriptor] = sample;
+                VisualTrailCenters[descriptor] =
+                    (prefix / scale + trail * max(1, Height / HLSLPERF_VISUAL_TRAIL_COUNT) +
+                        frame * (trail + 2) * 3) % Height;
+                VisualTrailFlags[descriptor] = Input1.Load(sample * 4);
+                VisualTrailRadii[descriptor] =
+                    2 + (Hash32(sample ^ Seed ^ (trail * 0x9e3779b9u)) & 1);
+            }
+            else
+            {
+                VisualTrailSamples[descriptor] = 0;
+                VisualTrailCenters[descriptor] = 0;
+                VisualTrailFlags[descriptor] = 0;
+                VisualTrailRadii[descriptor] = 0;
+            }
+        }
+    }
+    GroupMemoryBarrierWithGroupSync();
+
+    if (x >= Width || y >= Height || frame >= FrameCount)
         return;
 
-    const uint frame = dispatchThreadId.x / pixelCount;
-    const uint pixel = dispatchThreadId.x - frame * pixelCount;
-    const uint x = pixel % Width;
-    const uint y = pixel / Width;
+    const uint pixelCount = Width * Height;
+    const uint pixel = y * Width + x;
     uint3 color = uint3(3, 7, 18);
 
     const uint star = Hash32(pixel + Seed);
@@ -145,19 +192,16 @@ void VisualizeScan(uint3 dispatchThreadId : SV_DispatchThreadID)
         color = AddSaturated(color, uint3(pulse / 2, pulse, pulse));
     }
 
-    const uint stride = max(1, ElementCount / Width);
-    const uint scale = max(1, ElementCount / max(1, Height * 2));
-    const uint segment = max(1, ElementCount / 6);
     [unroll]
-    for (uint trail = 0; trail < 6; ++trail)
+    for (uint trail = 0; trail < HLSLPERF_VISUAL_TRAIL_COUNT; ++trail)
     {
-        const uint sample = (x * stride + trail * segment + frame * (stride * 3 + 17)) % ElementCount;
-        const uint prefix = Input0.Load(sample * 4);
-        const uint flag = Input1.Load(sample * 4);
-        const uint center = (prefix / scale + trail * max(1, Height / 6) + frame * (trail + 2) * 3) % Height;
+        const uint descriptor = groupThreadId.x * HLSLPERF_VISUAL_TRAIL_COUNT + trail;
+        const uint sample = VisualTrailSamples[descriptor];
+        const uint center = VisualTrailCenters[descriptor];
+        const uint flag = VisualTrailFlags[descriptor];
         const uint directDistance = y > center ? y - center : center - y;
         const uint distance = min(directDistance, Height - directDistance);
-        const uint radius = 2 + (Hash32(sample ^ Seed ^ (trail * 0x9e3779b9u)) & 1);
+        const uint radius = VisualTrailRadii[descriptor];
 
         if (distance <= radius)
         {
@@ -175,5 +219,5 @@ void VisualizeScan(uint3 dispatchThreadId : SV_DispatchThreadID)
     }
 
     const uint packed = color.x | (color.y << 8) | (color.z << 16) | 0xff000000;
-    Output0.Store(dispatchThreadId.x * 4, packed);
+    Output0.Store((frame * pixelCount + pixel) * 4, packed);
 }

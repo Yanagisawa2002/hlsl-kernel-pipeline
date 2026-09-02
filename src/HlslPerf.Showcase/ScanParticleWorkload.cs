@@ -5,6 +5,9 @@ namespace HlslPerf.Showcase;
 
 internal sealed class ScanParticleWorkload : IKernelWorkload
 {
+    private const int VisualTileWidth = 16;
+    private const int VisualTileHeight = 16;
+
     private byte[]? flagsData;
     private byte[]? expectedAtlas;
     private string? expectedHash;
@@ -96,11 +99,13 @@ internal sealed class ScanParticleWorkload : IKernelWorkload
 
         int atlasBytes = checked(Width * Height * FrameCount * sizeof(uint));
         buffers.Add(new KernelBufferSpec("frame-atlas", atlasBytes));
-        uint visualGroups = CeilDiv(checked(Width * Height * FrameCount), 256);
         passes.Add(new KernelPassSpec(
             "visualize-scan-particles",
             "VisualizeScan",
-            new KernelDispatch(visualGroups),
+            new KernelDispatch(
+                CeilDiv(Width, VisualTileWidth),
+                CeilDiv(Height, VisualTileHeight),
+                checked((uint)FrameCount)),
             "scan-0",
             "flags",
             "frame-atlas",
