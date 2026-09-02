@@ -8,6 +8,37 @@ device-specific profile that Unity can consume without importing the tuner.
 This is clean-room personal work. It contains no employer/client project source,
 assets, configuration, benchmark capture, or Git history.
 
+## v0.4 persistent single-pass and budget crossing
+
+![R9700 measured 120 Hz budget crossing](docs/results/r9700-single-pass-budget-crossing.gif)
+
+The new scan backend combines persistent logical-block claiming, wave-local
+prefixes, and decoupled look-back. The image above is not a chart animation:
+both sides use byte-identical GPU-generated frame atlases, while frame advance
+replays the recorded per-plan GPU samples against a real 8.3333 ms deadline.
+No delay or quality difference is synthesized.
+
+At eight scans per plan, the selected backend pivots from Wave at 2M elements to
+single-pass at 4M and then gains as the working set grows:
+
+| Elements | Selected backend | Baseline median | Selected median | Selected p95 | vs baseline |
+|---:|---|---:|---:|---:|---:|
+| 2M | Wave, group 128, EPT 1 | 0.3515 ms | 0.2996 ms | 0.3031 ms | 1.1731x |
+| 4M | Single-pass, group 512, IPT 8 | 0.5317 ms | 0.4413 ms | 0.4442 ms | 1.2047x |
+| 8M | Single-pass, group 512, IPT 8 | 0.8929 ms | 0.7175 ms | 0.7218 ms | 1.2443x |
+| 12M | Single-pass, group 512, IPT 8 | 2.1058 ms | 1.5257 ms | 1.5389 ms | 1.3802x |
+| 16M | Single-pass, group 512, IPT 8 | 3.7291 ms | 1.9582 ms | 1.9625 ms | 1.9044x |
+| 24M | Single-pass, group 512, IPT 8 | 5.7465 ms | 2.8541 ms | 2.8633 ms | 2.0134x |
+
+The strongest validated 120 Hz crossing was 24M elements × 16 scans: baseline
+11.3955 ms / p95 11.5060 ms versus single-pass 5.6151 ms / p95 5.6525 ms,
+or 2.0294x. Across the 46-point stress grid, all 1,656 candidate outputs passed
+the oracle and every baseline/selected pair passed the stability gate. The
+standalone 4M scan also selected single-pass at 0.04316 ms, 1.2122x over its
+declared baseline.
+
+See the [single-pass design, full evidence, and limitations](docs/results/R9700_SINGLE_PASS_2026-09-02.md).
+
 ## v0.3 actual-scene A/B showcase
 
 ![R9700 extreme-pressure scan particle A/B](docs/results/r9700-scan-particles-extreme-ab.gif)
@@ -82,8 +113,8 @@ variant system through `IHlslPerfDefineSink`.
 ## Real workload pack
 
 - `reduction-u32-v1`: recursively reduces all input elements to one uint.
-- `exclusive-scan-u32-v1`: scans block totals recursively, then propagates
-  offsets back down every level to produce a global exclusive scan.
+- `exclusive-scan-u32-v1`: compares hierarchical Blelloch, wave-hybrid, and
+  persistent decoupled-look-back single-pass backends.
 - `transpose-u32-v1`: padded groupshared 2D tiles with tunable tile dimension
   and block-row count.
 
@@ -98,8 +129,10 @@ Requirements: Windows 10/11, a D3D12-capable GPU, and .NET 10 SDK.
     dotnet build HlslKernelPipeline.slnx -c Release
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/reduction.json
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/scan.json
+    dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/scan-single-pass.json
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/transpose.json
     dotnet run --project src/HlslPerf.Showcase -c Release --no-build
+    dotnet run --project src/HlslPerf.Showcase -c Release --no-build -- --stress-grid --budget-ms 8.333333
 
 RGA is optional and never redistributed. If its CLI is installed or unpacked,
 attach live-driver evidence with:
