@@ -26,10 +26,12 @@
   },
   "baselineDefines": {
     "HLSLPERF_GROUP_SIZE": 256,
-    "HLSLPERF_ELEMENTS_PER_THREAD": 4
+    "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+    "HLSLPERF_SCAN_BACKEND": 1
   },
   "axes": [
     { "name": "HLSLPERF_GROUP_SIZE", "values": [64, 128, 256, 512] },
-    { "name": "HLSLPERF_ELEMENTS_PER_THREAD", "values": [1, 2, 4] }
+    { "name": "HLSLPERF_ELEMENTS_PER_THREAD", "values": [1, 2, 4] },
+    { "name": "HLSLPERF_SCAN_BACKEND", "values": [1, 2] }
   ]
 }

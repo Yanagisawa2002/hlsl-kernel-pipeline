@@ -17,6 +17,40 @@ public sealed class TuningLogicTests
     }
 
     [Fact]
+    public void ExpandAndResolveBaselineIncludeAlgorithmBackendAxis()
+    {
+        TuningManifest manifest = new()
+        {
+            Name = "scan-backends",
+            KernelPath = "scan.hlsl",
+            WorkItemCount = 1,
+            MeasurementBatches = 3,
+            ThreadsPerGroupParameter = "GROUP",
+            ElementsPerThreadParameter = "EPT",
+            BaselineDefines = new Dictionary<string, int>
+            {
+                ["GROUP"] = 256,
+                ["EPT"] = 4,
+                ["BACKEND"] = 1
+            },
+            Axes =
+            [
+                new CandidateAxis { Name = "GROUP", Values = [128, 256] },
+                new CandidateAxis { Name = "EPT", Values = [1, 4] },
+                new CandidateAxis { Name = "BACKEND", Values = [1, 2] }
+            ]
+        };
+
+        IReadOnlyList<KernelCandidate> candidates = CandidateGenerator.Expand(manifest);
+        KernelCandidate baseline = CandidateGenerator.ResolveBaseline(manifest, candidates);
+
+        Assert.Equal(8, candidates.Count);
+        Assert.Equal(1, baseline.GetRequired("BACKEND"));
+        Assert.Equal(256, baseline.GetRequired("GROUP"));
+        Assert.Equal(4, baseline.GetRequired("EPT"));
+    }
+
+    [Fact]
     public void SummaryUsesMedianAndInterpolatedP95()
     {
         DistributionSummary summary = StableStatistics.Summarize([1, 2, 3, 4, 5]);

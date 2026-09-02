@@ -24,6 +24,10 @@ cbuffer DispatchParameters : register(b0)
 #define HLSLPERF_ELEMENTS_PER_THREAD 4
 #endif
 
+#ifndef HLSLPERF_SCAN_BACKEND
+#define HLSLPERF_SCAN_BACKEND 1
+#endif
+
 groupshared uint ThreadTotals[HLSLPERF_GROUP_SIZE];
 
 [RootSignature(HLSLPERF_ROOT_SIGNATURE)]
@@ -44,6 +48,30 @@ void BlockScanPass(uint3 groupId : SV_GroupID, uint groupIndex : SV_GroupIndex)
             threadTotal += Input0.Load(index * 4);
     }
 
+#if HLSLPERF_SCAN_BACKEND == 2
+    const uint waveSize = WaveGetLaneCount();
+    const uint waveIndex = groupIndex / waveSize;
+    const uint wavePrefix = WavePrefixSum(threadTotal);
+    const uint waveTotal = WaveActiveSum(threadTotal);
+    if (WaveIsFirstLane())
+        ThreadTotals[waveIndex] = waveTotal;
+    GroupMemoryBarrierWithGroupSync();
+
+    const uint waveCount = (HLSLPERF_GROUP_SIZE + waveSize - 1) / waveSize;
+    if (groupIndex == 0)
+    {
+        uint runningWaveTotal = 0;
+        for (uint wave = 0; wave < waveCount; ++wave)
+        {
+            const uint currentWaveTotal = ThreadTotals[wave];
+            ThreadTotals[wave] = runningWaveTotal;
+            runningWaveTotal += currentWaveTotal;
+        }
+        Output1.Store(groupId.x * 4, runningWaveTotal);
+    }
+    GroupMemoryBarrierWithGroupSync();
+    const uint blockPrefix = ThreadTotals[waveIndex] + wavePrefix;
+#else
     ThreadTotals[groupIndex] = threadTotal;
     GroupMemoryBarrierWithGroupSync();
 
@@ -77,6 +105,7 @@ void BlockScanPass(uint3 groupId : SV_GroupID, uint groupIndex : SV_GroupIndex)
     }
 
     const uint blockPrefix = ThreadTotals[groupIndex];
+#endif
     [unroll]
     for (uint storeItem = 0; storeItem < HLSLPERF_ELEMENTS_PER_THREAD; ++storeItem)
     {

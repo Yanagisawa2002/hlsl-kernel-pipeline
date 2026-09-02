@@ -189,7 +189,10 @@ internal static class VisualComposer
     {
         int group = candidate.Defines["HLSLPERF_GROUP_SIZE"];
         int elementsPerThread = candidate.Defines["HLSLPERF_ELEMENTS_PER_THREAD"];
-        return $"group={group} · EPT={elementsPerThread}";
+        string backend = candidate.Defines.TryGetValue("HLSLPERF_SCAN_BACKEND", out int value) && value == 2
+            ? "wave"
+            : "blelloch";
+        return $"{backend} · group={group} · EPT={elementsPerThread}";
     }
 
     private static void EncodeGif(string framesDirectory, string outputPath)

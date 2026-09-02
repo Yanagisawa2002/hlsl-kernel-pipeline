@@ -218,7 +218,13 @@ internal static class Program
     }
 
     private static string ShortCandidate(CandidateResult candidate) =>
-        $"group={candidate.Defines["HLSLPERF_GROUP_SIZE"]}, EPT={candidate.Defines["HLSLPERF_ELEMENTS_PER_THREAD"]}";
+        $"{Backend(candidate)} · group={candidate.Defines["HLSLPERF_GROUP_SIZE"]}, " +
+        $"EPT={candidate.Defines["HLSLPERF_ELEMENTS_PER_THREAD"]}";
+
+    private static string Backend(CandidateResult candidate) =>
+        candidate.Defines.TryGetValue("HLSLPERF_SCAN_BACKEND", out int backend) && backend == 2
+            ? "wave"
+            : "blelloch";
 
     private static string Csv(string value) => '"' + value.Replace("\"", "\"\"") + '"';
 
