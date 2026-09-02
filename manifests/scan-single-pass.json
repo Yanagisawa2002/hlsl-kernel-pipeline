@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "2.0",
+  "schemaVersion": "3.0",
   "name": "single-pass-u32-exclusive-scan",
   "kernelPath": "../kernels/scan.hlsl",
   "kernelAbiVersion": "hlslperf.raw-buffer.v1",

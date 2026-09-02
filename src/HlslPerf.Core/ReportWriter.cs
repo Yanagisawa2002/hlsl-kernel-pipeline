@@ -28,12 +28,17 @@ public static class ReportWriter
         File.WriteAllText(htmlPath, BuildHtml(report), new UTF8Encoding(false));
         File.WriteAllText(svgPath, BuildSvg(report), new UTF8Encoding(false));
 
+        string profileCandidatePath = Path.Combine(fullOutputDirectory, "profile.json");
         string? profilePath = null;
         TuningProfile? profile = CreateProfile(report);
         if (profile is not null)
         {
-            profilePath = Path.Combine(fullOutputDirectory, "profile.json");
+            profilePath = profileCandidatePath;
             File.WriteAllText(profilePath, JsonSerializer.Serialize(profile, JsonDefaults.Options), new UTF8Encoding(false));
+        }
+        else if (File.Exists(profileCandidatePath))
+        {
+            File.Delete(profileCandidatePath);
         }
 
         return new ReportArtifacts(runPath, csvPath, htmlPath, svgPath, profilePath);
@@ -41,14 +46,19 @@ public static class ReportWriter
 
     public static TuningProfile? CreateProfile(TuningRunReport report)
     {
-        if (report.Selection is null)
+        if (report.Selection is null || !report.Selection.UsedStablePool)
             return null;
         CandidateResult? selected = report.Candidates.FirstOrDefault(candidate =>
             candidate.CandidateId == report.Selection.CandidateId);
-        if (selected?.Timing is null || selected.ThroughputMillionItemsPerSecond is null)
+        if (selected?.Compiled != true || selected.Error is not null ||
+            selected.Correctness?.Passed != true || !selected.Stable ||
+            selected.Timing is null || selected.ThroughputMillionItemsPerSecond is null)
             return null;
         CandidateResult? baseline = report.Candidates.FirstOrDefault(candidate =>
             candidate.CandidateId == report.BaselineCandidateId);
+        if (baseline?.Compiled != true || baseline.Error is not null ||
+            baseline.Correctness?.Passed != true || !baseline.Stable || baseline.Timing is null)
+            return null;
         double? speedup = baseline?.Timing is null
             ? null
             : baseline.Timing.MedianMilliseconds / selected.Timing.MedianMilliseconds;

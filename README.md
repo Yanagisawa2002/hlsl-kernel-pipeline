@@ -8,6 +8,32 @@ device-specific profile that Unity can consume without importing the tuner.
 This is clean-room personal work. It contains no employer/client project source,
 assets, configuration, benchmark capture, or Git history.
 
+## v0.6 reusable SDK and fused primitive pack
+
+The tuner is now an SDK rather than a repository-bound benchmark. External
+assemblies can provide workloads through the public raw-buffer execution ABI;
+`hlslperf new-workload` creates a separate package, schema 3.0 removes invalid
+conditional products, checkpoints resume candidate by candidate, and transitive
+`.hlsli` hashes invalidate stale DXIL and Unity profiles.
+
+The new primitive pack adds generic and segmented scan, fused stream compaction,
+histogram offsets, and stable 32-bit radix sort. Final R9700 runs using the
+post-timing poison/re-execute gate produced 294/294 correct candidate outputs:
+
+| Workload | Baseline median | Selected median | Selected p95 | vs baseline |
+|---|---:|---:|---:|---:|
+| Generic XOR scan, 4M | 0.05258 ms | 0.02773 ms | 0.02788 ms | 1.8963x |
+| Segmented scan, 4M | 0.06989 ms | 0.04489 ms | 0.04525 ms | 1.5571x |
+| Producer-scan-scatter compaction, 4M | 0.09433 ms | 0.01911 ms | 0.01931 ms | 4.9357x |
+| Histogram + prefix offsets, 4M | 0.17234 ms | 0.01068 ms | 0.01081 ms | 16.1422x |
+| 32-bit radix sort, 262K | 0.32861 ms | 0.25800 ms | 0.25980 ms | 1.2737x |
+
+The compaction comparison times the full unfused producer -> materialized flags
+-> scan -> scatter plan against a fused producer -> look-back -> direct scatter
+plan. Its advantage is reduced end-to-end memory traffic, not an isolated scan
+microbenchmark. See the [SDK guide](docs/SDK.md), [primitive designs and evidence](docs/V06_PRIMITIVES.md),
+and [explicit v0.7 TODO](docs/ROADMAP.md).
+
 ## v0.4 persistent single-pass and budget crossing
 
 ![R9700 measured 120 Hz budget crossing](docs/results/r9700-single-pass-budget-crossing.gif)
@@ -79,7 +105,7 @@ not universal parameter recommendations. See the [full R9700 v0.2 evidence](docs
 
 ## Architecture and ownership boundary
 
-    manifest v2 + workload provider + HLSL
+    manifest v3 + workload provider/plugin + HLSL/include graph
                     |
                     v
           engine-neutral execution plan
@@ -115,6 +141,11 @@ variant system through `IHlslPerfDefineSink`.
 - `reduction-u32-v1`: recursively reduces all input elements to one uint.
 - `exclusive-scan-u32-v1`: compares hierarchical Blelloch, wave-hybrid, and
   persistent decoupled-look-back single-pass backends.
+- `generic-exclusive-scan-u32-v1`: add/min/max/XOR with Wave32/64 and vector axes.
+- `segmented-exclusive-scan-u32-v1`: pair-monoid segmented look-back scan.
+- `stream-compaction-u32-v1`: unfused scan/scatter versus fused producer-consumer.
+- `histogram-prefix-u32-v1`: global atomics versus replicated LDS plus offsets.
+- `radix-sort-u32-v1`: stable 32-bit binary LSD sort using reusable scan scratch.
 - `transpose-u32-v1`: padded groupshared 2D tiles with tunable tile dimension
   and block-row count.
 
@@ -130,6 +161,11 @@ Requirements: Windows 10/11, a D3D12-capable GPU, and .NET 10 SDK.
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/reduction.json
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/scan.json
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/scan-single-pass.json
+    dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/scan-generic.json
+    dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/segmented-scan.json
+    dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/compaction.json
+    dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/histogram-prefix.json
+    dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/radix-sort.json
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/transpose.json
     dotnet run --project src/HlslPerf.Showcase -c Release --no-build
     dotnet run --project src/HlslPerf.Showcase -c Release --no-build -- --stress-grid --budget-ms 8.333333
@@ -145,7 +181,9 @@ selection, and profile emission still work.
 Outputs go to `.hlslperf/runs/<timestamp>/`. GPU timing is never cached; only
 DXIL compilation is cached by source/compiler/options/entry-point/define
 identity. The profile compatibility key includes device, driver, backend,
-shader model, compiler, manifest hash, and kernel hash.
+shader model, compiler, manifest hash, and transitive kernel hash. After timing,
+the runner poisons the verified resource and requires one already-used plan
+invocation to reconstruct every byte before a profile can be emitted.
 
 The standalone showcase under `showcase/` references the public execution ABI
 and D3D12 backend, not Unity. Unity remains a read-only profile consumer.
@@ -164,4 +202,5 @@ and D3D12 backend, not Unity. Unity remains a read-only profile consumer.
 
 Read the [ABI contract](docs/ABI.md), [measurement methodology](docs/METHODOLOGY.md),
 [RGA evidence policy](docs/RGA.md), [Unity consumer boundary](docs/UNITY_ADAPTER.md),
-and [clean-room provenance](docs/PROVENANCE.md).
+[SDK guide](docs/SDK.md), [roadmap](docs/ROADMAP.md), and
+[clean-room provenance](docs/PROVENANCE.md).

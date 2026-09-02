@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyName>hlslperf-showcase</AssemblyName>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../HlslPerf.Core/HlslPerf.Core.csproj" />

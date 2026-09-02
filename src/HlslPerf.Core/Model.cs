@@ -32,11 +32,12 @@ public sealed class TuningManifest
     public IReadOnlyDictionary<string, int> BaselineDefines { get; init; } =
         new ReadOnlyDictionary<string, int>(new Dictionary<string, int>());
     public required IReadOnlyList<CandidateAxis> Axes { get; init; }
+    public IReadOnlyList<CandidateConstraint> Constraints { get; init; } = [];
     public CorrectnessSpec Correctness { get; init; } = new();
 
     public void Validate()
     {
-        if (SchemaVersion is not ("1.0" or "2.0"))
+        if (SchemaVersion is not ("1.0" or "2.0" or "3.0"))
             throw new InvalidDataException($"Unsupported manifest schema '{SchemaVersion}'.");
         if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(KernelPath))
             throw new InvalidDataException("Manifest name and kernelPath are required.");
@@ -53,8 +54,21 @@ public sealed class TuningManifest
             throw new InvalidDataException("At least one candidate axis is required.");
         if (Axes.Select(axis => axis.Name).Distinct(StringComparer.Ordinal).Count() != Axes.Count)
             throw new InvalidDataException("Candidate axis names must be unique.");
+        if (Axes.Any(axis => FixedDefines.ContainsKey(axis.Name)))
+            throw new InvalidDataException("A define cannot be both fixed and a candidate axis.");
+        HashSet<string> availableConditionNames = FixedDefines.Keys.ToHashSet(StringComparer.Ordinal);
         foreach (CandidateAxis axis in Axes)
+        {
             axis.Validate();
+            ValidateCondition(axis.When, availableConditionNames, $"axis '{axis.Name}' when");
+            availableConditionNames.Add(axis.Name);
+        }
+        HashSet<string> allDefineNames = availableConditionNames;
+        foreach (CandidateConstraint constraint in Constraints)
+            constraint.Validate(allDefineNames);
+        if (SchemaVersion != "3.0" &&
+            (Constraints.Count > 0 || Axes.Any(axis => axis.When.Count > 0)))
+            throw new InvalidDataException("Conditional axes and constraints require manifest schema 3.0.");
         foreach ((string key, int value) in BaselineDefines)
         {
             CandidateAxis axis = Axes.FirstOrDefault(candidateAxis => candidateAxis.Name == key)
@@ -75,7 +89,21 @@ public sealed class TuningManifest
                 throw new InvalidDataException($"Unsupported kernel ABI '{KernelAbiVersion}'.");
             Workload?.Validate();
             if (Workload is null)
-                throw new InvalidDataException("Schema 2.0 manifests require a workload object.");
+                throw new InvalidDataException("Schema 2.0+ manifests require a workload object.");
+        }
+    }
+
+    internal static void ValidateCondition(
+        IReadOnlyDictionary<string, IReadOnlyList<int>> condition,
+        IReadOnlySet<string> availableNames,
+        string owner)
+    {
+        foreach ((string name, IReadOnlyList<int> values) in condition)
+        {
+            if (string.IsNullOrWhiteSpace(name) || !availableNames.Contains(name))
+                throw new InvalidDataException($"{owner} references unavailable define '{name}'.");
+            if (values.Count == 0 || values.Any(value => value <= 0) || values.Distinct().Count() != values.Count)
+                throw new InvalidDataException($"{owner} values for '{name}' must be unique positive integers.");
         }
     }
 
@@ -118,6 +146,8 @@ public sealed class CandidateAxis
 {
     public required string Name { get; init; }
     public required IReadOnlyList<int> Values { get; init; }
+    public IReadOnlyDictionary<string, IReadOnlyList<int>> When { get; init; } =
+        new Dictionary<string, IReadOnlyList<int>>(StringComparer.Ordinal);
 
     internal void Validate()
     {
@@ -125,6 +155,25 @@ public sealed class CandidateAxis
             throw new InvalidDataException("Every candidate axis needs a name and at least one value.");
         if (Values.Any(value => value <= 0) || Values.Distinct().Count() != Values.Count)
             throw new InvalidDataException($"Axis '{Name}' values must be unique positive integers.");
+    }
+}
+
+public sealed class CandidateConstraint
+{
+    [JsonPropertyName("if")]
+    public IReadOnlyDictionary<string, IReadOnlyList<int>> If { get; init; } =
+        new Dictionary<string, IReadOnlyList<int>>(StringComparer.Ordinal);
+
+    [JsonPropertyName("then")]
+    public IReadOnlyDictionary<string, IReadOnlyList<int>> Then { get; init; } =
+        new Dictionary<string, IReadOnlyList<int>>(StringComparer.Ordinal);
+
+    internal void Validate(IReadOnlySet<string> availableNames)
+    {
+        TuningManifest.ValidateCondition(If, availableNames, "constraint if");
+        TuningManifest.ValidateCondition(Then, availableNames, "constraint then");
+        if (Then.Count == 0)
+            throw new InvalidDataException("A candidate constraint requires a non-empty then condition.");
     }
 }
 
@@ -171,7 +220,8 @@ public sealed record CandidateResult(
     double? ThroughputMillionItemsPerSecond,
     bool Stable,
     string? Error,
-    RgaCandidateAnalysis? StaticAnalysis = null);
+    RgaCandidateAnalysis? StaticAnalysis = null,
+    bool ReusedFromCheckpoint = false);
 
 public sealed record RgaPassAnalysis(
     string PassName,
@@ -236,7 +286,14 @@ public sealed record TuningRunReport(
     SelectionResult? Selection,
     IReadOnlyList<CandidateResult> Candidates,
     string WorkloadId = "legacy-v1",
-    string KernelAbiVersion = "legacy-v1");
+    string KernelAbiVersion = "legacy-v1",
+    TuningResumeSummary? Resume = null);
+
+public sealed record TuningResumeSummary(
+    bool Enabled,
+    int ReusedCandidateCount,
+    int MeasuredCandidateCount,
+    string CheckpointSchema);
 
 public sealed record ProfileDefine(string Name, int Value);
 

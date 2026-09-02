@@ -1,6 +1,6 @@
 {
   "name": "com.edwinliu.hlslperf-profile",
-  "version": "0.2.0",
+  "version": "0.6.0",
   "displayName": "HLSL Performance Profile Consumer",
   "description": "A read-only Unity adapter for validated HlslKernelPipeline device profiles. It does not compile, tune, benchmark, or depend on the pipeline core.",
   "unity": "2022.3",

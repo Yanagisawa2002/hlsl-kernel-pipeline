@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edwinliu:hlslperf:manifest:3.0",
+  "title": "HlslPerf manifest schema 3.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "name", "kernelPath", "workload", "axes"],
+  "properties": {
+    "schemaVersion": { "const": "3.0" },
+    "name": { "type": "string", "minLength": 1 },
+    "kernelPath": { "type": "string", "minLength": 1 },
+    "kernelAbiVersion": { "const": "hlslperf.raw-buffer.v1" },
+    "entryPoint": { "type": "string", "minLength": 1 },
+    "shaderModel": { "enum": ["6_0", "6_1", "6_2", "6_3", "6_4", "6_5", "6_6", "6_7"] },
+    "workItemCount": { "$ref": "#/$defs/positiveInteger" },
+    "warmupDispatches": { "type": "integer", "minimum": 0 },
+    "minimumWarmupMilliseconds": { "type": "number", "minimum": 0 },
+    "measurementBatches": { "type": "integer", "minimum": 3 },
+    "dispatchesPerBatch": { "$ref": "#/$defs/positiveInteger" },
+    "minimumBatchMilliseconds": { "type": "number", "exclusiveMinimum": 0 },
+    "maximumDispatchesPerBatch": { "$ref": "#/$defs/positiveInteger" },
+    "maximumCoefficientOfVariation": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+    "minimumRequiredSpeedup": { "type": "number", "minimum": 1 },
+    "threadsPerGroupParameter": { "type": "string", "minLength": 1 },
+    "elementsPerThreadParameter": { "type": "string", "minLength": 1 },
+    "fixedDefines": { "$ref": "#/$defs/defineMap" },
+    "baselineDefines": { "$ref": "#/$defs/defineMap" },
+    "workload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/positiveInteger" }
+        }
+      }
+    },
+    "axes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "values"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "values": { "$ref": "#/$defs/valueSet" },
+          "when": { "$ref": "#/$defs/condition" }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["then"],
+        "properties": {
+          "if": { "$ref": "#/$defs/condition" },
+          "then": { "$ref": "#/$defs/condition" }
+        }
+      }
+    },
+    "correctness": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "seed": { "type": "integer" }
+      }
+    }
+  },
+  "$defs": {
+    "positiveInteger": { "type": "integer", "minimum": 1 },
+    "valueSet": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/positiveInteger" }
+    },
+    "condition": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/valueSet" }
+    },
+    "defineMap": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/positiveInteger" }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edwinliu:hlslperf:profile:2.0",
+  "title": "HlslPerf deployable profile schema 2.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "createdUtc", "compatibilityKey", "device",
+    "manifestSha256", "kernelSha256", "candidateId", "defines",
+    "medianGpuMilliseconds", "p95GpuMilliseconds",
+    "throughputMillionItemsPerSecond", "workloadId", "kernelAbiVersion"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "2.0" },
+    "createdUtc": { "type": "string", "format": "date-time" },
+    "compatibilityKey": { "$ref": "#/$defs/sha256" },
+    "device": { "$ref": "#/$defs/device" },
+    "manifestSha256": { "$ref": "#/$defs/sha256" },
+    "kernelSha256": { "$ref": "#/$defs/sha256" },
+    "candidateId": { "type": "string", "minLength": 1 },
+    "defines": { "$ref": "#/$defs/defines" },
+    "medianGpuMilliseconds": { "type": "number", "exclusiveMinimum": 0 },
+    "p95GpuMilliseconds": { "type": "number", "exclusiveMinimum": 0 },
+    "throughputMillionItemsPerSecond": { "type": "number", "exclusiveMinimum": 0 },
+    "speedupOverBaseline": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+    "workloadId": { "type": "string", "minLength": 1 },
+    "kernelAbiVersion": { "const": "hlslperf.raw-buffer.v1" },
+    "defineValues": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "value"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "value": { "type": "integer" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-fA-F]{64}$" },
+    "defines": { "type": "object", "additionalProperties": { "type": "integer" } },
+    "device": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapterName", "vendorId", "deviceId", "subsystemId", "revision",
+        "adapterLuid", "driverVersion", "backend", "shaderModel",
+        "compilerVersion", "operatingSystem"
+      ],
+      "properties": {
+        "adapterName": { "type": "string" },
+        "vendorId": { "type": "integer", "minimum": 0 },
+        "deviceId": { "type": "integer", "minimum": 0 },
+        "subsystemId": { "type": "integer", "minimum": 0 },
+        "revision": { "type": "integer", "minimum": 0 },
+        "adapterLuid": { "type": "string" },
+        "driverVersion": { "type": "string" },
+        "backend": { "type": "string" },
+        "shaderModel": { "type": "string" },
+        "compilerVersion": { "type": "string" },
+        "operatingSystem": { "type": "string" }
+      }
+    }
+  }
+}

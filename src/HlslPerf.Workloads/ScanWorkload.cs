@@ -4,11 +4,16 @@ namespace HlslPerf.Workloads;
 
 internal sealed class ScanWorkload : IKernelWorkload
 {
-    public string Id => "exclusive-scan-u32-v1";
+    private readonly string id;
+
+    public ScanWorkload(string id = "exclusive-scan-u32-v1") => this.id = id;
+
+    public string Id => id;
 
     private byte[]? inputData;
     private int cachedCount;
     private int cachedSeed;
+    private int cachedOperator;
     private string? expectedHash;
 
     public KernelExecutionPlan Build(TuningManifest manifest, KernelCandidate candidate)
@@ -21,8 +26,19 @@ internal sealed class ScanWorkload : IKernelWorkload
         int backend = candidate.Defines.TryGetValue("HLSLPERF_SCAN_BACKEND", out int selectedBackend)
             ? selectedBackend
             : 1;
+        int scanOperator = OptionalDefine(candidate, "HLSLPERF_SCAN_OPERATOR", 1);
+        int vectorWidth = OptionalDefine(candidate, "HLSLPERF_VECTOR_WIDTH", 1);
+        int waveSize = OptionalDefine(candidate, "HLSLPERF_WAVE_SIZE", 0);
         WorkloadData.ValidatePowerOfTwoGroup(groupSize, candidate.Id);
-        EnsureOracle(elementCount, seed);
+        if (scanOperator is < 1 or > 4)
+            throw new InvalidDataException($"Candidate '{candidate.Id}' scan operator must be in 1..4.");
+        if (vectorWidth is not (1 or 4))
+            throw new InvalidDataException($"Candidate '{candidate.Id}' vector width must be 1 or 4.");
+        if (waveSize is not (0 or 32 or 64))
+            throw new InvalidDataException($"Candidate '{candidate.Id}' wave size must be 0, 32, or 64.");
+        if (waveSize != 0 && manifest.ShaderModel is not ("6_6" or "6_7"))
+            throw new InvalidDataException($"Candidate '{candidate.Id}' fixed wave size requires shader model 6_6+.");
+        EnsureOracle(elementCount, seed, scanOperator);
 
         long blockSize = checked((long)groupSize * elementsPerThread);
         if (backend == 3)
@@ -42,6 +58,7 @@ internal sealed class ScanWorkload : IKernelWorkload
         while (true)
         {
             uint groups = WorkloadData.CeilDiv(count, blockSize);
+            KernelDispatch dispatch = DispatchForGroups(groups);
             string output = $"scan-{level}";
             string sums = $"sums-{level}";
             buffers.Add(new KernelBufferSpec(output, checked(count * sizeof(uint))));
@@ -49,12 +66,12 @@ internal sealed class ScanWorkload : IKernelWorkload
             passes.Add(new KernelPassSpec(
                 $"scan-level-{level}",
                 "BlockScanPass",
-                new KernelDispatch(groups),
+                dispatch,
                 input,
                 null,
                 output,
                 sums,
-                [(uint)count]));
+                [(uint)count, 0, 0, 0, 0, 0, dispatch.X, groups]));
             levelCounts.Add(count);
             levelGroups.Add(groups);
             if (groups == 1)
@@ -66,15 +83,19 @@ internal sealed class ScanWorkload : IKernelWorkload
 
         for (int childLevel = levelCounts.Count - 2; childLevel >= 0; --childLevel)
         {
+            KernelDispatch dispatch = DispatchForGroups(levelGroups[childLevel]);
             passes.Add(new KernelPassSpec(
                 $"add-offsets-level-{childLevel}",
                 "AddScanOffsets",
-                new KernelDispatch(levelGroups[childLevel]),
+                dispatch,
                 $"scan-{childLevel + 1}",
                 null,
                 $"scan-{childLevel}",
                 null,
-                [(uint)levelCounts[childLevel], checked((uint)blockSize)]));
+                [
+                    (uint)levelCounts[childLevel], checked((uint)blockSize), 0, 0, 0, 0,
+                    dispatch.X, levelGroups[childLevel]
+                ]));
         }
 
         KernelExecutionPlan plan = new(
@@ -142,6 +163,9 @@ internal sealed class ScanWorkload : IKernelWorkload
         return limit;
     }
 
+    private static int OptionalDefine(KernelCandidate candidate, string name, int fallback) =>
+        candidate.Defines.TryGetValue(name, out int value) ? value : fallback;
+
     private static int GetSinglePassItemsScale(KernelCandidate candidate)
     {
         int scale = candidate.Defines.TryGetValue("HLSLPERF_SINGLE_PASS_ITEMS_SCALE", out int value) ? value : 1;
@@ -151,21 +175,41 @@ internal sealed class ScanWorkload : IKernelWorkload
         return scale;
     }
 
-    private void EnsureOracle(int elementCount, int seed)
+    private static KernelDispatch DispatchForGroups(uint groupCount)
     {
-        if (inputData is not null && cachedCount == elementCount && cachedSeed == seed)
+        uint x = Math.Min(65_535u, groupCount);
+        uint y = (groupCount + x - 1) / x;
+        return new KernelDispatch(x, y);
+    }
+
+    private void EnsureOracle(int elementCount, int seed, int scanOperator)
+    {
+        if (inputData is not null && cachedCount == elementCount && cachedSeed == seed &&
+            cachedOperator == scanOperator)
             return;
         inputData = WorkloadData.GenerateUInt32(elementCount, seed);
         uint[] input = WorkloadData.AsUInt32(inputData);
         uint[] expected = new uint[input.Length];
-        uint prefix = 0;
+        uint prefix = Identity(scanOperator);
         for (int index = 0; index < input.Length; ++index)
         {
             expected[index] = prefix;
-            prefix = unchecked(prefix + input[index]);
+            prefix = Combine(prefix, input[index], scanOperator);
         }
         expectedHash = ContentHash.Sha256(WorkloadData.ToBytes(expected));
         cachedCount = elementCount;
         cachedSeed = seed;
+        cachedOperator = scanOperator;
     }
+
+    private static uint Identity(int scanOperator) => scanOperator == 2 ? uint.MaxValue : 0;
+
+    private static uint Combine(uint left, uint right, int scanOperator) => scanOperator switch
+    {
+        1 => unchecked(left + right),
+        2 => Math.Min(left, right),
+        3 => Math.Max(left, right),
+        4 => left ^ right,
+        _ => throw new ArgumentOutOfRangeException(nameof(scanOperator))
+    };
 }

@@ -80,6 +80,8 @@ namespace EdwinLiu.HlslPerf
             TextAsset profile,
             HlslPerfRuntimeFingerprint runtime,
             string expectedWorkloadId,
+            string expectedManifestSha256,
+            string expectedKernelSha256,
             HlslPerfCompatibilityPolicy policy,
             out HlslPerfResolvedProfile resolved)
         {
@@ -88,13 +90,22 @@ namespace EdwinLiu.HlslPerf
                 resolved = Failure("Profile TextAsset is null.");
                 return false;
             }
-            return TryResolveJson(profile.text, runtime, expectedWorkloadId, policy, out resolved);
+            return TryResolveJson(
+                profile.text,
+                runtime,
+                expectedWorkloadId,
+                expectedManifestSha256,
+                expectedKernelSha256,
+                policy,
+                out resolved);
         }
 
         public static bool TryResolveJson(
             string json,
             HlslPerfRuntimeFingerprint runtime,
             string expectedWorkloadId,
+            string expectedManifestSha256,
+            string expectedKernelSha256,
             HlslPerfCompatibilityPolicy policy,
             out HlslPerfResolvedProfile resolved)
         {
@@ -106,6 +117,11 @@ namespace EdwinLiu.HlslPerf
             if (string.IsNullOrWhiteSpace(expectedWorkloadId))
             {
                 resolved = Failure("Expected workload id is required.");
+                return false;
+            }
+            if (!IsSha256(expectedManifestSha256) || !IsSha256(expectedKernelSha256))
+            {
+                resolved = Failure("Expected manifest and kernel SHA-256 identities are required.");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(json))
@@ -130,7 +146,13 @@ namespace EdwinLiu.HlslPerf
                 return false;
             }
 
-            string validationError = Validate(data, runtime, expectedWorkloadId, policy);
+            string validationError = Validate(
+                data,
+                runtime,
+                expectedWorkloadId,
+                expectedManifestSha256,
+                expectedKernelSha256,
+                policy);
             if (validationError != null)
             {
                 resolved = Failure(validationError);
@@ -164,6 +186,8 @@ namespace EdwinLiu.HlslPerf
             HlslPerfProfileData data,
             HlslPerfRuntimeFingerprint runtime,
             string expectedWorkloadId,
+            string expectedManifestSha256,
+            string expectedKernelSha256,
             HlslPerfCompatibilityPolicy policy)
         {
             if (!string.Equals(data.schemaVersion, SupportedSchema, StringComparison.Ordinal))
@@ -172,6 +196,12 @@ namespace EdwinLiu.HlslPerf
                 return "Unsupported kernel ABI '" + data.kernelAbiVersion + "'.";
             if (!string.Equals(data.workloadId, expectedWorkloadId, StringComparison.Ordinal))
                 return "Profile workload does not match the requested workload.";
+            if (!IsSha256(data.manifestSha256) ||
+                !string.Equals(data.manifestSha256, expectedManifestSha256, StringComparison.OrdinalIgnoreCase))
+                return "Profile manifest hash does not match the project-owned manifest.";
+            if (!IsSha256(data.kernelSha256) ||
+                !string.Equals(data.kernelSha256, expectedKernelSha256, StringComparison.OrdinalIgnoreCase))
+                return "Profile transitive kernel hash does not match the project-owned HLSL source graph.";
             if (data.device == null)
                 return "Profile device fingerprint is missing.";
             if (string.IsNullOrWhiteSpace(data.compatibilityKey) || string.IsNullOrWhiteSpace(data.candidateId))
@@ -198,6 +228,22 @@ namespace EdwinLiu.HlslPerf
             if (!string.Equals(data.device.driverVersion, runtime.DriverVersion, StringComparison.OrdinalIgnoreCase))
                 return "Profile driver version does not match the runtime.";
             return null;
+        }
+
+        private static bool IsSha256(string value)
+        {
+            if (string.IsNullOrEmpty(value) || value.Length != 64)
+                return false;
+            for (int index = 0; index < value.Length; ++index)
+            {
+                char character = value[index];
+                bool hexadecimal = character >= '0' && character <= '9' ||
+                    character >= 'a' && character <= 'f' ||
+                    character >= 'A' && character <= 'F';
+                if (!hexadecimal)
+                    return false;
+            }
+            return true;
         }
 
         private static HlslPerfDefineValue[] Clone(HlslPerfDefineValue[] source)

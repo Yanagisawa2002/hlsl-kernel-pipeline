@@ -1,13 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <AssemblyName>hlslperf</AssemblyName>
+    <PackageId>EdwinLiu.HlslPerf.Cli</PackageId>
+    <Description>Command-line HLSL kernel autotuner, correctness gate, and evidence pipeline.</Description>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>hlslperf</ToolCommandName>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../HlslPerf.Core/HlslPerf.Core.csproj" />
     <ProjectReference Include="../HlslPerf.D3D12/HlslPerf.D3D12.csproj" />
     <ProjectReference Include="../HlslPerf.Workloads/HlslPerf.Workloads.csproj" />
     <ProjectReference Include="../HlslPerf.Rga/HlslPerf.Rga.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../../LICENSE.md" Pack="true" PackagePath="" />
   </ItemGroup>
 </Project>

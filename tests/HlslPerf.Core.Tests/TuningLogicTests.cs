@@ -51,6 +51,79 @@ public sealed class TuningLogicTests
     }
 
     [Fact]
+    public void SchemaThreeConditionalAxesAvoidMeaninglessBackendProducts()
+    {
+        TuningManifest manifest = new()
+        {
+            SchemaVersion = "3.0",
+            Name = "conditional",
+            KernelPath = "scan.hlsl",
+            WorkItemCount = 1,
+            MeasurementBatches = 3,
+            Workload = new WorkloadSpec
+            {
+                Id = "exclusive-scan-u32-v1",
+                Parameters = new Dictionary<string, long> { ["elementCount"] = 1 }
+            },
+            Axes =
+            [
+                new CandidateAxis { Name = "BACKEND", Values = [1, 3] },
+                new CandidateAxis
+                {
+                    Name = "PERSISTENT_GROUPS",
+                    Values = [64, 128],
+                    When = new Dictionary<string, IReadOnlyList<int>> { ["BACKEND"] = [3] }
+                }
+            ]
+        };
+
+        IReadOnlyList<KernelCandidate> candidates = CandidateGenerator.Expand(manifest);
+
+        Assert.Equal(3, candidates.Count);
+        Assert.Single(candidates, candidate => candidate.GetRequired("BACKEND") == 1);
+        Assert.DoesNotContain(
+            candidates.Single(candidate => candidate.GetRequired("BACKEND") == 1).Defines.Keys,
+            name => name == "PERSISTENT_GROUPS");
+    }
+
+    [Fact]
+    public void SchemaThreeConstraintsFilterInvalidCombinations()
+    {
+        TuningManifest manifest = new()
+        {
+            SchemaVersion = "3.0",
+            Name = "constraints",
+            KernelPath = "scan.hlsl",
+            WorkItemCount = 1,
+            MeasurementBatches = 3,
+            Workload = new WorkloadSpec
+            {
+                Id = "exclusive-scan-u32-v1",
+                Parameters = new Dictionary<string, long> { ["elementCount"] = 1 }
+            },
+            Axes =
+            [
+                new CandidateAxis { Name = "BACKEND", Values = [1, 3] },
+                new CandidateAxis { Name = "GROUP", Values = [128, 512] }
+            ],
+            Constraints =
+            [
+                new CandidateConstraint
+                {
+                    If = new Dictionary<string, IReadOnlyList<int>> { ["BACKEND"] = [3] },
+                    Then = new Dictionary<string, IReadOnlyList<int>> { ["GROUP"] = [512] }
+                }
+            ]
+        };
+
+        IReadOnlyList<KernelCandidate> candidates = CandidateGenerator.Expand(manifest);
+
+        Assert.Equal(3, candidates.Count);
+        Assert.DoesNotContain(candidates, candidate =>
+            candidate.GetRequired("BACKEND") == 3 && candidate.GetRequired("GROUP") == 128);
+    }
+
+    [Fact]
     public void SummaryUsesMedianAndInterpolatedP95()
     {
         DistributionSummary summary = StableStatistics.Summarize([1, 2, 3, 4, 5]);
@@ -104,6 +177,101 @@ public sealed class TuningLogicTests
         Assert.Equal("baseline", selection.CandidateId);
         Assert.True(selection.RetainedBaseline);
     }
+
+    [Fact]
+    public void SelectorMarksRunNonDeployableWhenDeclaredBaselineIsNoisy()
+    {
+        CandidateResult baseline = Result("baseline", 1.0, stable: false, passed: true);
+        CandidateResult winner = Result("winner", 0.5, stable: true, passed: true);
+
+        SelectionResult? selection = CandidateSelector.Select(
+            [baseline, winner],
+            baseline.CandidateId,
+            minimumRequiredSpeedup: 1.01);
+
+        Assert.NotNull(selection);
+        Assert.Equal("winner", selection.CandidateId);
+        Assert.False(selection.UsedStablePool);
+        Assert.Contains("observational only", selection.Reason);
+    }
+
+    [Fact]
+    public void ReportWriterNeverEmitsProfileFromNoisyFallbackPool()
+    {
+        CandidateResult candidate = Result("only-correct-but-noisy", 1.0, stable: false, passed: true);
+        TuningRunReport report = new(
+            "2.0",
+            DateTimeOffset.UtcNow,
+            DateTimeOffset.UtcNow,
+            "manifest.json",
+            new string('a', 64),
+            new string('b', 64),
+            new DeviceFingerprint("gpu", 1, 2, 3, 4, "5", "driver", "D3D12", "6_6", "DXC", "OS"),
+            candidate.CandidateId,
+            new SelectionResult(
+                candidate.CandidateId,
+                candidate.CandidateId,
+                UsedStablePool: false,
+                RetainedBaseline: false,
+                "Only the noisy fallback pool was available."),
+            [candidate],
+            "test-v1",
+            KernelAbiV1.Id);
+
+        Assert.Null(ReportWriter.CreateProfile(report));
+    }
+
+    [Fact]
+    public void ReportWriterRevalidatesSelectedCandidateBeforeEmittingProfile()
+    {
+        CandidateResult invalid = Result("invalid", 1.0, stable: true, passed: false);
+        TuningRunReport report = ReportWithSelection(invalid, usedStablePool: true);
+
+        Assert.Null(ReportWriter.CreateProfile(report));
+    }
+
+    [Fact]
+    public void WritingNonDeployableRunRemovesStaleProfile()
+    {
+        string directory = Path.Combine(Path.GetTempPath(), $"hlslperf-report-test-{Guid.NewGuid():N}");
+        Directory.CreateDirectory(directory);
+        try
+        {
+            string staleProfile = Path.Combine(directory, "profile.json");
+            File.WriteAllText(staleProfile, "stale");
+            CandidateResult noisy = Result("noisy", 1.0, stable: false, passed: true);
+
+            ReportArtifacts artifacts = ReportWriter.Write(
+                ReportWithSelection(noisy, usedStablePool: false),
+                directory);
+
+            Assert.Null(artifacts.ProfileJsonPath);
+            Assert.False(File.Exists(staleProfile));
+        }
+        finally
+        {
+            Directory.Delete(directory, recursive: true);
+        }
+    }
+
+    private static TuningRunReport ReportWithSelection(CandidateResult candidate, bool usedStablePool) => new(
+        "2.0",
+        DateTimeOffset.UtcNow,
+        DateTimeOffset.UtcNow,
+        "manifest.json",
+        new string('a', 64),
+        new string('b', 64),
+        new DeviceFingerprint("gpu", 1, 2, 3, 4, "5", "driver", "D3D12", "6_6", "DXC", "OS"),
+        candidate.CandidateId,
+        new SelectionResult(
+            candidate.CandidateId,
+            candidate.CandidateId,
+            usedStablePool,
+            RetainedBaseline: false,
+            "test"),
+        [candidate],
+        "test-v1",
+        KernelAbiV1.Id);
 
     private static CandidateResult Result(string id, double median, bool stable, bool passed, double? p95 = null)
     {

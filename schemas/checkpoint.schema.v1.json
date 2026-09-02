@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edwinliu:hlslperf:checkpoint:1",
+  "title": "HlslPerf checkpoint schema v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "sdkVersion", "measurementProtocol", "createdUtc", "updatedUtc", "complete",
+    "manifestSha256", "kernelSha256", "device", "workloadId", "workloadImplementationSha256",
+    "kernelAbiVersion", "completedCandidates"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "hlslperf.checkpoint.v1" },
+    "sdkVersion": { "type": "string", "minLength": 1 },
+    "measurementProtocol": { "const": "gpu-timestamps-poison-reexecute-v1" },
+    "createdUtc": { "type": "string", "format": "date-time" },
+    "updatedUtc": { "type": "string", "format": "date-time" },
+    "complete": { "type": "boolean" },
+    "manifestSha256": { "$ref": "#/$defs/sha256" },
+    "kernelSha256": { "$ref": "#/$defs/sha256" },
+    "device": { "$ref": "#/$defs/device" },
+    "workloadId": { "type": "string", "minLength": 1 },
+    "workloadImplementationSha256": { "$ref": "#/$defs/sha256" },
+    "kernelAbiVersion": { "const": "hlslperf.raw-buffer.v1" },
+    "completedCandidates": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "candidateId", "defines", "compiled", "samplesMilliseconds",
+          "measuredDispatchesPerBatch", "stable"
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-fA-F]{64}$" },
+    "device": {
+      "type": "object",
+      "required": [
+        "adapterName", "vendorId", "deviceId", "subsystemId", "revision",
+        "adapterLuid", "driverVersion", "backend", "shaderModel",
+        "compilerVersion", "operatingSystem"
+      ]
+    }
+  }
+}

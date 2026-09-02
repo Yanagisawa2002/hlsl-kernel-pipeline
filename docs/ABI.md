@@ -29,12 +29,19 @@ An `IKernelWorkload` builds a candidate-specific `KernelExecutionPlan` containin
 - one or more passes with entry point, 1D/2D/3D dispatch dimensions, four resource
   names, and up to eight constants;
 - a logical item count for throughput reporting;
-- one verified output buffer and its CPU-oracle SHA-256.
+- one fully deterministic verified output buffer and its CPU-oracle SHA-256.
 
 The backend compiles every distinct entry point with the candidate's sorted
 defines. It tracks resource state across passes, inserts the required SRV/UAV
 transitions, and times the complete plan. Upload, compilation, readback, and CPU
 hashing are outside the timestamp interval.
+
+The verified resource is a repeatability contract, not just a final snapshot.
+After all timed batches, the backend overwrites every verified byte with `0xA5`,
+executes the already-used plan once, then performs readback and hashing. Every
+invocation must therefore regenerate the complete resource. Workloads should
+size compact outputs to their defined payload rather than relying on untouched
+padding bytes.
 
 The same resource cannot be bound as an SRV and UAV in one pass. An algorithm
 that needs in-place work can split it into passes or use a read/write UAV kernel.
@@ -67,6 +74,12 @@ No D3D12 executor branch or Unity-specific binding is required.
 
 Schema 1.0 manifests are still accepted through the `uint-mix-v1` workload
 adapter. Schema 2.0 adds `kernelAbiVersion` and a workload id/parameter object.
-The D3D12 executor itself has no workload-specific branches.
+Schema 3.0 adds conditional axes and implication constraints without changing
+ABI v1. The D3D12 executor itself has no workload-specific branches.
+
+Kernel identity covers the root source and all transitive `.hlsli` dependencies.
+Include paths and content hashes are canonicalized, and include cycles are
+rejected. The combined hash keys compilation, checkpoints, profiles, and the
+Unity consumer.
 
 ABI extensions should receive a new id rather than silently changing root slots.

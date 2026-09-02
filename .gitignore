@@ -5,4 +5,5 @@ obj/
 .hlslperf/
 .scratch/
 TestResults/
+artifacts/
 *.user

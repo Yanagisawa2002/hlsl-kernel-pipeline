@@ -6,5 +6,17 @@
     <LangVersion>latest</LangVersion>
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+    <Version>0.6.0</Version>
+    <PackageVersion>0.6.0</PackageVersion>
+    <Authors>Edwin Liu</Authors>
+    <Company>Edwin Liu</Company>
+    <Copyright>Copyright (c) 2026 Edwin Liu</Copyright>
+    <PackageTags>hlsl;d3d12;gpu;autotuning;compute</PackageTags>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+  <ItemGroup Condition="'$(IsPackable)' != 'false'">
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="" Link="README.md" />
+  </ItemGroup>
 </Project>

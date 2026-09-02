@@ -1,1 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk" />
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>EdwinLiu.HlslPerf.Core</PackageId>
+    <Description>Engine-neutral workload ABI, manifest schema, plugin SDK, statistics, and reports for HlslPerf.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../../LICENSE.md" Pack="true" PackagePath="" />
+    <None Include="../../schemas/*.json" Pack="true" PackagePath="schemas/" />
+    <None Include="../../schemas/README.md" Pack="true" PackagePath="schemas/" />
+  </ItemGroup>
+</Project>

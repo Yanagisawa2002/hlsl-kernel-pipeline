@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "3.0",
+  "name": "stream-compaction-fusion",
+  "kernelPath": "../kernels/compaction.hlsl",
+  "kernelAbiVersion": "hlslperf.raw-buffer.v1",
+  "shaderModel": "6_6",
+  "workItemCount": 4000000,
+  "warmupDispatches": 4,
+  "minimumWarmupMilliseconds": 75,
+  "measurementBatches": 15,
+  "dispatchesPerBatch": 4,
+  "minimumBatchMilliseconds": 10,
+  "maximumDispatchesPerBatch": 256,
+  "maximumCoefficientOfVariation": 0.05,
+  "minimumRequiredSpeedup": 1.01,
+  "workload": {
+    "id": "stream-compaction-u32-v1",
+    "parameters": {
+      "elementCount": 4000000,
+      "seed": 19088743,
+      "predicateMask": 7
+    }
+  },
+  "fixedDefines": {
+    "HLSLPERF_SCAN_OPERATOR": 1
+  },
+  "baselineDefines": {
+    "HLSLPERF_SCAN_BACKEND": 1,
+    "HLSLPERF_GROUP_SIZE": 256,
+    "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+    "HLSLPERF_VECTOR_WIDTH": 1
+  },
+  "axes": [
+    { "name": "HLSLPERF_SCAN_BACKEND", "values": [1, 2, 3] },
+    { "name": "HLSLPERF_GROUP_SIZE", "values": [256, 512] },
+    { "name": "HLSLPERF_ELEMENTS_PER_THREAD", "values": [2, 4] },
+    { "name": "HLSLPERF_VECTOR_WIDTH", "values": [1, 4] },
+    {
+      "name": "HLSLPERF_WAVE_SIZE",
+      "values": [32, 64],
+      "when": { "HLSLPERF_SCAN_BACKEND": [2, 3] }
+    },
+    {
+      "name": "HLSLPERF_SINGLE_PASS_ITEMS_SCALE",
+      "values": [2, 4],
+      "when": { "HLSLPERF_SCAN_BACKEND": [3] }
+    },
+    {
+      "name": "HLSLPERF_SINGLE_PASS_GROUPS",
+      "values": [128, 256],
+      "when": { "HLSLPERF_SCAN_BACKEND": [3] }
+    }
+  ],
+  "constraints": [
+    {
+      "if": { "HLSLPERF_VECTOR_WIDTH": [4] },
+      "then": { "HLSLPERF_ELEMENTS_PER_THREAD": [4] }
+    }
+  ]
+}

@@ -1,8 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+    <PackageId>EdwinLiu.HlslPerf.Rga</PackageId>
+    <Description>Optional AMD Radeon GPU Analyzer evidence adapter for HlslPerf.</Description>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../HlslPerf.Core/HlslPerf.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../../LICENSE.md" Pack="true" PackagePath="" />
   </ItemGroup>
 </Project>

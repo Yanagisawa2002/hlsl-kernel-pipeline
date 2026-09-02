@@ -9,6 +9,8 @@ if (HlslPerfProfileConsumer.TryResolve(
         profileTextAsset,
         runtimeFingerprint,
         "reduction-u32-v1",
+        expectedManifestSha256,
+        expectedTransitiveKernelSha256,
         HlslPerfCompatibilityPolicy.ExactDeviceAndDriver,
         out HlslPerfResolvedProfile resolved))
 {
@@ -17,3 +19,7 @@ if (HlslPerfProfileConsumer.TryResolve(
 ```
 
 Use `ExactDeviceAndDriver` for deployment. Less strict policies are intended for explicit experiments and never make an incompatible workload or ABI acceptable.
+
+The two expected hashes must come from project-owned build metadata. The kernel
+hash covers the root HLSL file and every recursively included `.hlsli`; an old
+profile is rejected after either the manifest or any include changes.

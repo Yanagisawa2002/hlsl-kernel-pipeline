@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Text.Json;
 using HlslPerf.Core;
 using Microsoft.Win32;
@@ -20,6 +21,7 @@ public sealed record TuningProgress(
     string Stage,
     CandidateResult? Result);
 
+[SupportedOSPlatform("windows10.0")]
 public sealed class D3D12Tuner : IDisposable
 {
     private readonly ID3D12Device device;
@@ -39,6 +41,8 @@ public sealed class D3D12Tuner : IDisposable
 
     public D3D12Tuner(string? adapterNameContains = null)
     {
+        if (!OperatingSystem.IsWindows())
+            throw new PlatformNotSupportedException("The HlslPerf D3D12 backend requires Windows.");
         (device, adapterDescription, driverVersion) = CreateDevice(adapterNameContains);
         queue = device.CreateCommandQueue(
             CommandListType.Compute,
@@ -88,7 +92,8 @@ public sealed class D3D12Tuner : IDisposable
         Action<TuningProgress>? progress = null,
         CancellationToken cancellationToken = default,
         string? compilerCacheDirectory = null,
-        Action<KernelCandidate, ReadOnlyMemory<byte>>? captureVerifiedOutput = null)
+        Action<KernelCandidate, ReadOnlyMemory<byte>>? captureVerifiedOutput = null,
+        TuningCheckpointOptions? checkpointOptions = null)
     {
         ObjectDisposedException.ThrowIf(disposed, this);
         manifest.Validate();
@@ -98,18 +103,47 @@ public sealed class D3D12Tuner : IDisposable
         string manifestDirectory = Path.GetDirectoryName(fullManifestPath)
             ?? throw new InvalidDataException("The manifest path has no parent directory.");
         string kernelPath = Path.GetFullPath(Path.Combine(manifestDirectory, manifest.KernelPath));
-        string shaderSource = File.ReadAllText(kernelPath);
+        HlslSourceGraph sourceGraph = HlslSourceGraph.Load(kernelPath);
+        string shaderSource = sourceGraph.RootSource;
         string manifestHash = ContentHash.Sha256(File.ReadAllBytes(fullManifestPath));
-        string kernelHash = ContentHash.Sha256(File.ReadAllBytes(kernelPath));
+        string kernelHash = sourceGraph.CombinedSha256;
         IReadOnlyList<KernelCandidate> candidates = CandidateGenerator.Expand(manifest);
         KernelCandidate baseline = CandidateGenerator.ResolveBaseline(manifest, candidates);
         List<CandidateResult> results = new(candidates.Count);
         DateTimeOffset started = DateTimeOffset.UtcNow;
+        DeviceFingerprint fingerprint = CreateFingerprint(manifest.ShaderModel);
+        string workloadImplementationHash = WorkloadIdentity.Compute(workload);
+        Dictionary<string, CandidateResult> completed = new(StringComparer.Ordinal);
+        DateTimeOffset checkpointCreated = started;
+        if (checkpointOptions?.Resume == true)
+        {
+            TuningCheckpoint checkpoint = TuningCheckpointStore.LoadAndValidate(
+                checkpointOptions.Path,
+                manifestHash,
+                kernelHash,
+                fingerprint,
+                workload.Id,
+                workloadImplementationHash,
+                KernelAbiV1.Id,
+                candidates.Select(candidate => candidate.Id).ToHashSet(StringComparer.Ordinal));
+            checkpointCreated = checkpoint.CreatedUtc;
+            foreach ((string id, CandidateResult result) in checkpoint.CompletedCandidates)
+                if (CanResume(result))
+                    completed[id] = result with { ReusedFromCheckpoint = true };
+        }
+        int reusedCandidateCount = 0;
 
         for (int index = 0; index < candidates.Count; ++index)
         {
             cancellationToken.ThrowIfCancellationRequested();
             KernelCandidate candidate = candidates[index];
+            if (completed.TryGetValue(candidate.Id, out CandidateResult? resumed))
+            {
+                results.Add(resumed);
+                reusedCandidateCount++;
+                progress?.Invoke(new TuningProgress(index + 1, candidates.Count, candidate.Id, "resumed", resumed));
+                continue;
+            }
             progress?.Invoke(new TuningProgress(index + 1, candidates.Count, candidate.Id, "compile", null));
 
             KernelExecutionPlan plan;
@@ -123,6 +157,7 @@ public sealed class D3D12Tuner : IDisposable
                 CandidateResult planFailure = Failure(candidate, false, null, $"Execution plan failed: {exception.Message}");
                 results.Add(planFailure);
                 progress?.Invoke(new TuningProgress(index + 1, candidates.Count, candidate.Id, "failed", planFailure));
+                WriteCheckpoint(complete: false);
                 continue;
             }
 
@@ -133,12 +168,14 @@ public sealed class D3D12Tuner : IDisposable
                 manifest,
                 candidate,
                 plan.Passes.Select(pass => pass.EntryPoint).Distinct(StringComparer.Ordinal),
-                compilerCacheDirectory);
+                compilerCacheDirectory,
+                sourceGraph.IncludeDirectories);
             if (!compilation.Success)
             {
                 CandidateResult compileFailure = Failure(candidate, false, compilation.Diagnostics, "DXC compilation failed.");
                 results.Add(compileFailure);
                 progress?.Invoke(new TuningProgress(index + 1, candidates.Count, candidate.Id, "failed", compileFailure));
+                WriteCheckpoint(complete: false);
                 continue;
             }
 
@@ -154,9 +191,11 @@ public sealed class D3D12Tuner : IDisposable
             }
             results.Add(result);
             progress?.Invoke(new TuningProgress(index + 1, candidates.Count, candidate.Id, "complete", result));
+            WriteCheckpoint(complete: false);
         }
 
         SelectionResult? selection = CandidateSelector.Select(results, baseline.Id, manifest.MinimumRequiredSpeedup);
+        WriteCheckpoint(complete: true);
         return new TuningRunReport(
             "2.0",
             started,
@@ -164,13 +203,46 @@ public sealed class D3D12Tuner : IDisposable
             fullManifestPath,
             manifestHash,
             kernelHash,
-            CreateFingerprint(manifest.ShaderModel),
+            fingerprint,
             baseline.Id,
             selection,
             results,
             workload.Id,
-            KernelAbiV1.Id);
+            KernelAbiV1.Id,
+            new TuningResumeSummary(
+                checkpointOptions?.Resume == true,
+                reusedCandidateCount,
+                results.Count - reusedCandidateCount,
+                TuningCheckpointStore.Schema));
+
+        void WriteCheckpoint(bool complete)
+        {
+            if (checkpointOptions is null)
+                return;
+            IReadOnlyDictionary<string, CandidateResult> resumable = results
+                .Where(CanResume)
+                .ToDictionary(result => result.CandidateId, result => result, StringComparer.Ordinal);
+            TuningCheckpointStore.Write(
+                checkpointOptions.Path,
+                new TuningCheckpoint(
+                    TuningCheckpointStore.Schema,
+                    HlslPerfSdk.Version,
+                    HlslPerfSdk.MeasurementProtocol,
+                    checkpointCreated,
+                    DateTimeOffset.UtcNow,
+                    complete,
+                    manifestHash,
+                    kernelHash,
+                    fingerprint,
+                    workload.Id,
+                    workloadImplementationHash,
+                    KernelAbiV1.Id,
+                    resumable));
+        }
     }
+
+    private static bool CanResume(CandidateResult result) =>
+        result.Compiled && result.Correctness is not null && result.Timing is not null;
 
     private static CandidateResult Failure(
         KernelCandidate candidate,
@@ -230,6 +302,9 @@ public sealed class D3D12Tuner : IDisposable
         }
 
         GpuBuffer verified = resources.Get(plan.VerifiedResource);
+        PoisonVerifiedResource(verified);
+        ExecutePlan(plan, pipelines, resources);
+        ExecuteAndWait();
         Transition(verified, ResourceStates.CopySource);
         using ID3D12Resource readback = device.CreateCommittedResource(
             HeapType.Readback,
@@ -269,6 +344,21 @@ public sealed class D3D12Tuner : IDisposable
             throughput,
             stable,
             correctnessPassed ? null : "Correctness gate failed.");
+    }
+
+    private void PoisonVerifiedResource(GpuBuffer verified)
+    {
+        using ID3D12Resource upload = device.CreateCommittedResource(
+            HeapType.Upload,
+            ResourceDescription.Buffer((ulong)verified.ByteLength, ResourceFlags.None, 0),
+            ResourceStates.GenericRead,
+            null);
+        Span<byte> mapped = upload.Map<byte>(0, verified.ByteLength);
+        mapped.Fill(0xa5);
+        upload.Unmap(0);
+        Transition(verified, ResourceStates.CopyDest);
+        commandList.CopyResource(verified.Resource, upload);
+        ExecuteAndWait();
     }
 
     private ResourceSet CreateResources(KernelExecutionPlan plan)
@@ -442,7 +532,8 @@ public sealed class D3D12Tuner : IDisposable
         TuningManifest manifest,
         KernelCandidate candidate,
         IEnumerable<string> entryPoints,
-        string? compilerCacheDirectory)
+        string? compilerCacheDirectory,
+        IReadOnlyList<string> includeDirectories)
     {
         Dictionary<string, byte[]> bytecodes = new(StringComparer.Ordinal);
         List<string> diagnostics = [];
@@ -455,7 +546,8 @@ public sealed class D3D12Tuner : IDisposable
                 manifest,
                 candidate,
                 entryPoint,
-                compilerCacheDirectory);
+                compilerCacheDirectory,
+                includeDirectories);
             if (!string.IsNullOrWhiteSpace(result.Diagnostics))
                 diagnostics.Add($"[{entryPoint}] {result.Diagnostics}");
             if (!result.Success)
@@ -472,14 +564,15 @@ public sealed class D3D12Tuner : IDisposable
         TuningManifest manifest,
         KernelCandidate candidate,
         string entryPoint,
-        string? compilerCacheDirectory)
+        string? compilerCacheDirectory,
+        IReadOnlyList<string> includeDirectories)
     {
         string? cachePath = null;
         if (!string.IsNullOrWhiteSpace(compilerCacheDirectory))
         {
             string cacheIdentity = JsonSerializer.Serialize(new
             {
-                schema = "dxc-cache-v2",
+                schema = "dxc-cache-v3",
                 kernelHash,
                 entryPoint,
                 manifest.ShaderModel,
@@ -520,7 +613,7 @@ public sealed class D3D12Tuner : IDisposable
             kernelPath,
             defines,
             null,
-            []);
+            includeDirectories.SelectMany(directory => new[] { "-I", directory }).ToArray());
         string compilerDiagnostics = result.GetErrors();
         if (result.GetStatus().Failure)
             return new CompilationOutput(false, null, compilerDiagnostics);

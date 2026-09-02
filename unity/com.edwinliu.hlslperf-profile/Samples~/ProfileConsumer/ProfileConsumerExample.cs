@@ -18,6 +18,8 @@ public sealed class ProfileConsumerExample : MonoBehaviour, IHlslPerfDefineSink
                 profile,
                 runtime,
                 "reduction-u32-v1",
+                "replace-with-build-owned-manifest-sha256",
+                "replace-with-build-owned-transitive-kernel-sha256",
                 HlslPerfCompatibilityPolicy.ExactDeviceAndDriver,
                 out HlslPerfResolvedProfile resolved))
             HlslPerfProfileConsumer.Apply(resolved, this);

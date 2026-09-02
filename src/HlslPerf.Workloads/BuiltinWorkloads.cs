@@ -6,20 +6,44 @@ namespace HlslPerf.Workloads;
 
 public static class BuiltinWorkloads
 {
+    private static readonly BuiltinWorkloadProvider Provider = new();
+
     public static IKernelWorkload Resolve(TuningManifest manifest)
     {
         string id = manifest.SchemaVersion == "1.0"
             ? manifest.Correctness.Kind
-            : manifest.Workload?.Id ?? throw new InvalidDataException("A schema 2.0 workload is required.");
-        return id switch
+            : manifest.Workload?.Id ?? throw new InvalidDataException("A schema 2.0+ workload is required.");
+        return Provider.Create(id);
+    }
+}
+
+public sealed class BuiltinWorkloadProvider : IKernelWorkloadProvider
+{
+    public IReadOnlyCollection<string> WorkloadIds { get; } =
+    [
+        "uint-mix-v1",
+        "reduction-u32-v1",
+        "exclusive-scan-u32-v1",
+        "generic-exclusive-scan-u32-v1",
+        "segmented-exclusive-scan-u32-v1",
+        "stream-compaction-u32-v1",
+        "histogram-prefix-u32-v1",
+        "radix-sort-u32-v1",
+        "transpose-u32-v1"
+    ];
+
+    public IKernelWorkload Create(string workloadId) => workloadId switch
         {
             "uint-mix-v1" or "cross-candidate-sha256" => new UintMixWorkload(),
             "reduction-u32-v1" => new ReductionWorkload(),
-            "exclusive-scan-u32-v1" => new ScanWorkload(),
+            "exclusive-scan-u32-v1" or "generic-exclusive-scan-u32-v1" => new ScanWorkload(workloadId),
+            "segmented-exclusive-scan-u32-v1" => new SegmentedScanWorkload(),
+            "stream-compaction-u32-v1" => new StreamCompactionWorkload(),
+            "histogram-prefix-u32-v1" => new HistogramPrefixWorkload(),
+            "radix-sort-u32-v1" => new RadixSortWorkload(),
             "transpose-u32-v1" => new TransposeWorkload(),
-            _ => throw new InvalidDataException($"Unknown built-in workload '{id}'.")
+            _ => throw new InvalidDataException($"Unknown built-in workload '{workloadId}'.")
         };
-    }
 }
 
 internal static class WorkloadData

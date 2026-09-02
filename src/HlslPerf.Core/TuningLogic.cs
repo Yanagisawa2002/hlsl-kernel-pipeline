@@ -5,25 +5,54 @@ public static class CandidateGenerator
     public static IReadOnlyList<KernelCandidate> Expand(TuningManifest manifest, int maximumCandidates = 512)
     {
         manifest.Validate();
-        long count = manifest.Axes.Aggregate(1L, (total, axis) => checked(total * axis.Values.Count));
-        if (count > maximumCandidates)
-            throw new InvalidDataException($"Candidate space contains {count} variants; the v0.1 safety limit is {maximumCandidates}.");
+        if (maximumCandidates <= 0)
+            throw new ArgumentOutOfRangeException(nameof(maximumCandidates));
 
-        List<Dictionary<string, int>> partial = [new Dictionary<string, int>(manifest.FixedDefines, StringComparer.Ordinal)];
-        foreach (CandidateAxis axis in manifest.Axes)
+        List<KernelCandidate> candidates = [];
+        Dictionary<string, int> current = new(manifest.FixedDefines, StringComparer.Ordinal);
+        ExpandAxis(0);
+        if (candidates.Count == 0)
+            throw new InvalidDataException("Candidate conditions and constraints removed every variant.");
+        return candidates;
+
+        void ExpandAxis(int axisIndex)
         {
-            List<Dictionary<string, int>> next = [];
-            foreach (Dictionary<string, int> current in partial)
-                foreach (int value in axis.Values)
-                {
-                    Dictionary<string, int> expanded = new(current, StringComparer.Ordinal) { [axis.Name] = value };
-                    next.Add(expanded);
-                }
-            partial = next;
-        }
+            if (axisIndex == manifest.Axes.Count)
+            {
+                if (!SatisfiesConstraints(current, manifest.Constraints))
+                    return;
+                if (candidates.Count >= maximumCandidates)
+                    throw new InvalidDataException(
+                        $"Candidate space exceeds the safety limit of {maximumCandidates} variants after constraints.");
+                candidates.Add(new KernelCandidate(new Dictionary<string, int>(current, StringComparer.Ordinal)));
+                return;
+            }
 
-        return partial.Select(values => new KernelCandidate(values)).ToArray();
+            CandidateAxis axis = manifest.Axes[axisIndex];
+            if (!Matches(current, axis.When))
+            {
+                ExpandAxis(axisIndex + 1);
+                return;
+            }
+
+            foreach (int value in axis.Values)
+            {
+                current[axis.Name] = value;
+                ExpandAxis(axisIndex + 1);
+            }
+            current.Remove(axis.Name);
+        }
     }
+
+    private static bool SatisfiesConstraints(
+        IReadOnlyDictionary<string, int> defines,
+        IReadOnlyList<CandidateConstraint> constraints) =>
+        constraints.All(constraint => !Matches(defines, constraint.If) || Matches(defines, constraint.Then));
+
+    internal static bool Matches(
+        IReadOnlyDictionary<string, int> defines,
+        IReadOnlyDictionary<string, IReadOnlyList<int>> condition) =>
+        condition.All(pair => defines.TryGetValue(pair.Key, out int value) && pair.Value.Contains(value));
 
     public static KernelCandidate ResolveBaseline(TuningManifest manifest, IReadOnlyList<KernelCandidate> candidates)
     {
@@ -99,8 +128,18 @@ public static class CandidateSelector
 
         CandidateResult? baseline = baselineCandidateId is null
             ? null
-            : valid.FirstOrDefault(result => result.CandidateId == baselineCandidateId);
-        if (baseline is null || !baseline.Stable || winner.CandidateId == baseline.CandidateId)
+            : results.FirstOrDefault(result => result.CandidateId == baselineCandidateId);
+        if (baselineCandidateId is not null &&
+            (baseline is null || !IsValid(baseline) || !baseline.Stable))
+        {
+            return new SelectionResult(
+                winner.CandidateId,
+                winner.CandidateId,
+                UsedStablePool: false,
+                RetainedBaseline: false,
+                "The declared baseline did not pass correctness and stability gates; the fastest valid candidate is observational only and no deployable profile may be emitted.");
+        }
+        if (baseline is null || winner.CandidateId == baseline.CandidateId)
             return new SelectionResult(winner.CandidateId, winner.CandidateId, usedStablePool, false, poolReason);
 
         double observedSpeedup = baseline.Timing!.MedianMilliseconds / winner.Timing!.MedianMilliseconds;

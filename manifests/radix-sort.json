@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "3.0",
+  "name": "lsd-radix-sort-u32",
+  "kernelPath": "../kernels/radix-sort.hlsl",
+  "kernelAbiVersion": "hlslperf.raw-buffer.v1",
+  "shaderModel": "6_6",
+  "workItemCount": 262144,
+  "warmupDispatches": 2,
+  "minimumWarmupMilliseconds": 50,
+  "measurementBatches": 11,
+  "dispatchesPerBatch": 2,
+  "minimumBatchMilliseconds": 8,
+  "maximumDispatchesPerBatch": 64,
+  "maximumCoefficientOfVariation": 0.05,
+  "minimumRequiredSpeedup": 1.01,
+  "workload": {
+    "id": "radix-sort-u32-v1",
+    "parameters": {
+      "elementCount": 262144,
+      "seed": 19088743,
+      "bitCount": 32
+    }
+  },
+  "fixedDefines": {
+    "HLSLPERF_SCAN_OPERATOR": 1
+  },
+  "baselineDefines": {
+    "HLSLPERF_SCAN_BACKEND": 1,
+    "HLSLPERF_GROUP_SIZE": 256,
+    "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+    "HLSLPERF_VECTOR_WIDTH": 1
+  },
+  "axes": [
+    { "name": "HLSLPERF_SCAN_BACKEND", "values": [1, 2] },
+    { "name": "HLSLPERF_GROUP_SIZE", "values": [128, 256] },
+    { "name": "HLSLPERF_ELEMENTS_PER_THREAD", "values": [2, 4] },
+    { "name": "HLSLPERF_VECTOR_WIDTH", "values": [1, 4] },
+    {
+      "name": "HLSLPERF_WAVE_SIZE",
+      "values": [32, 64],
+      "when": { "HLSLPERF_SCAN_BACKEND": [2] }
+    }
+  ],
+  "constraints": [
+    {
+      "if": { "HLSLPERF_VECTOR_WIDTH": [4] },
+      "then": { "HLSLPERF_ELEMENTS_PER_THREAD": [4] }
+    }
+  ]
+}

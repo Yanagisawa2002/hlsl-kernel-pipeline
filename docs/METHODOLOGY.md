@@ -8,19 +8,22 @@ candidate is not deployable merely because one sample is lower.
 1. DXC compiles every distinct pass entry point with O3, strict mode, and
    warnings as errors.
 2. A workload provider supplies deterministic input and an independent CPU
-   oracle. Every candidate must match the verified output byte for byte.
-3. Each candidate receives at least 75 ms of warm-up in the bundled manifests.
+   oracle. After timing, the runner poisons the complete verified resource,
+   invokes the already-used plan once, and requires it to reconstruct every byte.
+3. Each candidate receives at least 50 ms of warm-up; the bundled manifests use
+   75 ms except for the 32-pass radix workload, which uses 50 ms.
 4. The runner doubles complete plan executions per timestamp batch until the
-   interval reaches at least 10 ms, capped by the manifest. A plan includes all
+   interval reaches the manifest's 8–10 ms minimum, capped by the manifest. A plan includes all
    dispatches and required inter-pass resource barriers.
 5. Upload, command submission fences, timestamp resolve, readback, and CPU work
    remain outside the measured interval.
-6. Fifteen independent batches produce median, interpolated p95, sample standard
-   deviation, and coefficient of variation (CV). Bundled manifests require CV
-   at or below 5%.
-7. The observed fastest stable candidate must be at least 1.01x faster than the
-   declared stable baseline and must not regress p95. Otherwise selection retains
-   the baseline.
+6. Eleven to fifteen independent batches produce median, interpolated p95,
+   sample standard deviation, and coefficient of variation (CV). Bundled
+   manifests require CV at or below 5%.
+7. Both the selected candidate and declared baseline must pass correctness and
+   stability gates. The observed fastest candidate must be at least 1.01x faster
+   than that baseline and must not regress p95. A missing/noisy/incorrect baseline
+   makes the result observational only and suppresses the deployable profile.
 
 The showcase and stress-grid runners add a stricter comparison-level gate: both
 the declared baseline and selected candidate must be stable. A noisy pair is
@@ -31,6 +34,7 @@ This prevents a transiently slow baseline from becoming an inflated A/B claim.
 
 GPU timing is never cached. DXIL is cached by source hash, entry point, shader
 model, compiler version, compiler option schema, ABI, and sorted defines.
+The source hash includes the complete transitive `.hlsli` graph.
 
 ## Visual A/B contract
 

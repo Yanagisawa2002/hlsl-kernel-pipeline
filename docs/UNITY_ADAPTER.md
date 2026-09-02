@@ -7,6 +7,7 @@ It contains:
 
 - serializable schema 2.0 profile fields;
 - workload and `hlslperf.raw-buffer.v1` ABI checks;
+- exact 64-hex manifest and transitive-kernel hash checks supplied by the caller;
 - backend, shader model, vendor/device, and optional exact-driver policies;
 - immutable resolved define values;
 - `IHlslPerfDefineSink`, implemented by project-owned integration code.
@@ -26,7 +27,9 @@ fingerprint through a project-owned hardware service, and call
 `ExactDeviceAndDriver`; looser modes are for deliberate experiments.
 
 Even the loosest mode never relaxes workload, ABI, backend, or shader-model
-matching. An incompatible result cannot be passed to `Apply`.
+matching. It also never relaxes either content hash. An incompatible or stale
+result cannot be passed to `Apply`.
 
 The package was compiled and tested with Unity 6000.5.3f1 in a clean temporary
-project: 3/3 EditMode tests passed.
+project. All five runtime tests passed on 2026-09-02, including independent
+manifest- and kernel-hash drift regressions.

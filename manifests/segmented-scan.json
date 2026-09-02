@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "3.0",
+  "name": "segmented-u32-exclusive-scan",
+  "kernelPath": "../kernels/segmented-scan.hlsl",
+  "kernelAbiVersion": "hlslperf.raw-buffer.v1",
+  "shaderModel": "6_6",
+  "workItemCount": 4000000,
+  "warmupDispatches": 4,
+  "minimumWarmupMilliseconds": 75,
+  "measurementBatches": 15,
+  "dispatchesPerBatch": 4,
+  "minimumBatchMilliseconds": 10,
+  "maximumDispatchesPerBatch": 256,
+  "maximumCoefficientOfVariation": 0.05,
+  "minimumRequiredSpeedup": 1.01,
+  "workload": {
+    "id": "segmented-exclusive-scan-u32-v1",
+    "parameters": {
+      "elementCount": 4000000,
+      "seed": 19088743,
+      "averageSegmentLength": 64
+    }
+  },
+  "baselineDefines": {
+    "HLSLPERF_GROUP_SIZE": 256,
+    "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+    "HLSLPERF_ITEMS_SCALE": 2,
+    "HLSLPERF_VECTOR_WIDTH": 1,
+    "HLSLPERF_WAVE_SIZE": 32,
+    "HLSLPERF_PERSISTENT_GROUPS": 128
+  },
+  "axes": [
+    { "name": "HLSLPERF_GROUP_SIZE", "values": [128, 256, 512] },
+    { "name": "HLSLPERF_ELEMENTS_PER_THREAD", "values": [2, 4] },
+    { "name": "HLSLPERF_ITEMS_SCALE", "values": [2, 4] },
+    { "name": "HLSLPERF_VECTOR_WIDTH", "values": [1, 4] },
+    { "name": "HLSLPERF_WAVE_SIZE", "values": [32, 64] },
+    { "name": "HLSLPERF_PERSISTENT_GROUPS", "values": [64, 128, 256] }
+  ],
+  "constraints": [
+    {
+      "if": { "HLSLPERF_VECTOR_WIDTH": [4] },
+      "then": { "HLSLPERF_ELEMENTS_PER_THREAD": [4] }
+    }
+  ]
+}
