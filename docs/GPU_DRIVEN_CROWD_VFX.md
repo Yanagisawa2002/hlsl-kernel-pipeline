@@ -2,11 +2,12 @@
 
 ## Status
 
-The standalone implementation, CPU oracle, candidate manifests, strict DXC
-validation, pressure-grid reporter, and GIF/MP4 compositor are complete. GPU
-measurements are deliberately pending. This document makes no performance claim
-until an explicit `run` completes on an identified adapter/driver and passes the
-existing correctness and stability gates.
+The standalone implementation and two independent four-level GPU matrices are
+complete. On an AMD Radeon AI PRO R9700, all 1,224 candidate executions across
+the two runs matched the CPU oracle. The primary extreme-pressure result reduced
+the complete application plan from 5.09944 ms to 2.74194 ms, or 1.8598×; the
+replication measured 1.8689×. See the
+[full results, raw samples, media, and limits](results/R9700_CROWD_VFX_2026-09-03.md).
 
 The safe validation command does not create a D3D12 device:
 
@@ -121,9 +122,9 @@ advantage is selected from measurements instead of preselected for marketing.
 Candidate checkpoints can be resumed only with the original output directory,
 exact source identities, and retained content-addressed capture.
 
-## Current validation and remaining evidence
+## Validation and measured evidence
 
-The CPU/DXC validation currently proves:
+The CPU/DXC validation proves:
 
 - all four manifests validate and expand to 153 candidates;
 - the smoke baseline builds 30 application passes and the fused path builds 21;
@@ -133,9 +134,18 @@ The CPU/DXC validation currently proves:
 - deadline replay is regression-tested and never mutates timing samples;
 - the full solution and 39 tests build and pass without opening a GPU.
 
-The explicit GPU run still needs to establish actual correctness, timings,
-stability, the best pressure interval, and visual evidence. v0.7 remains the
-place for multi-vendor runs, randomized interleaving/confidence intervals, and
-RGP/PIX counters. An optional future graphics adapter can consume the compacted
-and binned lists through `ExecuteIndirect` or mesh dispatch without moving the
-core workload into Unity.
+The two explicit R9700 GPU runs establish:
+
+- 612/612 correct candidates per run and byte-identical atlas hashes between
+  runs;
+- guarded primary speedups of 1.0615×, 1.1421×, 1.4075×, and 1.8598× from low
+  through extreme pressure;
+- a replicated extreme result of 1.8689× and a same-fixed-candidate result of
+  1.8480×;
+- an actual-GPU-atlas GIF/MP4 using an honestly labeled 253.8 Hz measured-fit
+  deadline because 120 Hz was not crossed.
+
+v0.7 remains the place for multi-vendor runs, randomized
+interleaving/confidence intervals, and RGP/PIX counters. An optional future
+graphics adapter can consume the compacted and binned lists through
+`ExecuteIndirect` or mesh dispatch without moving the core workload into Unity.

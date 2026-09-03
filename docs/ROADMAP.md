@@ -26,7 +26,7 @@ the repository owner's tag and NuGet credential.
 - [x] Wave32/64, scalar/`uint4`, persistent-group, item-scale, and LDS-replica axes.
 - [x] Post-timing poison/re-execute correctness gate for repeated-plan integrity.
 
-### v0.6 application proof harness — implemented, GPU evidence pending
+### v0.6 application proof harness — implemented and measured
 
 - [x] External Crowd/VFX workload plugin over the public kernel ABI.
 - [x] Complete visibility -> compaction -> tile offsets -> bin scatter -> raster plan.
@@ -34,10 +34,13 @@ the repository owner's tag and NuGet credential.
 - [x] Low, medium, high, and extreme pressure manifests with conditional axes.
 - [x] CPU atlas oracle, strict DXC-only validation, and regression tests.
 - [x] Whole-plan pressure grid and deadline/backlog GIF/MP4 compositor.
-- [ ] Run the explicit four-level GPU matrix and publish only guarded evidence.
+- [x] Run and independently repeat the explicit four-level R9700 GPU matrix;
+  publish guarded timings, raw samples, hashes, and actual-frame media.
 
-Implementation readiness is not recorded as a performance result. The pending
-checkbox requires a named GPU/driver run with correctness and stability gates.
+The two 2026-09-03 runs executed 1,224 candidates and recorded 13,464 timing
+samples. Every candidate matched the CPU oracle; noisy candidates remain in the
+raw evidence but could not win. See the
+[R9700 Crowd/VFX evidence](results/R9700_CROWD_VFX_2026-09-03.md).
 
 ## v0.7 evidence credibility — TODO, not claimed
 

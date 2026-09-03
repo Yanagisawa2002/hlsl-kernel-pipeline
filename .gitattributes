@@ -1,0 +1,3 @@
+# Generated evidence is checksummed byte-for-byte; never normalize or diff it.
+docs/results/data/crowd-vfx-r9700-2026-09-03/** -text -diff
+docs/results/r9700-crowd-vfx-pressure-grid.svg -text -diff

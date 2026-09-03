@@ -136,7 +136,9 @@ The core and workload pack reference no Unity assemblies. The package under
 profile. Project code owns the final mapping from integer defines to its shader
 variant system through `IHlslPerfDefineSink`.
 
-## v0.6 GPU-driven Crowd/VFX application proof — ready to measure
+## v0.6 GPU-driven Crowd/VFX application proof
+
+![R9700 GPU-driven Crowd/VFX measured-fit deadline](docs/results/r9700-crowd-vfx-budget-crossing.gif)
 
 The new standalone `HlslPerf.GpuDriven` plugin turns the fused primitives into a
 complete picture-producing application plan: moving-agent visibility, visible-
@@ -145,16 +147,32 @@ compute raster into a twelve-frame RGBA atlas. Its baseline materializes flags
 and prefixes and uses global tile atomics; its optimized family fuses
 producer -> scan -> scatter and merges replicated LDS histograms.
 
-The implementation deliberately has no published Crowd/VFX speedup yet. The
-CPU-only validator checks all manifests and compiles the baseline/fused shader
-entry points without creating a D3D12 device:
+Two independent full matrices ran on an AMD Radeon AI PRO R9700. Each expanded
+four pressure levels to 153 candidates; all 1,224 candidate executions across
+both runs matched their CPU oracles. The primary guarded result was:
+
+| Pressure | Agents | Baseline median | Selected median / p95 | Speedup |
+|---|---:|---:|---:|---:|
+| Low | 262K | 1.8799 ms | 1.7710 / 1.8566 ms | 1.0615× |
+| Medium | 1M | 2.0461 ms | 1.7915 / 1.8095 ms | 1.1421× |
+| High | 4M | 3.1800 ms | 2.2593 / 2.3098 ms | 1.4075× |
+| Extreme | 8M | 5.0994 ms | 2.7419 / 2.7812 ms | 1.8598× |
+
+The independent extreme replication measured 1.8689×. Reusing the primary
+winner's exact configuration in the second already-recorded matrix measured
+1.8480×, separating the architecture gain from near-tied parameter ordering.
+The GIF/MP4 uses byte-identical actual GPU frames and a 253.8 Hz measured-fit
+deadline because both paths were already below the requested 120 Hz budget.
+
+The CPU-only validator remains available and does not create a D3D12 device:
 
     dotnet run --project src/HlslPerf.GpuDrivenDemo -c Release -- validate
 
-GPU work requires an explicit `run`. When executed, four pressure levels will
-select the strongest guarded whole-plan interval and produce an actual-frame
-deadline/backlog GIF and MP4; a measured-fit deadline is labeled as such and is
-never presented as 120 Hz. See the [design and evidence contract](docs/GPU_DRIVEN_CROWD_VFX.md).
+GPU work still requires an explicit `run`. It produces a fresh pressure grid,
+content-addressed atlases, and actual-frame deadline/backlog media; a
+measured-fit deadline is labeled as such and is never presented as 120 Hz. See
+the [design and evidence contract](docs/GPU_DRIVEN_CROWD_VFX.md) and
+[full R9700 evidence with raw samples](docs/results/R9700_CROWD_VFX_2026-09-03.md).
 
 ## Real workload pack
 

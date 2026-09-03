@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="574" viewBox="0 0 1180 574">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#061020"/><stop offset="1" stop-color="#111f38"/></linearGradient></defs>
+<style>text{font-family:'Segoe UI',sans-serif;fill:#edf6ff}.muted{fill:#91a4bb}.mono{font-family:Consolas,monospace}.title{font-weight:700}.good{fill:#50e3ae}</style>
+<rect width="1180" height="574" fill="url(#bg)"/>
+<text x="38" y="48" font-size="27" class="title">GPU-DRIVEN CROWD/VFX · COMPLETE APPLICATION PLAN</text>
+<text x="40" y="78" font-size="14" class="muted">AMD Radeon AI PRO R9700 · driver 32.0.31041.1004 · D3D12 / SM 6.6</text>
+<text x="40" y="111" font-size="13" class="muted">Same agents → visibility → compaction → tile histogram/offsets → bin scatter → tiled raster; final atlas SHA-256 gated.</text>
+<text x="38" y="151" font-size="12" class="muted">PRESSURE</text>
+<text x="174" y="151" font-size="12" class="muted">AGENTS / MEAN VISIBLE</text>
+<text x="430" y="151" font-size="12" class="muted">BASELINE MEDIAN / P95</text>
+<text x="690" y="151" font-size="12" class="muted">SELECTED MEDIAN / P95</text>
+<text x="965" y="151" font-size="12" class="muted">END-TO-END</text>
+<rect x="28" y="168" width="1124" height="76" rx="12" fill="#101f37" stroke="#29415e"/>
+<rect x="955" y="178" width="181" height="56" rx="9" fill="#195f68"/>
+<text x="46" y="199" font-size="17" class="title">LOW</text>
+<text x="46" y="224" font-size="12" class="muted">153/153 correct</text>
+<text x="174" y="201" font-size="17" class="mono">262,144</text>
+<text x="174" y="225" font-size="12" class="muted">4,150 visible/frame</text>
+<text x="430" y="202" font-size="17" class="mono">1.8799 / 1.9085 ms</text>
+<text x="690" y="202" font-size="17" class="mono">1.7710 / 1.8566 ms</text>
+<text x="690" y="226" font-size="12" class="muted">fused · wave64 · group=128 · IPT=16 · LDS×1</text>
+<text x="1045" y="213" text-anchor="middle" font-size="22" class="title">1.062×</text>
+<rect x="28" y="264" width="1124" height="76" rx="12" fill="#101f37" stroke="#29415e"/>
+<rect x="955" y="274" width="181" height="56" rx="9" fill="#18656b"/>
+<text x="46" y="295" font-size="17" class="title">MEDIUM</text>
+<text x="46" y="320" font-size="12" class="muted">153/153 correct</text>
+<text x="174" y="297" font-size="17" class="mono">1,048,576</text>
+<text x="174" y="321" font-size="12" class="muted">4,078 visible/frame</text>
+<text x="430" y="298" font-size="17" class="mono">2.0461 / 2.0623 ms</text>
+<text x="690" y="298" font-size="17" class="mono">1.7915 / 1.8095 ms</text>
+<text x="690" y="322" font-size="12" class="muted">fused · wave32 · group=256 · IPT=8 · LDS×1</text>
+<text x="1045" y="309" text-anchor="middle" font-size="22" class="title">1.142×</text>
+<rect x="28" y="360" width="1124" height="76" rx="12" fill="#101f37" stroke="#29415e"/>
+<rect x="955" y="370" width="181" height="56" rx="9" fill="#167775"/>
+<text x="46" y="391" font-size="17" class="title">HIGH</text>
+<text x="46" y="416" font-size="12" class="muted">153/153 correct</text>
+<text x="174" y="393" font-size="17" class="mono">4,194,304</text>
+<text x="174" y="417" font-size="12" class="muted">4,040 visible/frame</text>
+<text x="430" y="394" font-size="17" class="mono">3.1800 / 3.2053 ms</text>
+<text x="690" y="394" font-size="17" class="mono">2.2593 / 2.3098 ms</text>
+<text x="690" y="418" font-size="12" class="muted">fused · wave64 · group=512 · IPT=8 · LDS×1</text>
+<text x="1045" y="405" text-anchor="middle" font-size="22" class="title">1.408×</text>
+<rect x="28" y="456" width="1124" height="76" rx="12" fill="#101f37" stroke="#29415e"/>
+<rect x="955" y="466" width="181" height="56" rx="9" fill="#129585"/>
+<text x="46" y="487" font-size="17" class="title">EXTREME</text>
+<text x="46" y="512" font-size="12" class="muted">153/153 correct</text>
+<text x="174" y="489" font-size="17" class="mono">8,388,608</text>
+<text x="174" y="513" font-size="12" class="muted">4,066 visible/frame</text>
+<text x="430" y="490" font-size="17" class="mono">5.0994 / 5.1802 ms</text>
+<text x="690" y="490" font-size="17" class="mono">2.7419 / 2.7812 ms</text>
+<text x="690" y="514" font-size="12" class="muted">fused · wave64 · group=256 · IPT=16 · LDS×1</text>
+<text x="1045" y="501" text-anchor="middle" font-size="22" class="title">1.860×</text>
+<text x="38" y="552" font-size="12" class="muted">GPU timestamps exclude upload/readback/media composition. Speedup is whole application-plan time, not isolated kernel time.</text>
+</svg>
