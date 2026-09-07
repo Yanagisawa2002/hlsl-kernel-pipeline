@@ -23,7 +23,8 @@
     "confirmationSha256",
     "measurementProtocol",
     "evidenceStatus",
-    "defineValues"
+    "defineValues",
+    "definesSha256"
   ],
   "properties": {
     "schemaVersion": {
@@ -118,6 +119,9 @@
     },
     "evidenceStatus": {
       "const": "independently-confirmed"
+    },
+    "definesSha256": {
+      "$ref": "#/$defs/sha256"
     }
   },
   "$defs": {

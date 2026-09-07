@@ -11,3 +11,10 @@ These files are the public wire-format contracts shipped in the
 Schema versions are independent of the SDK package version. A future breaking
 wire-format change gets a new file and version; an SDK release does not rewrite
 old schema files in place.
+# Paired protocol schemas
+
+`profile.schema.v3.json` describes independently confirmed profiles, including
+workload implementation, execution and confirmation identities. Schema 2 profiles
+are historical and require explicit consumer opt-in. Manifest schema 3 supports
+`measurementProtocol` and `pairedMeasurement`; omitted protocol uses the new runner
+default. See `docs/PAIRED_MEASUREMENT.md` for resume schema and statistical gates.

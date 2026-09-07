@@ -23,6 +23,7 @@ namespace EdwinLiu.HlslPerf
         public string workloadImplementationSha256;
         public string executionIdentitySha256;
         public string confirmationSha256;
+        public string definesSha256;
     }
 
     [Serializable]

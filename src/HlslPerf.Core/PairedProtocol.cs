@@ -10,17 +10,21 @@ public sealed record PairedMeasurementOptions
     public int OrderSeed { get; init; } = 73019;
     public int CalibrationSeedStart { get; init; } = 110001;
     public int ConfirmationSeedStart { get; init; } = 910001;
+    public int ResidentSlots { get; init; } = 3;
+    public long MaximumAllocationBytesPerArm { get; init; } = 512L * 1024 * 1024;
     public double MaximumBaselineDrift { get; init; } = 0.15;
 
     public void Validate()
     {
         if (CalibrationBlocks is < 6 or > 128 || ConfirmationBlocks is < 6 or > 128)
             throw new InvalidDataException("Paired phases require 6..128 complete blocks.");
+        if (ResidentSlots is < 1 or > 32 || MaximumAllocationBytesPerArm is <= 0 or > 2L * 1024 * 1024 * 1024)
+            throw new InvalidDataException("Resident ring requires 1..32 slots and a bounded per-arm allocation cap.");
         if (CalibrationSeedStart <= 0 || ConfirmationSeedStart <= 0 ||
-            (long)CalibrationSeedStart + CalibrationBlocks > int.MaxValue ||
-            (long)ConfirmationSeedStart + ConfirmationBlocks > int.MaxValue ||
-            Enumerable.Range(CalibrationSeedStart, CalibrationBlocks)
-                .Intersect(Enumerable.Range(ConfirmationSeedStart, ConfirmationBlocks)).Any())
+            (long)CalibrationSeedStart + CalibrationBlocks * ResidentSlots > int.MaxValue ||
+            (long)ConfirmationSeedStart + ConfirmationBlocks * ResidentSlots > int.MaxValue ||
+            Enumerable.Range(CalibrationSeedStart, CalibrationBlocks * ResidentSlots)
+                .Intersect(Enumerable.Range(ConfirmationSeedStart, ConfirmationBlocks * ResidentSlots)).Any())
             throw new InvalidDataException("Calibration and confirmation input seeds must be positive, bounded and disjoint.");
         if (!double.IsFinite(MaximumBaselineDrift) || MaximumBaselineDrift is <= 0 or > 1)
             throw new InvalidDataException("Maximum baseline drift must be in (0, 1].");
@@ -31,7 +35,8 @@ public sealed record PairedSlot(string Phase, int Block, int Position, string Ch
     string CandidateId, bool IsBaseline, string Order, int OrderSeed, int InputSeed);
 
 public sealed record PairedObservation(PairedSlot Slot, DateTimeOffset StartedUtc, DateTimeOffset FinishedUtc,
-    string? InputSha256, CandidateResult Result);
+    string? InputSha256, CandidateResult Result, ScenarioSessionEvidence? Scenario = null,
+    IReadOnlyList<ScenarioVerification>? SlotVerifications = null);
 
 public sealed record PairedComparison(string CandidateId, int Blocks, double? GeometricMeanSpeedup,
     double? Lower95Speedup, double? Upper95Speedup, double? BaselineDrift,
@@ -73,7 +78,7 @@ public static class PairedProtocol
                 {
                     bool isBaseline = (offset is 0 or 3) == abba;
                     slots.Add(new(phase, block, position++, id, isBaseline ? baselineId : id,
-                        isBaseline, abba ? "ABBA" : "BAAB", options.OrderSeed, seedStart + block));
+                        isBaseline, abba ? "ABBA" : "BAAB", options.OrderSeed, seedStart + block * options.ResidentSlots));
                 }
             }
         }
@@ -109,6 +114,9 @@ public static class PairedProtocol
         PairedSlot[] schedule = Schedule(options, phase, phaseIds, baselineId).Where(s => s.ChallengerId == challengerId).ToArray();
         if (!rows.Select(o => o.Slot).SequenceEqual(schedule) || rows.Any(o => o.Slot.CandidateId != o.Result.CandidateId))
             reasons.Add("Raw slot provenance does not match the frozen schedule or result identity.");
+        if (rows.Select(o => o.Result.MeasuredDispatchesPerBatch).Distinct().Count() != 1 ||
+            rows.Any(o => o.Result.MeasuredDispatchesPerBatch <= 0))
+            reasons.Add("Incomparable dispatch batch counts.");
         List<double> logs = [], baselines = [], candidateTimes = [], baselineTimes = [];
         double drift = 0;
         if (rows.Length != expected * 4) reasons.Add("Incomplete phase; no failed or missing block may be dropped.");
@@ -174,6 +182,12 @@ public static class PairedProtocol
             if (a.Length == 0 || b.Length == 0 || a.Concat(b).Any(o => string.IsNullOrEmpty(o.InputSha256)) ||
                 a.Select(o => o.Slot.InputSeed).Intersect(b.Select(o => o.Slot.InputSeed)).Any() ||
                 a.Select(o => o.InputSha256).Intersect(b.Select(o => o.InputSha256)).Any()) return false;
+            if (a.Concat(b).Any(o => o.Scenario is not null) &&
+                (a.Concat(b).Any(o => o.Scenario is null) ||
+                 a.SelectMany(o => o.Scenario!.Slots).Select(s => s.InputSeed)
+                    .Intersect(b.SelectMany(o => o.Scenario!.Slots).Select(s => s.InputSeed)).Any() ||
+                 a.SelectMany(o => o.Scenario!.Slots).Select(s => s.InputSha256)
+                    .Intersect(b.SelectMany(o => o.Scenario!.Slots).Select(s => s.InputSha256)).Any())) return false;
         }
         return true;
     }

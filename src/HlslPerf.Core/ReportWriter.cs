@@ -27,6 +27,17 @@ public static class ReportWriter
         File.WriteAllText(csvPath, BuildCsv(report), new UTF8Encoding(false));
         File.WriteAllText(htmlPath, BuildHtml(report), new UTF8Encoding(false));
         File.WriteAllText(svgPath, BuildSvg(report), new UTF8Encoding(false));
+        if (report.PairedEvidence is { } paired)
+        {
+            StringBuilder raw = new("phase,block,position,challenger,candidate,is_baseline,order,order_seed,input_seed,input_sha256,dispatches,ms,error\n");
+            foreach (PairedObservation row in paired.Observations)
+                raw.AppendLine(string.Join(",", Csv(row.Slot.Phase), row.Slot.Block, row.Slot.Position,
+                    Csv(row.Slot.ChallengerId), Csv(row.Slot.CandidateId), row.Slot.IsBaseline, Csv(row.Slot.Order),
+                    row.Slot.OrderSeed, row.Slot.InputSeed, Csv(row.InputSha256 ?? ""), row.Result.MeasuredDispatchesPerBatch,
+                    row.Result.SamplesMilliseconds.Count == 0 ? "" : row.Result.SamplesMilliseconds[0].ToString("R", CultureInfo.InvariantCulture),
+                    Csv(row.Result.Error ?? "")));
+            File.WriteAllText(Path.Combine(fullOutputDirectory, "paired-observations.csv"), raw.ToString(), new UTF8Encoding(false));
+        }
 
         string profileCandidatePath = Path.Combine(fullOutputDirectory, "profile.json");
         string? profilePath = null;
@@ -204,7 +215,7 @@ tr.winner{background:#173d35}tr.baseline{background:#172d4b}.ok{color:var(--gree
 <div class="card"><div class="label">Correct</div><div class="value">{{{report.Candidates.Count(candidate => candidate.Correctness?.Passed == true)}}} / {{{report.Candidates.Count}}}</div></div>
 <div class="card"><div class="label">Stable</div><div class="value">{{{report.Candidates.Count(candidate => candidate.Stable)}}} / {{{report.Candidates.Count}}}</div></div>
 </section>
-<div class="decision">{{{decision}}}</div>
+<div class="decision">Protocol: {{{Html(report.MeasurementProtocol)}}}. {{{(report.PairedEvidence is null ? "Historical sequential measurements; independent confirmation unavailable." : "Candidate table is descriptive calibration data. Paired intervals, locked selection, independent confirmation and all slot failures are retained in run.json; exported profile timings use confirmation only.")}}}<br>{{{decision}}}</div>
 <section class="panel">
 <table><thead><tr><th>Compile-time defines</th><th>Gate</th><th>Median ms</th><th>P95 ms</th><th>CV</th><th>M items/s</th><th>vs baseline</th><th>Relative speedup</th><th>RGA evidence</th></tr></thead>
 <tbody>{{{rows}}}</tbody></table>
