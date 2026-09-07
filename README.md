@@ -247,3 +247,10 @@ Read the [ABI contract](docs/ABI.md), [measurement methodology](docs/METHODOLOGY
 [RGA evidence policy](docs/RGA.md), [Unity consumer boundary](docs/UNITY_ADAPTER.md),
 [SDK guide](docs/SDK.md), [roadmap](docs/ROADMAP.md), and
 [clean-room provenance](docs/PROVENANCE.md).
+
+## Benchmark reproduction permission
+
+The [limited benchmark reproduction permission](LICENSE.md#limited-benchmark-reproduction-permission)
+allows anyone to run the benchmarks and required project components, make local
+changes needed for reproduction, and publish measurement results. Other plugin
+rights remain reserved; this is not an MIT or general open-source license.
