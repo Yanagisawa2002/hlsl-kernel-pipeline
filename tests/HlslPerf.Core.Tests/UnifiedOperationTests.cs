@@ -52,6 +52,12 @@ public sealed class UnifiedOperationTests
         foreach (string implementation in new[] { "gps-reduce-then-scan", "gps-decoupled-fallback" })
         {
             var plan = UnifiedWorkloads.Build(".", fixture, implementation);
+            Assert.All(plan.Shaders, shader =>
+            {
+                Assert.Equal(2021, shader.HlslVersion);
+                Assert.Equal("6_7", shader.ShaderModel);
+                Assert.False(shader.EnableStrictness);
+            });
             Assert.Equal(0, plan.Buffers.Single(buffer => buffer.Name == "input").ByteLength % 16);
             Assert.Equal(count * 4, plan.Buffers.Single(buffer => buffer.Name == plan.Outputs[0].Resource).ByteLength);
             Assert.Equal(count % 4 == 0 ? 0 : 1, plan.Passes.Count(pass => pass.Stage == UnifiedStage.OutputConversion));

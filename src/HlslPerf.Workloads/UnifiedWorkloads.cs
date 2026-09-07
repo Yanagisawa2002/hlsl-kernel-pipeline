@@ -171,7 +171,10 @@ public static class UnifiedWorkloads
         else passes.Add(Copy("restore-unsorted-input", UnifiedStage.InputRestore, "input", "keys-a", f.Count * 4));
         foreach (string pass in new[] { "sum", "reduce", "scan", "scan_add", "scatter" })
             shaders.Add(new("amd/" + pass + "/" + f.Pairs, Path.Combine(folder, "ffx_parallelsort_" + pass + "_pass.hlsl"), "CS",
-                new Dictionary<string, string> { ["FFX_GPU"] = "1", ["FFX_HLSL"] = "1", ["FFX_PARALLELSORT_OPTION_HAS_PAYLOAD"] = f.Pairs ? "1" : "0", ["FFX_PREFER_WAVE64"] = "[WaveSize(64)]" }, [gpu, Path.Combine(gpu, "parallelsort"), folder], []));
+                new Dictionary<string, string> { ["FFX_GPU"] = "1", ["FFX_HLSL"] = "1", ["FFX_HALF"] = "0", ["FFX_HLSL_SM"] = "66",
+                    ["FFX_PARALLELSORT_OPTION_HAS_PAYLOAD"] = f.Pairs ? "1" : "0", ["FFX_PREFER_WAVE64"] = "[WaveSize(64)]" },
+                [gpu, Path.Combine(gpu, "parallelsort"), folder], ["-Wno-for-redefinition", "-Wno-ambig-lit-shift"])
+                { HlslVersion = 2021, EnableStrictness = false });
         for (uint digit = 0; digit < 8; digit++)
         {
             string source = digit % 2 == 0 ? "keys-a" : "keys-b", destination = digit % 2 == 0 ? "keys-b" : "keys-a";
