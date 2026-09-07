@@ -272,6 +272,22 @@
           "gitBlobSha1": "6baf6da35e8c1aae4d4fb3c2f4747f264af75bb1",
           "sha256": "553773cd9f3f12ed18ef59b00f7242e4ec4916d7a4bce39fd1547d72a8f389f8",
           "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/src/components/parallelsort/ffx_parallelsort_private.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/CMakeCompileShaders.txt",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/CMakeCompileShaders.txt",
+          "bytes": 6139,
+          "gitBlobSha1": "ac1088d056d23c6b81fffa428aabd300c90fb760",
+          "sha256": "9f45dcefd72e35e3ee3b10c3063623041b8f69eeb443280067a467aa290ab085",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/CMakeCompileShaders.txt"
+        },
+        {
+          "path": "sdk/src/backends/dx12/CMakeShadersParallelSort.txt",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/CMakeShadersParallelSort.txt",
+          "bytes": 1391,
+          "gitBlobSha1": "cbc2b432bf187a36eb42fcb1b2a6ad8dcd948eb1",
+          "sha256": "aa9802a4a599fc9186134a2767571c407a9fed07944b6a313221c51c7e1b7723",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/src/backends/dx12/CMakeShadersParallelSort.txt"
         }
       ]
     },
@@ -393,6 +409,14 @@
           "gitBlobSha1": "99894ad457fe1b552e4de31fdc934c21f04409a1",
           "sha256": "1e76c32ecb36a76d39dbc16fc10833f30bb321067cc3d1e6c32bd2dbe38319f1",
           "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookbackDecoupledFallback.hlsl"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/packages.config",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/packages.config",
+          "bytes": 347,
+          "gitBlobSha1": "4a052a5aa2c1f50bace4f243c4f29caa1c8a194b",
+          "sha256": "af3436ed5fdea976387a9169bc8ad4ff17bab66d2491ae3b026e356dbec48682",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/packages.config"
         }
       ]
     }
