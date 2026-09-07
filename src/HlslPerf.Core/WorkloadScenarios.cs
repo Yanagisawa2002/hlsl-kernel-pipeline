@@ -61,15 +61,13 @@ public sealed record WorkloadScenario(
                 throw new InvalidDataException("Scenario logical buffers exceed the declared memory cap.");
             // Providers may reuse their CPU staging arrays on the next Build call.
             plan = plan with { Buffers = plan.Buffers.Select(buffer => buffer with
-                { InitialData = buffer.InitialData?.ToArray() }).ToArray() };
-            string inputHash = ContentHash.Sha256(string.Join("\n", plan.Buffers
-                .Where(buffer => buffer.InitialData is not null)
-                .OrderBy(buffer => buffer.Name, StringComparer.Ordinal)
-                .Select(buffer => buffer.Name + ":" + buffer.ByteLength + ":" + ContentHash.Sha256(buffer.InitialData!))));
+                { InitialData = buffer.InitialData?.ToArray() }).ToArray(),
+                Passes = plan.Passes.Select(pass => pass with { Constants = pass.Constants.ToArray() }).ToArray() };
+            string inputHash = PairedProtocol.InputDigest(plan);
             slots.Add(new ScenarioPlanSlot(slot, InputSeeds[slot], inputHash, plan));
         }
         if (slots.Count > 1 && slots.Select(slot => slot.InputSha256).Distinct().Count() != slots.Count)
-            throw new InvalidDataException("Workload did not produce distinct initialized buffers for changing seeds; scenario unsupported.");
+            throw new InvalidDataException("Workload did not produce distinct initialized buffers/root constants for changing seeds; scenario unsupported.");
         return slots;
     }
 }

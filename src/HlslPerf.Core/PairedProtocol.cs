@@ -95,9 +95,13 @@ public static class PairedProtocol
         return json.Deserialize<TuningManifest>(JsonDefaults.Options)!;
     }
 
-    public static string InputDigest(KernelExecutionPlan plan) => ContentHash.Sha256(string.Join("\n",
-        plan.Buffers.Where(b => b.InitialData is not null).OrderBy(b => b.Name, StringComparer.Ordinal)
-            .Select(b => $"{b.Name}:{b.ByteLength}:{ContentHash.Sha256(b.InitialData!)}")));
+    public static string InputDigest(KernelExecutionPlan plan) => ContentHash.Sha256(JsonSerializer.Serialize(new
+    {
+        schema = "initialized-buffers-and-root-constants-v2",
+        buffers = plan.Buffers.Where(b => b.InitialData is not null).OrderBy(b => b.Name, StringComparer.Ordinal)
+            .Select(b => new { b.Name, b.ByteLength, sha256 = ContentHash.Sha256(b.InitialData!) }).ToArray(),
+        constants = plan.Passes.Select(p => new { p.Name, p.EntryPoint, p.Constants }).ToArray()
+    }, JsonDefaults.Options));
 
     public static PairedComparison Compare(IReadOnlyList<PairedObservation> observations, string phase,
         string challengerId, PairedMeasurementOptions options, double minimumSpeedup, double maximumCv)
@@ -131,6 +135,21 @@ public static class PairedProtocol
                 continue;
             }
             bool[] roles = group.Select(o => o.Slot.IsBaseline).ToArray();
+            if (group.Any(o => o.Scenario is not null))
+            {
+                ScenarioSessionEvidence? reference = group[0].Scenario;
+                if (reference is null || group.Any(o => o.Scenario is not { } scenario ||
+                    scenario.Device != reference.Device || scenario.SourceSha256 != reference.SourceSha256 ||
+                    scenario.WorkloadImplementationSha256 != reference.WorkloadImplementationSha256 ||
+                    scenario.BackendAssemblySha256 != reference.BackendAssemblySha256 ||
+                    scenario.DynamicExecutorSha256 != reference.DynamicExecutorSha256 ||
+                    !scenario.NativeCompilerBinaries.Select(b => b.Sha256).Order(StringComparer.Ordinal)
+                        .SequenceEqual(reference.NativeCompilerBinaries.Select(b => b.Sha256).Order(StringComparer.Ordinal)) ||
+                    scenario.CachePolicy != reference.CachePolicy || scenario.TimingScope != reference.TimingScope ||
+                    !scenario.Slots.Select(s => (s.Slot, s.InputSeed, s.ExpectedSha256))
+                        .SequenceEqual(reference.Slots.Select(s => (s.Slot, s.InputSeed, s.ExpectedSha256)))))
+                    reasons.Add($"Block {block}: paired arms have incompatible primary oracles, inputs, device, source or timing scopes.");
+            }
             if (group.GroupBy(o => o.Slot.IsBaseline).Any(arm =>
                     arm.Any(o => string.IsNullOrEmpty(o.InputSha256)) || arm.Select(o => o.InputSha256).Distinct().Count() != 1))
                 reasons.Add($"Block {block}: repeated arm inputs do not match.");
