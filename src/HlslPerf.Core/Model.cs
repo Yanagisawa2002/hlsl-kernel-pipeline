@@ -256,7 +256,15 @@ public sealed record RgaPassAnalysis(
     int? ThreadGroupZ,
     double? OccupancyWavesPerSimd,
     string? IsaPath,
-    string? LiveVgprPath);
+    string? LiveVgprPath)
+{
+    public int? VgprSpills { get; init; }
+    public int? SgprSpills { get; init; }
+    public string Status { get; init; } = "collected";
+    public string MetricKind { get; init; } = "static-compiler-analysis; not measured occupancy or bandwidth";
+    public string? StatisticsPath { get; init; }
+    public RgaInvocationEvidence? Evidence { get; init; }
+}
 
 public sealed record RgaCandidateAnalysis(
     string Tool,

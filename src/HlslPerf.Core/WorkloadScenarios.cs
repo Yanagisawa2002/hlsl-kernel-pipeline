@@ -59,6 +59,9 @@ public sealed record WorkloadScenario(
             bytes = checked(bytes + plan.Buffers.Sum(buffer => (long)buffer.ByteLength));
             if (bytes > MaximumAllocationBytes)
                 throw new InvalidDataException("Scenario logical buffers exceed the declared memory cap.");
+            // Providers may reuse their CPU staging arrays on the next Build call.
+            plan = plan with { Buffers = plan.Buffers.Select(buffer => buffer with
+                { InitialData = buffer.InitialData?.ToArray() }).ToArray() };
             string inputHash = ContentHash.Sha256(string.Join("\n", plan.Buffers
                 .Where(buffer => buffer.InitialData is not null)
                 .OrderBy(buffer => buffer.Name, StringComparer.Ordinal)
@@ -75,6 +78,7 @@ public sealed record ScenarioPlanSlot(int Slot, int InputSeed, string InputSha25
 public sealed record ScenarioSlotEvidence(int Slot, int InputSeed, string InputSha256, string ExpectedSha256, long LogicalBytes, int PassCount);
 public sealed record ScenarioMemorySnapshot(DateTimeOffset CapturedUtc, ulong? LocalBudgetBytes, ulong? LocalUsageBytes, string Status);
 public sealed record ScenarioVerification(int Slot, int InputSeed, string Resource, CorrectnessResult Correctness);
+public sealed record ScenarioCompilerBinary(string Path, string Sha256, string? FileVersion);
 public sealed record ScenarioSessionEvidence(
     string Schema, string ScenarioId, string CachePolicy, string IdentitySha256,
     DeviceFingerprint Device, string SourceSha256, string WorkloadImplementationSha256,
@@ -82,4 +86,8 @@ public sealed record ScenarioSessionEvidence(
     long LogicalBufferBytes, ulong CommittedAllocationBytes, long InitialUploadBytes,
     long MaximumVerificationReadbackBytes, string ResidencyPolicy,
     ScenarioMemorySnapshot MemoryBefore, ScenarioMemorySnapshot MemoryAfter,
-    string TimingScope, string ThermalStatus, string InterferenceStatus);
+    string TimingScope, string ThermalStatus, string InterferenceStatus)
+{
+    public IReadOnlyList<ScenarioCompilerBinary> NativeCompilerBinaries { get; init; } = [];
+    public string NativeCompilerStatus { get; init; } = "unavailable";
+}
