@@ -11,7 +11,7 @@ internal static class UnifiedBenchRunner
         string repo = Path.GetFullPath(args[1]), output = Path.GetFullPath(args[2]);
         if (Directory.Exists(output)) throw new InvalidDataException("Refusing to overwrite an experiment.");
         Directory.CreateDirectory(output);
-        return args[0] == "correctness" ? Correctness(repo, output) : Formal(repo, output, args[3], args[4], int.Parse(args[5]));
+        return args[0] == "correctness" ? Correctness(repo, output) : Formal(repo, output, args[3], args[4], int.Parse(args[5]), args[0] == "pilot");
     }
 
     private static object RuntimeIdentity() => new
@@ -69,11 +69,11 @@ internal static class UnifiedBenchRunner
         Save(); return passed ? 0 : 2;
         void Save() => Write(output, "correctness.json", new { schema = "hlslperf.unified-correctness.v1", developmentOnly = true,
             pid = Environment.ProcessId, startedUtc = started, recordedUtc = DateTimeOffset.UtcNow, testsPassed = passed,
-            device = tuner.DescribeDevice(), deviceRemovalStatus = tuner.DeviceRemovalStatus, runtime,
+            device = tuner.DescribeDevice("per-arm:6_6-or-6_7"), deviceRemovalStatus = tuner.DeviceRemovalStatus, runtime,
             compilation = executor.CompilationEvidence, results });
     }
 
-    private static int Formal(string repo, string output, string declarationPath, string cellId, int processIndex)
+    private static int Formal(string repo, string output, string declarationPath, string cellId, int processIndex, bool developmentOnly)
     {
         byte[] declarationBytes = File.ReadAllBytes(declarationPath);
         var declaration = JsonSerializer.Deserialize<Declaration>(declarationBytes, JsonDefaults.Options) ?? throw new InvalidDataException("Missing declaration.");
@@ -158,10 +158,10 @@ internal static class UnifiedBenchRunner
         finally { foreach (var ring in rings.Values) foreach (var session in ring) session.Dispose(); }
         void Save() => Write(output, "process.json", new
         {
-            schema = "hlslperf.unified-process.v1", developmentOnly = false, completed, pid = Environment.ProcessId,
+            schema = "hlslperf.unified-process.v1", developmentOnly, completed, pid = Environment.ProcessId,
             processIndex, startedUtc = started, recordedUtc = DateTimeOffset.UtcNow,
             declarationSha256 = ContentHash.Sha256(declarationBytes), cell, schedule, fixtures, fixtureMilliseconds,
-            device = tuner.DescribeDevice(), deviceRemovalStatus = tuner.DeviceRemovalStatus, runtime,
+            device = tuner.DescribeDevice("per-arm:6_6-or-6_7"), deviceRemovalStatus = tuner.DeviceRemovalStatus, runtime,
             compilation = executor.CompilationEvidence, setup, checks, warmup, observations, statuses, errors
         });
     }

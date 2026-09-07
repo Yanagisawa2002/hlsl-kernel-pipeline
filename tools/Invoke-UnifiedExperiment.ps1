@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory)][string]$Runtime,
     [Parameter(Mandatory)][string]$OutputDirectory,
     [Parameter(Mandatory)][string]$SerializedValidationRunner,
-    [Parameter(Mandatory)][ValidateSet('correctness','formal')][string]$Mode,
+    [Parameter(Mandatory)][ValidateSet('correctness','formal','pilot')][string]$Mode,
     [string]$CoordinationReport,
     [string]$Declaration,
     [string]$Cell,
@@ -19,6 +19,7 @@ $output=[IO.Path]::GetFullPath($OutputDirectory)
 if ((Test-Path -LiteralPath $output) -or (Test-Path -LiteralPath "$output.execution.json")) { throw 'Evidence path already exists; no automatic retries.' }
 [IO.Directory]::CreateDirectory((Split-Path -Parent $output)) | Out-Null
 $arguments=@([IO.Path]::GetFullPath($Runtime),$Mode,$repo,$output)
+if ($Mode -eq 'pilot') { $arguments+=@([IO.Path]::GetFullPath($Declaration),$Cell,"$ProcessIndex") }
 if ($Mode -eq 'formal') {
     if (-not ($Declaration -and $Cell -and $ProcessIndex -ge 1 -and $ProcessIndex -le 5 -and $ExpectedSourceSha -and $BinaryLock)) { throw 'Formal execution requires frozen source, binaries and a complete declaration.' }
     $arguments+=@([IO.Path]::GetFullPath($Declaration),$Cell,"$ProcessIndex")
