@@ -255,6 +255,30 @@ public sealed partial class D3D12Tuner
 
         public UnifiedBatchTiming MeasureBatch(int repetitions) => MeasureRingBatch([this], repetitions);
 
+        /// <summary>Diagnostic only: one complete operation, one submission, timestamps between passes.</summary>
+        public UnifiedPassDiagnostic MeasurePassDiagnostic()
+        {
+            if (plan.Passes.Count + 1 > QueryCount) throw new InvalidDataException("Too many diagnostic timestamps.");
+            long start = Stopwatch.GetTimestamp();
+            Stamp(0);
+            for (int index = 0; index < plan.Passes.Count; index++) { Execute(plan.Passes[index]); Stamp((uint)index + 1); }
+            double record = Stopwatch.GetElapsedTime(start).TotalMilliseconds;
+            ulong[] data = Resolve((uint)plan.Passes.Count + 1, out var submission);
+            return new(Elapsed(data, 0, plan.Passes.Count), record, submission,
+                plan.Passes.Select((pass, index) => new UnifiedPassTiming(pass.Name, pass.Stage, Elapsed(data, index, index + 1))).ToArray(), plan.Passes.Count + 1);
+        }
+
+        public byte[] ReadDiagnosticBuffer(string name)
+        {
+            GpuBuffer buffer = resources.Get(name);
+            using var readback = owner.device.CreateCommittedResource(HeapType.Readback,
+                ResourceDescription.Buffer((ulong)buffer.ByteLength, ResourceFlags.None, 0), ResourceStates.CopyDest, null);
+            owner.Transition(buffer, ResourceStates.CopySource);
+            owner.commandList.CopyResource(readback, buffer.Resource);
+            owner.UnifiedSubmitAndWait();
+            byte[] data = readback.Map<byte>(0, buffer.ByteLength).ToArray(); readback.Unmap(0); return data;
+        }
+
         /// <summary>Development-only dispatch isolation; never used for benchmark timings.</summary>
         public void DiagnosePasses(Action<string, double> completed)
         {

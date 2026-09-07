@@ -90,3 +90,7 @@ public sealed record UnifiedVerification(
     string Resource, int Attempt, byte PoisonByte, string ExpectedSha256,
     string ActualSha256, bool Passed, double GpuReadbackMilliseconds,
     double CpuReadbackMilliseconds);
+
+public sealed record UnifiedPassTiming(string Name, UnifiedStage Stage, double GpuMilliseconds);
+public sealed record UnifiedPassDiagnostic(double GpuTotalMilliseconds, double CpuRecordMilliseconds,
+    UnifiedSubmissionTiming Submission, IReadOnlyList<UnifiedPassTiming> Passes, int TimestampMarkers);

@@ -7,6 +7,18 @@ namespace HlslPerf.Core.Tests;
 
 public sealed class UnifiedOperationTests
 {
+    [Fact]
+    public void FocusedCountersDoNotReplaceOrAliasTheScanOutput()
+    {
+        var fixture = UnifiedWorkloads.Fixture("scan", 6145, 7);
+        var plan = FocusedCostWorkloads.Build(".", fixture, FocusedCostWorkloads.ScanCounters);
+        Assert.Single(plan.Outputs);
+        Assert.Equal(fixture.ExpectedKeysSha256, plan.Outputs[0].ExpectedSha256);
+        Assert.Equal(32, plan.Buffers.Single(b => b.Name == "diagnostic-counters").ByteLength);
+        Assert.Equal("diagnostic-counters", plan.Passes.Single(p => p.Name == "single-pass-scan").Uavs[2]);
+        Assert.All(plan.Shaders, shader => Assert.Equal("1", shader.Defines["HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS"]));
+    }
+
     private static uint[] Values(byte[] bytes) => MemoryMarshal.Cast<byte, uint>(bytes).ToArray();
 
     [Fact]

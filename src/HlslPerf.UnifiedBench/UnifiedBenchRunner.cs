@@ -14,7 +14,7 @@ internal static class UnifiedBenchRunner
         return args[0] == "correctness" ? Correctness(repo, output) : Formal(repo, output, args[3], args[4], int.Parse(args[5]), args[0] == "pilot");
     }
 
-    private static object RuntimeIdentity() => new
+    internal static object RuntimeIdentity() => new
     {
         framework = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription,
         processArchitecture = System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture.ToString(),
