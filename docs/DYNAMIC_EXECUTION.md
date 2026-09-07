@@ -77,9 +77,8 @@ checks fixed-dispatch compatibility. Every native call repeats resident executio
 three times (one for negatives) before both poison attempts.
 
 ```powershell
-# All builds and GPU execution must be inside the project's shared validation lock.
-dotnet test tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj -c Release
-dotnet run --project tests/HlslPerf.DynamicSmoke/HlslPerf.DynamicSmoke.csproj -c Release -- . artifacts/dynamic-smoke
+# Holds the shared lock until all builds, tests and native GPU children exit.
+./tools/Invoke-DynamicValidation.ps1 -SerializationScript <control>/Invoke-SerializedValidation.ps1
 ```
 
 The JSON retains device/driver, workload and executor source identities, backend

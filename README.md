@@ -8,6 +8,10 @@ device-specific profile that Unity can consume without importing the tuner.
 This is clean-room personal work. It contains no employer/client project source,
 assets, configuration, benchmark capture, or Git history.
 
+The [dynamic ABI v2 demo](docs/DYNAMIC_EXECUTION.md) adds bounded GPU-count indirect
+dispatch and independent multi-output verification while retaining ABI v1.
+Its R9700 correctness evidence is separate from the historical performance results below.
+
 ## v0.6 reusable SDK and fused primitive pack
 
 The tuner is now an SDK rather than a repository-bound benchmark. External
