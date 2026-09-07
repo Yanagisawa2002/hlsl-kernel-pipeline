@@ -244,5 +244,36 @@
         "$ref": "#/$defs/positiveInteger"
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "kernelAbiVersion"
+        ],
+        "properties": {
+          "kernelAbiVersion": {
+            "const": "hlslperf.raw-buffer.v2"
+          }
+        }
+      },
+      "then": {},
+      "else": {
+        "properties": {
+          "workItemCount": {
+            "$ref": "#/$defs/positiveInteger"
+          },
+          "workload": {
+            "properties": {
+              "parameters": {
+                "additionalProperties": {
+                  "$ref": "#/$defs/positiveInteger"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

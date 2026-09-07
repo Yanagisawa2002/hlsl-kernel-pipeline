@@ -17,7 +17,7 @@ public sealed partial class D3D12Tuner
         string workloadHash = WorkloadIdentity.Compute(workload);
         string identity = ContentHash.Sha256(JsonSerializer.Serialize(new
         {
-            protocol = PairedProtocol.Id, manifestHash, effectiveManifest = manifest,
+            protocol = PairedProtocol.Id, manifestHash, effectiveManifest = manifest, DynamicExecutorSha256,
             kernelHash = graph.CombinedSha256, workloadHash, fingerprint,
             binaries = Directory.GetFiles(AppContext.BaseDirectory, "*.dll")
                 .Where(p => Path.GetFileName(p).StartsWith("HlslPerf", StringComparison.OrdinalIgnoreCase) ||

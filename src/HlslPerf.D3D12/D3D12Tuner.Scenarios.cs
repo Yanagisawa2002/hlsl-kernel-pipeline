@@ -148,22 +148,12 @@ public sealed partial class D3D12Tuner
             List<ScenarioVerification> results = [];
             foreach (ScenarioPlanSlot slot in slots)
             {
-                GpuBuffer verified = resources[slot.Slot].Get(slot.Plan.VerifiedResource);
-                owner.PoisonVerifiedResource(verified);
-                owner.ExecutePlan(slot.Plan, pipelines, resources[slot.Slot]);
-                owner.ExecuteAndWait();
-                owner.Transition(verified, ResourceStates.CopySource);
-                using ID3D12Resource readback = owner.device.CreateCommittedResource(HeapType.Readback,
-                    ResourceDescription.Buffer((ulong)verified.ByteLength, ResourceFlags.None, 0), ResourceStates.CopyDest, null);
-                owner.commandList.CopyResource(readback, verified.Resource);
-                owner.ExecuteAndWait();
-                Span<byte> bytes = readback.Map<byte>(0, verified.ByteLength);
-                string actual = ContentHash.Sha256(bytes);
-                if (captureVerifiedOutput is not null) captureVerifiedOutput(slot.Slot, bytes.ToArray());
-                readback.Unmap(0);
-                results.Add(new(slot.Slot, slot.InputSeed, slot.Plan.VerifiedResource,
-                    new CorrectnessResult(actual == slot.Plan.ExpectedSha256, actual, slot.Plan.ExpectedSha256,
-                        "Poison/re-execute/readback against this slot's independent CPU oracle.")));
+                CorrectnessResult correctness = owner.VerifyPlanOutputs(slot.Plan, pipelines, resources[slot.Slot],
+                    captureVerifiedOutput is null ? null : (name, bytes) =>
+                    {
+                        if (name == slot.Plan.VerifiedResource) captureVerifiedOutput(slot.Slot, bytes);
+                    });
+                results.Add(new(slot.Slot, slot.InputSeed, slot.Plan.VerifiedResource, correctness));
             }
             return results;
         }
