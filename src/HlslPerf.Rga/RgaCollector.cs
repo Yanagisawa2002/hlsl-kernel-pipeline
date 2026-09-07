@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Text.Json;
 using HlslPerf.Core;
 
 namespace HlslPerf.Rga;
@@ -24,6 +25,10 @@ public sealed partial class RgaCollector
     {
         string manifestDirectory = Path.GetDirectoryName(Path.GetFullPath(manifestPath))!;
         string kernelPath = Path.GetFullPath(Path.Combine(manifestDirectory, manifest.KernelPath));
+        if (HlslSourceGraph.Load(kernelPath).CombinedSha256 != report.KernelSha256)
+            throw new InvalidDataException("RGA source changed since measurement; refusing an incomparable evidence attachment.");
+        if (report.Device.ShaderModel != manifest.ShaderModel)
+            throw new InvalidDataException("RGA shader model differs from the measured shader model.");
         string root = Path.GetFullPath(outputDirectory);
         Directory.CreateDirectory(root);
         List<CandidateResult> candidates = new(report.Candidates.Count);
@@ -45,63 +50,91 @@ public sealed partial class RgaCollector
                 kernelPath,
                 Path.Combine(root, Sanitize(candidate.Id)),
                 target,
-                cancellationToken);
+                cancellationToken,
+                report.Device);
             candidates.Add(result with { StaticAnalysis = analysis });
         }
         return report with { Candidates = candidates };
     }
 
-    private RgaCandidateAnalysis AnalyzeCandidate(
+    public RgaCandidateAnalysis AnalyzeCandidate(
         TuningManifest manifest,
         KernelCandidate candidate,
         KernelExecutionPlan plan,
         string kernelPath,
         string candidateDirectory,
         string? target,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default,
+        DeviceFingerprint? measuredDevice = null)
     {
         Directory.CreateDirectory(candidateDirectory);
         List<RgaPassAnalysis> analyses = [];
         List<string> diagnostics = [];
         string? resolvedTarget = target;
+        HlslSourceGraph sourceGraph = HlslSourceGraph.Load(kernelPath);
         foreach (KernelPassSpec pass in plan.Passes
                      .GroupBy(value => value.EntryPoint, StringComparer.Ordinal)
                      .Select(group => group.First()))
         {
             cancellationToken.ThrowIfCancellationRequested();
             string stem = Sanitize(pass.EntryPoint);
-            string statisticsTemplate = Path.Combine(candidateDirectory, $"{stem}-stats.txt");
-            string isaTemplate = Path.Combine(candidateDirectory, $"{stem}-isa.txt");
-            string liveTemplate = Path.Combine(candidateDirectory, $"{stem}-livereg.txt");
-            ProcessResult process = Run(
-                BuildArguments(manifest, candidate, pass.EntryPoint, kernelPath, statisticsTemplate, isaTemplate, liveTemplate, target),
-                cancellationToken);
+            string invocationDirectory = Path.Combine(candidateDirectory, stem, Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(invocationDirectory);
+            for (int sourceIndex = 0; sourceIndex < sourceGraph.Dependencies.Count; sourceIndex++)
+            {
+                HlslSourceDependency source = sourceGraph.Dependencies[sourceIndex];
+                File.Copy(source.FullPath, Path.Combine(invocationDirectory, $"source-{sourceIndex}-{Path.GetFileName(source.FullPath)}"));
+            }
+            string statisticsTemplate = Path.Combine(invocationDirectory, $"{stem}-stats.txt");
+            string isaTemplate = Path.Combine(invocationDirectory, $"{stem}-isa.txt");
+            string liveTemplate = Path.Combine(invocationDirectory, $"{stem}-livereg.txt");
+            List<string> arguments = BuildArguments(manifest, candidate, pass.EntryPoint, kernelPath, statisticsTemplate, isaTemplate, liveTemplate, target).ToList();
+            foreach (string directory in sourceGraph.IncludeDirectories) { arguments.Add("-I"); arguments.Add(directory); }
+            string dxcDirectory = Path.Combine(Path.GetDirectoryName(installation.ExecutablePath)!, "utils", "dx12", "dxc");
+            List<EvidenceFile> compilerFiles = [];
+            if (Directory.Exists(dxcDirectory))
+            {
+                arguments.Add("--dxc"); arguments.Add(dxcDirectory);
+                compilerFiles.AddRange(Directory.EnumerateFiles(dxcDirectory).Where(path =>
+                    Path.GetExtension(path) is ".exe" or ".dll").Select(DescribeFile));
+            }
+            arguments.Add("--dxc-opt"); arguments.Add("-O3 -Ges -WX");
+            arguments.Add("--binary"); arguments.Add(Path.Combine(invocationDirectory, stem + ".bin"));
+            DateTimeOffset started = DateTimeOffset.UtcNow;
+            ProcessResult process = Run(arguments, cancellationToken);
+            File.WriteAllText(Path.Combine(invocationDirectory, "process-output.txt"), process.Output);
             diagnostics.Add($"[{pass.EntryPoint}] exit={process.ExitCode}: {Compact(process.Output)}");
             resolvedTarget ??= TargetRegex().Match(process.Output) is { Success: true } match
                 ? match.Value.ToLowerInvariant()
                 : null;
 
-            string? statsPath = FindGenerated(candidateDirectory, stem, "resourceUsage.numUsedVgprs");
-            string? livePath = FindGenerated(candidateDirectory, stem, "Maximum # VGPR");
-            string? isaPath = Directory.EnumerateFiles(candidateDirectory, "*", SearchOption.TopDirectoryOnly)
+            string? statsPath = FindGenerated(invocationDirectory, stem, "resourceUsage.numUsedVgprs");
+            string? livePath = FindGenerated(invocationDirectory, stem, "Maximum # VGPR");
+            string? isaPath = Directory.EnumerateFiles(invocationDirectory, "*.txt", SearchOption.TopDirectoryOnly)
                 .Where(path => Path.GetFileName(path).Contains(stem, StringComparison.OrdinalIgnoreCase))
                 .FirstOrDefault(path => path != statsPath && path != livePath && File.ReadAllText(path).Contains("Disassembly", StringComparison.OrdinalIgnoreCase));
-            if (process.ExitCode != 0 || statsPath is null)
-                continue;
+            RgaInvocationEvidence evidence = new("hlslperf.rga-invocation.v1", started, DateTimeOffset.UtcNow,
+                DescribeFile(installation.ExecutablePath), compilerFiles, arguments, pass.EntryPoint,
+                manifest.ShaderModel, candidate.Defines, sourceGraph.CombinedSha256, sourceGraph.Dependencies,
+                measuredDevice, process.ExitCode, Directory.EnumerateFiles(invocationDirectory).Select(DescribeFile).ToArray(),
+                "RGA recompiles the identified source and defines with its identified DXC through the live driver; not asserted byte-identical to measured DXIL.");
+            File.WriteAllText(Path.Combine(invocationDirectory, "invocation.json"), JsonSerializer.Serialize(evidence, JsonDefaults.Options));
             analyses.Add(RgaStatisticsParser.Parse(
                 pass.Name,
                 pass.EntryPoint,
-                File.ReadAllText(statsPath),
-                livePath is null ? null : File.ReadAllText(livePath),
+                statsPath is null || process.ExitCode != 0 ? "" : File.ReadAllText(statsPath),
+                livePath is null || process.ExitCode != 0 ? null : File.ReadAllText(livePath),
                 isaPath,
-                livePath));
+                livePath) with { Evidence = evidence, StatisticsPath = statsPath,
+                    Status = process.ExitCode == 0 && statsPath is not null ? "collected" : "unavailable" });
         }
 
         return new RgaCandidateAnalysis(
             "AMD Radeon GPU Analyzer DX12 live-driver",
             installation.Version,
             resolvedTarget,
-            analyses.Count > 0 ? "collected" : "failed",
+            analyses.All(pass => pass.Status == "collected") && analyses.Count > 0 ? "collected" :
+                analyses.Any(pass => pass.Status == "collected") ? "partial" : "failed",
             analyses,
             string.Join(Environment.NewLine, diagnostics));
     }
@@ -153,24 +186,32 @@ public sealed partial class RgaCollector
         using Process process = Process.Start(startInfo)
             ?? throw new InvalidOperationException("Could not start RGA.");
         StringBuilder output = new();
-        process.OutputDataReceived += (_, args) => { if (args.Data is not null) output.AppendLine(args.Data); };
-        process.ErrorDataReceived += (_, args) => { if (args.Data is not null) output.AppendLine(args.Data); };
+        process.OutputDataReceived += (_, args) => { lock (output) { if (args.Data is not null) output.AppendLine(args.Data); } };
+        process.ErrorDataReceived += (_, args) => { lock (output) { if (args.Data is not null) output.AppendLine(args.Data); } };
         process.BeginOutputReadLine();
         process.BeginErrorReadLine();
+        Stopwatch timeout = Stopwatch.StartNew();
         while (!process.WaitForExit(250))
         {
-            if (!cancellationToken.IsCancellationRequested)
+            if (!cancellationToken.IsCancellationRequested && timeout.Elapsed < TimeSpan.FromMinutes(2))
                 continue;
             process.Kill(true);
+            process.WaitForExit();
             cancellationToken.ThrowIfCancellationRequested();
+            output.AppendLine("RGA exceeded the bounded two-minute per-entrypoint timeout.");
+            return new ProcessResult(-1, output.ToString());
         }
         process.WaitForExit();
         return new ProcessResult(process.ExitCode, output.ToString());
     }
 
+    private static EvidenceFile DescribeFile(string path) => new(Path.GetFullPath(path),
+        ContentHash.Sha256(File.ReadAllBytes(path)), new FileInfo(path).Length,
+        Path.GetExtension(path) is ".exe" or ".dll" ? FileVersionInfo.GetVersionInfo(path).FileVersion : null);
+
     private static string? FindGenerated(string directory, string stem, string requiredText)
     {
-        foreach (string path in Directory.EnumerateFiles(directory, "*", SearchOption.TopDirectoryOnly)
+        foreach (string path in Directory.EnumerateFiles(directory, "*.txt", SearchOption.TopDirectoryOnly)
                      .Where(path => Path.GetFileName(path).Contains(stem, StringComparison.OrdinalIgnoreCase)))
         {
             try

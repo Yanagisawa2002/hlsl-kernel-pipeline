@@ -7,6 +7,27 @@ namespace HlslPerf.Core.Tests;
 public sealed class RgaParserTests
 {
     [Fact]
+    public void MissingInvalidMetricsAreUnavailableAndGenericOccupancyHasNoAssumedUnit()
+    {
+        var parsed = RgaStatisticsParser.Parse("p", "SinglePassScan", "resourceUsage.numUsedVgprs = -1\nresourceUsage.scratchMemUsageInBytes = NaN\noccupancy = 75\nresourceUsage.numUsedSgprs = 2.5");
+        Assert.Null(parsed.VgprsUsed);
+        Assert.Null(parsed.SgprsUsed);
+        Assert.Null(parsed.ScratchBytes);
+        Assert.Null(parsed.VgprSpills);
+        Assert.Null(parsed.SgprSpills);
+        Assert.Null(parsed.OccupancyWavesPerSimd);
+    }
+
+    [Fact]
+    public void ExplicitSpillCountsArePreservedWithoutDerivingFromScratch()
+    {
+        var parsed = RgaStatisticsParser.Parse("p", "FusedCompactSinglePass", "resourceUsage.scratchMemUsageInBytes = 64\nresourceUsage.numVgprSpills = 3\nresourceUsage.numSgprSpills = 0");
+        Assert.Equal(64, parsed.ScratchBytes);
+        Assert.Equal(3, parsed.VgprSpills);
+        Assert.Equal(0, parsed.SgprSpills);
+    }
+
+    [Fact]
     public void ParsesOfficialDx12StatisticsAndLiveVgprSummary()
     {
         const string statistics = """

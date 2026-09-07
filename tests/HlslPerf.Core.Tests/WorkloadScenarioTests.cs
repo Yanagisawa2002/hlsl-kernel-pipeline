@@ -55,5 +55,25 @@ public sealed class WorkloadScenarioTests
             KernelAbiV1.Id, 1, [new("input", 4, new byte[4]), new("output", 4)],
             [new("test", "Main", new(1), "input", null, "output", null, [])], "output", new string('a',64));
     }
+
+    [Fact]
+    public void ProviderStagingArrayReuseCannotRewriteAnEarlierResidentSlot()
+    {
+        var slots = new WorkloadScenario("mutable-provider", [1,2]).Build(Manifest(), new ReusingWorkload(), Candidate());
+        Assert.Equal(1, slots[0].Plan.Buffers[0].InitialData![0]);
+        Assert.Equal(2, slots[1].Plan.Buffers[0].InitialData![0]);
+    }
+
+    private sealed class ReusingWorkload : IKernelWorkload
+    {
+        private readonly byte[] input = new byte[4];
+        public string Id => "reuse";
+        public KernelExecutionPlan Build(TuningManifest manifest, KernelCandidate candidate)
+        {
+            input[0] = (byte)manifest.Workload!.GetRequiredInt32("seed");
+            return new(Id, KernelAbiV1.Id, 1, [new("input", 4, input), new("output",4)],
+                [new("test", "Main", new(1), "input", null, "output", null, [])], "output", ContentHash.Sha256(input));
+        }
+    }
 }
 
