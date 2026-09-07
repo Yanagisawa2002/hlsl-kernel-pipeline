@@ -22,6 +22,7 @@ public sealed class BuiltinWorkloadProvider : IKernelWorkloadProvider
     public IReadOnlyCollection<string> WorkloadIds { get; } =
     [
         "uint-mix-v1",
+        "dynamic-compaction-consume-u32-v2",
         "reduction-u32-v1",
         "exclusive-scan-u32-v1",
         "generic-exclusive-scan-u32-v1",
@@ -35,6 +36,7 @@ public sealed class BuiltinWorkloadProvider : IKernelWorkloadProvider
     public IKernelWorkload Create(string workloadId) => workloadId switch
         {
             "uint-mix-v1" or "cross-candidate-sha256" => new UintMixWorkload(),
+            "dynamic-compaction-consume-u32-v2" => new DynamicCompactionWorkload(),
             "reduction-u32-v1" => new ReductionWorkload(),
             "exclusive-scan-u32-v1" or "generic-exclusive-scan-u32-v1" => new ScanWorkload(workloadId),
             "segmented-exclusive-scan-u32-v1" => new SegmentedScanWorkload(),

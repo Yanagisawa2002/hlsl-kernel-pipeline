@@ -11,5 +11,6 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj" />
+    <Project Path="tests/HlslPerf.DynamicSmoke/HlslPerf.DynamicSmoke.csproj" />
   </Folder>
 </Solution>
