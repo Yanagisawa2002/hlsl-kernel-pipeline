@@ -12,6 +12,18 @@ The [dynamic ABI v2 demo](docs/DYNAMIC_EXECUTION.md) adds bounded GPU-count indi
 dispatch and independent multi-output verification while retaining ABI v1.
 Its R9700 correctness evidence is separate from the historical performance results below.
 
+## vNext paired measurement and dynamic plans
+
+The [integrated vNext evidence](docs/results/R9700_VNEXT_INTEGRATION_2026-09-07.md)
+covers randomized paired calibration, independent confirmation, stable 4/8-bit
+key/payload radix plans, bounded GPU-count indirect execution and real rotating
+working sets. The bounded R9700 matrix retained all 18 runs and passed 19,584
+output/poison checks. At 16M elements, single-pass scan confirmed 1.4782x and
+1.5254x speedups for one and three resident slots. Wide radix and dynamic results
+did not establish deployable gains; no defaults were promoted. See the
+[replay instructions](docs/integration/REPLAY.md) and exact scope in the report.
+The older tables below remain historical measurements under their original protocols.
+
 ## v0.6 reusable SDK and fused primitive pack
 
 The tuner is now an SDK rather than a repository-bound benchmark. External
