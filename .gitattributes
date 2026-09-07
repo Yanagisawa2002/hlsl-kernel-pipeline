@@ -9,3 +9,6 @@ docs/results/data/scan-process-2026-09-07/** -text -diff
 docs/results/data/radix-process-2026-09-07/** -text -diff
 # Preserve official upstream bytes exactly as pinned in upstream-lock.json.
 third_party/** -text -whitespace
+src/HlslPerf.Workloads/UnifiedWorkloads.cs text eol=lf
+src/HlslPerf.D3D12/D3D12UnifiedOperations.cs text eol=lf
+src/HlslPerf.UnifiedBench/UnifiedBenchRunner.cs text eol=lf

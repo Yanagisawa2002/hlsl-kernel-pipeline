@@ -81,15 +81,17 @@ def audit(repo, raw, binary_lock_path, output):
                 counts['measuredObservations']+=1;counts['measuredOperations']+=18
             counts['independentProcesses']+=1
     assert len(devices)==1 and counts['independentProcesses']==120
-    module_probe=json.loads((binary_lock_path.parent/'loaded-native-modules.json').read_text())
-    for module in module_probe['modules']:
+    probe_path=binary_lock_path.parent/'loaded-native-modules.json'
+    module_probe=json.loads(probe_path.read_text()) if probe_path.exists() else None
+    for module in module_probe['modules'] if module_probe else []:
         if module['name'] in ['dxcompiler.dll','dxil.dll']:
             assert binary_files[str(Path(module['path']).resolve())]==module['sha256']
             assert module['fileVersion']=='1.9.2602.17'
     result=dict(schema='hlslperf.unified-supplemental-audit.v1',passed=True,sourceSha=lock['sourceSha'],
         declarationSha256=declaration_hash,binaryLockSha256=lock_hash,counts=dict(counts),device=json.loads(next(iter(devices))),
         compiledShaderIdentities=compiler_identities,uniqueSourceFilesChecked=len(file_hashes),sourceHashChecks=source_checks,
-        nativeModuleProbe=module_probe,firstProcessStartedUtc=min(t[0] for t in times),lastProcessExitedUtc=max(t[1] for t in times),
+        nativeModuleProbe=module_probe,nativeModuleProbeAvailable=module_probe is not None,
+        firstProcessStartedUtc=min(t[0] for t in times),lastProcessExitedUtc=max(t[1] for t in times),
         note='Source/binary/oracle/accounting audit added after sampling; frozen sampling and statistical rules are unchanged.')
     output.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8');print(json.dumps(dict(passed=True,counts=dict(counts)),indent=2))
 

@@ -84,6 +84,14 @@ The matrix acquires the shared R9700 lock separately for each native process and
 holds it until exit. Restarting its wrapper skips only complete matching evidence;
 it never overwrites or retries a failed process. A new reproduction necessarily
 has new process identities and records its own device/compiler/binary metadata.
+The supplemental auditor reports whether an optional external loaded-module probe
+is present; a reproduction without that probe still verifies the recorded runtime
+files, but must not claim independently observed module load paths. The original
+delivery includes such a probe. To audit the archived original run, extract
+raw-evidence.zip into one directory and frozen-runtime.zip into that directory's
+`formal-build-01/artifacts/bin/HlslPerf.UnifiedBench/release/` subdirectory. The
+original records preserve absolute source paths; run this audit in the original
+worktree or use the fresh-reproduction workflow to record new paths.
 GPU clocks, global cache state, residency and unrelated user workloads are not
 controlled. Resident slots mean actual distinct allocations, not a claim of a
 measured cache-hit rate. Published conclusions apply only to the recorded R9700,
