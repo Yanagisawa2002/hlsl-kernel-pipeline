@@ -51,8 +51,11 @@ $identity | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $receiptPath
         $unityResult = Join-Path $EvidenceRoot 'unity-tests.xml'
         $unityLog = Join-Path $EvidenceRoot 'unity-tests.log'
         if (Test-Path -LiteralPath $unityResult) { throw 'Use a fresh evidence directory to avoid stale Unity results.' }
-        & $UnityEditor -batchmode -nographics -projectPath $fixture -runTests -testPlatform EditMode -testResults $unityResult -logFile $unityLog | Out-Null
-        $unityExitCode = $LASTEXITCODE
+        $unityArguments = @('-batchmode', '-nographics', '-projectPath', ('"' + $fixture + '"'),
+            '-runTests', '-testPlatform', 'EditMode', '-testResults', ('"' + $unityResult + '"'),
+            '-logFile', ('"' + $unityLog + '"'))
+        $unityProcess = Start-Process -FilePath $UnityEditor -ArgumentList $unityArguments -Wait -PassThru -WindowStyle Hidden
+        $unityExitCode = $unityProcess.ExitCode
         if ($unityExitCode -ne 0 -or -not (Test-Path -LiteralPath $unityResult)) {
             throw "Unity tests failed or did not produce results (exit $unityExitCode); see unity-tests.log."
         }
