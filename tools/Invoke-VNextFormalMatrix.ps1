@@ -74,7 +74,7 @@ if ($Phase -eq 'Declare') {
             $kind = if ($pairs) { 'pairs' } else { 'keys' }
             $template = if ($pairs) { 'radix-wide-pairs.json' } else { 'radix-wide.json' }
             $name = "radix-screen-$kind-n$($shape[0])-slots$($shape[1])"
-            $manifest = New-Manifest $template $name $shape[0] $shape[1] (100000 + $index * 10000) 16
+            $manifest = New-Manifest $template $name $shape[0] $shape[1] (100000 + $index * 10000) 18
             $manifest.workload.parameters.keyPattern = 2
             foreach ($axis in $manifest.axes) {
                 if ($axis.name -eq 'HLSLPERF_RADIX_BITS') { $axis.values = @(1) }
@@ -86,7 +86,7 @@ if ($Phase -eq 'Declare') {
     foreach ($count in @(4194304, 16777216)) {
         foreach ($slots in @(1, 3)) {
             $name = "scan-n$count-slots$slots"
-            $manifest = New-Manifest 'scan.json' $name $count $slots (4000000 + $index * 10000) 32
+            $manifest = New-Manifest 'scan.json' $name $count $slots (4000000 + $index * 10000) 36
             $manifest.shaderModel = '6_6'
             $manifest.fixedDefines = @{
                 HLSLPERF_GROUP_SIZE = 256; HLSLPERF_ELEMENTS_PER_THREAD = 4
