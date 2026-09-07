@@ -1,0 +1,400 @@
+{
+  "schema": "hlslperf.external-source-lock.v1",
+  "adaptedInPlace": false,
+  "sources": [
+    {
+      "name": "amd-fidelityfx-parallelsort",
+      "repository": "https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK",
+      "commit": "c6efa6bf7f2027b3ec94f28578bb5965eabb9e55",
+      "ref": "v1.1.4",
+      "license": "MIT; upstream notices retained",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/LICENSE.txt",
+          "bytes": 1115,
+          "gitBlobSha1": "3712e34adea415aa00dab08625ce7224b27f1706",
+          "sha256": "82cf74fc23885107c7f69249ac3f1dac55898ff68320eb2c753984cae6b2d78a",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/LICENSE.txt"
+        },
+        {
+          "path": "docs/license.md",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/docs/license.md",
+          "bytes": 1119,
+          "gitBlobSha1": "fe052b85e6434ea6ba57d80ce9d8efbd0b3637d1",
+          "sha256": "24574816bc396473a2082ba50aef02640502395b7cdaca49ce3fafe4bf6447fc",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/docs/license.md"
+        },
+        {
+          "path": "samples/parallelsort/parallelsortrendermodule.cpp",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/samples/parallelsort/parallelsortrendermodule.cpp",
+          "bytes": 17923,
+          "gitBlobSha1": "1c6c987142f39e6bc218a29eb49759aa53af000b",
+          "sha256": "9db3834e20cf1869e9a5800329affad6add2af155ec17237aa683bad1c715f55",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/samples/parallelsort/parallelsortrendermodule.cpp"
+        },
+        {
+          "path": "sdk/LICENSE.txt",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/LICENSE.txt",
+          "bytes": 1115,
+          "gitBlobSha1": "3712e34adea415aa00dab08625ce7224b27f1706",
+          "sha256": "82cf74fc23885107c7f69249ac3f1dac55898ff68320eb2c753984cae6b2d78a",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/LICENSE.txt"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/ffx_common_types.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/ffx_common_types.h",
+          "bytes": 16164,
+          "gitBlobSha1": "2c4f0ba02dfd399abcc2a1f18cdb059629a3e683",
+          "sha256": "a19560f837c09f0c990e98b5925b731135d908e372af41c5895cbfa70cc9e5c8",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/ffx_common_types.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/ffx_core.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/ffx_core.h",
+          "bytes": 2522,
+          "gitBlobSha1": "d1ed14419b783587e2e3c2e380d1776cab824f2b",
+          "sha256": "e439aa5f516b2d2ebf070ff1d24561f04fa5f00262a2e4f760764a7d07de7997",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/ffx_core.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/ffx_core_cpu.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/ffx_core_cpu.h",
+          "bytes": 15402,
+          "gitBlobSha1": "4b6c41aa5b287b6579996b8692ffb5473cf5a588",
+          "sha256": "bdb58574cf3ba80803c4198b4661e3a1cd63c877d59833f22bf15962b164a7fe",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/ffx_core_cpu.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/ffx_core_glsl.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/ffx_core_glsl.h",
+          "bytes": 60377,
+          "gitBlobSha1": "c8dccacdbc44460160d3b9fe3ce569ea2b2615e8",
+          "sha256": "01afe5b65549b2c0951b494ca4bf570ee2aa89a64344e4c7d98ef86e6613ab42",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/ffx_core_glsl.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/ffx_core_gpu_common.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/ffx_core_gpu_common.h",
+          "bytes": 87724,
+          "gitBlobSha1": "da03b07aaf998ed6575d0826578960eb86f783a5",
+          "sha256": "0e3c50cb0b4592c051d87e028a1dfa54fbd097942ebb3146964db801dec095d0",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/ffx_core_gpu_common.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/ffx_core_gpu_common_half.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/ffx_core_gpu_common_half.h",
+          "bytes": 98319,
+          "gitBlobSha1": "6b071d590f5a3ce5ffb5062f0bc62366bfe28775",
+          "sha256": "d10466cbf027c8c23858a25f8e8cbbbf521d29f373db663c9354221651e9a498",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/ffx_core_gpu_common_half.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/ffx_core_hlsl.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/ffx_core_hlsl.h",
+          "bytes": 60833,
+          "gitBlobSha1": "28827d98652f4c747615435fb28177b6cff5e9ff",
+          "sha256": "98722d4b1331c437f5aee645e6f12ed722b721f2ffcb0ec523ee817857f394c7",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/ffx_core_hlsl.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/ffx_core_portability.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/ffx_core_portability.h",
+          "bytes": 1682,
+          "gitBlobSha1": "12147b9a7bfedf006ef8abb5a67aca8a8dcf58cb",
+          "sha256": "a7c3a1c213ec083bec401181036cffe7a222af2c430c0bab6bd8c14e83e8a567",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/ffx_core_portability.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/CMakeCompileParallelSortShaders.txt",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/CMakeCompileParallelSortShaders.txt",
+          "bytes": 2419,
+          "gitBlobSha1": "28b54016dc9cfcc348f353a158f59b711da2e403",
+          "sha256": "b680f99c996dd3de09f187e5211e08a09cf7f16dd644031aad95abc041611681",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/CMakeCompileParallelSortShaders.txt"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort.h",
+          "bytes": 29117,
+          "gitBlobSha1": "d9ef41f6a7db289791433ecb76971a89a8b0afd6",
+          "sha256": "8c0c1513a72211c1e15298aee62113c14bf3b7133b3f4223e0e6a7c7e42cdac3",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_callbacks_glsl.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_callbacks_glsl.h",
+          "bytes": 9609,
+          "gitBlobSha1": "56d7e89ed77b1bbbd5e1ad043397f5b0ed979511",
+          "sha256": "dd2e3cc2a1b138c163319d2cac3e75823cc081c425bd3d4c3c74b51db3771def",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_callbacks_glsl.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_callbacks_hlsl.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_callbacks_hlsl.h",
+          "bytes": 9909,
+          "gitBlobSha1": "35dd4af0eb1d44742d301c29ca7a98f0c1c4b778",
+          "sha256": "96761824b01702b1089cb6a0e709e68f9b472648c596154aebf79fa13236aace",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_callbacks_hlsl.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_common.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_common.h",
+          "bytes": 3657,
+          "gitBlobSha1": "20569a6e4cffc18858e4cf2dc7e0155c799c0a77",
+          "sha256": "5565edb42117c94d4ed9f9d0701f6c88d2bc4f4ccb96dc1531be5a09a381a535",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_common.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_reduce.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_reduce.h",
+          "bytes": 1491,
+          "gitBlobSha1": "29904cad173bfcb0d6d81dc88d3842e8da9c6c45",
+          "sha256": "2d2948829ccd23fbc2571be33eaad73a823852cfe7a87c091d3c8364583746d0",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_reduce.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_resources.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_resources.h",
+          "bytes": 3171,
+          "gitBlobSha1": "e319a563586bd2ef0e42499c2ab7f5f1ef925a4b",
+          "sha256": "2369546246d827ae988bf2c43e44da1139529005a9768517fc3416c7f6851143",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_resources.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_scan.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_scan.h",
+          "bytes": 1636,
+          "gitBlobSha1": "124eecd5c5432cf0ab7a70b8a980fd7c6b870c7a",
+          "sha256": "38fbc065db723c8d1c30e6971f11cc8007b07ba6ae414f1555a7054dd1e59cf7",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_scan.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_scan_add.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_scan_add.h",
+          "bytes": 2094,
+          "gitBlobSha1": "dd248e5ae030c9e9b8d71bb829a905b72327bd2b",
+          "sha256": "25ca02fa80f764f5ca63472ccdd329a1d1a3752c5941b4a57a4922ae30e8e796",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_scan_add.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_scatter.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_scatter.h",
+          "bytes": 1504,
+          "gitBlobSha1": "71c7eb9c69579a64526427bf15adf07d40180b95",
+          "sha256": "7dc9ea82649df6ecb3e96258fecae2a2502a0565b340b3535a6c48e1c75706d2",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_scatter.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_setup_indirect_args.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_setup_indirect_args.h",
+          "bytes": 1647,
+          "gitBlobSha1": "dca76ad261acb3df3371c8c6bdbce5660f8ba30f",
+          "sha256": "5fbdaa3a5ccde14aa92cc99cbd46b21d65c1ce93ded743a5097fcf60faac30c6",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_setup_indirect_args.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_sum.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_sum.h",
+          "bytes": 1500,
+          "gitBlobSha1": "80a83b5defec1d23d85d7da227a88f69555b5610",
+          "sha256": "5c99258f28292c0e0b768f25b122fe5cfb5fac6f01b1e53f05f69bd052419e02",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/gpu/parallelsort/ffx_parallelsort_sum.h"
+        },
+        {
+          "path": "sdk/include/FidelityFX/host/ffx_parallelsort.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/host/ffx_parallelsort.h",
+          "bytes": 10154,
+          "gitBlobSha1": "f74b359805d2d644b30a8ad922fc738e851d5097",
+          "sha256": "17e0f1522e6e907e91ae873d40089e1aaf5e1f89c4e1f2b03570a7ffb04460ed",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/include/FidelityFX/host/ffx_parallelsort.h"
+        },
+        {
+          "path": "sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_reduce_pass.hlsl",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_reduce_pass.hlsl",
+          "bytes": 2595,
+          "gitBlobSha1": "0afdcf34e20f14c3664033dd5833a37e4ab38919",
+          "sha256": "34d1c201af0e8e0fec0d79462403b32f2195e72a5dc17c41f827ff5d1781931c",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_reduce_pass.hlsl"
+        },
+        {
+          "path": "sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_scan_add_pass.hlsl",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_scan_add_pass.hlsl",
+          "bytes": 2719,
+          "gitBlobSha1": "a57595bf276c885de90815f7e4230ba427f2d372",
+          "sha256": "968ac39118b83917b77b419fd7b6e84df493b731f37ab4e29a3000ba648e4da8",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_scan_add_pass.hlsl"
+        },
+        {
+          "path": "sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_scan_pass.hlsl",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_scan_pass.hlsl",
+          "bytes": 2590,
+          "gitBlobSha1": "d06104822028a3e3886a927c7c5834c7d113a556",
+          "sha256": "6b510632c339118920cff1f7808835285a526a1e2829647208756397a018afb3",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_scan_pass.hlsl"
+        },
+        {
+          "path": "sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_scatter_pass.hlsl",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_scatter_pass.hlsl",
+          "bytes": 3083,
+          "gitBlobSha1": "0465fb1b5de9d72439bc81cbfd5d9ad713615304",
+          "sha256": "8af06ba10a6e7a969f7a2bac21be310e3b4647774fc1b65eb81903e6b30af61c",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_scatter_pass.hlsl"
+        },
+        {
+          "path": "sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_setup_indirect_args_pass.hlsl",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_setup_indirect_args_pass.hlsl",
+          "bytes": 2607,
+          "gitBlobSha1": "6aafa748896bba28437d4f7698cad1b8e37c80c9",
+          "sha256": "acc47e58e06c952d718e1f587c152f0f6e2c5041721e48358f7d568dd40f741a",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_setup_indirect_args_pass.hlsl"
+        },
+        {
+          "path": "sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_sum_pass.hlsl",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_sum_pass.hlsl",
+          "bytes": 2585,
+          "gitBlobSha1": "a644d4d4cfe7ffa7d25b2aee827437f45ffeb0e0",
+          "sha256": "ce48cbeede99ce2812dd533935ad1793f163a31da0eb0d7c943be3cbc5f85be9",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/src/backends/dx12/shaders/parallelsort/ffx_parallelsort_sum_pass.hlsl"
+        },
+        {
+          "path": "sdk/src/components/parallelsort/ffx_parallelsort.cpp",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/src/components/parallelsort/ffx_parallelsort.cpp",
+          "bytes": 32690,
+          "gitBlobSha1": "e477ec678873bb4b422d57bf03e09ec810fa5994",
+          "sha256": "a00e50364881b4fc7cec5c3ca2dac55fa21c89e39b60a03d48b97d5022113841",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/src/components/parallelsort/ffx_parallelsort.cpp"
+        },
+        {
+          "path": "sdk/src/components/parallelsort/ffx_parallelsort_private.h",
+          "localPath": "third_party/amd-fidelityfx-parallelsort/sdk/src/components/parallelsort/ffx_parallelsort_private.h",
+          "bytes": 3229,
+          "gitBlobSha1": "6baf6da35e8c1aae4d4fb3c2f4747f264af75bb1",
+          "sha256": "553773cd9f3f12ed18ef59b00f7242e4ec4916d7a4bce39fd1547d72a8f389f8",
+          "url": "https://raw.githubusercontent.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/c6efa6bf7f2027b3ec94f28578bb5965eabb9e55/sdk/src/components/parallelsort/ffx_parallelsort_private.h"
+        }
+      ]
+    },
+    {
+      "name": "gpu-prefix-sums",
+      "repository": "https://github.com/b0nes164/GPUPrefixSums",
+      "commit": "98d93a4e9ed2f3c8353119515bf9be90a2e137ad",
+      "ref": "HEAD resolved before adaptation",
+      "license": "MIT; complete upstream LICENSE including CUB BSD notice retained",
+      "files": [
+        {
+          "path": "README.md",
+          "localPath": "third_party/gpu-prefix-sums/README.md",
+          "bytes": 9469,
+          "gitBlobSha1": "a247a9ab1665206ff5ca540370ddb45cb8308c82",
+          "sha256": "db7fef2ac2e70671296e0a27cfb180dbfd30c3624a7bedc34f354846e3e58df7",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "localPath": "third_party/gpu-prefix-sums/LICENSE",
+          "bytes": 3075,
+          "gitBlobSha1": "0a1211659b176f93feed2c79856314b223f2308b",
+          "sha256": "666d401992c505e5f94ff355068f91a12763e086e32f964ab06865627b1ed899",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/LICENSE"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/ReduceThenScan.cpp",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/ReduceThenScan.cpp",
+          "bytes": 3443,
+          "gitBlobSha1": "c58b191bb8c9aed1b0bd0bfd0d7ee375eac11813",
+          "sha256": "641f4c0b2eb83e25d77ea94aa153fc9dab481352a5ee8b7489828cb1ff9be9be",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ReduceThenScan.cpp"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.cpp",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.cpp",
+          "bytes": 3615,
+          "gitBlobSha1": "c95749a750ebd195bb2f9b0f964e14f340a9e0ff",
+          "sha256": "5f4c3e18e095f179af4123e82a7e2dfb13713a1fbc4105efdade4daf3d45f79b",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.cpp"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/RTSKernels.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/RTSKernels.h",
+          "bytes": 9812,
+          "gitBlobSha1": "33c288f1699341cdb8a7215f728ab21aa24deb1d",
+          "sha256": "8745a3378b89955ea975a79810beb94b81284c7d931fae1c2a9b952e12be5fa7",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/RTSKernels.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/CSDLDFKernels.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/CSDLDFKernels.h",
+          "bytes": 9060,
+          "gitBlobSha1": "be14da3b1238b48819461e2214312cacffa5b6d5",
+          "sha256": "d6d2af549bd4332018f9851a28b2de9bc31eb24b7682f09d68941d6981b95522",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/CSDLDFKernels.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/GPUPrefixSumBase.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/GPUPrefixSumBase.h",
+          "bytes": 17308,
+          "gitBlobSha1": "82dd5d26da360c7389b9b5497939ee3e3cdd4706",
+          "sha256": "c893651f90e68f9ff0491056065d9c217a9ff57d1eb6b17ecfa031f0068f0abd",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/GPUPrefixSumBase.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/ComputeKernelBase.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/ComputeKernelBase.h",
+          "bytes": 5796,
+          "gitBlobSha1": "ea8b8b8b3e2826468bf73329c26d831dcd66ce4e",
+          "sha256": "befe9840e8933a17d8c398484755ad38cd0f00d69aa6d37a6b4b69931748aa18",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ComputeKernelBase.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/GPUPrefixSums.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/GPUPrefixSums.h",
+          "bytes": 783,
+          "gitBlobSha1": "2029eec0fd768711b7a53e68d992df98f68de984",
+          "sha256": "8f985c2f596d3e3f84fbacf8e446413a5683d45407c670f29c50b01a8d562c3a",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/GPUPrefixSums.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.cpp",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.cpp",
+          "bytes": 5974,
+          "gitBlobSha1": "508f1837068706312d44f8e57b6e002f3228b6ae",
+          "sha256": "d5f5ac697e7df6ec9911e9c94a2029c32eec89945ab2b272c364d0ef055064d5",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.cpp"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Utils.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Utils.h",
+          "bytes": 3043,
+          "gitBlobSha1": "f18ee7255e7f0635e8333a7af70157aa69769802",
+          "sha256": "2556ee86d791d2203f0bc07419d9681bef7730f23e0b09fbabc596a6c39e397a",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Utils.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl",
+          "bytes": 7342,
+          "gitBlobSha1": "659618af8a5b3937e3e3e27467b208c6dd488592",
+          "sha256": "1e6feccda7db9dd3c7f1d6a6e057d40eafad973716478c607f0cd8072e51b336",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl",
+          "bytes": 5204,
+          "gitBlobSha1": "2e5c9ad6c3651a9a0788ed7cdbef0d65857ed759",
+          "sha256": "76c32f0653cba79ab7975209fb1547cc2fa0a2937b27a329024a308fd3c7d691",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookbackDecoupledFallback.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookbackDecoupledFallback.hlsl",
+          "bytes": 8411,
+          "gitBlobSha1": "99894ad457fe1b552e4de31fdc934c21f04409a1",
+          "sha256": "1e76c32ecb36a76d39dbc16fc10833f30bb321067cc3d1e6c32bd2dbe38319f1",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookbackDecoupledFallback.hlsl"
+        }
+      ]
+    }
+  ]
+}
