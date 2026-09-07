@@ -4,36 +4,108 @@
   "title": "HlslPerf manifest schema 3.0",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "name", "kernelPath", "workload", "axes"],
+  "required": [
+    "schemaVersion",
+    "name",
+    "kernelPath",
+    "workload",
+    "axes"
+  ],
   "properties": {
-    "schemaVersion": { "const": "3.0" },
-    "name": { "type": "string", "minLength": 1 },
-    "kernelPath": { "type": "string", "minLength": 1 },
-    "kernelAbiVersion": { "const": "hlslperf.raw-buffer.v1" },
-    "entryPoint": { "type": "string", "minLength": 1 },
-    "shaderModel": { "enum": ["6_0", "6_1", "6_2", "6_3", "6_4", "6_5", "6_6", "6_7"] },
-    "workItemCount": { "$ref": "#/$defs/positiveInteger" },
-    "warmupDispatches": { "type": "integer", "minimum": 0 },
-    "minimumWarmupMilliseconds": { "type": "number", "minimum": 0 },
-    "measurementBatches": { "type": "integer", "minimum": 3 },
-    "dispatchesPerBatch": { "$ref": "#/$defs/positiveInteger" },
-    "minimumBatchMilliseconds": { "type": "number", "exclusiveMinimum": 0 },
-    "maximumDispatchesPerBatch": { "$ref": "#/$defs/positiveInteger" },
-    "maximumCoefficientOfVariation": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
-    "minimumRequiredSpeedup": { "type": "number", "minimum": 1 },
-    "threadsPerGroupParameter": { "type": "string", "minLength": 1 },
-    "elementsPerThreadParameter": { "type": "string", "minLength": 1 },
-    "fixedDefines": { "$ref": "#/$defs/defineMap" },
-    "baselineDefines": { "$ref": "#/$defs/defineMap" },
+    "schemaVersion": {
+      "const": "3.0"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kernelPath": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kernelAbiVersion": {
+      "const": "hlslperf.raw-buffer.v1"
+    },
+    "entryPoint": {
+      "type": "string",
+      "minLength": 1
+    },
+    "shaderModel": {
+      "enum": [
+        "6_0",
+        "6_1",
+        "6_2",
+        "6_3",
+        "6_4",
+        "6_5",
+        "6_6",
+        "6_7"
+      ]
+    },
+    "workItemCount": {
+      "$ref": "#/$defs/positiveInteger"
+    },
+    "warmupDispatches": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "minimumWarmupMilliseconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "measurementBatches": {
+      "type": "integer",
+      "minimum": 3
+    },
+    "dispatchesPerBatch": {
+      "$ref": "#/$defs/positiveInteger"
+    },
+    "minimumBatchMilliseconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "maximumDispatchesPerBatch": {
+      "$ref": "#/$defs/positiveInteger"
+    },
+    "maximumCoefficientOfVariation": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 1
+    },
+    "minimumRequiredSpeedup": {
+      "type": "number",
+      "minimum": 1
+    },
+    "threadsPerGroupParameter": {
+      "type": "string",
+      "minLength": 1
+    },
+    "elementsPerThreadParameter": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fixedDefines": {
+      "$ref": "#/$defs/defineMap"
+    },
+    "baselineDefines": {
+      "$ref": "#/$defs/defineMap"
+    },
     "workload": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id"],
+      "required": [
+        "id"
+      ],
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
         "parameters": {
           "type": "object",
-          "additionalProperties": { "$ref": "#/$defs/positiveInteger" }
+          "additionalProperties": {
+            "$ref": "#/$defs/positiveInteger"
+          }
         }
       }
     },
@@ -43,11 +115,21 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["name", "values"],
+        "required": [
+          "name",
+          "values"
+        ],
         "properties": {
-          "name": { "type": "string", "minLength": 1 },
-          "values": { "$ref": "#/$defs/valueSet" },
-          "when": { "$ref": "#/$defs/condition" }
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "values": {
+            "$ref": "#/$defs/valueSet"
+          },
+          "when": {
+            "$ref": "#/$defs/condition"
+          }
         }
       }
     },
@@ -56,10 +138,16 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["then"],
+        "required": [
+          "then"
+        ],
         "properties": {
-          "if": { "$ref": "#/$defs/condition" },
-          "then": { "$ref": "#/$defs/condition" }
+          "if": {
+            "$ref": "#/$defs/condition"
+          },
+          "then": {
+            "$ref": "#/$defs/condition"
+          }
         }
       }
     },
@@ -67,27 +155,89 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "kind": { "type": "string", "minLength": 1 },
-        "seed": { "type": "integer" }
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "seed": {
+          "type": "integer"
+        }
       }
+    },
+    "measurementProtocol": {
+      "enum": [
+        "gpu-paired-abba-independent-confirmation-v2",
+        "gpu-timestamps-poison-reexecute-v1"
+      ]
+    },
+    "pairedMeasurement": {
+      "properties": {
+        "confirmationSeedStart": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximumBaselineDrift": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "type": "number"
+        },
+        "calibrationBlocks": {
+          "minimum": 6,
+          "maximum": 128,
+          "type": "integer"
+        },
+        "residentSlots": {
+          "minimum": 1,
+          "maximum": 32,
+          "type": "integer"
+        },
+        "orderSeed": {
+          "type": "integer"
+        },
+        "maximumAllocationBytesPerArm": {
+          "minimum": 1,
+          "maximum": 2147483648,
+          "type": "integer"
+        },
+        "confirmationBlocks": {
+          "minimum": 6,
+          "maximum": 128,
+          "type": "integer"
+        },
+        "calibrationSeedStart": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
     }
   },
   "$defs": {
-    "positiveInteger": { "type": "integer", "minimum": 1 },
+    "positiveInteger": {
+      "type": "integer",
+      "minimum": 1
+    },
     "valueSet": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
-      "items": { "$ref": "#/$defs/positiveInteger" }
+      "items": {
+        "$ref": "#/$defs/positiveInteger"
+      }
     },
     "condition": {
       "type": "object",
       "minProperties": 1,
-      "additionalProperties": { "$ref": "#/$defs/valueSet" }
+      "additionalProperties": {
+        "$ref": "#/$defs/valueSet"
+      }
     },
     "defineMap": {
       "type": "object",
-      "additionalProperties": { "$ref": "#/$defs/positiveInteger" }
+      "additionalProperties": {
+        "$ref": "#/$defs/positiveInteger"
+      }
     }
   }
 }

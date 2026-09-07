@@ -325,7 +325,8 @@ public sealed record TuningProfile(
     string EvidenceStatus = "historical",
     string? WorkloadImplementationSha256 = null,
     string? ExecutionIdentitySha256 = null,
-    string? ConfirmationSha256 = null);
+    string? ConfirmationSha256 = null,
+    string? DefinesSha256 = null);
 
 public static class JsonDefaults
 {
@@ -341,6 +342,9 @@ public static class JsonDefaults
 
 public static class ContentHash
 {
+    public static string DefinesSha256(IReadOnlyDictionary<string, int> defines) => Sha256(string.Concat(
+        defines.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p =>
+            $"{p.Key.Length.ToString(CultureInfo.InvariantCulture)}:{p.Key}:{p.Value.ToString(CultureInfo.InvariantCulture)};")));
     public static string Sha256(ReadOnlySpan<byte> bytes) => Convert.ToHexStringLower(SHA256.HashData(bytes));
     public static string Sha256(string text) => Sha256(Encoding.UTF8.GetBytes(text));
 

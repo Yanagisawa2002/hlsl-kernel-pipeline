@@ -43,7 +43,6 @@ public sealed partial class D3D12Tuner
         if (challengers.Length == 0) challengers = [baseline.Id];
         List<PairedObservation> observations = [];
         string? selected = null, selectionLock = null;
-        Dictionary<string, CompilationSet> compilations = new(StringComparer.Ordinal);
         Save(null);
         Sample(PairedProtocol.Schedule(manifest.PairedMeasurement, "calibration", challengers, baseline.Id));
         PairedComparison[] calibration = challengers.Select(id => PairedProtocol.Compare(observations, "calibration", id,
@@ -86,45 +85,93 @@ public sealed partial class D3D12Tuner
             summaries, workload.Id, manifest.KernelAbiVersion,
             new(checkpointOptions?.Resume == true, 0, candidates.Count, PairedProtocol.CheckpointSchema),
             PairedProtocol.Id, evidence);
+        if (deployable && PairedProfile.Create(report) is null)
+        {
+            rejections.Add("Deployment evidence content/identity validation rejected the profile.");
+            evidence = evidence with { Deployable = false, Rejections = rejections };
+            report = report with { PairedEvidence = evidence, Selection = report.Selection! with {
+                UsedStablePool = false, Reason = "No deployable profile: " + string.Join(" ", rejections) } };
+        }
         Save(report);
         return report;
 
         void Sample(IReadOnlyList<PairedSlot> slots)
         {
-            foreach (PairedSlot slot in slots)
+            foreach (var block in slots.GroupBy(s => (s.Block, s.ChallengerId)))
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                DateTimeOffset sampleStart = DateTimeOffset.UtcNow;
-                KernelCandidate candidate = byId[slot.CandidateId];
-                CandidateResult result;
-                string? inputHash = null;
+                Dictionary<bool, ScenarioSession> arms = [];
+                Dictionary<bool, string> preparationErrors = [];
+                Dictionary<bool, long> itemCounts = [];
                 try
                 {
-                    TuningManifest inputManifest = PairedProtocol.WithInputSeed(manifest, slot.InputSeed, fixedBatch: true);
-                    KernelExecutionPlan plan = workload.Build(inputManifest, candidate);
-                    plan.Validate();
-                    if (plan.AbiVersion != manifest.KernelAbiVersion) throw new InvalidDataException("Plan ABI does not match the manifest.");
-                    inputHash = PairedProtocol.InputDigest(plan);
-                    string compileKey = candidate.Id + "/" + string.Join("/", plan.Passes.Select(p => p.EntryPoint).Distinct().Order());
-                    if (!compilations.TryGetValue(compileKey, out CompilationSet? compilation))
+                    // Retain separate A and B resident rings simultaneously, even for baseline self-control.
+                    foreach (bool isBaseline in new[] { true, false })
                     {
-                        compilation = CompilePasses(graph.RootSource, kernelPath, graph.CombinedSha256, inputManifest,
-                            candidate, plan.Passes.Select(p => p.EntryPoint).Distinct(StringComparer.Ordinal),
-                            compilerCacheDirectory, graph.IncludeDirectories);
-                        compilations.Add(compileKey, compilation);
+                        PairedSlot first = block.First(s => s.IsBaseline == isBaseline);
+                        try
+                        {
+                            WorkloadScenario scenario = new($"paired-{first.Phase}-block-{first.Block}",
+                                Enumerable.Range(first.InputSeed, manifest.PairedMeasurement.ResidentSlots).ToArray(),
+                                MaximumAllocationBytes: manifest.PairedMeasurement.MaximumAllocationBytesPerArm);
+                            ScenarioSession arm = PrepareScenario(manifest, fullPath, workload, byId[first.CandidateId], scenario, compilerCacheDirectory);
+                            arms.Add(isBaseline, arm);
+                            itemCounts.Add(isBaseline, workload.Build(scenario.Apply(manifest, 0), byId[first.CandidateId]).LogicalItemCount);
+                        }
+                        catch (Exception e) when (e is not OperationCanceledException) { preparationErrors[isBaseline] = e.ToString(); }
                     }
-                    result = compilation.Success
-                        ? MeasureCandidate(inputManifest, candidate, plan, compilation, captureVerifiedOutput, sampleCount: 1)
-                        : Failure(candidate, false, compilation.Diagnostics, "DXC compilation failed.");
+                    foreach (PairedSlot slot in block)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+                        DateTimeOffset sampleStart = DateTimeOffset.UtcNow;
+                        KernelCandidate candidate = byId[slot.CandidateId];
+                        CandidateResult result;
+                        string? inputHash = null;
+                        ScenarioSessionEvidence? scenarioEvidence = null;
+                        IReadOnlyList<ScenarioVerification>? verified = null;
+                        List<double> raw = [];
+                        try
+                        {
+                            if (preparationErrors.TryGetValue(slot.IsBaseline, out string? error)) throw new InvalidDataException(error);
+                            ScenarioSession arm = arms[slot.IsBaseline];
+                            scenarioEvidence = arm.Evidence;
+                            inputHash = ContentHash.Sha256(string.Join("/", arm.Evidence.Slots.Select(s => s.InputSha256)));
+                            double warmup = 0;
+                            for (int repeat = 0; manifest.WarmupDispatches > 0 && (repeat == 0 || warmup < manifest.MinimumWarmupMilliseconds); repeat++)
+                            {
+                                cancellationToken.ThrowIfCancellationRequested();
+                                if (repeat >= 4096) throw new InvalidOperationException("Bounded warmup failed to meet the declared duration.");
+                                warmup += arm.MeasureBatch(manifest.WarmupDispatches);
+                            }
+                            double batch = arm.MeasureBatch(manifest.DispatchesPerBatch);
+                            double milliseconds = batch / manifest.DispatchesPerBatch;
+                            raw.Add(milliseconds);
+                            verified = arm.VerifyAll(captureVerifiedOutput is null ? null :
+                                (_, bytes) => captureVerifiedOutput(candidate, bytes));
+                            bool correct = verified.All(v => v.Correctness.Passed);
+                            string actual = ContentHash.Sha256(string.Join("/", verified.Select(v => v.Correctness.ActualSha256)));
+                            string expectedHash = ContentHash.Sha256(string.Join("/", verified.Select(v => v.Correctness.ExpectedSha256)));
+                            result = new(candidate.Id, candidate.Defines, true, null,
+                                new(correct, actual, expectedHash, "Every resident slot passed poison/re-execution and its CPU oracle."),
+                                raw, manifest.DispatchesPerBatch, StableStatistics.Summarize(raw),
+                                itemCounts[slot.IsBaseline] / milliseconds / 1000, true,
+                                !correct ? "Resident slot correctness failed." : batch < manifest.MinimumBatchMilliseconds
+                                    ? "Fixed batch was shorter than the predeclared minimum; increase dispatches in a new declared run." : null);
+                        }
+                        catch (Exception exception) when (exception is not OperationCanceledException)
+                        {
+                            result = Failure(candidate, false, null, exception.ToString()) with { SamplesMilliseconds = raw };
+                        }
+                        observations.Add(new(slot, sampleStart, DateTimeOffset.UtcNow, inputHash, result, scenarioEvidence, verified));
+                        Save(null);
+                        progress?.Invoke(new(observations.Count, slots.Count, candidate.Id,
+                            $"{slot.Phase}/block-{slot.Block}/position-{slot.Position}", result));
+                    }
                 }
-                catch (Exception exception) when (exception is not OperationCanceledException)
+                finally
                 {
-                    result = Failure(candidate, false, null, exception.ToString());
+                    foreach (ScenarioSession arm in arms.Values) arm.Dispose();
                 }
-                observations.Add(new(slot, sampleStart, DateTimeOffset.UtcNow, inputHash, result));
-                Save(null);
-                progress?.Invoke(new(observations.Count, slots.Count, candidate.Id,
-                    $"{slot.Phase}/block-{slot.Block}/position-{slot.Position}", result));
             }
         }
 

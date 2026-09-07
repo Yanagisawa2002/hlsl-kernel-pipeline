@@ -1,5 +1,11 @@
 # Measurement methodology
 
+The default runner now uses [paired blocks and independent confirmation](PAIRED_MEASUREMENT.md).
+The sequential contract below is explicitly historical (`gpu-timestamps-poison-reexecute-v1`).
+Previously published measurements retain only their original guarantees and are not
+paired or independently confirmed evidence. Historical export/Unity consumption
+requires explicit historical opt-in.
+
 The pipeline separates an observed fast result from a deployable profile. A
 candidate is not deployable merely because one sample is lower.
 

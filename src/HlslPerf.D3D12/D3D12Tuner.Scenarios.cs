@@ -142,7 +142,7 @@ public sealed partial class D3D12Tuner
             return (end - start) * 1000.0 / owner.timestampFrequency;
         }
 
-        public IReadOnlyList<ScenarioVerification> VerifyAll()
+        public IReadOnlyList<ScenarioVerification> VerifyAll(Action<int, ReadOnlyMemory<byte>>? captureVerifiedOutput = null)
         {
             ObjectDisposedException.ThrowIf(disposed || owner.disposed, this);
             List<ScenarioVerification> results = [];
@@ -159,6 +159,7 @@ public sealed partial class D3D12Tuner
                 owner.ExecuteAndWait();
                 Span<byte> bytes = readback.Map<byte>(0, verified.ByteLength);
                 string actual = ContentHash.Sha256(bytes);
+                if (captureVerifiedOutput is not null) captureVerifiedOutput(slot.Slot, bytes.ToArray());
                 readback.Unmap(0);
                 results.Add(new(slot.Slot, slot.InputSeed, slot.Plan.VerifiedResource,
                     new CorrectnessResult(actual == slot.Plan.ExpectedSha256, actual, slot.Plan.ExpectedSha256,
