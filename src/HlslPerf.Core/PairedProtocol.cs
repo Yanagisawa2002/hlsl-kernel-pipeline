@@ -141,6 +141,10 @@ public static class PairedProtocol
                 if (reference is null || group.Any(o => o.Scenario is not { } scenario ||
                     scenario.Device != reference.Device || scenario.SourceSha256 != reference.SourceSha256 ||
                     scenario.WorkloadImplementationSha256 != reference.WorkloadImplementationSha256 ||
+                    scenario.BackendAssemblySha256 != reference.BackendAssemblySha256 ||
+                    scenario.DynamicExecutorSha256 != reference.DynamicExecutorSha256 ||
+                    !scenario.NativeCompilerBinaries.Select(b => b.Sha256).Order(StringComparer.Ordinal)
+                        .SequenceEqual(reference.NativeCompilerBinaries.Select(b => b.Sha256).Order(StringComparer.Ordinal)) ||
                     scenario.CachePolicy != reference.CachePolicy || scenario.TimingScope != reference.TimingScope ||
                     !scenario.Slots.Select(s => (s.Slot, s.InputSeed, s.ExpectedSha256))
                         .SequenceEqual(reference.Slots.Select(s => (s.Slot, s.InputSeed, s.ExpectedSha256)))))

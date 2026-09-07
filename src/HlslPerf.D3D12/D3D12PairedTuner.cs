@@ -114,7 +114,9 @@ public sealed partial class D3D12Tuner
                             WorkloadScenario scenario = new($"paired-{first.Phase}-block-{first.Block}",
                                 Enumerable.Range(first.InputSeed, manifest.PairedMeasurement.ResidentSlots).ToArray(),
                                 MaximumAllocationBytes: manifest.PairedMeasurement.MaximumAllocationBytesPerArm);
-                            ScenarioSession arm = PrepareScenario(manifest, fullPath, workload, byId[first.CandidateId], scenario, compilerCacheDirectory);
+                            // Historical disk caches do not attest their native compiler. Compile paired arms freshly;
+                            // the prepared session records loaded native module and actual DXIL hashes.
+                            ScenarioSession arm = PrepareScenario(manifest, fullPath, workload, byId[first.CandidateId], scenario, compilerCacheDirectory: null);
                             arms.Add(isBaseline, arm);
                             itemCounts.Add(isBaseline, workload.Build(scenario.Apply(manifest, 0), byId[first.CandidateId]).LogicalItemCount);
                         }
