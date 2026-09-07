@@ -30,6 +30,7 @@ public sealed class BuiltinWorkloadProvider : IKernelWorkloadProvider
         "stream-compaction-u32-v1",
         "histogram-prefix-u32-v1",
         "radix-sort-u32-v1",
+        "radix-sort-pairs-u32-v1",
         "transpose-u32-v1"
     ];
 
@@ -43,6 +44,7 @@ public sealed class BuiltinWorkloadProvider : IKernelWorkloadProvider
             "stream-compaction-u32-v1" => new StreamCompactionWorkload(),
             "histogram-prefix-u32-v1" => new HistogramPrefixWorkload(),
             "radix-sort-u32-v1" => new RadixSortWorkload(),
+            "radix-sort-pairs-u32-v1" => new RadixSortWorkload(true),
             "transpose-u32-v1" => new TransposeWorkload(),
             _ => throw new InvalidDataException($"Unknown built-in workload '{workloadId}'.")
         };
