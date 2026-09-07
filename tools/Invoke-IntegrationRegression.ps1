@@ -54,7 +54,28 @@ $identity | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $receiptPath
         $unityArguments = @('-batchmode', '-nographics', '-projectPath', ('"' + $fixture + '"'),
             '-runTests', '-testPlatform', 'EditMode', '-testResults', ('"' + $unityResult + '"'),
             '-logFile', ('"' + $unityLog + '"'))
-        $unityProcess = Start-Process -FilePath $UnityEditor -ArgumentList $unityArguments -Wait -PassThru -WindowStyle Hidden
+        $unityProcess = Start-Process -FilePath $UnityEditor -ArgumentList $unityArguments -PassThru -WindowStyle Hidden
+        # Start-Process -Wait can wait on an inherited Windows job containing
+        # unrelated Codex tasks. Track this Unity process and its own descendants.
+        $unityOwnedIds = [System.Collections.Generic.HashSet[uint32]]::new()
+        [void]$unityOwnedIds.Add([uint32]$unityProcess.Id)
+        do {
+            $unitySnapshot = @(Get-CimInstance Win32_Process)
+            do {
+                $unityFoundChild = $false
+                foreach ($unityChild in $unitySnapshot) {
+                    if ($unityOwnedIds.Contains([uint32]$unityChild.ParentProcessId) -and
+                        $unityOwnedIds.Add([uint32]$unityChild.ProcessId)) { $unityFoundChild = $true }
+                }
+            } while ($unityFoundChild)
+            $unityLiveChildren = @($unitySnapshot | Where-Object {
+                $_.ProcessId -ne $unityProcess.Id -and $unityOwnedIds.Contains([uint32]$_.ProcessId)
+            })
+            $unityProcess.Refresh()
+            if ($unityProcess.HasExited -and $unityLiveChildren.Count -eq 0) { break }
+            Start-Sleep -Milliseconds 500
+        } while ($true)
+        $unityProcess.WaitForExit()
         $unityExitCode = $unityProcess.ExitCode
         if ($unityExitCode -ne 0 -or -not (Test-Path -LiteralPath $unityResult)) {
             throw "Unity tests failed or did not produce results (exit $unityExitCode); see unity-tests.log."
