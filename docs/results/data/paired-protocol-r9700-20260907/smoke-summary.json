@@ -1,0 +1,25 @@
+{
+  "evidenceKind": "native-short-smoke-not-formal-performance",
+  "completedUtc": "2026-09-07T05:29:01.3490889+00:00",
+  "firstSession": "c12bfdb72eb7446fbe83e6cfb84c53a2",
+  "restartedSession": "3c876cc6d5a744c9afd3721874a7f407",
+  "observationsPerAttempt": 48,
+  "residentSlots": 3,
+  "independentInputs": true,
+  "completeReplayWithoutSampling": true,
+  "partialRestartPreservesHistoricalObservations": 5,
+  "firstDeployable": false,
+  "firstRejections": [
+    "Baseline drift exceeded the declared budget.",
+    "Raw timing variation exceeded the declared budget (samples retained).",
+    "Calibration baseline exceeded the raw variation budget."
+  ],
+  "restartedDeployable": false,
+  "restartedRejections": [
+    "Baseline drift exceeded the declared budget.",
+    "Raw timing variation exceeded the declared budget (samples retained).",
+    "Calibration baseline exceeded the raw variation budget."
+  ],
+  "sourceCommit": "dcc5baa22e06d118584e27a28f4da36f7cc28113",
+  "manifestSha256": "73D7877CF333F484B3A97EE292FA5BDC84C4184AD0503CE39F426DC2558A6254"
+}
