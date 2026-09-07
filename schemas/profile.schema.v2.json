@@ -24,7 +24,7 @@
     "throughputMillionItemsPerSecond": { "type": "number", "exclusiveMinimum": 0 },
     "speedupOverBaseline": { "type": ["number", "null"], "exclusiveMinimum": 0 },
     "workloadId": { "type": "string", "minLength": 1 },
-    "kernelAbiVersion": { "const": "hlslperf.raw-buffer.v1" },
+    "kernelAbiVersion": { "enum": ["hlslperf.raw-buffer.v1", "hlslperf.raw-buffer.v2"] },
     "defineValues": {
       "type": ["array", "null"],
       "items": {

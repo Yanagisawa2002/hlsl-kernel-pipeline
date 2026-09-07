@@ -24,7 +24,10 @@
       "minLength": 1
     },
     "kernelAbiVersion": {
-      "const": "hlslperf.raw-buffer.v1"
+      "enum": [
+        "hlslperf.raw-buffer.v1",
+        "hlslperf.raw-buffer.v2"
+      ]
     },
     "entryPoint": {
       "type": "string",
@@ -43,7 +46,8 @@
       ]
     },
     "workItemCount": {
-      "$ref": "#/$defs/positiveInteger"
+      "minimum": 0,
+      "type": "integer"
     },
     "warmupDispatches": {
       "type": "integer",
@@ -104,7 +108,8 @@
         "parameters": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/$defs/positiveInteger"
+            "minimum": 0,
+            "type": "integer"
           }
         }
       }

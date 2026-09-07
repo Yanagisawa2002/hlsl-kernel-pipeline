@@ -47,7 +47,8 @@ public sealed class TuningManifest
             throw new InvalidDataException($"Unsupported manifest schema '{SchemaVersion}'.");
         if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(KernelPath))
             throw new InvalidDataException("Manifest name and kernelPath are required.");
-        if (WorkItemCount <= 0 || WarmupDispatches < 0 || MeasurementBatches < 3 || DispatchesPerBatch <= 0)
+        if (WorkItemCount < 0 || (WorkItemCount == 0 && (KernelAbiVersion != KernelAbiV2.Id || SchemaVersion == "1.0")) ||
+            WarmupDispatches < 0 || MeasurementBatches < 3 || DispatchesPerBatch <= 0)
             throw new InvalidDataException("Workload counts must be positive and at least three measurement batches are required.");
         if (MinimumWarmupMilliseconds < 0 || MinimumBatchMilliseconds <= 0 ||
             MaximumDispatchesPerBatch < DispatchesPerBatch)
@@ -93,7 +94,7 @@ public sealed class TuningManifest
         {
             if (KernelAbiVersion != KernelAbiV1.Id && KernelAbiVersion != KernelAbiV2.Id)
                 throw new InvalidDataException($"Unsupported kernel ABI '{KernelAbiVersion}'.");
-            Workload?.Validate();
+            Workload?.Validate(KernelAbiVersion == KernelAbiV2.Id);
             if (Workload is null)
                 throw new InvalidDataException("Schema 2.0+ manifests require a workload object.");
         }
@@ -128,12 +129,14 @@ public sealed class WorkloadSpec
     public IReadOnlyDictionary<string, long> Parameters { get; init; } =
         new ReadOnlyDictionary<string, long>(new Dictionary<string, long>());
 
-    internal void Validate()
+    internal void Validate(bool allowZero = false)
     {
         if (string.IsNullOrWhiteSpace(Id))
             throw new InvalidDataException("workload.id is required.");
-        if (Parameters.Any(pair => string.IsNullOrWhiteSpace(pair.Key) || pair.Value <= 0))
-            throw new InvalidDataException("Workload parameter names must be non-empty and values must be positive integers.");
+        if (Parameters.Any(pair => string.IsNullOrWhiteSpace(pair.Key) || pair.Value < 0 || (!allowZero && pair.Value == 0)))
+            throw new InvalidDataException(allowZero
+                ? "Workload parameter names must be non-empty and v2 values must be non-negative integers."
+                : "Workload parameter names must be non-empty and values must be positive integers.");
     }
 
     public int GetRequiredInt32(string name)
