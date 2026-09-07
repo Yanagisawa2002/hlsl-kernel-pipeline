@@ -24,6 +24,7 @@ if ($Mode -eq 'formal') {
     if (-not ($Declaration -and $Cell -and $ProcessIndex -ge 1 -and $ProcessIndex -le 5 -and $ExpectedSourceSha -and $BinaryLock)) { throw 'Formal execution requires frozen source, binaries and a complete declaration.' }
     $arguments+=@([IO.Path]::GetFullPath($Declaration),$Cell,"$ProcessIndex")
     $frozen=Get-Content -Raw -LiteralPath $BinaryLock | ConvertFrom-Json
+    if ($frozen.sourceSha -ne $ExpectedSourceSha) { throw 'Binary lock belongs to a different source commit.' }
     foreach ($item in $frozen.files) {
         $actual=(Get-FileHash -LiteralPath (Join-Path (Split-Path -Parent $Runtime) $item.path) -Algorithm SHA256).Hash.ToLowerInvariant()
         if ($actual -ne $item.sha256) { throw "Frozen binary changed: $($item.path)" }

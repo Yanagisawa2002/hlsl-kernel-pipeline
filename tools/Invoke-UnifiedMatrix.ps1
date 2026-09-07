@@ -19,6 +19,7 @@ foreach ($run in $protocol.processOrder) {
     if (Test-Path -LiteralPath "$output.execution.json") {
         $receipt=Get-Content -Raw -LiteralPath "$output.execution.json" | ConvertFrom-Json
         if ($receipt.sourceSha -ne $ExpectedSourceSha -or $receipt.exitCode -notin @(0,2) -or $receipt.status -notin @('tests-passed','collection-complete-with-correctness-failures')) { throw "Existing incomplete or incompatible evidence: $output" }
+        if ($receipt.binaryLockSha256 -ne (Get-FileHash -LiteralPath $BinaryLock -Algorithm SHA256).Hash.ToLowerInvariant()) { throw "Existing evidence used another binary lock: $output" }
         $record=Get-Content -Raw -LiteralPath (Join-Path $output 'process.json') | ConvertFrom-Json
         if (-not $record.completed -or $record.declarationSha256 -ne (Get-FileHash -LiteralPath $Declaration -Algorithm SHA256).Hash.ToLowerInvariant()) { throw "Existing process cannot be resumed: $output" }
         continue
