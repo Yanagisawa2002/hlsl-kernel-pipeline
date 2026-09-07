@@ -1,0 +1,2008 @@
+{
+  "schema": "hlslperf.scan-process-audit.v1",
+  "passed": true,
+  "complete": true,
+  "measurementSha": "6b66d9da4a8a827dfd329f3f6d3cf6914a9de4b1",
+  "baselineSha": "18c2e19500063b1749a9bb0315e22d3070a47ade",
+  "declarationSha256": "f1cbbff66ef66cf71550d3bd06fc8521e241026642ebc5198a1f4085bf3c3185",
+  "processes": 40,
+  "observations": 3840,
+  "poisonOutputChecks": 15360,
+  "failures": [],
+  "pending": [],
+  "cells": [
+    {
+      "cell": "scan-4Mi-slots1",
+      "processes": 5,
+      "selectedBackends": [
+        1,
+        2,
+        1,
+        2,
+        2
+      ],
+      "sameSelection": false,
+      "individualGatesPassed": 2,
+      "speedup": null,
+      "accepted": false,
+      "status": "inconclusive",
+      "confirmationLatency": {},
+      "calibration": [
+        {
+          "backend": 2,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.0780128113747014,
+            "lower95": 1.0283890385625558,
+            "upper95": 1.130031124322702,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 3,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.05408588888888889,
+                "lower95": 0.052219284436530906,
+                "upper95": 0.05595249334124688,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.0644465,
+                "lower95": 0.045876013457539035,
+                "upper95": 0.08301698654246098,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.07664943333333334,
+                "lower95": 0.03684625874361114,
+                "upper95": 0.11645260792305553,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.051291777777777776,
+                "lower95": 0.04987970533716404,
+                "upper95": 0.05270385021839151,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.05197555555555555,
+                "lower95": 0.05048544405271589,
+                "upper95": 0.053465667058395214,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.05237075555555556,
+                "lower95": 0.05067362576206552,
+                "upper95": 0.054067885349045594,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        },
+        {
+          "backend": 3,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 0.6817895660275969,
+            "lower95": 0.6789852305614062,
+            "upper95": 0.6846054839215826,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 0,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.05391844444444444,
+                "lower95": 0.05219393992045123,
+                "upper95": 0.055642948968437654,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.055167,
+                "lower95": 0.05414676382524311,
+                "upper95": 0.05618723617475689,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.055787533333333326,
+                "lower95": 0.05483092211960351,
+                "upper95": 0.05674414454706314,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.07901077777777778,
+                "lower95": 0.07703493349152325,
+                "upper95": 0.0809866220640323,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.0812463888888889,
+                "lower95": 0.08044317583125338,
+                "upper95": 0.08204960194652441,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.08185532222222222,
+                "lower95": 0.0811612262569867,
+                "upper95": 0.08254941818745774,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        }
+      ],
+      "allConfirmationTimingStable": false,
+      "costs": [
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+          "backend": 1,
+          "logicalBytesPerSlot": 33587236,
+          "logicalBytesPerArm": 33587236,
+          "committedBytesPerArm": 33947648,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 2,
+          "logicalBytesPerSlot": 33587236,
+          "logicalBytesPerArm": 33587236,
+          "committedBytesPerArm": 33947648,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 3,
+          "logicalBytesPerSlot": 33566728,
+          "logicalBytesPerArm": 33566728,
+          "committedBytesPerArm": 33685504,
+          "passes": 2
+        }
+      ]
+    },
+    {
+      "cell": "scan-4Mi-slots3",
+      "processes": 5,
+      "selectedBackends": [
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "sameSelection": false,
+      "individualGatesPassed": 2,
+      "speedup": null,
+      "accepted": false,
+      "status": "inconclusive",
+      "confirmationLatency": {},
+      "calibration": [
+        {
+          "backend": 2,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.0334329266012114,
+            "lower95": 1.0009908700808159,
+            "upper95": 1.0669264283073032,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 1,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.0921238888888889,
+                "lower95": 0.06966652051571731,
+                "upper95": 0.11458125726206048,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.111426875,
+                "lower95": 0.04420190492662446,
+                "upper95": 0.17865184507337553,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.1544343083333333,
+                "lower95": 0,
+                "upper95": 0.3287225772365288,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.09102855555555556,
+                "lower95": 0.06743141980958896,
+                "upper95": 0.11462569130152216,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.09452973611111111,
+                "lower95": 0.06511147287557298,
+                "upper95": 0.12394799934664924,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.09604270277777778,
+                "lower95": 0.06681313458144497,
+                "upper95": 0.1252722709741106,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        },
+        {
+          "backend": 3,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.021681488962617,
+            "lower95": 0.9388056796997006,
+            "upper95": 1.1118734019832142,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 0,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.08820488888888889,
+                "lower95": 0.07714147778932512,
+                "upper95": 0.09926829998845266,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.10609077777777777,
+                "lower95": 0.05184999874471817,
+                "upper95": 0.16033155681083738,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.1368169111111111,
+                "lower95": 0.006235215993884713,
+                "upper95": 0.2673986062283375,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.08701722222222222,
+                "lower95": 0.08229358833725606,
+                "upper95": 0.09174085610718838,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.09191855555555556,
+                "lower95": 0.08131490384203101,
+                "upper95": 0.10252220726908011,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.09763242222222221,
+                "lower95": 0.07377742918179905,
+                "upper95": 0.12148741526264537,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        }
+      ],
+      "allConfirmationTimingStable": false,
+      "costs": [
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+          "backend": 1,
+          "logicalBytesPerSlot": 33587236,
+          "logicalBytesPerArm": 100761708,
+          "committedBytesPerArm": 101842944,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 2,
+          "logicalBytesPerSlot": 33587236,
+          "logicalBytesPerArm": 100761708,
+          "committedBytesPerArm": 101842944,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 3,
+          "logicalBytesPerSlot": 33566728,
+          "logicalBytesPerArm": 100700184,
+          "committedBytesPerArm": 101056512,
+          "passes": 2
+        }
+      ]
+    },
+    {
+      "cell": "scan-8Mi-slots1",
+      "processes": 5,
+      "selectedBackends": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "sameSelection": true,
+      "individualGatesPassed": 3,
+      "speedup": {
+        "estimate": 0.998848871626278,
+        "lower95": 0.9904360400401895,
+        "upper95": 1.0073331623802833,
+        "processes": 5,
+        "df": 4,
+        "weight": "equal process"
+      },
+      "accepted": false,
+      "status": "inconclusive",
+      "confirmationLatency": {
+        "baselineLatency": {
+          "meanMs": {
+            "estimate": 0.09792289236111111,
+            "lower95": 0.09687339719025483,
+            "upper95": 0.0989723875319674,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.09762888888888889,
+            "lower95": 0.09655965875340865,
+            "upper95": 0.09869811902436913,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.10031018055555556,
+            "lower95": 0.09712732785340851,
+            "upper95": 0.10349303325770261,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.10299221388888888,
+            "lower95": 0.0935581020635891,
+            "upper95": 0.11242632571418866,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.10366272222222221,
+            "lower95": 0.0926441943839699,
+            "upper95": 0.11468125006047453,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        },
+        "candidateLatency": {
+          "meanMs": {
+            "estimate": 0.09800794444444444,
+            "lower95": 0.0974976561297179,
+            "upper95": 0.09851823275917097,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.09788988888888889,
+            "lower95": 0.09721117296627588,
+            "upper95": 0.0985686048115019,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.09962449999999999,
+            "lower95": 0.09884386003239046,
+            "upper95": 0.10040513996760952,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.09978143333333334,
+            "lower95": 0.09899503374909112,
+            "upper95": 0.10056783291757555,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.09982066666666667,
+            "lower95": 0.09903104665258505,
+            "upper95": 0.10061028668074828,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        }
+      },
+      "calibration": [
+        {
+          "backend": 2,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.013888682986632,
+            "lower95": 1.0121554576379037,
+            "upper95": 1.015624876328159,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 0,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.097604,
+                "lower95": 0.09630337069053808,
+                "upper95": 0.09890462930946191,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.11124033333333333,
+                "lower95": 0.07909362898477726,
+                "upper95": 0.1433870376818894,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.11312913333333334,
+                "lower95": 0.07928804859024889,
+                "upper95": 0.1469702180764178,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.09659877777777778,
+                "lower95": 0.09496198349026451,
+                "upper95": 0.09823557206529106,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.10836983333333333,
+                "lower95": 0.07996289364014474,
+                "upper95": 0.13677677302652191,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.10878063333333333,
+                "lower95": 0.0800394174510929,
+                "upper95": 0.13752184921557375,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        },
+        {
+          "backend": 3,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 0.6571330838458809,
+            "lower95": 0.6455060803768732,
+            "upper95": 0.6689695155662683,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 0,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.0977038888888889,
+                "lower95": 0.09655570179790401,
+                "upper95": 0.09885207597987378,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.11059166666666667,
+                "lower95": 0.07880139925602017,
+                "upper95": 0.14238193407731317,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.1114186,
+                "lower95": 0.0785463403420811,
+                "upper95": 0.1442908596579189,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.14869755555555556,
+                "lower95": 0.14641439468792583,
+                "upper95": 0.15098071642318528,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.16764222222222222,
+                "lower95": 0.11994551772669909,
+                "upper95": 0.21533892671774535,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.16840755555555553,
+                "lower95": 0.11961079033068803,
+                "upper95": 0.21720432078042304,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        }
+      ],
+      "allConfirmationTimingStable": false,
+      "costs": [
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+          "backend": 1,
+          "logicalBytesPerSlot": 67174468,
+          "logicalBytesPerArm": 67174468,
+          "committedBytesPerArm": 67502080,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 2,
+          "logicalBytesPerSlot": 67174468,
+          "logicalBytesPerArm": 67174468,
+          "committedBytesPerArm": 67502080,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 3,
+          "logicalBytesPerSlot": 67133448,
+          "logicalBytesPerArm": 67133448,
+          "committedBytesPerArm": 67239936,
+          "passes": 2
+        }
+      ]
+    },
+    {
+      "cell": "scan-8Mi-slots3",
+      "processes": 5,
+      "selectedBackends": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "sameSelection": true,
+      "individualGatesPassed": 5,
+      "speedup": {
+        "estimate": 1.106270835912463,
+        "lower95": 1.0997284181049267,
+        "upper95": 1.1128521753574359,
+        "processes": 5,
+        "df": 4,
+        "weight": "equal process"
+      },
+      "accepted": true,
+      "status": "confirmed_gain",
+      "confirmationLatency": {
+        "baselineLatency": {
+          "meanMs": {
+            "estimate": 0.17155433333333334,
+            "lower95": 0.17136389596100962,
+            "upper95": 0.17174477070565705,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.17148388888888888,
+            "lower95": 0.17126947508618892,
+            "upper95": 0.17169830269158884,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.1723951111111111,
+            "lower95": 0.17212586792302087,
+            "upper95": 0.17266435429920135,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.17264897777777777,
+            "lower95": 0.17234472594945766,
+            "upper95": 0.17295322960609788,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.17271244444444445,
+            "lower95": 0.17235742787296288,
+            "upper95": 0.17306746101592602,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        },
+        "candidateLatency": {
+          "meanMs": {
+            "estimate": 0.15507866666666667,
+            "lower95": 0.15415420053255283,
+            "upper95": 0.15600313280078051,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.15502977777777777,
+            "lower95": 0.15407581699070066,
+            "upper95": 0.15598373856485487,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.15688766666666668,
+            "lower95": 0.15621598355507307,
+            "upper95": 0.15755934977826028,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.15706286666666666,
+            "lower95": 0.156375299751862,
+            "upper95": 0.1577504335814713,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.15710666666666667,
+            "lower95": 0.15641491285949402,
+            "upper95": 0.15779842047383932,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        }
+      },
+      "calibration": [
+        {
+          "backend": 2,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.022678066683122,
+            "lower95": 1.0139023206907467,
+            "upper95": 1.0315297704045123,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 3,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.17163744444444445,
+                "lower95": 0.1715364125742596,
+                "upper95": 0.1717384763146293,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.17494479166666665,
+                "lower95": 0.17046694665244885,
+                "upper95": 0.17942263668088446,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.18104642499999998,
+                "lower95": 0.16661886416771515,
+                "upper95": 0.1954739858322848,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.16816444444444445,
+                "lower95": 0.1680602826312618,
+                "upper95": 0.1682686062576271,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.16985090277777778,
+                "lower95": 0.16801166174677876,
+                "upper95": 0.1716901438087768,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.17158533611111113,
+                "lower95": 0.16524213991891226,
+                "upper95": 0.17792853230331,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        },
+        {
+          "backend": 3,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.1096235592587742,
+            "lower95": 1.0978274736966618,
+            "upper95": 1.1215463930011997,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 5,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.1715172222222222,
+                "lower95": 0.17131421483467438,
+                "upper95": 0.17172022960977004,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.17430361111111112,
+                "lower95": 0.16949312003871553,
+                "upper95": 0.1791141021835067,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.17701094444444446,
+                "lower95": 0.1659615724859587,
+                "upper95": 0.18806031640293022,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.15492444444444445,
+                "lower95": 0.1540075599091401,
+                "upper95": 0.15584132897974878,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.15698983333333333,
+                "lower95": 0.15574160644464244,
+                "upper95": 0.15823806022202422,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.15788436666666666,
+                "lower95": 0.1561773333089575,
+                "upper95": 0.15959140002437583,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        }
+      ],
+      "allConfirmationTimingStable": true,
+      "costs": [
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+          "backend": 1,
+          "logicalBytesPerSlot": 67174468,
+          "logicalBytesPerArm": 201523404,
+          "committedBytesPerArm": 202506240,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 2,
+          "logicalBytesPerSlot": 67174468,
+          "logicalBytesPerArm": 201523404,
+          "committedBytesPerArm": 202506240,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 3,
+          "logicalBytesPerSlot": 67133448,
+          "logicalBytesPerArm": 201400344,
+          "committedBytesPerArm": 201719808,
+          "passes": 2
+        }
+      ]
+    },
+    {
+      "cell": "scan-12Mi-slots1",
+      "processes": 5,
+      "selectedBackends": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "sameSelection": true,
+      "individualGatesPassed": 5,
+      "speedup": {
+        "estimate": 1.1004646276505017,
+        "lower95": 1.0851243652410498,
+        "upper95": 1.1160217533599848,
+        "processes": 5,
+        "df": 4,
+        "weight": "equal process"
+      },
+      "accepted": true,
+      "status": "confirmed_gain",
+      "confirmationLatency": {
+        "baselineLatency": {
+          "meanMs": {
+            "estimate": 0.24934393055555557,
+            "lower95": 0.2480811231656288,
+            "upper95": 0.2506067379454823,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.24900311111111112,
+            "lower95": 0.24850310692265026,
+            "upper95": 0.24950311529957198,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.25197483333333337,
+            "lower95": 0.24736231678201753,
+            "upper95": 0.2565873498846492,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.25588456666666665,
+            "lower95": 0.24145725810605306,
+            "upper95": 0.27031187522728023,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.256862,
+            "lower95": 0.23997893346119945,
+            "upper95": 0.2737450665388005,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        },
+        "candidateLatency": {
+          "meanMs": {
+            "estimate": 0.22658111111111112,
+            "lower95": 0.22285417770956215,
+            "upper95": 0.2303080445126601,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.22668433333333332,
+            "lower95": 0.222581160071936,
+            "upper95": 0.23078750659473063,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.2293042777777778,
+            "lower95": 0.22531182404135394,
+            "upper95": 0.23329673151420163,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.22979827777777778,
+            "lower95": 0.22593269908496563,
+            "upper95": 0.23366385647058993,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.22992177777777778,
+            "lower95": 0.22608191829696575,
+            "upper95": 0.2337616372585898,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        }
+      },
+      "calibration": [
+        {
+          "backend": 2,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.0041076372427085,
+            "lower95": 1.0002454197087705,
+            "upper95": 1.007984767840966,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 0,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.2493818888888889,
+                "lower95": 0.24897299753391064,
+                "upper95": 0.24979078024386717,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.2517282361111111,
+                "lower95": 0.24881942100358778,
+                "upper95": 0.25463705121863445,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.2541085361111111,
+                "lower95": 0.24526090148932417,
+                "upper95": 0.26295617073289806,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.248449,
+                "lower95": 0.24724209233490585,
+                "upper95": 0.24965590766509416,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.2514142638888889,
+                "lower95": 0.2478438652031208,
+                "upper95": 0.25498466257465696,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.25502983055555556,
+                "lower95": 0.24283216019981976,
+                "upper95": 0.2672275009112913,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        },
+        {
+          "backend": 3,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.1043024742592211,
+            "lower95": 1.0810004432817533,
+            "upper95": 1.1281068035021977,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 5,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.24933055555555556,
+                "lower95": 0.2485148235084194,
+                "upper95": 0.2501462876026917,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.2594299722222222,
+                "lower95": 0.2491742753976149,
+                "upper95": 0.26968566904682945,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.2665112388888889,
+                "lower95": 0.2504036268900308,
+                "upper95": 0.28261885088774696,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.226744,
+                "lower95": 0.22263358932649194,
+                "upper95": 0.23085441067350806,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.23077670833333333,
+                "lower95": 0.22312524259356467,
+                "upper95": 0.238428174073102,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.23585520833333332,
+                "lower95": 0.2165618315717551,
+                "upper95": 0.2551485850949115,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        }
+      ],
+      "allConfirmationTimingStable": true,
+      "costs": [
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+          "backend": 1,
+          "logicalBytesPerSlot": 100761700,
+          "logicalBytesPerArm": 100761700,
+          "committedBytesPerArm": 101056512,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 2,
+          "logicalBytesPerSlot": 100761700,
+          "logicalBytesPerArm": 100761700,
+          "committedBytesPerArm": 101056512,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 3,
+          "logicalBytesPerSlot": 100700168,
+          "logicalBytesPerArm": 100700168,
+          "committedBytesPerArm": 100794368,
+          "passes": 2
+        }
+      ]
+    },
+    {
+      "cell": "scan-12Mi-slots3",
+      "processes": 5,
+      "selectedBackends": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "sameSelection": true,
+      "individualGatesPassed": 5,
+      "speedup": {
+        "estimate": 1.2815371918757645,
+        "lower95": 1.2640382065481608,
+        "upper95": 1.2992784281779906,
+        "processes": 5,
+        "df": 4,
+        "weight": "equal process"
+      },
+      "accepted": true,
+      "status": "confirmed_gain",
+      "confirmationLatency": {
+        "baselineLatency": {
+          "meanMs": {
+            "estimate": 0.2880835277777778,
+            "lower95": 0.2871918444707527,
+            "upper95": 0.2889752110848029,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.2876131111111111,
+            "lower95": 0.2867665088261205,
+            "upper95": 0.2884597133961017,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.29168805555555555,
+            "lower95": 0.2895923210957964,
+            "upper95": 0.2937837900153147,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.29413618888888887,
+            "lower95": 0.2875563002000707,
+            "upper95": 0.300716077577707,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.29474822222222224,
+            "lower95": 0.2869302826217989,
+            "upper95": 0.30256616182264556,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        },
+        "candidateLatency": {
+          "meanMs": {
+            "estimate": 0.22480883333333335,
+            "lower95": 0.2219016032254017,
+            "upper95": 0.227716063441265,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.22522455555555557,
+            "lower95": 0.22211752560008188,
+            "upper95": 0.22833158551102925,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.22753194444444447,
+            "lower95": 0.22529483071246248,
+            "upper95": 0.22976905817642646,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.22788221111111112,
+            "lower95": 0.22586647048597808,
+            "upper95": 0.22989795173624417,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.22796977777777777,
+            "lower95": 0.22600542111878583,
+            "upper95": 0.22993413443676972,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        }
+      },
+      "calibration": [
+        {
+          "backend": 2,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.0145479046489507,
+            "lower95": 1.014105812785269,
+            "upper95": 1.0149901892392825,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 3,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.2872395555555555,
+                "lower95": 0.28682225799885364,
+                "upper95": 0.2876568531122574,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.2906417361111111,
+                "lower95": 0.28706769018316053,
+                "upper95": 0.2942157820390617,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.2951819027777778,
+                "lower95": 0.28417149353776033,
+                "upper95": 0.30619231201779523,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.2830637777777778,
+                "lower95": 0.28285339975214546,
+                "upper95": 0.28327415580341014,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.2866235833333334,
+                "lower95": 0.28288664384599205,
+                "upper95": 0.2903605228206747,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.29188338333333336,
+                "lower95": 0.28003439361438415,
+                "upper95": 0.30373237305228257,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        },
+        {
+          "backend": 3,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.2788461171510672,
+            "lower95": 1.265156262563666,
+            "upper95": 1.2926841053122962,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 5,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.28713577777777777,
+                "lower95": 0.2868056508888136,
+                "upper95": 0.28746590466674193,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.28922070833333335,
+                "lower95": 0.28773266171353507,
+                "upper95": 0.29070875495313164,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.29046347499999997,
+                "lower95": 0.287230407058657,
+                "upper95": 0.29369654294134295,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.22522655555555557,
+                "lower95": 0.22285748561930507,
+                "upper95": 0.22759562549180606,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.2272611111111111,
+                "lower95": 0.22469812761411273,
+                "upper95": 0.22982409460810949,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.2274947111111111,
+                "lower95": 0.22468889601424344,
+                "upper95": 0.23030052620797878,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        }
+      ],
+      "allConfirmationTimingStable": true,
+      "costs": [
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+          "backend": 1,
+          "logicalBytesPerSlot": 100761700,
+          "logicalBytesPerArm": 302285100,
+          "committedBytesPerArm": 303169536,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 2,
+          "logicalBytesPerSlot": 100761700,
+          "logicalBytesPerArm": 302285100,
+          "committedBytesPerArm": 303169536,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 3,
+          "logicalBytesPerSlot": 100700168,
+          "logicalBytesPerArm": 302100504,
+          "committedBytesPerArm": 302383104,
+          "passes": 2
+        }
+      ]
+    },
+    {
+      "cell": "scan-16Mi-slots1",
+      "processes": 5,
+      "selectedBackends": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "sameSelection": true,
+      "individualGatesPassed": 5,
+      "speedup": {
+        "estimate": 1.507272232492705,
+        "lower95": 1.4863836050972716,
+        "upper95": 1.5284544144947478,
+        "processes": 5,
+        "df": 4,
+        "weight": "equal process"
+      },
+      "accepted": true,
+      "status": "confirmed_gain",
+      "confirmationLatency": {
+        "baselineLatency": {
+          "meanMs": {
+            "estimate": 0.44760141319444446,
+            "lower95": 0.44676261598716865,
+            "upper95": 0.4484402104017203,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.4471354444444445,
+            "lower95": 0.4463149702190032,
+            "upper95": 0.44795591866988577,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.4501906388888889,
+            "lower95": 0.4488177114461664,
+            "upper95": 0.4515635663316114,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.4508321722222222,
+            "lower95": 0.44903262088725,
+            "upper95": 0.45263172355719444,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.45099255555555556,
+            "lower95": 0.4490589739870431,
+            "upper95": 0.45292613712406804,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        },
+        "candidateLatency": {
+          "meanMs": {
+            "estimate": 0.29698458333333333,
+            "lower95": 0.292768796634027,
+            "upper95": 0.30120037003263966,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.29739133333333334,
+            "lower95": 0.2931176512246679,
+            "upper95": 0.3016650154419988,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.29955305555555556,
+            "lower95": 0.2956499521959039,
+            "upper95": 0.3034561589152072,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.29968572222222223,
+            "lower95": 0.29574546942005586,
+            "upper95": 0.3036259750243886,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.29971888888888887,
+            "lower95": 0.2957689902807876,
+            "upper95": 0.3036687874969901,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        }
+      },
+      "calibration": [
+        {
+          "backend": 2,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.0211005509870061,
+            "lower95": 1.0176689066355686,
+            "upper95": 1.0245437670617008,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 5,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.44713777777777775,
+                "lower95": 0.4465748393793086,
+                "upper95": 0.4477007161762469,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.45131027777777777,
+                "lower95": 0.4460828159364731,
+                "upper95": 0.45653773961908245,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.45349094444444443,
+                "lower95": 0.4451176539772435,
+                "upper95": 0.46186423491164535,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.4382171111111111,
+                "lower95": 0.4375269425473945,
+                "upper95": 0.43890727967482773,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.4406676111111111,
+                "lower95": 0.4386581595863497,
+                "upper95": 0.4426770626358725,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.4411274777777778,
+                "lower95": 0.4392044599693815,
+                "upper95": 0.44305049558617404,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        },
+        {
+          "backend": 3,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.5122781550200106,
+            "lower95": 1.4895855216639764,
+            "upper95": 1.5353164923327107,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 5,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.44774688888888886,
+                "lower95": 0.44647701499338704,
+                "upper95": 0.4490167627843907,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.45122545833333333,
+                "lower95": 0.4467022277782443,
+                "upper95": 0.45574868888842235,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.45197402499999995,
+                "lower95": 0.44731642777625646,
+                "upper95": 0.4566316222237434,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.2969297777777778,
+                "lower95": 0.29214911824582906,
+                "upper95": 0.3017104373097265,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.29955322222222225,
+                "lower95": 0.2954554925573879,
+                "upper95": 0.3036509518870566,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.2996830888888889,
+                "lower95": 0.29559242976229577,
+                "upper95": 0.303773748015482,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        }
+      ],
+      "allConfirmationTimingStable": true,
+      "costs": [
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+          "backend": 1,
+          "logicalBytesPerSlot": 134348932,
+          "logicalBytesPerArm": 134348932,
+          "committedBytesPerArm": 134610944,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 2,
+          "logicalBytesPerSlot": 134348932,
+          "logicalBytesPerArm": 134348932,
+          "committedBytesPerArm": 134610944,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 3,
+          "logicalBytesPerSlot": 134266888,
+          "logicalBytesPerArm": 134266888,
+          "committedBytesPerArm": 134348800,
+          "passes": 2
+        }
+      ]
+    },
+    {
+      "cell": "scan-16Mi-slots3",
+      "processes": 5,
+      "selectedBackends": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "sameSelection": true,
+      "individualGatesPassed": 4,
+      "speedup": {
+        "estimate": 1.4975667516646147,
+        "lower95": 1.452392937252523,
+        "upper95": 1.5441456083735923,
+        "processes": 5,
+        "df": 4,
+        "weight": "equal process"
+      },
+      "accepted": false,
+      "status": "inconclusive",
+      "confirmationLatency": {
+        "baselineLatency": {
+          "meanMs": {
+            "estimate": 0.44897188541666666,
+            "lower95": 0.4463081342730131,
+            "upper95": 0.45163563656032024,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.44731411111111113,
+            "lower95": 0.4457989771030132,
+            "upper95": 0.4488292451192091,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.4564597083333333,
+            "lower95": 0.4455291957450168,
+            "upper95": 0.46739022092164983,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.46469954166666666,
+            "lower95": 0.4383269796333206,
+            "upper95": 0.4910721037000127,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.46675950000000005,
+            "lower95": 0.4363876840046331,
+            "upper95": 0.497131315995367,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        },
+        "candidateLatency": {
+          "meanMs": {
+            "estimate": 0.30224802777777776,
+            "lower95": 0.28503097848847553,
+            "upper95": 0.31946507706708,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "medianMs": {
+            "estimate": 0.29584755555555553,
+            "lower95": 0.29238219015489475,
+            "upper95": 0.2993129209562163,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p95Ms": {
+            "estimate": 0.33823655555555554,
+            "lower95": 0.2310944895016835,
+            "upper95": 0.4453786216094276,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "p99Ms": {
+            "estimate": 0.38103468888888886,
+            "lower95": 0.15761135947266428,
+            "upper95": 0.6044580183051135,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "maxMs": {
+            "estimate": 0.3917342222222222,
+            "lower95": 0.139238783306823,
+            "upper95": 0.6442296611376215,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          }
+        }
+      },
+      "calibration": [
+        {
+          "backend": 2,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.0225521244077087,
+            "lower95": 1.019123628055922,
+            "upper95": 1.0259921547745163,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 5,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.4482072222222222,
+                "lower95": 0.44476977693721564,
+                "upper95": 0.45164466750722876,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.4533775,
+                "lower95": 0.44799930061680826,
+                "upper95": 0.4587556993831917,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.4555459,
+                "lower95": 0.44818658599641326,
+                "upper95": 0.46290521400358675,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.4382781111111111,
+                "lower95": 0.4372090560435974,
+                "upper95": 0.4393471661786248,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.44181044444444445,
+                "lower95": 0.4387399544190897,
+                "upper95": 0.4448809344697992,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.44342537777777774,
+                "lower95": 0.4376690482785456,
+                "upper95": 0.4491817072770099,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        },
+        {
+          "backend": 3,
+          "exploratory": true,
+          "speedup": {
+            "estimate": 1.5187273318140238,
+            "lower95": 1.4961253598737572,
+            "upper95": 1.5416707518369777,
+            "processes": 5,
+            "df": 4,
+            "weight": "equal process"
+          },
+          "passes": 5,
+          "latency": {
+            "baselineLatency": {
+              "medianMs": {
+                "estimate": 0.44745599999999996,
+                "lower95": 0.44607552078252777,
+                "upper95": 0.44883647921747216,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.4525214444444444,
+                "lower95": 0.45048655402087395,
+                "upper95": 0.4545563348680149,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.45294944444444446,
+                "lower95": 0.4506638328448878,
+                "upper95": 0.4552350560440011,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            },
+            "candidateLatency": {
+              "medianMs": {
+                "estimate": 0.295789,
+                "lower95": 0.29074318544532535,
+                "upper95": 0.3008348145546747,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p95Ms": {
+                "estimate": 0.29825633333333335,
+                "lower95": 0.293936373412743,
+                "upper95": 0.3025762932539237,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              },
+              "p99Ms": {
+                "estimate": 0.2987803333333333,
+                "lower95": 0.29440992040858094,
+                "upper95": 0.3031507462580857,
+                "processes": 5,
+                "df": 4,
+                "weight": "equal process"
+              }
+            }
+          }
+        }
+      ],
+      "allConfirmationTimingStable": false,
+      "costs": [
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+          "backend": 1,
+          "logicalBytesPerSlot": 134348932,
+          "logicalBytesPerArm": 403046796,
+          "committedBytesPerArm": 403832832,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 2,
+          "logicalBytesPerSlot": 134348932,
+          "logicalBytesPerArm": 403046796,
+          "committedBytesPerArm": 403832832,
+          "passes": 5
+        },
+        {
+          "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+          "backend": 3,
+          "logicalBytesPerSlot": 134266888,
+          "logicalBytesPerArm": 402800664,
+          "committedBytesPerArm": 403046400,
+          "passes": 2
+        }
+      ]
+    }
+  ],
+  "refinementTrigger": []
+}

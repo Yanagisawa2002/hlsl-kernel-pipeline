@@ -12,6 +12,14 @@ The [dynamic ABI v2 demo](docs/DYNAMIC_EXECUTION.md) adds bounded GPU-count indi
 dispatch and independent multi-output verification while retaining ABI v1.
 Its R9700 correctness evidence is separate from the historical performance results below.
 
+## Five-process Scan applicability experiment
+
+The [next-round Scan report](docs/results/SCAN_PROCESS_BOUNDARY_2026-09-07.md)
+covers 4/8/12/16 Mi uint elements with one/three resident inputs and five new
+processes per cell. Four exact configurations passed all five process gates;
+other cells remain inconclusive. No global crossover threshold or default
+promotion is inferred. Radix remains conditional on its separate dispatch.
+
 ## vNext paired measurement and dynamic plans
 
 The [integrated vNext evidence](docs/results/R9700_VNEXT_INTEGRATION_2026-09-07.md)
