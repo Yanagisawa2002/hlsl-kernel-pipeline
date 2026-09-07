@@ -9,10 +9,10 @@
     "schemaVersion": { "const": "3.0" },
     "name": { "type": "string", "minLength": 1 },
     "kernelPath": { "type": "string", "minLength": 1 },
-    "kernelAbiVersion": { "const": "hlslperf.raw-buffer.v1" },
+    "kernelAbiVersion": { "enum": ["hlslperf.raw-buffer.v1", "hlslperf.raw-buffer.v2"] },
     "entryPoint": { "type": "string", "minLength": 1 },
     "shaderModel": { "enum": ["6_0", "6_1", "6_2", "6_3", "6_4", "6_5", "6_6", "6_7"] },
-    "workItemCount": { "$ref": "#/$defs/positiveInteger" },
+    "workItemCount": { "type": "integer", "minimum": 0 },
     "warmupDispatches": { "type": "integer", "minimum": 0 },
     "minimumWarmupMilliseconds": { "type": "number", "minimum": 0 },
     "measurementBatches": { "type": "integer", "minimum": 3 },
@@ -33,7 +33,7 @@
         "id": { "type": "string", "minLength": 1 },
         "parameters": {
           "type": "object",
-          "additionalProperties": { "$ref": "#/$defs/positiveInteger" }
+          "additionalProperties": { "type": "integer", "minimum": 0 }
         }
       }
     },
@@ -72,6 +72,14 @@
       }
     }
   },
+  "allOf": [{
+    "if": { "required": ["kernelAbiVersion"], "properties": { "kernelAbiVersion": { "const": "hlslperf.raw-buffer.v2" } } },
+    "then": {},
+    "else": { "properties": {
+      "workItemCount": { "$ref": "#/$defs/positiveInteger" },
+      "workload": { "properties": { "parameters": { "additionalProperties": { "$ref": "#/$defs/positiveInteger" } } } }
+    } }
+  }],
   "$defs": {
     "positiveInteger": { "type": "integer", "minimum": 1 },
     "valueSet": {
