@@ -47,7 +47,7 @@ public static class RadixSortContract
 
     /// <summary>Allocated scratch includes the alternate record buffer, excludes input and final output.</summary>
     public static RadixPlanCost Describe(KernelExecutionPlan plan, int bitCount, int radixBits) => new(
-        (bitCount + radixBits - 1) / radixBits, plan.Passes.Count,
+        plan.LogicalItemCount == 0 ? 0 : (bitCount + radixBits - 1) / radixBits, plan.Passes.Count,
         plan.Buffers.Sum(buffer => (long)buffer.ByteLength),
         plan.Buffers.Where(buffer => buffer.InitialData is null && !plan.GetVerifiedOutputs().Any(output => output.Resource == buffer.Name))
             .Sum(buffer => (long)buffer.ByteLength),

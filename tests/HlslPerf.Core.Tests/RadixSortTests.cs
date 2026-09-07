@@ -38,6 +38,7 @@ public sealed class RadixSortTests
             Assert.Equal(2, plan.GetVerifiedOutputs().Count());
             Assert.Equal("sorted-payloads", plan.AdditionalVerifiedOutputs.Single().Resource);
             hashes.Add(plan.ExpectedSha256 + plan.AdditionalVerifiedOutputs.Single().ExpectedSha256);
+            if (count == 0) Assert.Equal(0, RadixSortContract.Describe(plan, bits, radix).DigitPasses);
             if (count > 0)
                 Assert.Equal((bits + radix - 1) / radix,
                     plan.Passes.Count(pass => pass.EntryPoint.StartsWith("ScatterRadix", StringComparison.Ordinal)));
