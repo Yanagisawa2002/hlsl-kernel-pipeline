@@ -1,6 +1,7 @@
 {
   "schemaVersion": "3.0",
   "name": "dynamic-compaction-consume-demo",
+  "measurementProtocol": "gpu-timestamps-poison-reexecute-v1",
   "kernelPath": "../kernels/dynamic-compaction.hlsl",
   "kernelAbiVersion": "hlslperf.raw-buffer.v2",
   "shaderModel": "6_0",
