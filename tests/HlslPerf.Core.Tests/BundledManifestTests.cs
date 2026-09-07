@@ -28,6 +28,13 @@ public sealed class BundledManifestTests
 
     private static string FindRepositoryRoot()
     {
+        string? configuredRoot = Environment.GetEnvironmentVariable("HLSLPERF_TEST_REPOSITORY_ROOT");
+        if (!string.IsNullOrWhiteSpace(configuredRoot))
+        {
+            if (!File.Exists(Path.Combine(configuredRoot, "HlslKernelPipeline.slnx")))
+                throw new DirectoryNotFoundException("Configured test repository root is invalid.");
+            return Path.GetFullPath(configuredRoot);
+        }
         DirectoryInfo? directory = new(AppContext.BaseDirectory);
         while (directory is not null)
         {

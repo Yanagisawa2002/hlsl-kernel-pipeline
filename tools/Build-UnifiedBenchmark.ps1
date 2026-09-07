@@ -10,6 +10,8 @@ $output=[IO.Path]::GetFullPath($OutputDirectory)
 if (Test-Path -LiteralPath $output) { throw 'Choose a new build output directory.' }
 [IO.Directory]::CreateDirectory($output) | Out-Null
 Push-Location $repo
+$previousTestRoot=$env:HLSLPERF_TEST_REPOSITORY_ROOT
+$env:HLSLPERF_TEST_REPOSITORY_ROOT=$repo
 try {
     & $SerializedValidationRunner -Action {
         $verification=python tools/verify_external_sources.py
@@ -36,4 +38,7 @@ try {
     [IO.File]::WriteAllText((Join-Path $output 'build.json'),($build | ConvertTo-Json -Depth 8))
     $build | ConvertTo-Json -Depth 8
 }
-finally { Pop-Location }
+finally {
+    $env:HLSLPERF_TEST_REPOSITORY_ROOT=$previousTestRoot
+    Pop-Location
+}
