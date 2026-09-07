@@ -4,6 +4,15 @@ using UnityEngine;
 
 namespace EdwinLiu.HlslPerf
 {
+    // Project-owned identities from the reviewed deployment artifact, never copied from incoming JSON.
+    public sealed class HlslPerfDeploymentIdentity
+    {
+        public string WorkloadImplementationSha256;
+        public string KernelAbiVersion;
+        public string ExecutionIdentitySha256;
+        public string ConfirmationSha256;
+    }
+
     public enum HlslPerfCompatibilityPolicy
     {
         ExactDeviceAndDriver,
@@ -73,8 +82,9 @@ namespace EdwinLiu.HlslPerf
 
     public static class HlslPerfProfileConsumer
     {
-        public const string SupportedSchema = "2.0";
+        public const string SupportedSchema = "3.0";
         public const string SupportedAbi = "hlslperf.raw-buffer.v1";
+        public const string PairedProtocol = "gpu-paired-abba-independent-confirmation-v2";
 
         public static bool TryResolve(
             TextAsset profile,
@@ -83,7 +93,9 @@ namespace EdwinLiu.HlslPerf
             string expectedManifestSha256,
             string expectedKernelSha256,
             HlslPerfCompatibilityPolicy policy,
-            out HlslPerfResolvedProfile resolved)
+            out HlslPerfResolvedProfile resolved,
+            HlslPerfDeploymentIdentity expectedIdentity = null,
+            bool allowHistorical = false)
         {
             if (profile == null)
             {
@@ -97,7 +109,7 @@ namespace EdwinLiu.HlslPerf
                 expectedManifestSha256,
                 expectedKernelSha256,
                 policy,
-                out resolved);
+                out resolved, expectedIdentity, allowHistorical);
         }
 
         public static bool TryResolveJson(
@@ -107,7 +119,9 @@ namespace EdwinLiu.HlslPerf
             string expectedManifestSha256,
             string expectedKernelSha256,
             HlslPerfCompatibilityPolicy policy,
-            out HlslPerfResolvedProfile resolved)
+            out HlslPerfResolvedProfile resolved,
+            HlslPerfDeploymentIdentity expectedIdentity = null,
+            bool allowHistorical = false)
         {
             if (runtime == null)
             {
@@ -152,7 +166,7 @@ namespace EdwinLiu.HlslPerf
                 expectedWorkloadId,
                 expectedManifestSha256,
                 expectedKernelSha256,
-                policy);
+                policy, expectedIdentity, allowHistorical);
             if (validationError != null)
             {
                 resolved = Failure(validationError);
@@ -160,7 +174,8 @@ namespace EdwinLiu.HlslPerf
             }
             resolved = new HlslPerfResolvedProfile(
                 true,
-                "Profile workload, ABI, and runtime fingerprint are compatible.",
+                data.schemaVersion == "2.0" ? "Historical profile accepted by explicit opt-in; independent confirmation is unavailable." :
+                    "Profile workload, ABI, confirmation identity and runtime fingerprint are compatible.",
                 data.workloadId,
                 data.candidateId,
                 data.compatibilityKey,
@@ -188,12 +203,37 @@ namespace EdwinLiu.HlslPerf
             string expectedWorkloadId,
             string expectedManifestSha256,
             string expectedKernelSha256,
-            HlslPerfCompatibilityPolicy policy)
+            HlslPerfCompatibilityPolicy policy,
+            HlslPerfDeploymentIdentity expectedIdentity,
+            bool allowHistorical)
         {
-            if (!string.Equals(data.schemaVersion, SupportedSchema, StringComparison.Ordinal))
+            bool historical = data.schemaVersion == "2.0";
+            if (historical && !allowHistorical)
+                return "Historical profile requires explicit allowHistorical opt-in; it has no independent confirmation guarantee.";
+            if (!historical && !string.Equals(data.schemaVersion, SupportedSchema, StringComparison.Ordinal))
                 return "Unsupported profile schema '" + data.schemaVersion + "'.";
-            if (!string.Equals(data.kernelAbiVersion, SupportedAbi, StringComparison.Ordinal))
+            if (!string.Equals(data.kernelAbiVersion, SupportedAbi, StringComparison.Ordinal) &&
+                !string.Equals(data.kernelAbiVersion, "hlslperf.raw-buffer.v2", StringComparison.Ordinal))
                 return "Unsupported kernel ABI '" + data.kernelAbiVersion + "'.";
+            if (!historical)
+            {
+                if (data.measurementProtocol != PairedProtocol || data.evidenceStatus != "independently-confirmed")
+                    return "Profile lacks the required paired protocol and independent confirmation.";
+                if (expectedIdentity == null)
+                    return "Project-owned deployment identity is required for confirmed profiles.";
+                if (!SameHash(data.workloadImplementationSha256, expectedIdentity.WorkloadImplementationSha256))
+                    return "Profile workload implementation hash does not match the project-owned identity.";
+                if (data.kernelAbiVersion != expectedIdentity.KernelAbiVersion)
+                    return "Profile ABI does not match the project-owned identity.";
+                if (!SameHash(data.executionIdentitySha256, expectedIdentity.ExecutionIdentitySha256))
+                    return "Profile execution identity does not match the project-owned identity.";
+                if (!SameHash(data.confirmationSha256, expectedIdentity.ConfirmationSha256))
+                    return "Profile confirmation identity does not match the reviewed evidence.";
+                if (policy != HlslPerfCompatibilityPolicy.ExactDeviceAndDriver)
+                    return "Confirmed profiles require exact device and driver policy.";
+                if (string.IsNullOrWhiteSpace(runtime.DriverVersion) || runtime.DriverVersion == "unavailable")
+                    return "Confirmed profiles require a known driver version.";
+            }
             if (!string.Equals(data.workloadId, expectedWorkloadId, StringComparison.Ordinal))
                 return "Profile workload does not match the requested workload.";
             if (!IsSha256(data.manifestSha256) ||
@@ -244,6 +284,11 @@ namespace EdwinLiu.HlslPerf
                     return false;
             }
             return true;
+        }
+
+        private static bool SameHash(string actual, string expected)
+        {
+            return IsSha256(actual) && IsSha256(expected) && string.Equals(actual, expected, StringComparison.OrdinalIgnoreCase);
         }
 
         private static HlslPerfDefineValue[] Clone(HlslPerfDefineValue[] source)

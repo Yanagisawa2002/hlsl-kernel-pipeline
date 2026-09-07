@@ -44,8 +44,12 @@ public static class ReportWriter
         return new ReportArtifacts(runPath, csvPath, htmlPath, svgPath, profilePath);
     }
 
-    public static TuningProfile? CreateProfile(TuningRunReport report)
+    public static TuningProfile? CreateProfile(TuningRunReport report, bool allowHistorical = false)
     {
+        if (report.MeasurementProtocol == PairedProtocol.Id)
+            return PairedProfile.Create(report);
+        if (!allowHistorical)
+            return null;
         if (report.Selection is null || !report.Selection.UsedStablePool)
             return null;
         CandidateResult? selected = report.Candidates.FirstOrDefault(candidate =>

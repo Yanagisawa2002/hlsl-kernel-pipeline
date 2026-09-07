@@ -34,9 +34,15 @@ public sealed class TuningManifest
     public required IReadOnlyList<CandidateAxis> Axes { get; init; }
     public IReadOnlyList<CandidateConstraint> Constraints { get; init; } = [];
     public CorrectnessSpec Correctness { get; init; } = new();
+    public string MeasurementProtocol { get; init; } = PairedProtocol.Id;
+    public PairedMeasurementOptions PairedMeasurement { get; init; } = new();
 
     public void Validate()
     {
+        if (MeasurementProtocol != PairedProtocol.Id && MeasurementProtocol != HlslPerfSdk.MeasurementProtocol)
+            throw new InvalidDataException("Unknown measurement protocol.");
+        if (MeasurementProtocol == PairedProtocol.Id)
+            PairedMeasurement.Validate();
         if (SchemaVersion is not ("1.0" or "2.0" or "3.0"))
             throw new InvalidDataException($"Unsupported manifest schema '{SchemaVersion}'.");
         if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(KernelPath))
@@ -287,7 +293,9 @@ public sealed record TuningRunReport(
     IReadOnlyList<CandidateResult> Candidates,
     string WorkloadId = "legacy-v1",
     string KernelAbiVersion = "legacy-v1",
-    TuningResumeSummary? Resume = null);
+    TuningResumeSummary? Resume = null,
+    string MeasurementProtocol = HlslPerfSdk.MeasurementProtocol,
+    PairedRunEvidence? PairedEvidence = null);
 
 public sealed record TuningResumeSummary(
     bool Enabled,
@@ -312,7 +320,12 @@ public sealed record TuningProfile(
     double? SpeedupOverBaseline,
     string WorkloadId = "legacy-v1",
     string KernelAbiVersion = "legacy-v1",
-    IReadOnlyList<ProfileDefine>? DefineValues = null);
+    IReadOnlyList<ProfileDefine>? DefineValues = null,
+    string MeasurementProtocol = HlslPerfSdk.MeasurementProtocol,
+    string EvidenceStatus = "historical",
+    string? WorkloadImplementationSha256 = null,
+    string? ExecutionIdentitySha256 = null,
+    string? ConfirmationSha256 = null);
 
 public static class JsonDefaults
 {
