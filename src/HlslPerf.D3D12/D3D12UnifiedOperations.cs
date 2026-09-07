@@ -109,14 +109,15 @@ public sealed partial class D3D12Tuner
                     Path.GetExtension(path) is ".h" or ".hlsl" or ".hlsli")))
                 .Select(Path.GetFullPath).Distinct(StringComparer.OrdinalIgnoreCase).Order(StringComparer.Ordinal).ToArray();
             var files = paths.Select(path => new { path, sha256 = ContentHash.Sha256(File.ReadAllBytes(path)) }).ToArray();
-            string identity = ContentHash.Sha256(JsonSerializer.Serialize(new { shader, files, options = "O3-strict-SM66-strip-rootsignature-warnings-retained" }, JsonDefaults.Options));
+            string identity = ContentHash.Sha256(JsonSerializer.Serialize(new { shader, files, options = "O3-strip-rootsignature-warnings-retained" }, JsonDefaults.Options));
             if (shaderIdentities.TryGetValue(shader.Id, out string? previous))
             {
                 if (previous != identity) throw new InvalidDataException("Shader ID reused with changed source or options: " + shader.Id);
                 return;
             }
             long start = Stopwatch.GetTimestamp();
-            DxcCompilerOptions options = new() { ShaderModel = DxcShaderModel.Model6_6, OptimizationLevel = 3, EnableStrictness = true, WarningsAreErrors = false };
+            DxcCompilerOptions options = new() { ShaderModel = shader.ShaderModel == "6_7" ? DxcShaderModel.Model6_7 : DxcShaderModel.Model6_6,
+                HLSLVersion = shader.HlslVersion, OptimizationLevel = 3, EnableStrictness = shader.EnableStrictness, WarningsAreErrors = false };
             string[] arguments = shader.IncludeDirectories.SelectMany(directory => new[] { "-I", directory })
                 .Concat(shader.CompilerArguments).Append("-Qstrip_rootsignature").ToArray();
             using IDxcResult compiled = DxcCompiler.Compile(DxcShaderStage.Compute, File.ReadAllText(shader.SourcePath),

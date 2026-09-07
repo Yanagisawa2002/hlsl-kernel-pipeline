@@ -4,7 +4,12 @@ namespace HlslPerf.Core;
 public sealed record UnifiedShader(
     string Id, string SourcePath, string EntryPoint,
     IReadOnlyDictionary<string, string> Defines, IReadOnlyList<string> IncludeDirectories,
-    IReadOnlyList<string> CompilerArguments);
+    IReadOnlyList<string> CompilerArguments)
+{
+    public int HlslVersion { get; init; } = 2018;
+    public string ShaderModel { get; init; } = "6_6";
+    public bool EnableStrictness { get; init; } = true;
+}
 
 public enum UnifiedStage { InputRestore, ScratchInitialization, Algorithm, OutputConversion }
 

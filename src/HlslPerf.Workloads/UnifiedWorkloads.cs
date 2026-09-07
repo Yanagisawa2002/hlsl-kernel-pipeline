@@ -126,7 +126,10 @@ public static class UnifiedWorkloads
         void Add(string entry, UnifiedStage stage, uint dispatch, string?[] uavs, uint[]? supplied = null)
         {
             string id = implementation + "/" + entry;
-            shaders.Add(Shader(id, path, entry, new Dictionary<string, int>(), [folder]));
+            // The upstream DXC 1.8 host supplies no -HV override (default 2021),
+            // and queries support capped at SM 6.7. Vortice defaults to HLSL 2018.
+            shaders.Add(Shader(id, path, entry, new Dictionary<string, int>(), [folder]) with
+                { HlslVersion = 2021, ShaderModel = "6_7", EnableStrictness = false });
             passes.Add(new(entry, stage, id, new(dispatch), [], uavs, supplied ?? constants));
         }
         if (fallback)
