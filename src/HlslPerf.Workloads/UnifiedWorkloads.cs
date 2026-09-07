@@ -104,10 +104,11 @@ public static class UnifiedWorkloads
         KernelExecutionPlan legacy = new BuiltinWorkloadProvider().Create(workload).Build(manifest, new KernelCandidate(defines));
         KernelBufferSpec[] buffers = legacy.Buffers.Select(buffer => buffer.Name == "input" ? buffer with { InitialData = f.Input } : buffer).ToArray();
         List<UnifiedShader> shaders = [];
-        foreach (string entry in legacy.Passes.Select(pass => pass.EntryPoint).Distinct()) shaders.Add(Shader(implementation + "/" + entry, path, entry, defines, [Path.Combine(repo, "kernels")]));
+        string shaderPrefix = implementation + "/" + (f.Pairs ? "pairs" : "keys") + "/";
+        foreach (string entry in legacy.Passes.Select(pass => pass.EntryPoint).Distinct()) shaders.Add(Shader(shaderPrefix + entry, path, entry, defines, [Path.Combine(repo, "kernels")]));
         UnifiedPass[] passes = legacy.Passes.Select(pass => new UnifiedPass(pass.Name,
             pass.Name == "single-pass-reset" ? UnifiedStage.ScratchInitialization : pass.Name == "split-radix-pairs" ? UnifiedStage.OutputConversion : UnifiedStage.Algorithm,
-            implementation + "/" + pass.EntryPoint, pass.Dispatch, [pass.Input0, pass.Input1], [pass.Output0, pass.Output1], pass.Constants)).ToArray();
+            shaderPrefix + pass.EntryPoint, pass.Dispatch, [pass.Input0, pass.Input1], [pass.Output0, pass.Output1], pass.Constants)).ToArray();
         List<KernelVerifiedOutput> outputs = [new(legacy.VerifiedResource, f.ExpectedKeysSha256)];
         if (f.Pairs) outputs.Add(new("sorted-payloads", f.ExpectedPayloadsSha256!));
         return new(implementation, f.Count, Semantic(f), f.InputSha256, buffers, shaders, passes, outputs) { ImmutableInputs = ["input"] };
