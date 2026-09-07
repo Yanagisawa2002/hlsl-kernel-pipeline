@@ -69,3 +69,24 @@ ledger. A report can conclude no benefit or unsupported functionality honestly;
 it must not count an unexecuted required gate as passed. Fast-forward the original
 checkout only after all required code/regression gates and the final frozen-source
 checks pass. Never push.
+
+## Sorting baseline selection rule (declared before integrated timing)
+
+For each size/record/scenario cell, first screen the complete valid binary
+parameter space from the corresponding bundled radix manifest. Choose the
+correctness-passing, stable binary candidate with the lowest calibration median
+(and candidate ID for ties); confirmation samples never choose this control.
+Retain every screening result, including rejected or noisy observations. If no
+binary candidate is valid/stable, the cell has no supported performance claim.
+
+Then freeze a three-family comparison: that binary control and 4/8-bit candidates
+with group size 128, two elements per thread, scalar loads, wave backend 2 and
+wave size 32. These are declared wide-radix configurations, not an exhaustive
+wide-radix optimum. Use a new seed range for this comparison and its independent
+confirmation. Both phases use eight paired blocks, CV <= 0.05, baseline drift
+<= 0.15 and the existing 1.01 speedup requirement. Report the complete-plan
+latency, dispatch pass count and allocated/scratch bytes for each family.
+
+Generated derived manifests are frozen and hashed after the stated calibration
+selection and before their own GPU samples. The rule, not a confirmation result,
+controls the transition between screening and the three-family comparison.
