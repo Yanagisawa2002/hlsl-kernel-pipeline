@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "3.0",
+  "name": "dynamic-compaction-consume-demo",
+  "kernelPath": "../kernels/dynamic-compaction.hlsl",
+  "kernelAbiVersion": "hlslperf.raw-buffer.v2",
+  "shaderModel": "6_0",
+  "workItemCount": 4096,
+  "warmupDispatches": 1,
+  "minimumWarmupMilliseconds": 1,
+  "measurementBatches": 3,
+  "dispatchesPerBatch": 1,
+  "minimumBatchMilliseconds": 0.1,
+  "maximumDispatchesPerBatch": 4,
+  "maximumCoefficientOfVariation": 1,
+  "workload": {
+    "id": "dynamic-compaction-consume-u32-v2",
+    "parameters": { "elementCount": 4096, "activeMode": 1, "maximumItems": 4096, "seed": 19, "countByteOffset": 16, "argumentByteOffset": 16 }
+  },
+  "baselineDefines": { "HLSLPERF_GROUP_SIZE": 64 },
+  "axes": [{ "name": "HLSLPERF_GROUP_SIZE", "values": [64] }]
+}
