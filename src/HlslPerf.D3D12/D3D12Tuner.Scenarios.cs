@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Diagnostics;
 using HlslPerf.Core;
 using Vortice.Direct3D12;
 using Vortice.DXGI;
@@ -94,11 +95,16 @@ public sealed partial class D3D12Tuner
                     slot.InputSeed, slot.InputSha256, slot.Plan.ExpectedSha256,
                     slot.Plan.Buffers.Sum(buffer => (long)buffer.ByteLength), slot.Plan.Passes.Count)).ToArray();
                 Dictionary<string, string> dxilHashes = compilation.Bytecodes.ToDictionary(pair => pair.Key, pair => ContentHash.Sha256(pair.Value));
+                ScenarioCompilerBinary[] compilerBinaries = Process.GetCurrentProcess().Modules.Cast<ProcessModule>()
+                    .Where(module => module.ModuleName.Equals("dxcompiler.dll", StringComparison.OrdinalIgnoreCase) ||
+                        module.ModuleName.Equals("dxil.dll", StringComparison.OrdinalIgnoreCase))
+                    .Select(module => new ScenarioCompilerBinary(module.FileName,
+                        ContentHash.Sha256(File.ReadAllBytes(module.FileName)), module.FileVersionInfo.FileVersion)).ToArray();
                 string workloadHash = WorkloadIdentity.Compute(workload);
                 string identity = ContentHash.Sha256(JsonSerializer.Serialize(new
                 {
                     schema = WorkloadScenario.Schema, scenario, manifest, candidate.Defines,
-                    source = graph.CombinedSha256, workloadHash, slotEvidence, dxilHashes,
+                    source = graph.CombinedSha256, workloadHash, slotEvidence, dxilHashes, compilerBinaries,
                     device = owner.CreateFingerprint(manifest.ShaderModel)
                 }, JsonDefaults.Options));
                 ScenarioSessionEvidence evidence = new(WorkloadScenario.Schema, scenario.Id, scenario.CachePolicy,
@@ -110,7 +116,12 @@ public sealed partial class D3D12Tuner
                     before, owner.CaptureScenarioMemory(),
                     "GPU timestamps enclose every complete plan including resets and transitions; upload, PSO creation, poison, readback and host oracle excluded.",
                     "unavailable: temperature and clocks not sampled or controlled",
-                    "uncontrolled: shared validation mutex serializes cooperating tasks only; external applications may interfere");
+                    "uncontrolled: shared validation mutex serializes cooperating tasks only; external applications may interfere")
+                {
+                    NativeCompilerBinaries = compilerBinaries,
+                    NativeCompilerStatus = compilerBinaries.Length > 0 ? "loaded native compiler module file hashes" :
+                        "unavailable: no DXC module loaded; cached DXIL does not attest its original native compiler"
+                };
                 return new(owner, slots, pipelines, resources, evidence);
             }
             catch
