@@ -8,7 +8,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $EvidenceRoot = [IO.Path]::GetFullPath($EvidenceRoot)
-$cli = Join-Path $repoRoot 'src/HlslPerf.Cli/bin/Release/net10.0/HlslPerf.Cli.dll'
+$cli = Join-Path $repoRoot 'src/HlslPerf.Cli/bin/Release/net10.0/hlslperf.dll'
 $declarationPath = Join-Path $EvidenceRoot 'declaration.json'
 
 function Write-Json($Object, [string]$Path) {
