@@ -93,7 +93,8 @@ public sealed partial class D3D12Tuner
                 foreach (ScenarioPlanSlot slot in slots) resources.Add(owner.CreateResources(slot.Plan));
                 ScenarioSlotEvidence[] slotEvidence = slots.Select(slot => new ScenarioSlotEvidence(slot.Slot,
                     slot.InputSeed, slot.InputSha256, slot.Plan.ExpectedSha256,
-                    slot.Plan.Buffers.Sum(buffer => (long)buffer.ByteLength), slot.Plan.Passes.Count)).ToArray();
+                    slot.Plan.Buffers.Sum(buffer => (long)buffer.ByteLength), slot.Plan.Passes.Count)
+                    { ExpectedOutputs = slot.Plan.GetVerifiedOutputs().ToDictionary(output => output.Resource, output => output.ExpectedSha256) }).ToArray();
                 Dictionary<string, string> dxilHashes = compilation.Bytecodes.ToDictionary(pair => pair.Key, pair => ContentHash.Sha256(pair.Value));
                 ScenarioCompilerBinary[] compilerBinaries = Process.GetCurrentProcess().Modules.Cast<ProcessModule>()
                     .Where(module => module.ModuleName.Equals("dxcompiler.dll", StringComparison.OrdinalIgnoreCase) ||
@@ -101,17 +102,19 @@ public sealed partial class D3D12Tuner
                     .Select(module => new ScenarioCompilerBinary(module.FileName,
                         ContentHash.Sha256(File.ReadAllBytes(module.FileName)), module.FileVersionInfo.FileVersion)).ToArray();
                 string workloadHash = WorkloadIdentity.Compute(workload);
+                string backendHash = ContentHash.Sha256(File.ReadAllBytes(typeof(D3D12Tuner).Assembly.Location));
                 string identity = ContentHash.Sha256(JsonSerializer.Serialize(new
                 {
                     schema = WorkloadScenario.Schema, scenario, manifest, candidate.Defines,
-                    source = graph.CombinedSha256, workloadHash, slotEvidence, dxilHashes, compilerBinaries,
+                    source = graph.CombinedSha256, workloadHash, backendHash, DynamicExecutorSha256, slotEvidence, dxilHashes, compilerBinaries,
                     device = owner.CreateFingerprint(manifest.ShaderModel)
                 }, JsonDefaults.Options));
                 ScenarioSessionEvidence evidence = new(WorkloadScenario.Schema, scenario.Id, scenario.CachePolicy,
                     identity, owner.CreateFingerprint(manifest.ShaderModel), graph.CombinedSha256, workloadHash,
                     dxilHashes, slotEvidence, slotEvidence.Sum(slot => slot.LogicalBytes), allocated,
                     slots.Sum(slot => slot.Plan.Buffers.Where(buffer => buffer.InitialData is not null).Sum(buffer => (long)buffer.ByteLength)),
-                    slots.Max(slot => (long)slot.Plan.Buffers.Single(buffer => buffer.Name == slot.Plan.VerifiedResource).ByteLength),
+                    slots.SelectMany(slot => slot.Plan.GetVerifiedOutputs().Select(output =>
+                        (long)slot.Plan.Buffers.Single(buffer => buffer.Name == output.Resource).ByteLength)).Max(),
                     "Committed DEFAULT heaps retained for session; normal WDDM residency, no pinning or eviction trace; no guaranteed cache-cold state.",
                     before, owner.CaptureScenarioMemory(),
                     "GPU timestamps enclose every complete plan including resets and transitions; upload, PSO creation, poison, readback and host oracle excluded.",
@@ -119,6 +122,8 @@ public sealed partial class D3D12Tuner
                     "uncontrolled: shared validation mutex serializes cooperating tasks only; external applications may interfere")
                 {
                     NativeCompilerBinaries = compilerBinaries,
+                    BackendAssemblySha256 = backendHash,
+                    DynamicExecutorSha256 = DynamicExecutorSha256,
                     NativeCompilerStatus = compilerBinaries.Length > 0 ? "loaded native compiler module file hashes" :
                         "unavailable: no DXC module loaded; cached DXIL does not attest its original native compiler"
                 };
@@ -160,9 +165,9 @@ public sealed partial class D3D12Tuner
             foreach (ScenarioPlanSlot slot in slots)
             {
                 CorrectnessResult correctness = owner.VerifyPlanOutputs(slot.Plan, pipelines, resources[slot.Slot],
-                    captureVerifiedOutput is null ? null : (name, bytes) =>
+                    captureVerifiedOutput is null ? null : (resource, bytes) =>
                     {
-                        if (name == slot.Plan.VerifiedResource) captureVerifiedOutput(slot.Slot, bytes);
+                        if (resource == slot.Plan.VerifiedResource) captureVerifiedOutput(slot.Slot, bytes);
                     });
                 results.Add(new(slot.Slot, slot.InputSeed, slot.Plan.VerifiedResource, correctness));
             }

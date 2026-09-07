@@ -23,7 +23,8 @@ provider rebuilds each slot's independent expected output hash.
 
 The session records logical buffers, D3D12 allocation-info sizes (including one
 dummy allocation per slot), initial upload bytes and maximum primary readback
-bytes. Upload totals are traffic/storage descriptions, not GPU bandwidth. Caps
+bytes (peak single-buffer readback across every declared output, allocated serially).
+Upload totals are traffic/storage descriptions, not GPU bandwidth. Caps
 apply to committed DEFAULT allocations; host oracle memory and transient
 upload/readback allocations are additional. Allocation fails before resource
 creation if it exceeds the declared cap or 75% of the current available DXGI
@@ -39,6 +40,12 @@ arms must pass `VerifyAll()` before their measurements are eligible. Warm each
 arm explicitly, then sample. Recheck every slot after timing; retain failures.
 Dispose both sessions before the next block. Calibration and confirmation must
 use disjoint complete seed rings; lock candidate selection before confirmation.
+
+`VerifyAll` uses the dynamic executor's common `VerifyPlanOutputs` helper: every
+declared output is poisoned twice with distinct patterns, then executed and
+read back against its own oracle. `Correctness.Outputs` retains each resource
+and attempt. The optional `(slot, primaryBytes)` callback preserves existing
+output consumers. Slot evidence includes all expected output hashes.
 
 Record session Evidence with each pair. IdentitySha256 binds scenario/seeds,
 manifest, candidate, device/driver, source graph, workload assembly, input hashes
