@@ -1,0 +1,12 @@
+empty/seed=19: True, checks=10
+zero-active/seed=19: True, checks=10
+one/seed=19: True, checks=10
+partial/seed=19: True, checks=10
+predicate/seed=19: True, checks=10
+predicate/seed=71: True, checks=10
+predicate/seed=103: True, checks=10
+capacity-clamp/seed=19: True, checks=10
+zero-capacity/seed=19: True, checks=10
+uint-max-count/seed=19: True, checks=10
+maximum-dispatch/seed=19: True, checks=10
+C:\Users\EdwinLiu\Downloads\opt-next-hlsl-dynamic\artifacts\dynamic-smoke\dynamic-native-smoke.json
