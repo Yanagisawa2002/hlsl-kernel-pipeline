@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory)][string]$Runtime,
     [Parameter(Mandatory)][string]$OutputDirectory,
     [Parameter(Mandatory)][string]$SerializedValidationRunner,
-    [Parameter(Mandatory)][ValidateSet('correctness','formal','pilot','focused-diagnostic')][string]$Mode,
+    [Parameter(Mandatory)][ValidateSet('correctness','formal','pilot','focused-diagnostic','focused-correctness','focused-formal')][string]$Mode,
     [string]$CoordinationReport,
     [string]$Declaration,
     [string]$Cell,
@@ -19,9 +19,9 @@ $output=[IO.Path]::GetFullPath($OutputDirectory)
 if ((Test-Path -LiteralPath $output) -or (Test-Path -LiteralPath "$output.execution.json")) { throw 'Evidence path already exists; no automatic retries.' }
 [IO.Directory]::CreateDirectory((Split-Path -Parent $output)) | Out-Null
 $arguments=@([IO.Path]::GetFullPath($Runtime),$Mode,$repo,$output)
-if ($Mode -eq 'focused-diagnostic') { $arguments+=@("$ProcessIndex") }
+if ($Mode -eq 'focused-diagnostic','focused-correctness','focused-formal') { $arguments+=@("$ProcessIndex") }
 if ($Mode -eq 'pilot') { $arguments+=@([IO.Path]::GetFullPath($Declaration),$Cell,"$ProcessIndex") }
-if ($Mode -eq 'formal') {
+if ($Mode -in @('formal','focused-formal')) {
     if (-not ($Declaration -and $Cell -and $ProcessIndex -ge 1 -and $ProcessIndex -le 5 -and $ExpectedSourceSha -and $BinaryLock)) { throw 'Formal execution requires frozen source, binaries and a complete declaration.' }
     $arguments+=@([IO.Path]::GetFullPath($Declaration),$Cell,"$ProcessIndex")
     $frozen=Get-Content -Raw -LiteralPath $BinaryLock | ConvertFrom-Json
@@ -31,7 +31,7 @@ if ($Mode -eq 'formal') {
         if ($actual -ne $item.sha256) { throw "Frozen binary changed: $($item.path)" }
     }
 }
-$receipt=[ordered]@{ schema='hlslperf.unified-native-execution.v1'; developmentOnly=($Mode -ne 'formal'); sourceSha=$source; command=@('dotnet')+$arguments; queuedUtc=[DateTime]::UtcNow.ToString('o'); status='queued'; output=$output; wrapperPid=$PID; pid=$null }
+$receipt=[ordered]@{ schema='hlslperf.unified-native-execution.v1'; developmentOnly=($Mode -notin @('formal','focused-formal')); sourceSha=$source; command=@('dotnet')+$arguments; queuedUtc=[DateTime]::UtcNow.ToString('o'); status='queued'; output=$output; wrapperPid=$PID; pid=$null }
 function Save-State {
     [IO.File]::WriteAllText("$output.execution.json",($receipt | ConvertTo-Json -Depth 10))
     if ($CoordinationReport) {
@@ -46,7 +46,7 @@ function Save-State {
 Save-State
 & $SerializedValidationRunner -Action {
     $receipt.binaries=@(Get-ChildItem -LiteralPath (Split-Path -Parent $Runtime) -Recurse -File | ForEach-Object { @{ path=$_.FullName; sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant() } })
-    if ($Mode -eq 'formal') { $receipt.declarationSha256=(Get-FileHash -LiteralPath $Declaration -Algorithm SHA256).Hash.ToLowerInvariant(); $receipt.binaryLockSha256=(Get-FileHash -LiteralPath $BinaryLock -Algorithm SHA256).Hash.ToLowerInvariant() }
+    if ($Mode -in @('formal','focused-formal')) { $receipt.declarationSha256=(Get-FileHash -LiteralPath $Declaration -Algorithm SHA256).Hash.ToLowerInvariant(); $receipt.binaryLockSha256=(Get-FileHash -LiteralPath $BinaryLock -Algorithm SHA256).Hash.ToLowerInvariant() }
     $quoted=@($arguments | ForEach-Object { '"'+$_.Replace('"','\"')+'"' })
     $native=Start-Process -FilePath dotnet -ArgumentList $quoted -WindowStyle Hidden -PassThru -RedirectStandardOutput "$output.stdout.log" -RedirectStandardError "$output.stderr.log"
     $receipt.pid=$native.Id; $receipt.startedUtc=$native.StartTime.ToUniversalTime().ToString('o'); $receipt.status='running'; Save-State

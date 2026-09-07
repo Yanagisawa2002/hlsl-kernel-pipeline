@@ -4,10 +4,21 @@ namespace HlslPerf.Workloads;
 
 public static class FocusedCostWorkloads
 {
+    public const string RadixBallot = "internal-radix-8-ballot";
     public const string ScanCounters = "internal-scan-single-counters";
 
     public static UnifiedOperationPlan Build(string repository, UnifiedFixture fixture, string arm)
     {
+        if (arm == RadixBallot)
+        {
+            var original = UnifiedWorkloads.Build(repository, fixture, "internal-radix-8");
+            string RenameRadix(string id) => id.Replace("internal-radix-8/", RadixBallot + "/", StringComparison.Ordinal);
+            var candidate = original with { Implementation = arm,
+                Shaders = original.Shaders.Select(shader => shader with { Id = RenameRadix(shader.Id),
+                    Defines = new Dictionary<string, string>(shader.Defines) { ["HLSLPERF_RADIX_RANK_BALLOT"] = "1" } }).ToArray(),
+                Passes = original.Passes.Select(pass => pass with { ShaderId = pass.ShaderId is null ? null : RenameRadix(pass.ShaderId) }).ToArray() };
+            candidate.Validate(); return candidate;
+        }
         bool counters = arm == ScanCounters;
         var plan = UnifiedWorkloads.Build(repository, fixture, counters ? "internal-scan-single" : arm);
         if (!counters) return plan;

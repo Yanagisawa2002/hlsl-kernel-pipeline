@@ -19,6 +19,29 @@ public sealed class UnifiedOperationTests
         Assert.All(plan.Shaders, shader => Assert.Equal("1", shader.Defines["HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS"]));
     }
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(257)]
+    [InlineData(1048576)]
+    public void BallotCandidateRetainsFullOperationAndHasDistinctShaderIdentity(int count)
+    {
+        var fixture = UnifiedWorkloads.Fixture("radix", count, 19, "duplicate", true);
+        var original = UnifiedWorkloads.Build(".", fixture, "internal-radix-8");
+        var candidate = FocusedCostWorkloads.Build(".", fixture, FocusedCostWorkloads.RadixBallot);
+        Assert.Equal(original.Buffers, candidate.Buffers);
+        Assert.Equal(original.Outputs, candidate.Outputs);
+        Assert.Equal(original.Passes.Count, candidate.Passes.Count);
+        Assert.All(candidate.Shaders, shader => {
+            Assert.DoesNotContain(original.Shaders, baseline => baseline.Id == shader.Id);
+            Assert.Equal("1", shader.Defines["HLSLPERF_RADIX_RANK_BALLOT"]);
+            Assert.Equal("128", shader.Defines["HLSLPERF_GROUP_SIZE"]);
+            Assert.Equal("2", shader.Defines["HLSLPERF_ELEMENTS_PER_THREAD"]);
+            Assert.Equal("8", shader.Defines["HLSLPERF_RADIX_BITS"]);
+            Assert.Equal("32", shader.Defines["HLSLPERF_WAVE_SIZE"]);
+        });
+        Assert.DoesNotContain(FocusedCostWorkloads.RadixBallot, UnifiedWorkloads.RadixImplementations);
+    }
+
     private static uint[] Values(byte[] bytes) => MemoryMarshal.Cast<byte, uint>(bytes).ToArray();
 
     [Fact]

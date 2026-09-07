@@ -6,6 +6,32 @@ using HlslPerf.Workloads;
 
 internal static class FocusedCostRunner
 {
+    public static int Correctness(string repo, string output)
+    {
+        if (Directory.Exists(output)) throw new InvalidDataException("Never overwrite correctness evidence.");
+        Directory.CreateDirectory(output);
+        using var tuner = new D3D12Tuner("R9700"); using var executor = tuner.CreateUnifiedExecutor();
+        var results = new List<object>(); var errors = new List<string>(); bool passed = true, completed = false;
+        var started = DateTimeOffset.UtcNow;
+        try
+        {
+            foreach (int count in new[] { 0, 1, 31, 32, 63, 64, 65, 127, 128, 129, 255, 256, 257, 1023, 1024, 1025, 6145, 1048576 })
+                foreach (string pattern in new[] { "uniform", "duplicate", "equal", "descending", "extremes" })
+                {
+                    var fixture = UnifiedWorkloads.Fixture("radix", count, 909177, pattern, true);
+                    using var session = executor.Prepare(FocusedCostWorkloads.Build(repo, fixture, FocusedCostWorkloads.RadixBallot));
+                    var verification = session.Verify(); passed &= verification.All(v => v.Passed);
+                    results.Add(new { fixture, arm = FocusedCostWorkloads.RadixBallot, verification }); Save();
+                }
+            completed = true; Save(); return passed ? 0 : 2;
+        }
+        catch (Exception error) { errors.Add(error.ToString()); Save(); return 3; }
+        void Save() => File.WriteAllText(Path.Combine(output, "correctness.json"), JsonSerializer.Serialize(new {
+            schema = "hlslperf.focused-correctness.v1", developmentOnly = true, completed, testsPassed = passed && errors.Count == 0,
+            pid = Environment.ProcessId, startedUtc = started, deviceRemovalStatus = tuner.DeviceRemovalStatus,
+            runtime = UnifiedBenchRunner.RuntimeIdentity(), compilation = executor.CompilationEvidence, results, errors }, JsonDefaults.Options));
+    }
+
     public static int Run(string repository, string outputDirectory, int processIndex)
     {
         if (processIndex is < 1 or > 3) throw new InvalidDataException("The diagnostic has exactly three process slots.");

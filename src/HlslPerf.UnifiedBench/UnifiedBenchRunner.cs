@@ -11,7 +11,7 @@ internal static class UnifiedBenchRunner
         string repo = Path.GetFullPath(args[1]), output = Path.GetFullPath(args[2]);
         if (Directory.Exists(output)) throw new InvalidDataException("Refusing to overwrite an experiment.");
         Directory.CreateDirectory(output);
-        return args[0] == "correctness" ? Correctness(repo, output) : Formal(repo, output, args[3], args[4], int.Parse(args[5]), args[0] == "pilot");
+        return args[0] == "correctness" ? Correctness(repo, output) : Formal(repo, output, args[3], args[4], int.Parse(args[5]), args[0] == "pilot", args[0] == "focused-formal");
     }
 
     internal static object RuntimeIdentity() => new
@@ -73,7 +73,7 @@ internal static class UnifiedBenchRunner
             compilation = executor.CompilationEvidence, results });
     }
 
-    private static int Formal(string repo, string output, string declarationPath, string cellId, int processIndex, bool developmentOnly)
+    private static int Formal(string repo, string output, string declarationPath, string cellId, int processIndex, bool developmentOnly, bool focused)
     {
         byte[] declarationBytes = File.ReadAllBytes(declarationPath);
         var declaration = JsonSerializer.Deserialize<Declaration>(declarationBytes, JsonDefaults.Options) ?? throw new InvalidDataException("Missing declaration.");
@@ -104,7 +104,7 @@ internal static class UnifiedBenchRunner
                 for (int slot = 0; slot < cell.Slots; slot++)
                 {
                     long start = Stopwatch.GetTimestamp();
-                    var plan = UnifiedWorkloads.Build(repo, fixtures[slot], arm);
+                    var plan = focused ? FocusedCostWorkloads.Build(repo, fixtures[slot], arm) : UnifiedWorkloads.Build(repo, fixtures[slot], arm);
                     double planMilliseconds = Stopwatch.GetElapsedTime(start).TotalMilliseconds;
                     var session = executor.Prepare(plan); rings[arm].Add(session);
                     setup.Add(new { arm, slot, planMilliseconds, session.CpuPreparationMilliseconds, session.GpuUploadMilliseconds,

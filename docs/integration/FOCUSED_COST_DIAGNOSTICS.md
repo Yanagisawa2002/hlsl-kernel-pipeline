@@ -38,3 +38,25 @@ No group size, radix width, scale or slot-count search is authorized. A diagnosi
 may justify at most one candidate per cell, frozen before independent five-process
 confirmation. No unsupported causal claim or positive gain is required. All
 builds, tests and native execution use the existing shared validation mutex.
+
+## One selected candidate
+
+Both retained diagnostic versions place about 69% of internal Radix time in
+scatter. The sole candidate replaces the quadratic predecessor equality loop
+with valid wave bit planes and population counts. Group size 128, two records per
+thread and eight-bit digits stay fixed. Its scatter explicitly requests wave32
+(the previous scatter entry point did not apply the existing wave32 macro).
+It adds 288 bytes of shared bit planes and one group barrier; this is a single
+fixed rank implementation, not a wave-size sweep. It preserves key/payload loads,
+stable original order, histogram and prefix work, all 29 passes and conversion.
+The default macro is zero; only the focused arm enables it. Native correctness
+covers 18 boundary sizes including 1 Mi, five patterns and both poisoned complete
+key/payload outputs. No performance pilot selects among candidates.
+
+Scan has no candidate: its observed algorithm cost, persistent lookback polling,
+scalar access pattern and intra-block work do not isolate a safe fixed repair.
+The confirmation repeats its unchanged two-arm comparison for contemporaneous
+context. `focused_cost_protocol.py generate` freezes exactly these two cells,
+three Radix arms and two Scan arms, five independent processes/cell, 12 balanced
+blocks, 18 operations/batch, and the previous 95% CI/CV/drift/p95 contract. No
+pass markers or diagnostic counters enter confirmation. All outcomes stay visible.

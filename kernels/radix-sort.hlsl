@@ -23,6 +23,9 @@ cbuffer DispatchParameters : register(b0)
 #ifndef HLSLPERF_RADIX_BITS
 #define HLSLPERF_RADIX_BITS 1
 #endif
+#ifndef HLSLPERF_RADIX_RANK_BALLOT
+#define HLSLPERF_RADIX_RANK_BALLOT 0
+#endif
 #define RADIX_STRIDE (4 + 4 * HLSLPERF_RADIX_PAIRS)
 
 uint LoadRadixKey(uint index) { return Input0.Load(index * RADIX_STRIDE); }
@@ -123,6 +126,13 @@ void ScatterRadixBit(uint3 groupId : SV_GroupID, uint groupIndex : SV_GroupIndex
 #define RADIX_BLOCK (HLSLPERF_GROUP_SIZE * HLSLPERF_ELEMENTS_PER_THREAD)
 groupshared uint RadixHistogram[RADIX_BINS];
 groupshared uint RadixDigits[RADIX_BLOCK];
+#if HLSLPERF_RADIX_RANK_BALLOT
+#if HLSLPERF_GROUP_SIZE != 128 || HLSLPERF_ELEMENTS_PER_THREAD != 2 || HLSLPERF_RADIX_BITS != 8 || HLSLPERF_WAVE_SIZE != 32
+#error Ballot rank is a fixed group128, two-record, eight-bit, wave32 candidate.
+#endif
+// Four waves, two original-order records/lane, eight bit planes plus validity.
+groupshared uint RadixRankPlanes[4][2][9];
+#endif
 
 [RootSignature(HLSLPERF_ROOT_SIGNATURE)]
 [numthreads(HLSLPERF_GROUP_SIZE, 1, 1)]
@@ -150,6 +160,9 @@ void BuildRadixHistogram(uint3 groupId : SV_GroupID, uint lane : SV_GroupIndex)
 
 [RootSignature(HLSLPERF_ROOT_SIGNATURE)]
 [numthreads(HLSLPERF_GROUP_SIZE, 1, 1)]
+#if HLSLPERF_RADIX_RANK_BALLOT
+[WaveSize(32)]
+#endif
 void ScatterRadixDigit(uint3 groupId : SV_GroupID, uint lane : SV_GroupIndex)
 {
     const uint block = groupId.y * DispatchGroupsX + groupId.x;
@@ -162,6 +175,24 @@ void ScatterRadixDigit(uint3 groupId : SV_GroupID, uint lane : SV_GroupIndex)
         RadixDigits[local] = index < ElementCount ? (LoadRadixKey(index) >> RadixBit) & Parameter3 : 0xffffffff;
     }
     GroupMemoryBarrierWithGroupSync();
+#if HLSLPERF_RADIX_RANK_BALLOT
+    const uint rankWave = lane / 32;
+    const uint rankLane = WaveGetLaneIndex();
+    [unroll]
+    for (uint sourceItem = 0; sourceItem < 2; sourceItem++)
+    {
+        const uint sourceDigit = RadixDigits[lane * 2 + sourceItem];
+        const uint valid = WaveActiveBallot(block * ElementsPerBlock + lane * 2 + sourceItem < ElementCount).x;
+        if (rankLane == 0) RadixRankPlanes[rankWave][sourceItem][8] = valid;
+        [unroll]
+        for (uint bit = 0; bit < 8; bit++)
+        {
+            const uint plane = WaveActiveBallot((sourceDigit & (1u << bit)) != 0).x;
+            if (rankLane == 0) RadixRankPlanes[rankWave][sourceItem][bit] = plane;
+        }
+    }
+    GroupMemoryBarrierWithGroupSync();
+#endif
     [unroll]
     for (uint item = 0; item < HLSLPERF_ELEMENTS_PER_THREAD; item++)
     {
@@ -171,9 +202,31 @@ void ScatterRadixDigit(uint3 groupId : SV_GroupID, uint lane : SV_GroupIndex)
         {
             const uint digit = RadixDigits[local];
             uint rank = 0;
+#if HLSLPERF_RADIX_RANK_BALLOT
+            // Count all earlier waves, then earlier lanes and earlier same-lane items.
+            // Validity is separate: invalid tail records must never match digit 255.
+            for (uint sourceWave = 0; sourceWave <= rankWave; sourceWave++)
+            {
+                [unroll]
+                for (uint sourceItem = 0; sourceItem < 2; sourceItem++)
+                {
+                    uint matches = RadixRankPlanes[sourceWave][sourceItem][8];
+                    [unroll]
+                    for (uint bit = 0; bit < 8; bit++)
+                    {
+                        const uint plane = RadixRankPlanes[sourceWave][sourceItem][bit];
+                        matches &= (digit & (1u << bit)) != 0 ? plane : ~plane;
+                    }
+                    if (sourceWave == rankWave)
+                        matches &= ((1u << rankLane) - 1u) | (sourceItem < item ? 1u << rankLane : 0u);
+                    rank += countbits(matches);
+                }
+            }
+#else
             // Explicit original-order rank: atomic arrival order never decides stability.
             for (uint previous = 0; previous < local; previous++)
                 rank += RadixDigits[previous] == digit ? 1 : 0;
+#endif
             const uint offset = Input1.Load((digit * DispatchGroupCount + block) * 4);
             StoreRadixRecord(offset + rank, index, LoadRadixKey(index));
         }
