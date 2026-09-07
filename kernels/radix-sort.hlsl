@@ -144,8 +144,8 @@ void BuildRadixHistogram(uint3 groupId : SV_GroupID, uint lane : SV_GroupIndex)
         }
     }
     GroupMemoryBarrierWithGroupSync();
-    for (uint bin = lane; bin < RADIX_BINS; bin += HLSLPERF_GROUP_SIZE)
-        Output0.Store((bin * DispatchGroupCount + block) * 4, RadixHistogram[bin]);
+    for (uint storeBin = lane; storeBin < RADIX_BINS; storeBin += HLSLPERF_GROUP_SIZE)
+        Output0.Store((storeBin * DispatchGroupCount + block) * 4, RadixHistogram[storeBin]);
 }
 
 [RootSignature(HLSLPERF_ROOT_SIGNATURE)]
@@ -155,9 +155,9 @@ void ScatterRadixDigit(uint3 groupId : SV_GroupID, uint lane : SV_GroupIndex)
     const uint block = groupId.y * DispatchGroupsX + groupId.x;
     if (block >= DispatchGroupCount) return;
     [unroll]
-    for (uint item = 0; item < HLSLPERF_ELEMENTS_PER_THREAD; item++)
+    for (uint loadItem = 0; loadItem < HLSLPERF_ELEMENTS_PER_THREAD; loadItem++)
     {
-        const uint local = lane * HLSLPERF_ELEMENTS_PER_THREAD + item;
+        const uint local = lane * HLSLPERF_ELEMENTS_PER_THREAD + loadItem;
         const uint index = block * ElementsPerBlock + local;
         RadixDigits[local] = index < ElementCount ? (LoadRadixKey(index) >> RadixBit) & Parameter3 : 0xffffffff;
     }
