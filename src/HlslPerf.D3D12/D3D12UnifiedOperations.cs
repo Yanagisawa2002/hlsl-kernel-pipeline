@@ -294,7 +294,8 @@ public sealed partial class D3D12Tuner
             for (int run = 0; run < repetitions; run++)
                 for (int stage = 0; stage < 4; stage++) stages[stage] += first.Elapsed(data, 1 + run * 5 + stage, 2 + run * 5 + stage);
             return new(repetitions, ring.Count, Enumerable.Repeat(repetitions / ring.Count, ring.Count).ToArray(),
-                first.Elapsed(data, 0, (int)marker - 1), stages[0], stages[1], stages[2], stages[3], record, submission, (int)marker);
+                first.Elapsed(data, 0, (int)marker - 1), stages[0], stages[1], stages[2], stages[3], record, submission, (int)marker)
+                { GpuOperationMilliseconds = Enumerable.Range(0, repetitions).Select(run => first.Elapsed(data, 1 + run * 5, 5 + run * 5)).ToArray() };
         }
 
         public IReadOnlyList<UnifiedVerification> Verify(Action<string, ReadOnlyMemory<byte>>? capture = null)

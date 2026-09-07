@@ -81,7 +81,10 @@ public sealed record UnifiedBatchTiming(
     double GpuTotalMilliseconds, double GpuInputRestoreMilliseconds,
     double GpuScratchInitializationMilliseconds, double GpuAlgorithmMilliseconds,
     double GpuOutputConversionMilliseconds, double CpuRecordMilliseconds,
-    UnifiedSubmissionTiming Submission, int TimestampMarkers);
+    UnifiedSubmissionTiming Submission, int TimestampMarkers)
+{
+    public IReadOnlyList<double> GpuOperationMilliseconds { get; init; } = [];
+}
 
 public sealed record UnifiedVerification(
     string Resource, int Attempt, byte PoisonByte, string ExpectedSha256,
