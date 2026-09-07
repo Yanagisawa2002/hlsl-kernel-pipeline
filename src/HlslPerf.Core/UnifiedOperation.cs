@@ -93,4 +93,8 @@ public sealed record UnifiedVerification(
 
 public sealed record UnifiedPassTiming(string Name, UnifiedStage Stage, double GpuMilliseconds);
 public sealed record UnifiedPassDiagnostic(double GpuTotalMilliseconds, double CpuRecordMilliseconds,
-    UnifiedSubmissionTiming Submission, IReadOnlyList<UnifiedPassTiming> Passes, int TimestampMarkers);
+    UnifiedSubmissionTiming Submission, IReadOnlyList<UnifiedPassTiming> Passes, int TimestampMarkers)
+{
+    public int Repetitions { get; init; } = 1;
+    public IReadOnlyList<double> GpuOperationMilliseconds { get; init; } = [];
+}

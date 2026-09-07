@@ -19,6 +19,14 @@ records one timestamp before work and one after each pass, with a single queue
 submission and fence completion. It does not fence between passes. Additional
 markers may change scheduling/cost, so these timings are never confirmation data.
 
+The first retained diagnostic used one operation per submission. Its timings,
+especially Scan's first pass, differed substantially from the prior 18-operation
+formal batches. The revised diagnostic therefore uses exactly 18 operations per
+submission, with a dedicated query heap, while retaining per-pass markers. Pass
+times are averages per operation; the total field is the whole batch. This is a
+measurement-granularity correction, not a performance candidate or a parameter
+search. Both versions and their failure/limitation evidence are retained.
+
 Scan additionally runs one opt-in instrumentation variant at the same size and
 configuration. Three snapshots per process retain every block's status polls,
 aggregate hits, prefix hits and not-ready polls. They have independent output
