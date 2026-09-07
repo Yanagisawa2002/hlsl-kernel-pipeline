@@ -67,10 +67,20 @@ Measurement commit: `3874eb0908539db5bf65777eacd54b2ab8bd8549`.
 Frozen declaration SHA256:
 `23dd2cce9cb6c1c0e2c05e799e1f7b5cf14aea72fa5f5802a96485541a779d25`.
 The later result/documentation/audit commit does not change measurement code.
-Use a clean checkout of the measurement commit for exact source reproduction,
+Use a clean checkout of this release's final source for reproduction,
 new output directories, and the included shared-lock helper. Do not wrap the
 build helper in another lock. A re-created runtime has its own binary identity;
 use the delivered runtime archive and lock when checking original binaries.
+
+Parent integration found a source-byte reproducibility issue: the measured working
+copy of UnifiedBenchRunner.cs used CRLF despite an LF checkout attribute, and
+scan_u32.hlsli had mixed line endings. A fresh checkout of the measurement commit
+therefore did not match two declaration hashes. The final release preserves those
+exact measured bytes with per-file text normalization disabled. The frozen
+declaration is unchanged; the correction changes line-ending storage only, not
+shader or runner logic. Earlier measurement-commit checkouts remain historical
+provenance, not a promise of byte-identical reproduction. Use the final release
+checkout and verify every declared source hash before collecting new results.
 
 ```powershell
 ./tools/Build-UnifiedBenchmark.ps1 -OutputDirectory .hlslperf/focused-reproduction/build

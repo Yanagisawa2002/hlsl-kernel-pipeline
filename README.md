@@ -14,6 +14,13 @@ Its R9700 correctness evidence is separate from the historical performance resul
 
 ## Five-process Scan applicability experiment
 
+The [focused cost diagnosis](docs/integration/FOCUSED_COST_RESULTS.md) examines
+only 1 Mi key/payload Radix and 8 Mi Scan. A single opt-in ballot-rank candidate
+reduces the Radix point estimate, but all four new comparisons remain inconclusive
+under the frozen stability gates. Defaults are unchanged. The
+[reproduction guide](docs/integration/FOCUSED_COST_DIAGNOSTICS.md) separates
+instrumented diagnostics, formal data and source-byte provenance.
+
 The [official external comparison](docs/integration/UNIFIED_BENCHMARK_RESULTS.md)
 adds pinned AMD Parallel Sort and GPUPrefixSums implementations under one complete-operation
 benchmark. All 120 fixed processes completed: four directional comparisons pass every

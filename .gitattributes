@@ -11,4 +11,6 @@ docs/results/data/radix-process-2026-09-07/** -text -diff
 third_party/** -text -whitespace
 src/HlslPerf.Workloads/UnifiedWorkloads.cs text eol=lf
 src/HlslPerf.D3D12/D3D12UnifiedOperations.cs text eol=lf
-src/HlslPerf.UnifiedBench/UnifiedBenchRunner.cs text eol=lf
+src/HlslPerf.UnifiedBench/UnifiedBenchRunner.cs -text -eol
+# Frozen focused measurements include mixed shader line endings; retain exact bytes.
+kernels/include/hlslperf/scan_u32.hlsli -text -eol
