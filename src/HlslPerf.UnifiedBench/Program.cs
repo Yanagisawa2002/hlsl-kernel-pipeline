@@ -22,13 +22,19 @@ string pattern = args.Length > 5 ? args[5] : "uniform";
 bool pairs = args.Length > 6 && bool.Parse(args[6]);
 string? selected = args.Length > 7 && args[7] != "all" ? args[7] : null;
 bool debug = args.Length > 8 && bool.Parse(args[8]);
+bool tracePasses = debug;
+string? debugUnavailable = null;
 DateTimeOffset started = DateTimeOffset.UtcNow;
 List<object> results = [];
 bool allPassed = true;
 long fixtureStart = Stopwatch.GetTimestamp();
 UnifiedFixture fixture = UnifiedWorkloads.Fixture(workload, count, 771029, pattern, pairs);
 double fixtureMilliseconds = Stopwatch.GetElapsedTime(fixtureStart).TotalMilliseconds;
-if (debug) D3D12Tuner.EnableUnifiedDebugLayer();
+if (debug)
+{
+    try { D3D12Tuner.EnableUnifiedDebugLayer(); }
+    catch (Exception error) { debugUnavailable = error.ToString(); debug = false; Console.WriteLine("Debug layer unavailable; retaining dispatch isolation and device-reason checks."); }
+}
 using D3D12Tuner tuner = new("R9700");
 using D3D12Tuner.UnifiedExecutor executor = tuner.CreateUnifiedExecutor();
 foreach (string implementation in workload == "scan" ? UnifiedWorkloads.ScanImplementations : UnifiedWorkloads.RadixImplementations)
@@ -40,7 +46,7 @@ foreach (string implementation in workload == "scan" ? UnifiedWorkloads.ScanImpl
         UnifiedOperationPlan plan = UnifiedWorkloads.Build(repository, fixture, implementation);
         double planMilliseconds = Stopwatch.GetElapsedTime(planStart).TotalMilliseconds;
         using D3D12Tuner.UnifiedSession session = executor.Prepare(plan);
-        if (debug) session.DiagnosePasses((pass, milliseconds) =>
+        if (tracePasses) session.DiagnosePasses((pass, milliseconds) =>
         {
             results.Add(new { implementation, diagnosticPass = pass, milliseconds });
             Console.WriteLine($"{implementation}/{pass}: {milliseconds} ms");
@@ -75,6 +81,6 @@ void Save() => File.WriteAllText(Path.Combine(output, "diagnostic.json"), JsonSe
 {
     schema = "hlslperf.unified-diagnostic.v1", developmentOnly = true, testsPassed = allPassed, pid = Environment.ProcessId,
     startedUtc = started, recordedUtc = DateTimeOffset.UtcNow, fixture, fixtureMilliseconds,
-    device = tuner.DescribeDevice("6_6"), debug, deviceRemovalStatus = tuner.DeviceRemovalStatus,
+    device = tuner.DescribeDevice("6_6"), debug, tracePasses, debugUnavailable, deviceRemovalStatus = tuner.DeviceRemovalStatus,
     debugMessages = debug ? tuner.ReadUnifiedDebugMessages() : [], compilation = executor.CompilationEvidence, results
 }, JsonDefaults.Options));
