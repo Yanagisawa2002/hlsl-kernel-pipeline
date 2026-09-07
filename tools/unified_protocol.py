@@ -99,7 +99,8 @@ def analyze(declaration_path, raw, output):
             assert p['completed'] and not p['errors'] and p['declarationSha256']==declaration_hash
             assert receipt['declarationSha256']==declaration_hash and receipt['exitCode'] in [0,2]
             assert p['pid']==receipt['pid'] and p['processIndex']==index and p['cell']==cell
-            assert p['pid'] not in pids; pids.add(p['pid']); source_shas.add(receipt['sourceSha'])
+            process_identity=(p['pid'],receipt['startedUtc'])
+            assert process_identity not in pids; pids.add(process_identity); source_shas.add(receipt['sourceSha'])
             assert p['schedule']==cell['processes'][index-1]
             assert p['deviceRemovalStatus']=='00000000'
             identities.add(json.dumps([(b['path'],b['sha256']) for b in p['runtime']['binaries']],sort_keys=True))

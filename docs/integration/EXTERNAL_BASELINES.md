@@ -48,6 +48,29 @@ ReduceThenScan uses the native exclusive propagation entry point. Fallback
 uses its native exclusive entry point and its required InitCSDLDF dispatch
 before every operation, with the upstream fixed spin limit of four.
 
+Compiler settings are explicit per shader. Existing internal arms retain HLSL
+2018, SM 6.6, O3 and strictness, matching the previous host path. GPUPrefixSums
+uses HLSL 2021, SM 6.7 and O3 without an added strictness flag: its pinned host
+supplies no language override to DXC 1.8 (whose default is 2021) and caps its
+shader-model capability query at 6.7. AMD uses the pinned CMake wave64/full
+precision permutation (`FFX_HALF=0`, `FFX_HLSL_SM=66`, SM 6.6), the two upstream
+warning suppressions, and the active DXC default language (2021). It is compiled
+with the shared current DXC, not claimed to be a bit-identical SDK prebuilt blob.
+Compiler reference files and GPUPrefixSums packages.config are in the source lock.
+Each process records actual compiler DLL file versions/hashes, per-shader options,
+source/dependency hashes and DXIL hashes. No shader cache crosses processes.
+
+Early development diagnostics 01 and 03 used the incorrect Vortice default
+language/target/strictness for GPUPrefixSums. They encountered device removal;
+dispatch isolation completed Reduce and Scan before failing at PropagateExclusive.
+Diagnostic 02 could not load the optional D3D12 debug SDK. Diagnostic 04 restored
+the upstream settings and passed all dispatches and both full-output poison checks.
+These three setting changes were made together: the evidence does not isolate
+any one setting as the sole cause. Original failures remain evidence and are not
+formal samples. Fence handling now rejects the UINT64_MAX removal sentinel,
+checks the device reason before submission and after completion, and has a
+30-second wait limit. Native exceptions stop the process and the matrix epoch.
+
 The fallback state stores flags in the low two bits of a 32-bit reduction.
 Cross-partition large sums and uint32 wraparound must therefore be tested
 explicitly. A semantic failure must remain visible; the upstream arithmetic
