@@ -22,7 +22,7 @@ public sealed record TuningProgress(
     CandidateResult? Result);
 
 [SupportedOSPlatform("windows10.0")]
-public sealed class D3D12Tuner : IDisposable
+public sealed partial class D3D12Tuner : IDisposable
 {
     private readonly ID3D12Device device;
     private readonly ID3D12CommandQueue queue;
