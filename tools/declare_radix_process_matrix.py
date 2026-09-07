@@ -1,5 +1,7 @@
 """Freeze all preflight and conditional Radix comparison inputs before sampling."""
 import argparse
+import sys
+sys.dont_write_bytecode = True
 import copy
 import hashlib
 from pathlib import Path
