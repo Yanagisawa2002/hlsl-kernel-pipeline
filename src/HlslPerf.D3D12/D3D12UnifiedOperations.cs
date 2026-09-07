@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using HlslPerf.Core;
 using Vortice.Direct3D12;
+using Vortice.Direct3D12.Debug;
 using Vortice.Dxc;
 
 namespace HlslPerf.D3D12;
@@ -10,9 +11,30 @@ public sealed partial class D3D12Tuner
 {
     public UnifiedExecutor CreateUnifiedExecutor() => new(this);
 
+    public bool IsDeviceRemoved => device.DeviceRemovedReason.Failure;
+    public string DeviceRemovalStatus => device.DeviceRemovedReason.ToString();
+
+    public static void EnableUnifiedDebugLayer()
+    {
+        using ID3D12Debug debug = Vortice.Direct3D12.D3D12.D3D12GetDebugInterface<ID3D12Debug>();
+        debug.EnableDebugLayer();
+    }
+
+    public string[] ReadUnifiedDebugMessages()
+    {
+        using ID3D12InfoQueue? info = device.QueryInterfaceOrNull<ID3D12InfoQueue>();
+        if (info is null) return [];
+        return Enumerable.Range(0, checked((int)info.NumStoredMessages)).Select(index =>
+        {
+            Message message = info.GetMessage((ulong)index);
+            return $"{message.Severity}: {message.Id}: {message.Description}";
+        }).ToArray();
+    }
+
     private UnifiedSubmissionTiming UnifiedSubmitAndWait()
     {
         long start = Stopwatch.GetTimestamp();
+        device.DeviceRemovedReason.CheckError();
         commandList.Close();
         double close = Stopwatch.GetElapsedTime(start).TotalMilliseconds;
         start = Stopwatch.GetTimestamp();
@@ -21,16 +43,30 @@ public sealed partial class D3D12Tuner
         queue.Signal(fence, target).CheckError();
         double submit = Stopwatch.GetElapsedTime(start).TotalMilliseconds;
         start = Stopwatch.GetTimestamp();
-        if (fence.CompletedValue < target)
+        ulong completed = fence.CompletedValue;
+        CheckCompletion(completed);
+        if (completed < target)
         {
             fence.SetEventOnCompletion(target, fenceEvent).CheckError();
-            fenceEvent.WaitOne();
+            if (!fenceEvent.WaitOne(TimeSpan.FromSeconds(30)))
+                throw new TimeoutException($"Unified GPU fence timed out after 30 seconds; device reason: {DeviceRemovalStatus}.");
+            completed = fence.CompletedValue;
+            CheckCompletion(completed);
+            if (completed < target) throw new InvalidDataException("GPU fence woke before the submitted work completed.");
         }
         double wait = Stopwatch.GetElapsedTime(start).TotalMilliseconds;
+        device.DeviceRemovedReason.CheckError();
         start = Stopwatch.GetTimestamp();
         allocator.Reset();
         commandList.Reset(allocator);
         return new(close, submit, wait, Stopwatch.GetElapsedTime(start).TotalMilliseconds);
+
+        void CheckCompletion(ulong value)
+        {
+            device.DeviceRemovedReason.CheckError();
+            if (value == ulong.MaxValue)
+                throw new InvalidOperationException($"GPU fence reported the device-removal sentinel; reason: {DeviceRemovalStatus}.");
+        }
     }
 
     /// <summary>Owns one common root signature and PSO cache for every benchmark arm.</summary>
@@ -217,6 +253,17 @@ public sealed partial class D3D12Tuner
         }
 
         public UnifiedBatchTiming MeasureBatch(int repetitions) => MeasureRingBatch([this], repetitions);
+
+        /// <summary>Development-only dispatch isolation; never used for benchmark timings.</summary>
+        public void DiagnosePasses(Action<string, double> completed)
+        {
+            foreach (UnifiedPass pass in plan.Passes)
+            {
+                Stamp(0); Execute(pass); Stamp(1);
+                double elapsed = Elapsed(Resolve(2, out _), 0, 1);
+                completed(pass.Name, elapsed);
+            }
+        }
 
         public static UnifiedBatchTiming MeasureRingBatch(IReadOnlyList<UnifiedSession> ring, int repetitions)
         {

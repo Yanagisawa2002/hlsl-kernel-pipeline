@@ -6,7 +6,9 @@ param(
     [ValidateSet('scan','radix')][string]$Workload = 'scan',
     [int]$Count = 6145,
     [string]$Pattern = 'uniform',
-    [switch]$Pairs
+    [switch]$Pairs,
+    [string]$Implementation = 'all',
+    [switch]$DebugLayer
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -16,7 +18,7 @@ $output = [IO.Path]::GetFullPath($OutputDirectory)
 $receiptPath = "$output.execution.json"
 if ((Test-Path -LiteralPath $output) -or (Test-Path -LiteralPath $receiptPath)) { throw 'Never overwrite a diagnostic attempt.' }
 [IO.Directory]::CreateDirectory((Split-Path -Parent $output)) | Out-Null
-$arguments = @([IO.Path]::GetFullPath($Runtime), 'diagnose', $repo, $output, $Workload, "$Count", $Pattern, "$($Pairs.IsPresent)")
+$arguments = @([IO.Path]::GetFullPath($Runtime), 'diagnose', $repo, $output, $Workload, "$Count", $Pattern, "$($Pairs.IsPresent)", $Implementation, "$($DebugLayer.IsPresent)")
 $receipt = [ordered]@{ schema='hlslperf.unified-native-execution.v1'; developmentOnly=$true; sourceSha=$source; command=@('dotnet')+$arguments; queuedUtc=[DateTime]::UtcNow.ToString('o'); status='queued'; output=$output; wrapperPid=$PID; pid=$null }
 function Save-State {
     [IO.File]::WriteAllText($receiptPath, ($receipt | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
