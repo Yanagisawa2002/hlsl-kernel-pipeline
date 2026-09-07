@@ -18,7 +18,15 @@ The [next-round Scan report](docs/results/SCAN_PROCESS_BOUNDARY_2026-09-07.md)
 covers 4/8/12/16 Mi uint elements with one/three resident inputs and five new
 processes per cell. Four exact configurations passed all five process gates;
 other cells remain inconclusive. No global crossover threshold or default
-promotion is inferred. Radix remains conditional on its separate dispatch.
+promotion is inferred.
+
+The [conditional Radix report](docs/results/RADIX_PROCESS_COMPARISON_2026-09-07.md)
+retains all 80 fixed-control preflight processes across 16 cells. Ten cells
+qualified for 50 new comparison processes; nine confirmed the fixed 8-bit
+candidate at 1.3458x to 6.8791x against their declared 1-bit controls. One cell
+retained mixed selections and six did not enter comparison. These are exact
+configuration results, with complete-plan latency, memory and all failed gates
+reported; no default policy was promoted.
 
 ## vNext paired measurement and dynamic plans
 

@@ -1,0 +1,1937 @@
+{
+  "preflight": {
+    "schema": "hlslperf.radix-process-audit.v1",
+    "stage": "preflight",
+    "complete": true,
+    "passed": true,
+    "sourceSha": "41d143cbf530128684a17ba989a55457a516049b",
+    "declarationSha256": "4c78685cda9e226c117fbc8459473ae48cb808fb04e1b6a52dfaa64006dccbd3",
+    "plannedProcesses": 80,
+    "processes": 80,
+    "observations": 5120,
+    "poisonOutputChecks": 30720,
+    "supportedProcesses": 80,
+    "cells": [
+      {
+        "cell": "radix-1Mi-keys-uniform-slots1",
+        "eligible": false,
+        "status": "inconclusive",
+        "processes": 5,
+        "individualPassed": 4,
+        "processMedianCv": 0.0050532673583112,
+        "processMedianDrift": 0.012875510241512567,
+        "baselineMediansMs": [
+          1.0986311111111111,
+          1.0935622222222223,
+          1.0904422222222223,
+          1.100271111111111,
+          1.1044822222222224
+        ],
+        "selfControlInterval": {
+          "estimate": 1.0080922329906352,
+          "lower95": 0.9916667593362369,
+          "upper95": 1.024789769999211,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": [
+          "At least one of five baseline calibration/confirmation/stability gates failed"
+        ]
+      },
+      {
+        "cell": "radix-1Mi-keys-uniform-slots3",
+        "eligible": true,
+        "status": "eligible",
+        "processes": 5,
+        "individualPassed": 5,
+        "processMedianCv": 0.002301098812664671,
+        "processMedianDrift": 0.005827789825938012,
+        "baselineMediansMs": [
+          1.0975322222222221,
+          1.0943733333333334,
+          1.1007511111111112,
+          1.1001522222222222,
+          1.09862
+        ],
+        "selfControlInterval": {
+          "estimate": 1.0082644574942625,
+          "lower95": 1.003120499658928,
+          "upper95": 1.0134347933193006,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": []
+      },
+      {
+        "cell": "radix-1Mi-keys-duplicate-slots1",
+        "eligible": false,
+        "status": "inconclusive",
+        "processes": 5,
+        "individualPassed": 2,
+        "processMedianCv": 0.008298892175520748,
+        "processMedianDrift": 0.020149456240402763,
+        "baselineMediansMs": [
+          1.040091111111111,
+          1.019547777777778,
+          1.0245233333333332,
+          1.0213244444444443,
+          1.0206833333333334
+        ],
+        "selfControlInterval": {
+          "estimate": 1.0109105808826024,
+          "lower95": 0.9942945303046341,
+          "upper95": 1.0278043088774675,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": [
+          "At least one of five baseline calibration/confirmation/stability gates failed"
+        ]
+      },
+      {
+        "cell": "radix-1Mi-keys-duplicate-slots3",
+        "eligible": false,
+        "status": "inconclusive",
+        "processes": 5,
+        "individualPassed": 2,
+        "processMedianCv": 0.005027718257752459,
+        "processMedianDrift": 0.012330200589449003,
+        "baselineMediansMs": [
+          1.0196011111111112,
+          1.0182766666666667,
+          1.0308322222222221,
+          1.023451111111111,
+          1.0266755555555556
+        ],
+        "selfControlInterval": {
+          "estimate": 0.9966388531057564,
+          "lower95": 0.9839373587194784,
+          "upper95": 1.009504309108305,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": [
+          "At least one of five baseline calibration/confirmation/stability gates failed"
+        ]
+      },
+      {
+        "cell": "radix-1Mi-pairs-uniform-slots1",
+        "eligible": true,
+        "status": "eligible",
+        "processes": 5,
+        "individualPassed": 5,
+        "processMedianCv": 0.002406352331128035,
+        "processMedianDrift": 0.0057868481450242815,
+        "baselineMediansMs": [
+          1.9508644444444443,
+          1.9584033333333333,
+          1.9471355555555556,
+          1.9475600000000002,
+          1.9481366666666666
+        ],
+        "selfControlInterval": {
+          "estimate": 0.9976043354765808,
+          "lower95": 0.9855614080081605,
+          "upper95": 1.009794419784576,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": []
+      },
+      {
+        "cell": "radix-1Mi-pairs-uniform-slots3",
+        "eligible": false,
+        "status": "inconclusive",
+        "processes": 5,
+        "individualPassed": 4,
+        "processMedianCv": 0.0845453435896003,
+        "processMedianDrift": 0.2025912343508558,
+        "baselineMediansMs": [
+          2.5111922222222223,
+          2.0881511111111113,
+          2.089296666666667,
+          2.1077233333333334,
+          2.112597777777778
+        ],
+        "selfControlInterval": {
+          "estimate": 1.003775354393729,
+          "lower95": 0.996748049691493,
+          "upper95": 1.0108522032223803,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": [
+          "At least one of five baseline calibration/confirmation/stability gates failed",
+          "Cross-process baseline median CV exceeded 0.05",
+          "Cross-process baseline median range drift exceeded 0.15"
+        ]
+      },
+      {
+        "cell": "radix-1Mi-pairs-duplicate-slots1",
+        "eligible": true,
+        "status": "eligible",
+        "processes": 5,
+        "individualPassed": 5,
+        "processMedianCv": 0.0029001041260030154,
+        "processMedianDrift": 0.007254463675164358,
+        "baselineMediansMs": [
+          2.031086666666667,
+          2.0324922222222224,
+          2.045821111111111,
+          2.0377333333333336,
+          2.0340355555555556
+        ],
+        "selfControlInterval": {
+          "estimate": 0.9992631523677906,
+          "lower95": 0.991623030404737,
+          "upper95": 1.0069621389011705,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": []
+      },
+      {
+        "cell": "radix-1Mi-pairs-duplicate-slots3",
+        "eligible": true,
+        "status": "eligible",
+        "processes": 5,
+        "individualPassed": 5,
+        "processMedianCv": 0.006040966057807551,
+        "processMedianDrift": 0.013464513596316285,
+        "baselineMediansMs": [
+          2.1538922222222223,
+          2.159063333333333,
+          2.167758888888889,
+          2.1818566666666666,
+          2.1828933333333334
+        ],
+        "selfControlInterval": {
+          "estimate": 1.0004025189427919,
+          "lower95": 0.99723125200009,
+          "upper95": 1.0035838707419418,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": []
+      },
+      {
+        "cell": "radix-4Mi-keys-uniform-slots1",
+        "eligible": true,
+        "status": "eligible",
+        "processes": 5,
+        "individualPassed": 5,
+        "processMedianCv": 0.002300397855036875,
+        "processMedianDrift": 0.005576528614124054,
+        "baselineMediansMs": [
+          3.506281111111111,
+          3.505685555555556,
+          3.4964033333333333,
+          3.486836666666667,
+          3.495887777777778
+        ],
+        "selfControlInterval": {
+          "estimate": 0.9939927600993371,
+          "lower95": 0.9875070396264773,
+          "upper95": 1.0005210773015,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": []
+      },
+      {
+        "cell": "radix-4Mi-keys-uniform-slots3",
+        "eligible": false,
+        "status": "inconclusive",
+        "processes": 5,
+        "individualPassed": 4,
+        "processMedianCv": 0.0038201125951898077,
+        "processMedianDrift": 0.010700984239684574,
+        "baselineMediansMs": [
+          3.5812044444444444,
+          3.562671111111111,
+          3.5580366666666667,
+          3.5432877777777776,
+          3.558355555555555
+        ],
+        "selfControlInterval": {
+          "estimate": 0.9912636414883382,
+          "lower95": 0.9707099397091175,
+          "upper95": 1.0122525450096527,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": [
+          "At least one of five baseline calibration/confirmation/stability gates failed"
+        ]
+      },
+      {
+        "cell": "radix-4Mi-keys-duplicate-slots1",
+        "eligible": true,
+        "status": "eligible",
+        "processes": 5,
+        "individualPassed": 5,
+        "processMedianCv": 0.0039806106506680115,
+        "processMedianDrift": 0.009750118614581638,
+        "baselineMediansMs": [
+          3.5470277777777777,
+          3.517116666666667,
+          3.5210333333333335,
+          3.5148055555555553,
+          3.512777777777778
+        ],
+        "selfControlInterval": {
+          "estimate": 0.9991786452937151,
+          "lower95": 0.9954309966640743,
+          "upper95": 1.0029404032592097,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": []
+      },
+      {
+        "cell": "radix-4Mi-keys-duplicate-slots3",
+        "eligible": false,
+        "status": "inconclusive",
+        "processes": 5,
+        "individualPassed": 4,
+        "processMedianCv": 0.002893922099908924,
+        "processMedianDrift": 0.007152532163530623,
+        "baselineMediansMs": [
+          3.5232277777777776,
+          3.547291111111111,
+          3.5484277777777775,
+          3.5360822222222223,
+          3.5363277777777777
+        ],
+        "selfControlInterval": {
+          "estimate": 0.9996586132945382,
+          "lower95": 0.9986672101447333,
+          "upper95": 1.0006510006362697,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": [
+          "At least one of five baseline calibration/confirmation/stability gates failed"
+        ]
+      },
+      {
+        "cell": "radix-4Mi-pairs-uniform-slots1",
+        "eligible": true,
+        "status": "eligible",
+        "processes": 5,
+        "individualPassed": 5,
+        "processMedianCv": 0.03358069161418608,
+        "processMedianDrift": 0.06472672059661466,
+        "baselineMediansMs": [
+          17.55189,
+          17.55425,
+          17.544062222222223,
+          16.487094444444445,
+          16.512875555555556
+        ],
+        "selfControlInterval": {
+          "estimate": 0.9971885406667055,
+          "lower95": 0.9959602016653387,
+          "upper95": 0.9984183946048135,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": []
+      },
+      {
+        "cell": "radix-4Mi-pairs-uniform-slots3",
+        "eligible": true,
+        "status": "eligible",
+        "processes": 5,
+        "individualPassed": 5,
+        "processMedianCv": 0.03302221942854978,
+        "processMedianDrift": 0.06394837382853114,
+        "baselineMediansMs": [
+          17.590143333333334,
+          17.59873222222222,
+          17.580378888888887,
+          16.540964444444445,
+          16.56792777777778
+        ],
+        "selfControlInterval": {
+          "estimate": 0.998245333127413,
+          "lower95": 0.9952245822807778,
+          "upper95": 1.0012752526941944,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": []
+      },
+      {
+        "cell": "radix-4Mi-pairs-duplicate-slots1",
+        "eligible": true,
+        "status": "eligible",
+        "processes": 5,
+        "individualPassed": 5,
+        "processMedianCv": 0.03372414191224647,
+        "processMedianDrift": 0.06644596376671186,
+        "baselineMediansMs": [
+          19.717599999999997,
+          19.67798666666667,
+          19.670716666666664,
+          18.489075555555555,
+          18.52348333333333
+        ],
+        "selfControlInterval": {
+          "estimate": 1.0069433217051482,
+          "lower95": 1.005447844172117,
+          "upper95": 1.0084410235733996,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": []
+      },
+      {
+        "cell": "radix-4Mi-pairs-duplicate-slots3",
+        "eligible": true,
+        "status": "eligible",
+        "processes": 5,
+        "individualPassed": 5,
+        "processMedianCv": 0.033140640083376215,
+        "processMedianDrift": 0.06515610457411047,
+        "baselineMediansMs": [
+          19.603872222222222,
+          19.62835111111111,
+          19.600558888888887,
+          18.427675555555556,
+          18.478315555555554
+        ],
+        "selfControlInterval": {
+          "estimate": 1.0033308383149735,
+          "lower95": 1.0007776160809414,
+          "upper95": 1.0058905744274853,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "reasons": []
+      }
+    ],
+    "notApplicable": [],
+    "pending": [],
+    "failures": []
+  },
+  "comparison": {
+    "schema": "hlslperf.radix-process-audit.v1",
+    "stage": "comparison",
+    "complete": true,
+    "passed": true,
+    "sourceSha": "41d143cbf530128684a17ba989a55457a516049b",
+    "declarationSha256": "4c78685cda9e226c117fbc8459473ae48cb808fb04e1b6a52dfaa64006dccbd3",
+    "plannedProcesses": 50,
+    "processes": 50,
+    "observations": 3360,
+    "poisonOutputChecks": 21760,
+    "supportedProcesses": 50,
+    "cells": [
+      {
+        "cell": "radix-1Mi-keys-uniform-slots3",
+        "status": "confirmed_gain",
+        "accepted": true,
+        "processes": 5,
+        "selectedBits": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "individualPassed": 5,
+        "speedup": {
+          "estimate": 1.578449508608385,
+          "lower95": 1.5577256238750008,
+          "upper95": 1.599449102614224,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "confirmationLatency": {
+          "baselineLatency": {
+            "meanMs": {
+              "estimate": 1.1063609513888888,
+              "lower95": 1.1007189724661548,
+              "upper95": 1.1120029303116228,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 1.0957764444444444,
+              "lower95": 1.0898454873871524,
+              "upper95": 1.1017074015017365,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 1.1462628888888888,
+              "lower95": 1.112155937246826,
+              "upper95": 1.1803698405309517,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 1.1593951555555557,
+              "lower95": 1.1164729849268369,
+              "upper95": 1.2023173261842746,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 1.1626782222222223,
+              "lower95": 1.117259304949953,
+              "upper95": 1.2080971394944915,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          },
+          "candidateLatency": {
+            "meanMs": {
+              "estimate": 0.7010464444444444,
+              "lower95": 0.6947861765418707,
+              "upper95": 0.7073067123470181,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 0.6965560000000001,
+              "lower95": 0.691788153401281,
+              "upper95": 0.7013238465987192,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 0.7339624444444445,
+              "lower95": 0.7214145831901665,
+              "upper95": 0.7465103056987225,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 0.7425965777777778,
+              "lower95": 0.7373933914392178,
+              "upper95": 0.7477997641163378,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 0.7447551111111111,
+              "lower95": 0.7402736167453532,
+              "upper95": 0.7492366054768691,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          }
+        },
+        "costs": [
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 0,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 1,
+              "HLSLPERF_GROUP_SIZE": 256,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 1,
+            "digitPasses": 32,
+            "dispatchPasses": 160,
+            "logicalBytesPerSlot": 20979716,
+            "scratchBytesPerSlot": 12591108,
+            "logicalBytesPerArm": 62939148,
+            "committedBytesPerArm": 63700992
+          },
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 0,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 8,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 8,
+            "digitPasses": 4,
+            "dispatchPasses": 28,
+            "logicalBytesPerSlot": 21004420,
+            "scratchBytesPerSlot": 12615812,
+            "logicalBytesPerArm": 63013260,
+            "committedBytesPerArm": 64094208
+          }
+        ]
+      },
+      {
+        "cell": "radix-1Mi-pairs-uniform-slots1",
+        "status": "confirmed_gain",
+        "accepted": true,
+        "processes": 5,
+        "selectedBits": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "individualPassed": 5,
+        "speedup": {
+          "estimate": 2.786210073000948,
+          "lower95": 2.7561627094334846,
+          "upper95": 2.816585009412447,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "confirmationLatency": {
+          "baselineLatency": {
+            "meanMs": {
+              "estimate": 1.9610898819444444,
+              "lower95": 1.951154632165342,
+              "upper95": 1.971025131723547,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 1.9495484444444444,
+              "lower95": 1.9474876868083433,
+              "upper95": 1.9516092020805456,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 2.0097739166666666,
+              "lower95": 1.9399656111647365,
+              "upper95": 2.0795822221685967,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 2.0219046499999997,
+              "lower95": 1.9299155146722689,
+              "upper95": 2.1138937853277304,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 2.0249373333333334,
+              "lower95": 1.9273272528562009,
+              "upper95": 2.122547413810466,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          },
+          "candidateLatency": {
+            "meanMs": {
+              "estimate": 0.7040205,
+              "lower95": 0.6990956098449388,
+              "upper95": 0.7089453901550613,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 0.6932891111111111,
+              "lower95": 0.6904851237878764,
+              "upper95": 0.6960930984343459,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 0.7361158888888889,
+              "lower95": 0.7290357873161318,
+              "upper95": 0.743195990461646,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 0.7376505555555556,
+              "lower95": 0.7305487600326224,
+              "upper95": 0.7447523510784888,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 0.7380342222222223,
+              "lower95": 0.7309022044227181,
+              "upper95": 0.7451662400217264,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          }
+        },
+        "costs": [
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 1,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_WAVE_SIZE": 64
+            },
+            "radixBits": 1,
+            "digitPasses": 32,
+            "dispatchPasses": 225,
+            "logicalBytesPerSlot": 41959460,
+            "scratchBytesPerSlot": 25182244,
+            "logicalBytesPerArm": 41959460,
+            "committedBytesPerArm": 42336256
+          },
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 8,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 8,
+            "digitPasses": 4,
+            "dispatchPasses": 29,
+            "logicalBytesPerSlot": 41975940,
+            "scratchBytesPerSlot": 25198724,
+            "logicalBytesPerArm": 41975940,
+            "committedBytesPerArm": 42336256
+          }
+        ]
+      },
+      {
+        "cell": "radix-1Mi-pairs-duplicate-slots1",
+        "status": "inconclusive",
+        "accepted": false,
+        "processes": 5,
+        "selectedBits": [
+          1,
+          8,
+          8,
+          8,
+          8
+        ],
+        "individualPassed": 5,
+        "speedup": null,
+        "confirmationLatency": {},
+        "costs": [
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 1,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_WAVE_SIZE": 64
+            },
+            "radixBits": 1,
+            "digitPasses": 32,
+            "dispatchPasses": 225,
+            "logicalBytesPerSlot": 41959460,
+            "scratchBytesPerSlot": 25182244,
+            "logicalBytesPerArm": 41959460,
+            "committedBytesPerArm": 42336256
+          },
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 8,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 8,
+            "digitPasses": 4,
+            "dispatchPasses": 29,
+            "logicalBytesPerSlot": 41975940,
+            "scratchBytesPerSlot": 25198724,
+            "logicalBytesPerArm": 41975940,
+            "committedBytesPerArm": 42336256
+          }
+        ]
+      },
+      {
+        "cell": "radix-1Mi-pairs-duplicate-slots3",
+        "status": "confirmed_gain",
+        "accepted": true,
+        "processes": 5,
+        "selectedBits": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "individualPassed": 5,
+        "speedup": {
+          "estimate": 3.0033119826744885,
+          "lower95": 2.985137893549662,
+          "upper95": 3.021596719121916,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "confirmationLatency": {
+          "baselineLatency": {
+            "meanMs": {
+              "estimate": 2.1843628055555557,
+              "lower95": 2.1805446899058025,
+              "upper95": 2.188180921205309,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 2.183453111111111,
+              "lower95": 2.182386127346272,
+              "upper95": 2.1845200948759502,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 2.200953166666667,
+              "lower95": 2.183515973189699,
+              "upper95": 2.2183903601436348,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 2.2201055666666667,
+              "lower95": 2.1839611484973425,
+              "upper95": 2.256249984835991,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 2.2248936666666665,
+              "lower95": 2.1838551276626226,
+              "upper95": 2.2659322056707105,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          },
+          "candidateLatency": {
+            "meanMs": {
+              "estimate": 0.7273553333333334,
+              "lower95": 0.7231649063635119,
+              "upper95": 0.7315457603031548,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 0.7265288888888889,
+              "lower95": 0.7238341421338348,
+              "upper95": 0.729223635643943,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 0.7400252222222222,
+              "lower95": 0.7336194610768734,
+              "upper95": 0.7464309833675711,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 0.7462425555555555,
+              "lower95": 0.7401402147969761,
+              "upper95": 0.7523448963141349,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 0.7477968888888888,
+              "lower95": 0.74122112460201,
+              "upper95": 0.7543726531757677,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          }
+        },
+        "costs": [
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 1,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_WAVE_SIZE": 64
+            },
+            "radixBits": 1,
+            "digitPasses": 32,
+            "dispatchPasses": 225,
+            "logicalBytesPerSlot": 41959460,
+            "scratchBytesPerSlot": 25182244,
+            "logicalBytesPerArm": 125878380,
+            "committedBytesPerArm": 127008768
+          },
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 8,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 8,
+            "digitPasses": 4,
+            "dispatchPasses": 29,
+            "logicalBytesPerSlot": 41975940,
+            "scratchBytesPerSlot": 25198724,
+            "logicalBytesPerArm": 125927820,
+            "committedBytesPerArm": 127008768
+          }
+        ]
+      },
+      {
+        "cell": "radix-4Mi-keys-uniform-slots1",
+        "status": "confirmed_gain",
+        "accepted": true,
+        "processes": 5,
+        "selectedBits": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "individualPassed": 5,
+        "speedup": {
+          "estimate": 1.345797264010285,
+          "lower95": 1.3404816678000167,
+          "upper95": 1.3511339388848493,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "confirmationLatency": {
+          "baselineLatency": {
+            "meanMs": {
+              "estimate": 3.5046295555555558,
+              "lower95": 3.496648845416525,
+              "upper95": 3.5126102656945863,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 3.4927353333333335,
+              "lower95": 3.484404257528465,
+              "upper95": 3.501066409138202,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 3.5489624444444443,
+              "lower95": 3.5414010704835683,
+              "upper95": 3.5565238184053203,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 3.5515656444444446,
+              "lower95": 3.5459741995451197,
+              "upper95": 3.5571570893437694,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 3.5522164444444444,
+              "lower95": 3.546751798919555,
+              "upper95": 3.557681089969334,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          },
+          "candidateLatency": {
+            "meanMs": {
+              "estimate": 2.60443025,
+              "lower95": 2.591296263784617,
+              "upper95": 2.617564236215383,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 2.586798,
+              "lower95": 2.56886220936642,
+              "upper95": 2.60473379063358,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 2.6773593333333334,
+              "lower95": 2.6601533284600745,
+              "upper95": 2.6945653382065924,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 2.699951866666667,
+              "lower95": 2.678368626702877,
+              "upper95": 2.7215351066304567,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 2.7056,
+              "lower95": 2.6826892507390703,
+              "upper95": 2.7285107492609297,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          }
+        },
+        "costs": [
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 0,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 1,
+              "HLSLPERF_GROUP_SIZE": 256,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 1,
+            "digitPasses": 32,
+            "dispatchPasses": 224,
+            "logicalBytesPerSlot": 83918884,
+            "scratchBytesPerSlot": 50364452,
+            "logicalBytesPerArm": 83918884,
+            "committedBytesPerArm": 84279296
+          },
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 0,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 8,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 8,
+            "digitPasses": 4,
+            "dispatchPasses": 28,
+            "logicalBytesPerSlot": 84017668,
+            "scratchBytesPerSlot": 50463236,
+            "logicalBytesPerArm": 84017668,
+            "committedBytesPerArm": 84279296
+          }
+        ]
+      },
+      {
+        "cell": "radix-4Mi-keys-duplicate-slots1",
+        "status": "confirmed_gain",
+        "accepted": true,
+        "processes": 5,
+        "selectedBits": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "individualPassed": 5,
+        "speedup": {
+          "estimate": 1.369933285813557,
+          "lower95": 1.3587940499325637,
+          "upper95": 1.3811638398571653,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "confirmationLatency": {
+          "baselineLatency": {
+            "meanMs": {
+              "estimate": 3.5140693055555556,
+              "lower95": 3.5081144333712784,
+              "upper95": 3.520024177739833,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 3.512356666666667,
+              "lower95": 3.5071584960168574,
+              "upper95": 3.5175548373164762,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 3.5325377777777778,
+              "lower95": 3.521601464980526,
+              "upper95": 3.5434740905750295,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 3.535112711111111,
+              "lower95": 3.522018441384368,
+              "upper95": 3.5482069808378545,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 3.5357564444444445,
+              "lower95": 3.5221131358172117,
+              "upper95": 3.549399753071677,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          },
+          "candidateLatency": {
+            "meanMs": {
+              "estimate": 2.5654714166666666,
+              "lower95": 2.5400936352742876,
+              "upper95": 2.5908491980590456,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 2.5527895555555555,
+              "lower95": 2.5329582752000457,
+              "upper95": 2.5726208359110654,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 2.635788333333333,
+              "lower95": 2.588763437830385,
+              "upper95": 2.6828132288362814,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 2.6471854,
+              "lower95": 2.60566458665096,
+              "upper95": 2.6887062133490405,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 2.6500346666666665,
+              "lower95": 2.609345408403299,
+              "upper95": 2.690723924930034,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          }
+        },
+        "costs": [
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 0,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 1,
+              "HLSLPERF_GROUP_SIZE": 256,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 1,
+            "digitPasses": 32,
+            "dispatchPasses": 224,
+            "logicalBytesPerSlot": 83918884,
+            "scratchBytesPerSlot": 50364452,
+            "logicalBytesPerArm": 83918884,
+            "committedBytesPerArm": 84279296
+          },
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 0,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 8,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 8,
+            "digitPasses": 4,
+            "dispatchPasses": 28,
+            "logicalBytesPerSlot": 84017668,
+            "scratchBytesPerSlot": 50463236,
+            "logicalBytesPerArm": 84017668,
+            "committedBytesPerArm": 84279296
+          }
+        ]
+      },
+      {
+        "cell": "radix-4Mi-pairs-uniform-slots1",
+        "status": "confirmed_gain",
+        "accepted": true,
+        "processes": 5,
+        "selectedBits": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "individualPassed": 5,
+        "speedup": {
+          "estimate": 5.953776551114607,
+          "lower95": 5.907109154618289,
+          "upper95": 6.000812629793485,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "confirmationLatency": {
+          "baselineLatency": {
+            "meanMs": {
+              "estimate": 16.505865,
+              "lower95": 16.498253219971808,
+              "upper95": 16.513476780028192,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 16.51434,
+              "lower95": 16.487256421690326,
+              "upper95": 16.541423578309676,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 16.590028333333333,
+              "lower95": 16.56809096257107,
+              "upper95": 16.611965704095596,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 16.597084066666667,
+              "lower95": 16.572591416673635,
+              "upper95": 16.6215767166597,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 16.598848,
+              "lower95": 16.57344221302129,
+              "upper95": 16.62425378697871,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          },
+          "candidateLatency": {
+            "meanMs": {
+              "estimate": 2.7725271041666666,
+              "lower95": 2.750563972702955,
+              "upper95": 2.794490235630378,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 2.76729,
+              "lower95": 2.7408744373506506,
+              "upper95": 2.7937055626493494,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 2.818709361111111,
+              "lower95": 2.8009128597118833,
+              "upper95": 2.8365058625103385,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 2.8403320944444443,
+              "lower95": 2.8123212992337763,
+              "upper95": 2.8683428896551124,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 2.8457377777777775,
+              "lower95": 2.8122702782546503,
+              "upper95": 2.8792052773009047,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          }
+        },
+        "costs": [
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 1,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_WAVE_SIZE": 64
+            },
+            "radixBits": 1,
+            "digitPasses": 32,
+            "dispatchPasses": 225,
+            "logicalBytesPerSlot": 167837828,
+            "scratchBytesPerSlot": 100728964,
+            "logicalBytesPerArm": 167837828,
+            "committedBytesPerArm": 168165376
+          },
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 8,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 8,
+            "digitPasses": 4,
+            "dispatchPasses": 29,
+            "logicalBytesPerSlot": 167903748,
+            "scratchBytesPerSlot": 100794884,
+            "logicalBytesPerArm": 167903748,
+            "committedBytesPerArm": 168165376
+          }
+        ]
+      },
+      {
+        "cell": "radix-4Mi-pairs-uniform-slots3",
+        "status": "confirmed_gain",
+        "accepted": true,
+        "processes": 5,
+        "selectedBits": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "individualPassed": 5,
+        "speedup": {
+          "estimate": 6.0120533193187855,
+          "lower95": 5.946602207530274,
+          "upper95": 6.07822481694863,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "confirmationLatency": {
+          "baselineLatency": {
+            "meanMs": {
+              "estimate": 16.62151833333333,
+              "lower95": 16.338221434763927,
+              "upper95": 16.904815231902734,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 16.59643711111111,
+              "lower95": 16.330350507370795,
+              "upper95": 16.862523714851427,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 16.805264444444443,
+              "lower95": 16.248917479745135,
+              "upper95": 17.36161140914375,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 16.816966844444444,
+              "lower95": 16.26417177227293,
+              "upper95": 17.369761916615957,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 16.819892444444445,
+              "lower95": 16.267960962740133,
+              "upper95": 17.371823926148757,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          },
+          "candidateLatency": {
+            "meanMs": {
+              "estimate": 2.7645531944444444,
+              "lower95": 2.7429811770410724,
+              "upper95": 2.7861252118478164,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 2.755783777777778,
+              "lower95": 2.730862104471321,
+              "upper95": 2.7807054510842346,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 2.8257292222222223,
+              "lower95": 2.793040479445562,
+              "upper95": 2.858417964998883,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 2.833243622222222,
+              "lower95": 2.7952822062765876,
+              "upper95": 2.8712050381678567,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 2.835122222222222,
+              "lower95": 2.795592910133577,
+              "upper95": 2.874651534310867,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          }
+        },
+        "costs": [
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 1,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_WAVE_SIZE": 64
+            },
+            "radixBits": 1,
+            "digitPasses": 32,
+            "dispatchPasses": 225,
+            "logicalBytesPerSlot": 167837828,
+            "scratchBytesPerSlot": 100728964,
+            "logicalBytesPerArm": 503513484,
+            "committedBytesPerArm": 504496128
+          },
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 4,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 4,
+            "digitPasses": 8,
+            "dispatchPasses": 57,
+            "logicalBytesPerSlot": 136323108,
+            "scratchBytesPerSlot": 69214244,
+            "logicalBytesPerArm": 408969324,
+            "committedBytesPerArm": 410124288
+          },
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 8,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 8,
+            "digitPasses": 4,
+            "dispatchPasses": 29,
+            "logicalBytesPerSlot": 167903748,
+            "scratchBytesPerSlot": 100794884,
+            "logicalBytesPerArm": 503711244,
+            "committedBytesPerArm": 504496128
+          }
+        ]
+      },
+      {
+        "cell": "radix-4Mi-pairs-duplicate-slots1",
+        "status": "confirmed_gain",
+        "accepted": true,
+        "processes": 5,
+        "selectedBits": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "individualPassed": 5,
+        "speedup": {
+          "estimate": 6.858952585243461,
+          "lower95": 6.808047663943017,
+          "upper95": 6.910238131231116,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "confirmationLatency": {
+          "baselineLatency": {
+            "meanMs": {
+              "estimate": 18.493916694444444,
+              "lower95": 18.464448162195342,
+              "upper95": 18.523385226693545,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 18.50457822222222,
+              "lower95": 18.46530779512432,
+              "upper95": 18.543848649320122,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 18.62622777777778,
+              "lower95": 18.588504553847194,
+              "upper95": 18.663951001708362,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 18.64515951111111,
+              "lower95": 18.591591741404123,
+              "upper95": 18.698727280818098,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 18.649892444444443,
+              "lower95": 18.591421030690356,
+              "upper95": 18.70836385819853,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          },
+          "candidateLatency": {
+            "meanMs": {
+              "estimate": 2.696542451388889,
+              "lower95": 2.6798958690645636,
+              "upper95": 2.7131890337132143,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 2.6842853333333334,
+              "lower95": 2.6639754247243,
+              "upper95": 2.704595241942367,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 2.762746972222222,
+              "lower95": 2.7406947453123713,
+              "upper95": 2.784799199132073,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 2.781528238888889,
+              "lower95": 2.735262457364514,
+              "upper95": 2.827794020413264,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 2.7862235555555555,
+              "lower95": 2.730103592629912,
+              "upper95": 2.842343518481199,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          }
+        },
+        "costs": [
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 1,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_WAVE_SIZE": 64
+            },
+            "radixBits": 1,
+            "digitPasses": 32,
+            "dispatchPasses": 225,
+            "logicalBytesPerSlot": 167837828,
+            "scratchBytesPerSlot": 100728964,
+            "logicalBytesPerArm": 167837828,
+            "committedBytesPerArm": 168165376
+          },
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 8,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 8,
+            "digitPasses": 4,
+            "dispatchPasses": 29,
+            "logicalBytesPerSlot": 167903748,
+            "scratchBytesPerSlot": 100794884,
+            "logicalBytesPerArm": 167903748,
+            "committedBytesPerArm": 168165376
+          }
+        ]
+      },
+      {
+        "cell": "radix-4Mi-pairs-duplicate-slots3",
+        "status": "confirmed_gain",
+        "accepted": true,
+        "processes": 5,
+        "selectedBits": [
+          8,
+          8,
+          8,
+          8,
+          8
+        ],
+        "individualPassed": 5,
+        "speedup": {
+          "estimate": 6.879121806289866,
+          "lower95": 6.785875902755087,
+          "upper95": 6.97364901803756,
+          "processes": 5,
+          "df": 4,
+          "weight": "equal process"
+        },
+        "confirmationLatency": {
+          "baselineLatency": {
+            "meanMs": {
+              "estimate": 18.51595063888889,
+              "lower95": 18.24385895954484,
+              "upper95": 18.788042318232936,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 18.435658222222223,
+              "lower95": 18.386464194185578,
+              "upper95": 18.484852250258868,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 18.75933277777778,
+              "lower95": 18.1561516047192,
+              "upper95": 19.36251395083636,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 18.77711171111111,
+              "lower95": 18.177513406646423,
+              "upper95": 19.3767100155758,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 18.781556444444444,
+              "lower95": 18.182736104835538,
+              "upper95": 19.38037678405335,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          },
+          "candidateLatency": {
+            "meanMs": {
+              "estimate": 2.6917872152777775,
+              "lower95": 2.654795967579805,
+              "upper95": 2.72877846297575,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "medianMs": {
+              "estimate": 2.6763462222222225,
+              "lower95": 2.639682949637802,
+              "upper95": 2.713009494806643,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p95Ms": {
+              "estimate": 2.7710766388888888,
+              "lower95": 2.7147269975144974,
+              "upper95": 2.82742628026328,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "p99Ms": {
+              "estimate": 2.802604572222222,
+              "lower95": 2.741110020330897,
+              "upper95": 2.8640991241135474,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            },
+            "maxMs": {
+              "estimate": 2.8104865555555554,
+              "lower95": 2.7457397800884564,
+              "upper95": 2.8752333310226543,
+              "processes": 5,
+              "df": 4,
+              "weight": "equal process"
+            }
+          }
+        },
+        "costs": [
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 1,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_WAVE_SIZE": 64
+            },
+            "radixBits": 1,
+            "digitPasses": 32,
+            "dispatchPasses": 225,
+            "logicalBytesPerSlot": 167837828,
+            "scratchBytesPerSlot": 100728964,
+            "logicalBytesPerArm": 503513484,
+            "committedBytesPerArm": 504496128
+          },
+          {
+            "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+            "defines": {
+              "HLSLPERF_SCAN_OPERATOR": 1,
+              "HLSLPERF_RADIX_PAIRS": 1,
+              "HLSLPERF_SCAN_BACKEND": 2,
+              "HLSLPERF_VECTOR_WIDTH": 1,
+              "HLSLPERF_RADIX_BITS": 8,
+              "HLSLPERF_GROUP_SIZE": 128,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+              "HLSLPERF_WAVE_SIZE": 32
+            },
+            "radixBits": 8,
+            "digitPasses": 4,
+            "dispatchPasses": 29,
+            "logicalBytesPerSlot": 167903748,
+            "scratchBytesPerSlot": 100794884,
+            "logicalBytesPerArm": 503711244,
+            "committedBytesPerArm": 504496128
+          }
+        ]
+      }
+    ],
+    "notApplicable": [
+      {
+        "cell": "radix-1Mi-keys-uniform-slots1",
+        "status": "not_applicable",
+        "reason": [
+          "At least one of five baseline calibration/confirmation/stability gates failed"
+        ],
+        "plannedProcesses": 5,
+        "executedProcesses": 0
+      },
+      {
+        "cell": "radix-1Mi-keys-duplicate-slots1",
+        "status": "not_applicable",
+        "reason": [
+          "At least one of five baseline calibration/confirmation/stability gates failed"
+        ],
+        "plannedProcesses": 5,
+        "executedProcesses": 0
+      },
+      {
+        "cell": "radix-1Mi-keys-duplicate-slots3",
+        "status": "not_applicable",
+        "reason": [
+          "At least one of five baseline calibration/confirmation/stability gates failed"
+        ],
+        "plannedProcesses": 5,
+        "executedProcesses": 0
+      },
+      {
+        "cell": "radix-1Mi-pairs-uniform-slots3",
+        "status": "not_applicable",
+        "reason": [
+          "At least one of five baseline calibration/confirmation/stability gates failed",
+          "Cross-process baseline median CV exceeded 0.05",
+          "Cross-process baseline median range drift exceeded 0.15"
+        ],
+        "plannedProcesses": 5,
+        "executedProcesses": 0
+      },
+      {
+        "cell": "radix-4Mi-keys-uniform-slots3",
+        "status": "not_applicable",
+        "reason": [
+          "At least one of five baseline calibration/confirmation/stability gates failed"
+        ],
+        "plannedProcesses": 5,
+        "executedProcesses": 0
+      },
+      {
+        "cell": "radix-4Mi-keys-duplicate-slots3",
+        "status": "not_applicable",
+        "reason": [
+          "At least one of five baseline calibration/confirmation/stability gates failed"
+        ],
+        "plannedProcesses": 5,
+        "executedProcesses": 0
+      }
+    ],
+    "pending": [],
+    "failures": []
+  }
+}
