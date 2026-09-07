@@ -1,0 +1,742 @@
+{
+  "schema": "hlslperf.unified-declaration.v1",
+  "repetitions": 18,
+  "blocks": 12,
+  "warmupBatches": 8,
+  "warmupRepetitions": 6,
+  "processesPerCell": 5,
+  "cells": [
+    {
+      "id": "radix-1mi-pairs-uniform-1slots",
+      "workload": "radix",
+      "count": 1048576,
+      "pattern": "uniform",
+      "pairs": true,
+      "slots": 1,
+      "arms": [
+        "internal-radix-8",
+        "internal-radix-8-ballot",
+        "amd-parallel-sort"
+      ],
+      "processes": [
+        {
+          "index": 1,
+          "seeds": [
+            1717000
+          ],
+          "orders": [
+            [
+              "amd-parallel-sort",
+              "internal-radix-8",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8",
+              "internal-radix-8-ballot",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "internal-radix-8",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "amd-parallel-sort",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8",
+              "internal-radix-8-ballot",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8",
+              "amd-parallel-sort",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "amd-parallel-sort",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8",
+              "amd-parallel-sort",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "internal-radix-8",
+              "amd-parallel-sort"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8-ballot",
+              "internal-radix-8"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8-ballot",
+              "internal-radix-8"
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "seeds": [
+            1724919
+          ],
+          "orders": [
+            [
+              "internal-radix-8",
+              "amd-parallel-sort",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "internal-radix-8",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "internal-radix-8",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "amd-parallel-sort",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "amd-parallel-sort",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8",
+              "internal-radix-8-ballot",
+              "amd-parallel-sort"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8-ballot",
+              "internal-radix-8"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8-ballot",
+              "internal-radix-8"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8",
+              "internal-radix-8-ballot",
+              "amd-parallel-sort"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8",
+              "amd-parallel-sort",
+              "internal-radix-8-ballot"
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "seeds": [
+            1732838
+          ],
+          "orders": [
+            [
+              "internal-radix-8-ballot",
+              "amd-parallel-sort",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "internal-radix-8",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8",
+              "internal-radix-8-ballot",
+              "amd-parallel-sort"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8-ballot",
+              "internal-radix-8"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "internal-radix-8",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8",
+              "amd-parallel-sort",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8",
+              "amd-parallel-sort",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8",
+              "internal-radix-8-ballot",
+              "amd-parallel-sort"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8-ballot",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "amd-parallel-sort",
+              "internal-radix-8"
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "seeds": [
+            1740757
+          ],
+          "orders": [
+            [
+              "amd-parallel-sort",
+              "internal-radix-8",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8-ballot",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "internal-radix-8",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "amd-parallel-sort",
+              "internal-radix-8"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8-ballot",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "internal-radix-8",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8",
+              "amd-parallel-sort",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "amd-parallel-sort",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8",
+              "internal-radix-8-ballot",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8",
+              "internal-radix-8-ballot",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8",
+              "amd-parallel-sort",
+              "internal-radix-8-ballot"
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "seeds": [
+            1748676
+          ],
+          "orders": [
+            [
+              "internal-radix-8-ballot",
+              "internal-radix-8",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "amd-parallel-sort",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8",
+              "amd-parallel-sort",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8-ballot",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8",
+              "internal-radix-8-ballot",
+              "amd-parallel-sort"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8",
+              "internal-radix-8-ballot",
+              "amd-parallel-sort"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8-ballot",
+              "internal-radix-8"
+            ],
+            [
+              "amd-parallel-sort",
+              "internal-radix-8",
+              "internal-radix-8-ballot"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "amd-parallel-sort",
+              "internal-radix-8"
+            ],
+            [
+              "internal-radix-8-ballot",
+              "internal-radix-8",
+              "amd-parallel-sort"
+            ],
+            [
+              "internal-radix-8",
+              "amd-parallel-sort",
+              "internal-radix-8-ballot"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scan-8mi-keys-uniform-1slots",
+      "workload": "scan",
+      "count": 8388608,
+      "pattern": "uniform",
+      "pairs": false,
+      "slots": 1,
+      "arms": [
+        "internal-scan-single",
+        "gps-reduce-then-scan"
+      ],
+      "processes": [
+        {
+          "index": 1,
+          "seeds": [
+            1821729
+          ],
+          "orders": [
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "seeds": [
+            1829648
+          ],
+          "orders": [
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "seeds": [
+            1837567
+          ],
+          "orders": [
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "seeds": [
+            1845486
+          ],
+          "orders": [
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "seeds": [
+            1853405
+          ],
+          "orders": [
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "processOrder": [
+    {
+      "cell": "radix-1mi-pairs-uniform-1slots",
+      "process": 1
+    },
+    {
+      "cell": "scan-8mi-keys-uniform-1slots",
+      "process": 1
+    },
+    {
+      "cell": "scan-8mi-keys-uniform-1slots",
+      "process": 2
+    },
+    {
+      "cell": "radix-1mi-pairs-uniform-1slots",
+      "process": 2
+    },
+    {
+      "cell": "radix-1mi-pairs-uniform-1slots",
+      "process": 3
+    },
+    {
+      "cell": "scan-8mi-keys-uniform-1slots",
+      "process": 3
+    },
+    {
+      "cell": "scan-8mi-keys-uniform-1slots",
+      "process": 4
+    },
+    {
+      "cell": "radix-1mi-pairs-uniform-1slots",
+      "process": 4
+    },
+    {
+      "cell": "radix-1mi-pairs-uniform-1slots",
+      "process": 5
+    },
+    {
+      "cell": "scan-8mi-keys-uniform-1slots",
+      "process": 5
+    }
+  ],
+  "inputs": "Full uint32 deterministic LCG; duplicate keys are modulo seven; original-index payloads; independent resident allocations.",
+  "semantics": {
+    "scan": "exclusive uint32 addition modulo 2^32",
+    "radix": "stable ascending full32 uint32 keys; canonical AoS pair input and SoA outputs"
+  },
+  "costs": "GPU total includes input restore, scratch initialization, all dispatches/barriers, consumer conversion, and timestamp markers; no empty-marker subtraction. Upload/readback and CPU plan/record/close/submit/wait/reset are separate.",
+  "correctness": "Every arm and resident slot independently runs two full-output poison/oracle checks before timing; correct arms repeat two checks after timing. A failing arm retains all checks and receives explicit not-timed observations. No other arm is filtered.",
+  "stops": "No retries, tuning, data-dependent warmup, early performance stopping or replacement seeds. Any native exception/device loss aborts this process and stops the matrix epoch for diagnosis; do not pool across source/binary changes. Incorrect arms are not timed. Statistical failures remain measured and inconclusive.",
+  "statistics": {
+    "primary": "paired log GPU-total-per-operation ratios, averaged within 12 blocks and then within each independent process",
+    "ci": "two-sided 95% Student t interval over five process log ratios, df=4, critical=2.7764451051977987",
+    "cv": "sample standard deviation / mean of 24 batch averages in each process and arm",
+    "drift": "absolute ratio of final three block mean to first three block mean minus one",
+    "tail": "linear interpolated per-operation GPU timestamp p95 and p99 within each process; correlated repeats are not independent replicates",
+    "accepted": "both arms correct in all five complete processes; every arm/process CV<=0.05 and drift<=0.15; every process p95 numerator/denominator>=1.01; paired lower95>=1.01",
+    "multiplicity": "predeclared pairwise comparisons are individually descriptive, with no familywise error adjustment; no universal winner or automatic policy promotion"
+  },
+  "controls": "Existing R9700/driver/power/user workloads unchanged. Resident slots rotate equally. No global cache flush, fixed clocks, residency pinning or measured hardware cache counters.",
+  "memory": "512 MiB committed allocation cap per slot, plus 75% of available DXGI local budget check; total allocations and slot counts reported.",
+  "sources": {
+    "src/HlslPerf.Workloads/UnifiedWorkloads.cs": "2ec51ea3fa41161dd951bd038ec9e13fa28008134a91fef5963885f64f2fd6c7",
+    "src/HlslPerf.D3D12/D3D12UnifiedOperations.cs": "275010b77642d15335dbfcf47ec6f0c98ab9fd03dddd52f2ebb16626a78078cf",
+    "src/HlslPerf.UnifiedBench/UnifiedBenchRunner.cs": "823f03a0982aaae14375f3991a9a2b463b73e162376d7424aa65abc5f3f220a9",
+    "third_party/upstream-lock.json": "a01f9af040bcb5f9804df97aa79de08b5b837da51ba187e4e48978e7cae3126e",
+    "src/HlslPerf.Workloads/FocusedCostWorkloads.cs": "c90a67edaf93e507ee712c6c1ce0ea2306d61fc2c788b406346b21f367583924",
+    "src/HlslPerf.UnifiedBench/FocusedCostRunner.cs": "676383d0777ab239bb17998ed4fa6eacb59b28eb8a1612fa655a438def00ac8e",
+    "kernels/radix-sort.hlsl": "de29b487141a360cce06c8a15356124c5baac1a6e081c30f94fbfe64d910642c",
+    "kernels/include/hlslperf/scan_u32.hlsli": "2bd0d3c6e79e98c57d37aaa686c5eadce4873791548f4640b6b8a2136839ae02",
+    "tools/focused_cost_protocol.py": "596b04684e3f914c2aaa73fc473ec57bf1865f200823d1943668c0597b809d0e",
+    "tools/unified_protocol.py": "a98e315ea47db25e47f52b9db4249e74696857f43ede9410f7b341d141b9e809"
+  },
+  "scope": "One fixed ballot local-rank candidate for Radix; Scan has no candidate and repeats the unchanged comparison. No parameter search, retries or automatic defaults.",
+  "candidate": {
+    "arm": "internal-radix-8-ballot",
+    "groupSize": 128,
+    "recordsPerThread": 2,
+    "radixBits": 8,
+    "waveSize": 32,
+    "extraSharedBytes": 288,
+    "change": "Stable predecessor rank from valid wave bit planes; input loads, histogram, scan, scatter output, conversion and pass count preserved."
+  }
+}

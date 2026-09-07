@@ -1,4 +1,8 @@
+#if HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS
+#define HLSLPERF_ROOT_SIGNATURE "SRV(t0), SRV(t1), UAV(u0), UAV(u1), UAV(u2), RootConstants(num32BitConstants=8, b0)"
+#else
 #define HLSLPERF_ROOT_SIGNATURE "SRV(t0), SRV(t1), UAV(u0), UAV(u1), RootConstants(num32BitConstants=8, b0)"
+#endif
 
 ByteAddressBuffer Input0 : register(t0);
 RWByteAddressBuffer Output0 : register(u0);

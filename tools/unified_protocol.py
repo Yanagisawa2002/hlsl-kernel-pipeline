@@ -87,9 +87,10 @@ def arm_metrics(process, arm):
                 gpuOutputConversionMs=stats.mean(o['timing']['gpuOutputConversionMilliseconds']/18 for o in measured))
 
 
-def analyze(declaration_path, raw, output):
+def analyze(declaration_path, raw, output, expected_cells=24):
     assert not output.exists(), 'Never overwrite an audit.'
     declaration=json.loads(declaration_path.read_text()); declaration_hash=digest(declaration_path)
+    assert len(declaration['cells'])==expected_cells and len(declaration['processOrder'])==expected_cells*5
     rows=[]; comparisons=[]; failures=[]; identities=set(); pids=set(); source_shas=set()
     for cell in declaration['cells']:
         processes=[]; metrics={arm:[] for arm in cell['arms']}
@@ -138,14 +139,14 @@ def analyze(declaration_path, raw, output):
                               independentProcesses=5,processLogRatios=logs,gates=gates,
                               status='accepted' if stable and tail and math.exp(mean-margin)>=1.01 else 'inconclusive')
             comparisons.append(result)
-    assert len(source_shas)==1 and len(identities)==1 and len(pids)==120
+    assert len(source_shas)==1 and len(identities)==1 and len(pids)==expected_cells*5
     output.mkdir(parents=True)
     report=dict(schema='hlslperf.unified-audit.v1',audited=True,declarationSha256=declaration_hash,sourceSha=next(iter(source_shas)),
-                independentProcesses=len(pids),cells=24,comparisons=comparisons,correctnessFailures=failures,metrics=rows)
+                independentProcesses=len(pids),cells=expected_cells,comparisons=comparisons,correctnessFailures=failures,metrics=rows)
     (output/'audit.json').write_text(json.dumps(report,indent=2)+'\n')
     with (output/'metrics.csv').open('w',newline='') as stream:
         writer=csv.DictWriter(stream,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
-    lines=['# Official external comparison results','',f'Audited 24 cells and {len(pids)} independent processes from `{next(iter(source_shas))}`.',
+    lines=['# Official external comparison results','',f'Audited {expected_cells} cells and {len(pids)} independent processes from `{next(iter(source_shas))}`.',
            '', 'Ratios are numerator GPU time / denominator GPU time. Values above one favor the denominator. Failed or unstable comparisons remain visible. No default policy changes are implied.',
            '', '| Cell | Numerator | Denominator | Ratio [95% CI] | Decision |','|---|---|---|---|---|']
     for c in comparisons:

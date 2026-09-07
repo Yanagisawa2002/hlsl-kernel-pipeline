@@ -255,6 +255,40 @@ public sealed partial class D3D12Tuner
 
         public UnifiedBatchTiming MeasureBatch(int repetitions) => MeasureRingBatch([this], repetitions);
 
+        /// <summary>Diagnostic only: a complete batch, one submission, timestamps between passes.</summary>
+        public UnifiedPassDiagnostic MeasurePassDiagnostic(int repetitions = 18)
+        {
+            int markers = checked(plan.Passes.Count * repetitions + 1);
+            if (repetitions is < 1 or > 18 || markers > 4096) throw new InvalidDataException("Too many diagnostic timestamps.");
+            using var diagnosticQueries = owner.device.CreateQueryHeap<ID3D12QueryHeap>(new QueryHeapDescription(QueryHeapType.Timestamp, (uint)markers, 0));
+            using var diagnosticReadback = owner.device.CreateCommittedResource(HeapType.Readback,
+                ResourceDescription.Buffer((ulong)markers * 8, ResourceFlags.None, 0), ResourceStates.CopyDest, null);
+            void Mark(int index) => owner.commandList.EndQuery(diagnosticQueries, QueryType.Timestamp, (uint)index);
+            long start = Stopwatch.GetTimestamp();
+            Mark(0);
+            for (int run = 0; run < repetitions; run++)
+                for (int index = 0; index < plan.Passes.Count; index++) { Execute(plan.Passes[index]); Mark(run * plan.Passes.Count + index + 1); }
+            double record = Stopwatch.GetElapsedTime(start).TotalMilliseconds;
+            owner.commandList.ResolveQueryData(diagnosticQueries, QueryType.Timestamp, 0, (uint)markers, diagnosticReadback, 0);
+            var submission = owner.UnifiedSubmitAndWait();
+            ulong[] data = diagnosticReadback.Map<ulong>(0, markers).ToArray(); diagnosticReadback.Unmap(0);
+            return new(Elapsed(data, 0, markers - 1), record, submission,
+                plan.Passes.Select((pass, index) => new UnifiedPassTiming(pass.Name, pass.Stage,
+                    Enumerable.Range(0, repetitions).Average(run => Elapsed(data, run * plan.Passes.Count + index, run * plan.Passes.Count + index + 1)))).ToArray(), markers)
+                { Repetitions = repetitions, GpuOperationMilliseconds = Enumerable.Range(0, repetitions).Select(run => Elapsed(data, run * plan.Passes.Count, (run + 1) * plan.Passes.Count)).ToArray() };
+        }
+
+        public byte[] ReadDiagnosticBuffer(string name)
+        {
+            GpuBuffer buffer = resources.Get(name);
+            using var readback = owner.device.CreateCommittedResource(HeapType.Readback,
+                ResourceDescription.Buffer((ulong)buffer.ByteLength, ResourceFlags.None, 0), ResourceStates.CopyDest, null);
+            owner.Transition(buffer, ResourceStates.CopySource);
+            owner.commandList.CopyResource(readback, buffer.Resource);
+            owner.UnifiedSubmitAndWait();
+            byte[] data = readback.Map<byte>(0, buffer.ByteLength).ToArray(); readback.Unmap(0); return data;
+        }
+
         /// <summary>Development-only dispatch isolation; never used for benchmark timings.</summary>
         public void DiagnosePasses(Action<string, double> completed)
         {

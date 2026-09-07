@@ -111,6 +111,9 @@ groupshared uint SinglePassEpoch;
 groupshared uint SinglePassBlockIndex;
 groupshared uint SinglePassBlockTotal;
 groupshared uint SinglePassBlockPrefix;
+#if HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS
+RWByteAddressBuffer ScanDiagnosticCounters : register(u2);
+#endif
 
 // Single-pass state uses an 8-byte header followed by 12 bytes per logical block:
 // [epoch, nextBlock] [aggregate, inclusivePrefix, epoch|status]...
@@ -228,6 +231,9 @@ void SinglePassScan(uint groupIndex : SV_GroupIndex)
 
             uint blockPrefix = HlslPerfScanIdentity();
             uint lookbackSuffix = HlslPerfScanIdentity();
+#if HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS
+            uint diagnosticPolls = 0, diagnosticAggregates = 0, diagnosticPrefixes = 0, diagnosticNotReady = 0;
+#endif
             if (SinglePassBlockIndex > 0)
             {
                 uint predecessor = SinglePassBlockIndex - 1;
@@ -241,8 +247,14 @@ void SinglePassScan(uint groupIndex : SV_GroupIndex)
                         0xffffffffu,
                         0xffffffffu,
                         observedStatus);
+#if HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS
+                    diagnosticPolls++;
+#endif
                     if (observedStatus == prefixToken)
                     {
+#if HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS
+                        diagnosticPrefixes++;
+#endif
                         DeviceMemoryBarrier();
                         blockPrefix = HlslPerfScanCombine(
                             Output1.Load(previousState + 4),
@@ -251,6 +263,9 @@ void SinglePassScan(uint groupIndex : SV_GroupIndex)
                     }
                     if (observedStatus == aggregateToken)
                     {
+#if HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS
+                        diagnosticAggregates++;
+#endif
                         DeviceMemoryBarrier();
                         lookbackSuffix = HlslPerfScanCombine(
                             Output1.Load(previousState),
@@ -262,8 +277,15 @@ void SinglePassScan(uint groupIndex : SV_GroupIndex)
                         }
                         predecessor--;
                     }
+#if HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS
+                    else { diagnosticNotReady++; }
+#endif
                 }
             }
+#if HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS
+            ScanDiagnosticCounters.Store4(SinglePassBlockIndex * 16,
+                uint4(diagnosticPolls, diagnosticAggregates, diagnosticPrefixes, diagnosticNotReady));
+#endif
             SinglePassBlockPrefix = blockPrefix;
 
             Output1.Store(
