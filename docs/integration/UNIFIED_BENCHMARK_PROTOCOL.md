@@ -53,6 +53,24 @@ under the shared validation wrapper for a reproduced validation session. Create 
 fresh binary lock listing source SHA and every file under the executable directory
 as `{path, sha256}`; relative paths are used in this lock. Then execute:
 
+For a fresh reproduction from the delivery revision, PowerShell 7, Python and
+the .NET 10 SDK are required. The checked-in build helper performs these steps
+under the same public mutex wrapper and writes the binary lock automatically:
+
+```powershell
+tools/Build-UnifiedBenchmark.ps1 -OutputDirectory .hlslperf/reproduction-build
+$build = Get-Content -Raw .hlslperf/reproduction-build/build.json | ConvertFrom-Json
+tools/Invoke-UnifiedMatrix.ps1 -Runtime $build.runtime `
+  -OutputRoot .hlslperf/reproduction-raw -Declaration $build.declaration `
+  -BinaryLock $build.binaryLock -ExpectedSourceSha $build.sourceSha `
+  -SerializedValidationRunner $build.serializedValidationRunner
+python tools/unified_protocol.py analyze docs/integration/unified-declaration.json .hlslperf/reproduction-raw .hlslperf/reproduction-audit
+```
+
+The delivery adds documentation, audit and reproduction helpers after the
+measurement commit; the frozen runtime source and statistical rules are unchanged.
+For an existing independently recorded build, the explicit runner arguments are:
+
 ```powershell
 tools/Invoke-UnifiedMatrix.ps1 -Runtime <release/hlslperf-unified.dll> `
   -OutputRoot <new-evidence-root> `
