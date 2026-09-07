@@ -124,7 +124,7 @@ public sealed partial class D3D12Tuner : IDisposable
                 fingerprint,
                 workload.Id,
                 workloadImplementationHash,
-                KernelAbiV1.Id,
+                manifest.KernelAbiVersion,
                 candidates.Select(candidate => candidate.Id).ToHashSet(StringComparer.Ordinal));
             checkpointCreated = checkpoint.CreatedUtc;
             foreach ((string id, CandidateResult result) in checkpoint.CompletedCandidates)
@@ -151,6 +151,8 @@ public sealed partial class D3D12Tuner : IDisposable
             {
                 plan = workload.Build(manifest, candidate);
                 plan.Validate();
+                if (plan.AbiVersion != manifest.KernelAbiVersion)
+                    throw new InvalidDataException("Workload plan ABI differs from the manifest ABI.");
             }
             catch (Exception exception) when (exception is not OperationCanceledException)
             {
@@ -208,7 +210,7 @@ public sealed partial class D3D12Tuner : IDisposable
             selection,
             results,
             workload.Id,
-            KernelAbiV1.Id,
+            manifest.KernelAbiVersion,
             new TuningResumeSummary(
                 checkpointOptions?.Resume == true,
                 reusedCandidateCount,
@@ -236,7 +238,7 @@ public sealed partial class D3D12Tuner : IDisposable
                     fingerprint,
                     workload.Id,
                     workloadImplementationHash,
-                    KernelAbiV1.Id,
+                    manifest.KernelAbiVersion,
                     resumable));
         }
     }
@@ -301,33 +303,12 @@ public sealed partial class D3D12Tuner : IDisposable
             samples.Add(batchMilliseconds / measuredRunsPerBatch);
         }
 
-        GpuBuffer verified = resources.Get(plan.VerifiedResource);
-        PoisonVerifiedResource(verified);
-        ExecutePlan(plan, pipelines, resources);
-        ExecuteAndWait();
-        Transition(verified, ResourceStates.CopySource);
-        using ID3D12Resource readback = device.CreateCommittedResource(
-            HeapType.Readback,
-            ResourceDescription.Buffer((ulong)verified.ByteLength, ResourceFlags.None, 0),
-            ResourceStates.CopyDest,
-            null);
-        commandList.CopyResource(readback, verified.Resource);
-        ExecuteAndWait();
-
-        Span<byte> outputBytes = readback.Map<byte>(0, verified.ByteLength);
-        string actualHash = ContentHash.Sha256(outputBytes);
-        byte[]? capturedOutput = captureVerifiedOutput is null ? null : outputBytes.ToArray();
-        readback.Unmap(0);
-        if (capturedOutput is not null)
-            captureVerifiedOutput!(candidate, capturedOutput);
-        bool correctnessPassed = string.Equals(actualHash, plan.ExpectedSha256, StringComparison.OrdinalIgnoreCase);
-        CorrectnessResult correctness = new(
-            correctnessPassed,
-            actualHash,
-            plan.ExpectedSha256,
-            correctnessPassed
-                ? "GPU output matched the workload pack's CPU oracle."
-                : "GPU output did not match the workload pack's CPU oracle.");
+        CorrectnessResult correctness = VerifyPlanOutputs(plan, pipelines, resources,
+            captureVerifiedOutput is null ? null : (resource, bytes) =>
+            {
+                if (resource == plan.VerifiedResource) captureVerifiedOutput(candidate, bytes);
+            });
+        bool correctnessPassed = correctness.Passed;
 
         DistributionSummary timing = StableStatistics.Summarize(samples);
         bool stable = timing.CoefficientOfVariation <= manifest.MaximumCoefficientOfVariation;
@@ -346,7 +327,7 @@ public sealed partial class D3D12Tuner : IDisposable
             correctnessPassed ? null : "Correctness gate failed.");
     }
 
-    private void PoisonVerifiedResource(GpuBuffer verified)
+    private void PoisonVerifiedResource(GpuBuffer verified, byte poison = 0xa5)
     {
         using ID3D12Resource upload = device.CreateCommittedResource(
             HeapType.Upload,
@@ -354,7 +335,7 @@ public sealed partial class D3D12Tuner : IDisposable
             ResourceStates.GenericRead,
             null);
         Span<byte> mapped = upload.Map<byte>(0, verified.ByteLength);
-        mapped.Fill(0xa5);
+        mapped.Fill(poison);
         upload.Unmap(0);
         Transition(verified, ResourceStates.CopyDest);
         commandList.CopyResource(verified.Resource, upload);
@@ -363,6 +344,7 @@ public sealed partial class D3D12Tuner : IDisposable
 
     private ResourceSet CreateResources(KernelExecutionPlan plan)
     {
+        if (plan.Passes.Any(pass => pass.Indirect is not null)) EnsureIndirectPipeline();
         Dictionary<string, GpuBuffer> buffers = new(StringComparer.Ordinal);
         List<ID3D12Resource> uploads = [];
         try
@@ -464,6 +446,7 @@ public sealed partial class D3D12Tuner : IDisposable
     {
         foreach (KernelPassSpec pass in plan.Passes)
         {
+            if (pass.Indirect is { } indirect) PrepareIndirectArguments(indirect, resources);
             GpuBuffer input0 = resources.GetOrDummy(pass.Input0);
             GpuBuffer input1 = resources.GetOrDummy(pass.Input1);
             GpuBuffer output0 = resources.GetOrDummy(pass.Output0);
@@ -487,7 +470,11 @@ public sealed partial class D3D12Tuner : IDisposable
             for (int index = 0; index < pass.Constants.Count; ++index)
                 constants[index] = pass.Constants[index];
             commandList.SetComputeRoot32BitConstants(4, constants, 0);
-            commandList.Dispatch(pass.Dispatch.X, pass.Dispatch.Y, pass.Dispatch.Z);
+            if (pass.Indirect is { } dispatch)
+                commandList.ExecuteIndirect(indirectSignature!, 1, resources.Get(dispatch.ArgumentResource).Resource,
+                    checked((ulong)dispatch.ArgumentByteOffset), null, 0);
+            else
+                commandList.Dispatch(pass.Dispatch.X, pass.Dispatch.Y, pass.Dispatch.Z);
 
             if (pass.Output0 is not null)
                 Transition(output0, ResourceStates.NonPixelShaderResource);
@@ -576,7 +563,7 @@ public sealed partial class D3D12Tuner : IDisposable
                 kernelHash,
                 entryPoint,
                 manifest.ShaderModel,
-                abi = KernelAbiV1.Id,
+                abi = manifest.KernelAbiVersion,
                 compiler = typeof(DxcCompiler).Assembly.GetName().Version?.ToString(),
                 defines = candidate.Defines.OrderBy(pair => pair.Key, StringComparer.Ordinal).ToArray(),
                 options = "O3-strict-warnings-as-errors"
@@ -736,6 +723,8 @@ public sealed partial class D3D12Tuner : IDisposable
         if (disposed)
             return;
         disposed = true;
+        indirectPipeline?.Dispose();
+        indirectSignature?.Dispose();
         timestampReadback.Dispose();
         timestampQueryHeap.Dispose();
         rootSignature.Dispose();
