@@ -98,6 +98,9 @@ public sealed partial class D3D12Tuner : IDisposable
         ObjectDisposedException.ThrowIf(disposed, this);
         manifest.Validate();
         ArgumentNullException.ThrowIfNull(workload);
+        if (manifest.MeasurementProtocol == PairedProtocol.Id)
+            return RunPaired(manifest, manifestPath, workload, progress, cancellationToken,
+                compilerCacheDirectory, captureVerifiedOutput, checkpointOptions);
 
         string fullManifestPath = Path.GetFullPath(manifestPath);
         string manifestDirectory = Path.GetDirectoryName(fullManifestPath)
@@ -268,7 +271,8 @@ public sealed partial class D3D12Tuner : IDisposable
         KernelCandidate candidate,
         KernelExecutionPlan plan,
         CompilationSet compilation,
-        Action<KernelCandidate, ReadOnlyMemory<byte>>? captureVerifiedOutput)
+        Action<KernelCandidate, ReadOnlyMemory<byte>>? captureVerifiedOutput,
+        int? sampleCount = null)
     {
         using PipelineSet pipelines = CreatePipelines(compilation.Bytecodes);
         using ResourceSet resources = CreateResources(plan);
@@ -297,7 +301,7 @@ public sealed partial class D3D12Tuner : IDisposable
         }
 
         List<double> samples = new(manifest.MeasurementBatches);
-        for (int batch = 0; batch < manifest.MeasurementBatches; ++batch)
+        for (int batch = 0; batch < (sampleCount ?? manifest.MeasurementBatches); ++batch)
         {
             double batchMilliseconds = MeasureBatch(plan, pipelines, resources, measuredRunsPerBatch);
             samples.Add(batchMilliseconds / measuredRunsPerBatch);

@@ -17,7 +17,7 @@ namespace EdwinLiu.HlslPerf.Tests
                 Hash('a'),
                 Hash('b'),
                 HlslPerfCompatibilityPolicy.ExactDeviceAndDriver,
-                out HlslPerfResolvedProfile resolved);
+                out HlslPerfResolvedProfile resolved, allowHistorical: true);
             RecordingSink sink = new RecordingSink();
             HlslPerfProfileConsumer.Apply(resolved, sink);
 
@@ -38,7 +38,7 @@ namespace EdwinLiu.HlslPerf.Tests
                 Hash('a'),
                 Hash('b'),
                 HlslPerfCompatibilityPolicy.ExactDeviceAndDriver,
-                out HlslPerfResolvedProfile resolved);
+                out HlslPerfResolvedProfile resolved, allowHistorical: true);
 
             Assert.That(success, Is.False);
             StringAssert.Contains("driver", resolved.Reason.ToLowerInvariant());
@@ -56,7 +56,7 @@ namespace EdwinLiu.HlslPerf.Tests
                 Hash('a'),
                 Hash('b'),
                 HlslPerfCompatibilityPolicy.BackendAndShaderModel,
-                out HlslPerfResolvedProfile resolved);
+                out HlslPerfResolvedProfile resolved, allowHistorical: true);
 
             Assert.That(success, Is.False);
             StringAssert.Contains("workload", resolved.Reason.ToLowerInvariant());
@@ -74,7 +74,7 @@ namespace EdwinLiu.HlslPerf.Tests
                 Hash('a'),
                 Hash('c'),
                 HlslPerfCompatibilityPolicy.BackendAndShaderModel,
-                out HlslPerfResolvedProfile resolved);
+                out HlslPerfResolvedProfile resolved, allowHistorical: true);
 
             Assert.That(success, Is.False);
             StringAssert.Contains("kernel", resolved.Reason.ToLowerInvariant());
@@ -92,7 +92,7 @@ namespace EdwinLiu.HlslPerf.Tests
                 Hash('c'),
                 Hash('b'),
                 HlslPerfCompatibilityPolicy.BackendAndShaderModel,
-                out HlslPerfResolvedProfile resolved);
+                out HlslPerfResolvedProfile resolved, allowHistorical: true);
 
             Assert.That(success, Is.False);
             StringAssert.Contains("manifest", resolved.Reason.ToLowerInvariant());
@@ -118,3 +118,4 @@ namespace EdwinLiu.HlslPerf.Tests
         }
     }
 }
+

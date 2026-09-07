@@ -18,6 +18,11 @@ namespace EdwinLiu.HlslPerf
         public string workloadId;
         public string kernelAbiVersion;
         public HlslPerfDefineValue[] defineValues;
+        public string measurementProtocol;
+        public string evidenceStatus;
+        public string workloadImplementationSha256;
+        public string executionIdentitySha256;
+        public string confirmationSha256;
     }
 
     [Serializable]
