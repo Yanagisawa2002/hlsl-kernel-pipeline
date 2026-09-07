@@ -44,6 +44,9 @@ public sealed record KernelPassSpec(
     string? Output1,
     IReadOnlyList<uint> Constants)
 {
+    public IReadOnlyList<string> DependsOn { get; init; } = [];
+    public KernelIndirectDispatch? Indirect { get; init; }
+
     public void Validate(IReadOnlySet<string> resources)
     {
         if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(EntryPoint))
@@ -73,11 +76,17 @@ public sealed record KernelExecutionPlan(
     string VerifiedResource,
     string ExpectedSha256)
 {
+    public IReadOnlyList<KernelVerifiedOutput> AdditionalVerifiedOutputs { get; init; } = [];
+
+    public IReadOnlyList<KernelVerifiedOutput> GetVerifiedOutputs() =>
+        [new(VerifiedResource, ExpectedSha256), .. AdditionalVerifiedOutputs];
+
     public void Validate()
     {
-        if (AbiVersion != KernelAbiV1.Id)
+        if (AbiVersion != KernelAbiV1.Id && AbiVersion != KernelAbiV2.Id)
             throw new InvalidDataException($"Unsupported execution-plan ABI '{AbiVersion}'.");
-        if (string.IsNullOrWhiteSpace(WorkloadId) || LogicalItemCount <= 0)
+        if (string.IsNullOrWhiteSpace(WorkloadId) || LogicalItemCount < 0 ||
+            (LogicalItemCount == 0 && AbiVersion == KernelAbiV1.Id))
             throw new InvalidDataException("Execution plans require a workload id and positive logical item count.");
         if (Buffers.Count == 0 || Passes.Count == 0)
             throw new InvalidDataException("Execution plans require at least one buffer and one pass.");
@@ -92,6 +101,13 @@ public sealed record KernelExecutionPlan(
             throw new InvalidDataException($"Verified resource '{VerifiedResource}' is not declared.");
         if (ExpectedSha256.Length != 64 || ExpectedSha256.Any(character => !Uri.IsHexDigit(character)))
             throw new InvalidDataException("Expected output SHA-256 must contain 64 hexadecimal characters.");
+        if (AbiVersion == KernelAbiV1.Id)
+        {
+            if (AdditionalVerifiedOutputs.Count != 0 || Passes.Any(pass => pass.Indirect is not null || pass.DependsOn.Count != 0))
+                throw new InvalidDataException("Extended outputs, dependencies and indirect dispatch require ABI v2.");
+        }
+        else
+            KernelAbiV2.Validate(this);
     }
 }
 

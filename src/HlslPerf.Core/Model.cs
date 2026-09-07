@@ -91,7 +91,7 @@ public sealed class TuningManifest
         }
         else
         {
-            if (KernelAbiVersion != KernelAbiV1.Id)
+            if (KernelAbiVersion != KernelAbiV1.Id && KernelAbiVersion != KernelAbiV2.Id)
                 throw new InvalidDataException($"Unsupported kernel ABI '{KernelAbiVersion}'.");
             Workload?.Validate();
             if (Workload is null)
@@ -212,7 +212,10 @@ public sealed record DistributionSummary(
     double StandardDeviationMilliseconds,
     double CoefficientOfVariation);
 
-public sealed record CorrectnessResult(bool Passed, string ActualSha256, string ExpectedSha256, string Detail);
+public sealed record CorrectnessResult(bool Passed, string ActualSha256, string ExpectedSha256, string Detail)
+{
+    public IReadOnlyList<KernelOutputVerification> Outputs { get; init; } = [];
+}
 
 public sealed record CandidateResult(
     string CandidateId,
