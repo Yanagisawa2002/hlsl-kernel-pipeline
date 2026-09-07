@@ -186,24 +186,22 @@ foreach ($cell in $cells) {
     $output = Join-Path $EvidenceRoot $cell.name
     if (Test-Path -LiteralPath $output) { throw "Evidence already exists for $($cell.name); refusing to overwrite an attempt." }
     New-Item -ItemType Directory -Path $output | Out-Null
-    $receipt = @{ name = $cell.name; manifestSha256 = $cell.manifestSha256; sourceSha = $declaration.sourceSha; before = Get-Interference; status = 'running' }
+    $receipt = @{ name = $cell.name; manifestSha256 = $cell.manifestSha256; sourceSha = $declaration.sourceSha; before = Get-Interference; status = 'running'; exitCode = $null }
     Write-Json $receipt (Join-Path $output 'execution.json')
-    $script:matrixExitCode = $null
     & $SerializedValidationRunner -Action {
         $receipt.lockAcquiredUtc = [DateTime]::UtcNow.ToString('o')
         $receipt.before = Get-Interference
         Push-Location $repoRoot
         try {
             & dotnet $cli tune $cell.manifestPath --adapter R9700 --rga off --output $output *> (Join-Path $output 'console.log')
-            $script:matrixExitCode = $LASTEXITCODE
+            $receipt.exitCode = $LASTEXITCODE
         }
         finally {
             $receipt.after = Get-Interference
             Pop-Location
         }
     }
-    $receipt.exitCode = $script:matrixExitCode
-    $receipt.status = if (($script:matrixExitCode -in @(0, 2)) -and (Test-Path -LiteralPath (Join-Path $output 'run.json'))) { 'recorded' } else { 'execution-failed' }
+    $receipt.status = if (($receipt.exitCode -in @(0, 2)) -and (Test-Path -LiteralPath (Join-Path $output 'run.json'))) { 'recorded' } else { 'execution-failed' }
     Write-Json $receipt (Join-Path $output 'execution.json')
     Write-Output "$($cell.name): $($receipt.status), exit $($receipt.exitCode)"
 }
