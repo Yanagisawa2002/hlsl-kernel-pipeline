@@ -89,7 +89,7 @@
       "minLength": 1
     },
     "fixedDefines": {
-      "$ref": "#/$defs/defineMap"
+      "$ref": "#/$defs/fixedDefineMap"
     },
     "baselineDefines": {
       "$ref": "#/$defs/defineMap"
@@ -242,6 +242,12 @@
       "type": "object",
       "additionalProperties": {
         "$ref": "#/$defs/positiveInteger"
+      }
+    },
+    "fixedDefineMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
       }
     }
   },
