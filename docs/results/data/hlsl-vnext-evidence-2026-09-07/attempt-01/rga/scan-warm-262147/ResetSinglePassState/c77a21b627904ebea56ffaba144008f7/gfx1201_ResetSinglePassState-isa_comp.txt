@@ -1,0 +1,54 @@
+
+
+; D3D12 Shader Hash 0x55c997736b4c75de06071be762e1bb68
+; API PSO Hash 0x4c1cf3af240f5a27
+; Driver Internal Pipeline Hash 0x6ab98a6ab02a3b67
+; -------- Disassembly --------------------
+shader main
+  asic(GFX12)
+  type(CS)
+  sgpr_count(14)
+  vgpr_count(8)
+  wave_size(32)
+
+  s_version     { version: UC_VERSION_GFX12, w32: 1 }   // 000000000000: B0804009
+  s_ctz_i32_b32  s1, exec_lo                            // 000000000004: BE81087E
+  s_and_b32     s2, s7, lit(0x0000ffff)                 // 000000000008: 8B02FF07 0000FFFF
+  s_mov_b32     s0, exec_lo                             // 000000000010: BE80007E
+  s_lshl_b32    s3, 1, s1                               // 000000000014: 84030181
+  s_mov_b32     s4, s6                                  // 000000000018: BE840006
+  s_mov_b32     s5, s2                                  // 00000000001C: BE850002
+  s_movk_i32    s6, 0xffff                              // 000000000020: B006FFFF
+  s_mov_b32     s7, lit(0x22014fac)                     // 000000000024: BE8700FF 22014FAC
+  s_and_b32     s3, s3, exec_lo                         // 00000000002C: 8B037E03
+  v_mbcnt_lo_u32_b32  v0, s0, 0                         // 000000000030: D71F0000 02010000
+  s_and_saveexec_b32  s2, s3                            // 000000000038: BE822003
+  s_prefetch_inst_pc_rel  0x000014, null, 0x00          // 00000000003C: F404A000 F8000014
+  s_cbranch_execz  label_0060                           // 000000000044: BFA50006
+  s_bcnt1_i32_b32  s0, s0                               // 000000000048: BE801800
+  s_wait_alu    { sa_sdst: 0 }                          // 00000000004C: BF88FF9E
+  v_mov_b32     v1, s0                                  // 000000000050: 7E020200
+  buffer_atomic_add_u32  v1, v0, s[4:7], null th:TH_ATOMIC_RETURN format:[BUF_FMT_INVALID] // 000000000054: C40D407C 00100801 00000000
+label_0060:
+  s_mov_b32     exec_lo, s2                             // 000000000060: BEFE0002
+  s_wait_loadcnt  0x0000                                // 000000000064: BFC00000
+  v_readlane_b32  s0, v1, s1                            // 000000000068: D7600000 02000301
+  s_wait_alu    { va_sdst: 0 }                          // 000000000070: BF88F19F
+                                                        s_delay_alu  { instid0: INSTID_VALU_DEP_1, instskip: INSTSKIP_NEXT, instid1: INSTID_VALU_DEP_1 } // 000000000074: BF870091
+  v_add_nc_u32  v0, s0, v0                              // 000000000078: 4A000000
+  v_and_b32     v0, lit(0x3fffffff), v0                 // 00000000007C: 360000FF 3FFFFFFF
+                                                        s_delay_alu  { instid0: INSTID_VALU_DEP_1 } // 000000000084: BF870001
+  v_cmp_ne_i32  vcc_lo, lit(0x3fffffff), v0             // 000000000088: 7C8A00FF 3FFFFFFF
+  s_and_not1_b32  exec_lo, s2, vcc_lo                   // 000000000090: 917E6A02
+  s_cbranch_execz  label_00A8                           // 000000000094: BFA50004
+  v_mov_b32     v0, 1                                   // 000000000098: 7E000281
+  buffer_store_b32  v0, v0, s[4:7], null scope:SCOPE_DEV format:[BUF_FMT_INVALID] // 00000000009C: C406807C 00080800 00000000
+label_00A8:
+  s_mov_b32     exec_lo, s2                             // 0000000000A8: BEFE0002
+  v_mov_b32     v0, 0                                   // 0000000000AC: 7E000280
+  buffer_store_b32  v0, v0, s[4:7], null offset:0x4 scope:SCOPE_DEV format:[BUF_FMT_INVALID] // 0000000000B0: C406807C 00080800 00000400
+  s_nop         0x0000                                  // 0000000000BC: BF800000
+  s_sendmsg     { msg: MSG_DEALLOC_VGPRS }              // 0000000000C0: BFB60003
+  s_endpgm                                              // 0000000000C4: BFB00000
+end
+
