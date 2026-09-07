@@ -192,9 +192,15 @@ foreach ($cell in $cells) {
     & $SerializedValidationRunner -Action {
         $receipt.lockAcquiredUtc = [DateTime]::UtcNow.ToString('o')
         $receipt.before = Get-Interference
-        & dotnet $cli tune $cell.manifestPath --adapter R9700 --rga off --output $output *> (Join-Path $output 'console.log')
-        $script:matrixExitCode = $LASTEXITCODE
-        $receipt.after = Get-Interference
+        Push-Location $repoRoot
+        try {
+            & dotnet $cli tune $cell.manifestPath --adapter R9700 --rga off --output $output *> (Join-Path $output 'console.log')
+            $script:matrixExitCode = $LASTEXITCODE
+        }
+        finally {
+            $receipt.after = Get-Interference
+            Pop-Location
+        }
     }
     $receipt.exitCode = $script:matrixExitCode
     $receipt.status = if (($script:matrixExitCode -in @(0, 2)) -and (Test-Path -LiteralPath (Join-Path $output 'run.json'))) { 'recorded' } else { 'execution-failed' }

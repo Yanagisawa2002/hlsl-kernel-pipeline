@@ -57,15 +57,18 @@ def audit(path):
         for verification in verifications:
             correctness = verification["correctness"]
             require(correctness["passed"], "resident output failed")
+            expected_outputs = scenario["slots"][verification["slot"]]["expectedOutputs"]
             by_resource = defaultdict(list)
             for output in correctness.get("outputs", []):
                 require(output["passed"] and output["actualSha256"] == output["expectedSha256"], "output hash failed")
                 by_resource[output["resource"]].append(output)
                 checks += 1
             require(by_resource, "missing per-output poison evidence")
+            require(set(by_resource) == set(expected_outputs), "declared output omitted from verification")
             for resource, attempts in by_resource.items():
                 require(sorted(v["attempt"] for v in attempts) == [1, 2], f"missing poison attempts: {resource}")
                 require({v["poisonByte"] for v in attempts} == {0xA5, 0x5A}, f"poison mismatch: {resource}")
+                require(all(v["expectedSha256"] == expected_outputs[resource] for v in attempts), "output oracle identity mismatch")
         if slot["phase"] == "confirmation":
             confirmation_ids.add(slot["challengerId"])
             require(datetime.fromisoformat(row["startedUtc"]) >= datetime.fromisoformat(evidence["selectionLockedUtc"]), "confirmation preceded selection lock")
@@ -121,7 +124,7 @@ def main():
     for path in reports:
         try:
             results.append(audit(path))
-        except (ValueError, KeyError, TypeError, ZeroDivisionError) as error:
+        except Exception as error:
             failures.append({"path": str(path), "error": str(error)})
     summary = {"passed": bool(reports) and not failures, "reports": len(reports), "results": results, "failures": failures}
     args.output.write_text(json.dumps(summary, indent=2), encoding="utf-8")
