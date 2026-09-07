@@ -12,7 +12,8 @@ if (HlslPerfProfileConsumer.TryResolve(
         expectedManifestSha256,
         expectedTransitiveKernelSha256,
         HlslPerfCompatibilityPolicy.ExactDeviceAndDriver,
-        out HlslPerfResolvedProfile resolved))
+        out HlslPerfResolvedProfile resolved,
+        reviewedDeploymentIdentity))
 {
     HlslPerfProfileConsumer.Apply(resolved, myProjectOwnedSink);
 }
@@ -23,3 +24,12 @@ Use `ExactDeviceAndDriver` for deployment. Less strict policies are intended for
 The two expected hashes must come from project-owned build metadata. The kernel
 hash covers the root HLSL file and every recursively included `.hlsli`; an old
 profile is rejected after either the manifest or any include changes.
+
+Schema 3 additionally requires `reviewedDeploymentIdentity`, a project-owned
+`HlslPerfDeploymentIdentity` containing `WorkloadImplementationSha256`,
+`KernelAbiVersion`, `ExecutionIdentitySha256`, `ConfirmationSha256`, `CandidateId`
+and `DefinesSha256`. Copy these from a reviewed build artifact into trusted project
+metadata, never from the incoming JSON while resolving it. The consumer recomputes
+the defines hash over actual defineValues and requires exact device/driver policy.
+Schema 2 is historical and is rejected unless `allowHistorical: true` is explicitly
+supplied. That compatibility mode has no paired/independent-confirmation guarantee.

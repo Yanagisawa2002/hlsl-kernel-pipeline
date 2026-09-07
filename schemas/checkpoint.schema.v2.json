@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edwinliu:hlslperf:paired-checkpoint:2",
+  "title": "HlslPerf paired session checkpoint v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "protocol", "identitySha256", "sessionId", "observations", "selectedCandidateId", "selectionLockSha256", "completedReport", "historicalAttemptPaths"],
+  "properties": {
+    "schemaVersion": { "const": "hlslperf.paired-checkpoint.v2" },
+    "protocol": { "const": "gpu-paired-abba-independent-confirmation-v2" },
+    "identitySha256": { "$ref": "#/$defs/sha256" },
+    "sessionId": { "type": "string", "minLength": 1 },
+    "selectedCandidateId": { "type": ["string", "null"] },
+    "selectionLockSha256": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+    "historicalAttemptPaths": { "type": "array", "items": { "type": "string" } },
+    "completedReport": { "type": ["object", "null"], "properties": {
+      "schemaVersion": { "const": "3.0" },
+      "measurementProtocol": { "const": "gpu-paired-abba-independent-confirmation-v2" }
+    } },
+    "observations": { "type": "array", "items": {
+      "type": "object",
+      "required": ["slot", "startedUtc", "finishedUtc", "inputSha256", "result", "scenario", "slotVerifications"],
+      "properties": {
+        "slot": { "type": "object", "required": ["phase", "block", "position", "challengerId", "candidateId", "isBaseline", "order", "orderSeed", "inputSeed"],
+          "properties": {
+            "phase": { "enum": ["calibration", "confirmation"] },
+            "block": { "type": "integer", "minimum": 0 },
+            "position": { "type": "integer", "minimum": 0 },
+            "order": { "enum": ["ABBA", "BAAB"] },
+            "inputSeed": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "startedUtc": { "type": "string", "format": "date-time" },
+        "finishedUtc": { "type": "string", "format": "date-time" },
+        "inputSha256": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "result": { "type": "object" },
+        "scenario": { "type": ["object", "null"] },
+        "slotVerifications": { "type": ["array", "null"] }
+      }
+    } }
+  },
+  "$defs": { "sha256": { "type": "string", "pattern": "^[0-9a-fA-F]{64}$" } }
+}
