@@ -37,6 +37,14 @@ public sealed class PairedProfileTests
     }
 
     [Fact]
+    public void UnrelatedFailedCandidateRemainsVisibleWithoutBlockingConfirmedWinner()
+    {
+        var report = Report(includeFailedChallenger: true);
+        Assert.Contains(report.PairedEvidence!.Observations, o => o.Result.Error == "synthetic failed challenger");
+        Assert.Equal("X-2", Assert.IsType<TuningProfile>(ReportWriter.CreateProfile(report)).CandidateId);
+    }
+
+    [Fact]
     public void CompleteCheckpointReplaysFrozenEvidenceAndRejectsWrongSession()
     {
         string dir = Path.Combine(Path.GetTempPath(), "hlslperf-profile-" + Guid.NewGuid().ToString("N"));
@@ -57,14 +65,15 @@ public sealed class PairedProfileTests
         finally { if (Directory.Exists(dir)) Directory.Delete(dir, true); }
     }
 
-    private static TuningRunReport Report(bool baselineControl = false)
+    private static TuningRunReport Report(bool baselineControl = false, bool includeFailedChallenger = false)
     {
-        var options = new PairedMeasurementOptions { CalibrationBlocks = 6, ConfirmationBlocks = 6 };
+        var options = new PairedMeasurementOptions { CalibrationBlocks = 6, ConfirmationBlocks = 6, ResidentSlots = 3 };
         var device = new DeviceFingerprint("Synthetic", 1, 2, 3, 4, "luid", "driver", "D3D12", "6_0", "compiler", "os");
         List<PairedObservation> rows = [];
         DateTimeOffset lockedUtc = DateTimeOffset.UnixEpoch.AddSeconds(2);
         Add("calibration", "X-2", baselineControl ? 1.02 : 0.8);
-        var calibration = new[] { PairedProtocol.Compare(rows, "calibration", "X-2", options, 1.01, 0.05) };
+        var calibration = (includeFailedChallenger ? new[] { "X-2", "X-3" } : new[] { "X-2" })
+            .Select(id => PairedProtocol.Compare(rows, "calibration", id, options, 1.01, 0.05)).ToArray();
         string selected = PairedProtocol.Select(calibration, "X-1");
         string identity = ContentHash.Sha256("identity"), session = "synthetic-test";
         string selectionLock = ContentHash.Sha256(JsonSerializer.Serialize(new { identity, session, selected, calibration, lockedUtc }, JsonDefaults.Options));
@@ -79,13 +88,15 @@ public sealed class PairedProfileTests
 
         void Add(string phase, string challenger, double time)
         {
-            foreach (PairedSlot slot in PairedProtocol.Schedule(options, phase, [challenger], "X-1"))
+            foreach (PairedSlot slot in PairedProtocol.Schedule(options, phase,
+                phase == "calibration" && includeFailedChallenger ? [challenger, "X-3"] : [challenger], "X-1"))
             {
                 double ms = slot.IsBaseline ? 1 : time;
                 var defines = new Dictionary<string, int> { ["X"] = slot.CandidateId == "X-1" ? 1 : 2 };
                 var correct = new CorrectnessResult(true, ContentHash.Sha256("oracle"), ContentHash.Sha256("oracle"), "synthetic");
                 var result = new CandidateResult(slot.CandidateId, defines, true, null, correct, [ms], 8,
                     StableStatistics.Summarize([ms]), 1 / ms, true, null);
+                if (slot.CandidateId == "X-3") result = result with { Compiled = false, Error = "synthetic failed challenger" };
                 var ring = Enumerable.Range(0, options.ResidentSlots).Select(i => new ScenarioSlotEvidence(i,
                     slot.InputSeed + i, ContentHash.Sha256("input-" + (slot.InputSeed + i)), correct.ExpectedSha256, 128, 1)).ToArray();
                 var memory = new ScenarioMemorySnapshot(DateTimeOffset.UnixEpoch, null, null, "synthetic");
@@ -95,7 +106,7 @@ public sealed class PairedProfileTests
                 var verification = ring.Select(s => new ScenarioVerification(s.Slot, s.InputSeed, "output", correct)).ToArray();
                 var timestamp = DateTimeOffset.UnixEpoch.AddSeconds(phase == "calibration" ? 1 : 3);
                 rows.Add(new(slot, timestamp, timestamp, ContentHash.Sha256(string.Join("/", ring.Select(s => s.InputSha256))),
-                    result, scenario, verification));
+                    result, slot.CandidateId == "X-3" ? null : scenario, slot.CandidateId == "X-3" ? null : verification));
             }
         }
     }

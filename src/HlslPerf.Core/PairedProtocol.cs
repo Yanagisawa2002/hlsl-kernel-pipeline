@@ -10,7 +10,7 @@ public sealed record PairedMeasurementOptions
     public int OrderSeed { get; init; } = 73019;
     public int CalibrationSeedStart { get; init; } = 110001;
     public int ConfirmationSeedStart { get; init; } = 910001;
-    public int ResidentSlots { get; init; } = 3;
+    public int ResidentSlots { get; init; } = 1;
     public long MaximumAllocationBytesPerArm { get; init; } = 512L * 1024 * 1024;
     public double MaximumBaselineDrift { get; init; } = 0.15;
 
