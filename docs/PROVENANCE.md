@@ -3,7 +3,7 @@
 HlslKernelPipeline was started on 2026-09-01 as independent personal work by
 Edwin Liu.
 
-The repository is clean-room:
+The original implementation is clean-room:
 
 - no employer, client, or unrelated project source, assets, configuration,
   benchmark captures, or Git history are included;
@@ -15,6 +15,13 @@ The repository is clean-room:
   in NOTICE.md;
 - generated device profiles contain hardware and toolchain fingerprints, not
   project content.
+
+The external-baseline experiment additionally vendors explicitly attributed
+official AMD FidelityFX and GPUPrefixSums source under `third_party/`.
+Those files retain their upstream licenses and are not claimed as original
+work. Full commit and byte identities, algorithm lineage, and the separate
+host adaptation boundary are documented in
+[external baselines](integration/EXTERNAL_BASELINES.md).
 
 The Unity directory is a standalone UPM package and does not contain or point to
 an employer/client Unity project. Optional RGA binaries used for validation were

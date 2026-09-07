@@ -5,11 +5,13 @@
     <Project Path="src/HlslPerf.Rga/HlslPerf.Rga.csproj" />
     <Project Path="src/HlslPerf.D3D12/HlslPerf.D3D12.csproj" />
     <Project Path="src/HlslPerf.Cli/HlslPerf.Cli.csproj" />
+    <Project Path="src/HlslPerf.UnifiedBench/HlslPerf.UnifiedBench.csproj" />
     <Project Path="src/HlslPerf.Showcase/HlslPerf.Showcase.csproj" />
     <Project Path="src/HlslPerf.GpuDriven/HlslPerf.GpuDriven.csproj" />
     <Project Path="src/HlslPerf.GpuDrivenDemo/HlslPerf.GpuDrivenDemo.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj" />
+    <Project Path="tests/HlslPerf.DynamicSmoke/HlslPerf.DynamicSmoke.csproj" />
   </Folder>
 </Solution>

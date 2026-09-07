@@ -34,14 +34,25 @@ public sealed class TuningManifest
     public required IReadOnlyList<CandidateAxis> Axes { get; init; }
     public IReadOnlyList<CandidateConstraint> Constraints { get; init; } = [];
     public CorrectnessSpec Correctness { get; init; } = new();
+    public string MeasurementProtocol { get; init; } = PairedProtocol.Id;
+    public PairedMeasurementOptions PairedMeasurement { get; init; } = new();
 
     public void Validate()
     {
+        if (MeasurementProtocol != PairedProtocol.Id && MeasurementProtocol != HlslPerfSdk.MeasurementProtocol)
+            throw new InvalidDataException("Unknown measurement protocol.");
+        if (MeasurementProtocol == PairedProtocol.Id)
+        {
+            PairedMeasurement.Validate();
+            if (DispatchesPerBatch < PairedMeasurement.ResidentSlots || DispatchesPerBatch > 65536 || WarmupDispatches > 65536)
+                throw new InvalidDataException("Paired batches must cover the resident ring and remain within 65536 plans.");
+        }
         if (SchemaVersion is not ("1.0" or "2.0" or "3.0"))
             throw new InvalidDataException($"Unsupported manifest schema '{SchemaVersion}'.");
         if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(KernelPath))
             throw new InvalidDataException("Manifest name and kernelPath are required.");
-        if (WorkItemCount <= 0 || WarmupDispatches < 0 || MeasurementBatches < 3 || DispatchesPerBatch <= 0)
+        if (WorkItemCount < 0 || (WorkItemCount == 0 && (KernelAbiVersion != KernelAbiV2.Id || SchemaVersion == "1.0")) ||
+            WarmupDispatches < 0 || MeasurementBatches < 3 || DispatchesPerBatch <= 0)
             throw new InvalidDataException("Workload counts must be positive and at least three measurement batches are required.");
         if (MinimumWarmupMilliseconds < 0 || MinimumBatchMilliseconds <= 0 ||
             MaximumDispatchesPerBatch < DispatchesPerBatch)
@@ -85,9 +96,9 @@ public sealed class TuningManifest
         }
         else
         {
-            if (KernelAbiVersion != KernelAbiV1.Id)
+            if (KernelAbiVersion != KernelAbiV1.Id && KernelAbiVersion != KernelAbiV2.Id)
                 throw new InvalidDataException($"Unsupported kernel ABI '{KernelAbiVersion}'.");
-            Workload?.Validate();
+            Workload?.Validate(KernelAbiVersion == KernelAbiV2.Id);
             if (Workload is null)
                 throw new InvalidDataException("Schema 2.0+ manifests require a workload object.");
         }
@@ -122,12 +133,14 @@ public sealed class WorkloadSpec
     public IReadOnlyDictionary<string, long> Parameters { get; init; } =
         new ReadOnlyDictionary<string, long>(new Dictionary<string, long>());
 
-    internal void Validate()
+    internal void Validate(bool allowZero = false)
     {
         if (string.IsNullOrWhiteSpace(Id))
             throw new InvalidDataException("workload.id is required.");
-        if (Parameters.Any(pair => string.IsNullOrWhiteSpace(pair.Key) || pair.Value <= 0))
-            throw new InvalidDataException("Workload parameter names must be non-empty and values must be positive integers.");
+        if (Parameters.Any(pair => string.IsNullOrWhiteSpace(pair.Key) || pair.Value < 0 || (!allowZero && pair.Value == 0)))
+            throw new InvalidDataException(allowZero
+                ? "Workload parameter names must be non-empty and v2 values must be non-negative integers."
+                : "Workload parameter names must be non-empty and values must be positive integers.");
     }
 
     public int GetRequiredInt32(string name)
@@ -206,7 +219,10 @@ public sealed record DistributionSummary(
     double StandardDeviationMilliseconds,
     double CoefficientOfVariation);
 
-public sealed record CorrectnessResult(bool Passed, string ActualSha256, string ExpectedSha256, string Detail);
+public sealed record CorrectnessResult(bool Passed, string ActualSha256, string ExpectedSha256, string Detail)
+{
+    public IReadOnlyList<KernelOutputVerification> Outputs { get; init; } = [];
+}
 
 public sealed record CandidateResult(
     string CandidateId,
@@ -244,7 +260,15 @@ public sealed record RgaPassAnalysis(
     int? ThreadGroupZ,
     double? OccupancyWavesPerSimd,
     string? IsaPath,
-    string? LiveVgprPath);
+    string? LiveVgprPath)
+{
+    public int? VgprSpills { get; init; }
+    public int? SgprSpills { get; init; }
+    public string Status { get; init; } = "collected";
+    public string MetricKind { get; init; } = "static-compiler-analysis; not measured occupancy or bandwidth";
+    public string? StatisticsPath { get; init; }
+    public RgaInvocationEvidence? Evidence { get; init; }
+}
 
 public sealed record RgaCandidateAnalysis(
     string Tool,
@@ -287,7 +311,9 @@ public sealed record TuningRunReport(
     IReadOnlyList<CandidateResult> Candidates,
     string WorkloadId = "legacy-v1",
     string KernelAbiVersion = "legacy-v1",
-    TuningResumeSummary? Resume = null);
+    TuningResumeSummary? Resume = null,
+    string MeasurementProtocol = HlslPerfSdk.MeasurementProtocol,
+    PairedRunEvidence? PairedEvidence = null);
 
 public sealed record TuningResumeSummary(
     bool Enabled,
@@ -312,7 +338,13 @@ public sealed record TuningProfile(
     double? SpeedupOverBaseline,
     string WorkloadId = "legacy-v1",
     string KernelAbiVersion = "legacy-v1",
-    IReadOnlyList<ProfileDefine>? DefineValues = null);
+    IReadOnlyList<ProfileDefine>? DefineValues = null,
+    string MeasurementProtocol = HlslPerfSdk.MeasurementProtocol,
+    string EvidenceStatus = "historical",
+    string? WorkloadImplementationSha256 = null,
+    string? ExecutionIdentitySha256 = null,
+    string? ConfirmationSha256 = null,
+    string? DefinesSha256 = null);
 
 public static class JsonDefaults
 {
@@ -328,6 +360,9 @@ public static class JsonDefaults
 
 public static class ContentHash
 {
+    public static string DefinesSha256(IReadOnlyDictionary<string, int> defines) => Sha256(string.Concat(
+        defines.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p =>
+            $"{p.Key.Length.ToString(CultureInfo.InvariantCulture)}:{p.Key}:{p.Value.ToString(CultureInfo.InvariantCulture)};")));
     public static string Sha256(ReadOnlySpan<byte> bytes) => Convert.ToHexStringLower(SHA256.HashData(bytes));
     public static string Sha256(string text) => Sha256(Encoding.UTF8.GetBytes(text));
 

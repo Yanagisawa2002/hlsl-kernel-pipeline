@@ -1,0 +1,318 @@
+{
+  "schemaVersion": 1,
+  "evidenceKind": "native-correctness-smoke-not-formal-performance",
+  "nativeSourceCommit": "de8b6c7c6b11410768bb78bf7966f78ae7cf1390",
+  "finalSourceCommit": "36e3dec54367a57f7178009fd7f5e176252bd855",
+  "postNativeChange": "36e3dec corrects zero-count DigitPasses metadata to 0 and adds an assertion; no shader or execution changes. Raw six empty-case cost rows retain the earlier 32/8/4 metadata. Final CPU tests verify corrected zero accounting.",
+  "kernelSha256": [
+    "1c9ab790187e7b25d07a6b7e97c6edf60032a2ab05ec9392ed193f7712ec6e30"
+  ],
+  "device": {
+    "adapterName": "AMD Radeon AI PRO R9700",
+    "vendorId": 4098,
+    "deviceId": 30033,
+    "subsystemId": 1410537545,
+    "revision": 192,
+    "adapterLuid": "76566",
+    "driverVersion": "32.0.31041.1004",
+    "backend": "D3D12",
+    "shaderModel": "6_6",
+    "compilerVersion": "Vortice.Dxc/3.8.3.0",
+    "operatingSystem": "Microsoft Windows 10.0.26200"
+  },
+  "loadedCompilerModules": [
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\tools\\RadixSmoke\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxil.dll",
+      "version": "1.9.2602.17",
+      "sha256": "058f2f52a680c38b223a5615b7df969def21f77e577562e5099d971dede992de"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\tools\\RadixSmoke\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxcompiler.dll",
+      "version": "1.9.2602.17",
+      "sha256": "b86a738ece4c05dbe2d9bbb29668a2ccb28a0740773c9b027cdc61e8d07b4d75"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\tools\\RadixSmoke\\bin\\Release\\net10.0\\HlslPerf.D3D12.dll",
+      "sha256": "9442f8f18c2b1689d8bf73785d9555fdf1b85f93b042f82faf0814e3f792e4b1"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\tools\\RadixSmoke\\bin\\Release\\net10.0\\HlslPerf.Workloads.dll",
+      "sha256": "ba0280f41c86048a366d39490e72b3c8e947fd10edff2f81640757f356e71a12"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\tools\\RadixSmoke\\bin\\Release\\net10.0\\RadixSmoke.dll",
+      "sha256": "3ba9422e9f1f7ee9100ccebfb344042cc79ef2c0de3a41e1d53c2c1d559aad36"
+    }
+  ],
+  "passed": true,
+  "candidateExecutions": 144,
+  "outputPoisonChecks": 420,
+  "cpuTests": {
+    "passed": 56,
+    "failed": 0,
+    "skipped": 0,
+    "trxPath": "tests/HlslPerf.Core.Tests/TestResults/radix-accounting-final.trx",
+    "trxSha256": "bdb57c461daf3e9e9cad4a648a7736f9f5bbb9b2e92013c15c59f9c6bcf1a983"
+  },
+  "classification": "All diagnostic GPU times include complete plan; three samples only, no paired comparison or independent confirmation. No performance/deployment claim.",
+  "representativeCompletePlans": [
+    {
+      "name": "keys-1048579-bits32-pattern2-domain1",
+      "candidateId": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-64__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "passed": true,
+      "error": null,
+      "cost": {
+        "digitPasses": 32,
+        "dispatchPasses": 224,
+        "allocatedBytes": 21037648,
+        "scratchBytes": 12649016,
+        "timingScope": "GPU timestamp surrounds every pass and resource transition in the complete plan; upload/readback excluded."
+      },
+      "diagnosticCompletePlanMilliseconds": 0.94864,
+      "raw": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\artifacts\\radix-smoke-fixed\\keys-1048579-bits32-pattern2-domain1.run.json"
+    },
+    {
+      "name": "keys-1048579-bits32-pattern2-domain1",
+      "candidateId": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-64__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "passed": true,
+      "error": null,
+      "cost": {
+        "digitPasses": 8,
+        "dispatchPasses": 56,
+        "allocatedBytes": 13639928,
+        "scratchBytes": 5251296,
+        "timingScope": "GPU timestamp surrounds every pass and resource transition in the complete plan; upload/readback excluded."
+      },
+      "diagnosticCompletePlanMilliseconds": 0.66808,
+      "raw": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\artifacts\\radix-smoke-fixed\\keys-1048579-bits32-pattern2-domain1.run.json"
+    },
+    {
+      "name": "keys-1048579-bits32-pattern2-domain1",
+      "candidateId": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-64__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "passed": true,
+      "error": null,
+      "cost": {
+        "digitPasses": 4,
+        "dispatchPasses": 36,
+        "allocatedBytes": 29494352,
+        "scratchBytes": 21105720,
+        "timingScope": "GPU timestamp surrounds every pass and resource transition in the complete plan; upload/readback excluded."
+      },
+      "diagnosticCompletePlanMilliseconds": 0.63604,
+      "raw": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\artifacts\\radix-smoke-fixed\\keys-1048579-bits32-pattern2-domain1.run.json"
+    },
+    {
+      "name": "pairs-1048579-bits32-pattern2-domain1",
+      "candidateId": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-64__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "passed": true,
+      "error": null,
+      "cost": {
+        "digitPasses": 32,
+        "dispatchPasses": 225,
+        "allocatedBytes": 42009228,
+        "scratchBytes": 25231964,
+        "timingScope": "GPU timestamp surrounds every pass and resource transition in the complete plan; upload/readback excluded."
+      },
+      "diagnosticCompletePlanMilliseconds": 1.25908,
+      "raw": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\artifacts\\radix-smoke-fixed\\pairs-1048579-bits32-pattern2-domain1.run.json"
+    },
+    {
+      "name": "pairs-1048579-bits32-pattern2-domain1",
+      "candidateId": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-64__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "passed": true,
+      "error": null,
+      "cost": {
+        "digitPasses": 8,
+        "dispatchPasses": 57,
+        "allocatedBytes": 34611508,
+        "scratchBytes": 17834244,
+        "timingScope": "GPU timestamp surrounds every pass and resource transition in the complete plan; upload/readback excluded."
+      },
+      "diagnosticCompletePlanMilliseconds": 0.68864,
+      "raw": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\artifacts\\radix-smoke-fixed\\pairs-1048579-bits32-pattern2-domain1.run.json"
+    },
+    {
+      "name": "pairs-1048579-bits32-pattern2-domain1",
+      "candidateId": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-64__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "passed": true,
+      "error": null,
+      "cost": {
+        "digitPasses": 4,
+        "dispatchPasses": 37,
+        "allocatedBytes": 50465932,
+        "scratchBytes": 33688668,
+        "timingScope": "GPU timestamp surrounds every pass and resource transition in the complete plan; upload/readback excluded."
+      },
+      "diagnosticCompletePlanMilliseconds": 0.55896,
+      "raw": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\artifacts\\radix-smoke-fixed\\pairs-1048579-bits32-pattern2-domain1.run.json"
+    }
+  ],
+  "rawDirectory": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\artifacts\\radix-smoke-fixed",
+  "rawSummarySha256": "5c6a20e2c4d4a4259ff5f72c91f11fcfba76f07ca25c09a5ed80b2b02a37ee29",
+  "rawReports": [
+    {
+      "file": "candidate-coverage-radix-wide-pairs.run.json",
+      "sha256": "e7c04a26496605304d022a5e9a3b68397dc0c9f8db4780fb315a876248580d13",
+      "startedUtc": "2026-09-07T05:21:37.5471036+00:00",
+      "finishedUtc": "2026-09-07T05:21:39.412948+00:00"
+    },
+    {
+      "file": "candidate-coverage-radix-wide.run.json",
+      "sha256": "b9b76c367e69b18e8932a4f2c943a7af8dbd95630c55a3c1c37633cc3e59a678",
+      "startedUtc": "2026-09-07T05:21:35.8434135+00:00",
+      "finishedUtc": "2026-09-07T05:21:37.5401417+00:00"
+    },
+    {
+      "file": "keys-0-bits32-pattern2-domain1.run.json",
+      "sha256": "2997faa59cd5bf93054649d9592c8eeb78023d75b8a908c9153b6fdf2d085637",
+      "startedUtc": "2026-09-07T05:21:33.6334437+00:00",
+      "finishedUtc": "2026-09-07T05:21:33.7073339+00:00"
+    },
+    {
+      "file": "keys-1-bits32-pattern5-domain1.run.json",
+      "sha256": "65b05e9badac5a13168fab71b0ab08515d9a20df58add3868243f793341548c3",
+      "startedUtc": "2026-09-07T05:21:33.7283557+00:00",
+      "finishedUtc": "2026-09-07T05:21:33.8623297+00:00"
+    },
+    {
+      "file": "keys-1048579-bits32-pattern2-domain1.run.json",
+      "sha256": "e2a47fdd036ea411fe25c2ca3dbb415478e875cba9528951ced38265ef15624b",
+      "startedUtc": "2026-09-07T05:21:34.241437+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.5101753+00:00"
+    },
+    {
+      "file": "keys-127-bits1-pattern2-domain2.run.json",
+      "sha256": "d91b24ff58ed927e46f7fecb6791ea0f8cd2108ec3cef032dba2837c4c438b1c",
+      "startedUtc": "2026-09-07T05:21:33.8658684+00:00",
+      "finishedUtc": "2026-09-07T05:21:33.9010167+00:00"
+    },
+    {
+      "file": "keys-128-bits4-pattern3-domain1.run.json",
+      "sha256": "79579ad4107bed539e18d4752ee1177094ce65102a17fc3680c35784e431231a",
+      "startedUtc": "2026-09-07T05:21:33.9052421+00:00",
+      "finishedUtc": "2026-09-07T05:21:33.9394815+00:00"
+    },
+    {
+      "file": "keys-129-bits5-pattern2-domain2.run.json",
+      "sha256": "ff6c243bec11b3b77fd3304d0eaa15b0cfc68df4db46100cdc1aa53275769f9b",
+      "startedUtc": "2026-09-07T05:21:33.9409501+00:00",
+      "finishedUtc": "2026-09-07T05:21:33.9837046+00:00"
+    },
+    {
+      "file": "keys-257-bits9-pattern5-domain2.run.json",
+      "sha256": "c5c7b936dd0d3ca778aca64d55f1793da5395b20c1749d114adcc1d6c077c37a",
+      "startedUtc": "2026-09-07T05:21:33.9885841+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.0260445+00:00"
+    },
+    {
+      "file": "keys-262147-bits32-pattern1-domain1.run.json",
+      "sha256": "488c4c80ffa5b51be4963d5478a4c8e6ae81d851a0096e12a0c9ad41b64fd829",
+      "startedUtc": "2026-09-07T05:21:34.140714+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.2353399+00:00"
+    },
+    {
+      "file": "keys-4097-bits31-pattern1-domain2.run.json",
+      "sha256": "d2d81933369982f0543cd027a30672409e8cc66c6e3ef18352e1a615321979f7",
+      "startedUtc": "2026-09-07T05:21:34.027846+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.0750725+00:00"
+    },
+    {
+      "file": "keys-4097-bits32-pattern4-domain1.run.json",
+      "sha256": "b34717a5b10ef6382d41fd73ecda8f86ef4d88d1ee3ce4b217d40355c5b26339",
+      "startedUtc": "2026-09-07T05:21:34.0803777+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.1333858+00:00"
+    },
+    {
+      "file": "keys-v1-compatibility.run.json",
+      "sha256": "435dc79bcd16125bf72c830d542c2297b7e7894e76f3409bc6826b4c0bb63b01",
+      "startedUtc": "2026-09-07T05:21:35.6001119+00:00",
+      "finishedUtc": "2026-09-07T05:21:35.716886+00:00"
+    },
+    {
+      "file": "packed-v1-compatibility.run.json",
+      "sha256": "9c3a739d5a8c69bffbfce0498d051c75392eecf4dab1c21b4dc337ee288da321",
+      "startedUtc": "2026-09-07T05:21:35.7186761+00:00",
+      "finishedUtc": "2026-09-07T05:21:35.8404257+00:00"
+    },
+    {
+      "file": "pairs-0-bits32-pattern2-domain1.run.json",
+      "sha256": "c47c454063139b717758203bbe957172eab525337b1e0da8968e9187af227d27",
+      "startedUtc": "2026-09-07T05:21:34.515059+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.5734284+00:00"
+    },
+    {
+      "file": "pairs-1-bits32-pattern5-domain1.run.json",
+      "sha256": "f0e0dfccf12bf295e273377a8d19e7eb9731582927b3d4fc215262f3d52c019a",
+      "startedUtc": "2026-09-07T05:21:34.5789028+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.7059075+00:00"
+    },
+    {
+      "file": "pairs-1048579-bits32-pattern2-domain1.run.json",
+      "sha256": "dc15e47d450328d7d2638e9db3cf276a48ded26f0fda553d04981272910cbb54",
+      "startedUtc": "2026-09-07T05:21:35.160571+00:00",
+      "finishedUtc": "2026-09-07T05:21:35.5937696+00:00"
+    },
+    {
+      "file": "pairs-127-bits1-pattern2-domain2.run.json",
+      "sha256": "9a2203cc3068f053a27b1d22501431279c97898554e25b0846f9e01186f09b5d",
+      "startedUtc": "2026-09-07T05:21:34.7081994+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.7420897+00:00"
+    },
+    {
+      "file": "pairs-128-bits4-pattern3-domain1.run.json",
+      "sha256": "18db329b65bdb8e43212b663138fd47541f55ca20b8ecdae296e3c713decd8c6",
+      "startedUtc": "2026-09-07T05:21:34.7464151+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.7816422+00:00"
+    },
+    {
+      "file": "pairs-129-bits5-pattern2-domain2.run.json",
+      "sha256": "606eec3885a4c620f87357a4f85031fd08184c676159f0212555334cefd60ed2",
+      "startedUtc": "2026-09-07T05:21:34.7864661+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.8288109+00:00"
+    },
+    {
+      "file": "pairs-257-bits9-pattern5-domain2.run.json",
+      "sha256": "01ea5c37c93ec7db735c2c088f3ffd1f2dfe1a5542c0d4f45b0b1b27fd76fc4a",
+      "startedUtc": "2026-09-07T05:21:34.8307155+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.8701866+00:00"
+    },
+    {
+      "file": "pairs-262147-bits32-pattern1-domain1.run.json",
+      "sha256": "110e71d691c0c0a1193427346af65248b21ae73859b38f4dd0c72db85fe22f11",
+      "startedUtc": "2026-09-07T05:21:34.9923913+00:00",
+      "finishedUtc": "2026-09-07T05:21:35.1557472+00:00"
+    },
+    {
+      "file": "pairs-4097-bits31-pattern1-domain2.run.json",
+      "sha256": "244056714402403d8130fe9c13ae9e1f004b5df8c113bdf9d9c659accc542435",
+      "startedUtc": "2026-09-07T05:21:34.8726526+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.9262344+00:00"
+    },
+    {
+      "file": "pairs-4097-bits32-pattern4-domain1.run.json",
+      "sha256": "b3bcd96d28650027d33104c9b5cf89147fd27f67368f31be20ca01602d8eadf7",
+      "startedUtc": "2026-09-07T05:21:34.9328846+00:00",
+      "finishedUtc": "2026-09-07T05:21:34.989258+00:00"
+    }
+  ],
+  "matrixSha256": "6c7e5cb00590e8e57052b0561e9502c219855d2d3d44d13a2e7136f0d737faa7",
+  "retainedFailedAttempt": {
+    "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-radix\\artifacts\\radix-smoke",
+    "summarySha256": "8fc7f768c648ab8a8aed1aa51fa0f28ac9bfedae4c0dfa7ca59b6e41822cecfd",
+    "passed": 52,
+    "failed": 92,
+    "failure": "DXC -Werror,-Wfor-redefinition on wide-only loops; corrected by de8b6c7, no correctness failure suppressed."
+  },
+  "unmetGates": [
+    "Post-merge paired calibration against fastest valid binary candidate from the retained complete binary pool",
+    "Fresh-seed independent confirmation and baseline drift/confidence/deployment gates owned by hlsl integration"
+  ],
+  "limits": [
+    "Only R9700 observed; driver 32.0.31041.1004",
+    "Maximum actual input 1048579; ABI maxima checked arithmetically, not allocated on GPU",
+    "Shared mutex serializes cooperating tasks; user apps, clocks and cache state uncontrolled",
+    "Local ranking is quadratic per block; lower digit count is not a performance result"
+  ]
+}

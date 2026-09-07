@@ -1,0 +1,99 @@
+{
+  "schema": "dynamic-evidence-identity-v1",
+  "testedSourceCommit": "9abf4d31fe5f2a27af6382f903100861f26f7835",
+  "baselineCommit": "052cfdb033fdcf1f365514403737fdc584609dc7",
+  "sdkVersion": "10.0.302",
+  "build": "Release net10.0 Windows x64",
+  "binaryIdentityScope": "Exact deployed harness/backend/workload/compiler assets and dependency manifest; GPU entry DXIL hashes and bounded-argument source hash are in the raw report.",
+  "binaries": [
+    {
+      "relativePath": "HlslPerf.DynamicSmoke.dll",
+      "sha256": "e59b75078c41b1909007f741ec50102db571ee18446014bc0147dd3b9d954736",
+      "bytes": 22528,
+      "fileVersion": "0.6.0.0"
+    },
+    {
+      "relativePath": "HlslPerf.Core.dll",
+      "sha256": "5c60e2d3ace9c43ee4ea69cfd2b50bc4e93e7d70a60ce9d17a65a4cc41191154",
+      "bytes": 154112,
+      "fileVersion": "0.6.0.0"
+    },
+    {
+      "relativePath": "HlslPerf.Workloads.dll",
+      "sha256": "044977792073f37ebedc83364d2aed5af5d78785b560f4d20648c6c6e246da2e",
+      "bytes": 38912,
+      "fileVersion": "0.6.0.0"
+    },
+    {
+      "relativePath": "HlslPerf.D3D12.dll",
+      "sha256": "bf1bc2ed248e821a772de8762817cf3448d320eeafe2115c59952d7c50a0b1da",
+      "bytes": 51712,
+      "fileVersion": "0.6.0.0"
+    },
+    {
+      "relativePath": "Vortice.Dxc.dll",
+      "sha256": "aa88d25f90dde955826743b6af8390eecbaaef9254ad01aaa153ac84ae205568",
+      "bytes": 65536,
+      "fileVersion": "3.8.3.0"
+    },
+    {
+      "relativePath": "HlslPerf.DynamicSmoke.deps.json",
+      "sha256": "408f7bdde4e59ee04902636271235a33ec504e68964f79a18e65e176a10e4412",
+      "bytes": 8880,
+      "fileVersion": null
+    },
+    {
+      "relativePath": "runtimes/win-x64/native/dxcompiler.dll",
+      "sha256": "b86a738ece4c05dbe2d9bbb29668a2ccb28a0740773c9b027cdc61e8d07b4d75",
+      "bytes": 17951808,
+      "fileVersion": "1.9.2602.17"
+    },
+    {
+      "relativePath": "runtimes/win-x64/native/dxil.dll",
+      "sha256": "058f2f52a680c38b223a5615b7df969def21f77e577562e5099d971dede992de",
+      "bytes": 1503304,
+      "fileVersion": "1.9.2602.17"
+    }
+  ],
+  "artifacts": [
+    {
+      "relativePath": "broken-bins.hlsl",
+      "sha256": "6cda3d4e65c8e9a0e303dbdcaa4ca18ce0fdff4b1b490d386dccfa2bd7cf6751",
+      "bytes": 1613
+    },
+    {
+      "relativePath": "broken-reset.hlsl",
+      "sha256": "5b1d39cfe6eb7263c1e8213ca733effec7be42799d288b104d3ebb77b49c3af1",
+      "bytes": 1587
+    },
+    {
+      "relativePath": "dynamic-native-smoke.json",
+      "sha256": "6909d49986be24f2043cfd1be66a936c2bc722248f82c1bf796ee1a76279f936",
+      "bytes": 557524
+    },
+    {
+      "relativePath": "dynamic-smoke.log",
+      "sha256": "a9b3199325896bca82ca308d4768037061fa57e7e326f34bf8210568d551b984",
+      "bytes": 509
+    }
+  ],
+  "validation": {
+    "releaseBuild": "passed, zero warnings and errors",
+    "coreTests": {
+      "passed": 53,
+      "failed": 0,
+      "skipped": 0
+    },
+    "nativePositiveV2Cases": 11,
+    "positiveV2OutputChecks": 110,
+    "legacyV1OutputChecks": 2,
+    "expectedRejectedNegativeCases": 2,
+    "unexpectedFailures": 0
+  },
+  "limitations": [
+    "Diagnostic timing is not randomized paired performance evidence.",
+    "GPU/Unity/shared measurement lock held during all native validation; no thermal/clock controls or GPU counters were captured.",
+    "Post-merge paired protocol/scenario integration validation remains owned by the HLSL integrator.",
+    "Unity v1 consumer intentionally does not support dynamic v2 plans."
+  ]
+}

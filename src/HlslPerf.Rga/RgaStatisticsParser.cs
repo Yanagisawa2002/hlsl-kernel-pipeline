@@ -23,7 +23,7 @@ public static partial class RgaStatisticsParser
             string key = Normalize(line[..equals]);
             string rawValue = line[(equals + 1)..].Trim();
             if (double.TryParse(rawValue, NumberStyles.Float, CultureInfo.InvariantCulture, out double value))
-                values[key] = value;
+                if (double.IsFinite(value) && value >= 0) values[key] = value;
         }
 
         int? maximumLive = null;
@@ -61,9 +61,13 @@ public static partial class RgaStatisticsParser
             Int(values, "computeworkgroupsizex"),
             Int(values, "computeworkgroupsizey"),
             Int(values, "computeworkgroupsizez"),
-            Double(values, "occupancywavespersimd") ?? Double(values, "occupancy"),
+            Double(values, "occupancywavespersimd"),
             isaPath,
-            liveVgprPath);
+            liveVgprPath)
+        {
+            VgprSpills = Int(values, "resourceusagenumvgprspills"),
+            SgprSpills = Int(values, "resourceusagenumsgprspills")
+        };
     }
 
     private static string Normalize(string key) => new(key
@@ -72,7 +76,7 @@ public static partial class RgaStatisticsParser
         .ToArray());
 
     private static int? Int(IReadOnlyDictionary<string, double> values, string key) =>
-        values.TryGetValue(key, out double value) ? checked((int)value) : null;
+        values.TryGetValue(key, out double value) && value <= int.MaxValue && value == Math.Truncate(value) ? (int)value : null;
 
     private static double? Double(IReadOnlyDictionary<string, double> values, string key) =>
         values.TryGetValue(key, out double value) ? value : null;

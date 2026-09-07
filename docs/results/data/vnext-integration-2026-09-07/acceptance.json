@@ -1,0 +1,3708 @@
+{
+  "passed": true,
+  "measuredSource": "9bde8741c9f9a7e51910f3c6ded47bf69e1e081c",
+  "reports": 18,
+  "observations": 3936,
+  "poisonOutputChecks": 19584,
+  "schemaCounts": {
+    "manifest.schema.v3.json": 18,
+    "checkpoint.schema.v2.json": 18,
+    "profile.schema.v3.json": 3
+  },
+  "binaryHashesVerified": 19,
+  "maximumCommittedBytesPerArm": 403832832,
+  "cells": [
+    {
+      "cell": "dynamic-n4096-active0",
+      "candidates": 2,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_GROUP_SIZE-64",
+      "confirmationSpeedup": 1.0274423974199705,
+      "lower95": 0.9807581113418001,
+      "upper95": 1.0763488650344695,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained).",
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T06:09:03.45831+00:00",
+      "finishedUtc": "2026-09-07T06:09:09.5546024+00:00"
+    },
+    {
+      "cell": "dynamic-n4096-active1",
+      "candidates": 2,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_GROUP_SIZE-64",
+      "confirmationSpeedup": 1.0066266014237466,
+      "lower95": 0.9372168694464157,
+      "upper95": 1.0811767774650118,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained).",
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T06:10:57.8547565+00:00",
+      "finishedUtc": "2026-09-07T06:11:04.5612828+00:00"
+    },
+    {
+      "cell": "dynamic-n4096-active2",
+      "candidates": 2,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_GROUP_SIZE-64",
+      "confirmationSpeedup": 0.9794446807578571,
+      "lower95": 0.9496061185667644,
+      "upper95": 1.0102208314672034,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained)."
+      ],
+      "startedUtc": "2026-09-07T06:14:51.5529098+00:00",
+      "finishedUtc": "2026-09-07T06:14:57.9156039+00:00"
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots1",
+      "candidates": 3,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "confirmationSpeedup": 1.0160460187073264,
+      "lower95": 0.9287543436030611,
+      "upper95": 1.1115420554869813,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained).",
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T05:54:48.7692889+00:00",
+      "finishedUtc": "2026-09-07T05:54:56.5237252+00:00"
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots3",
+      "candidates": 3,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "confirmationSpeedup": 0.972303097279803,
+      "lower95": 0.9087770926625695,
+      "upper95": 1.0402697433868051,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained)."
+      ],
+      "startedUtc": "2026-09-07T05:54:57.0446819+00:00",
+      "finishedUtc": "2026-09-07T05:55:08.6936347+00:00"
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots1",
+      "candidates": 3,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "confirmationSpeedup": 1.014074891896579,
+      "lower95": 0.9467336006580767,
+      "upper95": 1.086206178443705,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained).",
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T05:55:17.4845807+00:00",
+      "finishedUtc": "2026-09-07T05:55:25.9084922+00:00"
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots3",
+      "candidates": 3,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "confirmationSpeedup": 1.029599219264497,
+      "lower95": 0.9430190922122171,
+      "upper95": 1.1241284095566355,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained)."
+      ],
+      "startedUtc": "2026-09-07T05:55:26.3611841+00:00",
+      "finishedUtc": "2026-09-07T05:55:40.469981+00:00"
+    },
+    {
+      "cell": "radix-compare-pairs-n65537-slots1",
+      "candidates": 3,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "confirmationSpeedup": 1.0243009929747326,
+      "lower95": 0.8459890721847705,
+      "upper95": 1.2401963083275755,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained).",
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T05:55:09.1207894+00:00",
+      "finishedUtc": "2026-09-07T05:55:17.0878082+00:00"
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidates": 18,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "confirmationSpeedup": 1.04125496072048,
+      "lower95": 0.9701781741672895,
+      "upper95": 1.1175389450041944,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained).",
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T05:49:00.9187026+00:00",
+      "finishedUtc": "2026-09-07T05:49:45.4919037+00:00"
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidates": 18,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "confirmationSpeedup": 1.0671597078427573,
+      "lower95": 0.9280128827667932,
+      "upper95": 1.2271702938516462,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained).",
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T05:49:55.8567706+00:00",
+      "finishedUtc": "2026-09-07T05:51:06.6074304+00:00"
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidates": 18,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "confirmationSpeedup": 1.0004842001451555,
+      "lower95": 0.8306017432078653,
+      "upper95": 1.205112610135217,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained).",
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T05:47:46.9324528+00:00",
+      "finishedUtc": "2026-09-07T05:48:33.3167837+00:00"
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidates": 12,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "confirmationSpeedup": 0.9636942914017705,
+      "lower95": 0.8445613868417884,
+      "upper95": 1.0996319530463394,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained).",
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T05:52:16.5834899+00:00",
+      "finishedUtc": "2026-09-07T05:52:52.1642881+00:00"
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidates": 12,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "confirmationSpeedup": 1.099144005009721,
+      "lower95": 0.9918597663572313,
+      "upper95": 1.218032613809733,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained).",
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T05:52:52.4822164+00:00",
+      "finishedUtc": "2026-09-07T05:53:46.8852859+00:00"
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidates": 12,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "confirmationSpeedup": 1.0535938794429909,
+      "lower95": 1.0112300087457518,
+      "upper95": 1.0977325170329555,
+      "confirmationPassed": false,
+      "rejections": [
+        "Baseline drift exceeded the declared budget.",
+        "Raw timing variation exceeded the declared budget (samples retained).",
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T05:51:35.0841891+00:00",
+      "finishedUtc": "2026-09-07T05:52:06.9292187+00:00"
+    },
+    {
+      "cell": "scan-n16777216-slots1",
+      "candidates": 3,
+      "allCorrect": true,
+      "deployable": true,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "confirmationSpeedup": 1.4782124141116302,
+      "lower95": 1.4734033304701923,
+      "upper95": 1.4830371942599185,
+      "confirmationPassed": true,
+      "rejections": [],
+      "startedUtc": "2026-09-07T05:56:06.4384231+00:00",
+      "finishedUtc": "2026-09-07T05:56:22.5415896+00:00"
+    },
+    {
+      "cell": "scan-n16777216-slots3",
+      "candidates": 3,
+      "allCorrect": true,
+      "deployable": true,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "confirmationSpeedup": 1.5254302632389154,
+      "lower95": 1.5149214774535573,
+      "upper95": 1.5360119469139175,
+      "confirmationPassed": true,
+      "rejections": [],
+      "startedUtc": "2026-09-07T06:00:30.7343151+00:00",
+      "finishedUtc": "2026-09-07T06:01:16.6344335+00:00"
+    },
+    {
+      "cell": "scan-n4194304-slots1",
+      "candidates": 3,
+      "allCorrect": true,
+      "deployable": true,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "confirmationSpeedup": 1.00440513652988,
+      "lower95": 0.9950072440422905,
+      "upper95": 1.013891792575461,
+      "confirmationPassed": true,
+      "rejections": [],
+      "startedUtc": "2026-09-07T05:55:40.8446947+00:00",
+      "finishedUtc": "2026-09-07T05:55:49.3638101+00:00"
+    },
+    {
+      "cell": "scan-n4194304-slots3",
+      "candidates": 3,
+      "allCorrect": true,
+      "deployable": false,
+      "selected": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "confirmationSpeedup": 0.9975592435256155,
+      "lower95": 0.9913060088431639,
+      "upper95": 1.0038519240942467,
+      "confirmationPassed": true,
+      "rejections": [
+        "Calibration baseline exceeded the raw variation budget."
+      ],
+      "startedUtc": "2026-09-07T05:55:49.6552443+00:00",
+      "finishedUtc": "2026-09-07T05:56:06.1332207+00:00"
+    }
+  ],
+  "comparisons": [
+    {
+      "cell": "dynamic-n4096-active0",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_GROUP_SIZE-1",
+      "drift": 0.207142142161167,
+      "baselineCv": 0.09327466193782916,
+      "candidateCv": 0.06795023339139647,
+      "passed": false
+    },
+    {
+      "cell": "dynamic-n4096-active0",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_GROUP_SIZE-64",
+      "drift": 0.28312466506471345,
+      "baselineCv": 0.08391171217804777,
+      "candidateCv": 0.04375611725520117,
+      "passed": false
+    },
+    {
+      "cell": "dynamic-n4096-active1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_GROUP_SIZE-1",
+      "drift": 0.21836285379247466,
+      "baselineCv": 0.09283931601110415,
+      "candidateCv": 0.0919608242365777,
+      "passed": false
+    },
+    {
+      "cell": "dynamic-n4096-active1",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_GROUP_SIZE-64",
+      "drift": 0.2047150052980593,
+      "baselineCv": 0.09223991057583467,
+      "candidateCv": 0.08753241409374131,
+      "passed": false
+    },
+    {
+      "cell": "dynamic-n4096-active2",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_GROUP_SIZE-1",
+      "drift": 0.1126570966109004,
+      "baselineCv": 0.035410107215682274,
+      "candidateCv": 0.023648858495513757,
+      "passed": false
+    },
+    {
+      "cell": "dynamic-n4096-active2",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_GROUP_SIZE-64",
+      "drift": 0.18884938524356065,
+      "baselineCv": 0.06153304798194485,
+      "candidateCv": 0.08120737356642198,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.3989131180141261,
+      "baselineCv": 0.09842029674385917,
+      "candidateCv": 0.053113383441182174,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.15119776929205253,
+      "baselineCv": 0.04709997801643988,
+      "candidateCv": 0.2079464063632358,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots1",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.39068233353947646,
+      "baselineCv": 0.12067847817307288,
+      "candidateCv": 0.07920630223947958,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.07777720443020453,
+      "baselineCv": 0.027211948039775186,
+      "candidateCv": 0.060583890218636506,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.17775766584916375,
+      "baselineCv": 0.05284889505216208,
+      "candidateCv": 0.05538909710927733,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots3",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.20581965267337243,
+      "baselineCv": 0.05404328909867253,
+      "candidateCv": 0.09871332933158673,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.5158098694340616,
+      "baselineCv": 0.1488071246603256,
+      "candidateCv": 0.024138163298904156,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.17276092339244187,
+      "baselineCv": 0.054610722873651395,
+      "candidateCv": 0.05191191775312479,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots1",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.3358962082889738,
+      "baselineCv": 0.09443505051351231,
+      "candidateCv": 0.05900861329825096,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.0805009103423775,
+      "baselineCv": 0.03166084691769869,
+      "candidateCv": 0.03140129736320821,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.1346045889953218,
+      "baselineCv": 0.044116872205264876,
+      "candidateCv": 0.05094818778798499,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots3",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.6981733551502287,
+      "baselineCv": 0.1622545505971524,
+      "candidateCv": 0.045809241328098,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.22544881473236433,
+      "baselineCv": 0.06885080697368953,
+      "candidateCv": 0.1795789507318049,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.2234327301685617,
+      "baselineCv": 0.08139761898262833,
+      "candidateCv": 0.19354855852171268,
+      "passed": false
+    },
+    {
+      "cell": "radix-compare-pairs-n65537-slots1",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.8690774804905239,
+      "baselineCv": 0.2320163249318307,
+      "candidateCv": 0.31274129173957743,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.17063008418128733,
+      "baselineCv": 0.06684599732455677,
+      "candidateCv": 0.05522965330161326,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.3251772246826936,
+      "baselineCv": 0.09164441487801497,
+      "candidateCv": 0.22310175399489274,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "drift": 0.14891180649311164,
+      "baselineCv": 0.0366170865759728,
+      "candidateCv": 0.14826860203407285,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.536080331442305,
+      "baselineCv": 0.1367423699770354,
+      "candidateCv": 0.024349301386460687,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "drift": 0.09201009608246546,
+      "baselineCv": 0.029293519720657427,
+      "candidateCv": 0.24962815211773864,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.4068369249018555,
+      "baselineCv": 0.10732449049096802,
+      "candidateCv": 0.08037255966360136,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.1626931026027254,
+      "baselineCv": 0.04908475649094877,
+      "candidateCv": 0.15459588157263512,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.20812566687257816,
+      "baselineCv": 0.06665757267967079,
+      "candidateCv": 0.17014499481446263,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.18805574646270706,
+      "baselineCv": 0.05200607073445645,
+      "candidateCv": 0.09906892257307355,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.17162418042052896,
+      "baselineCv": 0.0697836680796076,
+      "candidateCv": 0.06390281940279233,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.164975551849863,
+      "baselineCv": 0.0427486747326965,
+      "candidateCv": 0.09506983739881679,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.3342094424316042,
+      "baselineCv": 0.08794975200897627,
+      "candidateCv": 0.06810385934750253,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.4916663127945984,
+      "baselineCv": 0.14329635906817503,
+      "candidateCv": 0.07422349094898628,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.4356252118404702,
+      "baselineCv": 0.12243815159212501,
+      "candidateCv": 0.02700169789060052,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.19745983037122272,
+      "baselineCv": 0.0621223825867695,
+      "candidateCv": 0.056039337296780935,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.08332048280599458,
+      "baselineCv": 0.02303668005889539,
+      "candidateCv": 0.18735679745402326,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.17279007971656357,
+      "baselineCv": 0.05863076913374549,
+      "candidateCv": 0.155782775202805,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.48753216666319843,
+      "baselineCv": 0.1230449568136626,
+      "candidateCv": 0.03915897431705888,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.22533500660873473,
+      "baselineCv": 0.05781215893462943,
+      "candidateCv": 0.05572997543898697,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.17091408837832134,
+      "baselineCv": 0.044744499097004585,
+      "candidateCv": 0.10922277007341231,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "drift": 0.15677545241298652,
+      "baselineCv": 0.054940222528019694,
+      "candidateCv": 0.157757625099531,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.17253466491755187,
+      "baselineCv": 0.0496132852277593,
+      "candidateCv": 0.020323150351967783,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "drift": 0.17770897396112506,
+      "baselineCv": 0.055785671574010605,
+      "candidateCv": 0.1705248400682668,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.15690983283060356,
+      "baselineCv": 0.05302296847157603,
+      "candidateCv": 0.03554696659531355,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.5709543917144599,
+      "baselineCv": 0.1383566050663649,
+      "candidateCv": 0.08206925348136287,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.2517008001691987,
+      "baselineCv": 0.08049455141151017,
+      "candidateCv": 0.0625226463419679,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.1654256744369702,
+      "baselineCv": 0.050624932416670224,
+      "candidateCv": 0.10234597233481084,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.6720938684204956,
+      "baselineCv": 0.16172258880740192,
+      "candidateCv": 0.05022804669000683,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.20681893552916608,
+      "baselineCv": 0.06241435083776681,
+      "candidateCv": 0.11680112644721316,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.5388254308068252,
+      "baselineCv": 0.16477517364609529,
+      "candidateCv": 0.0145108567615476,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.1472800456791603,
+      "baselineCv": 0.05120028851167294,
+      "candidateCv": 0.04554538350615862,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.16674074230847924,
+      "baselineCv": 0.0400500754128065,
+      "candidateCv": 0.08814384404205095,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.36312648169133555,
+      "baselineCv": 0.0971213266308908,
+      "candidateCv": 0.07497492555114178,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.17098855182733175,
+      "baselineCv": 0.04748988904176905,
+      "candidateCv": 0.16982852124992176,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.3147714572693705,
+      "baselineCv": 0.08541539917811661,
+      "candidateCv": 0.28157909323034713,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.6931223637605539,
+      "baselineCv": 0.20617560697762913,
+      "candidateCv": 0.16586476347277807,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.5543797412076359,
+      "baselineCv": 0.1519744134399272,
+      "candidateCv": 0.3823611563207124,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.7736005219135531,
+      "baselineCv": 0.18212263099325546,
+      "candidateCv": 0.1586832245047857,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "drift": 0.7347744324080783,
+      "baselineCv": 0.17431650079306496,
+      "candidateCv": 0.15929147943457891,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.8077419766665357,
+      "baselineCv": 0.23677815151193,
+      "candidateCv": 0.13119482505364935,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "drift": 0.5682264717910421,
+      "baselineCv": 0.17473884493389696,
+      "candidateCv": 0.14422938705346836,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.6884373375900215,
+      "baselineCv": 0.17355682366720826,
+      "candidateCv": 0.15470271921977682,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.07555072761613957,
+      "baselineCv": 0.02930979053519558,
+      "candidateCv": 0.0919582538062832,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.16623555446274896,
+      "baselineCv": 0.03987850888945055,
+      "candidateCv": 0.2647213392149187,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.38362692515868724,
+      "baselineCv": 0.0962356829136822,
+      "candidateCv": 0.3316498534861017,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.6745793593886591,
+      "baselineCv": 0.1839601085874865,
+      "candidateCv": 0.0793758373034842,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.9077587392662751,
+      "baselineCv": 0.20940473027095763,
+      "candidateCv": 0.093028007564623,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 1.168838240441834,
+      "baselineCv": 0.3092101323075393,
+      "candidateCv": 0.09515365569042866,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.40709306891812314,
+      "baselineCv": 0.10794915855369557,
+      "candidateCv": 0.25531519027309924,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.7610727765982541,
+      "baselineCv": 0.22279864209321495,
+      "candidateCv": 0.18522836894196792,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.16776698649296273,
+      "baselineCv": 0.06136024243142704,
+      "candidateCv": 0.05410371417624756,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.33800323244196284,
+      "baselineCv": 0.1016651602100892,
+      "candidateCv": 0.06057774557744498,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.625376254180602,
+      "baselineCv": 0.15937015225562878,
+      "candidateCv": 0.0838192838792862,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.5492366901346404,
+      "baselineCv": 0.21744767676256102,
+      "candidateCv": 0.20530071874279113,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 1.4460179006182896,
+      "baselineCv": 0.3193166680549446,
+      "candidateCv": 0.053035027666737296,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.5789699092407787,
+      "baselineCv": 0.14024124768442078,
+      "candidateCv": 0.12568404323154925,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.5566254106053494,
+      "baselineCv": 0.16892980904482843,
+      "candidateCv": 0.025035066497846488,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.16003825333388444,
+      "baselineCv": 0.05753074361459924,
+      "candidateCv": 0.055865506301782185,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.15769576217955117,
+      "baselineCv": 0.05954160268149257,
+      "candidateCv": 0.07593349234687197,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.1527389751388053,
+      "baselineCv": 0.05012885192137071,
+      "candidateCv": 0.04733606469839507,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.5933706235757201,
+      "baselineCv": 0.1874461887296917,
+      "candidateCv": 0.045095225526261475,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.47841418285430537,
+      "baselineCv": 0.11798657905604204,
+      "candidateCv": 0.03086977704437243,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.9795059179822669,
+      "baselineCv": 0.24331788011796573,
+      "candidateCv": 0.09246286333963098,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.49491787234544327,
+      "baselineCv": 0.16974220918396407,
+      "candidateCv": 0.0912588724581542,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.5265749988305188,
+      "baselineCv": 0.12431602257793982,
+      "candidateCv": 0.0631540880865743,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.7551972672528144,
+      "baselineCv": 0.1760078882178538,
+      "candidateCv": 0.19176074546879282,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.14746201437011774,
+      "baselineCv": 0.04589405016027761,
+      "candidateCv": 0.03711258955925913,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.5982207377901545,
+      "baselineCv": 0.1858791804815775,
+      "candidateCv": 0.2902301467688008,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.4787625940869731,
+      "baselineCv": 0.1143509033727833,
+      "candidateCv": 0.025986199717598142,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.6140371196108523,
+      "baselineCv": 0.16587238017301445,
+      "candidateCv": 0.054555360211719174,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.5238048202291588,
+      "baselineCv": 0.1636728980332251,
+      "candidateCv": 0.04351660710717309,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.5237542945287119,
+      "baselineCv": 0.1296662087870651,
+      "candidateCv": 0.12231865343378062,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.601619267245447,
+      "baselineCv": 0.13944349887618254,
+      "candidateCv": 0.05426779784668743,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.33399076390225124,
+      "baselineCv": 0.08697096666769619,
+      "candidateCv": 0.035533878061675774,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.08166759207847485,
+      "baselineCv": 0.02412417708296193,
+      "candidateCv": 0.07046756176127159,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.13902939007322823,
+      "baselineCv": 0.06065919712813263,
+      "candidateCv": 0.1219228384312485,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.42719405732779103,
+      "baselineCv": 0.12862803126305677,
+      "candidateCv": 0.056222749035968744,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.6655452626161613,
+      "baselineCv": 0.20020864934029187,
+      "candidateCv": 0.040819798331177964,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.17015763334053124,
+      "baselineCv": 0.06288496692372937,
+      "candidateCv": 0.08486060076904249,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.49999767203650225,
+      "baselineCv": 0.13437211156195863,
+      "candidateCv": 0.16810180721984538,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.9258649402166794,
+      "baselineCv": 0.2223932987614246,
+      "candidateCv": 0.20139384123450144,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.4894008589969616,
+      "baselineCv": 0.12073941498446852,
+      "candidateCv": 0.15271006722653777,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.8746304414313388,
+      "baselineCv": 0.23669565362096334,
+      "candidateCv": 0.050208946454268086,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.36684772498976925,
+      "baselineCv": 0.09847237370932907,
+      "candidateCv": 0.15658830525160952,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.2706000074292825,
+      "baselineCv": 0.0759814063038145,
+      "candidateCv": 0.10424884782050615,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.25722512053638713,
+      "baselineCv": 0.07984532871650594,
+      "candidateCv": 0.30144570086804806,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.3404290754189421,
+      "baselineCv": 0.10682128793704529,
+      "candidateCv": 0.40988516450970025,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.7790171636240384,
+      "baselineCv": 0.24476714333576638,
+      "candidateCv": 0.04702677317323711,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "drift": 0.7736811309273042,
+      "baselineCv": 0.21333922083572,
+      "candidateCv": 0.20047814818647014,
+      "passed": false
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.16983044167737948,
+      "baselineCv": 0.06971296914940292,
+      "candidateCv": 0.0381026765632276,
+      "passed": false
+    },
+    {
+      "cell": "scan-n16777216-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.009016997545706618,
+      "baselineCv": 0.00391842942423443,
+      "candidateCv": 0.0019594710703306514,
+      "passed": true
+    },
+    {
+      "cell": "scan-n16777216-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.009783171537305124,
+      "baselineCv": 0.00326421847641338,
+      "candidateCv": 0.007252484546525348,
+      "passed": true
+    },
+    {
+      "cell": "scan-n16777216-slots1",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.006344826893019961,
+      "baselineCv": 0.0021552059593832476,
+      "candidateCv": 0.006536291592729933,
+      "passed": true
+    },
+    {
+      "cell": "scan-n16777216-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.02410104490747056,
+      "baselineCv": 0.008215972489242008,
+      "candidateCv": 0.0037278387095997737,
+      "passed": true
+    },
+    {
+      "cell": "scan-n16777216-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.024023945946496594,
+      "baselineCv": 0.008745462344860837,
+      "candidateCv": 0.007431619289425725,
+      "passed": true
+    },
+    {
+      "cell": "scan-n16777216-slots3",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.024710719758318733,
+      "baselineCv": 0.009749696409574932,
+      "candidateCv": 0.00981180739998076,
+      "passed": true
+    },
+    {
+      "cell": "scan-n4194304-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.28258345121719475,
+      "baselineCv": 0.06562352526071157,
+      "candidateCv": 0.004779804052439592,
+      "passed": false
+    },
+    {
+      "cell": "scan-n4194304-slots1",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.03407044436068185,
+      "baselineCv": 0.010172031511865966,
+      "candidateCv": 0.031899889203405994,
+      "passed": false
+    },
+    {
+      "cell": "scan-n4194304-slots1",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.028636115886126357,
+      "baselineCv": 0.012110789310093894,
+      "candidateCv": 0.010801683276685176,
+      "passed": true
+    },
+    {
+      "cell": "scan-n4194304-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.3301711604546653,
+      "baselineCv": 0.08341051419286682,
+      "candidateCv": 0.006249386731970604,
+      "passed": false
+    },
+    {
+      "cell": "scan-n4194304-slots3",
+      "phase": "calibration",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "drift": 0.22745566885358226,
+      "baselineCv": 0.07244542030176152,
+      "candidateCv": 0.022249065593139956,
+      "passed": false
+    },
+    {
+      "cell": "scan-n4194304-slots3",
+      "phase": "confirmation",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "drift": 0.023296024497122758,
+      "baselineCv": 0.00774517832171876,
+      "candidateCv": 0.008242926994092238,
+      "passed": true
+    }
+  ],
+  "costs": [
+    {
+      "cell": "dynamic-n4096-active0",
+      "candidate": "HLSLPERF_GROUP_SIZE-1",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 1
+      },
+      "calibrationMedianMs": 0.25166375,
+      "calibrationStable": false,
+      "passes": 3,
+      "logicalBytesPerSlot": 49240,
+      "committedBytesPerArm": 458752
+    },
+    {
+      "cell": "dynamic-n4096-active0",
+      "candidate": "HLSLPERF_GROUP_SIZE-64",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 64
+      },
+      "calibrationMedianMs": 0.24975718749999998,
+      "calibrationStable": false,
+      "passes": 3,
+      "logicalBytesPerSlot": 49240,
+      "committedBytesPerArm": 458752
+    },
+    {
+      "cell": "dynamic-n4096-active1",
+      "candidate": "HLSLPERF_GROUP_SIZE-1",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 1
+      },
+      "calibrationMedianMs": 0.30436890625,
+      "calibrationStable": false,
+      "passes": 3,
+      "logicalBytesPerSlot": 49240,
+      "committedBytesPerArm": 458752
+    },
+    {
+      "cell": "dynamic-n4096-active1",
+      "candidate": "HLSLPERF_GROUP_SIZE-64",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 64
+      },
+      "calibrationMedianMs": 0.28505921875,
+      "calibrationStable": false,
+      "passes": 3,
+      "logicalBytesPerSlot": 49240,
+      "committedBytesPerArm": 458752
+    },
+    {
+      "cell": "dynamic-n4096-active2",
+      "candidate": "HLSLPERF_GROUP_SIZE-1",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 1
+      },
+      "calibrationMedianMs": 0.2684859375,
+      "calibrationStable": true,
+      "passes": 3,
+      "logicalBytesPerSlot": 49240,
+      "committedBytesPerArm": 458752
+    },
+    {
+      "cell": "dynamic-n4096-active2",
+      "candidate": "HLSLPERF_GROUP_SIZE-64",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 64
+      },
+      "calibrationMedianMs": 0.27070203125,
+      "calibrationStable": true,
+      "passes": 3,
+      "logicalBytesPerSlot": 49240,
+      "committedBytesPerArm": 458752
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.32554555555555553,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 5505024,
+      "scratchBytesPerSlot": 3147780,
+      "digitPasses": 32
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.5455366666666666,
+      "calibrationStable": false,
+      "passes": 40,
+      "logicalBytesPerSlot": 3277316,
+      "committedBytesPerArm": 3538944,
+      "scratchBytesPerSlot": 1180164,
+      "digitPasses": 8
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.30394666666666664,
+      "calibrationStable": false,
+      "passes": 28,
+      "logicalBytesPerSlot": 5251108,
+      "committedBytesPerArm": 5636096,
+      "scratchBytesPerSlot": 3153956,
+      "digitPasses": 4
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.47495888888888893,
+      "calibrationStable": true,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 16515072,
+      "scratchBytesPerSlot": 3149828,
+      "digitPasses": 32
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.5327111111111111,
+      "calibrationStable": false,
+      "passes": 40,
+      "logicalBytesPerSlot": 3277316,
+      "committedBytesPerArm": 10616832,
+      "scratchBytesPerSlot": 1180164,
+      "digitPasses": 8
+    },
+    {
+      "cell": "radix-compare-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.28986555555555554,
+      "calibrationStable": false,
+      "passes": 28,
+      "logicalBytesPerSlot": 5251108,
+      "committedBytesPerArm": 16908288,
+      "scratchBytesPerSlot": 3153956,
+      "digitPasses": 4
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.35897111111111113,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 10747904,
+      "scratchBytesPerSlot": 6295556,
+      "digitPasses": 32
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.5133188888888889,
+      "calibrationStable": true,
+      "passes": 41,
+      "logicalBytesPerSlot": 8520196,
+      "committedBytesPerArm": 8781824,
+      "scratchBytesPerSlot": 4325892,
+      "digitPasses": 8
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.2490211111111111,
+      "calibrationStable": false,
+      "passes": 29,
+      "logicalBytesPerSlot": 10493988,
+      "committedBytesPerArm": 10878976,
+      "scratchBytesPerSlot": 6299684,
+      "digitPasses": 4
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.5003433333333334,
+      "calibrationStable": true,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 32243712,
+      "scratchBytesPerSlot": 6295556,
+      "digitPasses": 32
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.5295244444444445,
+      "calibrationStable": true,
+      "passes": 41,
+      "logicalBytesPerSlot": 8520196,
+      "committedBytesPerArm": 26345472,
+      "scratchBytesPerSlot": 4325892,
+      "digitPasses": 8
+    },
+    {
+      "cell": "radix-compare-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.2841611111111111,
+      "calibrationStable": false,
+      "passes": 29,
+      "logicalBytesPerSlot": 10493988,
+      "committedBytesPerArm": 32636928,
+      "scratchBytesPerSlot": 6299684,
+      "digitPasses": 4
+    },
+    {
+      "cell": "radix-compare-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.21491444444444446,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 2622004,
+      "committedBytesPerArm": 3342336,
+      "scratchBytesPerSlot": 1573412,
+      "digitPasses": 32
+    },
+    {
+      "cell": "radix-compare-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-4__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.33233111111111113,
+      "calibrationStable": false,
+      "passes": 41,
+      "logicalBytesPerSlot": 2130220,
+      "committedBytesPerArm": 2818048,
+      "scratchBytesPerSlot": 1081628,
+      "digitPasses": 8
+    },
+    {
+      "cell": "radix-compare-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-8__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.20100333333333334,
+      "calibrationStable": false,
+      "passes": 29,
+      "logicalBytesPerSlot": 2625596,
+      "committedBytesPerArm": 3473408,
+      "scratchBytesPerSlot": 1577004,
+      "digitPasses": 4
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.5695188888888889,
+      "calibrationStable": false,
+      "passes": 224,
+      "logicalBytesPerSlot": 5251108,
+      "committedBytesPerArm": 5636096
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.33748222222222224,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4
+      },
+      "calibrationMedianMs": 0.3030777777777778,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.49334,
+      "calibrationStable": true,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.31594777777777777,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4
+      },
+      "calibrationMedianMs": 0.28712333333333334,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.5560022222222222,
+      "calibrationStable": false,
+      "passes": 224,
+      "logicalBytesPerSlot": 5251108,
+      "committedBytesPerArm": 5636096
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.5373744444444444,
+      "calibrationStable": false,
+      "passes": 224,
+      "logicalBytesPerSlot": 5251108,
+      "committedBytesPerArm": 5636096
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.34787444444444443,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.3044822222222222,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.33903777777777777,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.27020222222222223,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.4980066666666667,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.4737766666666666,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.32366666666666666,
+      "calibrationStable": true,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.27821999999999997,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.3147188888888889,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.24695111111111112,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 5505024
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.5719888888888889,
+      "calibrationStable": false,
+      "passes": 224,
+      "logicalBytesPerSlot": 5251108,
+      "committedBytesPerArm": 16908288
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.33679666666666663,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4
+      },
+      "calibrationMedianMs": 0.30055,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.4952522222222222,
+      "calibrationStable": true,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.3178988888888889,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4
+      },
+      "calibrationMedianMs": 0.28883444444444445,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.5582800000000001,
+      "calibrationStable": true,
+      "passes": 224,
+      "logicalBytesPerSlot": 5251108,
+      "committedBytesPerArm": 16908288
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.5394,
+      "calibrationStable": false,
+      "passes": 224,
+      "logicalBytesPerSlot": 5251108,
+      "committedBytesPerArm": 16908288
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.35235777777777777,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.3066077777777778,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.3399511111111111,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.26916444444444443,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.49968333333333337,
+      "calibrationStable": true,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.47575111111111107,
+      "calibrationStable": true,
+      "passes": 160,
+      "logicalBytesPerSlot": 5246980,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.3261455555555556,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.27714777777777777,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.31530111111111114,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.24683666666666668,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 5244932,
+      "committedBytesPerArm": 16515072
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.2598755555555555,
+      "calibrationStable": false,
+      "passes": 224,
+      "logicalBytesPerSlot": 1312816,
+      "committedBytesPerArm": 2031616
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.22063555555555553,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311776,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4
+      },
+      "calibrationMedianMs": 0.20425333333333334,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311776,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.1954811111111111,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311776,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.2274822222222222,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311264,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4
+      },
+      "calibrationMedianMs": 0.2116866666666667,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311264,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.21058333333333334,
+      "calibrationStable": false,
+      "passes": 224,
+      "logicalBytesPerSlot": 1312816,
+      "committedBytesPerArm": 2031616
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.21775333333333333,
+      "calibrationStable": false,
+      "passes": 224,
+      "logicalBytesPerSlot": 1312816,
+      "committedBytesPerArm": 2031616
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.19718333333333332,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311776,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.1870466666666667,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311776,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.17462777777777777,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311776,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.17098444444444444,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311776,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.15884555555555557,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311776,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.1553733333333333,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311776,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.19078555555555554,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311264,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.18796555555555555,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311264,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.17296444444444448,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311264,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-keys-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-0__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-4__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.17253333333333334,
+      "calibrationStable": false,
+      "passes": 160,
+      "logicalBytesPerSlot": 1311264,
+      "committedBytesPerArm": 1900544
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.5767444444444445,
+      "calibrationStable": false,
+      "passes": 225,
+      "logicalBytesPerSlot": 10493988,
+      "committedBytesPerArm": 10878976
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.3921922222222222,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 10747904
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.4997655555555556,
+      "calibrationStable": true,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 10747904
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.38058555555555557,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10487812,
+      "committedBytesPerArm": 10747904
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.5618688888888889,
+      "calibrationStable": false,
+      "passes": 225,
+      "logicalBytesPerSlot": 10493988,
+      "committedBytesPerArm": 10878976
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.5438233333333333,
+      "calibrationStable": false,
+      "passes": 225,
+      "logicalBytesPerSlot": 10493988,
+      "committedBytesPerArm": 10878976
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.41203999999999996,
+      "calibrationStable": true,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 10747904
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.3547877777777778,
+      "calibrationStable": true,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 10747904
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.5044633333333333,
+      "calibrationStable": true,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 10747904
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.4855777777777778,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 10747904
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.39418333333333333,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10487812,
+      "committedBytesPerArm": 10747904
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.34058,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10487812,
+      "committedBytesPerArm": 10747904
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.578508888888889,
+      "calibrationStable": true,
+      "passes": 225,
+      "logicalBytesPerSlot": 10493988,
+      "committedBytesPerArm": 32636928
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.39039,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 32243712
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.5005444444444445,
+      "calibrationStable": true,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 32243712
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.38073,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10487812,
+      "committedBytesPerArm": 32243712
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.5640911111111111,
+      "calibrationStable": false,
+      "passes": 225,
+      "logicalBytesPerSlot": 10493988,
+      "committedBytesPerArm": 32636928
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.5455788888888888,
+      "calibrationStable": true,
+      "passes": 225,
+      "logicalBytesPerSlot": 10493988,
+      "committedBytesPerArm": 32636928
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.4133444444444444,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 32243712
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.3571966666666666,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 32243712
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.5071244444444445,
+      "calibrationStable": true,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 32243712
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.4822088888888889,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10489860,
+      "committedBytesPerArm": 32243712
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.39515888888888884,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10487812,
+      "committedBytesPerArm": 32243712
+    },
+    {
+      "cell": "radix-screen-pairs-n262144-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.3396666666666667,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 10487812,
+      "committedBytesPerArm": 32243712
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.26649666666666666,
+      "calibrationStable": false,
+      "passes": 225,
+      "logicalBytesPerSlot": 2623556,
+      "committedBytesPerArm": 3473408
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.23003555555555555,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 2622516,
+      "committedBytesPerArm": 3342336
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.20013222222222224,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 2622516,
+      "committedBytesPerArm": 3342336
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1
+      },
+      "calibrationMedianMs": 0.2379611111111111,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 2622004,
+      "committedBytesPerArm": 3342336
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.21693555555555555,
+      "calibrationStable": false,
+      "passes": 225,
+      "logicalBytesPerSlot": 2623556,
+      "committedBytesPerArm": 3473408
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.21599000000000002,
+      "calibrationStable": false,
+      "passes": 225,
+      "logicalBytesPerSlot": 2623556,
+      "committedBytesPerArm": 3473408
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.19647222222222221,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 2622516,
+      "committedBytesPerArm": 3342336
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-128__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.1962388888888889,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 2622516,
+      "committedBytesPerArm": 3342336
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.16468,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 2622516,
+      "committedBytesPerArm": 3342336
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-2__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.16267666666666666,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 2622516,
+      "committedBytesPerArm": 3342336
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.2012288888888889,
+      "calibrationStable": true,
+      "passes": 161,
+      "logicalBytesPerSlot": 2622004,
+      "committedBytesPerArm": 3342336
+    },
+    {
+      "cell": "radix-screen-pairs-n65537-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_RADIX_BITS-1__HLSLPERF_RADIX_PAIRS-1__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-64",
+      "defines": {
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 64
+      },
+      "calibrationMedianMs": 0.19849555555555554,
+      "calibrationStable": false,
+      "passes": 161,
+      "logicalBytesPerSlot": 2622004,
+      "committedBytesPerArm": 3342336
+    },
+    {
+      "cell": "scan-n16777216-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 1
+      },
+      "calibrationMedianMs": 0.44311777777777783,
+      "calibrationStable": true,
+      "passes": 5,
+      "logicalBytesPerSlot": 134348932,
+      "committedBytesPerArm": 134610944
+    },
+    {
+      "cell": "scan-n16777216-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.43766666666666665,
+      "calibrationStable": true,
+      "passes": 5,
+      "logicalBytesPerSlot": 134348932,
+      "committedBytesPerArm": 134610944
+    },
+    {
+      "cell": "scan-n16777216-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4,
+        "HLSLPERF_SINGLE_PASS_GROUPS": 256
+      },
+      "calibrationMedianMs": 0.2975716666666667,
+      "calibrationStable": true,
+      "passes": 2,
+      "logicalBytesPerSlot": 134266888,
+      "committedBytesPerArm": 134348800
+    },
+    {
+      "cell": "scan-n16777216-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 1
+      },
+      "calibrationMedianMs": 0.4480644444444445,
+      "calibrationStable": true,
+      "passes": 5,
+      "logicalBytesPerSlot": 134348932,
+      "committedBytesPerArm": 403832832
+    },
+    {
+      "cell": "scan-n16777216-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.4382394444444444,
+      "calibrationStable": true,
+      "passes": 5,
+      "logicalBytesPerSlot": 134348932,
+      "committedBytesPerArm": 403832832
+    },
+    {
+      "cell": "scan-n16777216-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4,
+        "HLSLPERF_SINGLE_PASS_GROUPS": 256
+      },
+      "calibrationMedianMs": 0.29374055555555556,
+      "calibrationStable": true,
+      "passes": 2,
+      "logicalBytesPerSlot": 134266888,
+      "committedBytesPerArm": 403046400
+    },
+    {
+      "cell": "scan-n4194304-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 1
+      },
+      "calibrationMedianMs": 0.05364444444444444,
+      "calibrationStable": true,
+      "passes": 5,
+      "logicalBytesPerSlot": 33587236,
+      "committedBytesPerArm": 33947648
+    },
+    {
+      "cell": "scan-n4194304-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.050735555555555555,
+      "calibrationStable": true,
+      "passes": 5,
+      "logicalBytesPerSlot": 33587236,
+      "committedBytesPerArm": 33947648
+    },
+    {
+      "cell": "scan-n4194304-slots1",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4,
+        "HLSLPERF_SINGLE_PASS_GROUPS": 256
+      },
+      "calibrationMedianMs": 0.07736277777777778,
+      "calibrationStable": true,
+      "passes": 2,
+      "logicalBytesPerSlot": 33566728,
+      "committedBytesPerArm": 33685504
+    },
+    {
+      "cell": "scan-n4194304-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-1__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 1
+      },
+      "calibrationMedianMs": 0.08414777777777778,
+      "calibrationStable": false,
+      "passes": 5,
+      "logicalBytesPerSlot": 33587236,
+      "committedBytesPerArm": 101842944
+    },
+    {
+      "cell": "scan-n4194304-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-2__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_WAVE_SIZE": 32
+      },
+      "calibrationMedianMs": 0.08265722222222222,
+      "calibrationStable": true,
+      "passes": 5,
+      "logicalBytesPerSlot": 33587236,
+      "committedBytesPerArm": 101842944
+    },
+    {
+      "cell": "scan-n4194304-slots3",
+      "candidate": "HLSLPERF_ELEMENTS_PER_THREAD-4__HLSLPERF_GROUP_SIZE-256__HLSLPERF_SCAN_BACKEND-3__HLSLPERF_SCAN_OPERATOR-1__HLSLPERF_SINGLE_PASS_GROUPS-256__HLSLPERF_SINGLE_PASS_ITEMS_SCALE-4__HLSLPERF_VECTOR_WIDTH-1__HLSLPERF_WAVE_SIZE-32",
+      "defines": {
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4,
+        "HLSLPERF_SINGLE_PASS_GROUPS": 256
+      },
+      "calibrationMedianMs": 0.08521999999999999,
+      "calibrationStable": true,
+      "passes": 2,
+      "logicalBytesPerSlot": 33566728,
+      "committedBytesPerArm": 101056512
+    }
+  ]
+}

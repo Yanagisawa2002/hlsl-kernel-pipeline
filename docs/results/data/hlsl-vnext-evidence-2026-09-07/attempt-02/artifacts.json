@@ -1,0 +1,177 @@
+[
+  {
+    "path": "declared-matrix.json",
+    "sha256": "BDDB0EB32459CED9F2A0E66DF3047C65FB5B1AD8697F68470FB941AB0704CE16",
+    "bytes": 1842
+  },
+  {
+    "path": "evidence.json",
+    "sha256": "6B3158A40F265DDE87782897585FDEDA5E014DBF2B00A2C84810E1DA920FC462",
+    "bytes": 111258
+  },
+  {
+    "path": "host-metadata.json",
+    "sha256": "29E248C053096F4BC52EAD9B28B0D18047FC7C000F1A2FEE911F5F05E401E52D",
+    "bytes": 73943
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\FusedCompactSinglePass\\caf514cb47a74fb3934c2fa66aab683e\\gfx1201_FusedCompactSinglePass-isa_comp.txt",
+    "sha256": "84042CE46407E47DB6F4D9B25CFE1AB0B33489073FED9BADB6D6DC4674CE14C9",
+    "bytes": 79441
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\FusedCompactSinglePass\\caf514cb47a74fb3934c2fa66aab683e\\gfx1201_FusedCompactSinglePass-livereg_compute.txt",
+    "sha256": "B28F90256545A6E6CFF0F81840064C32250BEA9C666BF53D77893B8EE48DD98D",
+    "bytes": 78163
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\FusedCompactSinglePass\\caf514cb47a74fb3934c2fa66aab683e\\gfx1201_FusedCompactSinglePass-stats_comp.txt",
+    "sha256": "8C0407EF66B4605A2B97E128D19130DFFFE183D3942E4EF0C0658B2DCEBFEE31",
+    "bytes": 664
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\FusedCompactSinglePass\\caf514cb47a74fb3934c2fa66aab683e\\gfx1201_FusedCompactSinglePass.bin",
+    "sha256": "74D07C665740DDFDC6F91CF07BE747D6DC177555B9021648DD10733CABDB7D8B",
+    "bytes": 6832
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\FusedCompactSinglePass\\caf514cb47a74fb3934c2fa66aab683e\\invocation.json",
+    "sha256": "929FFF0A2B422E281CBC09FE79A8F51B55C78C8D53742526F6FBF2E8394DC176",
+    "bytes": 7374
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\FusedCompactSinglePass\\caf514cb47a74fb3934c2fa66aab683e\\process-output.txt",
+    "sha256": "9AC3DAB6164302BAF44E710E6479818CBCACD08FD2D5F56365400E99A608C836",
+    "bytes": 669
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\FusedCompactSinglePass\\caf514cb47a74fb3934c2fa66aab683e\\source-0-compaction.hlsl",
+    "sha256": "FE79759C43E1EB1C77BB1B051620E0AA3947EC5968190DED08CD3C30F15FA298",
+    "bytes": 10536
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\FusedCompactSinglePass\\caf514cb47a74fb3934c2fa66aab683e\\source-1-scan_u32.hlsli",
+    "sha256": "0C6CAE913E15FB30ED2BE7E0B428B389B474201D890EFFD92ACB72DBAC7175DD",
+    "bytes": 18607
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\ResetSinglePassState\\e9f17f4ac7ca41db9a078ed3fbf9fe91\\gfx1201_ResetSinglePassState-isa_comp.txt",
+    "sha256": "1DB655D7184BA18936B551B5658E065411AB0FD9ED745026FA01FF8D72435CEA",
+    "bytes": 3746
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\ResetSinglePassState\\e9f17f4ac7ca41db9a078ed3fbf9fe91\\gfx1201_ResetSinglePassState-livereg_compute.txt",
+    "sha256": "2A1CE60984C2186DE5B28531BD6338E8A249C63C89C71F30A69B36F8DDEE784A",
+    "bytes": 2413
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\ResetSinglePassState\\e9f17f4ac7ca41db9a078ed3fbf9fe91\\gfx1201_ResetSinglePassState-stats_comp.txt",
+    "sha256": "B4E52AE4CFC4D45A8590FEABA6F7E6DC7D3480D5A043FFA23AEE0FD2F2E0D198",
+    "bytes": 655
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\ResetSinglePassState\\e9f17f4ac7ca41db9a078ed3fbf9fe91\\gfx1201_ResetSinglePassState.bin",
+    "sha256": "2934F7613374E9B66541E7C724EE74DB186499025627B0E56A2DF2AA97B85CFF",
+    "bytes": 2428
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\ResetSinglePassState\\e9f17f4ac7ca41db9a078ed3fbf9fe91\\invocation.json",
+    "sha256": "194493727F13B634B4ED64B24769E0619B1610BE5C92872EED7E750B8392EB61",
+    "bytes": 7329
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\ResetSinglePassState\\e9f17f4ac7ca41db9a078ed3fbf9fe91\\process-output.txt",
+    "sha256": "9AC3DAB6164302BAF44E710E6479818CBCACD08FD2D5F56365400E99A608C836",
+    "bytes": 669
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\ResetSinglePassState\\e9f17f4ac7ca41db9a078ed3fbf9fe91\\source-0-compaction.hlsl",
+    "sha256": "FE79759C43E1EB1C77BB1B051620E0AA3947EC5968190DED08CD3C30F15FA298",
+    "bytes": 10536
+  },
+  {
+    "path": "rga\\compaction-rotating-262147\\ResetSinglePassState\\e9f17f4ac7ca41db9a078ed3fbf9fe91\\source-1-scan_u32.hlsli",
+    "sha256": "0C6CAE913E15FB30ED2BE7E0B428B389B474201D890EFFD92ACB72DBAC7175DD",
+    "bytes": 18607
+  },
+  {
+    "path": "rga\\scan-warm-262147\\ResetSinglePassState\\32a778beea064b5eb250ee28869f7646\\gfx1201_ResetSinglePassState-isa_comp.txt",
+    "sha256": "73A7F5CFC6F0982C347CD132A68D78530AF1E6811BA7360B1B74B8BE049B6AC6",
+    "bytes": 3746
+  },
+  {
+    "path": "rga\\scan-warm-262147\\ResetSinglePassState\\32a778beea064b5eb250ee28869f7646\\gfx1201_ResetSinglePassState-livereg_compute.txt",
+    "sha256": "2A1CE60984C2186DE5B28531BD6338E8A249C63C89C71F30A69B36F8DDEE784A",
+    "bytes": 2413
+  },
+  {
+    "path": "rga\\scan-warm-262147\\ResetSinglePassState\\32a778beea064b5eb250ee28869f7646\\gfx1201_ResetSinglePassState-stats_comp.txt",
+    "sha256": "B4E52AE4CFC4D45A8590FEABA6F7E6DC7D3480D5A043FFA23AEE0FD2F2E0D198",
+    "bytes": 655
+  },
+  {
+    "path": "rga\\scan-warm-262147\\ResetSinglePassState\\32a778beea064b5eb250ee28869f7646\\gfx1201_ResetSinglePassState.bin",
+    "sha256": "07579A7810E357CEA9885C70E51A3D6537F7EB3D18C2B6A253D493E43522743B",
+    "bytes": 2428
+  },
+  {
+    "path": "rga\\scan-warm-262147\\ResetSinglePassState\\32a778beea064b5eb250ee28869f7646\\invocation.json",
+    "sha256": "4CAB6EA71D6D4560AD718C7D3B8B1FD0861B537B3C1045A58E052A2870C92BC5",
+    "bytes": 7194
+  },
+  {
+    "path": "rga\\scan-warm-262147\\ResetSinglePassState\\32a778beea064b5eb250ee28869f7646\\process-output.txt",
+    "sha256": "9AC3DAB6164302BAF44E710E6479818CBCACD08FD2D5F56365400E99A608C836",
+    "bytes": 669
+  },
+  {
+    "path": "rga\\scan-warm-262147\\ResetSinglePassState\\32a778beea064b5eb250ee28869f7646\\source-0-scan_u32.hlsli",
+    "sha256": "0C6CAE913E15FB30ED2BE7E0B428B389B474201D890EFFD92ACB72DBAC7175DD",
+    "bytes": 18607
+  },
+  {
+    "path": "rga\\scan-warm-262147\\ResetSinglePassState\\32a778beea064b5eb250ee28869f7646\\source-1-scan.hlsl",
+    "sha256": "BC76DB871149C6A920F3C1FF44AEBC806F4B90AF14AD053A83933A36C97FE892",
+    "bytes": 704
+  },
+  {
+    "path": "rga\\scan-warm-262147\\SinglePassScan\\66c4b40f49c34f708cab494aba3bd9da\\gfx1201_SinglePassScan-isa_comp.txt",
+    "sha256": "7D07E0A12ADDEB76CA62F214E8D231DB3EA7775D941A0367BBEC6BE771B07561",
+    "bytes": 72000
+  },
+  {
+    "path": "rga\\scan-warm-262147\\SinglePassScan\\66c4b40f49c34f708cab494aba3bd9da\\gfx1201_SinglePassScan-livereg_compute.txt",
+    "sha256": "2F3A41688EFD33184F721E7017FF4E48C93B73152AEB71975D3786FA542710B4",
+    "bytes": 73134
+  },
+  {
+    "path": "rga\\scan-warm-262147\\SinglePassScan\\66c4b40f49c34f708cab494aba3bd9da\\gfx1201_SinglePassScan-stats_comp.txt",
+    "sha256": "C6EA45988212CEFAC4CA3FF98D23C596F06485637CB6A663E06F9035F61A73BB",
+    "bytes": 664
+  },
+  {
+    "path": "rga\\scan-warm-262147\\SinglePassScan\\66c4b40f49c34f708cab494aba3bd9da\\gfx1201_SinglePassScan.bin",
+    "sha256": "27E74DEC42A12005284C707AB05E4FD61C1C9E7E0952FBC2337969B5F63AD97B",
+    "bytes": 6476
+  },
+  {
+    "path": "rga\\scan-warm-262147\\SinglePassScan\\66c4b40f49c34f708cab494aba3bd9da\\invocation.json",
+    "sha256": "6EFD81B8AF60FAE42E41413F04DA3AE19925F2564A30DA71E1A31917A8557E6C",
+    "bytes": 7070
+  },
+  {
+    "path": "rga\\scan-warm-262147\\SinglePassScan\\66c4b40f49c34f708cab494aba3bd9da\\process-output.txt",
+    "sha256": "9AC3DAB6164302BAF44E710E6479818CBCACD08FD2D5F56365400E99A608C836",
+    "bytes": 669
+  },
+  {
+    "path": "rga\\scan-warm-262147\\SinglePassScan\\66c4b40f49c34f708cab494aba3bd9da\\source-0-scan_u32.hlsli",
+    "sha256": "0C6CAE913E15FB30ED2BE7E0B428B389B474201D890EFFD92ACB72DBAC7175DD",
+    "bytes": 18607
+  },
+  {
+    "path": "rga\\scan-warm-262147\\SinglePassScan\\66c4b40f49c34f708cab494aba3bd9da\\source-1-scan.hlsl",
+    "sha256": "BC76DB871149C6A920F3C1FF44AEBC806F4B90AF14AD053A83933A36C97FE892",
+    "bytes": 704
+  }
+]

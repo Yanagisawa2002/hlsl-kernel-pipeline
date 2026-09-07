@@ -8,6 +8,38 @@ device-specific profile that Unity can consume without importing the tuner.
 This is clean-room personal work. It contains no employer/client project source,
 assets, configuration, benchmark capture, or Git history.
 
+The [dynamic ABI v2 demo](docs/DYNAMIC_EXECUTION.md) adds bounded GPU-count indirect
+dispatch and independent multi-output verification while retaining ABI v1.
+Its R9700 correctness evidence is separate from the historical performance results below.
+
+## Five-process Scan applicability experiment
+
+The [next-round Scan report](docs/results/SCAN_PROCESS_BOUNDARY_2026-09-07.md)
+covers 4/8/12/16 Mi uint elements with one/three resident inputs and five new
+processes per cell. Four exact configurations passed all five process gates;
+other cells remain inconclusive. No global crossover threshold or default
+promotion is inferred.
+
+The [conditional Radix report](docs/results/RADIX_PROCESS_COMPARISON_2026-09-07.md)
+retains all 80 fixed-control preflight processes across 16 cells. Ten cells
+qualified for 50 new comparison processes; nine confirmed the fixed 8-bit
+candidate at 1.3458x to 6.8791x against their declared 1-bit controls. One cell
+retained mixed selections and six did not enter comparison. These are exact
+configuration results, with complete-plan latency, memory and all failed gates
+reported; no default policy was promoted.
+
+## vNext paired measurement and dynamic plans
+
+The [integrated vNext evidence](docs/results/R9700_VNEXT_INTEGRATION_2026-09-07.md)
+covers randomized paired calibration, independent confirmation, stable 4/8-bit
+key/payload radix plans, bounded GPU-count indirect execution and real rotating
+working sets. The bounded R9700 matrix retained all 18 runs and passed 19,584
+output/poison checks. At 16M elements, single-pass scan confirmed 1.4782x and
+1.5254x speedups for one and three resident slots. Wide radix and dynamic results
+did not establish deployable gains; no defaults were promoted. See the
+[replay instructions](docs/integration/REPLAY.md) and exact scope in the report.
+The older tables below remain historical measurements under their original protocols.
+
 ## v0.6 reusable SDK and fused primitive pack
 
 The tuner is now an SDK rather than a repository-bound benchmark. External

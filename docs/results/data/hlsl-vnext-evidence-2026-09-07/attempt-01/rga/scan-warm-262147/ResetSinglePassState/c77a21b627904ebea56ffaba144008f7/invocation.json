@@ -1,0 +1,150 @@
+{
+  "schema": "hlslperf.rga-invocation.v1",
+  "startedUtc": "2026-09-07T05:09:16.3233587+00:00",
+  "finishedUtc": "2026-09-07T05:09:16.6450734+00:00",
+  "executable": {
+    "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\rga.exe",
+    "sha256": "a3074dfbd9558da11ec3d973192b855b7f73e4bfe70b8d7734c20d13a79a2bc5",
+    "bytes": 2917128,
+    "version": "2.14.2.7"
+  },
+  "compilerFiles": [
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxc.exe",
+      "sha256": "ae4bf100b8c64ab03cdc0ee5996d5f212e96c59d6d37340359342d714ac6c004",
+      "bytes": 1236000,
+      "version": "1.8.2502.8"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxcompiler.dll",
+      "sha256": "f79943b02f73b621421b58a569fd6ee120d0023fb6bfa23844ecad6b00d6a295",
+      "bytes": 17986592,
+      "version": "1.8.2502.8"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxil.dll",
+      "sha256": "62736e99aa534a942873f92b881a71b2cb6ad62b8d7481ea7a8ad8e9888a8056",
+      "bytes": 1508896,
+      "version": "1.8.2502.8"
+    }
+  ],
+  "arguments": [
+    "-s",
+    "dx12",
+    "--cs",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\scan.hlsl",
+    "--cs-entry",
+    "ResetSinglePassState",
+    "--cs-model",
+    "cs_6_0",
+    "--analysis",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\ResetSinglePassState-stats.txt",
+    "--isa",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\ResetSinglePassState-isa.txt",
+    "--livereg",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\ResetSinglePassState-livereg.txt",
+    "--asic",
+    "gfx1201",
+    "--define",
+    "HLSLPERF_ELEMENTS_PER_THREAD=4",
+    "--define",
+    "HLSLPERF_GROUP_SIZE=256",
+    "--define",
+    "HLSLPERF_SCAN_BACKEND=3",
+    "--define",
+    "HLSLPERF_SINGLE_PASS_GROUPS=256",
+    "--define",
+    "HLSLPERF_SINGLE_PASS_ITEMS_SCALE=4",
+    "-I",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels",
+    "-I",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf",
+    "--dxc",
+    "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc",
+    "--dxc-opt",
+    "-O3 -Ges -WX",
+    "--binary",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\ResetSinglePassState.bin"
+  ],
+  "entryPoint": "ResetSinglePassState",
+  "shaderModel": "6_0",
+  "defines": {
+    "HLSLPERF_SCAN_BACKEND": 3,
+    "HLSLPERF_GROUP_SIZE": 256,
+    "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+    "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4,
+    "HLSLPERF_SINGLE_PASS_GROUPS": 256
+  },
+  "sourceGraphSha256": "1c32c7c0a9dd36bb2c1c420274fb558a777f3440810c57b95bb2873ff031cd0f",
+  "sources": [
+    {
+      "relativePath": "include/hlslperf/scan_u32.hlsli",
+      "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf\\scan_u32.hlsli",
+      "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd"
+    },
+    {
+      "relativePath": "scan.hlsl",
+      "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\scan.hlsl",
+      "sha256": "bc76db871149c6a920f3c1ff44aebc806f4b90af14ad053a83933a36c97fe892"
+    }
+  ],
+  "measuredDevice": {
+    "adapterName": "AMD Radeon AI PRO R9700",
+    "vendorId": 4098,
+    "deviceId": 30033,
+    "subsystemId": 1410537545,
+    "revision": 192,
+    "adapterLuid": "76566",
+    "driverVersion": "32.0.31041.1004",
+    "backend": "D3D12",
+    "shaderModel": "6_0",
+    "compilerVersion": "Vortice.Dxc/3.8.3.0",
+    "operatingSystem": "Microsoft Windows 10.0.26200"
+  },
+  "exitCode": 0,
+  "artifacts": [
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\gfx1201_ResetSinglePassState-isa_comp.txt",
+      "sha256": "73a7f5cfc6f0982c347cd132a68d78530af1e6811ba7360b1b74b8be049b6ac6",
+      "bytes": 3746,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\gfx1201_ResetSinglePassState-livereg_compute.txt",
+      "sha256": "2a1ce60984c2186de5b28531bd6338e8a249c63c89c71f30a69b36f8ddee784a",
+      "bytes": 2413,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\gfx1201_ResetSinglePassState-stats_comp.txt",
+      "sha256": "b4e52ae4cfc4d45a8590feaba6f7e6dc7d3480d5a043ffa23aee0fd2f2e0d198",
+      "bytes": 655,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\gfx1201_ResetSinglePassState.bin",
+      "sha256": "07579a7810e357cea9885c70e51a3d6537f7eb3d18c2b6a253d493e43522743b",
+      "bytes": 2428,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\process-output.txt",
+      "sha256": "9ac3dab6164302baf44e710e6479818cbcacd08fd2d5f56365400e99a608c836",
+      "bytes": 669,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\source-0-scan_u32.hlsli",
+      "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd",
+      "bytes": 18607,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\source-1-scan.hlsl",
+      "sha256": "bc76db871149c6a920f3c1ff44aebc806f4b90af14ad053a83933a36c97fe892",
+      "bytes": 704,
+      "version": null
+    }
+  ],
+  "compilationRelationship": "RGA recompiles the identified source and defines with its identified DXC through the live driver; not asserted byte-identical to measured DXIL."
+}
