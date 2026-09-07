@@ -18,6 +18,7 @@ public static class PairedProfile
             rows.Any(o => o.StartedUtc < evidence.SelectionLockedUtc || o.FinishedUtc < o.StartedUtc ||
                 !o.Result.Compiled || o.Result.Error is not null || o.Result.Correctness?.Passed != true ||
                 o.Result.SamplesMilliseconds.Count != 1)) return null;
+        if (evidence.Observations.Any(o => o.Slot.Phase == "calibration" && o.FinishedUtc > evidence.SelectionLockedUtc)) return null;
         if (evidence.Observations.Where(o => o.Slot.CandidateId == evidence.SelectedAfterCalibration ||
             o.Slot.CandidateId == report.BaselineCandidateId).Any(o => o.Scenario is null || o.SlotVerifications is null ||
             o.Scenario.Slots.Count != evidence.Options.ResidentSlots ||

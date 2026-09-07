@@ -42,7 +42,11 @@ public sealed class TuningManifest
         if (MeasurementProtocol != PairedProtocol.Id && MeasurementProtocol != HlslPerfSdk.MeasurementProtocol)
             throw new InvalidDataException("Unknown measurement protocol.");
         if (MeasurementProtocol == PairedProtocol.Id)
+        {
             PairedMeasurement.Validate();
+            if (DispatchesPerBatch < PairedMeasurement.ResidentSlots || DispatchesPerBatch > 65536 || WarmupDispatches > 65536)
+                throw new InvalidDataException("Paired batches must cover the resident ring and remain within 65536 plans.");
+        }
         if (SchemaVersion is not ("1.0" or "2.0" or "3.0"))
             throw new InvalidDataException($"Unsupported manifest schema '{SchemaVersion}'.");
         if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(KernelPath))

@@ -19,11 +19,11 @@ public sealed partial class D3D12Tuner
         {
             protocol = PairedProtocol.Id, manifestHash, effectiveManifest = manifest, DynamicExecutorSha256,
             kernelHash = graph.CombinedSha256, workloadHash, fingerprint,
-            binaries = Directory.GetFiles(AppContext.BaseDirectory, "*.dll")
+            binaries = Directory.GetFiles(AppContext.BaseDirectory, "*.dll", SearchOption.AllDirectories)
                 .Where(p => Path.GetFileName(p).StartsWith("HlslPerf", StringComparison.OrdinalIgnoreCase) ||
                     Path.GetFileName(p).StartsWith("dx", StringComparison.OrdinalIgnoreCase) ||
                     Path.GetFileName(p).StartsWith("Vortice", StringComparison.OrdinalIgnoreCase))
-                .Order(StringComparer.Ordinal).Select(p => new { name = Path.GetFileName(p), hash = ContentHash.Sha256(File.ReadAllBytes(p)) }).ToArray()
+                .Order(StringComparer.Ordinal).Select(p => new { name = Path.GetRelativePath(AppContext.BaseDirectory, p), hash = ContentHash.Sha256(File.ReadAllBytes(p)) }).ToArray()
         }, JsonDefaults.Options));
         List<string> historical = [];
         if (checkpointOptions?.Resume == true)

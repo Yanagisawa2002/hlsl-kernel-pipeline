@@ -12,7 +12,7 @@ selection behavior and labels the profile historical.
 
 `pairedMeasurement` declares `calibrationBlocks`, `confirmationBlocks` (6..128),
 `orderSeed`, `calibrationSeedStart`, `confirmationSeedStart`, `residentSlots`
-(1..32, default 3), `maximumAllocationBytesPerArm`, and
+(1..32, default 1 for cache-warm compatibility; declare 3 for rotation), `maximumAllocationBytesPerArm`, and
 `maximumBaselineDrift` (default 0.15). Defaults are 8+8 blocks, order seed 73019,
 and input seed starts 110001/910001. Seed ranges, including every resident slot,
 must be disjoint. A block's ring starts at `seedStart + block * residentSlots`.
@@ -71,7 +71,8 @@ the archived attempt. Historical checkpoints are rejected by the paired runner.
 
 Profiles use schema 3.0 and contain workload implementation, execution identity,
 protocol and confirmation hashes; their medians/p95 come from confirmation only.
-Unity's consumer requires project-owned expected identities supplied via
+Unity's consumer also binds the selected candidate and length-prefixed canonical
+defines hash, recomputed from the actual defineValues. It requires project-owned expected identities supplied via
 `HlslPerfDeploymentIdentity`, exact device+driver, and the confirmed protocol.
 Never copy expected identities from untrusted incoming profile JSON. Its optional
 `allowHistorical: true` parameter explicitly permits schema 2.0 behavior, with a

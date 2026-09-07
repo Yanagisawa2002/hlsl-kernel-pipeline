@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "name": "paired-native-smoke-not-performance-evidence",
+  "kernelPath": "../../kernels/uint-mix.hlsl",
+  "workItemCount": 262144,
+  "warmupDispatches": 8,
+  "minimumWarmupMilliseconds": 5,
+  "measurementBatches": 6,
+  "dispatchesPerBatch": 64,
+  "minimumBatchMilliseconds": 0.01,
+  "maximumDispatchesPerBatch": 64,
+  "maximumCoefficientOfVariation": 0.05,
+  "minimumRequiredSpeedup": 1.01,
+  "fixedDefines": { "HLSLPERF_ALU_ROUNDS": 8, "HLSLPERF_ELEMENTS_PER_THREAD": 1 },
+  "baselineDefines": { "HLSLPERF_GROUP_SIZE": 256 },
+  "axes": [ { "name": "HLSLPERF_GROUP_SIZE", "values": [128, 256] } ],
+  "measurementProtocol": "gpu-paired-abba-independent-confirmation-v2",
+  "pairedMeasurement": {
+    "calibrationBlocks": 6,
+    "confirmationBlocks": 6,
+    "orderSeed": 73019,
+    "calibrationSeedStart": 110001,
+    "confirmationSeedStart": 910001,
+    "residentSlots": 3,
+    "maximumAllocationBytesPerArm": 67108864,
+    "maximumBaselineDrift": 0.15
+  }
+}
