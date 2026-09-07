@@ -2,3 +2,4 @@
 docs/results/data/crowd-vfx-r9700-2026-09-03/** -text -diff
 docs/results/r9700-crowd-vfx-pressure-grid.svg -text -diff
 docs/results/data/dynamic-r9700-2026-09-07/** -text -diff
+docs/results/data/hlsl-vnext-evidence-2026-09-07/** -text -diff

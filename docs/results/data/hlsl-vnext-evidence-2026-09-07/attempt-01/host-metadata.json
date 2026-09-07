@@ -1,0 +1,3172 @@
+{
+  "finishedUtc": "2026-09-07T05:09:18.5500457+00:00",
+  "gitCommit": "913878be68e43fd4352b5719cc4c408daaa7ab84",
+  "gitStatus": [
+    " M docs/RGA.md",
+    " M src/HlslPerf.Core/Model.cs",
+    " M src/HlslPerf.Core/WorkloadScenarios.cs",
+    " M src/HlslPerf.D3D12/D3D12Tuner.Scenarios.cs",
+    " M src/HlslPerf.Rga/RgaCollector.cs",
+    " M src/HlslPerf.Rga/RgaStatisticsParser.cs",
+    " M tests/HlslPerf.Core.Tests/RgaParserTests.cs",
+    "?? manifests/evidence/",
+    "?? src/HlslPerf.Core/HardwareEvidence.cs",
+    "?? tools/HlslPerf.EvidenceRun/",
+    "?? tools/Invoke-BoundedHardwareEvidence.ps1"
+  ],
+  "runnerExitCode": 0,
+  "displayDrivers": [
+    {
+      "Name": "AMD Radeon AI PRO R9700",
+      "DriverVersion": "32.0.31041.1004",
+      "PNPDeviceID": "PCI\\VEN_1002&DEV_7551&SUBSYS_54131849&REV_C0\\6&31E3CDBB&0&00000009"
+    },
+    {
+      "Name": "AMD Radeon(TM) Graphics",
+      "DriverVersion": "32.0.21045.5002",
+      "PNPDeviceID": "PCI\\VEN_1002&DEV_13C0&SUBSYS_D0001458&REV_C1\\4&16012499&0&0041"
+    }
+  ],
+  "processes": [
+    {
+      "ProcessName": "AggregatorHost",
+      "Id": 7096,
+      "CPU": null,
+      "WorkingSet64": 10829824
+    },
+    {
+      "ProcessName": "amdfendrsr",
+      "Id": 2860,
+      "CPU": null,
+      "WorkingSet64": 10510336
+    },
+    {
+      "ProcessName": "amdow",
+      "Id": 15720,
+      "CPU": 0.03125,
+      "WorkingSet64": 3047424
+    },
+    {
+      "ProcessName": "AmdPpkgSvc",
+      "Id": 4400,
+      "CPU": null,
+      "WorkingSet64": 8552448
+    },
+    {
+      "ProcessName": "AMDRSServ",
+      "Id": 9168,
+      "CPU": 103.34375,
+      "WorkingSet64": 12226560
+    },
+    {
+      "ProcessName": "AMDRSSrcExt",
+      "Id": 10208,
+      "CPU": 0.265625,
+      "WorkingSet64": 10072064
+    },
+    {
+      "ProcessName": "AppActions",
+      "Id": 15868,
+      "CPU": 0.34375,
+      "WorkingSet64": 45178880
+    },
+    {
+      "ProcessName": "atieclxx",
+      "Id": 2408,
+      "CPU": null,
+      "WorkingSet64": 23801856
+    },
+    {
+      "ProcessName": "atiesrxx",
+      "Id": 2852,
+      "CPU": null,
+      "WorkingSet64": 13287424
+    },
+    {
+      "ProcessName": "audiodg",
+      "Id": 3692,
+      "CPU": 23.28125,
+      "WorkingSet64": 18116608
+    },
+    {
+      "ProcessName": "backgroundTaskHost",
+      "Id": 7788,
+      "CPU": 0.515625,
+      "WorkingSet64": 70254592
+    },
+    {
+      "ProcessName": "ChatGPT",
+      "Id": 1360,
+      "CPU": 12.1875,
+      "WorkingSet64": 68206592
+    },
+    {
+      "ProcessName": "ChatGPT",
+      "Id": 1364,
+      "CPU": 320.390625,
+      "WorkingSet64": 382676992
+    },
+    {
+      "ProcessName": "ChatGPT",
+      "Id": 2796,
+      "CPU": 0.265625,
+      "WorkingSet64": 103923712
+    },
+    {
+      "ProcessName": "ChatGPT",
+      "Id": 2888,
+      "CPU": 1.0,
+      "WorkingSet64": 39198720
+    },
+    {
+      "ProcessName": "ChatGPT",
+      "Id": 9060,
+      "CPU": 0.015625,
+      "WorkingSet64": 9695232
+    },
+    {
+      "ProcessName": "ChatGPT",
+      "Id": 16016,
+      "CPU": 7.796875,
+      "WorkingSet64": 282660864
+    },
+    {
+      "ProcessName": "ChatGPT",
+      "Id": 18104,
+      "CPU": 211.609375,
+      "WorkingSet64": 435863552
+    },
+    {
+      "ProcessName": "ChatGPT",
+      "Id": 19160,
+      "CPU": 528.234375,
+      "WorkingSet64": 915116032
+    },
+    {
+      "ProcessName": "ChatGPT",
+      "Id": 19172,
+      "CPU": 17.84375,
+      "WorkingSet64": 254611456
+    },
+    {
+      "ProcessName": "ChatGPT",
+      "Id": 20556,
+      "CPU": 0.375,
+      "WorkingSet64": 36347904
+    },
+    {
+      "ProcessName": "ChsIME",
+      "Id": 12688,
+      "CPU": 0.03125,
+      "WorkingSet64": 11001856
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 2924,
+      "CPU": 0.0,
+      "WorkingSet64": 8613888
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 4072,
+      "CPU": 0.0,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 4880,
+      "CPU": 0.015625,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 5188,
+      "CPU": 0.0,
+      "WorkingSet64": 8409088
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 7916,
+      "CPU": 0.0,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 11276,
+      "CPU": 0.015625,
+      "WorkingSet64": 8409088
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 11492,
+      "CPU": 0.0,
+      "WorkingSet64": 8335360
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 11592,
+      "CPU": 0.0,
+      "WorkingSet64": 7507968
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 13136,
+      "CPU": 0.0,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 14644,
+      "CPU": 0.0,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 15576,
+      "CPU": 0.046875,
+      "WorkingSet64": 3543040
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 18136,
+      "CPU": 0.015625,
+      "WorkingSet64": 8409088
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 19132,
+      "CPU": 0.0,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 20416,
+      "CPU": 0.015625,
+      "WorkingSet64": 8331264
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 21972,
+      "CPU": 0.015625,
+      "WorkingSet64": 8589312
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 23664,
+      "CPU": 0.015625,
+      "WorkingSet64": 8409088
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 23712,
+      "CPU": 0.015625,
+      "WorkingSet64": 8335360
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 23976,
+      "CPU": 0.0,
+      "WorkingSet64": 8409088
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 24124,
+      "CPU": 0.015625,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 26192,
+      "CPU": 0.015625,
+      "WorkingSet64": 8593408
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 26216,
+      "CPU": 0.0,
+      "WorkingSet64": 8560640
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 26620,
+      "CPU": 0.015625,
+      "WorkingSet64": 8409088
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 26832,
+      "CPU": 0.015625,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 27860,
+      "CPU": 0.0,
+      "WorkingSet64": 8593408
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 28440,
+      "CPU": 0.0,
+      "WorkingSet64": 8593408
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 28828,
+      "CPU": 0.015625,
+      "WorkingSet64": 8409088
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 28868,
+      "CPU": 0.0,
+      "WorkingSet64": 8597504
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 29280,
+      "CPU": 0.03125,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 29800,
+      "CPU": 0.015625,
+      "WorkingSet64": 8593408
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 29964,
+      "CPU": 0.0,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 30704,
+      "CPU": 0.015625,
+      "WorkingSet64": 8601600
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 31232,
+      "CPU": 0.015625,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 32036,
+      "CPU": 0.03125,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 32200,
+      "CPU": 0.0,
+      "WorkingSet64": 8413184
+    },
+    {
+      "ProcessName": "cmd",
+      "Id": 34252,
+      "CPU": 0.015625,
+      "WorkingSet64": 8409088
+    },
+    {
+      "ProcessName": "cncmd",
+      "Id": 8608,
+      "CPU": 0.0,
+      "WorkingSet64": 1409024
+    },
+    {
+      "ProcessName": "codex",
+      "Id": 19348,
+      "CPU": 163.8125,
+      "WorkingSet64": 1246085120
+    },
+    {
+      "ProcessName": "codex-code-mode-host",
+      "Id": 12436,
+      "CPU": 3.921875,
+      "WorkingSet64": 91754496
+    },
+    {
+      "ProcessName": "conhost",
+      "Id": 7584,
+      "CPU": 0.015625,
+      "WorkingSet64": 1941504
+    },
+    {
+      "ProcessName": "conhost",
+      "Id": 10212,
+      "CPU": 0.0,
+      "WorkingSet64": 1150976
+    },
+    {
+      "ProcessName": "conhost",
+      "Id": 10228,
+      "CPU": 0.015625,
+      "WorkingSet64": 9867264
+    },
+    {
+      "ProcessName": "conhost",
+      "Id": 10604,
+      "CPU": 0.046875,
+      "WorkingSet64": 22028288
+    },
+    {
+      "ProcessName": "conhost",
+      "Id": 17260,
+      "CPU": 0.015625,
+      "WorkingSet64": 7475200
+    },
+    {
+      "ProcessName": "conhost",
+      "Id": 19356,
+      "CPU": 2.515625,
+      "WorkingSet64": 7442432
+    },
+    {
+      "ProcessName": "conhost",
+      "Id": 23348,
+      "CPU": 0.0,
+      "WorkingSet64": 7434240
+    },
+    {
+      "ProcessName": "conhost",
+      "Id": 33288,
+      "CPU": 0.015625,
+      "WorkingSet64": 7622656
+    },
+    {
+      "ProcessName": "conhost",
+      "Id": 34800,
+      "CPU": 0.0,
+      "WorkingSet64": 7471104
+    },
+    {
+      "ProcessName": "conhost",
+      "Id": 36888,
+      "CPU": 0.0,
+      "WorkingSet64": 7483392
+    },
+    {
+      "ProcessName": "cowork-svc",
+      "Id": 7008,
+      "CPU": null,
+      "WorkingSet64": 24068096
+    },
+    {
+      "ProcessName": "CPUMetricsServer",
+      "Id": 16188,
+      "CPU": 0.03125,
+      "WorkingSet64": 4689920
+    },
+    {
+      "ProcessName": "CrossDeviceResume",
+      "Id": 8804,
+      "CPU": 0.265625,
+      "WorkingSet64": 66674688
+    },
+    {
+      "ProcessName": "csrss",
+      "Id": 1060,
+      "CPU": null,
+      "WorkingSet64": 7098368
+    },
+    {
+      "ProcessName": "csrss",
+      "Id": 1336,
+      "CPU": null,
+      "WorkingSet64": 8908800
+    },
+    {
+      "ProcessName": "ctfmon",
+      "Id": 12292,
+      "CPU": 32.40625,
+      "WorkingSet64": 87244800
+    },
+    {
+      "ProcessName": "dasHost",
+      "Id": 2956,
+      "CPU": null,
+      "WorkingSet64": 20127744
+    },
+    {
+      "ProcessName": "dotnet",
+      "Id": 1876,
+      "CPU": 0.5,
+      "WorkingSet64": 91668480
+    },
+    {
+      "ProcessName": "dotnet",
+      "Id": 32776,
+      "CPU": 4.140625,
+      "WorkingSet64": 134373376
+    },
+    {
+      "ProcessName": "dotnet",
+      "Id": 34808,
+      "CPU": 4.59375,
+      "WorkingSet64": 146059264
+    },
+    {
+      "ProcessName": "dotnet",
+      "Id": 37644,
+      "CPU": 1.0625,
+      "WorkingSet64": 150437888
+    },
+    {
+      "ProcessName": "dwm",
+      "Id": 1884,
+      "CPU": null,
+      "WorkingSet64": 166408192
+    },
+    {
+      "ProcessName": "EasyTuneEngineService",
+      "Id": 3848,
+      "CPU": null,
+      "WorkingSet64": 34304000
+    },
+    {
+      "ProcessName": "explorer",
+      "Id": 8528,
+      "CPU": 89.5625,
+      "WorkingSet64": 395059200
+    },
+    {
+      "ProcessName": "FileCoAuth",
+      "Id": 26968,
+      "CPU": 0.09375,
+      "WorkingSet64": 34598912
+    },
+    {
+      "ProcessName": "fontdrvhost",
+      "Id": 1672,
+      "CPU": null,
+      "WorkingSet64": 5197824
+    },
+    {
+      "ProcessName": "fontdrvhost",
+      "Id": 1680,
+      "CPU": null,
+      "WorkingSet64": 6889472
+    },
+    {
+      "ProcessName": "Idle",
+      "Id": 0,
+      "CPU": null,
+      "WorkingSet64": 8192
+    },
+    {
+      "ProcessName": "LsaIso",
+      "Id": 1492,
+      "CPU": null,
+      "WorkingSet64": 4571136
+    },
+    {
+      "ProcessName": "lsass",
+      "Id": 1500,
+      "CPU": null,
+      "WorkingSet64": 41582592
+    },
+    {
+      "ProcessName": "M365Copilot",
+      "Id": 15160,
+      "CPU": 2.78125,
+      "WorkingSet64": 158117888
+    },
+    {
+      "ProcessName": "Memory Compression",
+      "Id": 3200,
+      "CPU": null,
+      "WorkingSet64": 864423936
+    },
+    {
+      "ProcessName": "MicrosoftEdgeUpdate",
+      "Id": 7844,
+      "CPU": null,
+      "WorkingSet64": 6230016
+    },
+    {
+      "ProcessName": "MpDefenderCoreService",
+      "Id": 4536,
+      "CPU": null,
+      "WorkingSet64": 28942336
+    },
+    {
+      "ProcessName": "ms-teams",
+      "Id": 14012,
+      "CPU": 6.171875,
+      "WorkingSet64": 39751680
+    },
+    {
+      "ProcessName": "ms-teams",
+      "Id": 14956,
+      "CPU": 4.3125,
+      "WorkingSet64": 13946880
+    },
+    {
+      "ProcessName": "ms-teams",
+      "Id": 15340,
+      "CPU": 4.421875,
+      "WorkingSet64": 13615104
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 2124,
+      "CPU": 9.40625,
+      "WorkingSet64": 41312256
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 3280,
+      "CPU": 0.03125,
+      "WorkingSet64": 37670912
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 7272,
+      "CPU": 28.421875,
+      "WorkingSet64": 357969920
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 8328,
+      "CPU": 104.734375,
+      "WorkingSet64": 362971136
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 9200,
+      "CPU": 73.796875,
+      "WorkingSet64": 74248192
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 9208,
+      "CPU": 117.625,
+      "WorkingSet64": 428269568
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 10748,
+      "CPU": 16.0625,
+      "WorkingSet64": 366424064
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 11056,
+      "CPU": 10.703125,
+      "WorkingSet64": 357588992
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 12112,
+      "CPU": 0.421875,
+      "WorkingSet64": 88498176
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 12172,
+      "CPU": 76.046875,
+      "WorkingSet64": 372854784
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 12188,
+      "CPU": 0.171875,
+      "WorkingSet64": 48984064
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 12200,
+      "CPU": 0.84375,
+      "WorkingSet64": 24735744
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 12528,
+      "CPU": 55.359375,
+      "WorkingSet64": 383893504
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 12800,
+      "CPU": 0.046875,
+      "WorkingSet64": 13873152
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 13640,
+      "CPU": 20.921875,
+      "WorkingSet64": 25886720
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 13704,
+      "CPU": 0.109375,
+      "WorkingSet64": 53567488
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 13884,
+      "CPU": 164.921875,
+      "WorkingSet64": 197271552
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 15048,
+      "CPU": 8.40625,
+      "WorkingSet64": 301219840
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 17380,
+      "CPU": 9.15625,
+      "WorkingSet64": 108097536
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 19128,
+      "CPU": 20.65625,
+      "WorkingSet64": 351580160
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 19892,
+      "CPU": 0.390625,
+      "WorkingSet64": 31285248
+    },
+    {
+      "ProcessName": "msedge",
+      "Id": 20856,
+      "CPU": 7.9375,
+      "WorkingSet64": 313614336
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 804,
+      "CPU": 0.53125,
+      "WorkingSet64": 3563520
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 4964,
+      "CPU": 0.078125,
+      "WorkingSet64": 28672
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 8348,
+      "CPU": 0.734375,
+      "WorkingSet64": 540672
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 10680,
+      "CPU": 1.65625,
+      "WorkingSet64": 137199616
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 10916,
+      "CPU": 0.046875,
+      "WorkingSet64": 13672448
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 11392,
+      "CPU": 0.359375,
+      "WorkingSet64": 45252608
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 11408,
+      "CPU": 0.546875,
+      "WorkingSet64": 98754560
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 11556,
+      "CPU": 0.03125,
+      "WorkingSet64": 22376448
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 11724,
+      "CPU": 1.15625,
+      "WorkingSet64": 122912768
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 13572,
+      "CPU": 0.0625,
+      "WorkingSet64": 13877248
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 14400,
+      "CPU": 28.75,
+      "WorkingSet64": 50020352
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 14424,
+      "CPU": 0.0625,
+      "WorkingSet64": 14102528
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 14604,
+      "CPU": 17.546875,
+      "WorkingSet64": 18743296
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 14616,
+      "CPU": 90.546875,
+      "WorkingSet64": 12046336
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 14708,
+      "CPU": 0.328125,
+      "WorkingSet64": 3731456
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 15172,
+      "CPU": 53.578125,
+      "WorkingSet64": 83582976
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 15336,
+      "CPU": 2.234375,
+      "WorkingSet64": 20164608
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 15968,
+      "CPU": 0.78125,
+      "WorkingSet64": 0
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 16292,
+      "CPU": 530.5625,
+      "WorkingSet64": 95850496
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 17036,
+      "CPU": 0.875,
+      "WorkingSet64": 1028096
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 17592,
+      "CPU": 0.546875,
+      "WorkingSet64": 4521984
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 17600,
+      "CPU": 0.5625,
+      "WorkingSet64": 5193728
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 17660,
+      "CPU": 0.078125,
+      "WorkingSet64": 1761280
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 17760,
+      "CPU": 5.515625,
+      "WorkingSet64": 5267456
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 19712,
+      "CPU": 2.28125,
+      "WorkingSet64": 970752
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 20036,
+      "CPU": 0.359375,
+      "WorkingSet64": 1945600
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 21416,
+      "CPU": 1.71875,
+      "WorkingSet64": 12414976
+    },
+    {
+      "ProcessName": "msedgewebview2",
+      "Id": 21444,
+      "CPU": 0.0625,
+      "WorkingSet64": 13897728
+    },
+    {
+      "ProcessName": "MsMpEng",
+      "Id": 4488,
+      "CPU": null,
+      "WorkingSet64": 716554240
+    },
+    {
+      "ProcessName": "NgcIso",
+      "Id": 6340,
+      "CPU": null,
+      "WorkingSet64": 5062656
+    },
+    {
+      "ProcessName": "NisSrv",
+      "Id": 7068,
+      "CPU": null,
+      "WorkingSet64": 17584128
+    },
+    {
+      "ProcessName": "node",
+      "Id": 1984,
+      "CPU": 0.09375,
+      "WorkingSet64": 60035072
+    },
+    {
+      "ProcessName": "node",
+      "Id": 1988,
+      "CPU": 0.171875,
+      "WorkingSet64": 60145664
+    },
+    {
+      "ProcessName": "node",
+      "Id": 2440,
+      "CPU": 0.1875,
+      "WorkingSet64": 61693952
+    },
+    {
+      "ProcessName": "node",
+      "Id": 3164,
+      "CPU": 0.046875,
+      "WorkingSet64": 51306496
+    },
+    {
+      "ProcessName": "node",
+      "Id": 3444,
+      "CPU": 0.03125,
+      "WorkingSet64": 50806784
+    },
+    {
+      "ProcessName": "node",
+      "Id": 3768,
+      "CPU": 0.046875,
+      "WorkingSet64": 51077120
+    },
+    {
+      "ProcessName": "node",
+      "Id": 4060,
+      "CPU": 0.03125,
+      "WorkingSet64": 51056640
+    },
+    {
+      "ProcessName": "node",
+      "Id": 4204,
+      "CPU": 0.03125,
+      "WorkingSet64": 51032064
+    },
+    {
+      "ProcessName": "node",
+      "Id": 4264,
+      "CPU": 0.015625,
+      "WorkingSet64": 51023872
+    },
+    {
+      "ProcessName": "node",
+      "Id": 4268,
+      "CPU": 0.09375,
+      "WorkingSet64": 60112896
+    },
+    {
+      "ProcessName": "node",
+      "Id": 5592,
+      "CPU": 0.015625,
+      "WorkingSet64": 40370176
+    },
+    {
+      "ProcessName": "node",
+      "Id": 6308,
+      "CPU": 0.03125,
+      "WorkingSet64": 51019776
+    },
+    {
+      "ProcessName": "node",
+      "Id": 6644,
+      "CPU": 0.03125,
+      "WorkingSet64": 40239104
+    },
+    {
+      "ProcessName": "node",
+      "Id": 6656,
+      "CPU": 0.03125,
+      "WorkingSet64": 40337408
+    },
+    {
+      "ProcessName": "node",
+      "Id": 6884,
+      "CPU": 0.109375,
+      "WorkingSet64": 59113472
+    },
+    {
+      "ProcessName": "node",
+      "Id": 6968,
+      "CPU": 0.015625,
+      "WorkingSet64": 50999296
+    },
+    {
+      "ProcessName": "node",
+      "Id": 7120,
+      "CPU": 0.015625,
+      "WorkingSet64": 40378368
+    },
+    {
+      "ProcessName": "node",
+      "Id": 7404,
+      "CPU": 0.03125,
+      "WorkingSet64": 50872320
+    },
+    {
+      "ProcessName": "node",
+      "Id": 7428,
+      "CPU": 0.046875,
+      "WorkingSet64": 40312832
+    },
+    {
+      "ProcessName": "node",
+      "Id": 7480,
+      "CPU": 0.171875,
+      "WorkingSet64": 59682816
+    },
+    {
+      "ProcessName": "node",
+      "Id": 8112,
+      "CPU": 0.046875,
+      "WorkingSet64": 40394752
+    },
+    {
+      "ProcessName": "node",
+      "Id": 8228,
+      "CPU": 0.046875,
+      "WorkingSet64": 51015680
+    },
+    {
+      "ProcessName": "node",
+      "Id": 8900,
+      "CPU": 0.03125,
+      "WorkingSet64": 51392512
+    },
+    {
+      "ProcessName": "node",
+      "Id": 8972,
+      "CPU": 0.09375,
+      "WorkingSet64": 51404800
+    },
+    {
+      "ProcessName": "node",
+      "Id": 9508,
+      "CPU": 0.03125,
+      "WorkingSet64": 40325120
+    },
+    {
+      "ProcessName": "node",
+      "Id": 9740,
+      "CPU": 0.0625,
+      "WorkingSet64": 60702720
+    },
+    {
+      "ProcessName": "node",
+      "Id": 9956,
+      "CPU": 0.125,
+      "WorkingSet64": 61853696
+    },
+    {
+      "ProcessName": "node",
+      "Id": 10356,
+      "CPU": 0.03125,
+      "WorkingSet64": 39997440
+    },
+    {
+      "ProcessName": "node",
+      "Id": 11076,
+      "CPU": 0.03125,
+      "WorkingSet64": 51425280
+    },
+    {
+      "ProcessName": "node",
+      "Id": 12068,
+      "CPU": 0.015625,
+      "WorkingSet64": 51372032
+    },
+    {
+      "ProcessName": "node",
+      "Id": 12148,
+      "CPU": 0.046875,
+      "WorkingSet64": 51003392
+    },
+    {
+      "ProcessName": "node",
+      "Id": 12392,
+      "CPU": 0.03125,
+      "WorkingSet64": 50950144
+    },
+    {
+      "ProcessName": "node",
+      "Id": 12560,
+      "CPU": 0.09375,
+      "WorkingSet64": 61726720
+    },
+    {
+      "ProcessName": "node",
+      "Id": 13020,
+      "CPU": 0.03125,
+      "WorkingSet64": 51355648
+    },
+    {
+      "ProcessName": "node",
+      "Id": 16476,
+      "CPU": 0.0625,
+      "WorkingSet64": 40321024
+    },
+    {
+      "ProcessName": "node",
+      "Id": 17384,
+      "CPU": 0.03125,
+      "WorkingSet64": 51019776
+    },
+    {
+      "ProcessName": "node",
+      "Id": 18292,
+      "CPU": 0.03125,
+      "WorkingSet64": 51417088
+    },
+    {
+      "ProcessName": "node",
+      "Id": 18756,
+      "CPU": 0.03125,
+      "WorkingSet64": 40427520
+    },
+    {
+      "ProcessName": "node",
+      "Id": 19060,
+      "CPU": 0.03125,
+      "WorkingSet64": 51044352
+    },
+    {
+      "ProcessName": "node",
+      "Id": 19332,
+      "CPU": 0.03125,
+      "WorkingSet64": 51404800
+    },
+    {
+      "ProcessName": "node",
+      "Id": 19704,
+      "CPU": 0.0625,
+      "WorkingSet64": 51400704
+    },
+    {
+      "ProcessName": "node",
+      "Id": 19872,
+      "CPU": 0.046875,
+      "WorkingSet64": 51339264
+    },
+    {
+      "ProcessName": "node",
+      "Id": 20196,
+      "CPU": 0.0625,
+      "WorkingSet64": 51040256
+    },
+    {
+      "ProcessName": "node",
+      "Id": 20380,
+      "CPU": 0.109375,
+      "WorkingSet64": 58167296
+    },
+    {
+      "ProcessName": "node",
+      "Id": 20708,
+      "CPU": 0.046875,
+      "WorkingSet64": 51372032
+    },
+    {
+      "ProcessName": "node",
+      "Id": 20776,
+      "CPU": 0.046875,
+      "WorkingSet64": 51314688
+    },
+    {
+      "ProcessName": "node",
+      "Id": 21640,
+      "CPU": 0.140625,
+      "WorkingSet64": 60739584
+    },
+    {
+      "ProcessName": "node",
+      "Id": 21880,
+      "CPU": 0.140625,
+      "WorkingSet64": 60104704
+    },
+    {
+      "ProcessName": "node",
+      "Id": 21948,
+      "CPU": 0.046875,
+      "WorkingSet64": 40296448
+    },
+    {
+      "ProcessName": "node",
+      "Id": 22060,
+      "CPU": 0.09375,
+      "WorkingSet64": 40026112
+    },
+    {
+      "ProcessName": "node",
+      "Id": 22496,
+      "CPU": 0.03125,
+      "WorkingSet64": 51421184
+    },
+    {
+      "ProcessName": "node",
+      "Id": 22500,
+      "CPU": 0.0625,
+      "WorkingSet64": 60125184
+    },
+    {
+      "ProcessName": "node",
+      "Id": 22520,
+      "CPU": 0.0,
+      "WorkingSet64": 40103936
+    },
+    {
+      "ProcessName": "node",
+      "Id": 22708,
+      "CPU": 0.015625,
+      "WorkingSet64": 50888704
+    },
+    {
+      "ProcessName": "node",
+      "Id": 22720,
+      "CPU": 0.15625,
+      "WorkingSet64": 60133376
+    },
+    {
+      "ProcessName": "node",
+      "Id": 23072,
+      "CPU": 0.03125,
+      "WorkingSet64": 51044352
+    },
+    {
+      "ProcessName": "node",
+      "Id": 23096,
+      "CPU": 0.03125,
+      "WorkingSet64": 40316928
+    },
+    {
+      "ProcessName": "node",
+      "Id": 23648,
+      "CPU": 0.0625,
+      "WorkingSet64": 59228160
+    },
+    {
+      "ProcessName": "node",
+      "Id": 23716,
+      "CPU": 0.078125,
+      "WorkingSet64": 60215296
+    },
+    {
+      "ProcessName": "node",
+      "Id": 23784,
+      "CPU": 0.046875,
+      "WorkingSet64": 51380224
+    },
+    {
+      "ProcessName": "node",
+      "Id": 23792,
+      "CPU": 0.046875,
+      "WorkingSet64": 40390656
+    },
+    {
+      "ProcessName": "node",
+      "Id": 23820,
+      "CPU": 0.015625,
+      "WorkingSet64": 40108032
+    },
+    {
+      "ProcessName": "node",
+      "Id": 23872,
+      "CPU": 0.015625,
+      "WorkingSet64": 51511296
+    },
+    {
+      "ProcessName": "node",
+      "Id": 23908,
+      "CPU": 0.015625,
+      "WorkingSet64": 50917376
+    },
+    {
+      "ProcessName": "node",
+      "Id": 24020,
+      "CPU": 0.21875,
+      "WorkingSet64": 61808640
+    },
+    {
+      "ProcessName": "node",
+      "Id": 24428,
+      "CPU": 0.078125,
+      "WorkingSet64": 59133952
+    },
+    {
+      "ProcessName": "node",
+      "Id": 24564,
+      "CPU": 0.0625,
+      "WorkingSet64": 40177664
+    },
+    {
+      "ProcessName": "node",
+      "Id": 24784,
+      "CPU": 0.015625,
+      "WorkingSet64": 40374272
+    },
+    {
+      "ProcessName": "node",
+      "Id": 24852,
+      "CPU": 0.015625,
+      "WorkingSet64": 40407040
+    },
+    {
+      "ProcessName": "node",
+      "Id": 24900,
+      "CPU": 0.015625,
+      "WorkingSet64": 51060736
+    },
+    {
+      "ProcessName": "node",
+      "Id": 25008,
+      "CPU": 0.0625,
+      "WorkingSet64": 50790400
+    },
+    {
+      "ProcessName": "node",
+      "Id": 25148,
+      "CPU": 0.046875,
+      "WorkingSet64": 51625984
+    },
+    {
+      "ProcessName": "node",
+      "Id": 25488,
+      "CPU": 0.015625,
+      "WorkingSet64": 51490816
+    },
+    {
+      "ProcessName": "node",
+      "Id": 25512,
+      "CPU": 0.046875,
+      "WorkingSet64": 50999296
+    },
+    {
+      "ProcessName": "node",
+      "Id": 25608,
+      "CPU": 0.046875,
+      "WorkingSet64": 40448000
+    },
+    {
+      "ProcessName": "node",
+      "Id": 25676,
+      "CPU": 0.03125,
+      "WorkingSet64": 40370176
+    },
+    {
+      "ProcessName": "node",
+      "Id": 25916,
+      "CPU": 0.203125,
+      "WorkingSet64": 62300160
+    },
+    {
+      "ProcessName": "node",
+      "Id": 25988,
+      "CPU": 0.03125,
+      "WorkingSet64": 40374272
+    },
+    {
+      "ProcessName": "node",
+      "Id": 26056,
+      "CPU": 0.03125,
+      "WorkingSet64": 51417088
+    },
+    {
+      "ProcessName": "node",
+      "Id": 26136,
+      "CPU": 0.0625,
+      "WorkingSet64": 60461056
+    },
+    {
+      "ProcessName": "node",
+      "Id": 26468,
+      "CPU": 0.125,
+      "WorkingSet64": 59158528
+    },
+    {
+      "ProcessName": "node",
+      "Id": 26500,
+      "CPU": 0.046875,
+      "WorkingSet64": 51351552
+    },
+    {
+      "ProcessName": "node",
+      "Id": 26536,
+      "CPU": 0.09375,
+      "WorkingSet64": 40288256
+    },
+    {
+      "ProcessName": "node",
+      "Id": 26868,
+      "CPU": 0.03125,
+      "WorkingSet64": 50929664
+    },
+    {
+      "ProcessName": "node",
+      "Id": 26928,
+      "CPU": 0.09375,
+      "WorkingSet64": 59973632
+    },
+    {
+      "ProcessName": "node",
+      "Id": 27068,
+      "CPU": 0.015625,
+      "WorkingSet64": 51249152
+    },
+    {
+      "ProcessName": "node",
+      "Id": 27112,
+      "CPU": 0.046875,
+      "WorkingSet64": 50929664
+    },
+    {
+      "ProcessName": "node",
+      "Id": 27224,
+      "CPU": 0.0625,
+      "WorkingSet64": 50966528
+    },
+    {
+      "ProcessName": "node",
+      "Id": 27440,
+      "CPU": 0.03125,
+      "WorkingSet64": 51404800
+    },
+    {
+      "ProcessName": "node",
+      "Id": 27556,
+      "CPU": 0.046875,
+      "WorkingSet64": 50970624
+    },
+    {
+      "ProcessName": "node",
+      "Id": 27800,
+      "CPU": 0.15625,
+      "WorkingSet64": 59588608
+    },
+    {
+      "ProcessName": "node",
+      "Id": 27896,
+      "CPU": 0.015625,
+      "WorkingSet64": 51044352
+    },
+    {
+      "ProcessName": "node",
+      "Id": 28268,
+      "CPU": 0.046875,
+      "WorkingSet64": 40439808
+    },
+    {
+      "ProcessName": "node",
+      "Id": 28632,
+      "CPU": 0.015625,
+      "WorkingSet64": 50868224
+    },
+    {
+      "ProcessName": "node",
+      "Id": 28772,
+      "CPU": 0.0625,
+      "WorkingSet64": 59838464
+    },
+    {
+      "ProcessName": "node",
+      "Id": 28856,
+      "CPU": 0.0625,
+      "WorkingSet64": 40316928
+    },
+    {
+      "ProcessName": "node",
+      "Id": 28956,
+      "CPU": 0.0625,
+      "WorkingSet64": 58818560
+    },
+    {
+      "ProcessName": "node",
+      "Id": 28996,
+      "CPU": 0.03125,
+      "WorkingSet64": 51011584
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29128,
+      "CPU": 0.03125,
+      "WorkingSet64": 40443904
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29356,
+      "CPU": 0.09375,
+      "WorkingSet64": 60604416
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29368,
+      "CPU": 0.0625,
+      "WorkingSet64": 51240960
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29488,
+      "CPU": 0.046875,
+      "WorkingSet64": 51105792
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29552,
+      "CPU": 0.015625,
+      "WorkingSet64": 50954240
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29608,
+      "CPU": 0.03125,
+      "WorkingSet64": 51445760
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29728,
+      "CPU": 0.03125,
+      "WorkingSet64": 51396608
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29760,
+      "CPU": 0.03125,
+      "WorkingSet64": 52158464
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29784,
+      "CPU": 0.03125,
+      "WorkingSet64": 40296448
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29884,
+      "CPU": 0.03125,
+      "WorkingSet64": 50950144
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29892,
+      "CPU": 0.015625,
+      "WorkingSet64": 51388416
+    },
+    {
+      "ProcessName": "node",
+      "Id": 29972,
+      "CPU": 0.046875,
+      "WorkingSet64": 40398848
+    },
+    {
+      "ProcessName": "node",
+      "Id": 30132,
+      "CPU": 0.125,
+      "WorkingSet64": 60104704
+    },
+    {
+      "ProcessName": "node",
+      "Id": 30440,
+      "CPU": 0.125,
+      "WorkingSet64": 60833792
+    },
+    {
+      "ProcessName": "node",
+      "Id": 30680,
+      "CPU": 0.03125,
+      "WorkingSet64": 50966528
+    },
+    {
+      "ProcessName": "node",
+      "Id": 30756,
+      "CPU": 0.125,
+      "WorkingSet64": 60727296
+    },
+    {
+      "ProcessName": "node",
+      "Id": 31208,
+      "CPU": 0.015625,
+      "WorkingSet64": 51449856
+    },
+    {
+      "ProcessName": "node",
+      "Id": 31216,
+      "CPU": 0.03125,
+      "WorkingSet64": 50929664
+    },
+    {
+      "ProcessName": "node",
+      "Id": 31320,
+      "CPU": 0.03125,
+      "WorkingSet64": 40009728
+    },
+    {
+      "ProcessName": "node",
+      "Id": 31456,
+      "CPU": 0.15625,
+      "WorkingSet64": 60956672
+    },
+    {
+      "ProcessName": "node",
+      "Id": 31564,
+      "CPU": 0.046875,
+      "WorkingSet64": 40611840
+    },
+    {
+      "ProcessName": "node",
+      "Id": 32032,
+      "CPU": 0.03125,
+      "WorkingSet64": 50905088
+    },
+    {
+      "ProcessName": "node",
+      "Id": 32072,
+      "CPU": 0.03125,
+      "WorkingSet64": 51302400
+    },
+    {
+      "ProcessName": "node",
+      "Id": 32136,
+      "CPU": 0.046875,
+      "WorkingSet64": 40345600
+    },
+    {
+      "ProcessName": "node",
+      "Id": 32156,
+      "CPU": 0.140625,
+      "WorkingSet64": 61730816
+    },
+    {
+      "ProcessName": "node",
+      "Id": 32164,
+      "CPU": 0.046875,
+      "WorkingSet64": 51400704
+    },
+    {
+      "ProcessName": "node",
+      "Id": 32172,
+      "CPU": 0.03125,
+      "WorkingSet64": 51027968
+    },
+    {
+      "ProcessName": "node",
+      "Id": 32216,
+      "CPU": 0.015625,
+      "WorkingSet64": 40284160
+    },
+    {
+      "ProcessName": "node",
+      "Id": 32348,
+      "CPU": 0.09375,
+      "WorkingSet64": 60493824
+    },
+    {
+      "ProcessName": "node",
+      "Id": 32500,
+      "CPU": 0.0625,
+      "WorkingSet64": 51408896
+    },
+    {
+      "ProcessName": "node",
+      "Id": 32720,
+      "CPU": 0.078125,
+      "WorkingSet64": 60293120
+    },
+    {
+      "ProcessName": "node",
+      "Id": 33888,
+      "CPU": 0.03125,
+      "WorkingSet64": 51265536
+    },
+    {
+      "ProcessName": "node",
+      "Id": 34156,
+      "CPU": 0.03125,
+      "WorkingSet64": 50954240
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 180,
+      "CPU": 0.0,
+      "WorkingSet64": 10493952
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 1844,
+      "CPU": 0.015625,
+      "WorkingSet64": 10477568
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 2876,
+      "CPU": 0.046875,
+      "WorkingSet64": 10731520
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 4352,
+      "CPU": 0.0,
+      "WorkingSet64": 10534912
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 4708,
+      "CPU": 0.0,
+      "WorkingSet64": 10530816
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 7488,
+      "CPU": 0.015625,
+      "WorkingSet64": 10481664
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 7728,
+      "CPU": 0.0,
+      "WorkingSet64": 10739712
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 8408,
+      "CPU": 0.03125,
+      "WorkingSet64": 10567680
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 8544,
+      "CPU": 0.015625,
+      "WorkingSet64": 10510336
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 8660,
+      "CPU": 0.0,
+      "WorkingSet64": 10473472
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 8684,
+      "CPU": 0.0,
+      "WorkingSet64": 10502144
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 8800,
+      "CPU": 0.015625,
+      "WorkingSet64": 10280960
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 9008,
+      "CPU": 0.0,
+      "WorkingSet64": 10489856
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 9112,
+      "CPU": 0.046875,
+      "WorkingSet64": 10530816
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 9744,
+      "CPU": 0.015625,
+      "WorkingSet64": 10518528
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 12092,
+      "CPU": 0.0,
+      "WorkingSet64": 10461184
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 14280,
+      "CPU": 0.0,
+      "WorkingSet64": 10448896
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 17176,
+      "CPU": 0.0,
+      "WorkingSet64": 10514432
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 19104,
+      "CPU": 0.015625,
+      "WorkingSet64": 10498048
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 19336,
+      "CPU": 0.0,
+      "WorkingSet64": 10424320
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 19564,
+      "CPU": 0.015625,
+      "WorkingSet64": 10727424
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 19976,
+      "CPU": 0.015625,
+      "WorkingSet64": 10252288
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 20276,
+      "CPU": 0.0,
+      "WorkingSet64": 10522624
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 20388,
+      "CPU": 0.015625,
+      "WorkingSet64": 10870784
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 21692,
+      "CPU": 0.0,
+      "WorkingSet64": 10575872
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 21996,
+      "CPU": 0.015625,
+      "WorkingSet64": 10477568
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 22240,
+      "CPU": 0.015625,
+      "WorkingSet64": 10534912
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 22276,
+      "CPU": 0.015625,
+      "WorkingSet64": 10481664
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 22992,
+      "CPU": 0.0,
+      "WorkingSet64": 10555392
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 23184,
+      "CPU": 0.0,
+      "WorkingSet64": 10448896
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 23212,
+      "CPU": 0.0,
+      "WorkingSet64": 10489856
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 23244,
+      "CPU": 0.015625,
+      "WorkingSet64": 10469376
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 23316,
+      "CPU": 0.015625,
+      "WorkingSet64": 10502144
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 23848,
+      "CPU": 0.0,
+      "WorkingSet64": 10469376
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 23860,
+      "CPU": 0.078125,
+      "WorkingSet64": 10625024
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 23928,
+      "CPU": 0.015625,
+      "WorkingSet64": 10485760
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 25576,
+      "CPU": 0.0,
+      "WorkingSet64": 10407936
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 25664,
+      "CPU": 0.0,
+      "WorkingSet64": 10518528
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 25868,
+      "CPU": 0.0,
+      "WorkingSet64": 10547200
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 25888,
+      "CPU": 0.015625,
+      "WorkingSet64": 10502144
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 26252,
+      "CPU": 0.0,
+      "WorkingSet64": 10641408
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 26428,
+      "CPU": 0.0,
+      "WorkingSet64": 10579968
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 26436,
+      "CPU": 0.015625,
+      "WorkingSet64": 10465280
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 26848,
+      "CPU": 0.0625,
+      "WorkingSet64": 10461184
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 27200,
+      "CPU": 0.015625,
+      "WorkingSet64": 10473472
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 27232,
+      "CPU": 0.015625,
+      "WorkingSet64": 10457088
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 27324,
+      "CPU": 0.015625,
+      "WorkingSet64": 10465280
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 27552,
+      "CPU": 0.015625,
+      "WorkingSet64": 10457088
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 27572,
+      "CPU": 0.015625,
+      "WorkingSet64": 10526720
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 27780,
+      "CPU": 0.015625,
+      "WorkingSet64": 10559488
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 28072,
+      "CPU": 0.0,
+      "WorkingSet64": 10547200
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 28276,
+      "CPU": 0.0,
+      "WorkingSet64": 10461184
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 28540,
+      "CPU": 0.0,
+      "WorkingSet64": 10526720
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 28624,
+      "CPU": 0.015625,
+      "WorkingSet64": 10502144
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 28688,
+      "CPU": 0.0,
+      "WorkingSet64": 10526720
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 29100,
+      "CPU": 0.0,
+      "WorkingSet64": 10461184
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 29132,
+      "CPU": 0.0,
+      "WorkingSet64": 10485760
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 29136,
+      "CPU": 0.015625,
+      "WorkingSet64": 10461184
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 29324,
+      "CPU": 0.0,
+      "WorkingSet64": 10452992
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 29440,
+      "CPU": 0.046875,
+      "WorkingSet64": 10907648
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 29712,
+      "CPU": 0.015625,
+      "WorkingSet64": 10526720
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 29740,
+      "CPU": 0.0,
+      "WorkingSet64": 10444800
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 29820,
+      "CPU": 0.015625,
+      "WorkingSet64": 10448896
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 29932,
+      "CPU": 0.0,
+      "WorkingSet64": 10448896
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 30240,
+      "CPU": 0.03125,
+      "WorkingSet64": 10448896
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 30488,
+      "CPU": 0.0,
+      "WorkingSet64": 10489856
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 30536,
+      "CPU": 0.0,
+      "WorkingSet64": 10502144
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 30888,
+      "CPU": 0.03125,
+      "WorkingSet64": 10489856
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 30948,
+      "CPU": 0.0,
+      "WorkingSet64": 10448896
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 31056,
+      "CPU": 0.015625,
+      "WorkingSet64": 10510336
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 31280,
+      "CPU": 0.015625,
+      "WorkingSet64": 10469376
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 31580,
+      "CPU": 0.0,
+      "WorkingSet64": 10485760
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 31888,
+      "CPU": 0.015625,
+      "WorkingSet64": 10440704
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 31984,
+      "CPU": 0.0,
+      "WorkingSet64": 10485760
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 32064,
+      "CPU": 0.015625,
+      "WorkingSet64": 10444800
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 32188,
+      "CPU": 0.0,
+      "WorkingSet64": 10428416
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 32412,
+      "CPU": 0.0,
+      "WorkingSet64": 10416128
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 32476,
+      "CPU": 0.0,
+      "WorkingSet64": 10473472
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 32764,
+      "CPU": 0.015625,
+      "WorkingSet64": 10522624
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 33764,
+      "CPU": 0.03125,
+      "WorkingSet64": 10493952
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 33804,
+      "CPU": 0.0,
+      "WorkingSet64": 10448896
+    },
+    {
+      "ProcessName": "node_repl",
+      "Id": 34124,
+      "CPU": 0.0,
+      "WorkingSet64": 10485760
+    },
+    {
+      "ProcessName": "OfficeClickToRun",
+      "Id": 4552,
+      "CPU": null,
+      "WorkingSet64": 76947456
+    },
+    {
+      "ProcessName": "OneDrive",
+      "Id": 12508,
+      "CPU": 4.671875,
+      "WorkingSet64": 266756096
+    },
+    {
+      "ProcessName": "OneDrive.Sync.Service",
+      "Id": 18776,
+      "CPU": 16.328125,
+      "WorkingSet64": 43040768
+    },
+    {
+      "ProcessName": "pwahelper",
+      "Id": 13800,
+      "CPU": 0.046875,
+      "WorkingSet64": 17575936
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 2764,
+      "CPU": 214.859375,
+      "WorkingSet64": 180736000
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 21784,
+      "CPU": 0.703125,
+      "WorkingSet64": 111403008
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 25292,
+      "CPU": 0.578125,
+      "WorkingSet64": 103165952
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 26016,
+      "CPU": 0.578125,
+      "WorkingSet64": 100229120
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 27984,
+      "CPU": 0.6875,
+      "WorkingSet64": 100999168
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 29880,
+      "CPU": 0.5625,
+      "WorkingSet64": 100294656
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 33244,
+      "CPU": 0.515625,
+      "WorkingSet64": 100855808
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 33248,
+      "CPU": 13.796875,
+      "WorkingSet64": 138539008
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 33828,
+      "CPU": 0.578125,
+      "WorkingSet64": 102014976
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 35588,
+      "CPU": 0.5625,
+      "WorkingSet64": 100864000
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 35692,
+      "CPU": 0.640625,
+      "WorkingSet64": 100937728
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 36972,
+      "CPU": 0.453125,
+      "WorkingSet64": 101810176
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 37244,
+      "CPU": 0.3125,
+      "WorkingSet64": 86831104
+    },
+    {
+      "ProcessName": "pwsh",
+      "Id": 37672,
+      "CPU": 0.3125,
+      "WorkingSet64": 87138304
+    },
+    {
+      "ProcessName": "RadeonSoftware",
+      "Id": 18040,
+      "CPU": 11.125,
+      "WorkingSet64": 81530880
+    },
+    {
+      "ProcessName": "Registry",
+      "Id": 184,
+      "CPU": null,
+      "WorkingSet64": 36663296
+    },
+    {
+      "ProcessName": "remoting_host",
+      "Id": 4368,
+      "CPU": 0.0625,
+      "WorkingSet64": 17367040
+    },
+    {
+      "ProcessName": "remoting_host",
+      "Id": 5748,
+      "CPU": 0.53125,
+      "WorkingSet64": 26750976
+    },
+    {
+      "ProcessName": "remoting_native_messaging_host",
+      "Id": 14064,
+      "CPU": 0.0625,
+      "WorkingSet64": 17498112
+    },
+    {
+      "ProcessName": "ResidencyPlannerHarness",
+      "Id": 34168,
+      "CPU": 39.90625,
+      "WorkingSet64": 45502464
+    },
+    {
+      "ProcessName": "RtkAudUService64",
+      "Id": 4472,
+      "CPU": null,
+      "WorkingSet64": 28946432
+    },
+    {
+      "ProcessName": "RtkAudUService64",
+      "Id": 13068,
+      "CPU": 0.21875,
+      "WorkingSet64": 19742720
+    },
+    {
+      "ProcessName": "RtkBtManServ",
+      "Id": 4416,
+      "CPU": null,
+      "WorkingSet64": 10117120
+    },
+    {
+      "ProcessName": "RuntimeBroker",
+      "Id": 6676,
+      "CPU": 0.421875,
+      "WorkingSet64": 34902016
+    },
+    {
+      "ProcessName": "RuntimeBroker",
+      "Id": 9708,
+      "CPU": 1.203125,
+      "WorkingSet64": 75595776
+    },
+    {
+      "ProcessName": "RuntimeBroker",
+      "Id": 11464,
+      "CPU": 0.015625,
+      "WorkingSet64": 22204416
+    },
+    {
+      "ProcessName": "RuntimeBroker",
+      "Id": 16524,
+      "CPU": 0.140625,
+      "WorkingSet64": 31858688
+    },
+    {
+      "ProcessName": "RuntimeBroker",
+      "Id": 17376,
+      "CPU": 0.109375,
+      "WorkingSet64": 23932928
+    },
+    {
+      "ProcessName": "RuntimeBroker",
+      "Id": 20372,
+      "CPU": 0.0625,
+      "WorkingSet64": 11005952
+    },
+    {
+      "ProcessName": "RuntimeBroker",
+      "Id": 20520,
+      "CPU": 0.5,
+      "WorkingSet64": 32423936
+    },
+    {
+      "ProcessName": "rustdesk",
+      "Id": 4408,
+      "CPU": null,
+      "WorkingSet64": 20242432
+    },
+    {
+      "ProcessName": "rustdesk",
+      "Id": 5536,
+      "CPU": null,
+      "WorkingSet64": 31789056
+    },
+    {
+      "ProcessName": "rustdesk",
+      "Id": 18172,
+      "CPU": 28.15625,
+      "WorkingSet64": 23207936
+    },
+    {
+      "ProcessName": "SearchFilterHost",
+      "Id": 2564,
+      "CPU": null,
+      "WorkingSet64": 14954496
+    },
+    {
+      "ProcessName": "SearchFilterHost",
+      "Id": 3180,
+      "CPU": null,
+      "WorkingSet64": 12546048
+    },
+    {
+      "ProcessName": "SearchFilterHost",
+      "Id": 4528,
+      "CPU": null,
+      "WorkingSet64": 13737984
+    },
+    {
+      "ProcessName": "SearchFilterHost",
+      "Id": 26464,
+      "CPU": null,
+      "WorkingSet64": 15130624
+    },
+    {
+      "ProcessName": "SearchFilterHost",
+      "Id": 27268,
+      "CPU": null,
+      "WorkingSet64": 11567104
+    },
+    {
+      "ProcessName": "SearchFilterHost",
+      "Id": 28804,
+      "CPU": null,
+      "WorkingSet64": 13553664
+    },
+    {
+      "ProcessName": "SearchHost",
+      "Id": 9404,
+      "CPU": 2.25,
+      "WorkingSet64": 154812416
+    },
+    {
+      "ProcessName": "SearchIndexer",
+      "Id": 10500,
+      "CPU": null,
+      "WorkingSet64": 95113216
+    },
+    {
+      "ProcessName": "SearchProtocolHost",
+      "Id": 37564,
+      "CPU": null,
+      "WorkingSet64": 26525696
+    },
+    {
+      "ProcessName": "Secure System",
+      "Id": 140,
+      "CPU": null,
+      "WorkingSet64": 231677952
+    },
+    {
+      "ProcessName": "SecurityHealthService",
+      "Id": 12964,
+      "CPU": null,
+      "WorkingSet64": 25735168
+    },
+    {
+      "ProcessName": "SecurityHealthSystray",
+      "Id": 12924,
+      "CPU": 0.03125,
+      "WorkingSet64": 13922304
+    },
+    {
+      "ProcessName": "services",
+      "Id": 1448,
+      "CPU": null,
+      "WorkingSet64": 20959232
+    },
+    {
+      "ProcessName": "ShellExperienceHost",
+      "Id": 3032,
+      "CPU": 3.109375,
+      "WorkingSet64": 76906496
+    },
+    {
+      "ProcessName": "ShellHost",
+      "Id": 8616,
+      "CPU": 0.125,
+      "WorkingSet64": 59822080
+    },
+    {
+      "ProcessName": "sihost",
+      "Id": 8184,
+      "CPU": 5.3125,
+      "WorkingSet64": 55439360
+    },
+    {
+      "ProcessName": "smss",
+      "Id": 660,
+      "CPU": null,
+      "WorkingSet64": 1794048
+    },
+    {
+      "ProcessName": "spoolsv",
+      "Id": 4036,
+      "CPU": null,
+      "WorkingSet64": 22601728
+    },
+    {
+      "ProcessName": "sqlwriter",
+      "Id": 4500,
+      "CPU": null,
+      "WorkingSet64": 11517952
+    },
+    {
+      "ProcessName": "StartMenuExperienceHost",
+      "Id": 9412,
+      "CPU": 3.015625,
+      "WorkingSet64": 190115840
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 636,
+      "CPU": null,
+      "WorkingSet64": 11898880
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 800,
+      "CPU": null,
+      "WorkingSet64": 28917760
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 1056,
+      "CPU": null,
+      "WorkingSet64": 16633856
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 1628,
+      "CPU": null,
+      "WorkingSet64": 38494208
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 1756,
+      "CPU": null,
+      "WorkingSet64": 22319104
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 1804,
+      "CPU": null,
+      "WorkingSet64": 11390976
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 1968,
+      "CPU": null,
+      "WorkingSet64": 7319552
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2060,
+      "CPU": null,
+      "WorkingSet64": 18944000
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2096,
+      "CPU": null,
+      "WorkingSet64": 14925824
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2104,
+      "CPU": null,
+      "WorkingSet64": 14536704
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2112,
+      "CPU": null,
+      "WorkingSet64": 16084992
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2228,
+      "CPU": null,
+      "WorkingSet64": 13893632
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2236,
+      "CPU": null,
+      "WorkingSet64": 7925760
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2256,
+      "CPU": null,
+      "WorkingSet64": 15228928
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2332,
+      "CPU": null,
+      "WorkingSet64": 13103104
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2456,
+      "CPU": null,
+      "WorkingSet64": 22134784
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2504,
+      "CPU": null,
+      "WorkingSet64": 8458240
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2752,
+      "CPU": null,
+      "WorkingSet64": 11046912
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2788,
+      "CPU": null,
+      "WorkingSet64": 13541376
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 2844,
+      "CPU": null,
+      "WorkingSet64": 25161728
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3092,
+      "CPU": null,
+      "WorkingSet64": 8056832
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3100,
+      "CPU": null,
+      "WorkingSet64": 19664896
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3108,
+      "CPU": null,
+      "WorkingSet64": 11038720
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3236,
+      "CPU": null,
+      "WorkingSet64": 12009472
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3288,
+      "CPU": null,
+      "WorkingSet64": 13217792
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3296,
+      "CPU": null,
+      "WorkingSet64": 11452416
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3376,
+      "CPU": null,
+      "WorkingSet64": 20254720
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3400,
+      "CPU": null,
+      "WorkingSet64": 33054720
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3404,
+      "CPU": null,
+      "WorkingSet64": 11567104
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3484,
+      "CPU": null,
+      "WorkingSet64": 13500416
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3504,
+      "CPU": null,
+      "WorkingSet64": 11333632
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3564,
+      "CPU": null,
+      "WorkingSet64": 30814208
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3656,
+      "CPU": null,
+      "WorkingSet64": 11898880
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3740,
+      "CPU": null,
+      "WorkingSet64": 14262272
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3876,
+      "CPU": null,
+      "WorkingSet64": 25944064
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3912,
+      "CPU": null,
+      "WorkingSet64": 20393984
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 3960,
+      "CPU": null,
+      "WorkingSet64": 9457664
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 4160,
+      "CPU": null,
+      "WorkingSet64": 29704192
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 4188,
+      "CPU": null,
+      "WorkingSet64": 11280384
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 4376,
+      "CPU": null,
+      "WorkingSet64": 16105472
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 4384,
+      "CPU": null,
+      "WorkingSet64": 47169536
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 4392,
+      "CPU": null,
+      "WorkingSet64": 71757824
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 4424,
+      "CPU": null,
+      "WorkingSet64": 12144640
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 4436,
+      "CPU": null,
+      "WorkingSet64": 23842816
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 4444,
+      "CPU": null,
+      "WorkingSet64": 27447296
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 4452,
+      "CPU": null,
+      "WorkingSet64": 7872512
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 4744,
+      "CPU": null,
+      "WorkingSet64": 13049856
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 5032,
+      "CPU": null,
+      "WorkingSet64": 13127680
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 5392,
+      "CPU": null,
+      "WorkingSet64": 11149312
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 6040,
+      "CPU": null,
+      "WorkingSet64": 12013568
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 6184,
+      "CPU": null,
+      "WorkingSet64": 36323328
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 6264,
+      "CPU": null,
+      "WorkingSet64": 16576512
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 6580,
+      "CPU": null,
+      "WorkingSet64": 15556608
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 6588,
+      "CPU": null,
+      "WorkingSet64": 12476416
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 6800,
+      "CPU": null,
+      "WorkingSet64": 26791936
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 6948,
+      "CPU": null,
+      "WorkingSet64": 17465344
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 7024,
+      "CPU": null,
+      "WorkingSet64": 10756096
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 7112,
+      "CPU": null,
+      "WorkingSet64": 7815168
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 7192,
+      "CPU": null,
+      "WorkingSet64": 12472320
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 7196,
+      "CPU": null,
+      "WorkingSet64": 10100736
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 7304,
+      "CPU": null,
+      "WorkingSet64": 13737984
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 7416,
+      "CPU": 0.625,
+      "WorkingSet64": 39768064
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 7544,
+      "CPU": 1.40625,
+      "WorkingSet64": 52703232
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 7564,
+      "CPU": 0.03125,
+      "WorkingSet64": 11722752
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 7684,
+      "CPU": 0.0,
+      "WorkingSet64": 8024064
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 7848,
+      "CPU": null,
+      "WorkingSet64": 30789632
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 8360,
+      "CPU": null,
+      "WorkingSet64": 17874944
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 8536,
+      "CPU": null,
+      "WorkingSet64": 24776704
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 8712,
+      "CPU": 1.75,
+      "WorkingSet64": 53161984
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 9724,
+      "CPU": 0.71875,
+      "WorkingSet64": 31350784
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 9936,
+      "CPU": null,
+      "WorkingSet64": 28041216
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 10336,
+      "CPU": null,
+      "WorkingSet64": 28889088
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 12872,
+      "CPU": null,
+      "WorkingSet64": 36601856
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 13436,
+      "CPU": 0.109375,
+      "WorkingSet64": 18137088
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 15120,
+      "CPU": null,
+      "WorkingSet64": 16064512
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 17840,
+      "CPU": null,
+      "WorkingSet64": 9203712
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 18132,
+      "CPU": null,
+      "WorkingSet64": 25780224
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 18240,
+      "CPU": null,
+      "WorkingSet64": 17072128
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 18800,
+      "CPU": null,
+      "WorkingSet64": 17395712
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 18944,
+      "CPU": null,
+      "WorkingSet64": 32268288
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 19480,
+      "CPU": null,
+      "WorkingSet64": 28631040
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 21316,
+      "CPU": null,
+      "WorkingSet64": 10321920
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 23032,
+      "CPU": null,
+      "WorkingSet64": 9043968
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 25404,
+      "CPU": null,
+      "WorkingSet64": 8544256
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 27512,
+      "CPU": 0.03125,
+      "WorkingSet64": 15134720
+    },
+    {
+      "ProcessName": "svchost",
+      "Id": 34964,
+      "CPU": null,
+      "WorkingSet64": 8839168
+    },
+    {
+      "ProcessName": "System",
+      "Id": 4,
+      "CPU": null,
+      "WorkingSet64": 12632064
+    },
+    {
+      "ProcessName": "taskhostw",
+      "Id": 7752,
+      "CPU": 1.203125,
+      "WorkingSet64": 25825280
+    },
+    {
+      "ProcessName": "taskhostw",
+      "Id": 23992,
+      "CPU": 0.21875,
+      "WorkingSet64": 34152448
+    },
+    {
+      "ProcessName": "TextInputHost",
+      "Id": 13200,
+      "CPU": 28.90625,
+      "WorkingSet64": 223993856
+    },
+    {
+      "ProcessName": "Unity Hub",
+      "Id": 4808,
+      "CPU": 4.0,
+      "WorkingSet64": 225853440
+    },
+    {
+      "ProcessName": "Unity Hub",
+      "Id": 14180,
+      "CPU": 0.421875,
+      "WorkingSet64": 59449344
+    },
+    {
+      "ProcessName": "Unity Hub",
+      "Id": 15724,
+      "CPU": 7.484375,
+      "WorkingSet64": 182648832
+    },
+    {
+      "ProcessName": "Unity Hub",
+      "Id": 19624,
+      "CPU": 24.953125,
+      "WorkingSet64": 231088128
+    },
+    {
+      "ProcessName": "Unity.Licensing.Client",
+      "Id": 19788,
+      "CPU": 4.921875,
+      "WorkingSet64": 119959552
+    },
+    {
+      "ProcessName": "UserOOBEBroker",
+      "Id": 12532,
+      "CPU": 0.03125,
+      "WorkingSet64": 12230656
+    },
+    {
+      "ProcessName": "VBCSCompiler",
+      "Id": 9372,
+      "CPU": 27.796875,
+      "WorkingSet64": 346599424
+    },
+    {
+      "ProcessName": "Widgets",
+      "Id": 9692,
+      "CPU": 1.703125,
+      "WorkingSet64": 68444160
+    },
+    {
+      "ProcessName": "WidgetService",
+      "Id": 10048,
+      "CPU": 0.21875,
+      "WorkingSet64": 29888512
+    },
+    {
+      "ProcessName": "wininit",
+      "Id": 1328,
+      "CPU": null,
+      "WorkingSet64": 9760768
+    },
+    {
+      "ProcessName": "winlogon",
+      "Id": 1428,
+      "CPU": null,
+      "WorkingSet64": 16945152
+    },
+    {
+      "ProcessName": "WmiPrvSE",
+      "Id": 3940,
+      "CPU": null,
+      "WorkingSet64": 15458304
+    },
+    {
+      "ProcessName": "WmiPrvSE",
+      "Id": 18980,
+      "CPU": null,
+      "WorkingSet64": 18558976
+    }
+  ],
+  "thermalStatus": "unavailable: no temperature or clock provider installed by this task",
+  "comparability": "No cache flush, clock pinning, or external process control; process list is a snapshot, not GPU attribution."
+}

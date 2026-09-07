@@ -1,0 +1,52 @@
+Legend:
+  ':' means that the register is kept alive, while it is not actively being used by the current instruction
+  '^' means that the current instruction writes to the register
+  'v' means that the current instruction reads from the register
+  'x' means that the current instruction both reads from the register and writes to it
+ 'Rn': Number of live registers
+
+  Line | Rn  |    | Instruction
+--------------------------------------------------------------------------------
+     1 |   1 |  : | s_version { version: UC_VERSION_GFX12, w32:
+     2 |   1 |  : | s_ctz_i32_b32 s1, exec_lo
+     3 |   1 |  : | s_and_b32 s2, s7, lit(0x0000ffff)
+     4 |   1 |  : | s_mov_b32 s0, exec_lo
+     5 |   1 |  : | s_lshl_b32 s3, 1, s1
+     6 |   1 |  : | s_mov_b32 s4, s6
+     7 |   1 |  : | s_mov_b32 s5, s2
+     8 |   1 |  : | s_movk_i32 s6, 0xffff
+     9 |   1 |  : | s_mov_b32 s7, lit(0x22014fac)
+    10 |   1 |  : | s_and_b32 s3, s3, exec_lo
+    11 |   2 | ^: | v_mbcnt_lo_u32_b32 v0, s0, 0
+    12 |   2 | :: | s_and_saveexec_b32 s2, s3
+    13 |   2 | :: | s_prefetch_inst_pc_rel 0x000014, null, 0x00
+    14 |   2 | :: | s_cbranch_execz label_0060
+    15 |   1 | :  | s_bcnt1_i32_b32 s0, s0
+    16 |   1 | :  | s_wait_alu {
+    17 |   2 | :^ | v_mov_b32 v1, s0
+    18 |   2 | vx | buffer_atomic_add_u32 v1, v0, s[4:7], null
+    19 |   2 | :: | label_0060: s_mov_b32 exec_lo, s2
+    20 |   2 | :: | s_wait_loadcnt 0x0000
+    21 |   2 | :v | v_readlane_b32 s0, v1, s1
+    22 |   1 | :  | s_wait_alu {
+    23 |   1 | :  | s_delay_alu { instid0: INSTID_VALU_DEP_1, instskip: INSTSKIP_NEXT, instid1:
+    24 |   1 | x  | v_add_nc_u32 v0, s0, v0
+    25 |   1 | x  | v_and_b32 v0, lit(0x3fffffff), v0
+    26 |   1 | :  | s_delay_alu {
+    27 |   1 | v  | v_cmp_ne_i32 vcc_lo, lit(0x3fffffff), v0
+    28 |   0 |    | s_and_not1_b32 exec_lo, s2, vcc_lo
+    29 |   0 |    | s_cbranch_execz label_00A8
+    30 |   1 | ^  | v_mov_b32 v0, 1
+    31 |   1 | v  | buffer_store_b32 v0, v0, s[4:7], null
+    32 |   0 |    | label_00A8: s_mov_b32 exec_lo, s2
+    33 |   1 | ^  | v_mov_b32 v0, 0
+    34 |   1 | v  | buffer_store_b32 v0, v0, s[4:7], null
+    35 |   0 |    | s_nop 0x0000
+    36 |   0 |    | s_sendmsg {
+    37 |   0 |    | s_endpgm
+
+Maximum # VGPR used   2, VGPRs allocated by HW:  24 (2 requested)
+
+Architecture info:
+  VGPRs total: 256
+  VGPR allocation granularity: 24

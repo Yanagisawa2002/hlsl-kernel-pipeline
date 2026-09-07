@@ -1,0 +1,16 @@
+{
+  "runCount": 12,
+  "batches": 3,
+  "cells": [
+    { "id": "scan-warm-262147", "manifest": "manifests/scan.json", "elementCount": 262147, "seeds": [104729], "maximumAllocationBytes": 536870912,
+      "defines": { "HLSLPERF_SCAN_BACKEND": 3, "HLSLPERF_GROUP_SIZE": 256, "HLSLPERF_ELEMENTS_PER_THREAD": 4, "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4, "HLSLPERF_SINGLE_PASS_GROUPS": 256 } },
+    { "id": "scan-rotating-262147", "manifest": "manifests/scan.json", "elementCount": 262147, "seeds": [104729, 130363, 155921], "maximumAllocationBytes": 536870912,
+      "defines": { "HLSLPERF_SCAN_BACKEND": 3, "HLSLPERF_GROUP_SIZE": 256, "HLSLPERF_ELEMENTS_PER_THREAD": 4, "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4, "HLSLPERF_SINGLE_PASS_GROUPS": 256 } },
+    { "id": "scan-rotating-4194307", "manifest": "manifests/scan.json", "elementCount": 4194307, "seeds": [104729, 130363, 155921], "maximumAllocationBytes": 536870912,
+      "defines": { "HLSLPERF_SCAN_BACKEND": 3, "HLSLPERF_GROUP_SIZE": 256, "HLSLPERF_ELEMENTS_PER_THREAD": 4, "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4, "HLSLPERF_SINGLE_PASS_GROUPS": 256 } },
+    { "id": "compaction-rotating-262147", "manifest": "manifests/compaction.json", "elementCount": 262147, "seeds": [104729, 130363, 155921], "maximumAllocationBytes": 536870912,
+      "defines": { "HLSLPERF_SCAN_BACKEND": 3, "HLSLPERF_GROUP_SIZE": 256, "HLSLPERF_ELEMENTS_PER_THREAD": 4, "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4, "HLSLPERF_SINGLE_PASS_GROUPS": 256 } },
+    { "id": "compaction-rotating-4194307", "manifest": "manifests/compaction.json", "elementCount": 4194307, "seeds": [104729, 130363, 155921], "maximumAllocationBytes": 536870912,
+      "defines": { "HLSLPERF_SCAN_BACKEND": 3, "HLSLPERF_GROUP_SIZE": 256, "HLSLPERF_ELEMENTS_PER_THREAD": 4, "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4, "HLSLPERF_SINGLE_PASS_GROUPS": 256 } }
+  ]
+}

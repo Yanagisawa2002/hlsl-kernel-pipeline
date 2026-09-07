@@ -1,0 +1,1652 @@
+{
+  "schema": "hlslperf.bounded-hardware-evidence.v1",
+  "startedUtc": "2026-09-07T05:09:15.8237087+00:00",
+  "updatedUtc": "2026-09-07T05:09:18.4557734+00:00",
+  "status": "passed",
+  "purpose": "Bounded correctness and static resource evidence; smoke timestamps are not paired performance or deployment evidence.",
+  "matrixSha256": "bddb0eb32459ced9f2a0e66df3047c65fb5b1ad8697f68470fb941ab0704ce16",
+  "device": {
+    "adapterName": "AMD Radeon AI PRO R9700",
+    "vendorId": 4098,
+    "deviceId": 30033,
+    "subsystemId": 1410537545,
+    "revision": 192,
+    "adapterLuid": "76566",
+    "driverVersion": "32.0.31041.1004",
+    "backend": "D3D12",
+    "shaderModel": "6_0",
+    "compilerVersion": "Vortice.Dxc/3.8.3.0",
+    "operatingSystem": "Microsoft Windows 10.0.26200"
+  },
+  "runtimeFiles": [
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\HlslPerf.Core.dll",
+      "sha256": "b543ab8fb9e9ef52f3bc0f17255bd4b30dda99f7c90a04a0a6fd074899088fa6",
+      "bytes": 167936,
+      "version": "0.6.0.0"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\HlslPerf.D3D12.dll",
+      "sha256": "bb90251624243225ebc75dcb70917e02dce226a5021c7e3f0383521ffb24fc3c",
+      "bytes": 51712,
+      "version": "0.6.0.0"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\HlslPerf.EvidenceRun.dll",
+      "sha256": "66d841261bb74643e077133a272ee9d6b4da6890f7b85dde8636b5e82b9cdc53",
+      "bytes": 28160,
+      "version": "0.6.0.0"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\HlslPerf.Rga.dll",
+      "sha256": "17326e0636a5b959aae24b16f4e68e15abbcec031f23f02900a0e151a1f0a4c5",
+      "bytes": 32768,
+      "version": "0.6.0.0"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\HlslPerf.Workloads.dll",
+      "sha256": "2db55d54ed64fc15a9935199850afa7979a6ec7274a49dd01127cf2486e3f4e0",
+      "bytes": 35328,
+      "version": "0.6.0.0"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\SharpGen.Runtime.COM.dll",
+      "sha256": "35282958014c210bfde28399c9fa3841b6d51f81ff1da23ad0edad985dfa5b0c",
+      "bytes": 168960,
+      "version": "2.4.2.0"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\SharpGen.Runtime.dll",
+      "sha256": "0dc12ab829852555ccc9d8193e4422cd4ca389741de0a54a189de8a1c9b6bf4a",
+      "bytes": 79872,
+      "version": "2.4.2.0"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\Vortice.Direct3D12.dll",
+      "sha256": "7421025d83be2dcfb4eee1176cac88904028ddade853e493b1478f1c82ace8c0",
+      "bytes": 512512,
+      "version": "3.8.3.0"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\Vortice.DirectX.dll",
+      "sha256": "100b3a02ea5fd5bb8db39c24dd58dead5669fa5a46d1ebcd61d4a9d82f812c12",
+      "bytes": 365056,
+      "version": "3.8.3.0"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\Vortice.Dxc.dll",
+      "sha256": "aa88d25f90dde955826743b6af8390eecbaaef9254ad01aaa153ac84ae205568",
+      "bytes": 65536,
+      "version": "3.8.3.0"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\Vortice.DXGI.dll",
+      "sha256": "6e381eaab77257ee63c20a654a2ac51875bd38f24c5a7d44dd2e4b8e122e8623",
+      "bytes": 91648,
+      "version": "3.8.3.0"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\Vortice.Mathematics.dll",
+      "sha256": "944622612d0c9f658bb92ff29036e5a9b12db9daabddae68e5fd56655a72f446",
+      "bytes": 123904,
+      "version": "2.1.0.0"
+    },
+    {
+      "path": "C:\\Windows\\System32\\DriverStore\\FileRepository\\u0203304.inf_amd64_a6e5a337568ce3f0\\B026373\\amdxc64.dll",
+      "sha256": "f8e6c9e4df6907a08b6aab802e5e3794e25d4eab59c16439dfc1608501454e69",
+      "bytes": 78208968,
+      "version": "8.18.10.0504"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxil.dll",
+      "sha256": "058f2f52a680c38b223a5615b7df969def21f77e577562e5099d971dede992de",
+      "bytes": 1503304,
+      "version": "1.9.2602.17"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxcompiler.dll",
+      "sha256": "b86a738ece4c05dbe2d9bbb29668a2ccb28a0740773c9b027cdc61e8d07b4d75",
+      "bytes": 17951808,
+      "version": "1.9.2602.17"
+    }
+  ],
+  "results": [
+    {
+      "id": "scan-warm-262147",
+      "status": "passed",
+      "evidence": {
+        "schema": "hlslperf.workload-scenario.v1",
+        "scenarioId": "scan-warm-262147",
+        "cachePolicy": "cache-warm-repeated-resident-buffers",
+        "identitySha256": "14ca856874a7fb64f3688d891954f527bec5c26095e4a521779817c45579aeb9",
+        "device": {
+          "adapterName": "AMD Radeon AI PRO R9700",
+          "vendorId": 4098,
+          "deviceId": 30033,
+          "subsystemId": 1410537545,
+          "revision": 192,
+          "adapterLuid": "76566",
+          "driverVersion": "32.0.31041.1004",
+          "backend": "D3D12",
+          "shaderModel": "6_0",
+          "compilerVersion": "Vortice.Dxc/3.8.3.0",
+          "operatingSystem": "Microsoft Windows 10.0.26200"
+        },
+        "sourceSha256": "1c32c7c0a9dd36bb2c1c420274fb558a777f3440810c57b95bb2873ff031cd0f",
+        "workloadImplementationSha256": "b2e89941a5370916f37421dddde06b35fe60f21a3474bfdafbc1401971bd5366",
+        "dxilSha256": {
+          "ResetSinglePassState": "bb6e57e08f1ebccbb50ce77e9cb2d97133394be9c0f5d011f9be41bc567a611a",
+          "SinglePassScan": "6df9e7bc12d0017b710bcf342012662b1dd2b70f7e9f3be2e1d844c5bd8ef22e"
+        },
+        "slots": [
+          {
+            "slot": 0,
+            "inputSeed": 104729,
+            "inputSha256": "8d679bfa3a23472b2c8cfebe04e072e3b4492f07ed27472f96dfa5c52b238b6c",
+            "expectedSha256": "37e929e381667145af01787e6c2125ed0a80f33fea425d872f25d2b2487b4efe",
+            "logicalBytes": 2097964,
+            "passCount": 2
+          }
+        ],
+        "logicalBufferBytes": 2097964,
+        "committedAllocationBytes": 2359296,
+        "initialUploadBytes": 1049376,
+        "maximumVerificationReadbackBytes": 1048588,
+        "residencyPolicy": "Committed DEFAULT heaps retained for session; normal WDDM residency, no pinning or eviction trace; no guaranteed cache-cold state.",
+        "memoryBefore": {
+          "capturedUtc": "2026-09-07T05:09:16.1016204+00:00",
+          "localBudgetBytes": 33244737536,
+          "localUsageBytes": 11587584,
+          "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+        },
+        "memoryAfter": {
+          "capturedUtc": "2026-09-07T05:09:16.1806914+00:00",
+          "localBudgetBytes": 33244737536,
+          "localUsageBytes": 14479360,
+          "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+        },
+        "timingScope": "GPU timestamps enclose every complete plan including resets and transitions; upload, PSO creation, poison, readback and host oracle excluded.",
+        "thermalStatus": "unavailable: temperature and clocks not sampled or controlled",
+        "interferenceStatus": "uncontrolled: shared validation mutex serializes cooperating tasks only; external applications may interfere",
+        "nativeCompilerBinaries": [
+          {
+            "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxil.dll",
+            "sha256": "058f2f52a680c38b223a5615b7df969def21f77e577562e5099d971dede992de",
+            "fileVersion": "1.9.2602.17"
+          },
+          {
+            "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxcompiler.dll",
+            "sha256": "b86a738ece4c05dbe2d9bbb29668a2ccb28a0740773c9b027cdc61e8d07b4d75",
+            "fileVersion": "1.9.2602.17"
+          }
+        ],
+        "nativeCompilerStatus": "loaded native compiler module file hashes"
+      },
+      "verificationBefore": [
+        {
+          "slot": 0,
+          "inputSeed": 104729,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "37e929e381667145af01787e6c2125ed0a80f33fea425d872f25d2b2487b4efe",
+            "expectedSha256": "37e929e381667145af01787e6c2125ed0a80f33fea425d872f25d2b2487b4efe",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        }
+      ],
+      "verificationAfter": [
+        {
+          "slot": 0,
+          "inputSeed": 104729,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "37e929e381667145af01787e6c2125ed0a80f33fea425d872f25d2b2487b4efe",
+            "expectedSha256": "37e929e381667145af01787e6c2125ed0a80f33fea425d872f25d2b2487b4efe",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        }
+      ],
+      "warmupTotalGpuMilliseconds": 0.15056,
+      "runCount": 12,
+      "startSlot": 0,
+      "batchTotalGpuMilliseconds": [
+        0.14812,
+        0.14768,
+        0.1488
+      ],
+      "memoryAfterExecution": {
+        "capturedUtc": "2026-09-07T05:09:16.1924245+00:00",
+        "localBudgetBytes": 33244737536,
+        "localUsageBytes": 14544896,
+        "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+      }
+    },
+    {
+      "id": "scan-rotating-262147",
+      "status": "passed",
+      "evidence": {
+        "schema": "hlslperf.workload-scenario.v1",
+        "scenarioId": "scan-rotating-262147",
+        "cachePolicy": "rotating-resident-buffers-cache-state-uncontrolled",
+        "identitySha256": "961cd5c4c0fd47a2752cdb2c7bc8c3be0b31f2d1893661d5922bdafd8378eb2f",
+        "device": {
+          "adapterName": "AMD Radeon AI PRO R9700",
+          "vendorId": 4098,
+          "deviceId": 30033,
+          "subsystemId": 1410537545,
+          "revision": 192,
+          "adapterLuid": "76566",
+          "driverVersion": "32.0.31041.1004",
+          "backend": "D3D12",
+          "shaderModel": "6_0",
+          "compilerVersion": "Vortice.Dxc/3.8.3.0",
+          "operatingSystem": "Microsoft Windows 10.0.26200"
+        },
+        "sourceSha256": "1c32c7c0a9dd36bb2c1c420274fb558a777f3440810c57b95bb2873ff031cd0f",
+        "workloadImplementationSha256": "b2e89941a5370916f37421dddde06b35fe60f21a3474bfdafbc1401971bd5366",
+        "dxilSha256": {
+          "ResetSinglePassState": "bb6e57e08f1ebccbb50ce77e9cb2d97133394be9c0f5d011f9be41bc567a611a",
+          "SinglePassScan": "6df9e7bc12d0017b710bcf342012662b1dd2b70f7e9f3be2e1d844c5bd8ef22e"
+        },
+        "slots": [
+          {
+            "slot": 0,
+            "inputSeed": 104729,
+            "inputSha256": "8d679bfa3a23472b2c8cfebe04e072e3b4492f07ed27472f96dfa5c52b238b6c",
+            "expectedSha256": "37e929e381667145af01787e6c2125ed0a80f33fea425d872f25d2b2487b4efe",
+            "logicalBytes": 2097964,
+            "passCount": 2
+          },
+          {
+            "slot": 1,
+            "inputSeed": 130363,
+            "inputSha256": "8351646157b703c0043034cfddd35c08f2a842a25d435379b7200fd7bf6ce1b2",
+            "expectedSha256": "91ac55c2b83bd1bbdabbd75ff4de1f8060a2c25ab812a5781a10415cc327e6a6",
+            "logicalBytes": 2097964,
+            "passCount": 2
+          },
+          {
+            "slot": 2,
+            "inputSeed": 155921,
+            "inputSha256": "b10bedcd12a1bcdc643333e19a4626d02a6906ef38b34dfe0da0f6e5c8cdf938",
+            "expectedSha256": "5863f97994401785d00f9731fa5af2a25b651cfecebec731419d26b081eb6a0c",
+            "logicalBytes": 2097964,
+            "passCount": 2
+          }
+        ],
+        "logicalBufferBytes": 6293892,
+        "committedAllocationBytes": 7077888,
+        "initialUploadBytes": 3148128,
+        "maximumVerificationReadbackBytes": 1048588,
+        "residencyPolicy": "Committed DEFAULT heaps retained for session; normal WDDM residency, no pinning or eviction trace; no guaranteed cache-cold state.",
+        "memoryBefore": {
+          "capturedUtc": "2026-09-07T05:09:17.0833318+00:00",
+          "localBudgetBytes": 33244737536,
+          "localUsageBytes": 11915264,
+          "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+        },
+        "memoryAfter": {
+          "capturedUtc": "2026-09-07T05:09:17.1114892+00:00",
+          "localBudgetBytes": 33244737536,
+          "localUsageBytes": 19804160,
+          "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+        },
+        "timingScope": "GPU timestamps enclose every complete plan including resets and transitions; upload, PSO creation, poison, readback and host oracle excluded.",
+        "thermalStatus": "unavailable: temperature and clocks not sampled or controlled",
+        "interferenceStatus": "uncontrolled: shared validation mutex serializes cooperating tasks only; external applications may interfere",
+        "nativeCompilerBinaries": [
+          {
+            "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxil.dll",
+            "sha256": "058f2f52a680c38b223a5615b7df969def21f77e577562e5099d971dede992de",
+            "fileVersion": "1.9.2602.17"
+          },
+          {
+            "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxcompiler.dll",
+            "sha256": "b86a738ece4c05dbe2d9bbb29668a2ccb28a0740773c9b027cdc61e8d07b4d75",
+            "fileVersion": "1.9.2602.17"
+          }
+        ],
+        "nativeCompilerStatus": "loaded native compiler module file hashes"
+      },
+      "verificationBefore": [
+        {
+          "slot": 0,
+          "inputSeed": 104729,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "37e929e381667145af01787e6c2125ed0a80f33fea425d872f25d2b2487b4efe",
+            "expectedSha256": "37e929e381667145af01787e6c2125ed0a80f33fea425d872f25d2b2487b4efe",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 1,
+          "inputSeed": 130363,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "91ac55c2b83bd1bbdabbd75ff4de1f8060a2c25ab812a5781a10415cc327e6a6",
+            "expectedSha256": "91ac55c2b83bd1bbdabbd75ff4de1f8060a2c25ab812a5781a10415cc327e6a6",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 2,
+          "inputSeed": 155921,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "5863f97994401785d00f9731fa5af2a25b651cfecebec731419d26b081eb6a0c",
+            "expectedSha256": "5863f97994401785d00f9731fa5af2a25b651cfecebec731419d26b081eb6a0c",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        }
+      ],
+      "verificationAfter": [
+        {
+          "slot": 0,
+          "inputSeed": 104729,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "37e929e381667145af01787e6c2125ed0a80f33fea425d872f25d2b2487b4efe",
+            "expectedSha256": "37e929e381667145af01787e6c2125ed0a80f33fea425d872f25d2b2487b4efe",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 1,
+          "inputSeed": 130363,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "91ac55c2b83bd1bbdabbd75ff4de1f8060a2c25ab812a5781a10415cc327e6a6",
+            "expectedSha256": "91ac55c2b83bd1bbdabbd75ff4de1f8060a2c25ab812a5781a10415cc327e6a6",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 2,
+          "inputSeed": 155921,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "5863f97994401785d00f9731fa5af2a25b651cfecebec731419d26b081eb6a0c",
+            "expectedSha256": "5863f97994401785d00f9731fa5af2a25b651cfecebec731419d26b081eb6a0c",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        }
+      ],
+      "warmupTotalGpuMilliseconds": 0.27416,
+      "runCount": 12,
+      "startSlot": 0,
+      "batchTotalGpuMilliseconds": [
+        0.26988,
+        0.26936,
+        0.26648
+      ],
+      "memoryAfterExecution": {
+        "capturedUtc": "2026-09-07T05:09:17.1269989+00:00",
+        "localBudgetBytes": 33244737536,
+        "localUsageBytes": 19804160,
+        "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+      }
+    },
+    {
+      "id": "scan-rotating-4194307",
+      "status": "passed",
+      "evidence": {
+        "schema": "hlslperf.workload-scenario.v1",
+        "scenarioId": "scan-rotating-4194307",
+        "cachePolicy": "rotating-resident-buffers-cache-state-uncontrolled",
+        "identitySha256": "2669490789286a12b4c25300346fac77115abb7eff10e93b966f6e6b78e63ffe",
+        "device": {
+          "adapterName": "AMD Radeon AI PRO R9700",
+          "vendorId": 4098,
+          "deviceId": 30033,
+          "subsystemId": 1410537545,
+          "revision": 192,
+          "adapterLuid": "76566",
+          "driverVersion": "32.0.31041.1004",
+          "backend": "D3D12",
+          "shaderModel": "6_0",
+          "compilerVersion": "Vortice.Dxc/3.8.3.0",
+          "operatingSystem": "Microsoft Windows 10.0.26200"
+        },
+        "sourceSha256": "1c32c7c0a9dd36bb2c1c420274fb558a777f3440810c57b95bb2873ff031cd0f",
+        "workloadImplementationSha256": "b2e89941a5370916f37421dddde06b35fe60f21a3474bfdafbc1401971bd5366",
+        "dxilSha256": {
+          "ResetSinglePassState": "bb6e57e08f1ebccbb50ce77e9cb2d97133394be9c0f5d011f9be41bc567a611a",
+          "SinglePassScan": "6df9e7bc12d0017b710bcf342012662b1dd2b70f7e9f3be2e1d844c5bd8ef22e"
+        },
+        "slots": [
+          {
+            "slot": 0,
+            "inputSeed": 104729,
+            "inputSha256": "f5b048971df822997f27749799554dba492b25f4cc83a3b4fc8ad16390576161",
+            "expectedSha256": "78dd6cef1d39643859f270be566a0f8934e33d53071bfc27a527afe0f26c5075",
+            "logicalBytes": 33566764,
+            "passCount": 2
+          },
+          {
+            "slot": 1,
+            "inputSeed": 130363,
+            "inputSha256": "3592d51cb787a3c120dcc5f1b1261ba615ffe8d8cbcf41db8a89245012fcc77a",
+            "expectedSha256": "5a804f4956ab74700cd2e6bd167b89d73ad9d8b337f25afe2c9d3997b75bbc00",
+            "logicalBytes": 33566764,
+            "passCount": 2
+          },
+          {
+            "slot": 2,
+            "inputSeed": 155921,
+            "inputSha256": "f254751074c072fb0644b1d6ea386471ab7b7e7d909b629637f6192421450f1f",
+            "expectedSha256": "3669d93ac46615145bcfce1bed52b6abd5621ee8713a5efc0699ee72c3b022fa",
+            "logicalBytes": 33566764,
+            "passCount": 2
+          }
+        ],
+        "logicalBufferBytes": 100700292,
+        "committedAllocationBytes": 101449728,
+        "initialUploadBytes": 50368608,
+        "maximumVerificationReadbackBytes": 16777228,
+        "residencyPolicy": "Committed DEFAULT heaps retained for session; normal WDDM residency, no pinning or eviction trace; no guaranteed cache-cold state.",
+        "memoryBefore": {
+          "capturedUtc": "2026-09-07T05:09:17.2927017+00:00",
+          "localBudgetBytes": 33244737536,
+          "localUsageBytes": 11915264,
+          "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+        },
+        "memoryAfter": {
+          "capturedUtc": "2026-09-07T05:09:17.3278473+00:00",
+          "localBudgetBytes": 33244737536,
+          "localUsageBytes": 114212864,
+          "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+        },
+        "timingScope": "GPU timestamps enclose every complete plan including resets and transitions; upload, PSO creation, poison, readback and host oracle excluded.",
+        "thermalStatus": "unavailable: temperature and clocks not sampled or controlled",
+        "interferenceStatus": "uncontrolled: shared validation mutex serializes cooperating tasks only; external applications may interfere",
+        "nativeCompilerBinaries": [
+          {
+            "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxil.dll",
+            "sha256": "058f2f52a680c38b223a5615b7df969def21f77e577562e5099d971dede992de",
+            "fileVersion": "1.9.2602.17"
+          },
+          {
+            "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxcompiler.dll",
+            "sha256": "b86a738ece4c05dbe2d9bbb29668a2ccb28a0740773c9b027cdc61e8d07b4d75",
+            "fileVersion": "1.9.2602.17"
+          }
+        ],
+        "nativeCompilerStatus": "loaded native compiler module file hashes"
+      },
+      "verificationBefore": [
+        {
+          "slot": 0,
+          "inputSeed": 104729,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "78dd6cef1d39643859f270be566a0f8934e33d53071bfc27a527afe0f26c5075",
+            "expectedSha256": "78dd6cef1d39643859f270be566a0f8934e33d53071bfc27a527afe0f26c5075",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 1,
+          "inputSeed": 130363,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "5a804f4956ab74700cd2e6bd167b89d73ad9d8b337f25afe2c9d3997b75bbc00",
+            "expectedSha256": "5a804f4956ab74700cd2e6bd167b89d73ad9d8b337f25afe2c9d3997b75bbc00",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 2,
+          "inputSeed": 155921,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "3669d93ac46615145bcfce1bed52b6abd5621ee8713a5efc0699ee72c3b022fa",
+            "expectedSha256": "3669d93ac46615145bcfce1bed52b6abd5621ee8713a5efc0699ee72c3b022fa",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        }
+      ],
+      "verificationAfter": [
+        {
+          "slot": 0,
+          "inputSeed": 104729,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "78dd6cef1d39643859f270be566a0f8934e33d53071bfc27a527afe0f26c5075",
+            "expectedSha256": "78dd6cef1d39643859f270be566a0f8934e33d53071bfc27a527afe0f26c5075",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 1,
+          "inputSeed": 130363,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "5a804f4956ab74700cd2e6bd167b89d73ad9d8b337f25afe2c9d3997b75bbc00",
+            "expectedSha256": "5a804f4956ab74700cd2e6bd167b89d73ad9d8b337f25afe2c9d3997b75bbc00",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 2,
+          "inputSeed": 155921,
+          "resource": "scan-0",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "3669d93ac46615145bcfce1bed52b6abd5621ee8713a5efc0699ee72c3b022fa",
+            "expectedSha256": "3669d93ac46615145bcfce1bed52b6abd5621ee8713a5efc0699ee72c3b022fa",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        }
+      ],
+      "warmupTotalGpuMilliseconds": 1.06752,
+      "runCount": 12,
+      "startSlot": 0,
+      "batchTotalGpuMilliseconds": [
+        1.2552,
+        1.16412,
+        0.9662
+      ],
+      "memoryAfterExecution": {
+        "capturedUtc": "2026-09-07T05:09:17.4012444+00:00",
+        "localBudgetBytes": 33244737536,
+        "localUsageBytes": 114212864,
+        "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+      }
+    },
+    {
+      "id": "compaction-rotating-262147",
+      "status": "passed",
+      "evidence": {
+        "schema": "hlslperf.workload-scenario.v1",
+        "scenarioId": "compaction-rotating-262147",
+        "cachePolicy": "rotating-resident-buffers-cache-state-uncontrolled",
+        "identitySha256": "d2ae71a734bb8bfd17ffe5fb4167b0e8ebd5282a0e9c5d37057a7dbc5276943f",
+        "device": {
+          "adapterName": "AMD Radeon AI PRO R9700",
+          "vendorId": 4098,
+          "deviceId": 30033,
+          "subsystemId": 1410537545,
+          "revision": 192,
+          "adapterLuid": "76566",
+          "driverVersion": "32.0.31041.1004",
+          "backend": "D3D12",
+          "shaderModel": "6_6",
+          "compilerVersion": "Vortice.Dxc/3.8.3.0",
+          "operatingSystem": "Microsoft Windows 10.0.26200"
+        },
+        "sourceSha256": "81c346f667ae39be61872b72be6d15b361e9ee6fb79fb4e0848ea4512a089209",
+        "workloadImplementationSha256": "fd4c58f0d374bf1bf7eda74b079c6e99167b2cd73d6d194f177b16364202bf4d",
+        "dxilSha256": {
+          "ResetSinglePassState": "e08c233d787d870f2bfdd9bf1f3b4b2a264a907c4de8e7910f06f6797aa8452e",
+          "FusedCompactSinglePass": "331f3bd06587b4b35018dc66fccaf32ee007a1b0236d6132c4ed8eb6c80d839e"
+        },
+        "slots": [
+          {
+            "slot": 0,
+            "inputSeed": 104729,
+            "inputSha256": "ef457191443fe1073020f00b4bd0a9432cb7afd66375c10e6ec24ac4eae0d057",
+            "expectedSha256": "df51784637d95f501a94a620c68e5015ce3ec9e820f87b58e22836f2a54b8962",
+            "logicalBytes": 1180276,
+            "passCount": 2
+          },
+          {
+            "slot": 1,
+            "inputSeed": 130363,
+            "inputSha256": "f0e93bc700b6f4761b174fc69c14cf1b7684f8f900969892b5437cc9b69cc5c8",
+            "expectedSha256": "a9079c321bfd62ce47ebdeed2cfb33df9d5053daf27d46774d2b2d5daefab808",
+            "logicalBytes": 1179716,
+            "passCount": 2
+          },
+          {
+            "slot": 2,
+            "inputSeed": 155921,
+            "inputSha256": "dd4aebbbb037556711c6e4860e2d5ccf19dbb43e19cc8667ef510e18b38be9be",
+            "expectedSha256": "5dbc0f7631b2d231baaed420470e78fc084766da56c0fb88f3db35bf169cefeb",
+            "logicalBytes": 1180768,
+            "passCount": 2
+          }
+        ],
+        "logicalBufferBytes": 3540760,
+        "committedAllocationBytes": 4194304,
+        "initialUploadBytes": 3148128,
+        "maximumVerificationReadbackBytes": 131392,
+        "residencyPolicy": "Committed DEFAULT heaps retained for session; normal WDDM residency, no pinning or eviction trace; no guaranteed cache-cold state.",
+        "memoryBefore": {
+          "capturedUtc": "2026-09-07T05:09:17.4912927+00:00",
+          "localBudgetBytes": 33244737536,
+          "localUsageBytes": 11915264,
+          "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+        },
+        "memoryAfter": {
+          "capturedUtc": "2026-09-07T05:09:17.5348802+00:00",
+          "localBudgetBytes": 33244737536,
+          "localUsageBytes": 16658432,
+          "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+        },
+        "timingScope": "GPU timestamps enclose every complete plan including resets and transitions; upload, PSO creation, poison, readback and host oracle excluded.",
+        "thermalStatus": "unavailable: temperature and clocks not sampled or controlled",
+        "interferenceStatus": "uncontrolled: shared validation mutex serializes cooperating tasks only; external applications may interfere",
+        "nativeCompilerBinaries": [
+          {
+            "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxil.dll",
+            "sha256": "058f2f52a680c38b223a5615b7df969def21f77e577562e5099d971dede992de",
+            "fileVersion": "1.9.2602.17"
+          },
+          {
+            "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxcompiler.dll",
+            "sha256": "b86a738ece4c05dbe2d9bbb29668a2ccb28a0740773c9b027cdc61e8d07b4d75",
+            "fileVersion": "1.9.2602.17"
+          }
+        ],
+        "nativeCompilerStatus": "loaded native compiler module file hashes"
+      },
+      "verificationBefore": [
+        {
+          "slot": 0,
+          "inputSeed": 104729,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "df51784637d95f501a94a620c68e5015ce3ec9e820f87b58e22836f2a54b8962",
+            "expectedSha256": "df51784637d95f501a94a620c68e5015ce3ec9e820f87b58e22836f2a54b8962",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 1,
+          "inputSeed": 130363,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "a9079c321bfd62ce47ebdeed2cfb33df9d5053daf27d46774d2b2d5daefab808",
+            "expectedSha256": "a9079c321bfd62ce47ebdeed2cfb33df9d5053daf27d46774d2b2d5daefab808",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 2,
+          "inputSeed": 155921,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "5dbc0f7631b2d231baaed420470e78fc084766da56c0fb88f3db35bf169cefeb",
+            "expectedSha256": "5dbc0f7631b2d231baaed420470e78fc084766da56c0fb88f3db35bf169cefeb",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        }
+      ],
+      "verificationAfter": [
+        {
+          "slot": 0,
+          "inputSeed": 104729,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "df51784637d95f501a94a620c68e5015ce3ec9e820f87b58e22836f2a54b8962",
+            "expectedSha256": "df51784637d95f501a94a620c68e5015ce3ec9e820f87b58e22836f2a54b8962",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 1,
+          "inputSeed": 130363,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "a9079c321bfd62ce47ebdeed2cfb33df9d5053daf27d46774d2b2d5daefab808",
+            "expectedSha256": "a9079c321bfd62ce47ebdeed2cfb33df9d5053daf27d46774d2b2d5daefab808",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 2,
+          "inputSeed": 155921,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "5dbc0f7631b2d231baaed420470e78fc084766da56c0fb88f3db35bf169cefeb",
+            "expectedSha256": "5dbc0f7631b2d231baaed420470e78fc084766da56c0fb88f3db35bf169cefeb",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        }
+      ],
+      "warmupTotalGpuMilliseconds": 0.09064,
+      "runCount": 12,
+      "startSlot": 0,
+      "batchTotalGpuMilliseconds": [
+        0.08776,
+        0.08772,
+        0.08736
+      ],
+      "memoryAfterExecution": {
+        "capturedUtc": "2026-09-07T05:09:17.5446235+00:00",
+        "localBudgetBytes": 33244737536,
+        "localUsageBytes": 16658432,
+        "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+      }
+    },
+    {
+      "id": "compaction-rotating-4194307",
+      "status": "passed",
+      "evidence": {
+        "schema": "hlslperf.workload-scenario.v1",
+        "scenarioId": "compaction-rotating-4194307",
+        "cachePolicy": "rotating-resident-buffers-cache-state-uncontrolled",
+        "identitySha256": "89480c0cc56c57a01a744cebee1b84ca3c91a5355032cc23d241cd478749951a",
+        "device": {
+          "adapterName": "AMD Radeon AI PRO R9700",
+          "vendorId": 4098,
+          "deviceId": 30033,
+          "subsystemId": 1410537545,
+          "revision": 192,
+          "adapterLuid": "76566",
+          "driverVersion": "32.0.31041.1004",
+          "backend": "D3D12",
+          "shaderModel": "6_6",
+          "compilerVersion": "Vortice.Dxc/3.8.3.0",
+          "operatingSystem": "Microsoft Windows 10.0.26200"
+        },
+        "sourceSha256": "81c346f667ae39be61872b72be6d15b361e9ee6fb79fb4e0848ea4512a089209",
+        "workloadImplementationSha256": "fd4c58f0d374bf1bf7eda74b079c6e99167b2cd73d6d194f177b16364202bf4d",
+        "dxilSha256": {
+          "ResetSinglePassState": "e08c233d787d870f2bfdd9bf1f3b4b2a264a907c4de8e7910f06f6797aa8452e",
+          "FusedCompactSinglePass": "331f3bd06587b4b35018dc66fccaf32ee007a1b0236d6132c4ed8eb6c80d839e"
+        },
+        "slots": [
+          {
+            "slot": 0,
+            "inputSeed": 104729,
+            "inputSha256": "31df5cd992c42f0e127e036e1b6af23043a12cd5ba7e091bfab7fc3cb3d0cfc7",
+            "expectedSha256": "9c9bbdbcc557486ad02b19984fbcc914e6e53aa876d02d4c80caea1f32026907",
+            "logicalBytes": 18886696,
+            "passCount": 2
+          },
+          {
+            "slot": 1,
+            "inputSeed": 130363,
+            "inputSha256": "441cfbe6778dbb1d47a83c5bd3ee132fc024aee19f57b9080fd8f909072710fd",
+            "expectedSha256": "c5b4ec7dcd51eb964596b804110d090534a3807121241910ff91fb57f217b2f3",
+            "logicalBytes": 18886692,
+            "passCount": 2
+          },
+          {
+            "slot": 2,
+            "inputSeed": 155921,
+            "inputSha256": "6931c9e894c5c10d8762c5bfe6f7fdb1729489bbf2b562eb488b5e110b254147",
+            "expectedSha256": "3f1be25aeae5220dd598da71caa1b9eb60bbec045484e0d20642d92eb7fdb3d2",
+            "logicalBytes": 18886696,
+            "passCount": 2
+          }
+        ],
+        "logicalBufferBytes": 56660084,
+        "committedAllocationBytes": 57409536,
+        "initialUploadBytes": 50368608,
+        "maximumVerificationReadbackBytes": 2097160,
+        "residencyPolicy": "Committed DEFAULT heaps retained for session; normal WDDM residency, no pinning or eviction trace; no guaranteed cache-cold state.",
+        "memoryBefore": {
+          "capturedUtc": "2026-09-07T05:09:18.3395868+00:00",
+          "localBudgetBytes": 33244737536,
+          "localUsageBytes": 11915264,
+          "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+        },
+        "memoryAfter": {
+          "capturedUtc": "2026-09-07T05:09:18.3728407+00:00",
+          "localBudgetBytes": 33244737536,
+          "localUsageBytes": 70172672,
+          "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+        },
+        "timingScope": "GPU timestamps enclose every complete plan including resets and transitions; upload, PSO creation, poison, readback and host oracle excluded.",
+        "thermalStatus": "unavailable: temperature and clocks not sampled or controlled",
+        "interferenceStatus": "uncontrolled: shared validation mutex serializes cooperating tasks only; external applications may interfere",
+        "nativeCompilerBinaries": [
+          {
+            "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxil.dll",
+            "sha256": "058f2f52a680c38b223a5615b7df969def21f77e577562e5099d971dede992de",
+            "fileVersion": "1.9.2602.17"
+          },
+          {
+            "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\tools\\HlslPerf.EvidenceRun\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxcompiler.dll",
+            "sha256": "b86a738ece4c05dbe2d9bbb29668a2ccb28a0740773c9b027cdc61e8d07b4d75",
+            "fileVersion": "1.9.2602.17"
+          }
+        ],
+        "nativeCompilerStatus": "loaded native compiler module file hashes"
+      },
+      "verificationBefore": [
+        {
+          "slot": 0,
+          "inputSeed": 104729,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "9c9bbdbcc557486ad02b19984fbcc914e6e53aa876d02d4c80caea1f32026907",
+            "expectedSha256": "9c9bbdbcc557486ad02b19984fbcc914e6e53aa876d02d4c80caea1f32026907",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 1,
+          "inputSeed": 130363,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "c5b4ec7dcd51eb964596b804110d090534a3807121241910ff91fb57f217b2f3",
+            "expectedSha256": "c5b4ec7dcd51eb964596b804110d090534a3807121241910ff91fb57f217b2f3",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 2,
+          "inputSeed": 155921,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "3f1be25aeae5220dd598da71caa1b9eb60bbec045484e0d20642d92eb7fdb3d2",
+            "expectedSha256": "3f1be25aeae5220dd598da71caa1b9eb60bbec045484e0d20642d92eb7fdb3d2",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        }
+      ],
+      "verificationAfter": [
+        {
+          "slot": 0,
+          "inputSeed": 104729,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "9c9bbdbcc557486ad02b19984fbcc914e6e53aa876d02d4c80caea1f32026907",
+            "expectedSha256": "9c9bbdbcc557486ad02b19984fbcc914e6e53aa876d02d4c80caea1f32026907",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 1,
+          "inputSeed": 130363,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "c5b4ec7dcd51eb964596b804110d090534a3807121241910ff91fb57f217b2f3",
+            "expectedSha256": "c5b4ec7dcd51eb964596b804110d090534a3807121241910ff91fb57f217b2f3",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        },
+        {
+          "slot": 2,
+          "inputSeed": 155921,
+          "resource": "compacted",
+          "correctness": {
+            "passed": true,
+            "actualSha256": "3f1be25aeae5220dd598da71caa1b9eb60bbec045484e0d20642d92eb7fdb3d2",
+            "expectedSha256": "3f1be25aeae5220dd598da71caa1b9eb60bbec045484e0d20642d92eb7fdb3d2",
+            "detail": "Poison/re-execute/readback against this slot\u0027s independent CPU oracle."
+          }
+        }
+      ],
+      "warmupTotalGpuMilliseconds": 0.39508,
+      "runCount": 12,
+      "startSlot": 0,
+      "batchTotalGpuMilliseconds": [
+        0.38452,
+        0.38688,
+        0.38668
+      ],
+      "memoryAfterExecution": {
+        "capturedUtc": "2026-09-07T05:09:18.3904815+00:00",
+        "localBudgetBytes": 33244737536,
+        "localUsageBytes": 70172672,
+        "status": "DXGI process local-memory budget/usage; not per-resource residency proof"
+      }
+    }
+  ],
+  "rga": [
+    {
+      "tool": "AMD Radeon GPU Analyzer DX12 live-driver",
+      "toolVersion": "Radeon GPU Analyzer Version: 2.14.2.7 (05/11/2026)",
+      "target": "gfx1201",
+      "status": "collected",
+      "passes": [
+        {
+          "passName": "single-pass-reset",
+          "entryPoint": "ResetSinglePassState",
+          "vgprsUsed": 3,
+          "vgprsAvailable": 256,
+          "physicalVgprs": 1536,
+          "maximumLiveVgprs": 2,
+          "allocatedVgprs": 24,
+          "vgprUsageRatio": 0.01171875,
+          "sgprsUsed": 14,
+          "sgprsAvailable": 106,
+          "physicalSgprs": 2048,
+          "sgprUsageRatio": 0.1320754716981132,
+          "ldsBytes": 0,
+          "ldsAvailableBytes": 0,
+          "scratchBytes": 0,
+          "threadGroupX": 1,
+          "threadGroupY": 1,
+          "threadGroupZ": 1,
+          "occupancyWavesPerSimd": null,
+          "isaPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\gfx1201_ResetSinglePassState-isa_comp.txt",
+          "liveVgprPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\gfx1201_ResetSinglePassState-livereg_compute.txt",
+          "vgprSpills": null,
+          "sgprSpills": null,
+          "status": "collected",
+          "metricKind": "static-compiler-analysis; not measured occupancy or bandwidth",
+          "statisticsPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\gfx1201_ResetSinglePassState-stats_comp.txt",
+          "evidence": {
+            "schema": "hlslperf.rga-invocation.v1",
+            "startedUtc": "2026-09-07T05:09:16.3233587+00:00",
+            "finishedUtc": "2026-09-07T05:09:16.6450734+00:00",
+            "executable": {
+              "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\rga.exe",
+              "sha256": "a3074dfbd9558da11ec3d973192b855b7f73e4bfe70b8d7734c20d13a79a2bc5",
+              "bytes": 2917128,
+              "version": "2.14.2.7"
+            },
+            "compilerFiles": [
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxc.exe",
+                "sha256": "ae4bf100b8c64ab03cdc0ee5996d5f212e96c59d6d37340359342d714ac6c004",
+                "bytes": 1236000,
+                "version": "1.8.2502.8"
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxcompiler.dll",
+                "sha256": "f79943b02f73b621421b58a569fd6ee120d0023fb6bfa23844ecad6b00d6a295",
+                "bytes": 17986592,
+                "version": "1.8.2502.8"
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxil.dll",
+                "sha256": "62736e99aa534a942873f92b881a71b2cb6ad62b8d7481ea7a8ad8e9888a8056",
+                "bytes": 1508896,
+                "version": "1.8.2502.8"
+              }
+            ],
+            "arguments": [
+              "-s",
+              "dx12",
+              "--cs",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\scan.hlsl",
+              "--cs-entry",
+              "ResetSinglePassState",
+              "--cs-model",
+              "cs_6_0",
+              "--analysis",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\ResetSinglePassState-stats.txt",
+              "--isa",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\ResetSinglePassState-isa.txt",
+              "--livereg",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\ResetSinglePassState-livereg.txt",
+              "--asic",
+              "gfx1201",
+              "--define",
+              "HLSLPERF_ELEMENTS_PER_THREAD=4",
+              "--define",
+              "HLSLPERF_GROUP_SIZE=256",
+              "--define",
+              "HLSLPERF_SCAN_BACKEND=3",
+              "--define",
+              "HLSLPERF_SINGLE_PASS_GROUPS=256",
+              "--define",
+              "HLSLPERF_SINGLE_PASS_ITEMS_SCALE=4",
+              "-I",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels",
+              "-I",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf",
+              "--dxc",
+              "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc",
+              "--dxc-opt",
+              "-O3 -Ges -WX",
+              "--binary",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\ResetSinglePassState.bin"
+            ],
+            "entryPoint": "ResetSinglePassState",
+            "shaderModel": "6_0",
+            "defines": {
+              "HLSLPERF_SCAN_BACKEND": 3,
+              "HLSLPERF_GROUP_SIZE": 256,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4,
+              "HLSLPERF_SINGLE_PASS_GROUPS": 256
+            },
+            "sourceGraphSha256": "1c32c7c0a9dd36bb2c1c420274fb558a777f3440810c57b95bb2873ff031cd0f",
+            "sources": [
+              {
+                "relativePath": "include/hlslperf/scan_u32.hlsli",
+                "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf\\scan_u32.hlsli",
+                "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd"
+              },
+              {
+                "relativePath": "scan.hlsl",
+                "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\scan.hlsl",
+                "sha256": "bc76db871149c6a920f3c1ff44aebc806f4b90af14ad053a83933a36c97fe892"
+              }
+            ],
+            "measuredDevice": {
+              "adapterName": "AMD Radeon AI PRO R9700",
+              "vendorId": 4098,
+              "deviceId": 30033,
+              "subsystemId": 1410537545,
+              "revision": 192,
+              "adapterLuid": "76566",
+              "driverVersion": "32.0.31041.1004",
+              "backend": "D3D12",
+              "shaderModel": "6_0",
+              "compilerVersion": "Vortice.Dxc/3.8.3.0",
+              "operatingSystem": "Microsoft Windows 10.0.26200"
+            },
+            "exitCode": 0,
+            "artifacts": [
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\gfx1201_ResetSinglePassState-isa_comp.txt",
+                "sha256": "73a7f5cfc6f0982c347cd132a68d78530af1e6811ba7360b1b74b8be049b6ac6",
+                "bytes": 3746,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\gfx1201_ResetSinglePassState-livereg_compute.txt",
+                "sha256": "2a1ce60984c2186de5b28531bd6338e8a249c63c89c71f30a69b36f8ddee784a",
+                "bytes": 2413,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\gfx1201_ResetSinglePassState-stats_comp.txt",
+                "sha256": "b4e52ae4cfc4d45a8590feaba6f7e6dc7d3480d5a043ffa23aee0fd2f2e0d198",
+                "bytes": 655,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\gfx1201_ResetSinglePassState.bin",
+                "sha256": "07579a7810e357cea9885c70e51a3d6537f7eb3d18c2b6a253d493e43522743b",
+                "bytes": 2428,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\process-output.txt",
+                "sha256": "9ac3dab6164302baf44e710e6479818cbcacd08fd2d5f56365400e99a608c836",
+                "bytes": 669,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\source-0-scan_u32.hlsli",
+                "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd",
+                "bytes": 18607,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\ResetSinglePassState\\c77a21b627904ebea56ffaba144008f7\\source-1-scan.hlsl",
+                "sha256": "bc76db871149c6a920f3c1ff44aebc806f4b90af14ad053a83933a36c97fe892",
+                "bytes": 704,
+                "version": null
+              }
+            ],
+            "compilationRelationship": "RGA recompiles the identified source and defines with its identified DXC through the live driver; not asserted byte-identical to measured DXIL."
+          }
+        },
+        {
+          "passName": "single-pass-scan",
+          "entryPoint": "SinglePassScan",
+          "vgprsUsed": 45,
+          "vgprsAvailable": 256,
+          "physicalVgprs": 1536,
+          "maximumLiveVgprs": 43,
+          "allocatedVgprs": 48,
+          "vgprUsageRatio": 0.17578125,
+          "sgprsUsed": 26,
+          "sgprsAvailable": 106,
+          "physicalSgprs": 2048,
+          "sgprUsageRatio": 0.24528301886792453,
+          "ldsBytes": 1056,
+          "ldsAvailableBytes": 1536,
+          "scratchBytes": 0,
+          "threadGroupX": 256,
+          "threadGroupY": 1,
+          "threadGroupZ": 1,
+          "occupancyWavesPerSimd": null,
+          "isaPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\gfx1201_SinglePassScan-isa_comp.txt",
+          "liveVgprPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\gfx1201_SinglePassScan-livereg_compute.txt",
+          "vgprSpills": null,
+          "sgprSpills": null,
+          "status": "collected",
+          "metricKind": "static-compiler-analysis; not measured occupancy or bandwidth",
+          "statisticsPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\gfx1201_SinglePassScan-stats_comp.txt",
+          "evidence": {
+            "schema": "hlslperf.rga-invocation.v1",
+            "startedUtc": "2026-09-07T05:09:16.6734562+00:00",
+            "finishedUtc": "2026-09-07T05:09:16.9875599+00:00",
+            "executable": {
+              "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\rga.exe",
+              "sha256": "a3074dfbd9558da11ec3d973192b855b7f73e4bfe70b8d7734c20d13a79a2bc5",
+              "bytes": 2917128,
+              "version": "2.14.2.7"
+            },
+            "compilerFiles": [
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxc.exe",
+                "sha256": "ae4bf100b8c64ab03cdc0ee5996d5f212e96c59d6d37340359342d714ac6c004",
+                "bytes": 1236000,
+                "version": "1.8.2502.8"
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxcompiler.dll",
+                "sha256": "f79943b02f73b621421b58a569fd6ee120d0023fb6bfa23844ecad6b00d6a295",
+                "bytes": 17986592,
+                "version": "1.8.2502.8"
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxil.dll",
+                "sha256": "62736e99aa534a942873f92b881a71b2cb6ad62b8d7481ea7a8ad8e9888a8056",
+                "bytes": 1508896,
+                "version": "1.8.2502.8"
+              }
+            ],
+            "arguments": [
+              "-s",
+              "dx12",
+              "--cs",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\scan.hlsl",
+              "--cs-entry",
+              "SinglePassScan",
+              "--cs-model",
+              "cs_6_0",
+              "--analysis",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\SinglePassScan-stats.txt",
+              "--isa",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\SinglePassScan-isa.txt",
+              "--livereg",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\SinglePassScan-livereg.txt",
+              "--asic",
+              "gfx1201",
+              "--define",
+              "HLSLPERF_ELEMENTS_PER_THREAD=4",
+              "--define",
+              "HLSLPERF_GROUP_SIZE=256",
+              "--define",
+              "HLSLPERF_SCAN_BACKEND=3",
+              "--define",
+              "HLSLPERF_SINGLE_PASS_GROUPS=256",
+              "--define",
+              "HLSLPERF_SINGLE_PASS_ITEMS_SCALE=4",
+              "-I",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels",
+              "-I",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf",
+              "--dxc",
+              "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc",
+              "--dxc-opt",
+              "-O3 -Ges -WX",
+              "--binary",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\SinglePassScan.bin"
+            ],
+            "entryPoint": "SinglePassScan",
+            "shaderModel": "6_0",
+            "defines": {
+              "HLSLPERF_SCAN_BACKEND": 3,
+              "HLSLPERF_GROUP_SIZE": 256,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4,
+              "HLSLPERF_SINGLE_PASS_GROUPS": 256
+            },
+            "sourceGraphSha256": "1c32c7c0a9dd36bb2c1c420274fb558a777f3440810c57b95bb2873ff031cd0f",
+            "sources": [
+              {
+                "relativePath": "include/hlslperf/scan_u32.hlsli",
+                "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf\\scan_u32.hlsli",
+                "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd"
+              },
+              {
+                "relativePath": "scan.hlsl",
+                "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\scan.hlsl",
+                "sha256": "bc76db871149c6a920f3c1ff44aebc806f4b90af14ad053a83933a36c97fe892"
+              }
+            ],
+            "measuredDevice": {
+              "adapterName": "AMD Radeon AI PRO R9700",
+              "vendorId": 4098,
+              "deviceId": 30033,
+              "subsystemId": 1410537545,
+              "revision": 192,
+              "adapterLuid": "76566",
+              "driverVersion": "32.0.31041.1004",
+              "backend": "D3D12",
+              "shaderModel": "6_0",
+              "compilerVersion": "Vortice.Dxc/3.8.3.0",
+              "operatingSystem": "Microsoft Windows 10.0.26200"
+            },
+            "exitCode": 0,
+            "artifacts": [
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\gfx1201_SinglePassScan-isa_comp.txt",
+                "sha256": "7d07e0a12addeb76ca62f214e8d231db3ea7775d941a0367bbec6be771b07561",
+                "bytes": 72000,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\gfx1201_SinglePassScan-livereg_compute.txt",
+                "sha256": "2f3a41688efd33184f721e7017ff4e48c93b73152aeb71975d3786fa542710b4",
+                "bytes": 73134,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\gfx1201_SinglePassScan-stats_comp.txt",
+                "sha256": "c6ea45988212cefac4ca3ff98d23c596f06485637cb6a663e06f9035f61a73bb",
+                "bytes": 664,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\gfx1201_SinglePassScan.bin",
+                "sha256": "27e74dec42a12005284c707ab05e4fd61c1c9e7e0952fbc2337969b5f63ad97b",
+                "bytes": 6476,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\process-output.txt",
+                "sha256": "9ac3dab6164302baf44e710e6479818cbcacd08fd2d5f56365400e99a608c836",
+                "bytes": 669,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\source-0-scan_u32.hlsli",
+                "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd",
+                "bytes": 18607,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\scan-warm-262147\\SinglePassScan\\632ae4769870463ebb66ba82cab07e33\\source-1-scan.hlsl",
+                "sha256": "bc76db871149c6a920f3c1ff44aebc806f4b90af14ad053a83933a36c97fe892",
+                "bytes": 704,
+                "version": null
+              }
+            ],
+            "compilationRelationship": "RGA recompiles the identified source and defines with its identified DXC through the live driver; not asserted byte-identical to measured DXIL."
+          }
+        }
+      ],
+      "diagnostic": "[ResetSinglePassState] exit=0: Building for gfx1201... Performing front-end compilation of compute shader through DXC... Using DXC from user-provided path: C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc Front-end compilation success. Compiling compute pipeline... Extracting compute shader disassembly... Compute shader disassembly extracted successfully. Extracting compute shader statistics... Compute shader statistics extracted successfully. Extracting compute pipeline binary... Compute pipeline binary extracted successfully. succeeded. -=-=-=-=-=-=- Post-processing... Performing live vgpr analysis for compute shader... succeeded.\r\n[SinglePassScan] exit=0: Building for gfx1201... Performing front-end compilation of compute shader through DXC... Using DXC from user-provided path: C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc Front-end compilation success. Compiling compute pipeline... Extracting compute shader disassembly... Compute shader disassembly extracted successfully. Extracting compute shader statistics... Compute shader statistics extracted successfully. Extracting compute pipeline binary... Compute pipeline binary extracted successfully. succeeded. -=-=-=-=-=-=- Post-processing... Performing live vgpr analysis for compute shader... succeeded."
+    },
+    {
+      "tool": "AMD Radeon GPU Analyzer DX12 live-driver",
+      "toolVersion": "Radeon GPU Analyzer Version: 2.14.2.7 (05/11/2026)",
+      "target": "gfx1201",
+      "status": "collected",
+      "passes": [
+        {
+          "passName": "fused-reset",
+          "entryPoint": "ResetSinglePassState",
+          "vgprsUsed": 3,
+          "vgprsAvailable": 256,
+          "physicalVgprs": 1536,
+          "maximumLiveVgprs": 2,
+          "allocatedVgprs": 24,
+          "vgprUsageRatio": 0.01171875,
+          "sgprsUsed": 14,
+          "sgprsAvailable": 106,
+          "physicalSgprs": 2048,
+          "sgprUsageRatio": 0.1320754716981132,
+          "ldsBytes": 0,
+          "ldsAvailableBytes": 0,
+          "scratchBytes": 0,
+          "threadGroupX": 1,
+          "threadGroupY": 1,
+          "threadGroupZ": 1,
+          "occupancyWavesPerSimd": null,
+          "isaPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\gfx1201_ResetSinglePassState-isa_comp.txt",
+          "liveVgprPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\gfx1201_ResetSinglePassState-livereg_compute.txt",
+          "vgprSpills": null,
+          "sgprSpills": null,
+          "status": "collected",
+          "metricKind": "static-compiler-analysis; not measured occupancy or bandwidth",
+          "statisticsPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\gfx1201_ResetSinglePassState-stats_comp.txt",
+          "evidence": {
+            "schema": "hlslperf.rga-invocation.v1",
+            "startedUtc": "2026-09-07T05:09:17.6185642+00:00",
+            "finishedUtc": "2026-09-07T05:09:17.8568825+00:00",
+            "executable": {
+              "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\rga.exe",
+              "sha256": "a3074dfbd9558da11ec3d973192b855b7f73e4bfe70b8d7734c20d13a79a2bc5",
+              "bytes": 2917128,
+              "version": "2.14.2.7"
+            },
+            "compilerFiles": [
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxc.exe",
+                "sha256": "ae4bf100b8c64ab03cdc0ee5996d5f212e96c59d6d37340359342d714ac6c004",
+                "bytes": 1236000,
+                "version": "1.8.2502.8"
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxcompiler.dll",
+                "sha256": "f79943b02f73b621421b58a569fd6ee120d0023fb6bfa23844ecad6b00d6a295",
+                "bytes": 17986592,
+                "version": "1.8.2502.8"
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxil.dll",
+                "sha256": "62736e99aa534a942873f92b881a71b2cb6ad62b8d7481ea7a8ad8e9888a8056",
+                "bytes": 1508896,
+                "version": "1.8.2502.8"
+              }
+            ],
+            "arguments": [
+              "-s",
+              "dx12",
+              "--cs",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\compaction.hlsl",
+              "--cs-entry",
+              "ResetSinglePassState",
+              "--cs-model",
+              "cs_6_6",
+              "--analysis",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\ResetSinglePassState-stats.txt",
+              "--isa",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\ResetSinglePassState-isa.txt",
+              "--livereg",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\ResetSinglePassState-livereg.txt",
+              "--asic",
+              "gfx1201",
+              "--define",
+              "HLSLPERF_ELEMENTS_PER_THREAD=4",
+              "--define",
+              "HLSLPERF_GROUP_SIZE=256",
+              "--define",
+              "HLSLPERF_SCAN_BACKEND=3",
+              "--define",
+              "HLSLPERF_SINGLE_PASS_GROUPS=256",
+              "--define",
+              "HLSLPERF_SINGLE_PASS_ITEMS_SCALE=4",
+              "-I",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels",
+              "-I",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf",
+              "--dxc",
+              "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc",
+              "--dxc-opt",
+              "-O3 -Ges -WX",
+              "--binary",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\ResetSinglePassState.bin"
+            ],
+            "entryPoint": "ResetSinglePassState",
+            "shaderModel": "6_6",
+            "defines": {
+              "HLSLPERF_SCAN_BACKEND": 3,
+              "HLSLPERF_GROUP_SIZE": 256,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4,
+              "HLSLPERF_SINGLE_PASS_GROUPS": 256
+            },
+            "sourceGraphSha256": "81c346f667ae39be61872b72be6d15b361e9ee6fb79fb4e0848ea4512a089209",
+            "sources": [
+              {
+                "relativePath": "compaction.hlsl",
+                "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\compaction.hlsl",
+                "sha256": "fe79759c43e1eb1c77bb1b051620e0aa3947ec5968190ded08cd3c30f15fa298"
+              },
+              {
+                "relativePath": "include/hlslperf/scan_u32.hlsli",
+                "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf\\scan_u32.hlsli",
+                "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd"
+              }
+            ],
+            "measuredDevice": {
+              "adapterName": "AMD Radeon AI PRO R9700",
+              "vendorId": 4098,
+              "deviceId": 30033,
+              "subsystemId": 1410537545,
+              "revision": 192,
+              "adapterLuid": "76566",
+              "driverVersion": "32.0.31041.1004",
+              "backend": "D3D12",
+              "shaderModel": "6_6",
+              "compilerVersion": "Vortice.Dxc/3.8.3.0",
+              "operatingSystem": "Microsoft Windows 10.0.26200"
+            },
+            "exitCode": 0,
+            "artifacts": [
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\gfx1201_ResetSinglePassState-isa_comp.txt",
+                "sha256": "1db655d7184ba18936b551b5658e065411ab0fd9ed745026fa01ff8d72435cea",
+                "bytes": 3746,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\gfx1201_ResetSinglePassState-livereg_compute.txt",
+                "sha256": "2a1ce60984c2186de5b28531bd6338e8a249c63c89c71f30a69b36f8ddee784a",
+                "bytes": 2413,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\gfx1201_ResetSinglePassState-stats_comp.txt",
+                "sha256": "b4e52ae4cfc4d45a8590feaba6f7e6dc7d3480d5a043ffa23aee0fd2f2e0d198",
+                "bytes": 655,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\gfx1201_ResetSinglePassState.bin",
+                "sha256": "2934f7613374e9b66541e7c724ee74db186499025627b0e56a2df2aa97b85cff",
+                "bytes": 2428,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\process-output.txt",
+                "sha256": "9ac3dab6164302baf44e710e6479818cbcacd08fd2d5f56365400e99a608c836",
+                "bytes": 669,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\source-0-compaction.hlsl",
+                "sha256": "fe79759c43e1eb1c77bb1b051620e0aa3947ec5968190ded08cd3c30f15fa298",
+                "bytes": 10536,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\ResetSinglePassState\\ad8270b36feb4d1a8fbc337e7fd097a2\\source-1-scan_u32.hlsli",
+                "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd",
+                "bytes": 18607,
+                "version": null
+              }
+            ],
+            "compilationRelationship": "RGA recompiles the identified source and defines with its identified DXC through the live driver; not asserted byte-identical to measured DXIL."
+          }
+        },
+        {
+          "passName": "fused-produce-scan-scatter",
+          "entryPoint": "FusedCompactSinglePass",
+          "vgprsUsed": 44,
+          "vgprsAvailable": 256,
+          "physicalVgprs": 1536,
+          "maximumLiveVgprs": 42,
+          "allocatedVgprs": 48,
+          "vgprUsageRatio": 0.171875,
+          "sgprsUsed": 58,
+          "sgprsAvailable": 106,
+          "physicalSgprs": 2048,
+          "sgprUsageRatio": 0.5471698113207547,
+          "ldsBytes": 1056,
+          "ldsAvailableBytes": 1536,
+          "scratchBytes": 0,
+          "threadGroupX": 256,
+          "threadGroupY": 1,
+          "threadGroupZ": 1,
+          "occupancyWavesPerSimd": null,
+          "isaPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\gfx1201_FusedCompactSinglePass-isa_comp.txt",
+          "liveVgprPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\gfx1201_FusedCompactSinglePass-livereg_compute.txt",
+          "vgprSpills": null,
+          "sgprSpills": null,
+          "status": "collected",
+          "metricKind": "static-compiler-analysis; not measured occupancy or bandwidth",
+          "statisticsPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\gfx1201_FusedCompactSinglePass-stats_comp.txt",
+          "evidence": {
+            "schema": "hlslperf.rga-invocation.v1",
+            "startedUtc": "2026-09-07T05:09:17.8729593+00:00",
+            "finishedUtc": "2026-09-07T05:09:18.2010599+00:00",
+            "executable": {
+              "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\rga.exe",
+              "sha256": "a3074dfbd9558da11ec3d973192b855b7f73e4bfe70b8d7734c20d13a79a2bc5",
+              "bytes": 2917128,
+              "version": "2.14.2.7"
+            },
+            "compilerFiles": [
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxc.exe",
+                "sha256": "ae4bf100b8c64ab03cdc0ee5996d5f212e96c59d6d37340359342d714ac6c004",
+                "bytes": 1236000,
+                "version": "1.8.2502.8"
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxcompiler.dll",
+                "sha256": "f79943b02f73b621421b58a569fd6ee120d0023fb6bfa23844ecad6b00d6a295",
+                "bytes": 17986592,
+                "version": "1.8.2502.8"
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxil.dll",
+                "sha256": "62736e99aa534a942873f92b881a71b2cb6ad62b8d7481ea7a8ad8e9888a8056",
+                "bytes": 1508896,
+                "version": "1.8.2502.8"
+              }
+            ],
+            "arguments": [
+              "-s",
+              "dx12",
+              "--cs",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\compaction.hlsl",
+              "--cs-entry",
+              "FusedCompactSinglePass",
+              "--cs-model",
+              "cs_6_6",
+              "--analysis",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\FusedCompactSinglePass-stats.txt",
+              "--isa",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\FusedCompactSinglePass-isa.txt",
+              "--livereg",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\FusedCompactSinglePass-livereg.txt",
+              "--asic",
+              "gfx1201",
+              "--define",
+              "HLSLPERF_ELEMENTS_PER_THREAD=4",
+              "--define",
+              "HLSLPERF_GROUP_SIZE=256",
+              "--define",
+              "HLSLPERF_SCAN_BACKEND=3",
+              "--define",
+              "HLSLPERF_SINGLE_PASS_GROUPS=256",
+              "--define",
+              "HLSLPERF_SINGLE_PASS_ITEMS_SCALE=4",
+              "-I",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels",
+              "-I",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf",
+              "--dxc",
+              "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc",
+              "--dxc-opt",
+              "-O3 -Ges -WX",
+              "--binary",
+              "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\FusedCompactSinglePass.bin"
+            ],
+            "entryPoint": "FusedCompactSinglePass",
+            "shaderModel": "6_6",
+            "defines": {
+              "HLSLPERF_SCAN_BACKEND": 3,
+              "HLSLPERF_GROUP_SIZE": 256,
+              "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+              "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4,
+              "HLSLPERF_SINGLE_PASS_GROUPS": 256
+            },
+            "sourceGraphSha256": "81c346f667ae39be61872b72be6d15b361e9ee6fb79fb4e0848ea4512a089209",
+            "sources": [
+              {
+                "relativePath": "compaction.hlsl",
+                "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\compaction.hlsl",
+                "sha256": "fe79759c43e1eb1c77bb1b051620e0aa3947ec5968190ded08cd3c30f15fa298"
+              },
+              {
+                "relativePath": "include/hlslperf/scan_u32.hlsli",
+                "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf\\scan_u32.hlsli",
+                "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd"
+              }
+            ],
+            "measuredDevice": {
+              "adapterName": "AMD Radeon AI PRO R9700",
+              "vendorId": 4098,
+              "deviceId": 30033,
+              "subsystemId": 1410537545,
+              "revision": 192,
+              "adapterLuid": "76566",
+              "driverVersion": "32.0.31041.1004",
+              "backend": "D3D12",
+              "shaderModel": "6_6",
+              "compilerVersion": "Vortice.Dxc/3.8.3.0",
+              "operatingSystem": "Microsoft Windows 10.0.26200"
+            },
+            "exitCode": 0,
+            "artifacts": [
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\gfx1201_FusedCompactSinglePass-isa_comp.txt",
+                "sha256": "84042ce46407e47db6f4d9b25cfe1ab0b33489073fed9badb6d6dc4674ce14c9",
+                "bytes": 79441,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\gfx1201_FusedCompactSinglePass-livereg_compute.txt",
+                "sha256": "b28f90256545a6e6cff0f81840064c32250bea9c666bf53d77893b8ee48dd98d",
+                "bytes": 78163,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\gfx1201_FusedCompactSinglePass-stats_comp.txt",
+                "sha256": "8c0407ef66b4605a2b97e128d19130dfffe183d3942e4ef0c0658b2dcebfee31",
+                "bytes": 664,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\gfx1201_FusedCompactSinglePass.bin",
+                "sha256": "74d07c665740ddfdc6f91cf07be747d6dc177555b9021648dd10733cabdb7d8b",
+                "bytes": 6832,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\process-output.txt",
+                "sha256": "9ac3dab6164302baf44e710e6479818cbcacd08fd2d5f56365400e99a608c836",
+                "bytes": 669,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\source-0-compaction.hlsl",
+                "sha256": "fe79759c43e1eb1c77bb1b051620e0aa3947ec5968190ded08cd3c30f15fa298",
+                "bytes": 10536,
+                "version": null
+              },
+              {
+                "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\source-1-scan_u32.hlsli",
+                "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd",
+                "bytes": 18607,
+                "version": null
+              }
+            ],
+            "compilationRelationship": "RGA recompiles the identified source and defines with its identified DXC through the live driver; not asserted byte-identical to measured DXIL."
+          }
+        }
+      ],
+      "diagnostic": "[ResetSinglePassState] exit=0: Building for gfx1201... Performing front-end compilation of compute shader through DXC... Using DXC from user-provided path: C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc Front-end compilation success. Compiling compute pipeline... Extracting compute shader disassembly... Compute shader disassembly extracted successfully. Extracting compute shader statistics... Compute shader statistics extracted successfully. Extracting compute pipeline binary... Compute pipeline binary extracted successfully. succeeded. -=-=-=-=-=-=- Post-processing... Performing live vgpr analysis for compute shader... succeeded.\r\n[FusedCompactSinglePass] exit=0: Building for gfx1201... Performing front-end compilation of compute shader through DXC... Using DXC from user-provided path: C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc Front-end compilation success. Compiling compute pipeline... Extracting compute shader disassembly... Compute shader disassembly extracted successfully. Extracting compute shader statistics... Compute shader statistics extracted successfully. Extracting compute pipeline binary... Compute pipeline binary extracted successfully. succeeded. -=-=-=-=-=-=- Post-processing... Performing live vgpr analysis for compute shader... succeeded."
+    }
+  ],
+  "temperatureCelsius": null,
+  "measuredOccupancy": null,
+  "measuredBandwidthBytesPerSecond": null,
+  "interference": "Shared mutex serializes cooperating validation only. External processes and clocks uncontrolled.",
+  "outstanding": "Integrated candidate comparisons require independent paired calibration/confirmation. Spill/occupancy/runtime counters unavailable unless explicitly present in raw artifacts."
+}

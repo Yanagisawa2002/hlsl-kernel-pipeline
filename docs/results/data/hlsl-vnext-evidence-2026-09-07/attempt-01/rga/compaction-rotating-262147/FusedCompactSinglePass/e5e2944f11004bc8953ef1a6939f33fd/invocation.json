@@ -1,0 +1,150 @@
+{
+  "schema": "hlslperf.rga-invocation.v1",
+  "startedUtc": "2026-09-07T05:09:17.8729593+00:00",
+  "finishedUtc": "2026-09-07T05:09:18.2010599+00:00",
+  "executable": {
+    "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\rga.exe",
+    "sha256": "a3074dfbd9558da11ec3d973192b855b7f73e4bfe70b8d7734c20d13a79a2bc5",
+    "bytes": 2917128,
+    "version": "2.14.2.7"
+  },
+  "compilerFiles": [
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxc.exe",
+      "sha256": "ae4bf100b8c64ab03cdc0ee5996d5f212e96c59d6d37340359342d714ac6c004",
+      "bytes": 1236000,
+      "version": "1.8.2502.8"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxcompiler.dll",
+      "sha256": "f79943b02f73b621421b58a569fd6ee120d0023fb6bfa23844ecad6b00d6a295",
+      "bytes": 17986592,
+      "version": "1.8.2502.8"
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc\\dxil.dll",
+      "sha256": "62736e99aa534a942873f92b881a71b2cb6ad62b8d7481ea7a8ad8e9888a8056",
+      "bytes": 1508896,
+      "version": "1.8.2502.8"
+    }
+  ],
+  "arguments": [
+    "-s",
+    "dx12",
+    "--cs",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\compaction.hlsl",
+    "--cs-entry",
+    "FusedCompactSinglePass",
+    "--cs-model",
+    "cs_6_6",
+    "--analysis",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\FusedCompactSinglePass-stats.txt",
+    "--isa",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\FusedCompactSinglePass-isa.txt",
+    "--livereg",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\FusedCompactSinglePass-livereg.txt",
+    "--asic",
+    "gfx1201",
+    "--define",
+    "HLSLPERF_ELEMENTS_PER_THREAD=4",
+    "--define",
+    "HLSLPERF_GROUP_SIZE=256",
+    "--define",
+    "HLSLPERF_SCAN_BACKEND=3",
+    "--define",
+    "HLSLPERF_SINGLE_PASS_GROUPS=256",
+    "--define",
+    "HLSLPERF_SINGLE_PASS_ITEMS_SCALE=4",
+    "-I",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels",
+    "-I",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf",
+    "--dxc",
+    "C:\\Users\\EdwinLiu\\Downloads\\HlslKernelPipeline\\.hlslperf\\tools\\rga-2.14.2\\utils\\dx12\\dxc",
+    "--dxc-opt",
+    "-O3 -Ges -WX",
+    "--binary",
+    "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\FusedCompactSinglePass.bin"
+  ],
+  "entryPoint": "FusedCompactSinglePass",
+  "shaderModel": "6_6",
+  "defines": {
+    "HLSLPERF_SCAN_BACKEND": 3,
+    "HLSLPERF_GROUP_SIZE": 256,
+    "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+    "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4,
+    "HLSLPERF_SINGLE_PASS_GROUPS": 256
+  },
+  "sourceGraphSha256": "81c346f667ae39be61872b72be6d15b361e9ee6fb79fb4e0848ea4512a089209",
+  "sources": [
+    {
+      "relativePath": "compaction.hlsl",
+      "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\compaction.hlsl",
+      "sha256": "fe79759c43e1eb1c77bb1b051620e0aa3947ec5968190ded08cd3c30f15fa298"
+    },
+    {
+      "relativePath": "include/hlslperf/scan_u32.hlsli",
+      "fullPath": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\kernels\\include\\hlslperf\\scan_u32.hlsli",
+      "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd"
+    }
+  ],
+  "measuredDevice": {
+    "adapterName": "AMD Radeon AI PRO R9700",
+    "vendorId": 4098,
+    "deviceId": 30033,
+    "subsystemId": 1410537545,
+    "revision": 192,
+    "adapterLuid": "76566",
+    "driverVersion": "32.0.31041.1004",
+    "backend": "D3D12",
+    "shaderModel": "6_6",
+    "compilerVersion": "Vortice.Dxc/3.8.3.0",
+    "operatingSystem": "Microsoft Windows 10.0.26200"
+  },
+  "exitCode": 0,
+  "artifacts": [
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\gfx1201_FusedCompactSinglePass-isa_comp.txt",
+      "sha256": "84042ce46407e47db6f4d9b25cfe1ab0b33489073fed9badb6d6dc4674ce14c9",
+      "bytes": 79441,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\gfx1201_FusedCompactSinglePass-livereg_compute.txt",
+      "sha256": "b28f90256545a6e6cff0f81840064c32250bea9c666bf53d77893b8ee48dd98d",
+      "bytes": 78163,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\gfx1201_FusedCompactSinglePass-stats_comp.txt",
+      "sha256": "8c0407ef66b4605a2b97e128d19130dfffe183d3942e4ef0c0658b2dcebfee31",
+      "bytes": 664,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\gfx1201_FusedCompactSinglePass.bin",
+      "sha256": "74d07c665740ddfdc6f91cf07be747d6dc177555b9021648dd10733cabdb7d8b",
+      "bytes": 6832,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\process-output.txt",
+      "sha256": "9ac3dab6164302baf44e710e6479818cbcacd08fd2d5f56365400e99a608c836",
+      "bytes": 669,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\source-0-compaction.hlsl",
+      "sha256": "fe79759c43e1eb1c77bb1b051620e0aa3947ec5968190ded08cd3c30f15fa298",
+      "bytes": 10536,
+      "version": null
+    },
+    {
+      "path": "C:\\Users\\EdwinLiu\\Downloads\\opt-next-hlsl-evidence\\.hlslperf\\evidence-vnext\\attempt-01\\rga\\compaction-rotating-262147\\FusedCompactSinglePass\\e5e2944f11004bc8953ef1a6939f33fd\\source-1-scan_u32.hlsli",
+      "sha256": "0c6cae913e15fb30ed2be7e0b428b389b474201d890effd92acb72dbac7175dd",
+      "bytes": 18607,
+      "version": null
+    }
+  ],
+  "compilationRelationship": "RGA recompiles the identified source and defines with its identified DXC through the live driver; not asserted byte-identical to measured DXIL."
+}
