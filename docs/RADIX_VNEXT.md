@@ -89,3 +89,20 @@ intervals, independent confirmation and exact source/binary/driver identity.
 If no wide candidate clears the gates, retain the fastest valid binary path and
 report that outcome. Broad historical matrices and an external FidelityFX adapter
 are not prerequisites. No measured benefit is claimed by this document.
+
+## Retained R9700 correctness evidence
+
+The bounded worker run passed **144 candidate executions and 420 output/poison
+hash checks**, including all 42 key-only and 36 key/payload manifest candidates.
+Release CPU tests passed 56/56 after the final accounting correction. Hardware
+was R9700, driver 32.0.31041.1004, loaded DXC/DXIL 1.9.2602.17. The receipt in
+`docs/evidence/radix-r9700-smoke.json` records binary/source/raw-report hashes,
+all evidence paths and representative complete-plan dispatch/scratch/time rows.
+
+The initial attempt retained 52 passing binary cases and 92 wide compilation
+failures caused by DXC's strict loop-variable-shadowing warning. The corrected
+run passed all cases. Raw evidence is preserved for both attempts. Six empty-case
+rows in the corrected run still carry pre-fix digit-iteration metadata (32/8/4);
+the later accounting-only change reports zero iterations and passes a CPU test.
+Dispatch counts and all native correctness checks are unaffected. These runs
+remain correctness smoke; paired comparison and confirmation gates remain open.
