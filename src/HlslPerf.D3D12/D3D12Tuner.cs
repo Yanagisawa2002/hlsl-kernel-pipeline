@@ -349,11 +349,16 @@ public sealed partial class D3D12Tuner : IDisposable
     private ResourceSet CreateResources(KernelExecutionPlan plan)
     {
         if (plan.Passes.Any(pass => pass.Indirect is not null)) EnsureIndirectPipeline();
+        return CreateResources(plan.Buffers);
+    }
+
+    private ResourceSet CreateResources(IReadOnlyList<KernelBufferSpec> specifications)
+    {
         Dictionary<string, GpuBuffer> buffers = new(StringComparer.Ordinal);
         List<ID3D12Resource> uploads = [];
         try
         {
-            foreach (KernelBufferSpec spec in plan.Buffers)
+            foreach (KernelBufferSpec spec in specifications)
             {
                 ResourceStates initialState = spec.InitialData is null
                     ? ResourceStates.NonPixelShaderResource

@@ -8,4 +8,4 @@ docs/results/data/vnext-integration-2026-09-07/** -text -diff
 docs/results/data/scan-process-2026-09-07/** -text -diff
 docs/results/data/radix-process-2026-09-07/** -text -diff
 # Preserve official upstream bytes exactly as pinned in upstream-lock.json.
-third_party/** -text
+third_party/** -text -whitespace
