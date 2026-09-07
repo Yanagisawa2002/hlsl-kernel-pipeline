@@ -48,6 +48,22 @@ public sealed class WorkloadScenarioTests
             .Build(Manifest(), new ConstantWorkload(), Candidate()));
     }
 
+    [Fact]
+    public void RootConstantSeedIsActualInputEvenWithoutUploadedBuffers()
+    {
+        var manifest = new TuningManifest {
+            Name = "constant-input", KernelPath = "uint-mix.hlsl", WorkItemCount = 17,
+            Axes = [new CandidateAxis { Name = "HLSLPERF_GROUP_SIZE", Values = [64] }],
+            FixedDefines = new Dictionary<string, int> { ["HLSLPERF_ELEMENTS_PER_THREAD"] = 1, ["HLSLPERF_ALU_ROUNDS"] = 1 }
+        };
+        var candidate = CandidateGenerator.Expand(manifest).Single();
+        var slots = new WorkloadScenario("root-input", [101, 202, 303]).Build(manifest, BuiltinWorkloads.Resolve(manifest), candidate);
+        Assert.All(slots, s => Assert.All(s.Plan.Buffers, b => Assert.Null(b.InitialData)));
+        Assert.Equal(3, slots.Select(s => s.InputSha256).Distinct().Count());
+        Assert.Equal(3, slots.Select(s => s.Plan.ExpectedSha256).Distinct().Count());
+        Assert.Equal(new uint[] { 101, 202, 303 }, slots.Select(s => s.Plan.Passes[0].Constants[1]));
+    }
+
     private sealed class ConstantWorkload : IKernelWorkload
     {
         public string Id => "constant";

@@ -274,14 +274,14 @@ internal static class Program
                 candidate.CandidateId == report.Selection.CandidateId);
             CandidateResult? baseline = report.Candidates.FirstOrDefault(candidate =>
                 candidate.CandidateId == report.BaselineCandidateId);
-            double? speedup = baseline?.Timing is null
+            double? speedup = baseline?.Timing is null || selected.Timing is null
                 ? null
                 : baseline.Timing.MedianMilliseconds / selected.Timing!.MedianMilliseconds;
             Console.WriteLine($"Selected: {selected.CandidateId}");
             if (report.Selection.RetainedBaseline)
                 Console.WriteLine($"Observed: {report.Selection.ObservedFastestCandidateId} (deployment guard did not clear)");
-            Console.WriteLine($"Median:   {selected.Timing!.MedianMilliseconds:0.####} ms");
-            Console.WriteLine($"P95:      {selected.Timing.P95Milliseconds:0.####} ms");
+            Console.WriteLine($"Median:   {selected.Timing?.MedianMilliseconds.ToString("0.####") ?? "unavailable"} ms");
+            Console.WriteLine($"P95:      {selected.Timing?.P95Milliseconds.ToString("0.####") ?? "unavailable"} ms");
             Console.WriteLine($"Speedup:  {(speedup.HasValue ? $"{speedup.Value:0.###}× vs baseline" : "baseline unavailable")}");
             Console.WriteLine($"Decision: {report.Selection.Reason}");
         }

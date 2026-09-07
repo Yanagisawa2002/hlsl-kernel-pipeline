@@ -45,6 +45,18 @@ public sealed class PairedProfileTests
     }
 
     [Fact]
+    public void PassingEachOwnOracleDoesNotProveArmsAreComparable()
+    {
+        var report = Report(); var evidence = report.PairedEvidence!;
+        var mismatched = evidence.Observations.Select(o => o.Slot.Phase == "confirmation" && !o.Slot.IsBaseline
+            ? o with { Scenario = o.Scenario! with { Slots = o.Scenario.Slots.Select(s => s with {
+                ExpectedSha256 = ContentHash.Sha256("different semantic output") }).ToArray() } } : o).ToArray();
+        var comparison = PairedProtocol.Compare(mismatched, "confirmation", "X-2", evidence.Options, 1.01, 0.05);
+        Assert.False(comparison.Passed);
+        Assert.Contains(comparison.Rejections, r => r.Contains("incompatible primary oracles"));
+    }
+
+    [Fact]
     public void CompleteCheckpointReplaysFrozenEvidenceAndRejectsWrongSession()
     {
         string dir = Path.Combine(Path.GetTempPath(), "hlslperf-profile-" + Guid.NewGuid().ToString("N"));
