@@ -34,6 +34,12 @@ public sealed partial class D3D12Tuner
             historical.AddRange(saved.HistoricalAttemptPaths);
             historical.Add(PairedCheckpointStore.ArchiveInterrupted(checkpointOptions.Path, saved));
         }
+        else if (checkpointOptions is not null && File.Exists(checkpointOptions.Path))
+        {
+            string archive = Path.GetFullPath(checkpointOptions.Path) + ".historical-" + Guid.NewGuid().ToString("N") + ".json";
+            File.Copy(checkpointOptions.Path, archive, overwrite: false);
+            historical.Add(archive);
+        }
         DateTimeOffset started = DateTimeOffset.UtcNow;
         string session = Guid.NewGuid().ToString("N");
         IReadOnlyList<KernelCandidate> candidates = CandidateGenerator.Expand(manifest);

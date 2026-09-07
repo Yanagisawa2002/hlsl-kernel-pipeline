@@ -77,6 +77,25 @@ public sealed class PairedProfileTests
         finally { if (Directory.Exists(dir)) Directory.Delete(dir, true); }
     }
 
+    [Fact]
+    public void ReusingOutputDirectoryArchivesEarlierEvidenceBeforeWritingRejection()
+    {
+        string dir = Path.Combine(Path.GetTempPath(), "hlslperf-history-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            var report = Report();
+            Assert.NotNull(ReportWriter.Write(report, dir).ProfileJsonPath);
+            string original = File.ReadAllText(Path.Combine(dir, "run.json"));
+            var rejected = report with { PairedEvidence = report.PairedEvidence! with { Deployable = false } };
+            Assert.Null(ReportWriter.Write(rejected, dir).ProfileJsonPath);
+            string archive = Assert.Single(Directory.GetDirectories(Path.Combine(dir, "history")));
+            Assert.Equal(original, File.ReadAllText(Path.Combine(archive, "run.json")));
+            Assert.True(File.Exists(Path.Combine(archive, "profile.json")));
+            Assert.False(File.Exists(Path.Combine(dir, "profile.json")));
+        }
+        finally { if (Directory.Exists(dir)) Directory.Delete(dir, true); }
+    }
+
     private static TuningRunReport Report(bool baselineControl = false, bool includeFailedChallenger = false)
     {
         var options = new PairedMeasurementOptions { CalibrationBlocks = 6, ConfirmationBlocks = 6, ResidentSlots = 3 };

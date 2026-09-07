@@ -23,6 +23,17 @@ public static class ReportWriter
         string csvPath = Path.Combine(fullOutputDirectory, "candidates.csv");
         string htmlPath = Path.Combine(fullOutputDirectory, "report.html");
         string svgPath = Path.Combine(fullOutputDirectory, "comparison.svg");
+        if (File.Exists(runPath))
+        {
+            // Reusing an output directory must not erase failed/noisy or historical observations.
+            string history = Path.Combine(fullOutputDirectory, "history", Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(history);
+            foreach (string name in new[] { "run.json", "candidates.csv", "report.html", "comparison.svg", "profile.json", "paired-observations.csv" })
+            {
+                string existing = Path.Combine(fullOutputDirectory, name);
+                if (File.Exists(existing)) File.Copy(existing, Path.Combine(history, name), overwrite: false);
+            }
+        }
         File.WriteAllText(runPath, JsonSerializer.Serialize(report, JsonDefaults.Options), new UTF8Encoding(false));
         File.WriteAllText(csvPath, BuildCsv(report), new UTF8Encoding(false));
         File.WriteAllText(htmlPath, BuildHtml(report), new UTF8Encoding(false));
