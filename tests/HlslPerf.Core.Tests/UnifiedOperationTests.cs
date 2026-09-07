@@ -28,7 +28,8 @@ public sealed class UnifiedOperationTests
         var fixture = UnifiedWorkloads.Fixture("radix", count, 19, "duplicate", true);
         var original = UnifiedWorkloads.Build(".", fixture, "internal-radix-8");
         var candidate = FocusedCostWorkloads.Build(".", fixture, FocusedCostWorkloads.RadixBallot);
-        Assert.Equal(original.Buffers, candidate.Buffers);
+        Assert.Equal(original.Buffers.Select(b => (b.Name, b.ByteLength, Hash: b.InitialData is null ? null : ContentHash.Sha256(b.InitialData))),
+            candidate.Buffers.Select(b => (b.Name, b.ByteLength, Hash: b.InitialData is null ? null : ContentHash.Sha256(b.InitialData))));
         Assert.Equal(original.Outputs, candidate.Outputs);
         Assert.Equal(original.Passes.Count, candidate.Passes.Count);
         Assert.All(candidate.Shaders, shader => {
