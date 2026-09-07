@@ -14,6 +14,13 @@ Its R9700 correctness evidence is separate from the historical performance resul
 
 ## Five-process Scan applicability experiment
 
+The [official external comparison](docs/integration/UNIFIED_BENCHMARK_RESULTS.md)
+adds pinned AMD Parallel Sort and GPUPrefixSums implementations under one complete-operation
+benchmark. All 120 fixed processes completed: four directional comparisons pass every
+gate, 68 remain inconclusive, and 24 fallback comparisons are excluded for full32
+semantic incompatibility. See the [reproduction protocol](docs/integration/UNIFIED_BENCHMARK_PROTOCOL.md)
+for source locks, independent-process statistics and retained failures. Defaults remain unchanged.
+
 The [next-round Scan report](docs/results/SCAN_PROCESS_BOUNDARY_2026-09-07.md)
 covers 4/8/12/16 Mi uint elements with one/three resident inputs and five new
 processes per cell. Four exact configurations passed all five process gates;
