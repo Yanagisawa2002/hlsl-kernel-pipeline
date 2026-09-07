@@ -75,7 +75,10 @@ public sealed record WorkloadScenario(
 }
 
 public sealed record ScenarioPlanSlot(int Slot, int InputSeed, string InputSha256, KernelExecutionPlan Plan);
-public sealed record ScenarioSlotEvidence(int Slot, int InputSeed, string InputSha256, string ExpectedSha256, long LogicalBytes, int PassCount);
+public sealed record ScenarioSlotEvidence(int Slot, int InputSeed, string InputSha256, string ExpectedSha256, long LogicalBytes, int PassCount)
+{
+    public IReadOnlyDictionary<string, string> ExpectedOutputs { get; init; } = new Dictionary<string, string>();
+}
 public sealed record ScenarioMemorySnapshot(DateTimeOffset CapturedUtc, ulong? LocalBudgetBytes, ulong? LocalUsageBytes, string Status);
 public sealed record ScenarioVerification(int Slot, int InputSeed, string Resource, CorrectnessResult Correctness);
 public sealed record ScenarioCompilerBinary(string Path, string Sha256, string? FileVersion);
@@ -90,4 +93,6 @@ public sealed record ScenarioSessionEvidence(
 {
     public IReadOnlyList<ScenarioCompilerBinary> NativeCompilerBinaries { get; init; } = [];
     public string NativeCompilerStatus { get; init; } = "unavailable";
+    public string? BackendAssemblySha256 { get; init; }
+    public string? DynamicExecutorSha256 { get; init; }
 }
