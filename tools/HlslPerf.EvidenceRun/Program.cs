@@ -6,7 +6,9 @@ using HlslPerf.D3D12;
 using HlslPerf.Rga;
 using HlslPerf.Workloads;
 
-return OperatingSystem.IsWindows() ? Run(args) : throw new PlatformNotSupportedException("Windows D3D12 required.");
+[assembly: SupportedOSPlatform("windows10.0")]
+
+return OperatingSystem.IsWindowsVersionAtLeast(10) ? Run(args) : throw new PlatformNotSupportedException("Windows 10+ D3D12 required.");
 
 [SupportedOSPlatform("windows10.0")]
 static int Run(string[] args)
