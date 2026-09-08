@@ -26,3 +26,5 @@ src/HlslPerf.UnifiedBench/CausalScanRunner.cs -text -eol
 src/HlslPerf.UnifiedBench/Program.cs -text -eol
 tools/Invoke-UnifiedExperiment.ps1 -text -eol
 tools/causal_scan_protocol.py -text -eol
+kernels/scan.hlsl -text -eol
+docs/integration/causal-scan-declaration.json -text -eol
