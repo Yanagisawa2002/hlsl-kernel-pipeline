@@ -1,51 +1,50 @@
-# HlslKernelPipeline
+# HLSL Kernel Pipeline
 
-An independent, engine-neutral HLSL kernel autotuning and evidence pipeline for
-Windows/D3D12. It executes real algorithms, rejects incorrect variants, measures
-complete GPU execution plans, attaches optional AMD RGA evidence, and emits a
-device-specific profile that Unity can consume without importing the tuner.
+**Build, validate and tune GPU execution plans that an application can reuse.**
 
-This is clean-room personal work. It contains no employer/client project source,
-assets, configuration, benchmark capture, or Git history.
+A faster kernel is useful only when it produces the right output and improves
+the complete operation. I built an engine-neutral HLSL/D3D12 SDK that connects
+algorithm implementations, device measurements and deployable profile formats.
 
-The [dynamic ABI v2 demo](docs/DYNAMIC_EXECUTION.md) adds bounded GPU-count indirect
-dispatch and independent multi-output verification while retaining ABI v1.
-Its R9700 correctness evidence is separate from the historical performance results below.
+## Results
 
-## What this project demonstrates
+- **1.4782x–1.5254x confirmed single-pass Scan speedup** at 16,777,216 elements,
+  with one or three resident inputs, against the declared in-repository baseline.
+- **19,584 output/poison checks passed** across the recorded 18-run formal matrix.
 
-GPU kernel choices depend on the complete operation, workload and device. This
-pipeline turns those choices into reproducible measurements and a compatible
-profile that a consumer can load.
+These are AMD Radeon AI PRO R9700 / D3D12 results from the September 7 paired
+measurement protocol. [Exact controls and confidence intervals](docs/results/R9700_VNEXT_INTEGRATION_2026-09-07.md).
 
-- **Algorithms:** scan, reduction, stable radix sort, segmented scan, fused
-  compaction, histogram offsets and transpose in HLSL.
-- **Systems:** engine-neutral workload plugins, a raw-buffer execution ABI,
-  D3D12 dispatch/barrier/timestamp execution, and source-aware compilation caches.
-- **Validation:** CPU oracles, output poisoning and re-execution, randomized
-  paired measurements, independent confirmation and retained failed gates.
-- **Integration:** device-specific profiles and a read-only Unity consumer.
+```mermaid
+flowchart LR
+    W["Workload + HLSL candidates"] --> P["Complete D3D12 execution plan"]
+    P --> V["Correctness + paired timing"]
+    V --> C["Independent confirmation"]
+    C --> O["Device-specific profile"]
+    O --> U["Unity profile consumer"]
+```
 
-## Latest confirmed result and limits
+## Engineering challenges
 
-The [September 7 vNext integration report](docs/results/R9700_VNEXT_INTEGRATION_2026-09-07.md)
-retained all 18 runs and passed 19,584 output/poison checks. At 16M elements,
-single-pass scan confirmed **1.4782x** and **1.5254x** speedups for one and three
-resident slots. Wide-radix and dynamic-plan results did not establish deployable
-gains, and no runtime defaults were promoted.
+1. **Optimize the whole operation.** Scan, compaction and stable radix sorting
+   need buffer management, barriers, scratch storage and output verification
+   around the shader dispatches.
+2. **Separate speedup from measurement noise.** Device state, input reuse and
+   run order affect timings; selection needs fresh confirmation and drift checks.
 
-These are bounded AMD Radeon AI PRO R9700 / D3D12 measurements under the report's
-declared controls, not universal gains or wins over every external library.
-The separate [external comparison](docs/integration/UNIFIED_BENCHMARK_RESULTS.md)
-retains inconclusive and semantically incompatible comparisons as well as wins.
+## My contribution
 
-## Review and reproduce
+I implemented HLSL primitives, the workload-plugin/execution ABI, the D3D12
+executor, paired calibration and confirmation, source-aware caching, and profile
+validation for Unity. DXC, Vortice and optional AMD RGA provide the compiler,
+API binding and static shader analysis used by the system.
 
-1. Read the [SDK contract](docs/SDK.md) and architecture below for implementation scope.
-2. Follow [Quick start](#quick-start) to build and run a small workload.
-3. Use the [vNext replay instructions](docs/integration/REPLAY.md) for the reported protocol.
-4. Inspect the [experiment history and visual showcases](docs/EXPERIMENT_HISTORY.md)
-   for earlier results, exact baselines, source reports and negative findings.
+## Evidence and reproduction
+
+[Latest results](docs/results/R9700_VNEXT_INTEGRATION_2026-09-07.md) ·
+[Replay commands](docs/integration/REPLAY.md) · [SDK](docs/SDK.md) ·
+[Visual showcases and experiment history](docs/EXPERIMENT_HISTORY.md) ·
+[Quick start](#quick-start).
 
 ## Architecture and ownership boundary
 
@@ -137,6 +136,24 @@ invocation to reconstruct every byte before a profile can be emitted.
 The standalone showcase under `showcase/` references the public execution ABI
 and D3D12 backend, not Unity. Unity remains a read-only profile consumer.
 
+<details>
+<summary>Evaluation details, tradeoffs and supported scope</summary>
+
+## Latest confirmed result and limits
+
+The [September 7 vNext integration report](docs/results/R9700_VNEXT_INTEGRATION_2026-09-07.md)
+retained all 18 runs and passed 19,584 output/poison checks. At 16M elements,
+single-pass scan confirmed **1.4782x** and **1.5254x** speedups for one and three
+resident slots. Wide-radix and dynamic-plan results did not establish deployable
+gains, and no runtime defaults were promoted.
+
+These are bounded AMD Radeon AI PRO R9700 / D3D12 measurements under the report's
+declared controls, not universal gains or wins over every external library.
+The separate [external comparison](docs/integration/UNIFIED_BENCHMARK_RESULTS.md)
+retains inconclusive and semantically incompatible comparisons as well as wins.
+
+The [dynamic ABI v2 demo](docs/DYNAMIC_EXECUTION.md) adds bounded GPU-count indirect dispatch and independent multi-output verification. Its correctness evidence is separate from historical performance results.
+
 ## Deliberate non-goals
 
 - No Unity project or employer repository is required by the tuner.
@@ -153,6 +170,12 @@ Read the [ABI contract](docs/ABI.md), [measurement methodology](docs/METHODOLOGY
 [RGA evidence policy](docs/RGA.md), [Unity consumer boundary](docs/UNITY_ADAPTER.md),
 [SDK guide](docs/SDK.md), [roadmap](docs/ROADMAP.md), and
 [clean-room provenance](docs/PROVENANCE.md).
+
+</details>
+
+## Provenance and license
+
+Independent personal implementation; see [provenance](docs/PROVENANCE.md) for the source boundary.
 
 ## Benchmark reproduction permission
 
