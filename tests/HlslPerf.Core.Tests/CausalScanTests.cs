@@ -23,7 +23,9 @@ public sealed class CausalScanTests
             var a=original.Shaders[i];var b=candidate.Shaders[i];Assert.NotEqual(a.Id,b.Id);
             Assert.Equal("1",a.Defines["HLSLPERF_VECTOR_WIDTH"]);Assert.Equal("4",b.Defines["HLSLPERF_VECTOR_WIDTH"]);
             Assert.Equal(a.Defines.Where(p=>p.Key!="HLSLPERF_VECTOR_WIDTH"),b.Defines.Where(p=>p.Key!="HLSLPERF_VECTOR_WIDTH"));
-            Assert.Equal(a with { Id=b.Id,Defines=b.Defines },b);
+            Assert.Equal((a.SourcePath,a.EntryPoint,a.HlslVersion,a.ShaderModel,a.EnableStrictness),
+                (b.SourcePath,b.EntryPoint,b.HlslVersion,b.ShaderModel,b.EnableStrictness));
+            Assert.Equal(a.IncludeDirectories,b.IncludeDirectories);Assert.Equal(a.CompilerArguments,b.CompilerArguments);
         }
         Assert.DoesNotContain(CausalScanWorkloads.VectorIo,UnifiedWorkloads.ScanImplementations);
     }

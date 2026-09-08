@@ -88,7 +88,7 @@ internal static class CausalScanRunner
         byte[] bytes=result.GetObjectBytecodeArray(); using var blob=result.GetOutput(DxcOutKind.Object);
         var buffer=new DxcBuffer { Ptr=blob.BufferPointer,Size=(nuint)bytes.Length };
         using var compiler=Dxc.CreateDxcCompiler<IDxcCompiler3>();
-        using var disassembled=compiler.Disassemble<IDxcResult>(ref buffer);
+        using var disassembled=compiler.Disassemble<IDxcResult>(in buffer);
         if(disassembled.GetStatus().Failure) throw new InvalidDataException(disassembled.GetErrors());
         using var text=disassembled.GetOutput<IDxcBlobUtf8>(DxcOutKind.Disassembly);
         string prefix=Path.Combine(output,shader.Id.Replace('/','_'));
