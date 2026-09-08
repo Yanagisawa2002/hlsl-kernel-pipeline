@@ -18,7 +18,12 @@ List<UnifiedOperationPlan> plans =
     PrimitiveOperations.StableSort(root, [uint.MaxValue, 0, 0], [3, 1, uint.MaxValue], SortImplementation.AmdParallelSort)
 ];
 List<object> compiledShaders = [];
-foreach (var shader in plans.SelectMany(p => p.Shaders).DistinctBy(s => s.Id))
+var shaders = plans.SelectMany(p => p.Shaders).DistinctBy(s => s.Id).ToList();
+shaders.Add(new("native/scan-inclusive", Path.Combine(root, "benchmarks/external/native/ScanInclusive.hlsl"), "AddInput",
+    new Dictionary<string, string>(), [], []));
+shaders.Add(new("native/sort-input", Path.Combine(root, "benchmarks/external/native/SortInput.hlsl"), "Interleave",
+    new Dictionary<string, string>(), [], []));
+foreach (var shader in shaders)
 {
     var options = new DxcCompilerOptions
     {
