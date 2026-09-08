@@ -1,0 +1,54 @@
+{
+  "title": "Single-pass Scan: less intermediate GPU work",
+  "subtitle": "16,777,216 elements \u00b7 AMD R9700 / D3D12 \u00b7 independent paired confirmation",
+  "diagram": "before_after",
+  "before": [
+    "Multi-pass Scan",
+    "Intermediate buffers",
+    "Further dispatches"
+  ],
+  "after": [
+    "Single-pass Scan",
+    "Look-back state",
+    "Final output"
+  ],
+  "kind": "interval",
+  "panel": {
+    "title": "Confirmed speedup and 95% interval",
+    "rows": [
+      {
+        "label": "1 resident input",
+        "value": 1.4782,
+        "low": 1.4734,
+        "high": 1.483
+      },
+      {
+        "label": "3 resident inputs",
+        "value": 1.5254,
+        "low": 1.5149,
+        "high": 1.536
+      }
+    ],
+    "min": 0.95,
+    "max": 1.65,
+    "suffix": "x",
+    "unit": "Speedup vs declared in-repository baseline",
+    "reference": 1
+  },
+  "note": "Dashed line = 1.0x (baseline). Intervals use the recorded paired protocol.\nThe upper illustration explains execution structure; box sizes do not represent measured time.",
+  "source_label": "docs/results/R9700_VNEXT_INTEGRATION_2026-09-07.md",
+  "sources": [
+    {
+      "path": "docs/results/R9700_VNEXT_INTEGRATION_2026-09-07.md",
+      "sha256": "33eb246b56d372677df514abcc91395c3a9293a97c2c3bd23c1edb4556428820",
+      "hash_normalization": "CRLF to LF"
+    }
+  ],
+  "chart_contract": {
+    "surface": "GitHub README; static SVG and PNG",
+    "palette": "single blue root plus neutrals; explicit labels and hatching",
+    "footprint": "1200 x 860 logical pixels",
+    "question": "Single-pass Scan: less intermediate GPU work",
+    "data_grain": "As labeled per panel; schematic flow has no timing or dimensional scale."
+  }
+}

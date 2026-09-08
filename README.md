@@ -24,6 +24,12 @@ flowchart LR
     O --> U["Unity profile consumer"]
 ```
 
+## Visual walkthrough
+
+[![Engineering overview and evidence](docs/portfolio/overview.svg)](docs/portfolio/overview.png)
+
+Single-pass execution schematic with the two independently confirmed Scan results and their 95% intervals. [Sources and reproduction](docs/portfolio/README.md).
+
 ## Engineering challenges
 
 1. **Optimize the whole operation.** Scan, compaction and stable radix sorting
