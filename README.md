@@ -14,6 +14,12 @@ Its R9700 correctness evidence is separate from the historical performance resul
 
 ## Five-process Scan applicability experiment
 
+The [fixed 8 Mi Scan IO control](docs/integration/CAUSAL_SCAN_RESULTS.md) changes
+scalar IO to vector4 IO while retaining local scan and lookback work. The point
+estimate improves, but all three comparisons fail the frozen variability gates.
+This remains an opt-in diagnostic arm, with no default promotion or claim of
+isolated hardware bandwidth improvement.
+
 The [focused cost diagnosis](docs/integration/FOCUSED_COST_RESULTS.md) examines
 only 1 Mi key/payload Radix and 8 Mi Scan. A single opt-in ballot-rank candidate
 reduces the Radix point estimate, but all four new comparisons remain inconclusive
