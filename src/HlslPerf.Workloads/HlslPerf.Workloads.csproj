@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <PackageId>EdwinLiu.HlslPerf.Workloads</PackageId>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
     <Description>Reusable reduction, scan, transpose, compaction, histogram, and radix workloads for HlslPerf.</Description>
   </PropertyGroup>
   <ItemGroup>
@@ -10,8 +11,9 @@
   <ItemGroup>
     <None Include="../../LICENSE.md" Pack="true" PackagePath="" />
     <None Include="../../kernels/*.hlsl" Pack="true" PackagePath="contentFiles/any/any/hlslperf/kernels/" />
+    <None Include="../../kernels/consumer/*.compute" Pack="true" PackagePath="contentFiles/any/any/hlslperf/kernels/consumer/" />
     <None Include="../../kernels/include/hlslperf/*.hlsli" Pack="true" PackagePath="contentFiles/any/any/hlslperf/kernels/include/hlslperf/" />
-    <None Include="../../third_party/**/*" Exclude="../../third_party/**/bin/**;../../third_party/**/obj/**" Pack="true" PackagePath="contentFiles/any/any/hlslperf/third_party/%(RecursiveDir)" />
+    <None Include="../../third_party/**/*" Exclude="../../third_party/**/bin/**;../../third_party/**/obj/**" Pack="true" PackagePath="contentFiles/any/any/hlslperf/third_party/" />
     <None Include="../../manifests/*.json" Pack="true" PackagePath="contentFiles/any/any/hlslperf/manifests/" />
   </ItemGroup>
 </Project>

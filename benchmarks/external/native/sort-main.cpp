@@ -11,7 +11,7 @@ int main(int argc, char** argv)
     if (argc != 2 || std::strcmp(argv[1], "candidate") != 0) return 2;
     auto device = InitDevice();
     auto info = GetDeviceInfo(device.get());
-    if (!info.SupportsWaveIntrinsics || info.SIMDWidth > 32 || info.SIMDMaxWidth < 32) return 3;
+    if (!info.SupportsWaveIntrinsics || info.SIMDWidth > 32 || info.SIMDMaxWidth < 32 || info.SupportedShaderModel < L"cs_6_6") return 3;
     std::puts("HlslPerf candidate adapter (Unmeasured): inherited upstream input/validator/batch; SoA conversion included.");
     HlslPerfSort candidate(device, info);
     if (!candidate.TestAll()) return 4;

@@ -10,9 +10,11 @@ FILES=['kernels/consumer/ScanWaveTiled.compute','kernels/include/hlslperf/scan_w
 
 def export(root,output):
     root=Path(root).resolve(); output=Path(output).resolve()
-    # Read the complete dependency set before creating a destination.
-    data={path:(root/path).read_bytes() for path in FILES}
     source=subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()
+    # Export exact committed bytes, independent of platform text checkout filters.
+    # Refuse local shader changes rather than labelling them with an unrelated commit.
+    subprocess.run(['git','-C',str(root),'diff','--exit-code','HEAD','--',*FILES],check=True,stdout=subprocess.DEVNULL)
+    data={path:subprocess.check_output(['git','-C',str(root),'show',source+':'+path]) for path in FILES}
     if output.exists(): raise ValueError('Choose a new export directory.')
     files=[dict(path=path,sha256=hashlib.sha256(data[path]).hexdigest()) for path in sorted(data)]
     identity=hashlib.sha256(''.join(f['path']+'\0'+f['sha256']+'\n' for f in files).encode()).hexdigest()

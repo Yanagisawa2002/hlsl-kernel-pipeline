@@ -146,7 +146,7 @@ The public schemas are immutable, versioned files under `schemas/` and are also
 packed inside `EdwinLiu.HlslPerf.Core`:
 
 - manifest 3.0;
-- deployable profile 2.0;
+- deployable paired profile 3.0 (historical 2.0 requires explicit opt-in);
 - checkpoint `hlslperf.checkpoint.v1`.
 
 ## Shared HLSL and source identity
