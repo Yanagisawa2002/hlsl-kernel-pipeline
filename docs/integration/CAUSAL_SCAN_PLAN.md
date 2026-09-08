@@ -17,3 +17,9 @@ The candidate passed 68 boundary/pattern cases plus all three arms at 8 Mi (142 
 Three development processes completed once with all output checks passing. Candidate mean times are 0.072735/0.074046/0.092589 ms versus baseline 0.173018/0.176133/0.217519 ms. Variability is substantial (candidate CV16.48%/20.52%/65.20%; RTS also varies). These are descriptive diagnostics only. The verified mechanism and consistent lower point estimates justify exactly one frozen five-process confirmation, with independent new seeds and no altered warmup, thresholds or additional candidate. A stability failure will remain inconclusive, without another sampling attempt.
 
 One build compiled with a readonly-argument warning and failed two new tests because nested shader arrays used reference equality. The test now compares settings/array contents, and the disassembly argument uses `in`. This did not change the candidate kernel. The next build passed108 Core and3 Python tests with no warnings; all failures are retained.
+
+## Retained pre-measurement failures
+
+The new byte audit rejected scan.hlsl because changing its attributes did not restage pre-existing Git index bytes. An explicit `git add --renormalize` preserved the measured checkout bytes under -text/-eol. No HLSL text/semantics changed. The rejection is recorded before declaration generation.
+
+The first frozen formal process exited with usage code1 before creating a process record or D3D12 device: the wrapper had accidentally appended a diagnostic process-index argument to formal mode. Fix the dispatch condition and assert the exact argument count before launch. Retain the v1 declaration, failed receipt/logs and build. A v2 declaration changes only source hashes for the wrapper, with exactly the same arms, seeds, schedule, thresholds and workloads. Use a new build/output epoch; no performance observations existed to discard or select.

@@ -19,7 +19,7 @@ $output=[IO.Path]::GetFullPath($OutputDirectory)
 if ((Test-Path -LiteralPath $output) -or (Test-Path -LiteralPath "$output.execution.json")) { throw 'Evidence path already exists; no automatic retries.' }
 [IO.Directory]::CreateDirectory((Split-Path -Parent $output)) | Out-Null
 $arguments=@([IO.Path]::GetFullPath($Runtime),$Mode,$repo,$output)
-if ($Mode -in @('focused-diagnostic','causal-diagnostic'),'causal-diagnostic','focused-correctness','focused-formal','causal-formal') { $arguments+=@("$ProcessIndex") }
+if ($Mode -in @('focused-diagnostic','causal-diagnostic')) { $arguments+=@("$ProcessIndex") }
 if ($Mode -eq 'pilot') { $arguments+=@([IO.Path]::GetFullPath($Declaration),$Cell,"$ProcessIndex") }
 if ($Mode -in @('formal','focused-formal','causal-formal')) {
     if (-not ($Declaration -and $Cell -and $ProcessIndex -ge 1 -and $ProcessIndex -le 5 -and $ExpectedSourceSha -and $BinaryLock)) { throw 'Formal execution requires frozen source, binaries and a complete declaration.' }
@@ -31,6 +31,8 @@ if ($Mode -in @('formal','focused-formal','causal-formal')) {
         if ($actual -ne $item.sha256) { throw "Frozen binary changed: $($item.path)" }
     }
 }
+$expectedArgumentCount = if ($Mode -in @('formal','focused-formal','causal-formal','pilot')) { 7 } elseif ($Mode -in @('focused-diagnostic','causal-diagnostic')) { 5 } else { 4 }
+if ($arguments.Count -ne $expectedArgumentCount) { throw "Invalid argument count for $Mode before native launch." }
 $receipt=[ordered]@{ schema='hlslperf.unified-native-execution.v1'; developmentOnly=($Mode -notin @('formal','focused-formal','causal-formal')); sourceSha=$source; command=@('dotnet')+$arguments; queuedUtc=[DateTime]::UtcNow.ToString('o'); status='queued'; output=$output; wrapperPid=$PID; pid=$null }
 function Save-State {
     [IO.File]::WriteAllText("$output.execution.json",($receipt | ConvertTo-Json -Depth 10))

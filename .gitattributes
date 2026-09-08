@@ -28,3 +28,4 @@ tools/Invoke-UnifiedExperiment.ps1 -text -eol
 tools/causal_scan_protocol.py -text -eol
 kernels/scan.hlsl -text -eol
 docs/integration/causal-scan-declaration.json -text -eol
+docs/integration/causal-scan-declaration-v2.json -text -eol
