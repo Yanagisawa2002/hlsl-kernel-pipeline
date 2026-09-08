@@ -1,0 +1,433 @@
+{
+  "schema": "hlslperf.unified-declaration.v1",
+  "repetitions": 18,
+  "blocks": 12,
+  "warmupBatches": 8,
+  "warmupRepetitions": 6,
+  "processesPerCell": 5,
+  "cells": [
+    {
+      "id": "scan-8mi-keys-uniform-1slots",
+      "workload": "scan",
+      "count": 8388608,
+      "pattern": "uniform",
+      "pairs": false,
+      "slots": 1,
+      "arms": [
+        "internal-scan-single",
+        "internal-scan-single-vector-io",
+        "gps-reduce-then-scan"
+      ],
+      "processes": [
+        {
+          "index": 1,
+          "seeds": [
+            2916994
+          ],
+          "orders": [
+            [
+              "internal-scan-single-vector-io",
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single",
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io",
+              "internal-scan-single"
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "seeds": [
+            2924901
+          ],
+          "orders": [
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single",
+              "internal-scan-single-vector-io"
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "seeds": [
+            2932808
+          ],
+          "orders": [
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single",
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single",
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ]
+          ]
+        },
+        {
+          "index": 4,
+          "seeds": [
+            2940715
+          ],
+          "orders": [
+            [
+              "internal-scan-single",
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single",
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io"
+            ]
+          ]
+        },
+        {
+          "index": 5,
+          "seeds": [
+            2948622
+          ],
+          "orders": [
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single",
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single",
+              "internal-scan-single-vector-io"
+            ],
+            [
+              "internal-scan-single",
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "gps-reduce-then-scan",
+              "internal-scan-single"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single-vector-io",
+              "internal-scan-single",
+              "gps-reduce-then-scan"
+            ],
+            [
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io",
+              "internal-scan-single"
+            ],
+            [
+              "internal-scan-single",
+              "gps-reduce-then-scan",
+              "internal-scan-single-vector-io"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "processOrder": [
+    {
+      "cell": "scan-8mi-keys-uniform-1slots",
+      "process": 1
+    },
+    {
+      "cell": "scan-8mi-keys-uniform-1slots",
+      "process": 2
+    },
+    {
+      "cell": "scan-8mi-keys-uniform-1slots",
+      "process": 3
+    },
+    {
+      "cell": "scan-8mi-keys-uniform-1slots",
+      "process": 4
+    },
+    {
+      "cell": "scan-8mi-keys-uniform-1slots",
+      "process": 5
+    }
+  ],
+  "inputs": "Full uint32 deterministic LCG; duplicate keys are modulo seven; original-index payloads; independent resident allocations.",
+  "semantics": {
+    "scan": "exclusive uint32 addition modulo 2^32",
+    "radix": "stable ascending full32 uint32 keys; canonical AoS pair input and SoA outputs"
+  },
+  "costs": "GPU total includes input restore, scratch initialization, all dispatches/barriers, consumer conversion, and timestamp markers; no empty-marker subtraction. Upload/readback and CPU plan/record/close/submit/wait/reset are separate.",
+  "correctness": "Every arm and resident slot independently runs two full-output poison/oracle checks before timing; correct arms repeat two checks after timing. A failing arm retains all checks and receives explicit not-timed observations. No other arm is filtered.",
+  "stops": "No retries, tuning, data-dependent warmup, early performance stopping or replacement seeds. Any native exception/device loss aborts this process and stops the matrix epoch for diagnosis; do not pool across source/binary changes. Incorrect arms are not timed. Statistical failures remain measured and inconclusive.",
+  "statistics": {
+    "primary": "paired log GPU-total-per-operation ratios, averaged within 12 blocks and then within each independent process",
+    "ci": "two-sided 95% Student t interval over five process log ratios, df=4, critical=2.7764451051977987",
+    "cv": "sample standard deviation / mean of 24 batch averages in each process and arm",
+    "drift": "absolute ratio of final three block mean to first three block mean minus one",
+    "tail": "linear interpolated per-operation GPU timestamp p95 and p99 within each process; correlated repeats are not independent replicates",
+    "accepted": "both arms correct in all five complete processes; every arm/process CV<=0.05 and drift<=0.15; every process p95 numerator/denominator>=1.01; paired lower95>=1.01",
+    "multiplicity": "predeclared pairwise comparisons are individually descriptive, with no familywise error adjustment; no universal winner or automatic policy promotion"
+  },
+  "controls": "Existing R9700/driver/power/user workloads unchanged. Resident slots rotate equally. No global cache flush, fixed clocks, residency pinning or measured hardware cache counters.",
+  "memory": "512 MiB committed allocation cap per slot, plus 75% of available DXGI local budget check; total allocations and slot counts reported.",
+  "sources": {
+    "src/HlslPerf.Workloads/UnifiedWorkloads.cs": "2ec51ea3fa41161dd951bd038ec9e13fa28008134a91fef5963885f64f2fd6c7",
+    "src/HlslPerf.Workloads/CausalScanWorkloads.cs": "092c017ccdc21a543a2570ae776f5e2f34ae10a17b1e102b356d3a3c89626089",
+    "src/HlslPerf.D3D12/D3D12UnifiedOperations.cs": "275010b77642d15335dbfcf47ec6f0c98ab9fd03dddd52f2ebb16626a78078cf",
+    "src/HlslPerf.UnifiedBench/UnifiedBenchRunner.cs": "4129b8a4e7aef0ada51d99b45c9cddebda2364409be748eb7afe151e5d3753a5",
+    "src/HlslPerf.UnifiedBench/CausalScanRunner.cs": "2c0f8a23e380aa4dc619b446f168196d0b941cfc09625d646deb71012a0ba488",
+    "src/HlslPerf.UnifiedBench/Program.cs": "a8944c7574bf98eaf5bdf22f8abf2a609664b0719053f2bf0040c18b7da5da4f",
+    "kernels/scan.hlsl": "d7404a9c8e7e4112281209ae72cc31398bba6e1a10d385ab4e19e0ffa53db0d5",
+    "kernels/include/hlslperf/scan_u32.hlsli": "2bd0d3c6e79e98c57d37aaa686c5eadce4873791548f4640b6b8a2136839ae02",
+    "third_party/upstream-lock.json": "a01f9af040bcb5f9804df97aa79de08b5b837da51ba187e4e48978e7cae3126e",
+    "tools/Invoke-UnifiedExperiment.ps1": "3d8700c24e49fd1117587835c5e348b6a0d2ff6ae5adbb447241f514621661d4",
+    "tools/causal_scan_protocol.py": "81f42ea534a2b3f2f03dcea4d33685da2d4e184882f9aa919286c29c16229046",
+    "tools/unified_protocol.py": "a98e315ea47db25e47f52b9db4249e74696857f43ede9410f7b341d141b9e809"
+  },
+  "scope": "One fixed Scan vector4 IO candidate; no Radix; no parameter search or retries. Diagnostic samples are excluded.",
+  "candidate": {
+    "arm": "internal-scan-single-vector-io",
+    "vectorWidth": 4,
+    "groupSize": 256,
+    "waveSize": 32,
+    "elementsPerThread": 16,
+    "persistentGroups": 256,
+    "extraLogicalBytes": 0,
+    "extraLdsBytes": 0,
+    "limitations": "Lane spacing remains 64 bytes. Compiler scheduling/register allocation may change. DXIL is not device ISA or DRAM counters."
+  },
+  "rationale": "Correct full outputs and matching DXIL demonstrate sixteen scalar IO calls become four vector calls on full blocks while local-scan semantics remain. Three retained diagnostics show lower candidate point estimates with high variability. This single confirmation tests the frozen full-operation contract, not a pure hardware cost decomposition."
+}
