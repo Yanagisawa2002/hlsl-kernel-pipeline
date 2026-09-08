@@ -1,0 +1,11 @@
+# Fixed Scan IO-granularity experiment
+
+Baseline: published main 67156695bb0eed034078638321212e6df6f98d0a. Its ten focused declaration paths match both checkout and Git blob SHA256 before edits. Historical declarations/evidence remain unchanged. Radix is not sampled.
+
+Hypothesis: the existing vector4 branch reduces load/store instruction granularity cost while retaining semantic local prefix work. The sole candidate changes HLSLPERF_VECTOR_WIDTH from 1 to 4; group256, wave32, 16 elements/lane, 4096-element partitions, 2048 logical partitions, 256 persistent workers, input order, uint32 modulo semantics, lookback/reset, and complete output are fixed. Neighboring lanes still start 64 bytes apart. This is not a lane-transpose experiment or a bandwidth measurement. No extra logical bytes or LDS are requested. Register allocation, chunk lowering, and scheduling may change; actual device ISA/occupancy/DRAM counters are unavailable unless measured explicitly.
+
+First run index0: 17 boundary sizes including 8 Mi and four patterns, plus all three full-size arms, with two poisoned full-output oracle checks; no performance timing. Export actual compiled DXIL and disassembly using the same flags as the executor and require matching binary hashes. Check scalar/vector load/store masks and unchanged wave/local/atomic/barrier structure before interpreting the mechanism.
+
+Development diagnostics: exactly three independent processes, 8 Mi uniform full uint32, one slot. Baseline scalar, sole vector4 candidate, official default RTS. Seed1909087+processIndex*7907, eight six-operation warmup batches/arm, six blocks covering all six permutations with reversed second half, twelve eighteen-operation full batches/arm. No additional pass markers, software counters, or hardware-state changes. Do not pool with formal evidence. Native exceptions/device loss stop the epoch; preserve every failure. No tuning or retries for favorable timing.
+
+After mechanism and correctness validation, decide whether this one candidate supports a single frozen five-process confirmation; if not, report rejection without another candidate. Formal acceptance retains paired process-log 95% CI, CV<=5%, drift<=15%, every-process p95 ratio>=1.01 and lower95>=1.01. No default promotion. All builds/tests/GPU work use the shared mutex without nesting.

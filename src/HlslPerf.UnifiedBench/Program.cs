@@ -8,6 +8,8 @@ using HlslPerf.Workloads;
 [assembly: SupportedOSPlatform("windows10.0")]
 
 if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException("D3D12 requires Windows.");
+if (args.Length == 4 && args[0] == "causal-diagnostic") return CausalScanRunner.Run(args[1], args[2], int.Parse(args[3]));
+if (args.Length == 6 && args[0] == "causal-formal") return UnifiedBenchRunner.Run(args, CausalScanWorkloads.Build);
 if (args.Length == 3 && args[0] == "focused-correctness") return FocusedCostRunner.Correctness(args[1], args[2]);
 if (args.Length == 4 && args[0] == "focused-diagnostic") return FocusedCostRunner.Run(args[1], args[2], int.Parse(args[3]));
 if (args.Length >= 3 && args[0] is "correctness" or "formal" or "pilot" or "focused-formal") return UnifiedBenchRunner.Run(args);
