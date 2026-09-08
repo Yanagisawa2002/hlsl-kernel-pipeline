@@ -38,6 +38,7 @@ internal sealed class ScanWorkload : IKernelWorkload
             throw new InvalidDataException($"Candidate '{candidate.Id}' wave size must be 0, 32, or 64.");
         if (waveSize != 0 && manifest.ShaderModel is not ("6_6" or "6_7"))
             throw new InvalidDataException($"Candidate '{candidate.Id}' fixed wave size requires shader model 6_6+.");
+        WaveTiledScanCandidates.Validate(candidate);
         EnsureOracle(elementCount, seed, scanOperator);
 
         long blockSize = checked((long)groupSize * elementsPerThread);
@@ -112,6 +113,7 @@ internal sealed class ScanWorkload : IKernelWorkload
 
     private KernelExecutionPlan BuildSinglePass(KernelCandidate candidate, int elementCount, long blockSize)
     {
+        bool waveTiled = WaveTiledScanCandidates.Validate(candidate);
         uint logicalBlocks = WorkloadData.CeilDiv(elementCount, blockSize);
         uint persistentGroups = Math.Min(logicalBlocks, checked((uint)GetPersistentGroupLimit(candidate)));
         int stateBytes = checked(8 + checked((int)logicalBlocks) * 12);
@@ -125,16 +127,16 @@ internal sealed class ScanWorkload : IKernelWorkload
         [
             new(
                 "single-pass-reset",
-                "ResetSinglePassState",
+                waveTiled ? WaveTiledScanCandidates.ResetEntryPoint : "ResetSinglePassState",
                 new KernelDispatch(1),
                 null,
                 null,
                 "single-pass-state",
                 null,
-                []),
+                waveTiled ? [0, 0, logicalBlocks] : []),
             new(
                 "single-pass-scan",
-                "SinglePassScan",
+                waveTiled ? WaveTiledScanCandidates.ScanEntryPoint : "SinglePassScan",
                 new KernelDispatch(persistentGroups),
                 "input",
                 null,

@@ -1,0 +1,102 @@
+{
+  "schema": "hlslperf.scan-wave-tiled.source-review.v1",
+  "performanceStatus": "Unmeasured",
+  "sources": [
+    {
+      "name": "GPUPrefixSums",
+      "repository": "https://github.com/b0nes164/GPUPrefixSums",
+      "commit": "98d93a4e9ed2f3c8353119515bf9be90a2e137ad",
+      "role": "Algorithm library and its native D3D12 benchmark; local wave-tiled adaptation derives from its scan/fallback methods. Not a generic standard workload suite.",
+      "license": "MIT for reviewed HLSL; complete upstream MIT/BSD notices retained.",
+      "adaptedInPlace": false,
+      "files": [
+        {
+          "path": "LICENSE",
+          "localPath": "third_party/gpu-prefix-sums/LICENSE",
+          "bytes": 3075,
+          "gitBlobSha1": "0a1211659b176f93feed2c79856314b223f2308b",
+          "sha256": "666d401992c505e5f94ff355068f91a12763e086e32f964ab06865627b1ed899",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/LICENSE"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/GPUPrefixSumBase.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/GPUPrefixSumBase.h",
+          "bytes": 17308,
+          "gitBlobSha1": "82dd5d26da360c7389b9b5497939ee3e3cdd4706",
+          "sha256": "c893651f90e68f9ff0491056065d9c217a9ff57d1eb6b17ecfa031f0068f0abd",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/GPUPrefixSumBase.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl",
+          "bytes": 7342,
+          "gitBlobSha1": "659618af8a5b3937e3e3e27467b208c6dd488592",
+          "sha256": "1e6feccda7db9dd3c7f1d6a6e057d40eafad973716478c607f0cd8072e51b336",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl",
+          "bytes": 5204,
+          "gitBlobSha1": "2e5c9ad6c3651a9a0788ed7cdbef0d65857ed759",
+          "sha256": "76c32f0653cba79ab7975209fb1547cc2fa0a2937b27a329024a308fd3c7d691",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookbackDecoupledFallback.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookbackDecoupledFallback.hlsl",
+          "bytes": 8411,
+          "gitBlobSha1": "99894ad457fe1b552e4de31fdc934c21f04409a1",
+          "sha256": "1e76c32ecb36a76d39dbc16fc10833f30bb321067cc3d1e6c32bd2dbe38319f1",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookbackDecoupledFallback.hlsl"
+        }
+      ]
+    },
+    {
+      "name": "GPUSorting",
+      "repository": "https://github.com/b0nes164/GPUSorting",
+      "commit": "09a6081d964b682bbb58838b83ab75aebe7f4e05",
+      "role": "Source review of per-bin lookback/fallback and initialization. No radix file or sorter port is introduced by this change.",
+      "license": "MIT for reviewed HLSL; LICENSE also includes AMD/CUB notices.",
+      "adaptedInPlace": false,
+      "reviewSnapshot": "Downloaded for review to ignored artifacts/scan-source-review/GPUSorting; not a runtime or build dependency. URLs and byte/blob hashes identify the untouched original.",
+      "files": [
+        {
+          "path": "GPUSortingD3D12/Shaders/ForwardSweep.hlsl",
+          "bytes": 4373,
+          "sha256": "27cc682f23d19c5db9be7635dd86ddbec2f776d55240f45a0adccf5a59b6a186",
+          "gitBlobSha1": "fc40c72137f5f5a2231bef812f865f498c572d27",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/ForwardSweep.hlsl"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/OneSweep.hlsl",
+          "bytes": 4488,
+          "sha256": "1cbccfc36efbdd2c33bb9727960cdcafba0b7918bf2334dfe78d9db0d631df2e",
+          "gitBlobSha1": "24765197b2300b6e95959f7737701b0cbcd94c5b",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/OneSweep.hlsl"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/SortCommon.hlsl",
+          "bytes": 25684,
+          "sha256": "46e7852624f63fc4322c2ea73931a3941d08331567b92d85f5a085503d4cd2b1",
+          "gitBlobSha1": "958322b29690b39298077dfa4456be770c1f0857",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/SortCommon.hlsl"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/SweepCommon.hlsl",
+          "bytes": 15194,
+          "sha256": "655ef3bf2ffb2f8f1bdbec0029c4698de2abe806324a4e9ca92947621c1a7a9a",
+          "gitBlobSha1": "d18f0c892320595c9c5067972aab994289f147c5",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/SweepCommon.hlsl"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 32603,
+          "sha256": "aafd374bbdd8a629ca9800d24d2b65eff23cf4aadd3195d010d5ba786cc39ec0",
+          "gitBlobSha1": "02f60db41265039d77dd336419c669ced8fa5d3f",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/LICENSE"
+        }
+      ]
+    }
+  ]
+}
