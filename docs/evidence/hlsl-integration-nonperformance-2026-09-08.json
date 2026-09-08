@@ -1,0 +1,327 @@
+{
+  "schema": "hlslperf.integration-nonperformance.v1",
+  "date": "2026-09-08",
+  "testedCodeCommit": "93a913575b141f9afd793f654956758edbf0123d",
+  "testedCodeTree": "29053089ef4c73b7ae67d8fbd1743b18d60a8041",
+  "baselineCommit": "9bba9fefb0c579052d4dfee429531c4145e9e4be",
+  "performanceStatus": "Unmeasured",
+  "execution": {
+    "gpuDispatch": false,
+    "benchmark": false,
+    "profilingOrCounters": false,
+    "autotuningOrCalibration": false,
+    "unityImportOrPlayer": false,
+    "nativeExecutablesLaunched": false,
+    "remoteCiRun": false,
+    "published": false
+  },
+  "integratedDependencies": [
+    {
+      "task": "scan",
+      "originalCommit": "9019c1b47036bd2a67da03583f3e31ee6a6b87b4",
+      "integratedCommit": "274e5077455e6c08959a274a84379dfc4e1345dd"
+    },
+    {
+      "task": "sort",
+      "originalCommit": "251392df72a5f90e0c0b773b63c7530005721492",
+      "integratedCommit": "61a552e2fb93c85302f0ebcf332d96a4c70499e3"
+    }
+  ],
+  "preservedBranches": [
+    {
+      "branch": "codex/opt-next-hlsl-dynamic-20260907",
+      "commit": "50f16c8b4c92bd2f76b2f2f8c57fd35384245057",
+      "baselineContainsTip": true
+    },
+    {
+      "branch": "codex/opt-next-hlsl-evidence-20260907",
+      "commit": "61d9871680d953e38533438ba394bc31c11cc2a4",
+      "baselineContainsTip": true
+    },
+    {
+      "branch": "codex/opt-next-hlsl-integration-20260907",
+      "commit": "18c2e19500063b1749a9bb0315e22d3070a47ade",
+      "baselineContainsTip": true
+    },
+    {
+      "branch": "codex/opt-next-hlsl-measurement-20260907",
+      "commit": "7c68649f753f8dd9ad59de65c922cf6dc5249021",
+      "baselineContainsTip": true
+    },
+    {
+      "branch": "codex/focused-costs-hlsl-20260908",
+      "commit": "9e9e35b3724f72b7db8bb57401c7329374b99c66",
+      "baselineContainsTip": true
+    },
+    {
+      "branch": "codex/causal-hlsl-20260908",
+      "commit": "792e9e88fc00099261d733143bb209ed67c59fe8",
+      "baselineContainsTip": true
+    }
+  ],
+  "preservedRadixBranch": {
+    "branch": "codex/opt-next-hlsl-radix-20260907",
+    "tip": "392f6815748aaf2524b578b31576965e7cb3ebb6",
+    "patchEquivalentCommits": [
+      "8d531c2b22878d2ec593961c5b1ce18e8b13a06b",
+      "c0963839192cf8cdbc7bbc335ae7a675d6e2c0cd",
+      "a7a18bc2e050485759b13f71bf6dca4f62b290dd",
+      "de8b6c7c6b11410768bb78bf7966f78ae7cf1390",
+      "36e3dec54367a57f7178009fd7f5e176252bd855",
+      "392f6815748aaf2524b578b31576965e7cb3ebb6"
+    ]
+  },
+  "managedBuild": {
+    "command": "dotnet build HlslKernelPipeline.slnx -c Release --nologo -v minimal",
+    "succeeded": true,
+    "warnings": 0,
+    "errors": 0
+  },
+  "coreTests": {
+    "command": "dotnet test tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj -c Release --no-build",
+    "total": 167,
+    "executed": 167,
+    "passed": 167,
+    "failed": 0,
+    "trxSha256": "327775eb1929dfc3d01d403b6f03460257d90f4470e4b12c6a171bd019cf5006"
+  },
+  "observedPythonTests": [
+    {
+      "command": "python -m unittest discover -s tools -p test_external_contracts.py",
+      "passed": 5,
+      "sourceSha256": "5f49ea6c6c126f449a7f08828228c4ce537c3ea0883ac5574e58264d8046961a"
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_wave_tiled_scan.py",
+      "passed": 11,
+      "sourceSha256": "82077656be21c76ed8c03999dcdd48fb2807ca6c4a1a20180a668d66f0df7e53"
+    },
+    {
+      "command": "python -m unittest discover -s tests -p test_unified_protocol.py",
+      "passed": 3,
+      "sourceSha256": "016483336344250d49c8cc57bcfce613c766daf5002019376c0d401a59baf213"
+    }
+  ],
+  "sdkShaderCompilation": {
+    "compiledEntries": 24,
+    "planIdentities": [
+      {
+        "implementation": "internal-scan-baseline",
+        "semanticId": "exclusive-u32-sum-modulo-2^32",
+        "identity": "80bebf2a7debd3d0c7fe5f1a503b59a537a57b53ec916b272f3a451bb3d1b508"
+      },
+      {
+        "implementation": "gps-reduce-then-scan",
+        "semanticId": "exclusive-u32-sum-modulo-2^32",
+        "identity": "45d68f7015fec04bb175a2d41ec2657e42ab461407da4a61f0e511b8fc080b6a"
+      },
+      {
+        "implementation": "internal-radix-1",
+        "semanticId": "ascending-full32-u32-sort",
+        "identity": "a0c6d7e8453ade7d4c919ff0b604338f471bd72f146400d152c25b72bc502324"
+      },
+      {
+        "implementation": "internal-radix-1",
+        "semanticId": "stable-full32-u32-sort-aos-input-soa-output",
+        "identity": "2571b3fc46e150a50bc3885d15d993018be1a1129903c9684d21e0feb81589c3"
+      },
+      {
+        "implementation": "amd-parallel-sort",
+        "semanticId": "ascending-full32-u32-sort",
+        "identity": "66b147c435cfb81017b694dfd99c574bd9df1810d8c4bda8f7993071e90ccd09"
+      },
+      {
+        "implementation": "amd-parallel-sort",
+        "semanticId": "stable-full32-u32-sort-aos-input-soa-output",
+        "identity": "4af657f0b3b784df36fccc4bfde1709a4b24687a6b4d7ebe5ad387f078197408"
+      }
+    ],
+    "compilerFiles": [
+      {
+        "path": "tools/HlslPerf.CompileOnly/bin/Release/net10.0/runtimes/win-arm64/native/dxcompiler.dll",
+        "sha256": "7bce55ceb9438e5d8d3d147cc5b2cd0327908070ec67c428a71622a41d7a99a6"
+      },
+      {
+        "path": "tools/HlslPerf.CompileOnly/bin/Release/net10.0/runtimes/win-arm64/native/dxil.dll",
+        "sha256": "1716db89daa2c0e7acfd7dccbde368de7d8d5e6de45279155a4ce68e3cfc6ca5"
+      },
+      {
+        "path": "tools/HlslPerf.CompileOnly/bin/Release/net10.0/runtimes/win-x64/native/dxcompiler.dll",
+        "sha256": "b86a738ece4c05dbe2d9bbb29668a2ccb28a0740773c9b027cdc61e8d07b4d75"
+      },
+      {
+        "path": "tools/HlslPerf.CompileOnly/bin/Release/net10.0/runtimes/win-x64/native/dxil.dll",
+        "sha256": "058f2f52a680c38b223a5615b7df969def21f77e577562e5099d971dede992de"
+      }
+    ]
+  },
+  "scanCompilation": {
+    "contracts": 29,
+    "compiledEntries": 20,
+    "expectedRejections": 9,
+    "compilerSha256": "c1547a08c4ee0cb1d8c03a65fd2a8262002e68596d152a1915b1fd8b31ed0618",
+    "sources": {
+      "kernels/scan.hlsl": "5e52887b4b4aee542f29e570b5aaee8d216ca78941f569f09821b955cda961a6",
+      "kernels/compaction.hlsl": "0df236add5d2edc5bd927b2cfb7db49d5d853fc051f928147dfd2f1770b1b5a1",
+      "kernels/include/hlslperf/scan_u32.hlsli": "2bd0d3c6e79e98c57d37aaa686c5eadce4873791548f4640b6b8a2136839ae02",
+      "kernels/include/hlslperf/scan_wave_tiled_u32.hlsli": "d37710947770c523e04e6fd61cd94c56971d177e3c0128b940ed849bdd73e32e",
+      "kernels/consumer/ScanWaveTiled.compute": "9534c8287fa1afac0a961c70271ee2a7f8e49be573c4a97b24f799dbb1df3691",
+      "tools/check_wave_tiled_scan.py": "3a580abbfb55ad05cdb553d8833bab290fc6c60ec798b8c56aa69652e7a34659"
+    }
+  },
+  "radixCompilation": {
+    "compiledEntries": 74,
+    "maximumStaticSharedBytes": 22548,
+    "compilerSha256": "c1547a08c4ee0cb1d8c03a65fd2a8262002e68596d152a1915b1fd8b31ed0618",
+    "sources": {
+      "kernels/radix-sort.hlsl": "fa7ba4a551d87f8dc97541ee4adb28a73a39a0fd162f9178c83fade60167e1b8",
+      "kernels/include/hlslperf/scan_u32.hlsli": "2bd0d3c6e79e98c57d37aaa686c5eadce4873791548f4640b6b8a2136839ae02"
+    }
+  },
+  "nativeBuild": {
+    "toolset": "v145",
+    "succeeded": [
+      "scan",
+      "sort"
+    ],
+    "localSourceSha256": {
+      "HlslPerfScan.h": "1100dc2e9d44e1e70fa710ac9ca37b5defd0c3e9b284b2b16ebfa6357cebbb92",
+      "HlslPerfSort.h": "e0beeb4fea193ecfb89bb10e54db26ff6297d6f1717d689013aea527f7b9c0a0",
+      "NativeKernel.h": "d17b7de9fdf418a6c163c45fdaddc69ef2e4d020ae830374497d8620f2231422",
+      "scan-main.cpp": "3b12c41782d8906d43b545b239d03a3c090276051fb7a1b5ebd6a76c8e91a846",
+      "ScanInclusive.hlsl": "950dc7995cf92c8e212f372d4203b286e428f3f0e2ca1eb00c3950e3b06d19fa",
+      "sort-main.cpp": "0d9aa8071aecad04f2b1ea24cfc645e45f95f76d149d92a297f151011e915576",
+      "SortInput.hlsl": "fa9ae2629a08ad62e69315fb907c019b219722a20a289f88155c8e58b2927a33"
+    },
+    "binarySha256": {
+      "scan/scan.exe": "6e601a58fc7a4f7aa4432155da3730dce94e03624df08e3c1ba459c8abd63bc2",
+      "sort/sort.exe": "48a0d1d9858e853431024ab8491f6c8cca39b0a1f1fd79b9712a54617749e71c"
+    },
+    "warnings": "Three C4244 conversions in unchanged upstream DeviceRadixSort.cpp; no local adapter warnings."
+  },
+  "upstream": {
+    "passed": true,
+    "files": 114,
+    "lockSha256": "8d707858e69288fa6f10c9ec208d340cce3fa73b21d0240cbd3607d9b1120334",
+    "commits": {
+      "amd-fidelityfx-parallelsort": "c6efa6bf7f2027b3ec94f28578bb5965eabb9e55",
+      "gpu-prefix-sums": "98d93a4e9ed2f3c8353119515bf9be90a2e137ad",
+      "gpu-sorting": "09a6081d964b682bbb58838b83ab75aebe7f4e05"
+    }
+  },
+  "nativeDependencyLockSha256": "fb71bc842956ee0e048a523f00ab5d88571e254b9b4221cd2da77d93c1e875fe",
+  "broaderReviewLockSha256": "645ee536560c3bccabf6078567b8879996f038d368ce09670e5bfe3f6c99cfc8",
+  "nativeRadixDimensions": {
+    "count": 268435456,
+    "bitCount": 32,
+    "radixBits": 4,
+    "pairs": true,
+    "recordBytes": 2147483648,
+    "bins": 16,
+    "tiles": 524288,
+    "prefixTiles": 1024,
+    "histogramValues": 8388608,
+    "summaryValues": 16384,
+    "summaryOffset": 8388608,
+    "binOffset": 8404992,
+    "histogramBytes": 33554432,
+    "summaryBytes": 65536,
+    "prefixBytes": 33620032,
+    "defines": {
+      "HLSLPERF_GROUP_SIZE": 128,
+      "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+      "HLSLPERF_SCAN_BACKEND": 2,
+      "HLSLPERF_SCAN_OPERATOR": 1,
+      "HLSLPERF_VECTOR_WIDTH": 1,
+      "HLSLPERF_WAVE_SIZE": 32,
+      "HLSLPERF_RADIX_BITS": 4,
+      "HLSLPERF_RADIX_PAIRS": 1,
+      "HLSLPERF_RADIX_TILE": 1,
+      "HLSLPERF_RADIX_RANK_BALLOT": 0
+    }
+  },
+  "package": {
+    "path": "artifacts/packages-integrated/EdwinLiu.HlslPerf.Workloads.0.6.0.nupkg",
+    "passed": true,
+    "upstreamFiles": 114,
+    "shaderAssets": 12,
+    "packageSha256": "f8fdad86e36dec281c45b942c8d9d8bf4428f45798d7b0362ea04f04d6f9a7dc"
+  },
+  "unityConsumer": {
+    "schema": "hlslperf.unity-scan-consumer.v1",
+    "sourceCommit": "274e5077455e6c08959a274a84379dfc4e1345dd",
+    "assetSha256": "117f226d4f83c9a19155d03f2d6179e55db676e19fc58c76ccb1aaef836b6f16",
+    "variantId": "hlslperf.scan-wave-tiled.u32.wave32.g256.b4096.v1",
+    "kernelAbi": "hlslperf.raw-buffer.v1",
+    "files": [
+      {
+        "path": "LICENSE.md",
+        "sha256": "48830d9a8f6050f4fd485ed3b9898c879beda125e3233625c010928c4d6e2215"
+      },
+      {
+        "path": "kernels/consumer/ScanWaveTiled.compute",
+        "sha256": "9534c8287fa1afac0a961c70271ee2a7f8e49be573c4a97b24f799dbb1df3691"
+      },
+      {
+        "path": "kernels/include/hlslperf/scan_wave_tiled_u32.hlsli",
+        "sha256": "d37710947770c523e04e6fd61cd94c56971d177e3c0128b940ed849bdd73e32e"
+      }
+    ],
+    "maximumConsumerCount": 16776960
+  },
+  "rawLocalArtifacts": [
+    {
+      "path": ".scratch/sdk-compile-delivery/compile-only.json",
+      "sha256": "857bb80dc3833d999ae3cddf8a5500caaefc5b80843805165d76b8e08fb6a8df"
+    },
+    {
+      "path": ".scratch/scan-pinned-dxil/receipt.json",
+      "sha256": "46aa7cfbb234c977280f3109ae1452023d3049a6ef80ac41f25ff4e68e71c6da"
+    },
+    {
+      "path": ".scratch/radix-pinned-dxil/compile-receipt.json",
+      "sha256": "953ebe4deadef92fe213010e0567c8f9c5919f74a0461399e8365afc81e00af7"
+    },
+    {
+      "path": ".scratch/native-build-delivery/preparation.json",
+      "sha256": "45c2fd46c174bf10bd4c54aeddb4b284350056bc71502154d76521064ef695a4"
+    },
+    {
+      "path": ".scratch/summit-scan-consumer-canonical/consumer-manifest.json",
+      "sha256": "682f41b98fe034a12d5b6964aeffd2c379d8745f9bbcd33ffb9270de616936f0"
+    },
+    {
+      "path": ".scratch/native-radix-plan.json",
+      "sha256": "13fd3643a3fc868f2ee8649e3ce30805c54ef294b29ac8719224a847d1431c7e"
+    },
+    {
+      "path": ".scratch/integration-delivery/core-tests.trx",
+      "sha256": "327775eb1929dfc3d01d403b6f03460257d90f4470e4b12c6a171bd019cf5006"
+    },
+    {
+      "path": ".scratch/integration-delivery/build.log",
+      "sha256": "ddecf7a4a1c0a72844e9ecfcaf10f32f3dc6570235e60a9d3b2b8eb9513a0a41"
+    },
+    {
+      "path": ".scratch/native-build-delivery/scan-build.log",
+      "sha256": "3199a1c7b21a1ffb74c9247dae31c113df24d2894bd249e1f7ee6101da797f9c"
+    },
+    {
+      "path": ".scratch/native-build-delivery/sort-build.log",
+      "sha256": "83e6d181be9bb543f37d003de84dd383e3e1e476a0917690290d215de9a32249"
+    },
+    {
+      "path": "artifacts/packages-integrated/EdwinLiu.HlslPerf.Workloads.0.6.0.nupkg",
+      "sha256": "f8fdad86e36dec281c45b942c8d9d8bf4428f45798d7b0362ea04f04d6f9a7dc"
+    }
+  ],
+  "limits": [
+    "Compiler success and CPU model results do not establish GPU correctness, memory ordering or speed.",
+    "Native adapters retain original large workloads; those workloads were not allocated or executed.",
+    "Inherited native validators do not independently establish full-width scan overflow or duplicate-key stability.",
+    "BabelStream and HeCBench were reviewed only; no matched general HLSL scan/sort benchmark or cross-API score is claimed.",
+    "Unity consumer export was verified against committed Git bytes; Unity import and runtime dispatch remain unvalidated.",
+    "New candidates stay opt-in and Unmeasured; normal product runtime entry points remain available.",
+    "Raw artifacts are local, ignored build outputs. CI regenerates receipts; their hashes identify this local validation run."
+  ]
+}
