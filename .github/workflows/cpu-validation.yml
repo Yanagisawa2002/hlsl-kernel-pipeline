@@ -9,8 +9,6 @@ permissions:
 jobs:
   offline:
     runs-on: windows-latest
-    env:
-      HLSLPERF_GPU_POLICY: deny
     steps:
       - name: Enable byte-complete long-path checkout
         run: git config --global core.longpaths true

@@ -48,9 +48,11 @@ it when abandoning a command list or using those resources elsewhere. This ABI
 uses two SRVs/five UAVs/eight constants and has its own
 `hlslperf.unified-operation.v1` identity; it is not ABI-v1 Unity shader mapping.
 
-GPU recording/execution defaults to disabled. Build and CPU validation require
-no authorization; future GPU execution requires new explicit authorization as
-described in [external evaluation](../benchmarks/external/README.md).
+Build and CPU validation are separate from recording/execution. Existing GPU
+APIs and CLI commands remain runnable product features. This repair invokes
+only the compile/CPU paths; CI uses an explicit allowlist and never runs the
+GPU correctness or benchmark programs. See
+[external evaluation](../benchmarks/external/README.md).
 
 The workload package now includes the complete shared shader set and pinned
 third-party sources/licenses under `contentFiles/any/any/hlslperf`. Use that

@@ -1,4 +1,5 @@
-#include "ExecutionAuthorization.h"
+#include <cstring>
+#include <cstdio>
 #define main HlslPerfOriginalUpstreamMain
 #include "GPUSortingD3D12.cpp"
 #undef main
@@ -6,9 +7,13 @@
 
 int main(int argc, char** argv)
 {
-    if (!HlslPerfExecutionAuthorized()) return 77;
-    if (argc == 2 && std::strcmp(argv[1], "upstream") == 0) return HlslPerfOriginalUpstreamMain();
-    if (argc != 2 || std::strcmp(argv[1], "candidate") != 0) return 2;
+    if (argc == 1 || (argc == 2 && std::strcmp(argv[1], "--help") == 0))
+    {
+        std::puts("Usage: sort.exe run-upstream|run-candidate (executes native GPU tests and benchmark)");
+        return 0;
+    }
+    if (argc == 2 && std::strcmp(argv[1], "run-upstream") == 0) return HlslPerfOriginalUpstreamMain();
+    if (argc != 2 || std::strcmp(argv[1], "run-candidate") != 0) return 2;
     auto device = InitDevice();
     auto info = GetDeviceInfo(device.get());
     if (!info.SupportsWaveIntrinsics || info.SIMDWidth > 32 || info.SIMDMaxWidth < 32 || info.SupportedShaderModel < L"cs_6_6") return 3;

@@ -41,7 +41,6 @@ public sealed partial class D3D12Tuner : IDisposable
 
     public D3D12Tuner(string? adapterNameContains = null)
     {
-        GpuExecutionPolicy.RequireAuthorized();
         if (!OperatingSystem.IsWindows())
             throw new PlatformNotSupportedException("The HlslPerf D3D12 backend requires Windows.");
         (device, adapterDescription, driverVersion) = CreateDevice(adapterNameContains);

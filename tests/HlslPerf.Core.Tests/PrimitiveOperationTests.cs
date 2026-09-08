@@ -21,15 +21,6 @@ public sealed class PrimitiveOperationTests
     private static OperationRuntime Runtime => new("test-device", "test-driver", "D3D12", "6_7", new string('a', 64), 32, 64);
 
     [Fact]
-    public void ExecutionPolicyFailsClosedEvenWithOptInWhenCiDenies()
-    {
-        Assert.Throws<InvalidOperationException>(() => GpuExecutionPolicy.Check(null, null));
-        Assert.Throws<InvalidOperationException>(() => GpuExecutionPolicy.Check("deny", GpuExecutionPolicy.AuthorizationValue));
-        Assert.Throws<InvalidOperationException>(() => GpuExecutionPolicy.Check(null, "1"));
-        GpuExecutionPolicy.Check(null, GpuExecutionPolicy.AuthorizationValue); // Pure string policy check; no environment mutation or GPU.
-    }
-
-    [Fact]
     public void ExternalSortPreservesArbitraryPayloadsAndStableFullWidthOracle()
     {
         var plan = PrimitiveOperations.StableSort(Root, [uint.MaxValue, 0, uint.MaxValue, 0],

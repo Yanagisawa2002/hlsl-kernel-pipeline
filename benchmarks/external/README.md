@@ -28,8 +28,8 @@ does not supply standard workloads.
 ## Native adapters
 
 Local `native/` subclasses inherit original generators, validators, seeds,
-batch methods and defaults. `upstream` delegates to the unchanged original main;
-`candidate` substitutes our operation through a virtual recording hook.
+batch methods and defaults. `run-upstream` delegates to the unchanged original main;
+`run-candidate` substitutes our operation through a virtual recording hook.
 
 - Scan retains `TestAll()` and `BatchTimingInclusiveInitOne(1 << 28, 100)`.
   Its batch is inclusive, so a local pass adds the input to our exclusive result
@@ -66,12 +66,12 @@ macro. Logs and `preparation.json` retain identities. Candidate shader paths
 refer to the source checkout, so moving it requires rebuilding. Builds and CI
 never launch the produced programs.
 
-Future entry points are `scan.exe upstream|candidate` and
-`sort.exe upstream|candidate`, from each executable's directory. They fail
-before device creation by default. Only after **new explicit user authorization**
-may an owner set `HLSLPERF_EXECUTION_AUTHORIZATION=I_HAVE_NEW_USER_AUTHORIZATION`.
-`HLSLPERF_GPU_POLICY=deny` overrides it. Never set authorization in builds or CI.
-No future performance run is scheduled.
+Explicit performance entry points are `scan.exe run-upstream|run-candidate`
+and `sort.exe run-upstream|run-candidate`, from each executable's directory.
+No arguments or `--help` prints usage without creating a device. The named run
+commands execute the original GPU tests/batches normally. This repair does not
+invoke them. CI only calls the prepare/build tools and reviewed CPU tests.
+No performance run is scheduled.
 
 ## Broader benchmark suitability
 

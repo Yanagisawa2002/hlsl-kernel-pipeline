@@ -15,7 +15,6 @@ internal static class Program
         Console.OutputEncoding = Encoding.UTF8;
         try
         {
-            if (args.Length != 0 && args[0] is "tune" or "doctor") GpuExecutionPolicy.RequireAuthorized();
             return args.Length == 0 || args[0] is "-h" or "--help" or "help"
                 ? ShowHelp()
                 : args[0] is "-v" or "--version" or "version"

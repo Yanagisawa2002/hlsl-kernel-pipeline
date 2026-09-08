@@ -14,7 +14,6 @@ jobs:
     runs-on: windows-latest
     env:
       NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-      HLSLPERF_GPU_POLICY: deny
     steps:
       - run: git config --global core.longpaths true
       - uses: actions/checkout@v4

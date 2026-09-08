@@ -131,9 +131,10 @@ dotnet test tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj -c Release --no
 dotnet run --project tools/HlslPerf.CompileOnly -c Release -- . .scratch/sdk-compile
 ```
 
-GPU execution, tuning, diagnostics and the historical commands below are
-disabled by default and require a later, explicitly authorized run. CI sets
-`HLSLPERF_GPU_POLICY=deny`. See [execution policy](benchmarks/external/README.md).
+The commands above are separate from GPU execution. Tuning, diagnostics and the
+historical commands below remain explicit runnable product features; they were
+not run for this repair and are excluded from CPU CI. See
+[external build/run entry points](benchmarks/external/README.md).
 DynamicSmoke and GPU correctness runners are not CPU-only checks.
 
     dotnet build HlslKernelPipeline.slnx -c Release

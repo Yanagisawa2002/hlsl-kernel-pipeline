@@ -7,7 +7,6 @@ using HlslPerf.Workloads;
 
 [assembly: SupportedOSPlatform("windows10.0")]
 
-GpuExecutionPolicy.RequireAuthorized();
 if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException("D3D12 requires Windows.");
 if (args.Length == 4 && args[0] == "causal-diagnostic") return CausalScanRunner.Run(args[1], args[2], int.Parse(args[3]));
 if (args.Length == 6 && args[0] == "causal-formal") return UnifiedBenchRunner.Run(args, CausalScanWorkloads.Build);

@@ -21,12 +21,15 @@ class ExternalContracts(unittest.TestCase):
                 self.assertIn('/'+source['commit']+'/',file['url'])
                 self.assertEqual(file['sha256'],hashlib.sha256((ROOT/file['localPath']).read_bytes()).hexdigest())
 
-    def test_native_entries_guard_before_device_and_keep_upstream_batches(self):
+    def test_native_entries_require_named_run_commands_and_keep_upstream_batches(self):
         for name,call in [('scan','BatchTimingInclusiveInitOne(1 << 28, 100)'),
                           ('sort','BatchTiming(1 << 28, 100, 10, GPUSorting::ENTROPY_PRESET_1)')]:
             entry=(ROOT/f'benchmarks/external/native/{name}-main.cpp').read_text()
             body=entry[entry.index('int main('):]
-            self.assertLess(body.index('HlslPerfExecutionAuthorized()'),body.index('InitDevice()'))
+            self.assertLess(body.index('Usage:'),body.index('InitDevice()'))
+            self.assertIn('"run-upstream"',body)
+            self.assertIn('"run-candidate"',body)
+            self.assertNotIn('getenv',body)
             self.assertIn(call,body)
             self.assertIn('HlslPerfOriginalUpstreamMain()',body)
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "DeviceRadixSort.h"
 #include "NativeKernel.h"
+#include <limits>
 
 // Reuses the native input, keys/payload validator and batch methods; changes only the candidate operation.
 // Pairs, ascending full32, four-bit tiled radix. No tuning is performed by this adapter.
@@ -29,10 +30,16 @@ public:
 protected:
     void InitBuffers(uint32_t count, uint32_t upstreamPartitions) override
     {
+        if (count == 0 || static_cast<uint64_t>(count) * 8 > std::numeric_limits<uint32_t>::max())
+            throw std::invalid_argument("Native pair buffers require a positive uint-byte-addressable size.");
         DeviceRadixSort::InitBuffers(count, upstreamPartitions);
         uint64_t tiles = (static_cast<uint64_t>(count) + 511) / 512, chunks = (tiles + 511) / 512;
-        auto buffer = [this](uint64_t bytes) { return CreateBuffer(m_device, bytes, D3D12_HEAP_TYPE_DEFAULT,
-            D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS); };
+        auto buffer = [this](uint64_t bytes) {
+            if (bytes == 0 || bytes > std::numeric_limits<uint32_t>::max())
+                throw std::overflow_error("Native scratch exceeds the upstream buffer ABI.");
+            return CreateBuffer(m_device, static_cast<uint32_t>(bytes), D3D12_HEAP_TYPE_DEFAULT,
+                D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS);
+        };
         aosA = buffer(static_cast<uint64_t>(count) * 8); aosB = buffer(static_cast<uint64_t>(count) * 8);
         hist = buffer(16 * tiles * 4); sums = buffer(16 * chunks * 4); prefix = buffer((16 * tiles + 16 * chunks + 16) * 4);
     }

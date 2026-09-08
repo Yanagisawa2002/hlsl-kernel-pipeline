@@ -62,7 +62,6 @@ public sealed class D3D12OperationRecorder
     /// States are updated to match the recorded commands; abandoned command lists require resynchronization.</summary>
     public void Record(ID3D12GraphicsCommandList commands)
     {
-        GpuExecutionPolicy.RequireAuthorized();
         void Transition(string name, ResourceStates target)
         {
             ResourceStates previous = states[name];
