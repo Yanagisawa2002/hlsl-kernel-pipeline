@@ -1,0 +1,54 @@
+name: CPU and compile validation (no GPU)
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: windows-latest
+    env:
+      HLSLPERF_GPU_POLICY: deny
+    steps:
+      - name: Enable byte-complete long-path checkout
+        run: git config --global core.longpaths true
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: microsoft/setup-msbuild@v2
+      - name: Source and external license/hash preflight
+        run: |
+          python tools/check_source_checkout.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python tools/verify_external_sources.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -m unittest discover -s tools -p test_external_contracts.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Build managed solution only
+        run: dotnet build HlslKernelPipeline.slnx -c Release --nologo
+      - name: Reviewed CPU-only test project
+        env:
+          HLSLPERF_TEST_REPOSITORY_ROOT: ${{ github.workspace }}
+        run: dotnet test tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj -c Release --no-build --nologo
+      - name: CPU protocol tests
+        run: python -m unittest discover -s tests -p test_unified_protocol.py
+      - name: Compile SDK shader plans without a device
+        run: dotnet run --project tools/HlslPerf.CompileOnly -c Release -- . .scratch/sdk-compile
+      - name: Compile pinned upstream native adapters only
+        run: python tools/prepare_external_benchmarks.py --output .scratch/native --build --msbuild (Get-Command MSBuild.exe).Source
+      - name: Export actual Unity consumer assets without importing Unity
+        run: python tools/export_scan_consumer.py --output .scratch/consumer
+      - uses: actions/upload-artifact@v4
+        with:
+          name: offline-compile-contracts
+          path: |
+            .scratch/sdk-compile/compile-only.json
+            .scratch/native/preparation.json
+            .scratch/native/*-build.log
+            .scratch/consumer/consumer-manifest.json

@@ -10,7 +10,8 @@
   <ItemGroup>
     <None Include="../../LICENSE.md" Pack="true" PackagePath="" />
     <None Include="../../kernels/*.hlsl" Pack="true" PackagePath="contentFiles/any/any/hlslperf/kernels/" />
-    <None Include="../../kernels/include/hlslperf/scan_u32.hlsli" Pack="true" PackagePath="contentFiles/any/any/hlslperf/kernels/include/hlslperf/" />
+    <None Include="../../kernels/include/hlslperf/*.hlsli" Pack="true" PackagePath="contentFiles/any/any/hlslperf/kernels/include/hlslperf/" />
+    <None Include="../../third_party/**/*" Exclude="../../third_party/**/bin/**;../../third_party/**/obj/**" Pack="true" PackagePath="contentFiles/any/any/hlslperf/third_party/%(RecursiveDir)" />
     <None Include="../../manifests/*.json" Pack="true" PackagePath="contentFiles/any/any/hlslperf/manifests/" />
   </ItemGroup>
 </Project>

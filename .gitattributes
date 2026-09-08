@@ -9,6 +9,7 @@ docs/results/data/scan-process-2026-09-07/** -text -diff
 docs/results/data/radix-process-2026-09-07/** -text -diff
 # Preserve official upstream bytes exactly as pinned in upstream-lock.json.
 third_party/** -text -whitespace
+benchmarks/external/review/** -text -whitespace
 # Every focused declaration source must reproduce its measured raw bytes on all hosts.
 src/HlslPerf.Workloads/UnifiedWorkloads.cs -text -eol
 src/HlslPerf.D3D12/D3D12UnifiedOperations.cs -text -eol

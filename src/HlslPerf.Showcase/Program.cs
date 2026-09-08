@@ -15,6 +15,7 @@ internal static class Program
         Console.OutputEncoding = Encoding.UTF8;
         try
         {
+            GpuExecutionPolicy.RequireAuthorized();
             string repositoryRoot = FindRepositoryRoot();
             ShowcaseOptions options = ParseOptions(args);
             string outputRoot = options.OutputDirectory ?? Path.Combine(

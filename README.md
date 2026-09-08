@@ -8,12 +8,26 @@ algorithm implementations, device measurements and deployable profile formats.
 
 ## Results
 
+**September 8 repair: new algorithms and external SDK paths are Unmeasured.**
+The [wave-tiled scan/compaction](docs/integration/SCAN_WAVE_TILED.md) and tiled
+stable radix candidates remain explicit opt-ins. The SDK exposes pinned
+GPUPrefixSums RTS / AMD Parallel Sort operations with identity checks and fallback.
+[Native external benchmark adapters](benchmarks/external/README.md) preserve
+upstream workloads; this repair uses compilation and CPU checks only.
+
 - **1.4782x–1.5254x confirmed single-pass Scan speedup** at 16,777,216 elements,
   with one or three resident inputs, against the declared in-repository baseline.
 - **19,584 output/poison checks passed** across the recorded 18-run formal matrix.
 
 These are AMD Radeon AI PRO R9700 / D3D12 results from the September 7 paired
 measurement protocol. [Exact controls and confidence intervals](docs/results/R9700_VNEXT_INTEGRATION_2026-09-07.md).
+
+The separate historical external comparison found the internal single-pass
+Scan took **2.21124× RTS time at 8 Mi elements**, and internal eight-bit sorting
+took **2.41331× AMD Parallel Sort time at 1 Mi key/value pairs**. These ratios
+favor the external libraries and belong to source
+`824cfafc9a07ade0a3cf440c1f5b3a19af2e8bf0`; they do not measure this repair.
+[Controls, failed/inconclusive cells and source identity](docs/integration/UNIFIED_BENCHMARK_RESULTS.md).
 
 ```mermaid
 flowchart LR
@@ -105,6 +119,22 @@ dimensions, and an oracle without changing the D3D12 backend.
 ## Quick start
 
 Requirements: Windows 10/11, a D3D12-capable GPU, and .NET 10 SDK.
+
+Use a short Windows checkout path and `git -c core.longpaths=true clone`.
+The safe first-use path performs CPU validation and compilation only:
+
+```powershell
+python tools/check_source_checkout.py
+python tools/verify_external_sources.py
+dotnet build HlslKernelPipeline.slnx -c Release
+dotnet test tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj -c Release --no-build
+dotnet run --project tools/HlslPerf.CompileOnly -c Release -- . .scratch/sdk-compile
+```
+
+GPU execution, tuning, diagnostics and the historical commands below are
+disabled by default and require a later, explicitly authorized run. CI sets
+`HLSLPERF_GPU_POLICY=deny`. See [execution policy](benchmarks/external/README.md).
+DynamicSmoke and GPU correctness runners are not CPU-only checks.
 
     dotnet build HlslKernelPipeline.slnx -c Release
     dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/reduction.json

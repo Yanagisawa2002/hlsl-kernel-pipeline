@@ -46,7 +46,7 @@ raw evidence but could not win. See the
 
 - [ ] AMD, NVIDIA, and Intel multi-GPU matrix.
 - [ ] Multi-driver and multi-DXC-version regression jobs.
-- [ ] Randomized/interleaved candidate ordering, paired comparisons, and confidence intervals.
+- [x] Randomized/interleaved candidate ordering, paired comparisons, independent confirmation and confidence intervals (already present before this repair).
 - [ ] RGA register and live-VGPR evidence for the new single-pass/fused entry points.
 - [ ] RGP/PIX/runtime-counter adapters for measured occupancy, cache misses, bandwidth, and power.
 - [ ] Real-time interactive evidence explorer.
@@ -57,7 +57,7 @@ cross-vendor portability, or power evidence.
 
 ## Likely post-v0.7 algorithm extensions
 
-- Wider 4/8-bit radix passes and key/value payload sorting.
+- Wider 4/8-bit radix passes and key/value payload sorting are implemented; the September 8 tiled candidate is opt-in and Unmeasured.
 - Generic segmented operators and by-key segmentation.
 - Hierarchical/fused histogram pipelines for larger bin counts.
 - Backend capability predicates so unsupported wave sizes are eliminated before compilation.

@@ -18,6 +18,57 @@ application to the core or built-in primitive package.
 The SDK contains no Unity references. The UPM package is a separate read-only
 consumer of a selected profile.
 
+## Explicit operations and external backends (September 8 repair)
+
+`PrimitiveOperations.ExclusiveScan(root, input, implementation)` and
+`PrimitiveOperations.StableSort(root, keys, payloads, implementation)` construct
+CPU-side plans from application input. Payloads are arbitrary uint32 values;
+keys are full-width, ties preserve original order. Empty operations regenerate
+four-byte zero sentinels. Defaults remain the internal scan/binary radix
+baselines. GPUPrefixSums ReduceThenScan and AMD Parallel Sort are explicit enum
+options. Packed-flag fallback scan is excluded from this full-width SDK API.
+
+`PrimitiveOperations.Select` validates identical input/output contracts,
+capabilities, pinned source files and exact source/plan/ABI/runtime identity.
+An application supplies a trusted confirmation hash independently of an incoming
+`OperationDeploymentProfile`. Missing or mismatched profiles choose the explicit
+baseline; `allowUnmeasured: true` permits a supported alternative with no
+performance claim. A mismatched supplied profile still falls back. Shader model,
+wave range, device, driver and compiler identities come from the application.
+Historical tuning/Unity profiles are not implicitly converted into this profile.
+
+`D3D12OperationRecorder` records a plan against application-owned resources,
+states, root signature and precompiled PSOs. Allocate and upload InitialData
+before recording, preserve the input for repeated calls, and keep all resources
+alive through the caller's completion fence. It records copies, dispatches,
+transitions and UAV barriers without a tuner, timestamps, submission or readback.
+Provide distinct named UAV-capable buffers and a 256-byte dummy buffer initially
+in COMMON state. The mutable state map tracks recorded transitions; resynchronize
+it when abandoning a command list or using those resources elsewhere. This ABI
+uses two SRVs/five UAVs/eight constants and has its own
+`hlslperf.unified-operation.v1` identity; it is not ABI-v1 Unity shader mapping.
+
+GPU recording/execution defaults to disabled. Build and CPU validation require
+no authorization; future GPU execution requires new explicit authorization as
+described in [external evaluation](../benchmarks/external/README.md).
+
+The workload package now includes the complete shared shader set and pinned
+third-party sources/licenses under `contentFiles/any/any/hlslperf`. Use that
+asset root when building operation plans. Do not distribute just the thin root
+shader without its includes or third-party notices.
+
+For a real Unity scan consumer, `tools/export_scan_consumer.py --output <new-dir>`
+copies `ScanWaveTiled.compute`, its actual independent shared header and project
+license with a sorted per-file SHA-256 manifest. Variant identity is
+`hlslperf.scan-wave-tiled.u32.wave32.g256.b4096.v1`, ABI `hlslperf.raw-buffer.v1`.
+This Raw-buffer, D3D12 wave32 path uses B=4096, reset plus scan, preallocated
+`8 + 12*ceil(capacity/4096)` scratch, no aliases and ordered same-queue use.
+Count zero skips dispatch and preserves the sentinel. It is Unmeasured;
+standalone DXC compilation is not Unity import or GPU validation. SUMMIT owns
+its explicit consumer recorder and fallback. The fused compaction mask contract
+does not match SUMMIT's independent nonzero predicate and is not advertised as
+integrated there.
+
 ## Install and scaffold
 
 Packages can be built locally without publishing them:
