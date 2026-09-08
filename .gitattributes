@@ -19,3 +19,13 @@ kernels/radix-sort.hlsl -text -eol
 kernels/include/hlslperf/scan_u32.hlsli -text -eol
 tools/focused_cost_protocol.py -text -eol
 tools/unified_protocol.py -text -eol
+
+# Causal declarations also preserve source bytes without host normalization.
+src/HlslPerf.Workloads/CausalScanWorkloads.cs -text -eol
+src/HlslPerf.UnifiedBench/CausalScanRunner.cs -text -eol
+src/HlslPerf.UnifiedBench/Program.cs -text -eol
+tools/Invoke-UnifiedExperiment.ps1 -text -eol
+tools/causal_scan_protocol.py -text -eol
+kernels/scan.hlsl -text -eol
+docs/integration/causal-scan-declaration.json -text -eol
+docs/integration/causal-scan-declaration-v2.json -text -eol
