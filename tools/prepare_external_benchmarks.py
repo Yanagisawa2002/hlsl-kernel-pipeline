@@ -97,7 +97,25 @@ def prepare(output, package_cache, build=False, msbuild=None, toolset='v143'):
         files = child(project, 'ItemGroup')
         child(files, 'ClCompile', Include=str(main))
         for file in sorted(upstream.glob('*.cpp')):
-            if file.stem not in ('pch', upstream.name): child(files, 'ClCompile', Include=str(file))
+            if file.stem not in ('pch', upstream.name):
+                compiled_file = file
+                if file.name == 'FFXParallelSort.cpp':
+                    # Preserve the locked original. Its CreateBuffer lengths are bytes,
+                    # but these two tables were sized in uint elements. Compile a
+                    # separately identified allocation-only patch for the native host.
+                    original = file.read_bytes()
+                    patched = original
+                    for expression in (b'threadBlocks * k_radix,', b'm_numReduceBlocks * k_radix,'):
+                        if patched.count(expression) != 1:
+                            raise ValueError('Pinned FFX allocation patch no longer matches.')
+                        patched = patched.replace(expression, expression[:-1] + b' * sizeof(uint32_t),')
+                    compiled_file = output / 'FFXParallelSort.buffer-allocation.cpp'
+                    compiled_file.write_bytes(patched)
+                    (output / 'ffx-allocation-patch.json').write_text(json.dumps(dict(
+                        schema='hlslperf.ffx-byte-allocation-patch.v1', original=str(file),
+                        originalSha256=hashlib.sha256(original).hexdigest(), patchedSha256=hashlib.sha256(patched).hexdigest(),
+                        change='Multiply sum/reduce table uint element counts by sizeof(uint32_t); shader, generator and timing code unchanged.'), indent=2)+'\n')
+                child(files, 'ClCompile', Include=str(compiled_file))
         child(project, 'Import', Project='$(VCTargetsPath)\\Microsoft.Cpp.targets')
         path = output / (name + '.vcxproj')
         ET.indent(project)
@@ -118,6 +136,7 @@ def prepare(output, package_cache, build=False, msbuild=None, toolset='v143'):
         dependencyLockSha256=hashlib.sha256(dependency_lock.read_bytes()).hexdigest(),
         projects=[str(p) for p in projects],
         localAdapterFiles={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(native.iterdir()) if p.is_file()},
+        localBuildPatches={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(output.glob('*allocation*'))},
         binaries={p.relative_to(output).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(output.rglob('*.exe'))})
     (output / 'preparation.json').write_text(json.dumps(report, indent=2)+'\n')
     return report

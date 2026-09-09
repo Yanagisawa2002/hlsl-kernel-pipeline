@@ -7,16 +7,18 @@
 // Pairs, ascending full32, four-bit tiled radix. No tuning is performed by this adapter.
 class HlslPerfSort : public DeviceRadixSort
 {
+    uint32_t radixBits;
     std::unique_ptr<HlslPerfNativeKernel> interleave, histogram, prefixTiles, prefixBins, scatter, scatterPairs;
     winrt::com_ptr<ID3D12Resource> aosA, aosB, hist, prefix, sums;
 public:
-    HlslPerfSort(winrt::com_ptr<ID3D12Device> device, GPUSorting::DeviceInfo info)
-        : DeviceRadixSort(device, info, GPUSorting::ORDER_ASCENDING, GPUSorting::KEY_UINT32, GPUSorting::PAYLOAD_UINT32)
+    HlslPerfSort(winrt::com_ptr<ID3D12Device> device, GPUSorting::DeviceInfo info, uint32_t bits = 4)
+        : DeviceRadixSort(device, info, GPUSorting::ORDER_ASCENDING, GPUSorting::KEY_UINT32, GPUSorting::PAYLOAD_UINT32), radixBits(bits)
     {
+        if (bits != 4 && bits != 8) throw std::invalid_argument("Native tiled radix requires four or eight bits.");
         std::filesystem::path root = HLSLPERF_REPOSITORY;
         info.SupportedShaderModel = L"cs_6_6";
         std::vector<std::wstring> args = {L"-HV", L"2018", L"-Ges", L"-O3",
-            L"-D", L"HLSLPERF_RADIX_TILE=1", L"-D", L"HLSLPERF_RADIX_BITS=4", L"-D", L"HLSLPERF_RADIX_PAIRS=1",
+            L"-D", L"HLSLPERF_RADIX_TILE=1", L"-D", L"HLSLPERF_RADIX_BITS=" + std::to_wstring(bits), L"-D", L"HLSLPERF_RADIX_PAIRS=1",
             L"-D", L"HLSLPERF_GROUP_SIZE=128", L"-D", L"HLSLPERF_ELEMENTS_PER_THREAD=4", L"-D", L"HLSLPERF_SCAN_BACKEND=2",
             L"-D", L"HLSLPERF_SCAN_OPERATOR=1", L"-D", L"HLSLPERF_VECTOR_WIDTH=1", L"-D", L"HLSLPERF_WAVE_SIZE=32"};
         auto source = root / "kernels/radix-sort.hlsl";
@@ -41,7 +43,8 @@ protected:
                 D3D12_RESOURCE_STATE_COMMON, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS);
         };
         aosA = buffer(static_cast<uint64_t>(count) * 8); aosB = buffer(static_cast<uint64_t>(count) * 8);
-        hist = buffer(16 * tiles * 4); sums = buffer(16 * chunks * 4); prefix = buffer((16 * tiles + 16 * chunks + 16) * 4);
+        uint64_t bins = 1ull << radixBits;
+        hist = buffer(bins * tiles * 4); sums = buffer(bins * chunks * 4); prefix = buffer((bins * tiles + bins * chunks + bins) * 4);
     }
     void DisposeBuffers() override
     {
@@ -52,7 +55,8 @@ protected:
     {
         uint32_t tiles = (m_numKeys + 511) / 512, chunks = (tiles + 511) / 512;
         interleave->Dispatch(m_cmdList, m_sortBuffer.get(), m_sortPayloadBuffer.get(), aosA.get(), nullptr, {m_numKeys}, 256);
-        for (uint32_t digit = 0; digit < 8; ++digit)
+        uint32_t bins = 1u << radixBits, digits = 32 / radixBits;
+        for (uint32_t digit = 0; digit < digits; ++digit)
         {
             auto source = digit % 2 == 0 ? aosA.get() : aosB.get();
             auto destination = digit % 2 == 0 ? aosB.get() : aosA.get();
@@ -61,12 +65,12 @@ protected:
             {
                 uint32_t x = std::min(groups, 65535u), y = (groups + x - 1) / x;
                 kernel->Dispatch(m_cmdList, in0, in1, out0, out1,
-                    {m_numKeys, 512, digit * 4, 15, chunks, tiles, x, groups}, x, y);
+                    {m_numKeys, 512, digit * radixBits, bins - 1, chunks, tiles, x, groups}, x, y);
             };
             dispatch(histogram.get(), source, nullptr, hist.get(), nullptr, tiles);
-            dispatch(prefixTiles.get(), hist.get(), nullptr, prefix.get(), sums.get(), 16 * chunks);
+            dispatch(prefixTiles.get(), hist.get(), nullptr, prefix.get(), sums.get(), bins * chunks);
             dispatch(prefixBins.get(), sums.get(), nullptr, prefix.get(), nullptr, 1);
-            if (digit == 7) dispatch(scatterPairs.get(), source, prefix.get(), m_sortBuffer.get(), m_sortPayloadBuffer.get(), tiles);
+            if (digit == digits - 1) dispatch(scatterPairs.get(), source, prefix.get(), m_sortBuffer.get(), m_sortPayloadBuffer.get(), tiles);
             else dispatch(scatter.get(), source, prefix.get(), destination, nullptr, tiles);
         }
     }
