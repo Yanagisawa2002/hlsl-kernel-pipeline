@@ -40,6 +40,8 @@ jobs:
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           python -m unittest discover -s tests -p test_wave_tiled_scan.py
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Application primitive plans and selection (CPU only)
+        run: dotnet run --project examples/HlslPerf.PrimitiveApp -c Release --no-build --no-restore -- . --check
       - name: Compile SDK shader plans without a device
         run: dotnet run --project tools/HlslPerf.CompileOnly -c Release -- . .scratch/sdk-compile
       - name: Compile pinned upstream native adapters only

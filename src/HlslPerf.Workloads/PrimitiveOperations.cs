@@ -65,8 +65,8 @@ public static class PrimitiveOperations
         if (!Compatible(requested, runtime)) return FallBack("Required shader model / wave capability unavailable.");
         string requestedHash;
         try { VerifyPinnedSource(assetRoot, requested.Implementation); requestedHash = OperationIdentity.Compute(requested, assetRoot); }
-        catch (Exception error) when (error is IOException or UnauthorizedAccessException)
-        { return FallBack("Requested shader assets are unavailable: " + error.Message); }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or InvalidDataException or JsonException)
+        { return FallBack("Requested shader assets are unavailable or invalid: " + error.Message); }
         if (profile is not null)
         {
             bool confirmed = profile.Implementation == requested.Implementation && profile.SemanticId == requested.SemanticId &&
