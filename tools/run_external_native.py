@@ -74,6 +74,8 @@ def main():
     p.add_argument('--output', required=True, type=Path)
     p.add_argument('--managed-validation', type=Path)
     p.add_argument('--native-validation', type=Path)
+    p.add_argument('--additional-validation', type=Path)
+    p.add_argument('--tile8-only', action='store_true', help='Separate second phase: extra 2^25 correctness or three tile8 sort comparisons.')
     p.add_argument('--plan', type=Path)
     p.add_argument('--luid', type=int, default=76566)
     args = p.parse_args()
@@ -88,6 +90,7 @@ def main():
         declaration = [('scan', 'rts', 1 << 28), ('scan', 'tile', 1 << 28),
             ('sort', 'device', 1 << 28), ('sort', 'onesweep', 1 << 28), ('sort', 'ffx', 1 << 25),
             ('sort', 'tile4', 1 << 28), ('sort', 'tile8', 1 << 28), ('sort', 'tile4', 1 << 25)]
+        if args.tile8_only: declaration = [('sort', 'tile8', 1 << 25)]
         save(output / 'declaration.json', {'startedUtc': now(), 'managedCorrectnessSha256': sha(args.managed_validation / 'correctness.json'),
             'declaration': declaration, 'native': str(native), 'identity': frozen})
         results = []
@@ -100,6 +103,12 @@ def main():
             raise ValueError('Native correctness or binary identity mismatch.')
         groups = [('scan-rts', 'scan', 'rts', 'tile', 1 << 28), ('sort-device', 'sort', 'device', 'tile4', 1 << 28),
             ('sort-onesweep', 'sort', 'onesweep', 'tile4', 1 << 28), ('sort-ffx', 'sort', 'ffx', 'tile4', 1 << 25)]
+        if args.tile8_only:
+            extra = read(args.additional_validation / 'validation.json')
+            if not extra['passed'] or extra['identity']['binaries'] != frozen['binaries'] or not any(
+                r['arm'] == 'tile8' and r['count'] == 1 << 25 and r['exitCode'] == 0 for r in extra['results']):
+                raise ValueError('Additional tile8 2^25 GPU correctness did not pass.')
+            groups = [(group + '-tile8', program, baseline, 'tile8', count) for group, program, baseline, candidate, count in groups if program == 'sort']
         schedule = []
         for group, program, baseline, candidate, count in groups:
             for pair in range(5):
@@ -108,9 +117,12 @@ def main():
                         'program': program, 'arm': arm, 'baseline': baseline, 'candidate': candidate, 'count': count})
         save(output / 'plan.json', {'schema': 'hlslperf.native-confirmation-plan.v1', 'registeredUtc': now(), 'identity': frozen,
             'validationSha256': sha(args.native_validation / 'validation.json'), 'native': str(native), 'luid': args.luid,
-            'pairsPerGroup': 5, 'processes': 40, 'batchSize': 100, 'nativeWarmupIterations': 1,
+            'phase': 2 if args.tile8_only else 1,
+            'additionalValidationSha256': sha(args.additional_validation / 'validation.json') if args.tile8_only else None,
+            'pairsPerGroup': 5, 'processes': len(schedule), 'batchSize': 100, 'nativeWarmupIterations': 1,
             'preBatch': 'One original full-size validation operation per process, followed by unchanged upstream batch with one excluded iteration.',
-            'primaryCandidate': 'tile4; frozen before any formal timing. tile8 receives correctness coverage only; no performance-based selection.',
+            'primaryCandidate': ('tile8; separately requested second phase covering every original sort workload. Phase one is retained unchanged; no workload selection.' if args.tile8_only else
+                'tile4; frozen before any formal timing. tile8 receives correctness coverage only; no performance-based selection.'),
             'timingBoundary': 'Upstream GPU timestamp TimeScan/TimeSort: complete recording hook including conversion/reset/barriers. Original input generation, compilation, allocation, upload, readback and CPU submission wait excluded.',
             'input': 'Scan original inclusive InitOne at 2^28. Sort original ENTROPY_PRESET_1, uint32 ascending pairs, batch seed10 plus iteration index; 2^28 Device/OneSweep, 2^25 FFX.',
             'sourceLabel': 'Adapted upstream host. Original pinned generator/validator/batch. FFX host has separately recorded byte-allocation repair.',
