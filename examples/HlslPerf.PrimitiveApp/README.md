@@ -82,15 +82,18 @@ ABI, implementation, source/include bytes, compile options, complete plan,
 input/oracle hashes, Core assembly and runtime, plus an independently supplied
 trusted confirmation hash. Changed application data needs a new plan and cannot
 inherit a profile for another input. Source revision/byte failures, unreadable
-assets or invalid JSON select the verified baseline with a diagnostic. Invalid
-input/fallback contracts still throw.
+assets, invalid JSON or malformed lock structure select the verified baseline
+with a diagnostic. Empty file lists are rejected. Invalid input/fallback
+contracts still throw.
 
 The 12 `--check` assertions cover the two explicit selections, unmeasured status,
 application oracle metadata, complete restore/trim stages, absent/stale/untrusted
 profile fallback, unsupported shader model/wave fallback and empty sentinels.
 The [targeted regression tests](../../tests/HlslPerf.Core.Tests/PrimitiveOperationTests.cs)
-also inject source revision, byte, missing-file and JSON faults in newly created
-temporary copies. No test mutates the checkout's pinned sources.
+also inject 12 source faults: revision, bytes, missing file, JSON syntax and eight
+structural failures involving missing fields, array types, missing/duplicate
+sources, empty file lists and null paths. They use newly created temporary copies;
+no test mutates the checkout's pinned sources.
 
 ## Recording and ownership in an application
 

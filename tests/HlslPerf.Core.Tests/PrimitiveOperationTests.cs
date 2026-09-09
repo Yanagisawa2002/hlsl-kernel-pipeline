@@ -80,6 +80,14 @@ public sealed class PrimitiveOperationTests
     [InlineData("bytes")]
     [InlineData("missing")]
     [InlineData("json")]
+    [InlineData("missing-sources")]
+    [InlineData("sources-object")]
+    [InlineData("source-missing")]
+    [InlineData("source-duplicate")]
+    [InlineData("missing-files")]
+    [InlineData("files-object")]
+    [InlineData("empty-files")]
+    [InlineData("null-path")]
     public void UnavailableOrInvalidPinnedSourceFallsBack(string failure)
     {
         // Isolate faults in a new tiny fixture; never change pinned checkout assets.
@@ -97,6 +105,17 @@ public sealed class PrimitiveOperationTests
             var sourceLock = JsonNode.Parse(File.ReadAllText(Path.Combine(Root, "third_party/upstream-lock.json")))!;
             var pinned = sourceLock["sources"]!.AsArray().Single(s => s!["name"]!.GetValue<string>() == "gpu-prefix-sums")!;
             if (failure == "revision") pinned["commit"] = new string('0', 40);
+            switch (failure)
+            {
+                case "missing-sources": sourceLock.AsObject().Remove("sources"); break;
+                case "sources-object": sourceLock["sources"] = new JsonObject(); break;
+                case "source-missing": sourceLock["sources"] = new JsonArray(); break;
+                case "source-duplicate": sourceLock["sources"]!.AsArray().Add(pinned.DeepClone()); break;
+                case "missing-files": pinned.AsObject().Remove("files"); break;
+                case "files-object": pinned["files"] = new JsonObject(); break;
+                case "empty-files": pinned["files"] = new JsonArray(); break;
+                case "null-path": pinned["files"]![0]!["localPath"] = null; break;
+            }
             if (failure == "bytes")
             {
                 string relative = pinned["files"]![0]!["localPath"]!.GetValue<string>();
@@ -105,6 +124,9 @@ public sealed class PrimitiveOperationTests
                 File.WriteAllText(target, "Deliberately corrupt CPU-test source fixture.");
             }
             File.WriteAllText(lockPath, failure == "json" ? "{" : sourceLock.ToJsonString());
+            if (failure is not ("revision" or "bytes" or "missing" or "json"))
+                Assert.Throws<InvalidDataException>(() =>
+                    PrimitiveOperations.VerifyPinnedSource(fixture.FullName, "gps-reduce-then-scan"));
             var fallback = PrimitiveOperations.ExclusiveScan(fixture.FullName, [3, 0, 2]);
             var external = PrimitiveOperations.ExclusiveScan(fixture.FullName, [3, 0, 2], ScanImplementation.GpuPrefixSumsReduceThenScan);
             var selected = PrimitiveOperations.Select(fixture.FullName, external, fallback, Runtime, allowUnmeasured: true);

@@ -79,8 +79,9 @@ baseline; `allowUnmeasured: true` permits a supported alternative with no
 performance claim. A mismatched supplied profile still falls back. Shader model,
 wave range, device, driver and compiler identities come from the application.
 Historical tuning/Unity profiles are not implicitly converted into this profile.
-Pinned source revision/byte mismatches, unreadable files and malformed JSON now
-return the validated baseline with a diagnostic instead of escaping selection.
+Pinned source revision/byte mismatches, unreadable files, malformed JSON and
+invalid lock structure now return the validated baseline with a diagnostic
+instead of escaping selection. A source must have a nonempty file list.
 Input and expected-output hashes are part of the exact operation identity:
 changing the input requires a new plan, and a confirmed profile for different
 data cannot be reused as a general winner policy. Identity validation is not

@@ -86,19 +86,31 @@ public static class PrimitiveOperations
         if (sourceName is null) return;
         string root = Path.GetFullPath(assetRoot);
         using var json = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "third_party/upstream-lock.json")));
-        var source = json.RootElement.GetProperty("sources").EnumerateArray().Single(s => s.GetProperty("name").GetString() == sourceName);
-        string expectedCommit = sourceName == "gpu-prefix-sums" ? "98d93a4e9ed2f3c8353119515bf9be90a2e137ad" : "c6efa6bf7f2027b3ec94f28578bb5965eabb9e55";
-        if (source.GetProperty("commit").GetString() != expectedCommit)
-            throw new InvalidDataException("External source revision differs from reviewed SDK adapter.");
-        foreach (var file in source.GetProperty("files").EnumerateArray())
+        try
         {
-            string path = Path.GetFullPath(Path.Combine(root, file.GetProperty("localPath").GetString()!));
-            string relative = Path.GetRelativePath(Path.Combine(root, "third_party", sourceName), path);
-            if (Path.IsPathRooted(relative) || relative == ".." || relative.StartsWith(".." + Path.DirectorySeparatorChar))
-                throw new InvalidDataException("External source escapes its reviewed directory.");
-            byte[] bytes = File.ReadAllBytes(path);
-            if (bytes.Length != file.GetProperty("bytes").GetInt32() || ContentHash.Sha256(bytes) != file.GetProperty("sha256").GetString())
-                throw new InvalidDataException("External source bytes differ from source lock: " + relative);
+            var source = json.RootElement.GetProperty("sources").EnumerateArray().Single(s => s.GetProperty("name").GetString() == sourceName);
+            string expectedCommit = sourceName == "gpu-prefix-sums" ? "98d93a4e9ed2f3c8353119515bf9be90a2e137ad" : "c6efa6bf7f2027b3ec94f28578bb5965eabb9e55";
+            if (source.GetProperty("commit").GetString() != expectedCommit)
+                throw new InvalidDataException("External source revision differs from reviewed SDK adapter.");
+            var files = source.GetProperty("files");
+            if (files.ValueKind != JsonValueKind.Array || files.GetArrayLength() == 0)
+                throw new InvalidDataException("External source lock requires a nonempty file list.");
+            foreach (var file in files.EnumerateArray())
+            {
+                string path = Path.GetFullPath(Path.Combine(root, file.GetProperty("localPath").GetString()!));
+                string relative = Path.GetRelativePath(Path.Combine(root, "third_party", sourceName), path);
+                if (Path.IsPathRooted(relative) || relative == ".." || relative.StartsWith(".." + Path.DirectorySeparatorChar))
+                    throw new InvalidDataException("External source escapes its reviewed directory.");
+                byte[] bytes = File.ReadAllBytes(path);
+                if (bytes.Length != file.GetProperty("bytes").GetInt32() || ContentHash.Sha256(bytes) != file.GetProperty("sha256").GetString())
+                    throw new InvalidDataException("External source bytes differ from source lock: " + relative);
+            }
+        }
+        catch (Exception error) when (error is KeyNotFoundException or InvalidOperationException or FormatException or ArgumentException)
+        {
+            // Normalize malformed lock data here, without hiding unrelated plan errors
+            // behind a broad catch in Select. Caller root validation remains outside.
+            throw new InvalidDataException("External source lock has an invalid structure.", error);
         }
     }
 

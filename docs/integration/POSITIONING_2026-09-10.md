@@ -45,9 +45,15 @@ original authors.
   those two data-error categories and returns the already validated baseline with
   a diagnostic. Invalid input/fallback contracts still throw. No source check is
   bypassed to permit an external implementation.
-- Four isolated source-fault regressions cover revision, bytes, missing file and
-  JSON syntax. They use nonempty scan inputs and temporary copies of the small
-  kernel tree; they never mutate the pinned checkout or old caches.
+- Twelve isolated source-fault regressions cover revision, bytes, missing file,
+  JSON syntax and eight structural failures: missing `sources`, non-array
+  `sources`, absent/duplicate source entry, missing `files`, non-array `files`,
+  empty `files` and a null path. They use nonempty scan inputs and temporary
+  copies of the small kernel tree; they never mutate the pinned checkout or old
+  caches. `VerifyPinnedSource` normalizes malformed lock fields to
+  `InvalidDataException` and rejects empty file lists. This normalization stays
+  inside source verification; caller root validation and invalid input/fallback
+  contracts retain their errors.
 - README, SDK first use, roadmap and the portfolio entry now foreground application
   integration, measurement boundaries and mature backend reuse. The latest result
   link points to September 9; September 8 preparation status and September 7
@@ -83,7 +89,10 @@ packages and existing project assets.
 | Workloads single-project incremental Release build, `--no-restore -p:BuildProjectReferences=false` | Passed, 0 warnings / 0 errors |
 | Example single-project Release compile/link against existing dependencies, `--no-restore -p:BuildProjectReferences=false -p:CopyLocalLockFileAssemblies=false` | Passed, 0 warnings / 0 errors, including the D3D12/Vortice method signatures |
 | Example CPU entry point with `--check` | 12 checks passed; RTS and AMD selected explicitly, both `Unmeasured`; no device or GPU executor called |
-| `PrimitiveOperationTests` only, incremental test-project build against updated Workloads | 8 passed, 0 failed, 0 skipped; four existing contract/profile tests plus four source-fault cases |
+| Initial `PrimitiveOperationTests`, incremental build against updated Workloads | 8 passed, 0 failed, 0 skipped; four existing contract/profile tests plus four source-fault cases |
+| Eight added structural fault cases against the initial integration binary | All eight reproduced failures: unexpected parsing exceptions or an accepted empty file list |
+| Final `PrimitiveOperationTests` after structural validation repair | 16 passed, 0 failed, 0 skipped; four contract/profile tests plus twelve source-fault cases |
+| Final incremental Workloads/example builds and example CPU entry point | Both builds passed with 0 warnings / 0 errors; all 12 example checks passed against the repaired binary |
 | `python tools/verify_external_sources.py` | Passed all 114 pinned files; lock SHA-256 `8d707858e69288fa6f10c9ec208d340cce3fa73b21d0240cbd3607d9b1120334` |
 | `python tools/check_source_checkout.py` | Passed existing tracked checkout; long-path setting remains enabled |
 | Local Markdown link/anchor check | 48 targets across six changed documents passed |
@@ -95,6 +104,11 @@ The first example compilation exposed two sample-only mistakes: accessing the
 internal `WorkloadData` helper and treating Vortice's void `Close()` as a result.
 They were corrected to BCL byte conversion and the actual public `Close()` call;
 the SDK was not expanded to accommodate sample code. The final compile passed.
+
+The final structural-fault red/green run and incremental build/example logs are
+retained locally under `.scratch/positioning-shape-20260910/` as `before-fix.log`,
+`after-fix.log`, `workloads-build.log`, `example-build.log` and `example.log`.
+These are CPU regression checks and add no GPU execution or performance evidence.
 
 Commands for the passing focused checks, from the repository root:
 
