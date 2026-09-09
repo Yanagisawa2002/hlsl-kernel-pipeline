@@ -8,6 +8,15 @@ algorithm implementations, device measurements and deployable profile formats.
 
 ## Results
 
+**September 9 native GPU confirmation:** all 70 preregistered processes and
+the independent GPU correctness gates passed. Tiled 4-bit sort took 12.124 ms
+versus GPUSorting's FFX baseline at 15.038 ms on its original `2^25` pair workload
+(paired baseline/candidate ratio 1.2404, 95% interval 1.2400–1.2408). The other
+six comparisons favored RTS, DeviceRadixSort, OneSweep or FFX over the tested
+candidate. Both 4/8-bit results, full costs and raw pairs are in the
+[native confirmation report](docs/results/R9700_NATIVE_CONFIRMATION_2026-09-09.md).
+The new candidates remain opt-in.
+
 **September 8 repair: new algorithms and external SDK paths are Unmeasured.**
 The [wave-tiled scan/compaction](docs/integration/SCAN_WAVE_TILED.md) and tiled
 stable radix candidates remain explicit opt-ins. The SDK exposes pinned

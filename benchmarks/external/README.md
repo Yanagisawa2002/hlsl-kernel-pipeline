@@ -1,5 +1,12 @@
 # External evaluation sources — prepared, Unmeasured
 
+This page records the September 8 preparation stage. The separately authorized
+September 9 execution completed seven native comparisons and independent GPU
+correctness gates; see the [measured report](../../docs/results/R9700_NATIVE_CONFIRMATION_2026-09-09.md).
+Its validate-only/batch-only entries select an exact R9700 LUID and retain the
+original workloads. FFX's two scratch byte lengths are repaired in an identified
+generated source copy; the pinned upstream files remain unchanged.
+
 No benchmark, GPU dispatch, Player, calibration, profiling or counter collection
 was executed for this repair. Builds do not establish GPU correctness or speed.
 
