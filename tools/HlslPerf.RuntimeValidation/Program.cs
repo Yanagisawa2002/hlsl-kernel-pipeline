@@ -6,8 +6,8 @@ using HlslPerf.D3D12;
 using HlslPerf.Workloads;
 
 [assembly: SupportedOSPlatform("windows10.0")]
-if (args.Length != 3 || args[0] is not ("probe" or "validate"))
-    throw new ArgumentException("RuntimeValidation probe|validate <repository> <new-output>");
+if (args.Length != 3 || args[0] is not ("probe" or "validate" or "validate-empty"))
+    throw new ArgumentException("RuntimeValidation probe|validate|validate-empty <repository> <new-output>");
 string root = Path.GetFullPath(args[1]), output = Path.GetFullPath(args[2]);
 if (Directory.Exists(output)) throw new IOException("Preserve earlier evidence; use a new output directory.");
 Directory.CreateDirectory(output);
@@ -20,6 +20,31 @@ Save("device.json", new { device, memory = before, processId = Environment.Proce
 Console.WriteLine(JsonSerializer.Serialize(new { device, memory = before }, JsonDefaults.Options));
 if (args[0] == "probe") return 0;
 using var executor = tuner.CreateUnifiedExecutor();
+if (args[0] == "validate-empty")
+{
+    var emptyChecks = new List<object>();
+    foreach (uint sentinel in new[] { 0xa5a5a5a5u, 0x5a5a5a5au, 0x735129abu })
+    {
+        byte[] bytes = Bytes([sentinel]);
+        UnifiedOperationPlan plan = new("host-empty-no-dispatch", 0, "preserve-output-sentinel", ContentHash.Sha256(bytes),
+            [new("input", 4, bytes), new("output", 4, bytes)], [],
+            [new("unused-copy", UnifiedStage.InputRestore, null, null, [], [], []) { CopySource = "input", CopyDestination = "output", CopyBytes = 4 }],
+            [new("output", ContentHash.Sha256(bytes))]) { ImmutableInputs = ["input", "output"] };
+        using var session = executor.Prepare(plan);
+        for (int repeat = 0; repeat < 4; ++repeat)
+        {
+            // Count zero returns from the host operation: no plan execution,
+            // no reset, no dispatch, and no sentinel-restoring copy.
+            byte[] actual = session.ReadDiagnosticBuffer("output");
+            bool passed = actual.SequenceEqual(bytes);
+            emptyChecks.Add(new { sentinel, repeat, passed, sha256 = ContentHash.Sha256(actual), dispatches = 0 });
+            if (!passed) throw new InvalidDataException("Empty host operation changed the sentinel.");
+        }
+    }
+    Save("empty-correctness.json", new { schema = "hlslperf.empty-no-dispatch.v1", passed = true, device, emptyChecks });
+    Console.WriteLine("Empty scan: 12 GPU readback checks passed; zero dispatches and zero restoration copies.");
+    return 0;
+}
 var results = new List<object>();
 bool allPassed = true;
 int[] scanCounts = [0, 1, 3, 31, 32, 33, 255, 256, 257, 4095, 4096, 4097, 8193, 1048583, 4194311];
