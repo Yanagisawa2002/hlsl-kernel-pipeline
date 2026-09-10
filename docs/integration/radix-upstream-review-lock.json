@@ -1,0 +1,116 @@
+{
+  "schema": "hlslperf.radix-upstream-review.v1",
+  "kind": "review references; not a vendored runtime or benchmark result",
+  "sources": [
+    {
+      "repository": "https://github.com/b0nes164/GPUSorting",
+      "commit": "09a6081d964b682bbb58838b83ab75aebe7f4e05",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/README.md",
+          "bytes": 7201,
+          "sha256": "a581f9c164fc7f611408f057f0661cd6dd274d00c69c00849be46d5733fade68",
+          "gitBlobSha1": "0a9f9ce9dcf91ca7ba4d50b162110e2ac18db3e8"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/LICENSE",
+          "bytes": 32603,
+          "sha256": "aafd374bbdd8a629ca9800d24d2b65eff23cf4aadd3195d010d5ba786cc39ec0",
+          "gitBlobSha1": "02f60db41265039d77dd336419c669ced8fa5d3f"
+        },
+        {
+          "path": "GPUSortingD3D12/GPUSortBase.h",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/GPUSortBase.h",
+          "bytes": 18795,
+          "sha256": "182d620de5dff2ee3784c1d25c12e879e983f933af34203bf2a1b309cd3a4113",
+          "gitBlobSha1": "3975ce48fef9e2e15919d8c0f579ebc398ead214"
+        },
+        {
+          "path": "GPUSortingD3D12/GPUSortingD3D12.cpp",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/GPUSortingD3D12.cpp",
+          "bytes": 6615,
+          "sha256": "a827e6dda0ec631d5fdc59659d58a5c66d5953354b6ad5e31cc641e6e6f4b140",
+          "gitBlobSha1": "3c7614da6e7cd831dd8116700c66fb79a17a21f4"
+        },
+        {
+          "path": "GPUSortingD3D12/Tests.h",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Tests.h",
+          "bytes": 12666,
+          "sha256": "2eaba73b9addf658450731626649edf46f9d4cbce627d03763a5e48e87065cda",
+          "gitBlobSha1": "6d80c905e5c50d979d6bbf8b73f0a654e1da15d7"
+        },
+        {
+          "path": "GPUSortingD3D12/DeviceRadixSort.cpp",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/DeviceRadixSort.cpp",
+          "bytes": 10916,
+          "sha256": "a8c6505157757cb4b61c8c0b3e71d737a5aca7711a76af95e4200bc92d7ff7c8",
+          "gitBlobSha1": "f4e60bffcc3e5835f2bbe51284acd6a42b5912df"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/DeviceRadixSort.hlsl",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/DeviceRadixSort.hlsl",
+          "bytes": 17236,
+          "sha256": "c924fc936e2bedc4c7a61c834331d3f76519ec96e7c0518ff304d82a0cb66ee7",
+          "gitBlobSha1": "b643e5c912d6861bcc856ae171526b15908a7181"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/SortCommon.hlsl",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/SortCommon.hlsl",
+          "bytes": 25684,
+          "sha256": "46e7852624f63fc4322c2ea73931a3941d08331567b92d85f5a085503d4cd2b1",
+          "gitBlobSha1": "958322b29690b39298077dfa4456be770c1f0857"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/Utility.hlsl",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/Utility.hlsl",
+          "bytes": 7777,
+          "sha256": "791f41038b22b2527a69ae450b3d52f7656cd78883413525214b1d0b7c18c558",
+          "gitBlobSha1": "a81d4d8db8f9a8d1d657db65316556745def77ab"
+        }
+      ]
+    },
+    {
+      "repository": "https://github.com/GPUOpen-Effects/FidelityFX-ParallelSort",
+      "commit": "0c539948c8d196ae338d91efbc8ca495f1ea0d1d",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://raw.githubusercontent.com/GPUOpen-Effects/FidelityFX-ParallelSort/0c539948c8d196ae338d91efbc8ca495f1ea0d1d/README.md",
+          "bytes": 1721,
+          "sha256": "f2dc9b2da672e3ad4f2e034e43e74db429df855d8698ec30d761da5c3e9e43a7",
+          "gitBlobSha1": "ab3e6ca6686c068497f1c9da2f2f88f3a6863813"
+        },
+        {
+          "path": "LICENSE.txt",
+          "url": "https://raw.githubusercontent.com/GPUOpen-Effects/FidelityFX-ParallelSort/0c539948c8d196ae338d91efbc8ca495f1ea0d1d/LICENSE.txt",
+          "bytes": 1099,
+          "sha256": "1bed2f55030780f264c71e69ce14734e50c60f4d36bbb9c20ef1c98df451d7d8",
+          "gitBlobSha1": "cc2870eb2b4e3349c9d0a532b6805e5b856f0bf9"
+        },
+        {
+          "path": "ffx-parallelsort/FFX_ParallelSort.h",
+          "url": "https://raw.githubusercontent.com/GPUOpen-Effects/FidelityFX-ParallelSort/0c539948c8d196ae338d91efbc8ca495f1ea0d1d/ffx-parallelsort/FFX_ParallelSort.h",
+          "bytes": 22541,
+          "sha256": "50d6309459f2e2ce6abd9d48099d4e34d1b126b81a69e824443def0380723d84",
+          "gitBlobSha1": "efcb42c647f1ecf8a5496221cda3aac55f200759"
+        },
+        {
+          "path": "sample/src/Common/shaders/ParallelSortCS.hlsl",
+          "url": "https://raw.githubusercontent.com/GPUOpen-Effects/FidelityFX-ParallelSort/0c539948c8d196ae338d91efbc8ca495f1ea0d1d/sample/src/Common/shaders/ParallelSortCS.hlsl",
+          "bytes": 6071,
+          "sha256": "852365b7cd4d0c97279d3d316931dfee7cc3dabd43be15e7cf0d3bcf5895357e",
+          "gitBlobSha1": "eb2cf0804589e6e3b971a16248ef09d0fdb41a37"
+        },
+        {
+          "path": "sample/src/DX12/ParallelSort.cpp",
+          "url": "https://raw.githubusercontent.com/GPUOpen-Effects/FidelityFX-ParallelSort/0c539948c8d196ae338d91efbc8ca495f1ea0d1d/sample/src/DX12/ParallelSort.cpp",
+          "bytes": 48689,
+          "sha256": "0b96515ed34fb6c305134a952496094d2cf0a72dd98c0e1df34de55334ed5626",
+          "gitBlobSha1": "ffc6fc7fbe9653422e4c3e7f3204e0fa6549519f"
+        }
+      ]
+    }
+  ]
+}

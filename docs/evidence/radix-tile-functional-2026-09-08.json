@@ -1,0 +1,39 @@
+{
+  "schema": "hlslperf.radix-cpu-validation.v1",
+  "status": "Unmeasured",
+  "gpuExecuted": false,
+  "benchmarkExecuted": false,
+  "validation": "Selected deterministic CPU functional tests only",
+  "project": "tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj",
+  "configuration": "Release",
+  "filter": "FullyQualifiedName~HlslPerf.Core.Tests.RadixTileTests|FullyQualifiedName~HlslPerf.Core.Tests.RadixSortTests|FullyQualifiedName~BallotCandidateRetainsFullOperationAndHasDistinctShaderIdentity",
+  "total": 49,
+  "passed": 49,
+  "failed": 0,
+  "modelOracleCombinations": 2400,
+  "sourceGitBlobSha1": {
+    "src/HlslPerf.Workloads/RadixSortWorkload.cs": "f9bcdf833ec8b349953ee6839bc3b516ca3b5556",
+    "src/HlslPerf.Workloads/RadixTileLayout.cs": "fe8bb3dbe930d1b1aa51b171b37e6a2d09cd222d",
+    "tests/HlslPerf.Core.Tests/RadixTileTests.cs": "644039a334095588ef1c3464b9b6922eb36ca9f4",
+    "tests/HlslPerf.Core.Tests/RadixSortTests.cs": "1d3197c61c35c035e2f2d78d38fe88bb082d47bd",
+    "tests/HlslPerf.Core.Tests/UnifiedOperationTests.cs": "926cf2778d455664e10b32285946f1ac690a9ed2"
+  },
+  "nativePlanCheck": {
+    "count": 268435456,
+    "pairs": true,
+    "recordBuffersAllocated": false,
+    "passes": 16,
+    "packedRecordBytes": 2147483648,
+    "logicalPlanBytes": 9665774592
+  },
+  "externalSources": {
+    "existingVendoredFiles": 50,
+    "reviewedPinnedFiles": 14
+  },
+  "notValidated": [
+    "GPU execution and stability",
+    "Device memory allocation and residency",
+    "Performance, profiling and tuning",
+    "External native benchmark execution"
+  ]
+}

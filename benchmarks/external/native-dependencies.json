@@ -1,0 +1,26 @@
+{
+  "schema": "hlslperf.native-build-dependencies.v1",
+  "packages": [
+    {
+      "id": "Microsoft.Direct3D.D3D12",
+      "version": "1.613.0",
+      "url": "https://api.nuget.org/v3-flatcontainer/microsoft.direct3d.d3d12/1.613.0/microsoft.direct3d.d3d12.1.613.0.nupkg",
+      "bytes": 23138163,
+      "sha256": "3447e47146c6533c8390e97ab650b66104e12c84c6751e645f1557bbe1baf1e0"
+    },
+    {
+      "id": "Microsoft.Direct3D.DXC",
+      "version": "1.8.2403.18",
+      "url": "https://api.nuget.org/v3-flatcontainer/microsoft.direct3d.dxc/1.8.2403.18/microsoft.direct3d.dxc.1.8.2403.18.nupkg",
+      "bytes": 46828981,
+      "sha256": "d7af6a32f959ad511f908ca7f98baf11eb75f68d4d6c79a27183b537752c5d92"
+    },
+    {
+      "id": "Microsoft.Windows.ImplementationLibrary",
+      "version": "1.0.240122.1",
+      "url": "https://api.nuget.org/v3-flatcontainer/microsoft.windows.implementationlibrary/1.0.240122.1/microsoft.windows.implementationlibrary.1.0.240122.1.nupkg",
+      "bytes": 348923,
+      "sha256": "2762643e7865c42ac60d809fe951a813ae10960141e56bb74ad28843f2d6b5c1"
+    }
+  ]
+}

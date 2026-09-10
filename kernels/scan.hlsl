@@ -24,3 +24,7 @@ cbuffer DispatchParameters : register(b0)
 #define HLSLPERF_SCAN_DISPATCH_GROUPS_X Parameter6
 #define HLSLPERF_SCAN_DISPATCH_GROUP_COUNT Parameter7
 #include "include/hlslperf/scan_u32.hlsli"
+
+#if HLSLPERF_SCAN_WAVE_TILED
+#include "include/hlslperf/scan_wave_tiled_u32.hlsli"
+#endif

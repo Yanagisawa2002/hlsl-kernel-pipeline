@@ -1,0 +1,572 @@
+{
+  "schema": "hlslperf.scan-wave-tiled.nonperformance-validation.v1",
+  "performanceStatus": "Unmeasured",
+  "baseline": "9bba9fefb0c579052d4dfee429531c4145e9e4be",
+  "gpuDispatchExecuted": false,
+  "unityImportExecuted": false,
+  "performanceTestsExecuted": false,
+  "cpuModelTestsPassed": 11,
+  "selectedDotnetTestsPassed": 29,
+  "dotnetBuildWarnings": 0,
+  "dotnetBuildErrors": 0,
+  "dotnetTestFilter": "FullyQualifiedName~WaveTiledScanTests|FullyQualifiedName~WorkloadPackTests.Scan|FullyQualifiedName~WorkloadPackTests.CompactionExposesUnfusedAndFusedEndToEndPlans",
+  "compiler": {
+    "path": "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/dxc.exe",
+    "sha256": "854d5f29dbbe25b584942855e65d673db3164f7f68e20fb784be9cd747d14814",
+    "target": "cs_6_6",
+    "hlslVersion": "2018",
+    "options": [
+      "-Ges",
+      "-WX",
+      "-O3"
+    ]
+  },
+  "sourceSha256": {
+    "kernels/scan.hlsl": "5e52887b4b4aee542f29e570b5aaee8d216ca78941f569f09821b955cda961a6",
+    "kernels/compaction.hlsl": "cf933823c7494aa9b60d5009f4c8a354619426ecf62ba88bf63606d5dafd4609",
+    "kernels/include/hlslperf/scan_u32.hlsli": "2bd0d3c6e79e98c57d37aaa686c5eadce4873791548f4640b6b8a2136839ae02",
+    "kernels/include/hlslperf/scan_wave_tiled_u32.hlsli": "d37710947770c523e04e6fd61cd94c56971d177e3c0128b940ed849bdd73e32e",
+    "kernels/consumer/ScanWaveTiled.compute": "9534c8287fa1afac0a961c70271ee2a7f8e49be573c4a97b24f799dbb1df3691",
+    "src/HlslPerf.Workloads/WaveTiledScanCandidates.cs": "33b87b95a0cc9c38af69a65a6602870c3f49597a9a3444aa7d84970c8bec4a0e",
+    "src/HlslPerf.Workloads/ScanWorkload.cs": "bc7647172826e8a82ce22ca862063bc5f4d5a8f3d59e7843313d3bf6508594f6",
+    "src/HlslPerf.Workloads/StreamCompactionWorkload.cs": "fd15ee54fc39cbec3b9422a01bc72d3f25af54c488c92b59635a646641e318a1",
+    "tests/HlslPerf.Core.Tests/WaveTiledScanTests.cs": "1e7b71d4d02900cf8241c9b11fd9cf102c852baa28637f30e4137ca85fa4d323",
+    "tests/wave_tiled_scan_model.py": "c14271d9a214b217b8504ef6db25a9bd4c1df3726a92c7da39bdd36c96b2a53f",
+    "tests/test_wave_tiled_scan.py": "82077656be21c76ed8c03999dcdd48fb2807ca6c4a1a20180a668d66f0df7e53",
+    "tools/check_wave_tiled_scan.py": "3a580abbfb55ad05cdb553d8833bab290fc6c60ec798b8c56aa69652e7a34659",
+    "docs/integration/scan-wave-tiled-sources.json": "afbe836bdcf71a7df5942d0096d53652804103db251dd05e734c50215993a4f4"
+  },
+  "compilations": [
+    {
+      "label": "SinglePassScanWaveTiled-g256-w32-i16",
+      "source": "kernels/scan.hlsl",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "dxilSha256": "b8d25ca9f5d79927ef5f0bdf5a4e05249997ef303cdd9389bc2bbeac663d470d",
+      "declaredDxilSharedBytes": 52
+    },
+    {
+      "label": "FusedCompactWaveTiled-g256-w32-i16",
+      "source": "kernels/compaction.hlsl",
+      "entry": "FusedCompactWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "dxilSha256": "54b9eb1ec9305a2c796329dbc1bf1d46b21f565db3773206ec6cd9a963503f35",
+      "declaredDxilSharedBytes": 52
+    },
+    {
+      "label": "SinglePassScanWaveTiled-g256-w64-i16",
+      "source": "kernels/scan.hlsl",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 64,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "dxilSha256": "20ed4cb10546d4af86901aa86d79b3767bbb4fad151783ef6b89854cf6f0defd",
+      "declaredDxilSharedBytes": 36
+    },
+    {
+      "label": "FusedCompactWaveTiled-g256-w64-i16",
+      "source": "kernels/compaction.hlsl",
+      "entry": "FusedCompactWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 64,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "dxilSha256": "b700745f890f14cbbb9e4a8e05389a2adeab5fb10c4b48377a5e1e88e008e897",
+      "declaredDxilSharedBytes": 36
+    },
+    {
+      "label": "SinglePassScanWaveTiled-g32-w32-i4",
+      "source": "kernels/scan.hlsl",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 32,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 1
+      },
+      "dxilSha256": "21c93faa83277f779a2e7179aa54cb9126ef45e937261d242a6ae27bbf16a539",
+      "declaredDxilSharedBytes": 24
+    },
+    {
+      "label": "FusedCompactWaveTiled-g32-w32-i4",
+      "source": "kernels/compaction.hlsl",
+      "entry": "FusedCompactWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 32,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 1
+      },
+      "dxilSha256": "0f360358bba473067fd55095542cb8ef1a497722df0dab784164cf52d7df27ff",
+      "declaredDxilSharedBytes": 24
+    },
+    {
+      "label": "SinglePassScanWaveTiled-g64-w64-i64",
+      "source": "kernels/scan.hlsl",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 64,
+        "HLSLPERF_WAVE_SIZE": 64,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 16
+      },
+      "dxilSha256": "566e4364d554874982da954833b6727b25e5d5eb8f17dd995045380429ac0227",
+      "declaredDxilSharedBytes": 24
+    },
+    {
+      "label": "FusedCompactWaveTiled-g64-w64-i64",
+      "source": "kernels/compaction.hlsl",
+      "entry": "FusedCompactWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 64,
+        "HLSLPERF_WAVE_SIZE": 64,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 16
+      },
+      "dxilSha256": "a8352a6648b417cd3231727d2bda71cfbd58f97143511c977041f583fa8197c4",
+      "declaredDxilSharedBytes": 24
+    },
+    {
+      "label": "SinglePassScanWaveTiled-g1024-w32-i4",
+      "source": "kernels/scan.hlsl",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 1024,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 1
+      },
+      "dxilSha256": "5da3d6ce8a8bc4ba7ed4ac6de5798a2d1e7a152472cfc3ab6643698754be4758",
+      "declaredDxilSharedBytes": 148
+    },
+    {
+      "label": "FusedCompactWaveTiled-g1024-w32-i4",
+      "source": "kernels/compaction.hlsl",
+      "entry": "FusedCompactWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 1024,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 1
+      },
+      "dxilSha256": "3ea155ee169a0d1703698c7014588569c77ef167d1fe1524007eaa7c56c07f39",
+      "declaredDxilSharedBytes": 148
+    },
+    {
+      "label": "SinglePassScanWaveTiled-g256-w64-i12",
+      "source": "kernels/scan.hlsl",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 64,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 3
+      },
+      "dxilSha256": "271227357fd8a392bcff8cbf258517ab1b0a59509fe2661cf5185750e2038149",
+      "declaredDxilSharedBytes": 36
+    },
+    {
+      "label": "FusedCompactWaveTiled-g256-w64-i12",
+      "source": "kernels/compaction.hlsl",
+      "entry": "FusedCompactWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 64,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 3
+      },
+      "dxilSha256": "b4110a3df6d3fc5b2837408002849a7087edd1ac5b05136f2cacc90977333e69",
+      "declaredDxilSharedBytes": 36
+    },
+    {
+      "label": "scan-reset",
+      "source": "kernels/scan.hlsl",
+      "entry": "ResetWaveTiledState",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "dxilSha256": "857cc6f6793723ac300bf210352639d7274a4b1c249165152ce37aa5f6ec2287"
+    },
+    {
+      "label": "compaction-reset",
+      "source": "kernels/compaction.hlsl",
+      "entry": "ResetWaveTiledState",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "dxilSha256": "39e5d68f6d9aa093e3bb52dc897d2dd19553fb20c8855d2a38cb3276b238a289"
+    },
+    {
+      "label": "unity-wrapper-ResetWaveTiledState",
+      "source": "kernels/consumer/ScanWaveTiled.compute",
+      "entry": "ResetWaveTiledState",
+      "defines": {},
+      "dxilSha256": "8a7c009c95c22323f8aa6dcff1ce7a9d4ea94efa9de47b8bc8c9f0b712a91576"
+    },
+    {
+      "label": "unity-wrapper-SinglePassScanWaveTiled",
+      "source": "kernels/consumer/ScanWaveTiled.compute",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {},
+      "dxilSha256": "f879bec5248a6c96e8d2a83519dd134ba3e946bd36706219cc492ef027197cd1",
+      "declaredDxilSharedBytes": 52
+    },
+    {
+      "label": "reject-HLSLPERF_SCAN_WAVE_TILED",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 0,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "expectedRejection": true,
+      "source": "kernels/scan.hlsl"
+    },
+    {
+      "label": "reject-HLSLPERF_SCAN_BACKEND",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "expectedRejection": true,
+      "source": "kernels/scan.hlsl"
+    },
+    {
+      "label": "reject-HLSLPERF_SCAN_OPERATOR",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 2,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "expectedRejection": true,
+      "source": "kernels/scan.hlsl"
+    },
+    {
+      "label": "reject-HLSLPERF_VECTOR_WIDTH",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "expectedRejection": true,
+      "source": "kernels/scan.hlsl"
+    },
+    {
+      "label": "reject-HLSLPERF_WAVE_SIZE",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 0,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "expectedRejection": true,
+      "source": "kernels/scan.hlsl"
+    },
+    {
+      "label": "reject-HLSLPERF_GROUP_SIZE",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 16,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "expectedRejection": true,
+      "source": "kernels/scan.hlsl"
+    },
+    {
+      "label": "reject-HLSLPERF_SINGLE_PASS_ITEMS_SCALE",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 17
+      },
+      "expectedRejection": true,
+      "source": "kernels/scan.hlsl"
+    },
+    {
+      "label": "reject-HLSLPERF_WAVE_TILED_MAX_POLLS",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 0,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "expectedRejection": true,
+      "source": "kernels/scan.hlsl"
+    },
+    {
+      "label": "reject-HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS",
+      "entry": "SinglePassScanWaveTiled",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 1,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4,
+        "HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS": 1
+      },
+      "expectedRejection": true,
+      "source": "kernels/scan.hlsl"
+    },
+    {
+      "label": "legacy-SinglePassScan",
+      "source": "kernels/scan.hlsl",
+      "entry": "SinglePassScan",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 0,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "dxilSha256": "2a24dd74008c8eba75aa5ba601972a0370ec4082df00fa9e0d3f52c79317bfab"
+    },
+    {
+      "label": "legacy-BlockScanPass",
+      "source": "kernels/scan.hlsl",
+      "entry": "BlockScanPass",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 0,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "dxilSha256": "0bc44d348e0da73edaa82506b3096cab77813d785d962ec10f0db4d78b8b880e"
+    },
+    {
+      "label": "legacy-ResetSinglePassState",
+      "source": "kernels/scan.hlsl",
+      "entry": "ResetSinglePassState",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 0,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "dxilSha256": "d16da014b9866e88e86d0efbd9d4abbbc3424080ab56cca708efa739b0c2a687"
+    },
+    {
+      "label": "legacy-FusedCompactSinglePass",
+      "source": "kernels/compaction.hlsl",
+      "entry": "FusedCompactSinglePass",
+      "defines": {
+        "HLSLPERF_SCAN_WAVE_TILED": 0,
+        "HLSLPERF_SCAN_BACKEND": 3,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 4,
+        "HLSLPERF_WAVE_TILED_MAX_POLLS": 4,
+        "HLSLPERF_GROUP_SIZE": 256,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": 4
+      },
+      "dxilSha256": "5d22b62dddf5ff6fa54c229fdc53c61fdedaf33fd99dd800826ab18768504fff"
+    }
+  ],
+  "legacyByteIdenticalControls": [
+    {
+      "entry": "SinglePassScan",
+      "dxilSha256": "2a24dd74008c8eba75aa5ba601972a0370ec4082df00fa9e0d3f52c79317bfab",
+      "unchanged": true
+    },
+    {
+      "entry": "BlockScanPass",
+      "dxilSha256": "0bc44d348e0da73edaa82506b3096cab77813d785d962ec10f0db4d78b8b880e",
+      "unchanged": true
+    },
+    {
+      "entry": "ResetSinglePassState",
+      "dxilSha256": "d16da014b9866e88e86d0efbd9d4abbbc3424080ab56cca708efa739b0c2a687",
+      "unchanged": true
+    },
+    {
+      "entry": "FusedCompactSinglePass",
+      "dxilSha256": "5d22b62dddf5ff6fa54c229fdc53c61fdedaf33fd99dd800826ab18768504fff",
+      "unchanged": true
+    }
+  ],
+  "unchangedVendoredSourceFilesVerified": 50,
+  "limits": [
+    "CPU models are not GPU execution or a memory-model proof.",
+    "DXIL declarations are not physical registers, LDS allocation, occupancy or measured performance.",
+    "Unity asset imported only by a future authorized integration; standalone DXC compile is the only wrapper validation here."
+  ],
+  "sourceHashBasis": "Raw checked-out bytes used by the allowed validation. Git text normalization is recorded separately below; no historical performance is attributed to this source.",
+  "gitIndexSourceSha256": {
+    "kernels/scan.hlsl": "5e52887b4b4aee542f29e570b5aaee8d216ca78941f569f09821b955cda961a6",
+    "kernels/compaction.hlsl": "0df236add5d2edc5bd927b2cfb7db49d5d853fc051f928147dfd2f1770b1b5a1",
+    "kernels/include/hlslperf/scan_u32.hlsli": "2bd0d3c6e79e98c57d37aaa686c5eadce4873791548f4640b6b8a2136839ae02",
+    "kernels/include/hlslperf/scan_wave_tiled_u32.hlsli": "d37710947770c523e04e6fd61cd94c56971d177e3c0128b940ed849bdd73e32e",
+    "kernels/consumer/ScanWaveTiled.compute": "9534c8287fa1afac0a961c70271ee2a7f8e49be573c4a97b24f799dbb1df3691",
+    "src/HlslPerf.Workloads/WaveTiledScanCandidates.cs": "33b87b95a0cc9c38af69a65a6602870c3f49597a9a3444aa7d84970c8bec4a0e",
+    "src/HlslPerf.Workloads/ScanWorkload.cs": "9857b0469988e52724a1ad89f6d9daffcf42c22e923caa16b529825b9fb9d7a3",
+    "src/HlslPerf.Workloads/StreamCompactionWorkload.cs": "f01a993c3becf74bbe0e1cfbf101a91935a1db50e2f7e1e4bd79c6ff0d125f08",
+    "tests/HlslPerf.Core.Tests/WaveTiledScanTests.cs": "1e7b71d4d02900cf8241c9b11fd9cf102c852baa28637f30e4137ca85fa4d323",
+    "tests/wave_tiled_scan_model.py": "c14271d9a214b217b8504ef6db25a9bd4c1df3726a92c7da39bdd36c96b2a53f",
+    "tests/test_wave_tiled_scan.py": "82077656be21c76ed8c03999dcdd48fb2807ca6c4a1a20180a668d66f0df7e53",
+    "tools/check_wave_tiled_scan.py": "3a580abbfb55ad05cdb553d8833bab290fc6c60ec798b8c56aa69652e7a34659",
+    "docs/integration/scan-wave-tiled-sources.json": "2e1e023fd38ff6338f9bd44a1fb91d32da1be0f852bffc7759e59890f1ef3825"
+  }
+}

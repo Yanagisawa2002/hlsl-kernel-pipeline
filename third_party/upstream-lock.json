@@ -299,44 +299,20 @@
       "license": "MIT; complete upstream LICENSE including CUB BSD notice retained",
       "files": [
         {
-          "path": "README.md",
-          "localPath": "third_party/gpu-prefix-sums/README.md",
-          "bytes": 9469,
-          "gitBlobSha1": "a247a9ab1665206ff5ca540370ddb45cb8308c82",
-          "sha256": "db7fef2ac2e70671296e0a27cfb180dbfd30c3624a7bedc34f354846e3e58df7",
-          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/README.md"
+          "path": "GPUPrefixSumsD3D12/.clang-format",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/.clang-format",
+          "bytes": 2597,
+          "gitBlobSha1": "8fe7923992c8a81ab0ce7cf84756a838c7965684",
+          "sha256": "22d126ffb02ceb41bb25a6f3a1d023e6b03ae23763d33765809390ccc1f38d39",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/.clang-format"
         },
         {
-          "path": "LICENSE",
-          "localPath": "third_party/gpu-prefix-sums/LICENSE",
-          "bytes": 3075,
-          "gitBlobSha1": "0a1211659b176f93feed2c79856314b223f2308b",
-          "sha256": "666d401992c505e5f94ff355068f91a12763e086e32f964ab06865627b1ed899",
-          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/LICENSE"
-        },
-        {
-          "path": "GPUPrefixSumsD3D12/ReduceThenScan.cpp",
-          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/ReduceThenScan.cpp",
-          "bytes": 3443,
-          "gitBlobSha1": "c58b191bb8c9aed1b0bd0bfd0d7ee375eac11813",
-          "sha256": "641f4c0b2eb83e25d77ea94aa153fc9dab481352a5ee8b7489828cb1ff9be9be",
-          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ReduceThenScan.cpp"
-        },
-        {
-          "path": "GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.cpp",
-          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.cpp",
-          "bytes": 3615,
-          "gitBlobSha1": "c95749a750ebd195bb2f9b0f964e14f340a9e0ff",
-          "sha256": "5f4c3e18e095f179af4123e82a7e2dfb13713a1fbc4105efdade4daf3d45f79b",
-          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.cpp"
-        },
-        {
-          "path": "GPUPrefixSumsD3D12/RTSKernels.h",
-          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/RTSKernels.h",
-          "bytes": 9812,
-          "gitBlobSha1": "33c288f1699341cdb8a7215f728ab21aa24deb1d",
-          "sha256": "8745a3378b89955ea975a79810beb94b81284c7d931fae1c2a9b952e12be5fa7",
-          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/RTSKernels.h"
+          "path": "GPUPrefixSumsD3D12/.gitignore",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/.gitignore",
+          "bytes": 6223,
+          "gitBlobSha1": "9491a2fda28342ab358eaf234e1afe0c07a53d62",
+          "sha256": "deab72c393f334c50b9f30ce730eca452ea0ac28f6544cdc2012017f6c9a902c",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/.gitignore"
         },
         {
           "path": "GPUPrefixSumsD3D12/CSDLDFKernels.h",
@@ -347,12 +323,44 @@
           "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/CSDLDFKernels.h"
         },
         {
-          "path": "GPUPrefixSumsD3D12/GPUPrefixSumBase.h",
-          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/GPUPrefixSumBase.h",
-          "bytes": 17308,
-          "gitBlobSha1": "82dd5d26da360c7389b9b5497939ee3e3cdd4706",
-          "sha256": "c893651f90e68f9ff0491056065d9c217a9ff57d1eb6b17ecfa031f0068f0abd",
-          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/GPUPrefixSumBase.h"
+          "path": "GPUPrefixSumsD3D12/CSDLKernels.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/CSDLKernels.h",
+          "bytes": 8945,
+          "gitBlobSha1": "5350c893f8fe2dcbc820d95d5cff2369d6e3d889",
+          "sha256": "334be697a7bf76aff7249c0206f24ef3406a285779db71c416b8e8de0d29ec99",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/CSDLKernels.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/ChainedScanDecoupledLookback.cpp",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/ChainedScanDecoupledLookback.cpp",
+          "bytes": 3407,
+          "gitBlobSha1": "faf0fde1bc5445a7813a931068ca56074afc995c",
+          "sha256": "31f375d256b2b19b5395c9fa719c49d8aebc5c269dbcc3f398dfbac43c21f21a",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ChainedScanDecoupledLookback.cpp"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/ChainedScanDecoupledLookback.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/ChainedScanDecoupledLookback.h",
+          "bytes": 1092,
+          "gitBlobSha1": "ac4c9f95cedd842232bb6c76b17ca1102f01127c",
+          "sha256": "c3a0dbe6dc4ffb38f2fcf1df03f83a61f0e44b935dee789956e7bfc96fe9a036",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ChainedScanDecoupledLookback.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.cpp",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.cpp",
+          "bytes": 3615,
+          "gitBlobSha1": "c95749a750ebd195bb2f9b0f964e14f340a9e0ff",
+          "sha256": "5f4c3e18e095f179af4123e82a7e2dfb13713a1fbc4105efdade4daf3d45f79b",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.cpp"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.h",
+          "bytes": 1180,
+          "gitBlobSha1": "54b31af66b41f812795b3a563a2e817117a0220b",
+          "sha256": "bcc19a017947851695f068281dee093f2a8ba24d962f9159d6a64afcdf8aa1aa",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ChainedScanDecoupledLookbackDecoupledFallback.h"
         },
         {
           "path": "GPUPrefixSumsD3D12/ComputeKernelBase.h",
@@ -361,6 +369,38 @@
           "gitBlobSha1": "ea8b8b8b3e2826468bf73329c26d831dcd66ce4e",
           "sha256": "befe9840e8933a17d8c398484755ad38cd0f00d69aa6d37a6b4b69931748aa18",
           "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ComputeKernelBase.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/EmulatedDeadlock.cpp",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/EmulatedDeadlock.cpp",
+          "bytes": 4766,
+          "gitBlobSha1": "7f7732edfb00639a467b0cfc0911d204ac8d30ab",
+          "sha256": "4a21f50bea209b2d7b80ba82e8c5949cf3f30673f8705c71e0b632a06d5c7bb2",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/EmulatedDeadlock.cpp"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/EmulatedDeadlock.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/EmulatedDeadlock.h",
+          "bytes": 1560,
+          "gitBlobSha1": "8696d52ec6cd08a18634497e57bde067ec206aef",
+          "sha256": "adf76d425da2482bc0f2f2bc257410fbcbe1dce2b1daf40411b5df051f0cab5b",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/EmulatedDeadlock.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/EmulatedDeadlockKernels.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/EmulatedDeadlockKernels.h",
+          "bytes": 12080,
+          "gitBlobSha1": "ab883853831f9e4048285fe965c9e045629f773d",
+          "sha256": "0de24ee1221a2e5ff2207c704d26ad26d2c9df3e060dfaf837bd34c943cd3242",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/EmulatedDeadlockKernels.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/GPUPrefixSumBase.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/GPUPrefixSumBase.h",
+          "bytes": 17308,
+          "gitBlobSha1": "82dd5d26da360c7389b9b5497939ee3e3cdd4706",
+          "sha256": "c893651f90e68f9ff0491056065d9c217a9ff57d1eb6b17ecfa031f0068f0abd",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/GPUPrefixSumBase.h"
         },
         {
           "path": "GPUPrefixSumsD3D12/GPUPrefixSums.h",
@@ -379,28 +419,60 @@
           "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.cpp"
         },
         {
-          "path": "GPUPrefixSumsD3D12/Utils.h",
-          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Utils.h",
-          "bytes": 3043,
-          "gitBlobSha1": "f18ee7255e7f0635e8333a7af70157aa69769802",
-          "sha256": "2556ee86d791d2203f0bc07419d9681bef7730f23e0b09fbabc596a6c39e397a",
-          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Utils.h"
+          "path": "GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.sln",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.sln",
+          "bytes": 1425,
+          "gitBlobSha1": "ad2ac62337e679ca4b17b73c0013b40aceb95b98",
+          "sha256": "241a62fd31ddd28ae6b85b762bfc739ac36e8f1719caaaa1a743599c61274a5c",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.sln"
         },
         {
-          "path": "GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl",
-          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl",
-          "bytes": 7342,
-          "gitBlobSha1": "659618af8a5b3937e3e3e27467b208c6dd488592",
-          "sha256": "1e6feccda7db9dd3c7f1d6a6e057d40eafad973716478c607f0cd8072e51b336",
-          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl"
+          "path": "GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.vcxproj",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.vcxproj",
+          "bytes": 12316,
+          "gitBlobSha1": "b1c4d7dc0318ddee5c0847c0b2aaa48ae4c440d2",
+          "sha256": "19a11950e01c0c66629d1e97af6fe569e16a3b84ddacc879e9871105585e2ca5",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.vcxproj"
         },
         {
-          "path": "GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl",
-          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl",
-          "bytes": 5204,
-          "gitBlobSha1": "2e5c9ad6c3651a9a0788ed7cdbef0d65857ed759",
-          "sha256": "76c32f0653cba79ab7975209fb1547cc2fa0a2937b27a329024a308fd3c7d691",
-          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl"
+          "path": "GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.vcxproj.filters",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.vcxproj.filters",
+          "bytes": 3445,
+          "gitBlobSha1": "d9ebde142d8eac183ce915e7a49a2420b32903eb",
+          "sha256": "dd3ad84ac5dbbf8f91ad15d697f941f620f9f851d8471a7942f055e534364e11",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/GPUPrefixSumsD3D12.vcxproj.filters"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/RTSKernels.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/RTSKernels.h",
+          "bytes": 9812,
+          "gitBlobSha1": "33c288f1699341cdb8a7215f728ab21aa24deb1d",
+          "sha256": "8745a3378b89955ea975a79810beb94b81284c7d931fae1c2a9b952e12be5fa7",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/RTSKernels.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/ReduceThenScan.cpp",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/ReduceThenScan.cpp",
+          "bytes": 3443,
+          "gitBlobSha1": "c58b191bb8c9aed1b0bd0bfd0d7ee375eac11813",
+          "sha256": "641f4c0b2eb83e25d77ea94aa153fc9dab481352a5ee8b7489828cb1ff9be9be",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ReduceThenScan.cpp"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/ReduceThenScan.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/ReduceThenScan.h",
+          "bytes": 1017,
+          "gitBlobSha1": "4df1cb27ad614141aa80ae1ad354c7f867410fb8",
+          "sha256": "bf6471e43ae197f19c7ebf12e3ada54377643b09363589f4c13714c783e746e0",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/ReduceThenScan.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookback.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookback.hlsl",
+          "bytes": 7009,
+          "gitBlobSha1": "5c33e763c0c6646543d12122702fb8ec817b0986",
+          "sha256": "9965678893cacb8c4313cbbddcf4c9f9dac1768bd09b75f8f348c8838b8b1731",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookback.hlsl"
         },
         {
           "path": "GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookbackDecoupledFallback.hlsl",
@@ -411,12 +483,461 @@
           "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ChainedScanDecoupledLookbackDecoupledFallback.hlsl"
         },
         {
+          "path": "GPUPrefixSumsD3D12/Shaders/EmulatedDeadlock.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/EmulatedDeadlock.hlsl",
+          "bytes": 10395,
+          "gitBlobSha1": "3357cda0db46aca408f27722ff096b29b70e1988",
+          "sha256": "2d0968116e182ce23f2859776a02cd24c1184ceed15c60506a76210ec73b8cf8",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/EmulatedDeadlock.hlsl"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl",
+          "bytes": 5204,
+          "gitBlobSha1": "2e5c9ad6c3651a9a0788ed7cdbef0d65857ed759",
+          "sha256": "76c32f0653cba79ab7975209fb1547cc2fa0a2937b27a329024a308fd3c7d691",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ReduceThenScan.hlsl"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl",
+          "bytes": 7342,
+          "gitBlobSha1": "659618af8a5b3937e3e3e27467b208c6dd488592",
+          "sha256": "1e6feccda7db9dd3c7f1d6a6e057d40eafad973716478c607f0cd8072e51b336",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Shaders/Survey.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/Survey.hlsl",
+          "bytes": 36669,
+          "gitBlobSha1": "6f476b7938a9c93002a54e1bce5c5486ec9bf670",
+          "sha256": "78746fcb4f113da86da654e6cb3f3bdaffe11930d1ebeecfe854b5f562bb15f7",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/Survey.hlsl"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Shaders/Utility.hlsl",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/Utility.hlsl",
+          "bytes": 3524,
+          "gitBlobSha1": "59f4f5db12529228bac10c0eecaec38c5ae8619e",
+          "sha256": "4898856674baac996de45c463ecdb1e6e41d0c8ed916a90d036503f3a3b857ed",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Shaders/Utility.hlsl"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Survey.cpp",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Survey.cpp",
+          "bytes": 26264,
+          "gitBlobSha1": "c1d47089cb92910aab293c27698e90a80b7f6802",
+          "sha256": "5312fcca449ed58247d0df7df54df8ba5a6f1063de55d68b93bc988394ac3b1f",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Survey.cpp"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Survey.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Survey.h",
+          "bytes": 8815,
+          "gitBlobSha1": "43a76ee215d04ad8b1375d8f9f02ad1dce3f961e",
+          "sha256": "8102ea630a9459af01292bcaca46c2e48766a9c1835d5c7d9fde46964204fd6b",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Survey.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/SurveyKernelBase.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/SurveyKernelBase.h",
+          "bytes": 1901,
+          "gitBlobSha1": "e3f7832c9c12b2a5bf09771ea83ff9144862669b",
+          "sha256": "17edaee29a744801f21ef437585d399840812f79f4969781a85e3a346d1165fa",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/SurveyKernelBase.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/SurveyKernels.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/SurveyKernels.h",
+          "bytes": 17929,
+          "gitBlobSha1": "d6ab7f19399c4da2ba362495ddce55dc9c3fdace",
+          "sha256": "c28d63be188d6de6ad1e4bb2ca65e782f4c56c47ebb3a53b603eac6444dc7f7f",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/SurveyKernels.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/UtilityKernels.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/UtilityKernels.h",
+          "bytes": 11081,
+          "gitBlobSha1": "750340823a9a08c60726a34a4180d9e6932e7c58",
+          "sha256": "80cdc10d5b9e0d47a04247013da0f2be25ffcf595f8f3940c0b3a8a6377785d5",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/UtilityKernels.h"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/Utils.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Utils.h",
+          "bytes": 3043,
+          "gitBlobSha1": "f18ee7255e7f0635e8333a7af70157aa69769802",
+          "sha256": "2556ee86d791d2203f0bc07419d9681bef7730f23e0b09fbabc596a6c39e397a",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/Utils.h"
+        },
+        {
           "path": "GPUPrefixSumsD3D12/packages.config",
           "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/packages.config",
           "bytes": 347,
           "gitBlobSha1": "4a052a5aa2c1f50bace4f243c4f29caa1c8a194b",
           "sha256": "af3436ed5fdea976387a9169bc8ad4ff17bab66d2491ae3b026e356dbec48682",
           "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/packages.config"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/pch.cpp",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/pch.cpp",
+          "bytes": 313,
+          "gitBlobSha1": "19deee92ffaaf77ce637b1c974ac821abe441ae8",
+          "sha256": "746324a55aa2265a822ab47fcbf0d7edaa639c5b85d5a05a186ce7792abdc59f",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/pch.cpp"
+        },
+        {
+          "path": "GPUPrefixSumsD3D12/pch.h",
+          "localPath": "third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/pch.h",
+          "bytes": 695,
+          "gitBlobSha1": "b0594e3d87bc2d4b09efb651fa1461ef1ead7f32",
+          "sha256": "af59191cc757d5edc62c60f45a84a60a063c86e70cd00dad39ed4376f21b7380",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/GPUPrefixSumsD3D12/pch.h"
+        },
+        {
+          "path": "LICENSE",
+          "localPath": "third_party/gpu-prefix-sums/LICENSE",
+          "bytes": 3075,
+          "gitBlobSha1": "0a1211659b176f93feed2c79856314b223f2308b",
+          "sha256": "666d401992c505e5f94ff355068f91a12763e086e32f964ab06865627b1ed899",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "localPath": "third_party/gpu-prefix-sums/README.md",
+          "bytes": 9469,
+          "gitBlobSha1": "a247a9ab1665206ff5ca540370ddb45cb8308c82",
+          "sha256": "db7fef2ac2e70671296e0a27cfb180dbfd30c3624a7bedc34f354846e3e58df7",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUPrefixSums/98d93a4e9ed2f3c8353119515bf9be90a2e137ad/README.md"
+        }
+      ]
+    },
+    {
+      "name": "gpu-sorting",
+      "repository": "https://github.com/b0nes164/GPUSorting",
+      "commit": "09a6081d964b682bbb58838b83ab75aebe7f4e05",
+      "ref": "09a6081d964b682bbb58838b83ab75aebe7f4e05",
+      "license": "MIT; upstream notices retained",
+      "files": [
+        {
+          "path": "GPUSortingD3D12/.gitignore",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/.gitignore",
+          "bytes": 6223,
+          "gitBlobSha1": "9491a2fda28342ab358eaf234e1afe0c07a53d62",
+          "sha256": "deab72c393f334c50b9f30ce730eca452ea0ac28f6544cdc2012017f6c9a902c",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/.gitignore"
+        },
+        {
+          "path": "GPUSortingD3D12/ComputeKernelBase.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/ComputeKernelBase.h",
+          "bytes": 5934,
+          "gitBlobSha1": "304dde243619bd4de030708403a44c0be974c56b",
+          "sha256": "b6168970c7fadf62a2344994c611548b57101f4e2ea1b6a3a5715068b1d31b1d",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/ComputeKernelBase.h"
+        },
+        {
+          "path": "GPUSortingD3D12/DeviceRadixSort.cpp",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/DeviceRadixSort.cpp",
+          "bytes": 10916,
+          "gitBlobSha1": "f4e60bffcc3e5835f2bbe51284acd6a42b5912df",
+          "sha256": "a8c6505157757cb4b61c8c0b3e71d737a5aca7711a76af95e4200bc92d7ff7c8",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/DeviceRadixSort.cpp"
+        },
+        {
+          "path": "GPUSortingD3D12/DeviceRadixSort.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/DeviceRadixSort.h",
+          "bytes": 1731,
+          "gitBlobSha1": "d6ae54cf93225b46bdf1f93d57c04047c2ee3825",
+          "sha256": "3eeecb48dd33da0d23763c733f7f339041b913d6e70ca48bf5feeb0ae7a17b38",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/DeviceRadixSort.h"
+        },
+        {
+          "path": "GPUSortingD3D12/DeviceRadixSortKernels.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/DeviceRadixSortKernels.h",
+          "bytes": 9734,
+          "gitBlobSha1": "a917932494e7bdaa0357496ff6a08e578410ebe6",
+          "sha256": "47e160f5eb22b846df53432e0bc8819237923fc52f982202eb99d5c64c4f07e5",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/DeviceRadixSortKernels.h"
+        },
+        {
+          "path": "GPUSortingD3D12/EmulatedDeadlocking.cpp",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/EmulatedDeadlocking.cpp",
+          "bytes": 4454,
+          "gitBlobSha1": "73589fe59308c475660a377ac0b1ee8411a977fa",
+          "sha256": "7f7dec30ce5d7ef4ec81a2626183df9e662c31be1d7507984aae42303b1c21ce",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/EmulatedDeadlocking.cpp"
+        },
+        {
+          "path": "GPUSortingD3D12/EmulatedDeadlocking.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/EmulatedDeadlocking.h",
+          "bytes": 1116,
+          "gitBlobSha1": "03808bf25266779037c09f07af712ad6774a90ce",
+          "sha256": "2d15a1c346d267bbe89deac45992cb34f9eb75d264cb1920e68f061680983bbb",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/EmulatedDeadlocking.h"
+        },
+        {
+          "path": "GPUSortingD3D12/EmulatedDeadlockingKernels.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/EmulatedDeadlockingKernels.h",
+          "bytes": 1548,
+          "gitBlobSha1": "a1e8923ebc39179c34edb29c07d6397c06fb2b60",
+          "sha256": "fbd607922c70565fc7558a9279a1538e9ebe788d16ec75e97f8e45498b23c2e0",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/EmulatedDeadlockingKernels.h"
+        },
+        {
+          "path": "GPUSortingD3D12/FFXParallelSort.cpp",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/FFXParallelSort.cpp",
+          "bytes": 11391,
+          "gitBlobSha1": "c19e7f1365349519410056335d9df1432b740c31",
+          "sha256": "4e01d49e72de9194cb042d20f5a8d755b571b1e4ad75f23a68cc5bac3269279f",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/FFXParallelSort.cpp"
+        },
+        {
+          "path": "GPUSortingD3D12/FFXParallelSort.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/FFXParallelSort.h",
+          "bytes": 2875,
+          "gitBlobSha1": "fa9aa785f5a06145052f05d334dbb53ce8155685",
+          "sha256": "b50bf0fdedd98600e93451a673dec7e6ad6bbf7a071d9350b4a5466870fcb686",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/FFXParallelSort.h"
+        },
+        {
+          "path": "GPUSortingD3D12/FFXParallelSortKernels.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/FFXParallelSortKernels.h",
+          "bytes": 12288,
+          "gitBlobSha1": "3c2f91e5174f1d87cdf229a2b8328dda3c11faf5",
+          "sha256": "ce31af9fab9251c6f2ac7a53c19d2cdc0d1301d5423d28705478265edb45b3b5",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/FFXParallelSortKernels.h"
+        },
+        {
+          "path": "GPUSortingD3D12/ForwardSweep.cpp",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/ForwardSweep.cpp",
+          "bytes": 1807,
+          "gitBlobSha1": "c49b68ac5305d4e000428fbb65dab5c1a371c8e4",
+          "sha256": "c1629a0f3099a6df59a9b95788fda1fde8a17e5c431287ddc539c2aaf61432ad",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/ForwardSweep.cpp"
+        },
+        {
+          "path": "GPUSortingD3D12/ForwardSweep.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/ForwardSweep.h",
+          "bytes": 891,
+          "gitBlobSha1": "c00bd89ad2fad7e2135f92bf24015b406dbe8470",
+          "sha256": "c63fca4abf8869d1ec12dc6e61e244b1b61154ea85762ba9816f8586e7ed9660",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/ForwardSweep.h"
+        },
+        {
+          "path": "GPUSortingD3D12/GPUSortBase.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/GPUSortBase.h",
+          "bytes": 18795,
+          "gitBlobSha1": "3975ce48fef9e2e15919d8c0f579ebc398ead214",
+          "sha256": "182d620de5dff2ee3784c1d25c12e879e983f933af34203bf2a1b309cd3a4113",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/GPUSortBase.h"
+        },
+        {
+          "path": "GPUSortingD3D12/GPUSorting.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/GPUSorting.h",
+          "bytes": 1923,
+          "gitBlobSha1": "effab4f1a6e8a196a9f6103f3197c4f2f7197f58",
+          "sha256": "a78f3127a5d1bdad2570f3481e6645383a8f3e43d3480729a37073ecccc8d2ae",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/GPUSorting.h"
+        },
+        {
+          "path": "GPUSortingD3D12/GPUSortingD3D12.cpp",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/GPUSortingD3D12.cpp",
+          "bytes": 6615,
+          "gitBlobSha1": "3c7614da6e7cd831dd8116700c66fb79a17a21f4",
+          "sha256": "a827e6dda0ec631d5fdc59659d58a5c66d5953354b6ad5e31cc641e6e6f4b140",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/GPUSortingD3D12.cpp"
+        },
+        {
+          "path": "GPUSortingD3D12/GPUSortingD3D12.sln",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/GPUSortingD3D12.sln",
+          "bytes": 1419,
+          "gitBlobSha1": "1ce8bc6e11152227c052b892a1906f3dbdab362c",
+          "sha256": "6082dad92127fced7f75ee612254de0ff87b51b1771db719cf79ee2ae2621d77",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/GPUSortingD3D12.sln"
+        },
+        {
+          "path": "GPUSortingD3D12/GPUSortingD3D12.vcxproj",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/GPUSortingD3D12.vcxproj",
+          "bytes": 13217,
+          "gitBlobSha1": "064eaaa1a0072a309d6342b74a5ed8b46bf329ba",
+          "sha256": "b01917c9ad54a96c1bd9122cd98479df6fb143af5c1654400c443877a6ee00a5",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/GPUSortingD3D12.vcxproj"
+        },
+        {
+          "path": "GPUSortingD3D12/GPUSortingD3D12.vcxproj.filters",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/GPUSortingD3D12.vcxproj.filters",
+          "bytes": 3457,
+          "gitBlobSha1": "37465dc794254ba77bdc05de0e3e346731299b13",
+          "sha256": "f2ead28b9b92d7bea3d1be7c6e043cceddac464f669455cb0039f41df20f1a96",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/GPUSortingD3D12.vcxproj.filters"
+        },
+        {
+          "path": "GPUSortingD3D12/OneSweep.cpp",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/OneSweep.cpp",
+          "bytes": 1791,
+          "gitBlobSha1": "ae114663b90dfa732e88ac590770f7d4c52d71a5",
+          "sha256": "2e1e59b4c766e712e55e8a4681de9a2a1004aae478b35926276160ddf1d15e38",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/OneSweep.cpp"
+        },
+        {
+          "path": "GPUSortingD3D12/OneSweep.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/OneSweep.h",
+          "bytes": 874,
+          "gitBlobSha1": "20a578f3215af0b11b0a1aa962684eab7c72bb81",
+          "sha256": "41cb30cd8f9ec16cfbb8e098b8113fba666908c42e3bc22683f77db367306ed7",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/OneSweep.h"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/DeviceRadixSort.hlsl",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/Shaders/DeviceRadixSort.hlsl",
+          "bytes": 17236,
+          "gitBlobSha1": "b643e5c912d6861bcc856ae171526b15908a7181",
+          "sha256": "c924fc936e2bedc4c7a61c834331d3f76519ec96e7c0518ff304d82a0cb66ee7",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/DeviceRadixSort.hlsl"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/EmulatedDeadlocking.hlsl",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/Shaders/EmulatedDeadlocking.hlsl",
+          "bytes": 9042,
+          "gitBlobSha1": "553f84838882a7ad1403edc31b4f3a4e7db116bd",
+          "sha256": "f7eb88d0105b3f22ab0c781e3fbd7e99a9f73d11fde9e51610af1715925f5e83",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/EmulatedDeadlocking.hlsl"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/FFXParallelSort.hlsl",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/Shaders/FFXParallelSort.hlsl",
+          "bytes": 16810,
+          "gitBlobSha1": "f21ff6a9bfc0cab913819010560406b5bcfd3d31",
+          "sha256": "7956d383f3696056d247149c2767472e9f4e77ec3bf3fb3825450e6f82f10e19",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/FFXParallelSort.hlsl"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/ForwardSweep.hlsl",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/Shaders/ForwardSweep.hlsl",
+          "bytes": 4373,
+          "gitBlobSha1": "fc40c72137f5f5a2231bef812f865f498c572d27",
+          "sha256": "27cc682f23d19c5db9be7635dd86ddbec2f776d55240f45a0adccf5a59b6a186",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/ForwardSweep.hlsl"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/OneSweep.hlsl",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/Shaders/OneSweep.hlsl",
+          "bytes": 4488,
+          "gitBlobSha1": "24765197b2300b6e95959f7737701b0cbcd94c5b",
+          "sha256": "1cbccfc36efbdd2c33bb9727960cdcafba0b7918bf2334dfe78d9db0d631df2e",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/OneSweep.hlsl"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/SortCommon.hlsl",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/Shaders/SortCommon.hlsl",
+          "bytes": 25684,
+          "gitBlobSha1": "958322b29690b39298077dfa4456be770c1f0857",
+          "sha256": "46e7852624f63fc4322c2ea73931a3941d08331567b92d85f5a085503d4cd2b1",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/SortCommon.hlsl"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/SweepCommon.hlsl",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/Shaders/SweepCommon.hlsl",
+          "bytes": 15194,
+          "gitBlobSha1": "d18f0c892320595c9c5067972aab994289f147c5",
+          "sha256": "655ef3bf2ffb2f8f1bdbec0029c4698de2abe806324a4e9ca92947621c1a7a9a",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/SweepCommon.hlsl"
+        },
+        {
+          "path": "GPUSortingD3D12/Shaders/Utility.hlsl",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/Shaders/Utility.hlsl",
+          "bytes": 7777,
+          "gitBlobSha1": "a81d4d8db8f9a8d1d657db65316556745def77ab",
+          "sha256": "791f41038b22b2527a69ae450b3d52f7656cd78883413525214b1d0b7c18c558",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Shaders/Utility.hlsl"
+        },
+        {
+          "path": "GPUSortingD3D12/SweepBase.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/SweepBase.h",
+          "bytes": 10870,
+          "gitBlobSha1": "f1b580878a77f09c6ec8a31f96ba7a08cd4b10d0",
+          "sha256": "1d4f205549ab267d4fed25017b2f9f356a52b606cdd00ab0f71625bcd3adb34f",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/SweepBase.h"
+        },
+        {
+          "path": "GPUSortingD3D12/SweepCommonKernels.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/SweepCommonKernels.h",
+          "bytes": 10716,
+          "gitBlobSha1": "0a21405a63f06f077d253b6b19837f72132cfaa1",
+          "sha256": "7e6b60ca6ccbe9dfe1584cde53fb8816abef406461ec6a6c1b2c2f27a11c06b0",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/SweepCommonKernels.h"
+        },
+        {
+          "path": "GPUSortingD3D12/Tests.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/Tests.h",
+          "bytes": 12666,
+          "gitBlobSha1": "6d80c905e5c50d979d6bbf8b73f0a654e1da15d7",
+          "sha256": "2eaba73b9addf658450731626649edf46f9d4cbce627d03763a5e48e87065cda",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Tests.h"
+        },
+        {
+          "path": "GPUSortingD3D12/Tuner.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/Tuner.h",
+          "bytes": 38971,
+          "gitBlobSha1": "58a5880162be3f434f7a1d3f7a22324742781ab1",
+          "sha256": "947227dec9b5fca966abf597894023b2559bf046a2be71470f538990643f6670",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Tuner.h"
+        },
+        {
+          "path": "GPUSortingD3D12/UtilityKernels.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/UtilityKernels.h",
+          "bytes": 7793,
+          "gitBlobSha1": "d08ac01e8c440124ce4341eb273891811263cc36",
+          "sha256": "0826ee1af7b9beadacc58c70765edfc6ae7080217f670887be6d50ca4a77e7fb",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/UtilityKernels.h"
+        },
+        {
+          "path": "GPUSortingD3D12/Utils.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/Utils.h",
+          "bytes": 2813,
+          "gitBlobSha1": "ca05e816b126ac8f8ff63f2746ba031590867dd7",
+          "sha256": "88f46a543e7c155c551a954f68394bedcdf312cf23a9c02e7774972a118dbe65",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/Utils.h"
+        },
+        {
+          "path": "GPUSortingD3D12/packages.config",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/packages.config",
+          "bytes": 347,
+          "gitBlobSha1": "4a052a5aa2c1f50bace4f243c4f29caa1c8a194b",
+          "sha256": "af3436ed5fdea976387a9169bc8ad4ff17bab66d2491ae3b026e356dbec48682",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/packages.config"
+        },
+        {
+          "path": "GPUSortingD3D12/pch.cpp",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/pch.cpp",
+          "bytes": 307,
+          "gitBlobSha1": "9687abddf6c143c6a029286e941e9cdda39a781e",
+          "sha256": "48a1c2f44ffd2c4f344ac0b53c7b9619e6a15288270c1c8bb8384762d0faa1fb",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/pch.cpp"
+        },
+        {
+          "path": "GPUSortingD3D12/pch.h",
+          "localPath": "third_party/gpu-sorting/GPUSortingD3D12/pch.h",
+          "bytes": 760,
+          "gitBlobSha1": "e2e469a041e6817e000948956e98d54cb76fb3c0",
+          "sha256": "4c598d47960cc1636ac7288ec7e7f98fbb423b5892a08094101f23ec712cd68e",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/GPUSortingD3D12/pch.h"
+        },
+        {
+          "path": "LICENSE",
+          "localPath": "third_party/gpu-sorting/LICENSE",
+          "bytes": 32603,
+          "gitBlobSha1": "02f60db41265039d77dd336419c669ced8fa5d3f",
+          "sha256": "aafd374bbdd8a629ca9800d24d2b65eff23cf4aadd3195d010d5ba786cc39ec0",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "localPath": "third_party/gpu-sorting/README.md",
+          "bytes": 7201,
+          "gitBlobSha1": "0a9f9ce9dcf91ca7ba4d50b162110e2ac18db3e8",
+          "sha256": "a581f9c164fc7f611408f057f0661cd6dd274d00c69c00849be46d5733fade68",
+          "url": "https://raw.githubusercontent.com/b0nes164/GPUSorting/09a6081d964b682bbb58838b83ab75aebe7f4e05/README.md"
         }
       ]
     }
