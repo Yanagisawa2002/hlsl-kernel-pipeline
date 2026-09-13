@@ -1,6 +1,6 @@
 namespace HlslPerf.Core;
 
-/// <summary>Benchmark-only adapter ABI: two SRVs, five UAVs, eight b0 constants.</summary>
+/// <summary>Explicit operation adapter ABI: two SRVs, five UAVs, eight b0 constants.</summary>
 public sealed record UnifiedShader(
     string Id, string SourcePath, string EntryPoint,
     IReadOnlyDictionary<string, string> Defines, IReadOnlyList<string> IncludeDirectories,
@@ -27,6 +27,7 @@ public sealed record UnifiedOperationPlan(
     IReadOnlyList<KernelBufferSpec> Buffers, IReadOnlyList<UnifiedShader> Shaders,
     IReadOnlyList<UnifiedPass> Passes, IReadOnlyList<KernelVerifiedOutput> Outputs)
 {
+    public const string AbiId = "hlslperf.unified-operation.v1";
     public IReadOnlyList<string> ImmutableInputs { get; init; } = [];
 
     public void Validate()

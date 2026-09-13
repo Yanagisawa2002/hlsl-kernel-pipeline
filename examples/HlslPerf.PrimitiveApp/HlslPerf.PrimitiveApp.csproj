@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/HlslPerf.Workloads/HlslPerf.Workloads.csproj" />
+    <ProjectReference Include="../../src/HlslPerf.D3D12/HlslPerf.D3D12.csproj" />
+  </ItemGroup>
+</Project>

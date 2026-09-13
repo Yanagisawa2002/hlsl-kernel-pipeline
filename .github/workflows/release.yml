@@ -15,6 +15,7 @@ jobs:
     env:
       NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
     steps:
+      - run: git config --global core.longpaths true
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
@@ -23,8 +24,8 @@ jobs:
         run: dotnet restore HlslKernelPipeline.slnx
       - name: Build
         run: dotnet build HlslKernelPipeline.slnx -c Release --no-restore
-      - name: Test
-        run: dotnet test HlslKernelPipeline.slnx -c Release --no-build
+      - name: Reviewed CPU-only tests
+        run: dotnet test tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj -c Release --no-build
       - name: Validate release tag
         if: startsWith(github.ref, 'refs/tags/v')
         env:

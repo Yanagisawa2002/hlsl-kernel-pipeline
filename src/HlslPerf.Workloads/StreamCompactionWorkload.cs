@@ -34,6 +34,7 @@ internal sealed class StreamCompactionWorkload : IKernelWorkload
             throw new InvalidDataException($"Candidate '{candidate.Id}' wave size must be 0, 32, or 64.");
         if (waveSize != 0 && manifest.ShaderModel is not ("6_6" or "6_7"))
             throw new InvalidDataException($"Candidate '{candidate.Id}' fixed wave size requires shader model 6_6+.");
+        bool waveTiled = WaveTiledScanCandidates.Validate(candidate);
 
         EnsureOracle(elementCount, seed, predicateMask);
         List<KernelBufferSpec> buffers =
@@ -58,16 +59,16 @@ internal sealed class StreamCompactionWorkload : IKernelWorkload
             buffers.Add(new KernelBufferSpec("compaction-state", stateBytes, new byte[stateBytes]));
             passes.Add(new KernelPassSpec(
                 "fused-reset",
-                "ResetSinglePassState",
+                waveTiled ? WaveTiledScanCandidates.ResetEntryPoint : "ResetSinglePassState",
                 new KernelDispatch(1),
                 null,
                 null,
                 "compaction-state",
                 null,
-                []));
+                waveTiled ? [0, 0, logicalBlocks] : []));
             passes.Add(new KernelPassSpec(
                 "fused-produce-scan-scatter",
-                "FusedCompactSinglePass",
+                waveTiled ? WaveTiledScanCandidates.CompactionEntryPoint : "FusedCompactSinglePass",
                 new KernelDispatch(persistentGroups),
                 "input",
                 null,

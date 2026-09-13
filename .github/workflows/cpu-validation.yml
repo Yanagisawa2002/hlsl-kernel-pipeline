@@ -1,0 +1,73 @@
+name: CPU and compile validation (no GPU)
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: windows-latest
+    steps:
+      - name: Enable byte-complete long-path checkout
+        run: git config --global core.longpaths true
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: microsoft/setup-msbuild@v2
+      - name: Source and external license/hash preflight
+        run: |
+          python tools/check_source_checkout.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python tools/verify_external_sources.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -m unittest discover -s tools -p test_external_contracts.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Build managed solution only
+        run: dotnet build HlslKernelPipeline.slnx -c Release --nologo
+      - name: Reviewed CPU-only test project
+        env:
+          HLSLPERF_TEST_REPOSITORY_ROOT: ${{ github.workspace }}
+        run: dotnet test tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj -c Release --no-build --nologo
+      - name: CPU protocol tests
+        run: |
+          python -m unittest discover -s tests -p test_unified_protocol.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -m unittest discover -s tests -p test_wave_tiled_scan.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Application primitive plans and selection (CPU only)
+        run: dotnet run --project examples/HlslPerf.PrimitiveApp -c Release --no-build --no-restore -- . --check
+      - name: Compile SDK shader plans without a device
+        run: dotnet run --project tools/HlslPerf.CompileOnly -c Release -- . .scratch/sdk-compile
+      - name: Compile pinned upstream native adapters only
+        run: python tools/prepare_external_benchmarks.py --output .scratch/native --build --msbuild (Get-Command MSBuild.exe).Source
+      - name: Compile opt-in algorithms with pinned DXC without a device
+        run: |
+          $dxc = '.scratch/native/packages/Microsoft.Direct3D.DXC/build/native/bin/x64/dxc.exe'
+          python tools/check_wave_tiled_scan.py --dxc $dxc --output .scratch/scan-dxil
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python tools/compile_radix_tile.py --dxc $dxc --output .scratch/radix-dxil
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Export original 2^28-pair native dimensions without allocations
+        run: dotnet run --project tools/RadixPlanExport -c Release -- --count 268435456 --pairs --native-buffers --radix-bits 4 --output .scratch/native-radix-plan.json
+      - name: Export actual Unity consumer assets without importing Unity
+        run: python tools/export_scan_consumer.py --output .scratch/consumer
+      - name: Pack and inspect installed shader/license layout
+        run: |
+          dotnet pack src/HlslPerf.Workloads/HlslPerf.Workloads.csproj -c Release --no-build -o artifacts/packages
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $package = Get-ChildItem artifacts/packages/EdwinLiu.HlslPerf.Workloads.*.nupkg | Select-Object -First 1
+          python tools/verify_workload_package.py $package.FullName
+      - uses: actions/upload-artifact@v4
+        with:
+          name: offline-compile-contracts
+          path: |
+            .scratch/sdk-compile/compile-only.json
+            .scratch/native/preparation.json
+            .scratch/native/*-build.log
+            .scratch/consumer/consumer-manifest.json

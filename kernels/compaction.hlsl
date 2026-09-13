@@ -268,3 +268,8 @@ void FusedCompactSinglePass(uint groupIndex : SV_GroupIndex)
         GroupMemoryBarrierWithGroupSync();
     }
 }
+
+#if HLSLPERF_SCAN_WAVE_TILED
+#define HLSLPERF_WAVE_TILED_COMPACTION 1
+#include "include/hlslperf/scan_wave_tiled_u32.hlsli"
+#endif

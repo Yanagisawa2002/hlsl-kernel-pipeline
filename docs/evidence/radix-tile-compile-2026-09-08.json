@@ -1,0 +1,1356 @@
+{
+  "status": "Unmeasured",
+  "validation": "DXC compilation and static LDS only",
+  "gpuExecuted": false,
+  "compilerPath": "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64\\dxc.exe",
+  "compilerSha256": "854d5f29dbbe25b584942855e65d673db3164f7f68e20fb784be9cd747d14814",
+  "sources": {
+    "kernels/radix-sort.hlsl": "fa7ba4a551d87f8dc97541ee4adb28a73a39a0fd162f9178c83fade60167e1b8",
+    "kernels/include/hlslperf/scan_u32.hlsli": "2bd0d3c6e79e98c57d37aaa686c5eadce4873791548f4640b6b8a2136839ae02"
+  },
+  "options": [
+    "cs_6_6",
+    "HLSL2018",
+    "O3",
+    "Ges",
+    "WX"
+  ],
+  "shaders": [
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "59526fd058b1af05abf23e5a658e2e5a48c915a3c5f01ca92b79110dd9d92774",
+      "assemblySha256": "d18139f52554101df42669059636048cc59b5f500e23799380f9f78cfacb434d"
+    },
+    {
+      "entry": "BuildRadixHistogram",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 64,
+      "dxilSha256": "95550513920bd12d16bcaeaae073890072de2a9e31f5d0dafc0b20f3a1487fda",
+      "assemblySha256": "e26a5ba49638e82a863094d6b040392148ffa5b39c0480566ec97e574452c5eb"
+    },
+    {
+      "entry": "PrefixRadixHistogramTiles",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 20,
+      "dxilSha256": "7a50ba247f8630e1e4a0cdd40086ce6db22a18e1b07c8c2fe0d05725c8f252b7",
+      "assemblySha256": "64813f318e40f82335837cdfd584243f0763b0416b097a27bbb65c7a82a4f68e"
+    },
+    {
+      "entry": "PrefixRadixHistogramBins",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 20,
+      "dxilSha256": "81552de773b9a1a617eefdbf2f68272f269080323a6bfba75d43362db0fc75df",
+      "assemblySha256": "c86c52b1a4c2dfe8131d37a0c94f2a35f8dadcdc7464b4058fef27a64b9ee5ba"
+    },
+    {
+      "entry": "ScatterRadixTile",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 3220,
+      "dxilSha256": "2ad2bd6a08ae3eb77e28fca5e9e956a6d82098d94c40a4bc03ed2cbd081f07df",
+      "assemblySha256": "55e1508abaf6e892851f04fed74a70cc61f45f3cbef5fd7670058edad0d29a2d"
+    },
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "63e1f582c0ad6b9ca74c2531c0f402779c6b3c3f38ac18b6b327e9b83abf4bf9",
+      "assemblySha256": "43798ad23aad1880b72c826e51f47505694224ed9d4233bea6f37fa1d68a37a8"
+    },
+    {
+      "entry": "SplitRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "48fdf4a2e5f91064d5ffbcef6d7b9802a6414ce4390192ecb0f32bf62098d94e",
+      "assemblySha256": "3cbba439d4840428c77a83486b76146d55c826fc8f9f186f9fd5722bb44e27a0"
+    },
+    {
+      "entry": "PackRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "0cc64d5d03265fb1852f890cd0c2629a458d2ff7b12c9d919288cfb16a9f48f9",
+      "assemblySha256": "2f07f812df82e175c8567f2e255550d02a9e8c83be5b582e3824c46d4d40f37e"
+    },
+    {
+      "entry": "BuildRadixHistogram",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 64,
+      "dxilSha256": "35883794dc1f89507f7dd880cd140a0702ffb7d0c242790d801db56cf111ceb2",
+      "assemblySha256": "36fc5b4fc52ec17a6dbee16e384b1d309af905e63b56852eb6207c63fb5b6840"
+    },
+    {
+      "entry": "PrefixRadixHistogramTiles",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 20,
+      "dxilSha256": "7a50ba247f8630e1e4a0cdd40086ce6db22a18e1b07c8c2fe0d05725c8f252b7",
+      "assemblySha256": "64813f318e40f82335837cdfd584243f0763b0416b097a27bbb65c7a82a4f68e"
+    },
+    {
+      "entry": "PrefixRadixHistogramBins",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 20,
+      "dxilSha256": "81552de773b9a1a617eefdbf2f68272f269080323a6bfba75d43362db0fc75df",
+      "assemblySha256": "c86c52b1a4c2dfe8131d37a0c94f2a35f8dadcdc7464b4058fef27a64b9ee5ba"
+    },
+    {
+      "entry": "ScatterRadixTile",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 5268,
+      "dxilSha256": "1e54a190d08dd7cd69712de35ba39878a0cfb17ca1812ccb8e864426a02bf429",
+      "assemblySha256": "686c21322ba41fcf7c5d1b27e11cfe1c92125731443fb4288bce17457d3e15e3"
+    },
+    {
+      "entry": "ScatterRadixTileToPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 5268,
+      "dxilSha256": "9a9dfc5f8b2928e312bcb65d689dd9fcb04168cf649e5221a4120b40b121e850",
+      "assemblySha256": "8f84ad0a5561615af0b776d85f95c5a0cab065dd008bf6bcd08ae1d8cf70b947"
+    },
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "59526fd058b1af05abf23e5a658e2e5a48c915a3c5f01ca92b79110dd9d92774",
+      "assemblySha256": "d18139f52554101df42669059636048cc59b5f500e23799380f9f78cfacb434d"
+    },
+    {
+      "entry": "BuildRadixHistogram",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 1024,
+      "dxilSha256": "08d43b360d44cbfed852f45a34d7b2349dedc4e232e00281222b7ce0c1deb0f5",
+      "assemblySha256": "3645b18697f704d5a2c5fb2b39b12054f5411f945f102321d6a9d90a90f7d183"
+    },
+    {
+      "entry": "PrefixRadixHistogramTiles",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 20,
+      "dxilSha256": "7a50ba247f8630e1e4a0cdd40086ce6db22a18e1b07c8c2fe0d05725c8f252b7",
+      "assemblySha256": "64813f318e40f82335837cdfd584243f0763b0416b097a27bbb65c7a82a4f68e"
+    },
+    {
+      "entry": "PrefixRadixHistogramBins",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 20,
+      "dxilSha256": "714a093aac835173c801201595d06fc67fc749f66b4da0be71a7ef5e81899e53",
+      "assemblySha256": "358f4a6f9964844253c8d85465b36b7e7cf8b7f3d94c18d54c596e14c0ffaa39"
+    },
+    {
+      "entry": "ScatterRadixTile",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 20500,
+      "dxilSha256": "5fd6ddac7a9709b4cb51ed54fa5e590d5527afdbf9064f2be7efd4892d0e2fe9",
+      "assemblySha256": "088c4a38d397fbe62173a197a7cd7010e86566d689bfa4b3e922bdd6edd063fd"
+    },
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "63e1f582c0ad6b9ca74c2531c0f402779c6b3c3f38ac18b6b327e9b83abf4bf9",
+      "assemblySha256": "43798ad23aad1880b72c826e51f47505694224ed9d4233bea6f37fa1d68a37a8"
+    },
+    {
+      "entry": "SplitRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "48fdf4a2e5f91064d5ffbcef6d7b9802a6414ce4390192ecb0f32bf62098d94e",
+      "assemblySha256": "3cbba439d4840428c77a83486b76146d55c826fc8f9f186f9fd5722bb44e27a0"
+    },
+    {
+      "entry": "PackRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "0cc64d5d03265fb1852f890cd0c2629a458d2ff7b12c9d919288cfb16a9f48f9",
+      "assemblySha256": "2f07f812df82e175c8567f2e255550d02a9e8c83be5b582e3824c46d4d40f37e"
+    },
+    {
+      "entry": "BuildRadixHistogram",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 1024,
+      "dxilSha256": "9202af60f28b5e06287834f37b97c99c60932d84c64a39f8941dc1eefeaf6cf4",
+      "assemblySha256": "7f16ea73c57e67511c1e4ff2be469e449205bb284bdf0fa9af3e045d282c40d3"
+    },
+    {
+      "entry": "PrefixRadixHistogramTiles",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 20,
+      "dxilSha256": "7a50ba247f8630e1e4a0cdd40086ce6db22a18e1b07c8c2fe0d05725c8f252b7",
+      "assemblySha256": "64813f318e40f82335837cdfd584243f0763b0416b097a27bbb65c7a82a4f68e"
+    },
+    {
+      "entry": "PrefixRadixHistogramBins",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 20,
+      "dxilSha256": "714a093aac835173c801201595d06fc67fc749f66b4da0be71a7ef5e81899e53",
+      "assemblySha256": "358f4a6f9964844253c8d85465b36b7e7cf8b7f3d94c18d54c596e14c0ffaa39"
+    },
+    {
+      "entry": "ScatterRadixTile",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 22548,
+      "dxilSha256": "baf3684b01fea4948b4c9fb77b7873da2faa8249fc504e4c0bd1c29e2ae42524",
+      "assemblySha256": "ef2f9521d14567c5857616e839b7870fd8d942f6c9410899793c0be66f2d6f94"
+    },
+    {
+      "entry": "ScatterRadixTileToPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 1,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 22548,
+      "dxilSha256": "6f125a4fae1b8fa26f64579e789994900954b00c48f3752a25cf68029dee0e56",
+      "assemblySha256": "35d2a4cd7112f2b25746efb6dc0835949db352cb0787a7d6d3e50d2dd5be2f44"
+    },
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "59526fd058b1af05abf23e5a658e2e5a48c915a3c5f01ca92b79110dd9d92774",
+      "assemblySha256": "d18139f52554101df42669059636048cc59b5f500e23799380f9f78cfacb434d"
+    },
+    {
+      "entry": "ProduceZeroFlags",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "db2fb4128d939356c9ce008c1b0119a8059c63af9dc7cf05508a94c624b79279",
+      "assemblySha256": "e6764fe36a841cf9188392119110929c22d826238a2234ab73424bf9768be4ec"
+    },
+    {
+      "entry": "ScatterRadixBit",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "f976526dfcdc0eb2674467e8c059a72ca3897f2b26f8dc5420c46e885a309111",
+      "assemblySha256": "696b825bdf9ed4c178485ff25c550bdc497133ffd96a116193c8a778c10ff2ae"
+    },
+    {
+      "entry": "BlockScanPass",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 512,
+      "dxilSha256": "4c02c979a58ffb647678cfdaef778157cee4388cc7b052488d5e5eac1da496b4",
+      "assemblySha256": "cb79b6059506c32809fc5ec3245bbf22563d3a0b4d620f9e226881cbfeb5b57c"
+    },
+    {
+      "entry": "AddScanOffsets",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "8ea46a175471a7f96b0cac14616b11b7e012d5d467ab720ddfdcfd47976504f4",
+      "assemblySha256": "6915ebb1423e155730054e6c766e1f39735d24fb2e59463a1dddce54491e2b37"
+    },
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "63e1f582c0ad6b9ca74c2531c0f402779c6b3c3f38ac18b6b327e9b83abf4bf9",
+      "assemblySha256": "43798ad23aad1880b72c826e51f47505694224ed9d4233bea6f37fa1d68a37a8"
+    },
+    {
+      "entry": "SplitRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "48fdf4a2e5f91064d5ffbcef6d7b9802a6414ce4390192ecb0f32bf62098d94e",
+      "assemblySha256": "3cbba439d4840428c77a83486b76146d55c826fc8f9f186f9fd5722bb44e27a0"
+    },
+    {
+      "entry": "PackRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "0cc64d5d03265fb1852f890cd0c2629a458d2ff7b12c9d919288cfb16a9f48f9",
+      "assemblySha256": "2f07f812df82e175c8567f2e255550d02a9e8c83be5b582e3824c46d4d40f37e"
+    },
+    {
+      "entry": "ProduceZeroFlags",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "38af5b072439111cb93164da77710fa6532ced240d07d8ffa4723ef5e189080b",
+      "assemblySha256": "fd566a14d204fef80ac4f0dbe7a96c550c09ea6f37ae3ef7df51a21a02cc954d"
+    },
+    {
+      "entry": "ScatterRadixBit",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "7c0ebb779db70e73fb703710f2ed7f688900daf143d9d7f37b4d619cae500ca8",
+      "assemblySha256": "ded7cd66fd1272867bf02611de17a66a1a6f9e76fb6f9e278e7af024eff77aa0"
+    },
+    {
+      "entry": "BlockScanPass",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 512,
+      "dxilSha256": "4c02c979a58ffb647678cfdaef778157cee4388cc7b052488d5e5eac1da496b4",
+      "assemblySha256": "cb79b6059506c32809fc5ec3245bbf22563d3a0b4d620f9e226881cbfeb5b57c"
+    },
+    {
+      "entry": "AddScanOffsets",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 1,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "8ea46a175471a7f96b0cac14616b11b7e012d5d467ab720ddfdcfd47976504f4",
+      "assemblySha256": "6915ebb1423e155730054e6c766e1f39735d24fb2e59463a1dddce54491e2b37"
+    },
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "59526fd058b1af05abf23e5a658e2e5a48c915a3c5f01ca92b79110dd9d92774",
+      "assemblySha256": "d18139f52554101df42669059636048cc59b5f500e23799380f9f78cfacb434d"
+    },
+    {
+      "entry": "BuildRadixHistogram",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 64,
+      "dxilSha256": "95550513920bd12d16bcaeaae073890072de2a9e31f5d0dafc0b20f3a1487fda",
+      "assemblySha256": "e26a5ba49638e82a863094d6b040392148ffa5b39c0480566ec97e574452c5eb"
+    },
+    {
+      "entry": "BlockScanPass",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 512,
+      "dxilSha256": "4c02c979a58ffb647678cfdaef778157cee4388cc7b052488d5e5eac1da496b4",
+      "assemblySha256": "cb79b6059506c32809fc5ec3245bbf22563d3a0b4d620f9e226881cbfeb5b57c"
+    },
+    {
+      "entry": "AddScanOffsets",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "8ea46a175471a7f96b0cac14616b11b7e012d5d467ab720ddfdcfd47976504f4",
+      "assemblySha256": "6915ebb1423e155730054e6c766e1f39735d24fb2e59463a1dddce54491e2b37"
+    },
+    {
+      "entry": "ScatterRadixDigit",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 2048,
+      "dxilSha256": "d39d1a6392de95f115abcd5caaca23d14700dcfabe7e1d548f0b5f882b8aca48",
+      "assemblySha256": "8858621bf3756d9989d7ebdf01cf710b8643d9fb73ca091c66f0183e2cf247c5"
+    },
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "63e1f582c0ad6b9ca74c2531c0f402779c6b3c3f38ac18b6b327e9b83abf4bf9",
+      "assemblySha256": "43798ad23aad1880b72c826e51f47505694224ed9d4233bea6f37fa1d68a37a8"
+    },
+    {
+      "entry": "SplitRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "48fdf4a2e5f91064d5ffbcef6d7b9802a6414ce4390192ecb0f32bf62098d94e",
+      "assemblySha256": "3cbba439d4840428c77a83486b76146d55c826fc8f9f186f9fd5722bb44e27a0"
+    },
+    {
+      "entry": "PackRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "0cc64d5d03265fb1852f890cd0c2629a458d2ff7b12c9d919288cfb16a9f48f9",
+      "assemblySha256": "2f07f812df82e175c8567f2e255550d02a9e8c83be5b582e3824c46d4d40f37e"
+    },
+    {
+      "entry": "BuildRadixHistogram",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 64,
+      "dxilSha256": "35883794dc1f89507f7dd880cd140a0702ffb7d0c242790d801db56cf111ceb2",
+      "assemblySha256": "36fc5b4fc52ec17a6dbee16e384b1d309af905e63b56852eb6207c63fb5b6840"
+    },
+    {
+      "entry": "BlockScanPass",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 512,
+      "dxilSha256": "4c02c979a58ffb647678cfdaef778157cee4388cc7b052488d5e5eac1da496b4",
+      "assemblySha256": "cb79b6059506c32809fc5ec3245bbf22563d3a0b4d620f9e226881cbfeb5b57c"
+    },
+    {
+      "entry": "AddScanOffsets",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "8ea46a175471a7f96b0cac14616b11b7e012d5d467ab720ddfdcfd47976504f4",
+      "assemblySha256": "6915ebb1423e155730054e6c766e1f39735d24fb2e59463a1dddce54491e2b37"
+    },
+    {
+      "entry": "ScatterRadixDigit",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 4,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 2048,
+      "dxilSha256": "35f6dfbaafde11b915010d1e811e58799fef380c159c4ac6672f768efa49c9ff",
+      "assemblySha256": "9c75c7c9642952271feb28af42b84dfd545d2f43b9616a06932209efb5ef35a0"
+    },
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "59526fd058b1af05abf23e5a658e2e5a48c915a3c5f01ca92b79110dd9d92774",
+      "assemblySha256": "d18139f52554101df42669059636048cc59b5f500e23799380f9f78cfacb434d"
+    },
+    {
+      "entry": "BuildRadixHistogram",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 1024,
+      "dxilSha256": "08d43b360d44cbfed852f45a34d7b2349dedc4e232e00281222b7ce0c1deb0f5",
+      "assemblySha256": "3645b18697f704d5a2c5fb2b39b12054f5411f945f102321d6a9d90a90f7d183"
+    },
+    {
+      "entry": "BlockScanPass",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 512,
+      "dxilSha256": "4c02c979a58ffb647678cfdaef778157cee4388cc7b052488d5e5eac1da496b4",
+      "assemblySha256": "cb79b6059506c32809fc5ec3245bbf22563d3a0b4d620f9e226881cbfeb5b57c"
+    },
+    {
+      "entry": "AddScanOffsets",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "8ea46a175471a7f96b0cac14616b11b7e012d5d467ab720ddfdcfd47976504f4",
+      "assemblySha256": "6915ebb1423e155730054e6c766e1f39735d24fb2e59463a1dddce54491e2b37"
+    },
+    {
+      "entry": "ScatterRadixDigit",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 2048,
+      "dxilSha256": "d39d1a6392de95f115abcd5caaca23d14700dcfabe7e1d548f0b5f882b8aca48",
+      "assemblySha256": "8858621bf3756d9989d7ebdf01cf710b8643d9fb73ca091c66f0183e2cf247c5"
+    },
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "63e1f582c0ad6b9ca74c2531c0f402779c6b3c3f38ac18b6b327e9b83abf4bf9",
+      "assemblySha256": "43798ad23aad1880b72c826e51f47505694224ed9d4233bea6f37fa1d68a37a8"
+    },
+    {
+      "entry": "SplitRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "48fdf4a2e5f91064d5ffbcef6d7b9802a6414ce4390192ecb0f32bf62098d94e",
+      "assemblySha256": "3cbba439d4840428c77a83486b76146d55c826fc8f9f186f9fd5722bb44e27a0"
+    },
+    {
+      "entry": "PackRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "0cc64d5d03265fb1852f890cd0c2629a458d2ff7b12c9d919288cfb16a9f48f9",
+      "assemblySha256": "2f07f812df82e175c8567f2e255550d02a9e8c83be5b582e3824c46d4d40f37e"
+    },
+    {
+      "entry": "BuildRadixHistogram",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 1024,
+      "dxilSha256": "9202af60f28b5e06287834f37b97c99c60932d84c64a39f8941dc1eefeaf6cf4",
+      "assemblySha256": "7f16ea73c57e67511c1e4ff2be469e449205bb284bdf0fa9af3e045d282c40d3"
+    },
+    {
+      "entry": "BlockScanPass",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 512,
+      "dxilSha256": "4c02c979a58ffb647678cfdaef778157cee4388cc7b052488d5e5eac1da496b4",
+      "assemblySha256": "cb79b6059506c32809fc5ec3245bbf22563d3a0b4d620f9e226881cbfeb5b57c"
+    },
+    {
+      "entry": "AddScanOffsets",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "8ea46a175471a7f96b0cac14616b11b7e012d5d467ab720ddfdcfd47976504f4",
+      "assemblySha256": "6915ebb1423e155730054e6c766e1f39735d24fb2e59463a1dddce54491e2b37"
+    },
+    {
+      "entry": "ScatterRadixDigit",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 4,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 0
+      },
+      "sharedBytes": 2048,
+      "dxilSha256": "35f6dfbaafde11b915010d1e811e58799fef380c159c4ac6672f768efa49c9ff",
+      "assemblySha256": "9c75c7c9642952271feb28af42b84dfd545d2f43b9616a06932209efb5ef35a0"
+    },
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "59526fd058b1af05abf23e5a658e2e5a48c915a3c5f01ca92b79110dd9d92774",
+      "assemblySha256": "d18139f52554101df42669059636048cc59b5f500e23799380f9f78cfacb434d"
+    },
+    {
+      "entry": "BuildRadixHistogram",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 1024,
+      "dxilSha256": "6480f24e75d4c8cd847cb9b137af757394ecbdb9b5455ddeb25fd5dbea1d9035",
+      "assemblySha256": "675ccc5987014f2ef2f3e84153127524659d79b81db5f41954b5170ff9d0f366"
+    },
+    {
+      "entry": "BlockScanPass",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 512,
+      "dxilSha256": "6a2e306fad0c5c52955afeca7880c26802de8410f17887fbd19dd9ea3360adb1",
+      "assemblySha256": "6c65d690e333382aae7e3adf7df030c0b032ae073aca806474024faa8f5e8ee4"
+    },
+    {
+      "entry": "AddScanOffsets",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "de9e79e8b86f55037ee9619d899cc121473e52820d9ab1e3ba6f62d0d51c8b49",
+      "assemblySha256": "e164afd7809f3d629a19d781f2fde70f71d11000c479b187fd198c35c5ea60ab"
+    },
+    {
+      "entry": "ScatterRadixDigit",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 0,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 1312,
+      "dxilSha256": "b2c964a6814251b24c655306eaf990dd8e37ad5fb30d7e2aeb341cf67ed09f34",
+      "assemblySha256": "19d1dd9b96225c5ce4979397e15491bd1fe7b02003e3fefa436252c750b08b4d"
+    },
+    {
+      "entry": "EmptyRadix",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "63e1f582c0ad6b9ca74c2531c0f402779c6b3c3f38ac18b6b327e9b83abf4bf9",
+      "assemblySha256": "43798ad23aad1880b72c826e51f47505694224ed9d4233bea6f37fa1d68a37a8"
+    },
+    {
+      "entry": "SplitRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "b7ffd8bb1d38b4e731e4b95d34c86ea3ecd9c70eed086ee47b3ab7d7cb0add5f",
+      "assemblySha256": "00522b444bdada586959de643bf851024697872195d385c4c73d51f04ab6cfaa"
+    },
+    {
+      "entry": "PackRadixPairs",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "b0c1cadfae0f508a1507df2a8f0ccae4da78256d063307686c1061f9532df767",
+      "assemblySha256": "999458cb715effb3ae08a022caeb7168ad16c0f40f92a0c4449965397de3f53d"
+    },
+    {
+      "entry": "BuildRadixHistogram",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 1024,
+      "dxilSha256": "3a1ac55ca96c2b8a7b85f8eec88e384351c78c1115aa581b466c425707be40ec",
+      "assemblySha256": "6de19b555359015e82055c4c2b62c6d128bd4618fd2b80d959692649a827767e"
+    },
+    {
+      "entry": "BlockScanPass",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 512,
+      "dxilSha256": "6a2e306fad0c5c52955afeca7880c26802de8410f17887fbd19dd9ea3360adb1",
+      "assemblySha256": "6c65d690e333382aae7e3adf7df030c0b032ae073aca806474024faa8f5e8ee4"
+    },
+    {
+      "entry": "AddScanOffsets",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 0,
+      "dxilSha256": "de9e79e8b86f55037ee9619d899cc121473e52820d9ab1e3ba6f62d0d51c8b49",
+      "assemblySha256": "e164afd7809f3d629a19d781f2fde70f71d11000c479b187fd198c35c5ea60ab"
+    },
+    {
+      "entry": "ScatterRadixDigit",
+      "defines": {
+        "HLSLPERF_GROUP_SIZE": 128,
+        "HLSLPERF_ELEMENTS_PER_THREAD": 2,
+        "HLSLPERF_SCAN_BACKEND": 2,
+        "HLSLPERF_SCAN_OPERATOR": 1,
+        "HLSLPERF_VECTOR_WIDTH": 1,
+        "HLSLPERF_WAVE_SIZE": 32,
+        "HLSLPERF_RADIX_BITS": 8,
+        "HLSLPERF_RADIX_PAIRS": 1,
+        "HLSLPERF_RADIX_TILE": 0,
+        "HLSLPERF_RADIX_RANK_BALLOT": 1
+      },
+      "sharedBytes": 1312,
+      "dxilSha256": "4b2bfc7835a5d9d33bf1089d02261a3f379ba129ef33e250b8c5107c7a748362",
+      "assemblySha256": "361c2b8071431f0961b6e3b816a2833cf6eae756db676ddba0545cb0d476cdd4"
+    }
+  ],
+  "compilerLibraries": {
+    "dxcompiler.dll": "97abd3b3083607dc29cc3f8eae56c39c349b76ee3c20deeb2f66258708e55bd8",
+    "dxil.dll": "fda4dde92222ddb8564c3173ce48faa56f7e1c7b46b0b67dada1182ee07a4123"
+  }
+}

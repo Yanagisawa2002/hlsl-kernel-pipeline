@@ -32,6 +32,8 @@ internal sealed class RadixSortWorkload(bool pairs = false) : IKernelWorkload
         int elementsPerThread = candidate.GetRequired("HLSLPERF_ELEMENTS_PER_THREAD");
         int vectorWidth = OptionalDefine(candidate, "HLSLPERF_VECTOR_WIDTH", 1);
         int waveSize = OptionalDefine(candidate, "HLSLPERF_WAVE_SIZE", 0);
+        int tiled = OptionalDefine(candidate, "HLSLPERF_RADIX_TILE", 0);
+        int ballot = OptionalDefine(candidate, "HLSLPERF_RADIX_RANK_BALLOT", 0);
 
         WorkloadData.ValidatePowerOfTwoGroup(groupSize, candidate.Id);
         RadixSortContract.ValidateDimensions(elementCount, bitCount, pairs);
@@ -53,6 +55,12 @@ internal sealed class RadixSortWorkload(bool pairs = false) : IKernelWorkload
             throw new InvalidDataException($"Candidate '{candidate.Id}' wave size must be 0, 32, or 64.");
         if (waveSize != 0 && manifest.ShaderModel is not ("6_6" or "6_7"))
             throw new InvalidDataException($"Candidate '{candidate.Id}' fixed wave size requires shader model 6_6+.");
+        if (ballot is not (0 or 1) || (ballot == 1 && (groupSize != 128 || elementsPerThread != 2 || radixBits != 8 || waveSize != 32)))
+            throw new InvalidDataException("Ballot radix rank requires group128, two records, eight bits and wave32.");
+        if (tiled is not (0 or 1) || (tiled == 1 && (groupSize != RadixTileLayout.GroupSize ||
+            elementsPerThread != RadixTileLayout.ItemsPerThread || radixBits is not (4 or 8) ||
+            waveSize != 32 || backend != 2 || vectorWidth != 1 || ballot != 0)))
+            throw new InvalidDataException("Tiled radix requires group128, four records, four/eight bits, wave32, backend2, scalar loads and no legacy ballot rank.");
 
         if (elementCount == 0 && manifest.KernelAbiVersion != KernelAbiV2.Id)
             throw new InvalidDataException("Zero-count radix requires ABI v2; v1 accepts positive counts only.");
@@ -60,6 +68,7 @@ internal sealed class RadixSortWorkload(bool pairs = false) : IKernelWorkload
         if (radixBits != 1 && (preflightBlock > 1024 ||
             ((elementCount + preflightBlock - 1) / preflightBlock) * (1 << radixBits) * 4 > int.MaxValue))
             throw new InvalidDataException("Wide radix block or histogram exceeds its supported ABI limit.");
+        RadixTileLayout? tileLayout = tiled == 1 ? RadixTileLayout.Create(elementCount, bitCount, radixBits, pairs) : null;
         EnsureOracle(elementCount, seed, bitCount, pattern, domain);
         if (elementCount == 0)
         {
@@ -69,6 +78,9 @@ internal sealed class RadixSortWorkload(bool pairs = false) : IKernelWorkload
                 "radix-empty", expectedHash!);
             return Finish(empty, manifest, groupSize, elementsPerThread);
         }
+        if (tileLayout is not null)
+            return Finish(BuildTiled(tileLayout, manifest.KernelAbiVersion == KernelAbiV2.Id),
+                manifest, groupSize, elementsPerThread, splitPairs: false);
         if (radixBits != 1)
             return Finish(BuildWide(elementCount, bitCount, radixBits, groupSize, elementsPerThread), manifest, groupSize, elementsPerThread);
         long blockSize = checked((long)groupSize * elementsPerThread);
@@ -128,6 +140,20 @@ internal sealed class RadixSortWorkload(bool pairs = false) : IKernelWorkload
             source,
             expectedHash!);
         return Finish(plan, manifest, groupSize, elementsPerThread);
+    }
+
+    private KernelExecutionPlan BuildTiled(RadixTileLayout layout, bool v2)
+    {
+        bool directPairs = pairs && v2;
+        RadixTilePlan description = layout.DescribePlan(directPairs);
+        KernelBufferSpec[] buffers = description.Buffers.Select(buffer => new KernelBufferSpec(
+            buffer.Name, checked((int)buffer.ByteLength), buffer.Name == "input" ? inputData : null)).ToArray();
+        KernelPassSpec[] passes = description.Passes.Select(pass => v2 ? pass : pass with { DependsOn = [] }).ToArray();
+        return new(Id, v2 ? KernelAbiV2.Id : KernelAbiV1.Id, layout.Count, buffers, passes, description.Outputs[0],
+            directPairs ? expectedKeysHash! : expectedHash!)
+        {
+            AdditionalVerifiedOutputs = directPairs ? [new("sorted-payloads", expectedPayloadsHash!)] : []
+        };
     }
 
     private KernelExecutionPlan BuildWide(int count, int bitCount, int radixBits, int groupSize, int items)
@@ -212,13 +238,13 @@ internal sealed class RadixSortWorkload(bool pairs = false) : IKernelWorkload
     private static int OptionalDefine(KernelCandidate candidate, string name, int fallback) =>
         candidate.Defines.TryGetValue(name, out int value) ? value : fallback;
 
-    private KernelExecutionPlan Finish(KernelExecutionPlan plan, TuningManifest manifest, int groupSize, int items)
+    private KernelExecutionPlan Finish(KernelExecutionPlan plan, TuningManifest manifest, int groupSize, int items, bool splitPairs = true)
     {
         if (manifest.KernelAbiVersion == KernelAbiV2.Id)
         {
             List<KernelPassSpec> passes = plan.Passes.ToList();
             List<KernelBufferSpec> buffers = plan.Buffers.ToList();
-            if (pairs)
+            if (pairs && splitPairs)
             {
                 int count = checked((int)plan.LogicalItemCount);
                 uint groups = Math.Max(1u, WorkloadData.CeilDiv(count, (long)groupSize * items));

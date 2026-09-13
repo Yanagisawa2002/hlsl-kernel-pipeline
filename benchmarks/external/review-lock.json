@@ -1,0 +1,274 @@
+{
+  "schema": "hlslperf.external-review.v1",
+  "performanceStatus": "Unmeasured",
+  "sources": [
+    {
+      "repository": "https://github.com/UoB-HPC/BabelStream",
+      "commit": "17ab377b0e919e14fd3df2b67268761fdac8abb3",
+      "classification": "external-memory-bandwidth-benchmark",
+      "files": [
+        {
+          "path": "CMakeLists.txt",
+          "localPath": "benchmarks/external/review/BabelStream/CMakeLists.txt",
+          "url": "https://raw.githubusercontent.com/UoB-HPC/BabelStream/17ab377b0e919e14fd3df2b67268761fdac8abb3/CMakeLists.txt",
+          "sha256": "1ad2e5e3837f9b1c967aa899d9609e1a589677ac97cce22490db7c1ba803bf5e"
+        },
+        {
+          "path": "LICENSE",
+          "localPath": "benchmarks/external/review/BabelStream/LICENSE",
+          "url": "https://raw.githubusercontent.com/UoB-HPC/BabelStream/17ab377b0e919e14fd3df2b67268761fdac8abb3/LICENSE",
+          "sha256": "7d2e4e8166d0656f6648ad495dc44c1176667ed1aa0473c177397a54d35a9112"
+        },
+        {
+          "path": "README.md",
+          "localPath": "benchmarks/external/review/BabelStream/README.md",
+          "url": "https://raw.githubusercontent.com/UoB-HPC/BabelStream/17ab377b0e919e14fd3df2b67268761fdac8abb3/README.md",
+          "sha256": "2e6a1c9ec1d9225ae2846b50d23cb362b84b932305aacea43f9e4f925157fcaa"
+        },
+        {
+          "path": "src/Stream.h",
+          "localPath": "benchmarks/external/review/BabelStream/src/Stream.h",
+          "url": "https://raw.githubusercontent.com/UoB-HPC/BabelStream/17ab377b0e919e14fd3df2b67268761fdac8abb3/src/Stream.h",
+          "sha256": "1f0f86e0b0a09c5035b3011a65182bdc8fea9593b754bd901069e9e7208abd03"
+        },
+        {
+          "path": "src/main.cpp",
+          "localPath": "benchmarks/external/review/BabelStream/src/main.cpp",
+          "url": "https://raw.githubusercontent.com/UoB-HPC/BabelStream/17ab377b0e919e14fd3df2b67268761fdac8abb3/src/main.cpp",
+          "sha256": "dba25f515934be96a52e7bb8f80bc4fc06d6311b76c6b6da112298d3e2c5eda7"
+        }
+      ]
+    },
+    {
+      "repository": "https://github.com/zjin-lcf/HeCBench",
+      "commit": "7d2d3c567be522a2104065165de0a4a233a6ea1a",
+      "classification": "external-heterogeneous-kernel-suite",
+      "files": [
+        {
+          "path": "LICENSE",
+          "localPath": "benchmarks/external/review/HeCBench/LICENSE",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/LICENSE",
+          "sha256": "eae7fae6934a2452b211684b270683d5e87d865604e388d9ca123f5438a4165a"
+        },
+        {
+          "path": "README.md",
+          "localPath": "benchmarks/external/review/HeCBench/README.md",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/README.md",
+          "sha256": "79c470e47b69926fed19151e95e825491237f84b00368676fa3f8737b15ef03e"
+        }
+      ],
+      "reviewedFiles": [
+        {
+          "path": "src/histogram-cuda/CMakeLists.txt",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-cuda/CMakeLists.txt",
+          "sha256": "fb4a45bf5936c296ad0910493ff3e85ab0e54481a54b3d8ec48c0c500d821262"
+        },
+        {
+          "path": "src/histogram-cuda/Makefile",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-cuda/Makefile",
+          "sha256": "4e3d419adbd08a2d2954c34aa72bd8065cf62d15416a23768682831d28fc8ee3"
+        },
+        {
+          "path": "src/histogram-cuda/histogram_compare.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-cuda/histogram_compare.cu",
+          "sha256": "e9eae828f1bb5b48f2aa0b3bef5ac5ee0561a2f3dac84da64dffd6fd46d4a764"
+        },
+        {
+          "path": "src/histogram-cuda/histogram_gmem_atomics.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-cuda/histogram_gmem_atomics.h",
+          "sha256": "e93b12f60faf8cf52ca852d7a89fd33de69b880c6b0d7d552bb67d93c6cdb6cd"
+        },
+        {
+          "path": "src/histogram-cuda/histogram_smem_atomics.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-cuda/histogram_smem_atomics.h",
+          "sha256": "9a684455c0e795f61ec2e8a0e99c3881a2bddabd366e9ef50dfee658fe32c42c"
+        },
+        {
+          "path": "src/histogram-cuda/mersenne.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-cuda/mersenne.h",
+          "sha256": "6bac70d3cff2081eaf81ed74805f35b622e266ea147987e177099a8527ebc6f9"
+        },
+        {
+          "path": "src/histogram-cuda/test_util.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-cuda/test_util.h",
+          "sha256": "f98f9fb3adf1bde7102ff25e04405975bd4af0f90d520daa381fa94bcf6ada06"
+        },
+        {
+          "path": "src/histogram-hip/CMakeLists.txt",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-hip/CMakeLists.txt",
+          "sha256": "a09ba9d964ab6ff481e2a973f93775d08a43744472cc5bfe27fa65f845660346"
+        },
+        {
+          "path": "src/histogram-hip/Makefile",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-hip/Makefile",
+          "sha256": "744f389d9796071ea921ca3d39f99c8033535c95b1f8437e038d2254a9067310"
+        },
+        {
+          "path": "src/histogram-hip/histogram_compare.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-hip/histogram_compare.cu",
+          "sha256": "a2d62f47b9a25fb0f0ea96a0f9cb54178f8eeafffb131f33f0bc3fab48c3e09e"
+        },
+        {
+          "path": "src/histogram-hip/histogram_gmem_atomics.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-hip/histogram_gmem_atomics.h",
+          "sha256": "4136535b44539b9be0a5755e9878ab5eca47028125760791f62aab386e68a106"
+        },
+        {
+          "path": "src/histogram-hip/histogram_smem_atomics.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-hip/histogram_smem_atomics.h",
+          "sha256": "8b7cfd473dc564b25480a01a6f532b18c46a45744cdd8d4ea4b44f414c282a87"
+        },
+        {
+          "path": "src/histogram-hip/mersenne.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-hip/mersenne.h",
+          "sha256": "6bac70d3cff2081eaf81ed74805f35b622e266ea147987e177099a8527ebc6f9"
+        },
+        {
+          "path": "src/histogram-hip/test_util.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/histogram-hip/test_util.h",
+          "sha256": "a00a8bfa58f9107403f342555edfe3080a371076911f3cc03a23e9aa45d0d1d3"
+        },
+        {
+          "path": "src/radixsort-cuda/CMakeLists.txt",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-cuda/CMakeLists.txt",
+          "sha256": "5af75d451b4a9adb48514f62a91a092180419df80d84f155d273db1bc4281660"
+        },
+        {
+          "path": "src/radixsort-cuda/Makefile",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-cuda/Makefile",
+          "sha256": "6da5bb0a9f655a1d25c37f015f4f2fd31033c9f0419f936afd254c87fb7f9485"
+        },
+        {
+          "path": "src/radixsort-cuda/RadixSort.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-cuda/RadixSort.cu",
+          "sha256": "fbd0a9291fde4b3e781ea05fa6628ef6be51eb587d6acf69ce192058c99779fa"
+        },
+        {
+          "path": "src/radixsort-cuda/RadixSort.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-cuda/RadixSort.h",
+          "sha256": "163bb965c5c84e34cb56d93030085809d7f2bf15f9ca5225ce6445162dd2446e"
+        },
+        {
+          "path": "src/radixsort-cuda/RadixSort_kernels.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-cuda/RadixSort_kernels.cu",
+          "sha256": "3982632f81cb3a594017fb1bdd7e94e2be9f687dfcd29d78702cccee1fae9118"
+        },
+        {
+          "path": "src/radixsort-cuda/Scan.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-cuda/Scan.cu",
+          "sha256": "f06c996f79a483d8856f1f5f0b96bdbb70fa940c049c966a932d64368d22b5de"
+        },
+        {
+          "path": "src/radixsort-cuda/Scan.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-cuda/Scan.h",
+          "sha256": "f2973ac1e6b8c8ac8036a0d1b792f1db1c4183add7b62e267efd2d7793d84e64"
+        },
+        {
+          "path": "src/radixsort-cuda/Scan_kernels.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-cuda/Scan_kernels.cu",
+          "sha256": "0546691ec2a00902472dbdae82b069afa1e604e4aa5870b55a649e4ed57eca19"
+        },
+        {
+          "path": "src/radixsort-cuda/main.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-cuda/main.cu",
+          "sha256": "9819b0f64d1249b7ca244b08a3c3dc088898016880dfbf7ce606cb52b9a22c22"
+        },
+        {
+          "path": "src/radixsort-hip/CMakeLists.txt",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-hip/CMakeLists.txt",
+          "sha256": "7633b9fe26d4a1af08c4ff78d8501d9b2a7442e6771f3248d2ab5bc1d34e67c8"
+        },
+        {
+          "path": "src/radixsort-hip/Makefile",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-hip/Makefile",
+          "sha256": "a49a91bf6d6043b287ebadac363368e35a73d5b090f88cec3cdb092197aef358"
+        },
+        {
+          "path": "src/radixsort-hip/RadixSort.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-hip/RadixSort.cu",
+          "sha256": "6d65f36c94f89d0375df231fde45c2b4c69e3f9c887952a1062c0461567b6695"
+        },
+        {
+          "path": "src/radixsort-hip/RadixSort.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-hip/RadixSort.h",
+          "sha256": "16def155a310ba0b58f15acc89ae34a45f120984765b3beb84b035b8167ec92c"
+        },
+        {
+          "path": "src/radixsort-hip/RadixSort_kernels.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-hip/RadixSort_kernels.cu",
+          "sha256": "3982632f81cb3a594017fb1bdd7e94e2be9f687dfcd29d78702cccee1fae9118"
+        },
+        {
+          "path": "src/radixsort-hip/Scan.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-hip/Scan.cu",
+          "sha256": "6f2de0c657d23216493749a728a82a617d4db3da8a3fbee42acff248cd2beff6"
+        },
+        {
+          "path": "src/radixsort-hip/Scan.h",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-hip/Scan.h",
+          "sha256": "147862fccc5ea68f4b49fe4e982625431de971e5dd13fcb0f659cc6a39fd2228"
+        },
+        {
+          "path": "src/radixsort-hip/Scan_kernels.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-hip/Scan_kernels.cu",
+          "sha256": "0546691ec2a00902472dbdae82b069afa1e604e4aa5870b55a649e4ed57eca19"
+        },
+        {
+          "path": "src/radixsort-hip/main.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/radixsort-hip/main.cu",
+          "sha256": "3fffced31d5d49bbb5ffd1ba77f0efe33d95ee4fd66b8678aa5cca82a268d8a0"
+        },
+        {
+          "path": "src/scan-cuda/CMakeLists.txt",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/scan-cuda/CMakeLists.txt",
+          "sha256": "f11617ef8ffa2cb4b23320497bc2e4c742d2d49ac2e984e2271d3f761fd07d05"
+        },
+        {
+          "path": "src/scan-cuda/Makefile",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/scan-cuda/Makefile",
+          "sha256": "faec572a72d13e9c744ce281841f42e5633fd9f56a10fdb47457343266f23aad"
+        },
+        {
+          "path": "src/scan-cuda/main.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/scan-cuda/main.cu",
+          "sha256": "ee615d36d6139ac236abb8f237cc5d7e34ae26f570804e34a4bdc8fd957d8e7f"
+        },
+        {
+          "path": "src/scan-hip/CMakeLists.txt",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/scan-hip/CMakeLists.txt",
+          "sha256": "a4dd7046ce8755895c16094ea998996861ebdf235bd529550847301f6a70b93d"
+        },
+        {
+          "path": "src/scan-hip/Makefile",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/scan-hip/Makefile",
+          "sha256": "5d3e831faece8ccf5ff3526c6a2de043a30d24c09137680972e5815371a19761"
+        },
+        {
+          "path": "src/scan-hip/main.cu",
+          "url": "https://raw.githubusercontent.com/zjin-lcf/HeCBench/7d2d3c567be522a2104065165de0a4a233a6ea1a/src/scan-hip/main.cu",
+          "sha256": "eef1b0c9a6d1122c1ef00371ca5712e82be153922a1390781df6a2d567c1c36c"
+        }
+      ],
+      "distribution": "Kernel source is reference-only: radixsort files retain a separate NVIDIA EULA notice; root BSD license is not assumed to override file terms."
+    },
+    {
+      "repository": "https://github.com/GPUOpen-Effects/FidelityFX-ParallelSort",
+      "commit": "0c539948c8d196ae338d91efbc8ca495f1ea0d1d",
+      "classification": "legacy-external-algorithm-sample",
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "localPath": "benchmarks/external/review/FidelityFX-ParallelSort/LICENSE.txt",
+          "url": "https://raw.githubusercontent.com/GPUOpen-Effects/FidelityFX-ParallelSort/0c539948c8d196ae338d91efbc8ca495f1ea0d1d/LICENSE.txt",
+          "sha256": "1bed2f55030780f264c71e69ce14734e50c60f4d36bbb9c20ef1c98df451d7d8"
+        },
+        {
+          "path": "README.md",
+          "localPath": "benchmarks/external/review/FidelityFX-ParallelSort/README.md",
+          "url": "https://raw.githubusercontent.com/GPUOpen-Effects/FidelityFX-ParallelSort/0c539948c8d196ae338d91efbc8ca495f1ea0d1d/README.md",
+          "sha256": "f2dc9b2da672e3ad4f2e034e43e74db429df855d8698ec30d761da5c3e9e43a7"
+        }
+      ]
+    }
+  ]
+}
