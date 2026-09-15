@@ -3,8 +3,9 @@
 #include <functional>
 #include <numeric>
 #include <iomanip>
+#include <fstream>
 
-inline winrt::com_ptr<ID3D12Device> HlslPerfRuntimeDevice(uint64_t expectedLuid)
+inline winrt::com_ptr<ID3D12Device> HlslPerfRuntimeDevice(uint64_t expectedLuid, const std::wstring& exactAdapter = L"")
 {
     winrt::com_ptr<IDXGIFactory6> factory;
     winrt::check_hresult(CreateDXGIFactory2(0, IID_PPV_ARGS(factory.put())));
@@ -15,7 +16,13 @@ inline winrt::com_ptr<ID3D12Device> HlslPerfRuntimeDevice(uint64_t expectedLuid)
         DXGI_ADAPTER_DESC1 desc{};
         winrt::check_hresult(adapter->GetDesc1(&desc));
         uint64_t luid = (uint64_t(uint32_t(desc.AdapterLuid.HighPart)) << 32) | desc.AdapterLuid.LowPart;
-        if (std::wstring(desc.Description).find(L"R9700") == std::wstring::npos || luid != expectedLuid) continue;
+        // Legacy callers retain the R9700/LUID contract. New callers must name
+        // the exact adapter; LUID zero is permitted only for an explicit probe.
+        if (exactAdapter.empty())
+        {
+            if (std::wstring(desc.Description).find(L"R9700") == std::wstring::npos || luid != expectedLuid) continue;
+        }
+        else if (std::wstring(desc.Description) != exactAdapter || (expectedLuid && luid != expectedLuid)) continue;
         LARGE_INTEGER driver{};
         winrt::check_hresult(adapter->CheckInterfaceSupport(__uuidof(IDXGIDevice), &driver));
         winrt::com_ptr<ID3D12Device> device;
@@ -28,13 +35,13 @@ inline winrt::com_ptr<ID3D12Device> HlslPerfRuntimeDevice(uint64_t expectedLuid)
         D3D12_FEATURE_DATA_FEATURE_LEVELS feature{3, requested, D3D_FEATURE_LEVEL_12_0};
         winrt::check_hresult(device->CheckFeatureSupport(D3D12_FEATURE_FEATURE_LEVELS, &feature, sizeof(feature)));
         if (!wave.WaveOps || wave.WaveLaneCountMin > 32 || wave.WaveLaneCountMax < 32 || model.HighestShaderModel < D3D_SHADER_MODEL_6_6)
-            throw std::runtime_error("R9700 feature/wave contract unsupported.");
-        printf("HPJSON {\"kind\":\"device\",\"adapter\":\"AMD Radeon AI PRO R9700\",\"luid\":%llu,\"vendorId\":%u,\"deviceId\":%u,\"driver\":\"%u.%u.%u.%u\",\"dedicatedBytes\":%llu,\"waveMin\":%u,\"waveMax\":%u,\"shaderModel\":%u,\"featureLevel\":%u}\n",
-            luid, desc.VendorId, desc.DeviceId, HIWORD(driver.HighPart), LOWORD(driver.HighPart), HIWORD(driver.LowPart), LOWORD(driver.LowPart),
+            throw std::runtime_error("Required SM6.6/wave32 contract unsupported.");
+        printf("HPJSON {\"kind\":\"device\",\"adapter\":\"%ls\",\"luid\":%llu,\"vendorId\":%u,\"deviceId\":%u,\"driver\":\"%u.%u.%u.%u\",\"dedicatedBytes\":%llu,\"waveMin\":%u,\"waveMax\":%u,\"shaderModel\":%u,\"featureLevel\":%u}\n",
+            desc.Description, luid, desc.VendorId, desc.DeviceId, HIWORD(driver.HighPart), LOWORD(driver.HighPart), HIWORD(driver.LowPart), LOWORD(driver.LowPart),
             uint64_t(desc.DedicatedVideoMemory), wave.WaveLaneCountMin, wave.WaveLaneCountMax, model.HighestShaderModel, feature.MaxSupportedFeatureLevel);
         return device;
     }
-    throw std::runtime_error("The exact R9700 LUID was not found; default/integrated GPU fallback is forbidden.");
+    throw std::runtime_error("The requested adapter/LUID was not found; default/integrated GPU fallback is forbidden.");
 }
 
 inline void HlslPerfRuntimeBudget(ID3D12Device* device, const char* phase, uint64_t required = 0)
@@ -89,6 +96,17 @@ template<class Base> class HlslPerfScanValidation : public Base
 {
 public:
     using Base::Base;
+    void ExportInput(uint32_t n, const char* path)
+    {
+        this->UpdateSize(n, Base::ValidationType::ONE_INCLUSIVE);
+        this->CreateTestInput(0, Base::ValidationType::ONE_INCLUSIVE);
+        auto execute = [this]() { this->ExecuteCommandList(); };
+        auto actual = HlslPerfDownload(this->m_device, this->m_cmdList, this->m_scanInBuffer.get(), n, execute);
+        std::ofstream file(path, std::ios::binary | std::ios::trunc);
+        file.write(reinterpret_cast<const char*>(actual.data()), uint64_t(n) * sizeof(uint32_t));
+        if (!file) throw std::runtime_error("Input readback export failed.");
+        printf("HPJSON {\"kind\":\"inputExport\",\"count\":%u,\"bytes\":%llu}\n", n, uint64_t(n) * 4);
+    }
     void StrictValidate()
     {
         for (uint32_t n : {4u, 32u, 128u, 256u, 4092u, 4096u, 4100u, 8196u, 1048580u})

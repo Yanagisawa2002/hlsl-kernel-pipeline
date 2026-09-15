@@ -71,6 +71,8 @@ public sealed class WaveTiledScanTests
     [InlineData("HLSLPERF_WAVE_TILED_MAX_POLLS", 0)]
     [InlineData("HLSLPERF_WAVE_TILED_MAX_POLLS", 17)]
     [InlineData("HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS", 1)]
+    [InlineData("HLSLPERF_WAVE_TILED_INCLUSIVE", 1)]
+    [InlineData("HLSLPERF_WAVE_TILED_INCLUSIVE", 2)]
     public void UnsupportedConfigurationsAreRejectedBeforeDispatch(string name, int value)
     {
         foreach (bool compaction in new[] { false, true })

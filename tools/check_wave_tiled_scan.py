@@ -89,6 +89,9 @@ def main():
                               ("kernels/compaction.hlsl", "FusedCompactWaveTiled")]:
             label = f"{entry}-g{group}-w{wave}-i{items}"
             records.append(compile_one(dxc, output, label, source, entry, defines))
+        records.append(compile_one(dxc, output, f"inclusive-g{group}-w{wave}-i{items}",
+                                   "kernels/scan.hlsl", "SinglePassScanWaveTiled",
+                                   defines | {"HLSLPERF_WAVE_TILED_INCLUSIVE": 1}))
     for source in ["kernels/scan.hlsl", "kernels/compaction.hlsl"]:
         records.append(compile_one(dxc, output, Path(source).stem + "-reset", source, "ResetWaveTiledState", base))
     for entry in ["ResetWaveTiledState", "SinglePassScanWaveTiled"]:
@@ -106,6 +109,10 @@ def main():
                           ("kernels/compaction.hlsl", "FusedCompactSinglePass")]:
         records.append(compile_one(dxc, output, "legacy-" + entry, source, entry,
                                    base | {"HLSLPERF_SCAN_WAVE_TILED": 0}))
+    records.append(compile_one(dxc, output, "reject-inclusive-value", "kernels/scan.hlsl",
+                               "SinglePassScanWaveTiled", base | {"HLSLPERF_WAVE_TILED_INCLUSIVE": 2}, reject=True))
+    records.append(compile_one(dxc, output, "reject-inclusive-compaction", "kernels/compaction.hlsl",
+                               "FusedCompactWaveTiled", base | {"HLSLPERF_WAVE_TILED_INCLUSIVE": 1}, reject=True))
     sources = ["kernels/scan.hlsl", "kernels/compaction.hlsl", "kernels/include/hlslperf/scan_u32.hlsli",
                "kernels/include/hlslperf/scan_wave_tiled_u32.hlsli", "kernels/consumer/ScanWaveTiled.compute",
                "tools/check_wave_tiled_scan.py"]

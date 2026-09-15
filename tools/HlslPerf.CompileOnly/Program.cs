@@ -12,6 +12,8 @@ List<UnifiedOperationPlan> plans =
 [
     PrimitiveOperations.ExclusiveScan(root, [uint.MaxValue, 1, 2]),
     PrimitiveOperations.ExclusiveScan(root, [uint.MaxValue, 1, 2], ScanImplementation.GpuPrefixSumsReduceThenScan),
+    PrimitiveOperations.ExclusiveScan(root, [uint.MaxValue, 1, 2], ScanImplementation.WaveTiled),
+    PrimitiveOperations.InclusiveScan(root, [uint.MaxValue, 1, 2]),
     PrimitiveOperations.StableSort(root, [uint.MaxValue, 0, 0]),
     PrimitiveOperations.StableSort(root, [uint.MaxValue, 0, 0], [3, 1, uint.MaxValue]),
     PrimitiveOperations.StableSort(root, [uint.MaxValue, 0, 0], implementation: SortImplementation.AmdParallelSort),

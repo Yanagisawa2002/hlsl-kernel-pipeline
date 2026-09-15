@@ -34,6 +34,59 @@ public sealed class PrimitiveOperationTests
 
     private static string Hash(uint[] values) => ContentHash.Sha256(MemoryMarshal.AsBytes(values.AsSpan()).ToArray());
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(3)]
+    [InlineData(4095)]
+    [InlineData(4096)]
+    [InlineData(4097)]
+    [InlineData(1048583)]
+    public void WaveTiledSdkKeepsIndependentInclusiveAndExclusiveOracles(int count)
+    {
+        uint[] input = Enumerable.Range(0, count).Select(i => unchecked(uint.MaxValue - (uint)i * 7919)).ToArray();
+        var exclusive = PrimitiveOperations.ExclusiveScan(Root, input, ScanImplementation.WaveTiled);
+        var inclusive = PrimitiveOperations.InclusiveScan(Root, input);
+        ulong sum = 0;
+        uint[] expectedExclusive = new uint[Math.Max(1, count)], expectedInclusive = new uint[Math.Max(1, count)];
+        for (int i = 0; i < count; ++i)
+        {
+            expectedExclusive[i] = (uint)(sum & uint.MaxValue);
+            sum += input[i];
+            expectedInclusive[i] = (uint)(sum & uint.MaxValue);
+        }
+        Assert.Equal(Hash(expectedExclusive), exclusive.Outputs.Single().ExpectedSha256);
+        Assert.Equal(Hash(expectedInclusive), inclusive.Outputs.Single().ExpectedSha256);
+        Assert.Equal(exclusive.InputSha256, inclusive.InputSha256);
+        Assert.Equal("inclusive-u32-sum-modulo-2^32", inclusive.SemanticId);
+        Assert.Equal("exclusive-u32-sum-modulo-2^32", exclusive.SemanticId);
+        foreach (var plan in new[] { exclusive, inclusive })
+        {
+            plan.Validate();
+            Assert.DoesNotContain(plan.Passes, p => p.Stage == UnifiedStage.OutputConversion);
+            if (count == 0)
+            {
+                Assert.Empty(plan.Shaders);
+                Assert.All(plan.Passes, p => Assert.Null(p.Dispatch));
+            }
+            else
+            {
+                Assert.Equal(new[] { UnifiedStage.ScratchInitialization, UnifiedStage.Algorithm }, plan.Passes.Select(p => p.Stage));
+                Assert.Equal((uint)((count + 4095) / 4096), plan.Passes[0].Constants[2]);
+                Assert.Equal(Math.Min(256u, (uint)((count + 4095) / 4096)), plan.Passes[1].Dispatch!.X);
+                Assert.Equal(count * 4, plan.Buffers.Single(b => b.Name == "output").ByteLength);
+            }
+        }
+        Assert.All(inclusive.Shaders, s => Assert.Equal("1", s.Defines[WaveTiledScanCandidates.InclusiveDefine]));
+        Assert.All(exclusive.Shaders, s => Assert.False(s.Defines.ContainsKey(WaveTiledScanCandidates.InclusiveDefine)));
+        Assert.Empty(exclusive.Shaders.Select(s => s.Id).Intersect(inclusive.Shaders.Select(s => s.Id)));
+        var fallback = PrimitiveOperations.ExclusiveScan(Root, input);
+        Assert.True(PrimitiveOperations.Select(Root, exclusive, fallback, Runtime).UsedFallback);
+        Assert.False(PrimitiveOperations.Select(Root, exclusive, fallback, Runtime, allowUnmeasured: true).UsedFallback);
+        if (count > 0)
+            Assert.True(PrimitiveOperations.Select(Root, exclusive, fallback, Runtime with { MinimumWaveSize = 64 }, allowUnmeasured: true).UsedFallback);
+    }
+
     [Fact]
     public void DefaultsRemainInternalAndUnconfirmedRequestsFallBack()
     {

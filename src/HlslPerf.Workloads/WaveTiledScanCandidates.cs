@@ -10,6 +10,7 @@ namespace HlslPerf.Workloads;
 public static class WaveTiledScanCandidates
 {
     public const string OptInDefine = "HLSLPERF_SCAN_WAVE_TILED";
+    public const string InclusiveDefine = "HLSLPERF_WAVE_TILED_INCLUSIVE";
     public const string ScanEntryPoint = "SinglePassScanWaveTiled";
     public const string CompactionEntryPoint = "FusedCompactWaveTiled";
     public const string ResetEntryPoint = "ResetWaveTiledState";
@@ -29,9 +30,17 @@ public static class WaveTiledScanCandidates
         ["HLSLPERF_WAVE_TILED_MAX_POLLS"] = 4
     });
 
-    internal static bool Validate(KernelCandidate candidate)
+    public static KernelCandidate CreateInclusive(int waveSize = 32) =>
+        new(new Dictionary<string, int>(Create(waveSize).Defines) { [InclusiveDefine] = 1 });
+
+    internal static bool Validate(KernelCandidate candidate, bool allowInclusive = false)
     {
+        int inclusive = Get(InclusiveDefine, 0);
+        if (inclusive is not (0 or 1) || (inclusive == 1 && !allowInclusive))
+            throw new InvalidDataException("Inclusive output requires the explicit inclusive scan operation.");
         int enabled = Get(OptInDefine, 0);
+        if (inclusive == 1 && enabled != 1)
+            throw new InvalidDataException("Inclusive output requires wave-tiled scan.");
         if (enabled == 0)
             return false;
         if (enabled != 1)

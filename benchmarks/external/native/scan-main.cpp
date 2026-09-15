@@ -9,18 +9,23 @@
 
 int RuntimeScan(int argc, char** argv)
 {
-    if (argc != 5) throw std::invalid_argument("probe|validate-only|batch-only rts|tile count expected-luid");
+    if (argc < 5 || argc > 7) throw std::invalid_argument("probe|validate-only|test-all|batch-only|export-input rts|tile|tile-fused count expected-luid [exact-adapter] [input-output-file]");
     std::string command = argv[1], arm = argv[2];
     uint32_t count = static_cast<uint32_t>(std::stoul(argv[3]));
-    auto device = HlslPerfRuntimeDevice(std::stoull(argv[4]));
+    uint64_t luid = std::stoull(argv[4]);
+    if (!luid && command != "probe") throw std::invalid_argument("Non-probe operations require the observed LUID.");
+    if ((command == "export-input") != (argc == 7)) throw std::invalid_argument("Only export-input requires an output filename.");
+    auto device = HlslPerfRuntimeDevice(luid, argc >= 6 ? std::wstring(winrt::to_hstring(argv[5])) : L"");
     HlslPerfRuntimeBudget(device.get(), "before", count * 12ull + 1024 * 1024);
     if (command == "probe") return 0;
     if (count != (1u << 28)) throw std::invalid_argument("Use the pinned upstream 2^28 scan workload.");
     auto info = GetDeviceInfo(device.get());
     auto run = [&](auto& operation)
     {
+        if (command == "export-input") { operation.ExportInput(count, argv[6]); return; }
         printf("HPJSON {\"kind\":\"arm\",\"backend\":\"%s\",\"count\":%u,\"batchSize\":100,\"warmupIterations\":1}\n", arm.c_str(), count);
-        if (command == "validate-only") operation.StrictValidate();
+        if (command == "test-all") operation.TestAll();
+        if (command == "validate-only" || command == "test-all") operation.StrictValidate();
         operation.ValidateFullSize(count);
         HlslPerfRuntimeBudget(device.get(), "allocated");
         if (command == "batch-only") operation.BatchTimingInclusiveInitOne(count, 100);
@@ -28,13 +33,14 @@ int RuntimeScan(int argc, char** argv)
     };
     if (arm == "rts") { HlslPerfScanValidation<ReduceThenScan> operation(device, info); run(operation); }
     else if (arm == "tile") { HlslPerfScanValidation<HlslPerfScan> operation(device, info); run(operation); }
+    else if (arm == "tile-fused") { HlslPerfScanValidation<HlslPerfScan> operation(device, info, true); run(operation); }
     else throw std::invalid_argument("Unknown scan backend.");
     return 0;
 }
 
 int main(int argc, char** argv)
 {
-    if (argc > 1 && (std::strcmp(argv[1], "probe") == 0 || std::strcmp(argv[1], "validate-only") == 0 || std::strcmp(argv[1], "batch-only") == 0))
+    if (argc > 1 && (std::strcmp(argv[1], "probe") == 0 || std::strcmp(argv[1], "validate-only") == 0 || std::strcmp(argv[1], "batch-only") == 0 || std::strcmp(argv[1], "test-all") == 0 || std::strcmp(argv[1], "export-input") == 0))
     {
         try { return RuntimeScan(argc, argv); }
         catch (const winrt::hresult_error& error) { printf("RUNTIME_FAILED HRESULT %08x\n", uint32_t(error.code().value)); return 5; }
