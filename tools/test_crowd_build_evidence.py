@@ -99,6 +99,17 @@ class BuildBindingControls(unittest.TestCase):
         self.assertFalse(saved["passed"])
         self.assertIn("changed during check", saved["error"])
 
+    def test_cpu_test_dependency_drift_after_launch_is_rejected(self):
+        output = self.root / "cpu-drift"; output.mkdir()
+        args = types.SimpleNamespace(output=output, check="cpu-tests", dotnet="synthetic", build_receipt=self.receipt, references=None)
+        build = evidence.read(self.receipt); build["testBinaries"] = {"test.dll": "original"}
+        with patch.object(evidence, "require_lock", return_value={}), \
+             patch.object(evidence, "verify_build", return_value=build), \
+             patch.object(evidence, "file_manifest", side_effect=[{"test.dll": "original"}, {"test.dll": "replaced"}]), \
+             patch.object(evidence, "process", return_value={"exitCode": 0}):
+            with self.assertRaisesRegex(ValueError, "changed during check"): evidence.check(args)
+        self.assertFalse(evidence.read(output / "check-receipt.json")["passed"])
+
 
 class ProtocolControls(unittest.TestCase):
     def test_retired_matrix_cannot_launch_any_process(self):

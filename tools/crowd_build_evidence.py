@@ -184,6 +184,7 @@ def check(args):
         if args.check == "cpu-tests":
             current_tests = file_manifest(ROOT / "tests/HlslPerf.Core.Tests/bin/Release/net10.0")
             if current_tests != build_record["testBinaries"]: raise ValueError("Test binary differs from sealed build")
+            receipt["before"]["testBinaries"] = current_tests
             command = [str(args.dotnet), "test", "tests/HlslPerf.Core.Tests", "-c", "Release", "--no-build", "--no-restore",
                        "--results-directory", str(output.resolve()), "--logger", "trx;LogFileName=whole-task.trx"]
         else:
@@ -196,6 +197,8 @@ def check(args):
                 command += [args.case, args.arm]
         receipt["process"] = process(command, args.output / "process.log")
         receipt["after"] = {"source": source_state(), "binaries": binaries(), "host": host_identity(args.dotnet)}
+        if args.check == "cpu-tests":
+            receipt["after"]["testBinaries"] = file_manifest(ROOT / "tests/HlslPerf.Core.Tests/bin/Release/net10.0")
         if receipt["before"] != receipt["after"]: raise ValueError("Source/binary/host changed during check")
         if sha(args.build_receipt) != receipt["buildReceipt"]["sha256"]: raise ValueError("Build receipt changed during check")
         if args.references and file_manifest(args.references, {".json", ".rgba"}) != receipt["referencesBefore"]:
