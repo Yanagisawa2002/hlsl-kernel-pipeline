@@ -7,12 +7,13 @@ public sealed record UnifiedDebugMessage(string Severity, string Id, string Desc
 public sealed record UnifiedDebugFilter(string[] AllowedCategories, string[] AllowedSeverities, string[] AllowedIds,
     string[] DeniedCategories, string[] DeniedSeverities, string[] DeniedIds)
 {
+    public bool Available { get; init; } = true;
     // The D3D12 default storage filter may suppress informational object-lifetime messages.
     // Category, ID or allow-list restrictions can hide errors and are never accepted here.
-    public bool RetainsWarningsAndErrors => AllowedCategories.Length == 0 && AllowedSeverities.Length == 0 &&
+    public bool RetainsWarningsAndErrors => Available && AllowedCategories.Length == 0 && AllowedSeverities.Length == 0 &&
         AllowedIds.Length == 0 && DeniedCategories.Length == 0 && DeniedIds.Length == 0 &&
         DeniedSeverities.All(s => s is "Info" or "Message");
-    public bool SameAs(UnifiedDebugFilter other) => AllowedCategories.SequenceEqual(other.AllowedCategories) &&
+    public bool SameAs(UnifiedDebugFilter other) => Available == other.Available && AllowedCategories.SequenceEqual(other.AllowedCategories) &&
         AllowedSeverities.SequenceEqual(other.AllowedSeverities) && AllowedIds.SequenceEqual(other.AllowedIds) &&
         DeniedCategories.SequenceEqual(other.DeniedCategories) && DeniedSeverities.SequenceEqual(other.DeniedSeverities) &&
         DeniedIds.SequenceEqual(other.DeniedIds);
@@ -85,7 +86,9 @@ public sealed partial class D3D12Tuner
         finally { info.MessageCountLimit = originalLimit; }
     }
 
-    private static UnifiedDebugFilter DescribeFilter(InfoQueueFilter filter) => new(
+    private static UnifiedDebugFilter DescribeFilter(InfoQueueFilter? filter) => filter is null
+        ? new([], [], [], [], [], []) { Available = false }
+        : new(
         (filter.AllowList.Categories ?? []).Select(x => x.ToString()).ToArray(),
         (filter.AllowList.Severities ?? []).Select(x => x.ToString()).ToArray(),
         (filter.AllowList.Ids ?? []).Select(x => x.ToString()).ToArray(),

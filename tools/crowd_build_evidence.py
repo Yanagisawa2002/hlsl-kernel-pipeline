@@ -133,7 +133,7 @@ def verify_debug(folder):
     for row in evidence["snapshots"]:
         s = row["snapshot"]
         def safe_filter(f):
-            return isinstance(f, dict) and all(not f[k] for k in ["allowedCategories", "allowedSeverities", "allowedIds", "deniedCategories", "deniedIds"]) and all(v in ["Info", "Message"] for v in f["deniedSeverities"])
+            return isinstance(f, dict) and f.get("available") is True and all(not f[k] for k in ["allowedCategories", "allowedSeverities", "allowedIds", "deniedCategories", "deniedIds"]) and all(v in ["Info", "Message"] for v in f["deniedSeverities"])
         if (not s["available"] or not s["cleared"] or s["discardedMessages"] or not s.get("filtersStable") or
             not safe_filter(s.get("storageFilter")) or not safe_filter(s.get("retrievalFilter")) or
             (s["deniedByStorageFilter"] and not s["storageFilter"]["deniedSeverities"]) or

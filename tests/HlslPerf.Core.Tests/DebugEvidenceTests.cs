@@ -33,6 +33,7 @@ public sealed class DebugEvidenceTests
         Assert.False((Warning with { StorageFilter = infoOnly with { DeniedSeverities = ["Warning"] } }).Passed);
         Assert.False((Warning with { StorageFilter = infoOnly with { DeniedIds = ["Application"] } }).Passed);
         Assert.False((Warning with { StorageFilter = infoOnly with { AllowedSeverities = ["Warning"] } }).Passed);
+        Assert.False((Warning with { StorageFilter = infoOnly with { Available = false } }).Passed);
     }
 
     [Theory]

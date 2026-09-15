@@ -22,6 +22,7 @@ class DebugEvidenceControls(unittest.TestCase):
                          "storedMessages": 1, "retrievableMessages": 1, "storedMessagesAfterRead": 1,
                          "messages": [{"severity": "Warning"}]}
         empty_filter = {k: [] for k in ["allowedCategories", "allowedSeverities", "allowedIds", "deniedCategories", "deniedSeverities", "deniedIds"]}
+        empty_filter["available"] = True
         self.snapshot.update(storageFilter=empty_filter, retrievalFilter=empty_filter, filtersStable=True)
 
     def tearDown(self): self.tmp.cleanup()
