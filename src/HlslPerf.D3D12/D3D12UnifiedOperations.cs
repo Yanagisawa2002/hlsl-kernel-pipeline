@@ -20,16 +20,9 @@ public sealed partial class D3D12Tuner
         debug.EnableDebugLayer();
     }
 
-    public string[] ReadUnifiedDebugMessages()
-    {
-        using ID3D12InfoQueue? info = device.QueryInterfaceOrNull<ID3D12InfoQueue>();
-        if (info is null) return [];
-        return Enumerable.Range(0, checked((int)info.NumStoredMessages)).Select(index =>
-        {
-            Message message = info.GetMessage((ulong)index);
-            return $"{message.Severity}: {message.Id}: {message.Description}";
-        }).ToArray();
-    }
+    // Compatibility for older diagnostic callers; acceptance gates must use the structured snapshot.
+    public string[] ReadUnifiedDebugMessages() => ReadUnifiedDebugSnapshot().Messages
+        .Select(message => $"{message.Severity}: {message.Id}: {message.Description}").ToArray();
 
     private UnifiedSubmissionTiming UnifiedSubmitAndWait()
     {
@@ -142,7 +135,7 @@ public sealed partial class D3D12Tuner
         }
     }
 
-    public sealed class UnifiedSession : IDisposable
+    public sealed partial class UnifiedSession : IDisposable
     {
         private const int QueryCount = 256;
         private readonly D3D12Tuner owner;
