@@ -42,7 +42,12 @@ bounded grid-stride consumer. The same repair applies to every arm. CPU oracle
 work is retained separately for validation; it cannot decide allocation,
 dispatch size, flags, offsets, or GPU output.
 
-## Fixed comparison before discovery
+## GPU paths implemented before discovery
+
+The comparison rules below were extended by [protocol version 2](CROWD_PROTOCOL_V2.md).
+The CPU-input/CPU-output contract also requires a conventional CPU renderer.
+That arm is designed but not implemented. No four-GPU-only whole-task winner
+can be declared, and the old performance orchestration is retired.
 
 - `hierarchical`: the original materialized flags + hierarchical Blelloch
   exclusive scan + scatter algorithm, group256 / four items per thread.

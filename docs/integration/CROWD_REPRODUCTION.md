@@ -25,8 +25,8 @@ application task.
 The reference inputs are generated from the original CPU seed generator. No
 external dataset, employer source, Unity project, or private asset is needed.
 Two cohorts, four cases and 144 frames/cohort/case produce about 597 MB of CPU
-reference pixels. Keep about 12 GB for discovery/confirmation raw exports and
-additional space for build/dependency caches. Every output directory must be new.
+reference pixels. Budget raw exports only after registering the new protocol;
+reserve additional space for build/dependency caches. Every output directory must be new.
 
 The unchanged upstream RTS shaders are pinned at
 `98d93a4e9ed2f3c8353119515bf9be90a2e137ad`, with their MIT license and source lock.
@@ -40,33 +40,37 @@ the dependencies and an explicit campaign/queue path after host authorization.
 The current local queue remains in
 `D:/CodexWork/whole-task-validation-20260915/coordination`.
 
+Commit intended source and documentation changes before sealing a build. The
+wrapper rejects a dirty checkout or a receipt from another commit. Every check
+uses the **same** clean build and its exact DLLs, native dependencies and host.
+Do not rebuild or commit between these checks; changed source needs a new build.
+
 ```powershell
 $env:HLSLPERF_CROWD_ADAPTER = 'NVIDIA GeForce RTX 4090'
 $taskDotnet = 'dotnet' # Or the absolute path to the installed 10.0.302 host.
-$taskDll = 'tools/HlslPerf.CrowdWholeTask/bin/Release/net10.0/HlslPerf.CrowdWholeTask.dll'
 $coordination = 'D:/CodexWork/whole-task-validation-20260915/coordination'
+$taskBuildReceipt = '.scratch/build-new/build-receipt.json'
 
-& tools/Invoke-CrowdWholeTaskLocked.ps1 -Coordination $coordination -Stage build -OutputDirectory .scratch/build-new -Action {
-    & $taskDotnet restore tools/HlslPerf.CrowdWholeTask -p:NuGetAudit=false
-    if ($LASTEXITCODE) { throw 'Restore failed' }
-    & $taskDotnet build tools/HlslPerf.CrowdWholeTask -c Release --no-restore --disable-build-servers
-    if ($LASTEXITCODE) { throw 'Build failed' }
-    & $taskDotnet test tests/HlslPerf.Core.Tests -c Release --disable-build-servers -p:NuGetAudit=false
+& tools/Invoke-CrowdWholeTaskLocked.ps1 -Coordination $coordination -Stage build -OutputDirectory .scratch/build-lock-new -Action {
+    python tools/crowd_build_evidence.py build --dotnet $taskDotnet --output .scratch/build-new
+    if ($LASTEXITCODE) { throw 'Clean rebuild failed; retain build receipts' }
+    python tools/crowd_build_evidence.py check --check cpu-tests --dotnet $taskDotnet --build-receipt $taskBuildReceipt --output .scratch/cpu-new
     if ($LASTEXITCODE) { throw 'CPU tests failed' }
+    python tools/test_crowd_build_evidence.py
+    if ($LASTEXITCODE) { throw 'Build/debug/protocol controls failed' }
     python tools/test_crowd_analysis.py
-    if ($LASTEXITCODE) { throw 'Analysis controls failed' }
+    if ($LASTEXITCODE) { throw 'Legacy descriptive analysis controls failed' }
     python tools/verify_external_sources.py
     if ($LASTEXITCODE) { throw 'Pinned source check failed' }
-    & $taskDotnet $taskDll oracle . .scratch/references-new
+    python tools/crowd_build_evidence.py check --check oracle --dotnet $taskDotnet --build-receipt $taskBuildReceipt --output .scratch/references-new
     if ($LASTEXITCODE) { throw 'Oracle generation failed' }
 }
 
 & tools/Invoke-CrowdWholeTaskLocked.ps1 -Coordination $coordination -Stage correctness -OutputDirectory .scratch/correctness-lock-new -Action {
-    python tools/run_crowd_whole_task.py snapshot --output .scratch/source-new
-    & $taskDotnet $taskDll validate . .scratch/validation-new
-    if ($LASTEXITCODE) { throw 'Boundary correctness failed' }
-    & $taskDotnet $taskDll check-scenes . .scratch/full-scenes-new .scratch/references-new
-    if ($LASTEXITCODE) { throw 'Full scene correctness failed' }
+    foreach ($mode in @('debug-control','validate','check-scenes')) {
+        python tools/crowd_build_evidence.py check --check $mode --dotnet $taskDotnet --build-receipt $taskBuildReceipt --references .scratch/references-new/result --output ('.scratch/checked-new/' + $mode)
+        if ($LASTEXITCODE) { throw ('Bound correctness check failed: ' + $mode) }
+    }
 }
 ```
 
@@ -83,66 +87,42 @@ advance frame constants on already allocated buffers.
 
 ## Complete caller/export rehearsal
 
-This explicitly ineligible mode exercises the same first-use, resource reuse,
-GPU-to-CPU transfer, raw-file export, cleanup and receipt code as timing. It
-labels samples `rehearsal` and the result `performanceEligible=false`.
-Discovery/freeze reject such a result.
+This explicitly ineligible mode exercises first-use, resource reuse, GPU-to-CPU
+transfer, buffered raw-file export and cleanup. It labels samples `rehearsal`
+and the result `performanceEligible=false`. It is not performance evidence.
 
 ```powershell
 & tools/Invoke-CrowdWholeTaskLocked.ps1 -Coordination $coordination -Stage correctness -OutputDirectory .scratch/rehearsal-lock-new -Action {
     foreach ($arm in @('hierarchical','fused','wave-tiled','rts')) {
-        & $taskDotnet $taskDll rehearse . ('.scratch/rehearsal-new/' + $arm) .scratch/references-new discovery-large $arm
-        if ($LASTEXITCODE) { throw ('Rehearsal failed: ' + $arm) }
+        python tools/crowd_build_evidence.py check --check rehearse --dotnet $taskDotnet --build-receipt $taskBuildReceipt --references .scratch/references-new/result --case discovery-large --arm $arm --output ('.scratch/rehearsal-new/' + $arm)
+        if ($LASTEXITCODE) { throw ('Bound rehearsal failed: ' + $arm) }
     }
 }
 ```
 
-## Discovery, frozen confirmation and analysis
+Each check directory contains `check-receipt.json`, `process.log`, and `result/`.
+The receipt seals source/binary/host identity before and after the child, its
+build-receipt hash, PID/command/exit/log and every result artifact. The child
+independently records its assembly hash and embedded source commit. Missing,
+changed, filtered or discarded debug messages make correctness ineligible.
+`debug-control` deliberately overflows a queue and injects an error on a separate
+device to prove rejection; its messages are not workload failures.
 
-Performance requires idle snapshots: CPU <=25%, GPU <=15%, sufficient memory
-and disk, no known concurrent experiment, and the independent shared mutex.
-Keep the debugger and invasive profiler disabled for these samples. Discovery's
-per-pass timestamps are taken only after its complete-task samples.
+## Performance is not ready for registration
 
-```powershell
-& tools/Invoke-CrowdWholeTaskLocked.ps1 -Coordination $coordination -Stage performance -OutputDirectory .scratch/performance-lock-new -Action {
-    python tools/run_crowd_whole_task.py discover --dotnet $taskDotnet --references .scratch/references-new --output .scratch/discovery-new
-    if ($LASTEXITCODE) { throw 'Discovery incomplete' }
-}
-```
+The version-1 `discover`, `freeze` and `confirm` commands now reject calls before
+creating an output directory or process. **Do not run the old 128-process
+matrix.** Its analyzer remains available for descriptive audit and synthetic
+regression controls, with `inferentialClaimsEligible=false`.
 
-Review the complete-task and stage diagnostics before registration. Keep every
-attempt if a repair is needed; changed candidates need new discovery evidence.
-Then freeze and confirm the final implementation:
+[Protocol version 2](CROWD_PROTOCOL_V2.md) defines a single primary comparison,
+CPU baseline eligibility, process-level uncertainty and how secondary results
+must be treated. The conventional CPU implementation, independent CPU/GPU
+correctness, discovery and the new registration/confirmation runner are still
+required. This change does not assert a performance improvement.
 
-```powershell
-& tools/Invoke-CrowdWholeTaskLocked.ps1 -Coordination $coordination -Stage performance -OutputDirectory .scratch/confirmation-lock-new -Action {
-    python tools/run_crowd_whole_task.py freeze --references .scratch/references-new --validation .scratch/validation-new --full-scenes .scratch/full-scenes-new --discovery .scratch/discovery-new --output .scratch/registration-new
-    if ($LASTEXITCODE) { throw 'Registration failed' }
-    python tools/run_crowd_whole_task.py confirm --dotnet $taskDotnet --references .scratch/references-new --plan .scratch/registration-new/plan.json --output .scratch/confirmation-new
-    if ($LASTEXITCODE) { throw 'Confirmation incomplete; retain the attempt' }
-    python tools/run_crowd_whole_task.py analyze --confirmation .scratch/confirmation-new --output .scratch/analysis-new
-    if ($LASTEXITCODE) { throw 'Evidence audit failed' }
-}
-```
-
-There are four discovery cases x four arms and 128 confirmation processes
-(eight rounds x four cases x four arms). Four-row Williams orders balance arm
-positions and immediate predecessors; case order rotates by round. Each process
-has one first use, three warmups and eight separately submitted/completed
-twelve-frame requests. Input seed and all 144 frames are shared within each
-case/round. Confirmation uses the untouched second seed cohort.
-
-The primary outcome is CPU latency through full RGBA export for the large case.
-Report all other cases, first-use latency, all actual request costs and cleanup
-over the twelve-request lifetime, GPU rendering/readback, and resource costs.
-Intervals use eight process means; inner requests are not independent processes.
-The complete twelve-request cost excludes verification gaps and includes actual
-resource cleanup; it is accumulated application work, not elapsed wall time
-through the experiment's oracle checks. Buffered export is not durable-storage
-latency. Presentation, video encoding, and other GPUs remain outside this claim.
-
-New-host validation and registration are mandatory: do not replay a local
-device/compiler/binary freeze as if it describes another host. No remote host,
-purchase, cache clearing, power-setting change, or unattended queue is created
-by these scripts.
+The queue and shared hardware mutex remain mandatory. Non-timed builds and
+correctness require their normal CPU/memory/disk budget; performance additionally
+requires CPU <=25% and GPU <=15%. No remote host, install, cache clearing, power
+change or unattended queue is created by these scripts. Linux/RTX5090 cannot
+run this Windows/D3D12 runner directly; no alternate backend is added here.

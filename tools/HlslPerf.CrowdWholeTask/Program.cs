@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Numerics;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text.Json;
@@ -19,13 +20,19 @@ internal static class Program
     {
         try
         {
-            if (args.Length < 3) throw new ArgumentException("oracle|validate|check-scenes|run <repository> <new-output> [reference-directory case arm]");
+            if (args.Length < 3) throw new ArgumentException("oracle|debug-control|validate|check-scenes|run|rehearse <repository> <new-output> [reference-directory case arm]");
             string root = Path.GetFullPath(args[1]), output = Path.GetFullPath(args[2]);
             if (Directory.Exists(output)) throw new IOException("Choose a new output directory; existing evidence is preserved.");
             Directory.CreateDirectory(output);
+            var assembly = Assembly.GetExecutingAssembly();
+            Save(Path.Combine(output, "process-identity.json"), new { pid = Environment.ProcessId,
+                startedUtc = DateTimeOffset.UtcNow, command = args, assembly = assembly.Location,
+                assemblySha256 = ContentHash.Sha256(File.ReadAllBytes(assembly.Location)),
+                informationalVersion = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion });
             switch (args[0])
             {
                 case "oracle": MakeReferences(root, output); break;
+                case "debug-control": DebugControls(output); break;
                 case "validate": Validate(root, output); break;
                 case "check-scenes" when args.Length == 4: CheckScenes(root, output, Path.GetFullPath(args[3])); break;
                 case "run" when args.Length == 6: Run(root, output, Path.GetFullPath(args[3]), args[4], args[5]); break;
@@ -108,47 +115,54 @@ internal static class Program
         PrimitiveOperations.VerifyPinnedSource(root, "gps-reduce-then-scan");
         D3D12Tuner.EnableUnifiedDebugLayer();
         using var tuner = new D3D12Tuner(Adapter);
-        using var executor = tuner.CreateUnifiedExecutor();
+        var audit = new DebugEvidence(tuner, output);
+        var executor = tuner.CreateUnifiedExecutor();
         List<object> checks = [];
-        foreach (int n in new[] { 1, 31, 255, 1023, 4095, 4096, 4097, 8193, 65539 })
-        foreach (uint mask in new[] { 0u, 15u, 0x7fffffffu })
+        try
         {
-            CrowdApplicationScene scene = new(n, 19088743, mask, 64, 32, 3);
-            var reference = Reference(root, scene, 6);
-            byte[] input = CrowdApplication.GenerateAgents(n, scene.Seed);
-            int bytes = scene.Width * scene.Height * scene.Frames * 4;
-            foreach (string arm in CrowdApplication.Arms)
+            using (executor)
             {
-                var plan = CrowdApplication.Build(root, scene, input, arm, ContentHash.Sha256(reference.Atlas.AsSpan(0, bytes)));
-                // Two independently poisoned allocations, then reuse each through a new time interval.
-                foreach (byte poison in new byte[] { 0xa5, 0x5a })
+                foreach (int n in new[] { 1, 31, 255, 1023, 4095, 4096, 4097, 8193, 65539 })
+                foreach (uint mask in new[] { 0u, 15u, 0x7fffffffu })
                 {
-                    var poisoned = plan with { Buffers = plan.Buffers.Select(b => b.Name == "agents" ? b :
-                        b with { InitialData = Enumerable.Repeat(poison, b.ByteLength).ToArray() }).ToArray() };
-                    using var session = executor.Prepare(poisoned);
-                    using var reader = session.CreateCpuOutputReader("frame-atlas");
-                    for (int window = 0; window < 2; window++)
+                    CrowdApplicationScene scene = new(n, 19088743, mask, 64, 32, 3);
+                    var reference = Reference(root, scene, 6);
+                    byte[] input = CrowdApplication.GenerateAgents(n, scene.Seed);
+                    int bytes = scene.Width * scene.Height * scene.Frames * 4;
+                    foreach (string arm in CrowdApplication.Arms)
                     {
-                        reader.Execute(CrowdApplication.FrameConstants(plan, (uint)(window * scene.Frames)));
-                        if (!reader.Data.Span.SequenceEqual(reference.Atlas.AsSpan(window * bytes, bytes)))
-                            throw new InvalidDataException($"Pixel mismatch {n}/{mask}/{arm}/{poison}/{window}");
-                        CheckLists(session, scene, input, (uint)(window * scene.Frames + scene.Frames - 1), poison);
-                        if (!session.ReadDiagnosticBuffer("agents").AsSpan().SequenceEqual(input)) throw new InvalidDataException("Input changed.");
-                        checks.Add(new { n, mask, arm, poison, window, fullPixelsPassed = true, stableListAndBinsPassed = true,
-                            inputUnchanged = true, atlasSha256 = ContentHash.Sha256(reader.Data.Span) });
+                        var plan = CrowdApplication.Build(root, scene, input, arm, ContentHash.Sha256(reference.Atlas.AsSpan(0, bytes)));
+                        // Two independently poisoned allocations, then reuse each through a new time interval.
+                        foreach (byte poison in new byte[] { 0xa5, 0x5a })
+                        {
+                            var poisoned = plan with { Buffers = plan.Buffers.Select(b => b.Name == "agents" ? b :
+                                b with { InitialData = Enumerable.Repeat(poison, b.ByteLength).ToArray() }).ToArray() };
+                            using var session = executor.Prepare(poisoned);
+                            using var reader = session.CreateCpuOutputReader("frame-atlas");
+                            for (int window = 0; window < 2; window++)
+                            {
+                                reader.Execute(CrowdApplication.FrameConstants(plan, (uint)(window * scene.Frames)));
+                                if (!reader.Data.Span.SequenceEqual(reference.Atlas.AsSpan(window * bytes, bytes)))
+                                    throw new InvalidDataException($"Pixel mismatch {n}/{mask}/{arm}/{poison}/{window}");
+                                CheckLists(session, scene, input, (uint)(window * scene.Frames + scene.Frames - 1), poison);
+                                if (!session.ReadDiagnosticBuffer("agents").AsSpan().SequenceEqual(input)) throw new InvalidDataException("Input changed.");
+                                audit.Check($"N={n}/mask={mask}/{arm}/poison={poison}/window={window}");
+                                checks.Add(new { n, mask, arm, poison, window, fullPixelsPassed = true, stableListAndBinsPassed = true,
+                                    inputUnchanged = true, atlasSha256 = ContentHash.Sha256(reader.Data.Span) });
+                            }
+                            // Caller input errors must fail before recording any GPU work.
+                            try { reader.Execute(new Dictionary<string, uint[]> { ["missing"] = [1] }); throw new Exception("Missing override accepted."); }
+                            catch (ArgumentException) { }
+                        }
                     }
-                    // Caller input errors must fail before recording any GPU work.
-                    try { reader.Execute(new Dictionary<string, uint[]> { ["missing"] = [1] }); throw new Exception("Missing override accepted."); }
-                    catch (ArgumentException) { }
+                    Save(Path.Combine(output, "correctness.json"), new { passed = false, complete = false, device = tuner.DescribeDevice("6_7"), count = checks.Count, checks });
+                    Console.WriteLine($"validated N={n} mask={mask}; {checks.Count} full-output executions");
                 }
             }
-            Save(Path.Combine(output, "correctness.json"), new { passed = true, device = tuner.DescribeDevice("6_7"), count = checks.Count, checks });
-            Console.WriteLine($"validated N={n} mask={mask}; {checks.Count} full-output executions");
         }
-        var messages = tuner.ReadUnifiedDebugMessages();
-        Save(Path.Combine(output, "debug.json"), messages);
-        if (messages.Any(m => m.StartsWith("Error:", StringComparison.OrdinalIgnoreCase) || m.StartsWith("Corruption:", StringComparison.OrdinalIgnoreCase)))
-            throw new InvalidDataException("D3D12 debug layer reported an error.");
+        finally { audit.Capture("executor disposed; final queue drain"); }
+        audit.Complete();
+        Save(Path.Combine(output, "correctness.json"), new { passed = true, complete = true, device = tuner.DescribeDevice("6_7"), count = checks.Count, checks });
         Save(Path.Combine(output, "compilation.json"), executor.CompilationEvidence);
         Save(Path.Combine(output, "runtime.json"), RuntimeModules());
     }
@@ -259,40 +273,91 @@ internal static class Program
     {
         // Correctness only: ordinary desktop activity is allowed and no performance
         // samples or ratios are emitted by this mode.
+        D3D12Tuner.EnableUnifiedDebugLayer();
         using var tuner = new D3D12Tuner(Adapter);
-        using var executor = tuner.CreateUnifiedExecutor();
+        var audit = new DebugEvidence(tuner, output);
+        var executor = tuner.CreateUnifiedExecutor();
         List<object> checks = [];
-        foreach (string file in Directory.GetFiles(refs, "*.json").Where(p => Path.GetFileName(p) != "references.json").Order())
+        try
         {
-            using var reference = JsonDocument.Parse(File.ReadAllText(file));
-            string id = reference.RootElement.GetProperty("id").GetString()!;
-            var scene = reference.RootElement.GetProperty("scene").Deserialize<CrowdApplicationScene>(Json)!;
-            string[] hashes = reference.RootElement.GetProperty("hashes").EnumerateArray().Select(p => p.GetString()!).ToArray();
-            byte[] input = CrowdApplication.GenerateAgents(scene.AgentCount, scene.Seed);
-            int bytes = scene.Width * scene.Height * scene.Frames * 4;
-            foreach (string arm in CrowdApplication.Arms)
+            using (executor)
             {
-                var plan = CrowdApplication.Build(root, scene, input, arm, hashes[0]);
-                using var session = executor.Prepare(plan);
-                using var reader = session.CreateCpuOutputReader("frame-atlas");
-                foreach (int request in new[] { 0, Requests - 1 })
+                foreach (string file in Directory.GetFiles(refs, "*.json").Where(p =>
+                    Path.GetFileName(p).StartsWith("discovery-", StringComparison.Ordinal) ||
+                    Path.GetFileName(p).StartsWith("confirmation-", StringComparison.Ordinal)).Order())
                 {
-                    _ = reader.Execute(CrowdApplication.FrameConstants(plan, (uint)(request * scene.Frames)));
-                    byte[] expected = ReadReference(refs, id, request, bytes);
-                    if (!reader.Data.Span.SequenceEqual(expected) || ContentHash.Sha256(reader.Data.Span) != hashes[request])
-                        throw new InvalidDataException($"Full scene mismatch {id}/{arm}/{request}");
-                    CheckLists(session, scene, input, (uint)((request + 1) * scene.Frames - 1));
-                    if (!session.ReadDiagnosticBuffer("agents").AsSpan().SequenceEqual(input)) throw new InvalidDataException("Scene input changed.");
-                    string capture = Path.Combine(output, hashes[request] + ".rgba");
-                    if (!File.Exists(capture)) File.WriteAllBytes(capture, reader.Data.Span);
-                    checks.Add(new { id, arm, request, fullPixelsPassed = true, stableListAndBinsPassed = true,
-                        atlasSha256 = hashes[request], session.LogicalBytes, session.CommittedBytes, reader.CommittedReadbackBytes });
+                    using var reference = JsonDocument.Parse(File.ReadAllText(file));
+                    string id = reference.RootElement.GetProperty("id").GetString()!;
+                    var scene = reference.RootElement.GetProperty("scene").Deserialize<CrowdApplicationScene>(Json)!;
+                    string[] hashes = reference.RootElement.GetProperty("hashes").EnumerateArray().Select(p => p.GetString()!).ToArray();
+                    byte[] input = CrowdApplication.GenerateAgents(scene.AgentCount, scene.Seed);
+                    int bytes = scene.Width * scene.Height * scene.Frames * 4;
+                    foreach (string arm in CrowdApplication.Arms)
+                    {
+                        var plan = CrowdApplication.Build(root, scene, input, arm, hashes[0]);
+                        using var session = executor.Prepare(plan);
+                        using var reader = session.CreateCpuOutputReader("frame-atlas");
+                        foreach (int request in new[] { 0, Requests - 1 })
+                        {
+                            _ = reader.Execute(CrowdApplication.FrameConstants(plan, (uint)(request * scene.Frames)));
+                            byte[] expected = ReadReference(refs, id, request, bytes);
+                            if (!reader.Data.Span.SequenceEqual(expected) || ContentHash.Sha256(reader.Data.Span) != hashes[request])
+                                throw new InvalidDataException($"Full scene mismatch {id}/{arm}/{request}");
+                            CheckLists(session, scene, input, (uint)((request + 1) * scene.Frames - 1));
+                            if (!session.ReadDiagnosticBuffer("agents").AsSpan().SequenceEqual(input)) throw new InvalidDataException("Scene input changed.");
+                            audit.Check($"{id}/{arm}/request={request}");
+                            string capture = Path.Combine(output, hashes[request] + ".rgba");
+                            if (!File.Exists(capture)) File.WriteAllBytes(capture, reader.Data.Span);
+                            checks.Add(new { id, arm, request, fullPixelsPassed = true, stableListAndBinsPassed = true,
+                                atlasSha256 = hashes[request], session.LogicalBytes, session.CommittedBytes, reader.CommittedReadbackBytes });
+                        }
+                        Save(Path.Combine(output, "full-scenes.json"), new { passed = false, complete = false, count = checks.Count, device = tuner.DescribeDevice("6_7"), checks });
+                        Console.WriteLine("full scene exact: " + id + "/" + arm);
+                    }
                 }
-                Save(Path.Combine(output, "full-scenes.json"), new { passed = true, count = checks.Count, device = tuner.DescribeDevice("6_7"), checks });
-                Console.WriteLine("full scene exact: " + id + "/" + arm);
             }
         }
+        finally { audit.Capture("executor disposed; final queue drain"); }
+        audit.Complete();
+        Save(Path.Combine(output, "full-scenes.json"), new { passed = true, complete = true, count = checks.Count, device = tuner.DescribeDevice("6_7"), checks });
         Save(Path.Combine(output, "compilation.json"), executor.CompilationEvidence);
+        Save(Path.Combine(output, "runtime.json"), RuntimeModules());
+    }
+
+    private static void DebugControls(string output)
+    {
+        D3D12Tuner.EnableUnifiedDebugLayer();
+        using var tuner = new D3D12Tuner(Adapter);
+        var (initial, overflow, error) = tuner.RunUnifiedDebugQueueControls();
+        bool passed = initial.Passed && !overflow.Passed && overflow.DiscardedMessages > 0 &&
+            overflow.StoredMessages == 2 && overflow.Messages.Length == 2 && !error.Passed && error.ErrorCount == 1;
+        Save(Path.Combine(output, "debug-control.json"), new { passed, controlOnly = true,
+            purpose = "Expected message loss and injected error must be rejected; this is not workload validation.", initial, overflow, error });
+        if (!passed) throw new InvalidDataException("Debug queue rejection control failed.");
+        Console.WriteLine("Debug queue overflow and error rejection controls passed.");
+    }
+
+    private sealed class DebugEvidence(D3D12Tuner tuner, string output)
+    {
+        private readonly List<object> snapshots = [];
+        private bool allPassed = true;
+        public void Capture(string context)
+        {
+            var snapshot = tuner.ReadUnifiedDebugSnapshot(clear: true);
+            snapshots.Add(new { context, snapshot });
+            allPassed &= snapshot.Passed;
+            Save(Path.Combine(output, "debug.json"), new { schemaVersion = 2, passed = false, complete = false, allSnapshotsPassed = allPassed, snapshots });
+        }
+        public void Check(string context)
+        {
+            Capture(context);
+            if (!allPassed) throw new InvalidDataException("Debug queue missing, truncated, filtered, changed during read, or contains an error; inspect debug.json.");
+        }
+        public void Complete()
+        {
+            if (!allPassed || snapshots.Count == 0) throw new InvalidDataException("Incomplete debug evidence; inspect debug.json.");
+            Save(Path.Combine(output, "debug.json"), new { schemaVersion = 2, passed = true, complete = true, allSnapshotsPassed = true, snapshots });
+        }
     }
 
     private static object[] RuntimeModules() => Process.GetCurrentProcess().Modules.Cast<ProcessModule>()
