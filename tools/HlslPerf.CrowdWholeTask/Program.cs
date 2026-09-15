@@ -328,14 +328,15 @@ internal static class Program
     {
         D3D12Tuner.EnableUnifiedDebugLayer();
         using var tuner = new D3D12Tuner(Adapter);
-        var (initial, overflow, error) = tuner.RunUnifiedDebugQueueControls((context, snapshot) =>
+        var (initial, overflow, error, corruption) = tuner.RunUnifiedDebugQueueControls((context, snapshot) =>
             Save(Path.Combine(output, "debug-control-" + context + ".json"), snapshot));
         bool passed = initial.Passed && !overflow.Passed && overflow.DiscardedMessages > 0 &&
-            overflow.StoredMessages == 2 && overflow.Messages.Length == 2 && !error.Passed && error.ErrorCount == 1;
+            overflow.StoredMessages == 2 && overflow.Messages.Length == 2 && !error.Passed && error.ErrorCount == 1 &&
+            error.DiscardedMessages == 0 && !corruption.Passed && corruption.ErrorCount == 1 && corruption.DiscardedMessages == 0;
         Save(Path.Combine(output, "debug-control.json"), new { passed, controlOnly = true,
-            purpose = "Expected message loss and injected error must be rejected; this is not workload validation.", initial, overflow, error });
+            purpose = "Expected message loss and injected Error/Corruption must be rejected; this is not workload validation.", initial, overflow, error, corruption });
         if (!passed) throw new InvalidDataException("Debug queue rejection control failed.");
-        Console.WriteLine("Debug queue overflow and error rejection controls passed.");
+        Console.WriteLine("Debug queue overflow, Error and Corruption rejection controls passed.");
     }
 
     private sealed class DebugEvidence(D3D12Tuner tuner, string output)

@@ -157,7 +157,8 @@ def verify_result(mode, folder):
         evidence = read(folder / "debug-control.json")
         if (not evidence["passed"] or not evidence["controlOnly"] or not evidence["initial"]["passed"] or
             evidence["overflow"]["passed"] or evidence["overflow"]["discardedMessages"] < 1 or
-            evidence["error"]["passed"] or evidence["error"]["errorCount"] != 1):
+            evidence["error"]["passed"] or evidence["error"]["errorCount"] != 1 or evidence["error"]["discardedMessages"] or
+            evidence["corruption"]["passed"] or evidence["corruption"]["errorCount"] != 1 or evidence["corruption"]["discardedMessages"]):
             raise ValueError("Debug rejection control did not detect the expected failures")
     elif mode == "rehearse":
         evidence = read(folder / "result.json")

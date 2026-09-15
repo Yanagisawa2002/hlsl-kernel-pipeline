@@ -63,7 +63,7 @@ public sealed partial class D3D12Tuner
     }
 
     /// <summary>Deliberately loses a warning and injects an error. Use a dedicated control device, never a measurement device.</summary>
-    public (UnifiedDebugSnapshot Initial, UnifiedDebugSnapshot Overflow, UnifiedDebugSnapshot Error) RunUnifiedDebugQueueControls(
+    public (UnifiedDebugSnapshot Initial, UnifiedDebugSnapshot Overflow, UnifiedDebugSnapshot Error, UnifiedDebugSnapshot Corruption) RunUnifiedDebugQueueControls(
         Action<string, UnifiedDebugSnapshot> capture)
     {
         var initial = ReadUnifiedDebugSnapshot(true);
@@ -74,14 +74,17 @@ public sealed partial class D3D12Tuner
         try
         {
             info.MessageCountLimit = 2;
+            info.AddApplicationMessage(MessageSeverity.Error, "Expected error rejection control");
+            var error = ReadUnifiedDebugSnapshot(true);
+            capture("error", error);
+            info.AddApplicationMessage(MessageSeverity.Corruption, "Expected corruption rejection control");
+            var corruption = ReadUnifiedDebugSnapshot(true);
+            capture("corruption", corruption);
             for (int i = 0; i < 3; i++)
                 info.AddApplicationMessage(MessageSeverity.Warning, $"Expected overflow control {i}");
             var overflow = ReadUnifiedDebugSnapshot(true);
             capture("overflow", overflow);
-            info.AddApplicationMessage(MessageSeverity.Error, "Expected error rejection control");
-            var error = ReadUnifiedDebugSnapshot(true);
-            capture("error", error);
-            return (initial, overflow, error);
+            return (initial, overflow, error, corruption);
         }
         finally { info.MessageCountLimit = originalLimit; }
     }
