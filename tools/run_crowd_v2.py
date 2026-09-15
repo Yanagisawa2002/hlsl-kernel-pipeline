@@ -149,13 +149,28 @@ def process_metrics(result):
     if first < completed[0] or any(v == 0 for v in completed): raise ValueError("Invalid first-use or completed duration")
     exports = [positive(s["exportMilliseconds"]) for s in samples]
     if any(e > c for e, c in zip(exports, completed)): raise ValueError("Export exceeds enclosing request")
+    stage_means = {}
+    if result.get("backend") == "d3d12":
+        paths = {"gpuRenderMs": ["timing", "gpuRenderMilliseconds"], "gpuReadbackMs": ["timing", "gpuReadbackMilliseconds"],
+                 "cpuRecordMs": ["timing", "cpuRecordMilliseconds"], "cpuCopyMs": ["timing", "cpuCopyMilliseconds"],
+                 "cpuSubmitMs": ["timing", "submission", "cpuSubmitMilliseconds"],
+                 "cpuFenceWaitMs": ["timing", "submission", "cpuFenceWaitMilliseconds"]}
+    elif result.get("backend") == "cpu": paths = {"cpuRenderMs": ["cpuTiming", "renderMilliseconds"]}
+    else: paths = {}  # Minimal mathematical fixtures; real process validation requires a known arm/backend.
+    for name, path in paths.items():
+        values = []
+        for sample in samples:
+            value = sample
+            for part in path: value = value[part]
+            values.append(positive(value))
+        stage_means[name] = statistics.mean(values[4:])
     lifetime = (first + sum(completed[1:]) + cleanup) / 12
     return {"lifetime12PerRequestMs": lifetime, "firstUseMs": first, "steadyMeanMs": statistics.mean(completed[4:]),
             "cleanupMs": cleanup, "exportMeanMs": statistics.mean(exports[4:]),
             "peakWorkingSetBytes": result["processPeakWorkingSetBytes"],
             "hostLogicalBytes": result.get("hostLogicalBytes", result.get("hostInputAndOutputBytes")),
             "deviceLogicalBytes": result.get("logicalBytes"), "committedDeviceBytes": result.get("committedBytes"),
-            "readbackBytes": result.get("committedReadbackBytes"), "cpuWorkers": result.get("workers")}
+            "readbackBytes": result.get("committedReadbackBytes"), "cpuWorkers": result.get("workers"), "stageMeans": stage_means}
 
 
 def collect_batches(plan, plan_path, batches, complete=False):
@@ -300,7 +315,8 @@ def analyze(args):
     descriptive = []
     for case, key in itertools.product(CASES, [a, b]):
         group = [r for r in rows if r["case"] == case and r["key"] == key]
-        descriptive.append({"case": case, "arm": key, "processes": len(group), "descriptiveOnly": case != "large",
+        descriptive.append({"case": case, "arm": key, "processes": len(group), "descriptiveOnly": True,
+            "stageMeans": {m: statistics.mean(r["stageMeans"][m] for r in group) for m in group[0]["stageMeans"]},
             **{m: {"mean": statistics.mean(r[m] for r in group), "min": min(r[m] for r in group), "max": max(r[m] for r in group)}
                for m in ["lifetime12PerRequestMs", "firstUseMs", "steadyMeanMs", "peakWorkingSetBytes"]}})
     ev.save(args.output / "analysis.json", {"passed": True, "plan": identity(args.plan), "processCount": len(rows),
