@@ -31,6 +31,13 @@ planning does not verify GPU output or establish an application speedup.
 
 ## Packages
 
+For file input and a viewable output instead of plan inspection, the separate
+[CrowdExport caller](../examples/HlslPerf.CrowdExport/README.md) publishes as a
+standalone .NET application. It consumes the existing `CrowdCpuRenderer` through
+a source project reference, with no runtime dependency on repository files. It
+does not use a published SDK package or exercise the GPU primitives. See the
+[release readiness matrix](RELEASE_READINESS_2026-09-16.md) for those separate gates.
+
 The packages also allow workload plugins to live in their own repositories.
 
 | Package | Responsibility |

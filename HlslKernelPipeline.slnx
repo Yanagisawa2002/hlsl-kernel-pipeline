@@ -12,6 +12,7 @@
   </Folder>
   <Folder Name="/examples/">
     <Project Path="examples/HlslPerf.PrimitiveApp/HlslPerf.PrimitiveApp.csproj" />
+    <Project Path="examples/HlslPerf.CrowdExport/HlslPerf.CrowdExport.csproj" />
   </Folder>
   <Folder Name="/tools/">
     <Project Path="tools/HlslPerf.CrowdWholeTask/HlslPerf.CrowdWholeTask.csproj" />

@@ -14,6 +14,13 @@ reuse an existing implementation. Internal algorithms remain research candidates
 the existing internal API defaults remain compatibility baselines, not measured
 winners. Start with the [compilable CPU application example](examples/HlslPerf.PrimitiveApp/README.md).
 
+For a runnable file-to-image caller, use the
+[Crowd atlas exporter](examples/HlslPerf.CrowdExport/README.md): caller-owned
+seed file → existing CPU renderer → RGBA/BMP output → hash receipt. The published
+app runs outside the checkout. This validates a CPU application consumption path;
+GPU execution and external production adoption remain unverified. See the
+[current release preparation and evidence boundaries](docs/RELEASE_READINESS_2026-09-16.md).
+
 ## Results
 
 **September 15 inclusive-scan repair:** on an RTX 4090, a fused inclusive
