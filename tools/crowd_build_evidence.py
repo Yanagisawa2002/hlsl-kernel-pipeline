@@ -160,10 +160,26 @@ def verify_result(mode, folder):
             evidence["error"]["passed"] or evidence["error"]["errorCount"] != 1 or evidence["error"]["discardedMessages"] or
             evidence["corruption"]["passed"] or evidence["corruption"]["errorCount"] != 1 or evidence["corruption"]["discardedMessages"]):
             raise ValueError("Debug rejection control did not detect the expected failures")
-    elif mode == "rehearse":
+    elif mode == "check-cpu":
+        evidence = read(folder / "cpu-check.json")
+        pc = evidence["cpuMachine"]["processorCount"]
+        boundary_workers = len({1, min(2, pc, 3), min(pc, 3)})
+        full_workers = len({n for n in [1, 2, 4, 8, 12, min(12, pc)] if n <= min(12, pc)})
+        if (not evidence["passed"] or not evidence["complete"] or evidence["performanceEligible"] or
+            evidence["boundaryCount"] != 27 * boundary_workers * 4 or evidence["fullSceneCount"] != 8 * full_workers * 2 or
+            evidence["count"] != len(evidence["checks"]) or evidence["count"] != evidence["boundaryCount"] + evidence["fullSceneCount"]):
+            raise ValueError("Incomplete CPU scene/worker coverage")
+        for row in evidence["checks"]:
+            if not row["fullPixelsPassed"] or not row["stableVisibleSequencePassed"] or not row["inputUnchanged"]:
+                raise ValueError("CPU output/sequence/input contract failed")
+            if row["logicalBytes"] > 2 * 1024**3: raise ValueError("CPU storage budget exceeded")
+            if row["kind"] == "full-scene" and sha(folder / (row["atlasSha256"] + ".rgba")) != row["atlasSha256"]:
+                raise ValueError("CPU capture changed")
+    elif mode in ["rehearse", "run"]:
         evidence = read(folder / "result.json")
-        if (not evidence["passed"] or evidence["performanceEligible"] or evidence["fullOutputChecks"] != 12 or
-            not evidence["stableListAndBinsPassed"] or len(evidence["samples"]) != 12):
+        contract = evidence.get("stableListAndBinsPassed") if evidence["arm"] != "cpu-frame-parallel" else evidence.get("stableVisibleSequencePassed") and evidence.get("inputUnchanged")
+        if (not evidence["passed"] or evidence["performanceEligible"] != (mode == "run") or evidence["fullOutputChecks"] != 12 or
+            not contract or len(evidence["samples"]) != 12):
             raise ValueError("Incomplete or incorrectly labelled rehearsal")
         for sample in evidence["samples"]:
             if not sample["fullByteComparisonPassed"] or sha(folder / f"atlas-{sample['request']:02d}.rgba") != sample["actualHash"]:
@@ -174,12 +190,27 @@ def check(args):
     target = args.output / "check-receipt.json"
     receipt = {"schemaVersion": 2, "kind": "bound-check", "mode": args.check, "passed": False, "startedUtc": now()}
     try:
-        receipt["gate"] = require_lock("build" if args.check in ["oracle", "cpu-tests"] else "correctness")
+        stage = "performance" if args.check == "run" else "build" if args.check in ["oracle", "cpu-tests", "check-cpu"] or (args.check == "rehearse" and args.arm == "cpu-frame-parallel") else "correctness"
+        receipt["gate"] = require_lock(stage)
         build_record = verify_build(args.build_receipt, args.dotnet)
         receipt["buildReceipt"] = {"path": str(args.build_receipt.resolve()), "sha256": sha(args.build_receipt), "head": build_record["sourceAfter"]["head"]}
         receipt["before"] = {"source": source_state(), "binaries": binaries(), "host": host_identity(args.dotnet)}
         if args.references:
             receipt["referencesBefore"] = file_manifest(args.references, {".json", ".rgba"})
+        if args.check == "run":
+            if not getattr(args, "protocol", None) or getattr(args, "protocol_index", None) is None:
+                raise ValueError("Timed run requires a version-2 protocol and explicit schedule index")
+            plan = read(args.protocol)
+            if plan.get("schemaVersion") != 2 or plan.get("phase") not in ["discovery", "confirmation"]:
+                raise ValueError("Version-2 performance protocol required")
+            cell = plan["schedule"][args.protocol_index]
+            if (cell["index"] != args.protocol_index or cell["arm"] != args.arm or cell["workers"] != args.workers or
+                args.case != plan["phase"] + "-" + cell["case"] or plan["buildReceipt"]["sha256"] != sha(args.build_receipt) or
+                plan["references"] != receipt["referencesBefore"] or plan["buildHead"] != build_record["sourceAfter"]["head"]):
+                raise ValueError("Timed process does not match its fixed protocol cell")
+            for gate in plan["gates"].values():
+                if sha(gate["path"]) != gate["sha256"]: raise ValueError("Frozen prerequisite changed")
+            receipt["protocol"] = {"path": str(args.protocol.resolve()), "sha256": sha(args.protocol), "cell": cell}
         output = args.output / "result"
         if args.check == "cpu-tests":
             current_tests = file_manifest(ROOT / "tests/HlslPerf.Core.Tests/bin/Release/net10.0")
@@ -189,18 +220,27 @@ def check(args):
                        "--results-directory", str(output.resolve()), "--logger", "trx;LogFileName=whole-task.trx"]
         else:
             command = [str(args.dotnet), str(DLL), args.check, str(ROOT), str(output.resolve())]
-            if args.check in ["check-scenes", "rehearse"]:
+            if args.check in ["check-scenes", "check-cpu", "rehearse", "run"]:
                 if not args.references: raise ValueError("Reference directory required")
                 command.append(str(args.references.resolve()))
-            if args.check == "rehearse":
+            if args.check in ["rehearse", "run"]:
                 if not args.case or not args.arm: raise ValueError("Case and arm required")
                 command += [args.case, args.arm]
+                if args.workers is not None: command.append(str(args.workers))
+        if args.check == "run":
+            from run_crowd_v2 import load_gate
+            receipt["performancePreflight"] = load_gate()
+            if not receipt["performancePreflight"]["passed"]: raise ValueError("Final prelaunch load gate failed; no process launched")
         receipt["process"] = process(command, args.output / "process.log")
+        if args.check == "run": receipt["performancePostflight"] = load_gate()
         receipt["after"] = {"source": source_state(), "binaries": binaries(), "host": host_identity(args.dotnet)}
         if args.check == "cpu-tests":
             receipt["after"]["testBinaries"] = file_manifest(ROOT / "tests/HlslPerf.Core.Tests/bin/Release/net10.0")
         if receipt["before"] != receipt["after"]: raise ValueError("Source/binary/host changed during check")
         if sha(args.build_receipt) != receipt["buildReceipt"]["sha256"]: raise ValueError("Build receipt changed during check")
+        if args.check == "run":
+            if sha(args.protocol) != receipt["protocol"]["sha256"]: raise ValueError("Performance protocol changed during process")
+            if not receipt["performancePostflight"]["passed"]: raise ValueError("Post-process load gate failed; retain and invalidate the attempt")
         if args.references and file_manifest(args.references, {".json", ".rgba"}) != receipt["referencesBefore"]:
             raise ValueError("Reference changed during check")
         if receipt["process"]["exitCode"]: raise ValueError("Check process failed; retain process.log")
@@ -214,7 +254,7 @@ def check(args):
         else:
             import xml.etree.ElementTree as ET
             counters = ET.parse(output / "whole-task.trx").find(".//{*}Counters")
-            if counters is None or int(counters.attrib["total"]) < 199 or counters.attrib["passed"] != counters.attrib["total"]:
+            if counters is None or int(counters.attrib["total"]) < 205 or counters.attrib["passed"] != counters.attrib["total"]:
                 raise ValueError("Complete CPU test receipt required")
         receipt["artifacts"] = file_manifest(output)
         receipt["passed"] = True
@@ -233,10 +273,13 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--dotnet", required=True)
     parser.add_argument("--build-receipt", type=Path)
-    parser.add_argument("--check", choices=["cpu-tests", "oracle", "debug-control", "validate", "check-scenes", "rehearse"])
+    parser.add_argument("--check", choices=["cpu-tests", "oracle", "debug-control", "validate", "check-scenes", "check-cpu", "rehearse", "run"])
     parser.add_argument("--references", type=Path)
     parser.add_argument("--case")
-    parser.add_argument("--arm", choices=["hierarchical", "fused", "wave-tiled", "rts"])
+    parser.add_argument("--arm", choices=["hierarchical", "fused", "wave-tiled", "rts", "cpu-frame-parallel"])
+    parser.add_argument("--workers", type=int)
+    parser.add_argument("--protocol", type=Path)
+    parser.add_argument("--protocol-index", type=int)
     args = parser.parse_args()
     if args.mode == "check" and (not args.build_receipt or not args.check): parser.error("check requires --build-receipt and --check")
     args.output = args.output.resolve()

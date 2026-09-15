@@ -19,7 +19,7 @@ application task.
 | GPU tools | `nvidia-smi` for this NVIDIA campaign's load/VRAM gate |
 | GPU functionality | SM **6.7** for unchanged RTS; SM6.6 fixed **wave32** for local/fused code; raw UAV buffers and D3D12 timestamp queries |
 | Device selection | Set `HLSLPERF_CROWD_ADAPTER` to the exact DXGI name; default is NVIDIA GeForce RTX 4090. No automatic WARP or alternate-adapter selection |
-| Capacity | At largest tested N, about 175 MB of committed default buffers plus about 6.3 MB reusable readback; declared arm cap 512 MiB |
+| Capacity | GPU largest-case buffers are about 175 MB plus 6.3 MB readback; v2 has a 2 GiB experimental logical-buffer budget, not a caller hard constraint. CPU shares its cache across frame workers |
 | Isolation budget | At least 8 GiB free VRAM, 4 GiB free host RAM, and 30 GiB free space on the output volume before a run |
 
 The reference inputs are generated from the original CPU seed generator. No
@@ -110,18 +110,71 @@ severity-only Info/Message exclusion is permitted.
 `debug-control` deliberately overflows a queue and injects an error on a separate
 device to prove rejection; its messages are not workload failures.
 
-## Performance is not ready for registration
+## CPU conventional path and version-2 performance
 
 The version-1 `discover`, `freeze` and `confirm` commands now reject calls before
 creating an output directory or process. **Do not run the old 128-process
 matrix.** Its analyzer remains available for descriptive audit and synthetic
 regression controls, with `inferentialClaimsEligible=false`.
 
-[Protocol version 2](CROWD_PROTOCOL_V2.md) defines a single primary comparison,
-CPU baseline eligibility, process-level uncertainty and how secondary results
-must be treated. The conventional CPU implementation, independent CPU/GPU
-correctness, discovery and the new registration/confirmation runner are still
-required. This change does not assert a performance improvement.
+[Protocol version 2](CROWD_PROTOCOL_V2.md) defines the CPU static-cache/direct-splat
+implementation, CPU worker selection, one primary comparison and descriptive
+secondary results. The source is implemented; all gates must pass on its exact
+clean build. Prepare references as above or preserve and hash the unchanged
+scalar-oracle reference cohort. Neither correctness nor rehearsal is timing evidence.
+
+```powershell
+& tools/Invoke-CrowdWholeTaskLocked.ps1 -Coordination $coordination -Stage build -OutputDirectory .scratch/cpu-gates-lock-new -Action {
+    python tools/crowd_build_evidence.py check --check check-cpu --dotnet $taskDotnet --build-receipt $taskBuildReceipt --references .scratch/references-new/result --output .scratch/cpu-scenes-new
+    if ($LASTEXITCODE) { throw 'CPU full-output/worker gate failed' }
+    python tools/crowd_build_evidence.py check --check rehearse --arm cpu-frame-parallel --workers 12 --case discovery-large --dotnet $taskDotnet --build-receipt $taskBuildReceipt --references .scratch/references-new/result --output .scratch/cpu-rehearsal-new
+    if ($LASTEXITCODE) { throw 'CPU complete caller failed' }
+    python tools/test_crowd_v2.py
+    if ($LASTEXITCODE) { throw 'V2 negative controls failed' }
+}
+```
+
+Use the host's actual `min(12, Environment.ProcessorCount)` for the CPU rehearsal;
+12 is correct on the validated local host. Keep its result's configured and
+observed concurrency separate. Run the existing wave-tiled GPU rehearsal under
+the correctness lock, saving `.scratch/gpu-rehearsal-new/check-receipt.json`.
+
+With the same clean commit and build, prepare the discovery plan:
+
+```powershell
+python tools/run_crowd_v2.py prepare --dotnet $taskDotnet --build-receipt $taskBuildReceipt --references .scratch/references-new/result --cpu-tests .scratch/cpu-new/check-receipt.json --debug-control .scratch/checked-new/debug-control/check-receipt.json --validation .scratch/checked-new/validate/check-receipt.json --full-scenes .scratch/checked-new/check-scenes/check-receipt.json --cpu-check .scratch/cpu-scenes-new/check-receipt.json --cpu-rehearsal .scratch/cpu-rehearsal-new/check-receipt.json --gpu-rehearsal .scratch/gpu-rehearsal-new/check-receipt.json --output .scratch/discovery-plan-new
+
+& tools/Invoke-CrowdWholeTaskLocked.ps1 -Coordination $coordination -Stage performance -OutputDirectory .scratch/discovery-lock-01 -Action {
+    python tools/run_crowd_v2.py discovery --dotnet $taskDotnet --references .scratch/references-new/result --plan .scratch/discovery-plan-new/plan.json --max-processes 2 --output .scratch/discovery-batch-01
+    if ($LASTEXITCODE) { throw 'Discovery stopped; preserve the attempt' }
+}
+```
+
+To continue the fixed order, use a new output and lock directory and explicitly
+pass **all** earlier batch directories, in order, with `--batches`. Each call
+starts at most two processes by default and returns. A preflight that launches
+nothing is retained; a failed measured process invalidates its cohort and must
+not be replaced. The current 20-CPU host's complete discovery has 72 processes
+(four GPU arms plus five CPU worker choices, four cases, two rounds). A first
+limited stage can cover only the 18 primary-case processes; freeze rejects an
+incomplete full discovery.
+
+Freeze only after complete discovery. The tool chooses the strongest observed
+alternative (including all CPU choices) and fixes the primary sample size from
+its declared 8/12/16/24/32-pair precision rule. Pass all discovery batches:
+
+```powershell
+python tools/run_crowd_v2.py freeze --dotnet $taskDotnet --references .scratch/references-new/result --plan .scratch/discovery-plan-new/plan.json --batches .scratch/discovery-batch-01 .scratch/discovery-batch-02 --output .scratch/registration-new
+```
+
+The two batch paths above illustrate syntax; a real freeze needs the complete
+schedule. Execute `confirmation` under the performance lock with the registered
+plan, new batch directory, and `--max-processes 2`; pass all prior confirmation
+batches to continue. Keep each two-process pair in one invocation. Any failed
+confirmation invocation stops that attempt. Finally run `analyze` with the same
+registered plan and all complete confirmation batch paths, writing a new
+analysis directory. Only the large-case paired lifetime ratio is confirmatory.
+Other cases and first-use/steady/memory summaries remain descriptive.
 
 The queue and shared hardware mutex remain mandatory. Non-timed builds and
 correctness require their normal CPU/memory/disk budget; performance additionally

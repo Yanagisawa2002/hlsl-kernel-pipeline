@@ -46,8 +46,10 @@ dispatch size, flags, offsets, or GPU output.
 
 The comparison rules below were extended by [protocol version 2](CROWD_PROTOCOL_V2.md).
 The CPU-input/CPU-output contract also requires a conventional CPU renderer.
-That arm is designed but not implemented. No four-GPU-only whole-task winner
-can be declared, and the old performance orchestration is retired.
+The CPU arm is implemented with shared immutable preparation and direct
+per-frame splatting. No four-GPU-only whole-task winner can be declared, and
+the old performance orchestration is retired. See protocol version 2 for the
+bound validation and selection rules.
 
 - `hierarchical`: the original materialized flags + hierarchical Blelloch
   exclusive scan + scatter algorithm, group256 / four items per thread.

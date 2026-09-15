@@ -55,8 +55,8 @@ def identity():
 
 def retired_protocol(args):
     raise ValueError("The version-1 four-GPU/128-process protocol is retired. "
-                     "CPU baseline eligibility, bound validation and the version-2 single-primary protocol "
-                     "must be implemented before new performance orchestration. See CROWD_PROTOCOL_V2.md.")
+                     "Use run_crowd_v2.py with bound CPU/GPU gates and a version-2 protocol; these "
+                     "legacy commands cannot launch new processes. See CROWD_PROTOCOL_V2.md.")
 
 
 def discover(args): retired_protocol(args)

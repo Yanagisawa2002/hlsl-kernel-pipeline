@@ -11,7 +11,7 @@ using HlslPerf.Workloads;
 
 [assembly: SupportedOSPlatform("windows10.0")]
 
-internal static class Program
+internal static partial class Program
 {
     private static readonly JsonSerializerOptions Json = new(JsonDefaults.Options) { WriteIndented = true };
     private static string Adapter => Environment.GetEnvironmentVariable("HLSLPERF_CROWD_ADAPTER") ?? "NVIDIA GeForce RTX 4090";
@@ -20,7 +20,7 @@ internal static class Program
     {
         try
         {
-            if (args.Length < 3) throw new ArgumentException("oracle|debug-control|validate|check-scenes|run|rehearse <repository> <new-output> [reference-directory case arm]");
+            if (args.Length < 3) throw new ArgumentException("oracle|debug-control|validate|check-scenes|check-cpu|run|rehearse <repository> <new-output> [reference-directory case arm cpu-workers]");
             string root = Path.GetFullPath(args[1]), output = Path.GetFullPath(args[2]);
             if (Directory.Exists(output)) throw new IOException("Choose a new output directory; existing evidence is preserved.");
             Directory.CreateDirectory(output);
@@ -35,8 +35,9 @@ internal static class Program
                 case "debug-control": DebugControls(output); break;
                 case "validate": Validate(root, output); break;
                 case "check-scenes" when args.Length == 4: CheckScenes(root, output, Path.GetFullPath(args[3])); break;
-                case "run" when args.Length == 6: Run(root, output, Path.GetFullPath(args[3]), args[4], args[5]); break;
-                case "rehearse" when args.Length == 6: Run(root, output, Path.GetFullPath(args[3]), args[4], args[5], true); break;
+                case "check-cpu" when args.Length == 4: CheckCpu(root, output, Path.GetFullPath(args[3])); break;
+                case "run" when args.Length is 6 or 7: Run(root, output, Path.GetFullPath(args[3]), args[4], args[5], false, args.Length == 7 ? int.Parse(args[6]) : null); break;
+                case "rehearse" when args.Length is 6 or 7: Run(root, output, Path.GetFullPath(args[3]), args[4], args[5], true, args.Length == 7 ? int.Parse(args[6]) : null); break;
                 default: throw new ArgumentException("Unknown mode or arguments.");
             }
             return 0;
@@ -204,8 +205,10 @@ internal static class Program
         }
     }
 
-    private static void Run(string root, string output, string refs, string id, string arm, bool rehearsal = false)
+    private static void Run(string root, string output, string refs, string id, string arm, bool rehearsal = false, int? workers = null)
     {
+        if (arm == "cpu-frame-parallel") { RunCpu(output, refs, id, rehearsal, workers); return; }
+        if (workers is not null) throw new ArgumentException("Worker count is only valid for the CPU arm.");
         using var reference = JsonDocument.Parse(File.ReadAllText(Path.Combine(refs, id + ".json")));
         CrowdApplicationScene scene = reference.RootElement.GetProperty("scene").Deserialize<CrowdApplicationScene>(Json)!;
         var hashes = reference.RootElement.GetProperty("hashes").EnumerateArray().Select(e => e.GetString()!).ToArray();
@@ -224,7 +227,7 @@ internal static class Program
         var executor = lifetime.Own(tuner.CreateUnifiedExecutor());
         double deviceMs = Stopwatch.GetElapsedTime(stageStart).TotalMilliseconds;
         stageStart = Stopwatch.GetTimestamp();
-        var session = lifetime.Own(executor.Prepare(plan, 512L * 1024 * 1024));
+        var session = lifetime.Own(executor.Prepare(plan, CrowdCpuRenderer.DefaultMemoryBudget));
         var reader = lifetime.Own(session.CreateCpuOutputReader("frame-atlas"));
         double prepareMs = Stopwatch.GetElapsedTime(stageStart).TotalMilliseconds;
         double firstMs = 0;
@@ -257,12 +260,13 @@ internal static class Program
         var memory = tuner.CaptureScenarioMemory();
         var runtime = RuntimeModules();
         lifetime.Dispose();
-        Save(Path.Combine(output, "result.json"), new { schemaVersion = 1, passed = true, performanceEligible = !rehearsal, id, arm, scene,
+        Save(Path.Combine(output, "result.json"), new { schemaVersion = 2, backend = "d3d12", passed = true, performanceEligible = !rehearsal, id, arm, scene,
             pid = Environment.ProcessId, startedUtc, endedUtc = DateTimeOffset.UtcNow, device,
             inputSha256 = ContentHash.Sha256(input), firstUseMilliseconds = firstMs, generationMilliseconds = generation,
             planMilliseconds = planMs, deviceMilliseconds = deviceMs, prepareMilliseconds = prepareMs,
             session.CpuPreparationMilliseconds, session.GpuUploadMilliseconds, session.UploadBytes,
             session.LogicalBytes, session.CommittedBytes, reader.CommittedReadbackBytes,
+            allocationCapBytes = CrowdCpuRenderer.DefaultMemoryBudget, cpuMachine = CpuMachine(),
             hostInputAndOutputBytes = (long)input.Length + bytes, processPeakWorkingSetBytes = Process.GetCurrentProcess().PeakWorkingSet64,
             memory, runtime, cleanupMilliseconds = lifetime.Milliseconds,
             fullOutputChecks = Requests, stableListAndBinsPassed = true, samples });
