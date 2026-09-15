@@ -1,10 +1,16 @@
 # Crowd atlas export caller
 
+**Draft / unvalidated:** the September 16 frozen run stopped at solution restore
+(`NU1100`). The harness selected an empty cache after isolating `DOTNET_CLI_HOME`;
+it did not bind the pre-existing package cache. No compile, test, publish or
+application invocation followed. The commands below describe the intended use,
+not a completed deployment. The frozen candidate was not repaired or rerun.
+
 A standalone file-based application that consumes the public, existing
 `CrowdCpuRenderer` and produces usable RGBA animation atlases and BMP previews.
 The caller reads your seed file, prepares one renderer, advances successive
 frame windows, exports every pixel, and saves hashes after verifying file
-readback. It runs after publishing, without the source checkout or shaders.
+readback. It is designed to run after publishing without the source checkout or shaders.
 
 This is an example asset-export application for the repository's controlled
 Crowd scene. It is **CPU execution**, not a CPU oracle, GPU fallback, external
@@ -85,7 +91,8 @@ close and readback, without a durable-storage flush guarantee.
 CPU integration tests compare all pixels of two emitted windows with the
 independent existing oracle, check BMP channels/order, and exercise malformed
 inputs, frame bounds, unsupported backends and preservation of previous output.
-The separate frozen run also publishes and executes the app outside the checkout.
+The frozen run was intended to publish and execute the app outside the checkout,
+but stopped before either stage. No generated image is available from this attempt.
 
 The requested Ubuntu/RTX 5090 native D3D12 stage is **SKIPPED**. This application
 does not add a Linux GPU backend, and its CPU output cannot validate D3D12 or

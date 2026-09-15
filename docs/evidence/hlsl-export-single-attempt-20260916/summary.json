@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "repo": "hlsl-kernel-pipeline",
+  "status": "FAILED",
+  "attempt_consumed": true,
+  "attempts": 1,
+  "base_sha": "723e0dd1d0fbe0912811a4bab19e8ea1a10ac630",
+  "candidate_sha": "da35f42b66788ced024ec7965e3f11160b99f50a",
+  "candidate_tree": "0ecbd9400f79997d5bb3bb0c5ec249599ccb1534",
+  "branch": "codex/single-attempt-20260916-hlsl",
+  "run_id": "hlsl-export-frozen-20260916-01",
+  "run_started_utc": "2026-09-15T17:47:11.271751+00:00",
+  "run_ended_utc": "2026-09-15T17:47:13.768553+00:00",
+  "validation": [
+    {
+      "step": "01-sdk",
+      "exit_code": 0,
+      "log_sha256": "6a57de12ef2f08d5446ab1661b40a4832bde48e9e823f0a55a677f500a3d01b0"
+    },
+    {
+      "step": "02-checkout",
+      "exit_code": 0,
+      "log_sha256": "d5c68ada8314967fdf088e83e97b5c681eba34d6cdd9b1651c6f394fb70ee670"
+    },
+    {
+      "step": "03-upstream",
+      "exit_code": 0,
+      "log_sha256": "49d2e31abd639d4ea923c71c5c493c640e1eb5abf95bab20d5b8fe6ee8d9a6e5"
+    },
+    {
+      "step": "04-restore",
+      "exit_code": 1,
+      "log_sha256": "743be02c4d74fbca0ce6e9c1333575775fe7693cc0bc61260837e8bb6ffb7ca0"
+    }
+  ],
+  "not_run": [
+    "build",
+    "cpu-tests",
+    "primitive-app",
+    "pack",
+    "package-inspection",
+    "publish",
+    "caller-execution",
+    "preview-verification"
+  ],
+  "hardware_stage": "SKIPPED_UBUNTU_NATIVE_D3D12_UNAVAILABLE",
+  "remote_used": false,
+  "remote_root": null,
+  "owned_processes_remaining": [],
+  "blocking_reason": "Harness sets an isolated DOTNET_CLI_HOME but does not preserve NUGET_PACKAGES. The offline restore resolves an empty cache, not the existing user cache.",
+  "frozen_implementation_files": [
+    {
+      "path": "HlslKernelPipeline.slnx",
+      "sha256": "9e4ceb77864a8036e47b001f9309f5dd2559492ab39b425be369156aa2730ae5"
+    },
+    {
+      "path": "examples/HlslPerf.CrowdExport/CrowdExporter.cs",
+      "sha256": "57863b125c6b12cbc5ac7b30a9d23741594b4daf68efb904d3f80801ce40b60b"
+    },
+    {
+      "path": "examples/HlslPerf.CrowdExport/HlslPerf.CrowdExport.csproj",
+      "sha256": "f0d3e3c30a6117dccbb4c88dc6c16779add57d2f5471a2ab47e12a498e6166d4"
+    },
+    {
+      "path": "examples/HlslPerf.CrowdExport/Program.cs",
+      "sha256": "8e9901ca137cc251cbb8c1b43c791ff8a8660a19abe7815449aae538a5ba9764"
+    },
+    {
+      "path": "examples/HlslPerf.CrowdExport/make_demo_input.py",
+      "sha256": "086f03751b9b1d19836be9b9bc68ac428dbed14fad99c90946b53574833be7ed"
+    },
+    {
+      "path": "tests/HlslPerf.Core.Tests/CrowdExporterTests.cs",
+      "sha256": "236981009b1708c005a0ef8869e4f80caaf742975584c12fd7909c16c500d421"
+    },
+    {
+      "path": "tests/HlslPerf.Core.Tests/HlslPerf.Core.Tests.csproj",
+      "sha256": "4096217d030ad249ff738a715fc75b14d3d315f17631be6a1754b2dbc244a1c9"
+    },
+    {
+      "path": "tools/validate_crowd_export.py",
+      "sha256": "411dc31c2fd0532af67e665800b604e40a0e5550975884fb0b09986aaf6d01a6"
+    }
+  ],
+  "raw_archive_sha256": "87554bbead4d3c33c45a5874bcb30db64475a0a10016312fca9942b88d041b66",
+  "raw_run_json_sha256": "8b57146d7a52a8245dc4885a526dcd4ee1a262c6f632e965cbe76d91b496ae71",
+  "evidence_files": [
+    {
+      "path": "run.json",
+      "sha256": "8b57146d7a52a8245dc4885a526dcd4ee1a262c6f632e965cbe76d91b496ae71",
+      "bytes": 4095
+    },
+    {
+      "path": "01-sdk.log",
+      "sha256": "6a57de12ef2f08d5446ab1661b40a4832bde48e9e823f0a55a677f500a3d01b0",
+      "bytes": 1968
+    },
+    {
+      "path": "02-checkout.log",
+      "sha256": "d5c68ada8314967fdf088e83e97b5c681eba34d6cdd9b1651c6f394fb70ee670",
+      "bytes": 276
+    },
+    {
+      "path": "03-upstream.log",
+      "sha256": "49d2e31abd639d4ea923c71c5c493c640e1eb5abf95bab20d5b8fe6ee8d9a6e5",
+      "bytes": 359
+    },
+    {
+      "path": "04-restore.log",
+      "sha256": "743be02c4d74fbca0ce6e9c1333575775fe7693cc0bc61260837e8bb6ffb7ca0",
+      "bytes": 13907
+    },
+    {
+      "path": "failed-restore/project.assets.json",
+      "sha256": "3d24aa24c0b30d230f89ea3bc5ab5225ad292f7d3323bd55f1e7659c2fc396ac",
+      "bytes": 29537
+    },
+    {
+      "path": "restore-diagnosis.json",
+      "sha256": "6f781778c9cad219c4f0ada54cb76420f8b46909a9661e5700471e5cbe620d7f",
+      "bytes": 1767
+    },
+    {
+      "path": "process-closeout.json",
+      "sha256": "a59db4ae880ffec0c95b203cb1fbaf7b05d0e0b1c96e0845c1116c5be8a1d387",
+      "bytes": 253
+    },
+    {
+      "path": "pr4-background.json",
+      "sha256": "8095ddaa50845c4dbbb71047bc984bdad52b2b3968be28d34bff8091d1cf7eb3",
+      "bytes": 861
+    },
+    {
+      "path": "frozen-files.json",
+      "sha256": "cca1a1d2bfe40be9fd203f0b8f30b2ad6d96b3d82081901605a053686bb9f363",
+      "bytes": 1228
+    }
+  ]
+}

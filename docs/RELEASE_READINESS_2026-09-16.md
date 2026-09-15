@@ -5,16 +5,24 @@ not publish an official Release, tag, NuGet package or production deployment.
 The candidate starts from refreshed GitHub main
 `723e0dd1d0fbe0912811a4bab19e8ea1a10ac630`.
 
+**Outcome: FAILED at offline restore.** The harness isolated `DOTNET_CLI_HOME`
+without preserving the existing NuGet cache path. Its resolved cache was empty;
+`NU1100` stopped the one run before build, tests, package, publish or app execution.
+This is a harness/environment binding failure, not evidence that the new caller
+compiled or failed numerical correctness. The candidate stays Draft and unchanged.
+
 ## One useful entry point
 
 [CrowdExport](../examples/HlslPerf.CrowdExport/README.md) accepts a caller-owned
 uint32 seed file and JSON scene request. It reuses one existing conventional CPU
 renderer across successive animation windows, writes complete RGBA atlases and
 viewable BMP strips, and publishes a receipt only after all file readbacks match.
-The framework-dependent publish folder runs independently of the source tree.
+The framework-dependent publish folder is intended to run independently of the
+source tree; this run did not reach publish or execution.
 
 The delivered caller is a standalone **example asset export application** using
-the controlled Crowd scene. It establishes a concrete CPU consumption path.
+the controlled Crowd scene. Its implementation supplies a concrete CPU consumption
+path, but that path has not been validated in this attempt.
 No named external host application was supplied or integrated in this attempt;
 external product adoption and real GPU-caller acceptance remain open. The demo
 input is synthetic and is not evidence of deployment or application speedup.
@@ -39,10 +47,10 @@ this candidate does not retest, supersede or imply that report has merged.
 
 | Gate | Scope / boundary |
 |---|---|
-| CPU source build and tests | One frozen run; raw exit codes and TRX determine pass/fail |
-| Published caller | One invocation outside the source checkout, two sequential atlas windows, exact file hashes and independent BMP decode |
-| Local workload `.nupkg` | Pack existing 0.6.0 workload package and verify shader/upstream/license bytes; not package installation or NuGet publication |
-| CPU correctness | Independent pixel oracle and exporter contract tests; not CPU/GPU comparative performance |
+| CPU source build and tests | NOT RUN: offline restore failed first; no TRX |
+| Published caller | NOT RUN: no publish folder, application invocation or exported atlas |
+| Local workload `.nupkg` | NOT RUN: no package produced or inspected |
+| CPU correctness | Tests added for independent pixel oracle and exporter contracts, but not executed |
 | Requested Ubuntu RTX 5090 D3D12 | **SKIPPED**: no native D3D12 backend on this target; no SSH or remote work used |
 | New Linux GPU backend | Excluded; no D3D12/Vulkan/CUDA port |
 | Linux execution of new CPU caller | Unverified; local validation uses Windows |
