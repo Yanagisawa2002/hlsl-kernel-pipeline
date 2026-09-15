@@ -132,7 +132,11 @@ def verify_debug(folder):
         raise ValueError("Complete structured debug evidence required")
     for row in evidence["snapshots"]:
         s = row["snapshot"]
-        if (not s["available"] or not s["cleared"] or s["discardedMessages"] or s["deniedByStorageFilter"] or
+        def safe_filter(f):
+            return isinstance(f, dict) and all(not f[k] for k in ["allowedCategories", "allowedSeverities", "allowedIds", "deniedCategories", "deniedIds"]) and all(v in ["Info", "Message"] for v in f["deniedSeverities"])
+        if (not s["available"] or not s["cleared"] or s["discardedMessages"] or not s.get("filtersStable") or
+            not safe_filter(s.get("storageFilter")) or not safe_filter(s.get("retrievalFilter")) or
+            (s["deniedByStorageFilter"] and not s["storageFilter"]["deniedSeverities"]) or
             s["storedMessages"] != s["retrievableMessages"] or s["storedMessages"] != s["storedMessagesAfterRead"] or
             s["retrievableMessages"] != len(s["messages"]) or any(m["severity"] in ["Error", "Corruption"] for m in s["messages"])):
             raise ValueError("Debug evidence contains missing, lost, filtered or error messages")
@@ -206,7 +210,7 @@ def check(args):
         else:
             import xml.etree.ElementTree as ET
             counters = ET.parse(output / "whole-task.trx").find(".//{*}Counters")
-            if counters is None or int(counters.attrib["total"]) < 198 or counters.attrib["passed"] != counters.attrib["total"]:
+            if counters is None or int(counters.attrib["total"]) < 199 or counters.attrib["passed"] != counters.attrib["total"]:
                 raise ValueError("Complete CPU test receipt required")
         receipt["artifacts"] = file_manifest(output)
         receipt["passed"] = True

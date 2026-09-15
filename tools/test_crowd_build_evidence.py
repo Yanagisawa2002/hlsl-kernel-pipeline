@@ -21,6 +21,8 @@ class DebugEvidenceControls(unittest.TestCase):
         self.snapshot = {"available": True, "cleared": True, "discardedMessages": 0, "deniedByStorageFilter": 0,
                          "storedMessages": 1, "retrievableMessages": 1, "storedMessagesAfterRead": 1,
                          "messages": [{"severity": "Warning"}]}
+        empty_filter = {k: [] for k in ["allowedCategories", "allowedSeverities", "allowedIds", "deniedCategories", "deniedSeverities", "deniedIds"]}
+        self.snapshot.update(storageFilter=empty_filter, retrievalFilter=empty_filter, filtersStable=True)
 
     def tearDown(self): self.tmp.cleanup()
     def verify(self):
@@ -29,6 +31,13 @@ class DebugEvidenceControls(unittest.TestCase):
         evidence.verify_debug(self.root)
 
     def test_complete_warning_passes(self): self.verify()
+
+    def test_recorded_info_only_filtering_is_distinguished_from_loss(self):
+        self.snapshot["storageFilter"] = {**self.snapshot["storageFilter"], "deniedSeverities": ["Info"]}
+        self.snapshot["deniedByStorageFilter"] = 119
+        self.verify()
+        self.snapshot["storageFilter"]["deniedSeverities"] = ["Info", "Error"]
+        with self.assertRaisesRegex(ValueError, "filtered"): self.verify()
 
     def test_truncated_tail_fails_even_if_stored_messages_are_only_warnings(self):
         self.snapshot["discardedMessages"] = 77

@@ -104,7 +104,9 @@ Each check directory contains `check-receipt.json`, `process.log`, and `result/`
 The receipt seals source/binary/host identity before and after the child, its
 build-receipt hash, PID/command/exit/log and every result artifact. The child
 independently records its assembly hash and embedded source commit. Missing,
-changed, filtered or discarded debug messages make correctness ineligible.
+changed or discarded messages, or filters able to hide warnings/errors, make
+correctness ineligible. The device's filters and denied counter are retained;
+severity-only Info/Message exclusion is permitted.
 `debug-control` deliberately overflows a queue and injects an error on a separate
 device to prove rejection; its messages are not workload failures.
 

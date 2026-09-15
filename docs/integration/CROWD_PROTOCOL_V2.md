@@ -110,8 +110,12 @@ not ready. Lack of the CPU arm cannot be interpreted as a measured GPU benefit.
   build commit outside application timing. Output manifests and input reference
   hashes are sealed in each check receipt. Failed attempts retain their logs.
 - Boundary and full-scene checks require complete structured debug evidence:
-  queue available, zero discarded/filtered messages, stable stored/retrievable
-  counts, all messages retained, and no Error/Corruption severity. Drain after
+  queue available, zero discarded messages, stable stored/retrievable counts,
+  all stored messages retained, and no Error/Corruption severity. Record both
+  filters and the denied counter. Only an empty allow list and severity-only
+  denial of Info/Message are eligible; category/ID filters, Warning/Error denial
+  or filters changing during a read fail. This preserves the default exclusion
+  of informational object-lifetime messages without confusing it with overflow. Drain after
   every output check and after executor disposal. A dedicated control device
   must prove deliberate queue overflow and injected errors are rejected.
 - The frozen performance implementation must require these bound receipts;
@@ -128,3 +132,5 @@ The Windows/D3D12 route remains selected. No Vulkan/CUDA rewrite, remote
 Linux/5090 execution, host installation or hardware setting change is part of
 this repair. A backend or device change requires new implementation validation
 and independent results.
+
+Filter interpretation follows the [D3D12 filter structure](https://learn.microsoft.com/en-us/windows/win32/api/d3d12sdklayers/ns-d3d12sdklayers-d3d12_info_queue_filter) and [denied-message counter](https://learn.microsoft.com/en-us/windows/win32/api/d3d12sdklayers/nf-d3d12sdklayers-id3d12infoqueue-getnummessagesdeniedbystoragefilter). The actual active filter is recorded from the local device; a default is never assumed.

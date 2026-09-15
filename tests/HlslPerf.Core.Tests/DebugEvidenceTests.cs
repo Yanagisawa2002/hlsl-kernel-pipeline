@@ -6,7 +6,8 @@ namespace HlslPerf.Core.Tests;
 public sealed class DebugEvidenceTests
 {
     private static readonly UnifiedDebugSnapshot Warning = new(true, 1024, 1, 1, 1, 0, 0, true,
-        [new("Warning", "CreateResourceStateIgnored", "Retained warning")]);
+        [new("Warning", "CreateResourceStateIgnored", "Retained warning")])
+    { StorageFilter = new([], [], [], [], [], []), RetrievalFilter = new([], [], [], [], [], []), FiltersStable = true };
 
     [Fact]
     public void CompleteWarningIsRetainedAndAccepted() => Assert.True(Warning.Passed);
@@ -20,6 +21,18 @@ public sealed class DebugEvidenceTests
         Assert.False((Warning with { StoredMessagesAfterRead = 2 }).Passed);
         Assert.False((Warning with { Messages = [] }).Passed);
         Assert.False((Warning with { Available = false }).Passed);
+        Assert.False((Warning with { FiltersStable = false }).Passed);
+    }
+
+    [Fact]
+    public void OnlyRecordedInformationalSeverityFilteringIsAccepted()
+    {
+        var infoOnly = new UnifiedDebugFilter([], [], [], [], ["Info"], []);
+        Assert.True((Warning with { StorageFilter = infoOnly, DeniedByStorageFilter = 119 }).Passed);
+        Assert.False((Warning with { StorageFilter = infoOnly with { DeniedSeverities = ["Error"] } }).Passed);
+        Assert.False((Warning with { StorageFilter = infoOnly with { DeniedSeverities = ["Warning"] } }).Passed);
+        Assert.False((Warning with { StorageFilter = infoOnly with { DeniedIds = ["Application"] } }).Passed);
+        Assert.False((Warning with { StorageFilter = infoOnly with { AllowedSeverities = ["Warning"] } }).Passed);
     }
 
     [Theory]

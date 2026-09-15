@@ -328,7 +328,8 @@ internal static class Program
     {
         D3D12Tuner.EnableUnifiedDebugLayer();
         using var tuner = new D3D12Tuner(Adapter);
-        var (initial, overflow, error) = tuner.RunUnifiedDebugQueueControls();
+        var (initial, overflow, error) = tuner.RunUnifiedDebugQueueControls((context, snapshot) =>
+            Save(Path.Combine(output, "debug-control-" + context + ".json"), snapshot));
         bool passed = initial.Passed && !overflow.Passed && overflow.DiscardedMessages > 0 &&
             overflow.StoredMessages == 2 && overflow.Messages.Length == 2 && !error.Passed && error.ErrorCount == 1;
         Save(Path.Combine(output, "debug-control.json"), new { passed, controlOnly = true,
