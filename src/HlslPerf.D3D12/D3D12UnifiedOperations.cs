@@ -142,7 +142,7 @@ public sealed partial class D3D12Tuner
         }
     }
 
-    public sealed class UnifiedSession : IDisposable
+    public sealed partial class UnifiedSession : IDisposable
     {
         private const int QueryCount = 256;
         private readonly D3D12Tuner owner;

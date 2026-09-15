@@ -377,11 +377,19 @@ void BuildCrowdTileHistogram(uint3 groupId : SV_GroupID, uint groupIndex : SV_Gr
 
     const uint threadStart = linearGroup * Parameter1 +
         groupIndex * HLSLPERF_ELEMENTS_PER_THREAD;
+    // Runtime callers use the GPU header, not an oracle-provided visible count.
+#ifdef HLSLPERF_CROWD_RUNTIME_COUNTS
+    const uint visibleCount = min(Input0.Load(0), Parameter0);
+    for (uint batch = threadStart; batch < visibleCount; batch += Parameter7 * Parameter1)
+#else
+    const uint visibleCount = Parameter0;
+    const uint batch = threadStart;
+#endif
     [unroll]
     for (uint item = 0; item < HLSLPERF_ELEMENTS_PER_THREAD; ++item)
     {
-        const uint index = threadStart + item;
-        if (index < Parameter0)
+        const uint index = batch + item;
+        if (index < visibleCount)
         {
             const uint seed = Input0.Load((index + 1) * 4);
             const uint tile = CrowdTileIndex(seed, Parameter5, Parameter3, Parameter4);
@@ -468,11 +476,18 @@ void ScatterCrowdTileSeeds(uint3 groupId : SV_GroupID, uint groupIndex : SV_Grou
         return;
     const uint threadStart = linearGroup * Parameter1 +
         groupIndex * HLSLPERF_ELEMENTS_PER_THREAD;
+#ifdef HLSLPERF_CROWD_RUNTIME_COUNTS
+    const uint visibleCount = min(Input0.Load(0), Parameter0);
+    for (uint batch = threadStart; batch < visibleCount; batch += Parameter7 * Parameter1)
+#else
+    const uint visibleCount = Parameter0;
+    const uint batch = threadStart;
+#endif
     [unroll]
     for (uint item = 0; item < HLSLPERF_ELEMENTS_PER_THREAD; ++item)
     {
-        const uint index = threadStart + item;
-        if (index < Parameter0)
+        const uint index = batch + item;
+        if (index < visibleCount)
         {
             const uint seed = Input0.Load((index + 1) * 4);
             const uint tile = CrowdTileIndex(seed, Parameter5, Parameter3, Parameter4);
@@ -556,6 +571,10 @@ void RasterizeCrowdVfx(uint3 dispatchIndex : SV_DispatchThreadID)
         }
     }
 
+#ifdef HLSLPERF_CROWD_RUNTIME_COUNTS
+    const uint atlasIndex = (frame - Parameter2) * width * height + pixel;
+#else
     const uint atlasIndex = frame * width * height + pixel;
+#endif
     Output0.Store(atlasIndex * 4, red | (green << 8) | (blue << 16) | 0xff000000u);
 }
