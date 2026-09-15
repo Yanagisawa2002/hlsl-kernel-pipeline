@@ -1,0 +1,17 @@
+  正在确定要还原的项目…
+  已还原 D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.Core\HlslPerf.Core.csproj (用时 59 毫秒)。
+  已还原 D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.GpuDriven\HlslPerf.GpuDriven.csproj (用时 67 毫秒)。
+  已还原 D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.Rga\HlslPerf.Rga.csproj (用时 67 毫秒)。
+  已还原 D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.Workloads\HlslPerf.Workloads.csproj (用时 67 毫秒)。
+  已还原 D:\CodexWork\hlsl-scan-inclusive-20260915\tests\HlslPerf.Core.Tests\HlslPerf.Core.Tests.csproj (用时 871 毫秒)。
+  HlslPerf.Core -> D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.Core\bin\Release\net10.0\HlslPerf.Core.dll
+  HlslPerf.Workloads -> D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.Workloads\bin\Release\net10.0\HlslPerf.Workloads.dll
+  HlslPerf.GpuDriven -> D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.GpuDriven\bin\Release\net10.0\HlslPerf.GpuDriven.dll
+  HlslPerf.Rga -> D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.Rga\bin\Release\net10.0\HlslPerf.Rga.dll
+  HlslPerf.Core.Tests -> D:\CodexWork\hlsl-scan-inclusive-20260915\tests\HlslPerf.Core.Tests\bin\Release\net10.0\HlslPerf.Core.Tests.dll
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:06.22

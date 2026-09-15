@@ -1,0 +1,2 @@
+name, driver_version, memory.total [MiB], memory.free [MiB], memory.used [MiB], temperature.gpu, power.draw [W], clocks.current.graphics [MHz], clocks.current.memory [MHz]
+NVIDIA GeForce RTX 4090, 591.86, 24564 MiB, 22309 MiB, 1830 MiB, 41, 14.98 W, 210 MHz, 405 MHz

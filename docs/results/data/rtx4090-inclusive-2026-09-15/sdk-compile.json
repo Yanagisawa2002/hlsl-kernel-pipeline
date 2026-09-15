@@ -1,0 +1,810 @@
+{
+  "schema": "hlslperf.compile-only.v1",
+  "performanceStatus": "Unmeasured",
+  "gpuExecuted": false,
+  "plans": [
+    {
+      "implementation": "internal-scan-baseline",
+      "semanticId": "exclusive-u32-sum-modulo-2^32",
+      "identity": "cd3e6fb8d67220980abc78ee54a287160d3a19fd7c65578c55655c83a24b479b"
+    },
+    {
+      "implementation": "gps-reduce-then-scan",
+      "semanticId": "exclusive-u32-sum-modulo-2^32",
+      "identity": "9e9ca6d63a9e638a25b4c1b2bdd9942015f5238e04302420ad0cbcb43bccedca"
+    },
+    {
+      "implementation": "wave-tiled-exclusive",
+      "semanticId": "exclusive-u32-sum-modulo-2^32",
+      "identity": "133bd0ea5f525f2704379f59adf723184be67d627c1735ebb3501a0e99812eaf"
+    },
+    {
+      "implementation": "wave-tiled-inclusive",
+      "semanticId": "inclusive-u32-sum-modulo-2^32",
+      "identity": "56bcf73e657fd099313ceb42622c8270f3a3f9627b856a4333d65442f85b32b6"
+    },
+    {
+      "implementation": "internal-radix-1",
+      "semanticId": "ascending-full32-u32-sort",
+      "identity": "572479a74f18de363ee33ae980a0ebe90ec0a2a575fe6dd2917b64e92b3246da"
+    },
+    {
+      "implementation": "internal-radix-1",
+      "semanticId": "stable-full32-u32-sort-aos-input-soa-output",
+      "identity": "4cfef477573e910dcfd9c8489c10511a64f7f99bfb937157d40b437163afdde3"
+    },
+    {
+      "implementation": "amd-parallel-sort",
+      "semanticId": "ascending-full32-u32-sort",
+      "identity": "916d7435978c3355ca2e4e2e3047634ef09571fb5b8cb8012044049b609ecafe"
+    },
+    {
+      "implementation": "amd-parallel-sort",
+      "semanticId": "stable-full32-u32-sort-aos-input-soa-output",
+      "identity": "5679d869372fb46523b360b1f21f637309a3a2c3662d705b0d17507ab0755fb2"
+    }
+  ],
+  "compilerFiles": [
+    {
+      "path": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\tools\\HlslPerf.CompileOnly\\bin\\Release\\net10.0\\runtimes\\win-arm64\\native\\dxcompiler.dll",
+      "sha256": "7bce55ceb9438e5d8d3d147cc5b2cd0327908070ec67c428a71622a41d7a99a6"
+    },
+    {
+      "path": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\tools\\HlslPerf.CompileOnly\\bin\\Release\\net10.0\\runtimes\\win-arm64\\native\\dxil.dll",
+      "sha256": "1716db89daa2c0e7acfd7dccbde368de7d8d5e6de45279155a4ce68e3cfc6ca5"
+    },
+    {
+      "path": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\tools\\HlslPerf.CompileOnly\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxcompiler.dll",
+      "sha256": "b86a738ece4c05dbe2d9bbb29668a2ccb28a0740773c9b027cdc61e8d07b4d75"
+    },
+    {
+      "path": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\tools\\HlslPerf.CompileOnly\\bin\\Release\\net10.0\\runtimes\\win-x64\\native\\dxil.dll",
+      "sha256": "058f2f52a680c38b223a5615b7df969def21f77e577562e5099d971dede992de"
+    }
+  ],
+  "compiledShaders": [
+    {
+      "shader": {
+        "id": "internal-scan-baseline/keys/BlockScanPass",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels\\scan.hlsl",
+        "entryPoint": "BlockScanPass",
+        "defines": {
+          "HLSLPERF_GROUP_SIZE": "256",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SCAN_BACKEND": "1",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_VECTOR_WIDTH": "1"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "e17b4dd61a834d928f93c83bd71658ac2c72b8583fa7e07373c0460d2101b919.dxil",
+      "dxilSha256": "397e25e261a971f883a7651a49a4cbf4933f0b5d666939f02c92bd5298c05a8f",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "gps-reduce-then-scan/Reduce",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl",
+        "entryPoint": "Reduce",
+        "defines": {},
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2021,
+        "shaderModel": "6_7",
+        "enableStrictness": false
+      },
+      "file": "831a605683bbd2dd9c614ba83e8b0ba816b212be2c9ae132c2b059202f02a6de.dxil",
+      "dxilSha256": "071b5114390ac669a319bba4b02f8758264c0ff63860ede72ac35ce69a821aa2",
+      "diagnostics": "In file included from D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:10:\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl:192:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like \u0027L\u0027 or \u0027U\u0027, or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 \u003C\u003C (countbits(spineSize - 1) \u002B laneLog - 1) / laneLog * laneLog;\n                               ^\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl:197:31: warning: operator \u0027\u003C\u003C\u0027 has lower precedence than \u0027\u002B\u0027; \u0027\u002B\u0027 will be evaluated first [-Wshift-op-parentheses]\n        const uint i0 = (gtid \u002B t0 \u003C\u003C offset) - t0;\n                         ~~~~~^~~~ ~~\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl:197:31: note: place parentheses around the \u0027\u002B\u0027 expression to silence this warning\n        const uint i0 = (gtid \u002B t0 \u003C\u003C offset) - t0;\n                              ^\n                         (        )\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:44:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like \u0027L\u0027 or \u0027U\u0027, or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 \u003C\u003C (countbits(spineSize - 1) \u002B laneLog - 1) / laneLog * laneLog;\n                               ^\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:48:30: warning: operator \u0027\u003C\u003C\u0027 has lower precedence than \u0027\u002B\u0027; \u0027\u002B\u0027 will be evaluated first [-Wshift-op-parentheses]\n        const uint i = (gtid \u002B 1 \u003C\u003C offset) - 1;\n                        ~~~~~^~~ ~~\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:48:30: note: place parentheses around the \u0027\u002B\u0027 expression to silence this warning\n        const uint i = (gtid \u002B 1 \u003C\u003C offset) - 1;\n                             ^\n                        (       )\n"
+    },
+    {
+      "shader": {
+        "id": "gps-reduce-then-scan/Scan",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl",
+        "entryPoint": "Scan",
+        "defines": {},
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2021,
+        "shaderModel": "6_7",
+        "enableStrictness": false
+      },
+      "file": "b4e6078233d10765fea5940db5adb0816328c70177b111541746272dbb30bef2.dxil",
+      "dxilSha256": "6b3a34d7e9cb2d334aa1b75f86bf83aef4e59c4b72ad49fad728d4710d80e096",
+      "diagnostics": "In file included from D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:10:\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl:192:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like \u0027L\u0027 or \u0027U\u0027, or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 \u003C\u003C (countbits(spineSize - 1) \u002B laneLog - 1) / laneLog * laneLog;\n                               ^\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl:197:31: warning: operator \u0027\u003C\u003C\u0027 has lower precedence than \u0027\u002B\u0027; \u0027\u002B\u0027 will be evaluated first [-Wshift-op-parentheses]\n        const uint i0 = (gtid \u002B t0 \u003C\u003C offset) - t0;\n                         ~~~~~^~~~ ~~\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl:197:31: note: place parentheses around the \u0027\u002B\u0027 expression to silence this warning\n        const uint i0 = (gtid \u002B t0 \u003C\u003C offset) - t0;\n                              ^\n                         (        )\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:44:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like \u0027L\u0027 or \u0027U\u0027, or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 \u003C\u003C (countbits(spineSize - 1) \u002B laneLog - 1) / laneLog * laneLog;\n                               ^\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:48:30: warning: operator \u0027\u003C\u003C\u0027 has lower precedence than \u0027\u002B\u0027; \u0027\u002B\u0027 will be evaluated first [-Wshift-op-parentheses]\n        const uint i = (gtid \u002B 1 \u003C\u003C offset) - 1;\n                        ~~~~~^~~ ~~\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:48:30: note: place parentheses around the \u0027\u002B\u0027 expression to silence this warning\n        const uint i = (gtid \u002B 1 \u003C\u003C offset) - 1;\n                             ^\n                        (       )\n"
+    },
+    {
+      "shader": {
+        "id": "gps-reduce-then-scan/PropagateExclusive",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl",
+        "entryPoint": "PropagateExclusive",
+        "defines": {},
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2021,
+        "shaderModel": "6_7",
+        "enableStrictness": false
+      },
+      "file": "c1daf0cc970716d1abd0b66dd1d4d9caf89f69443bc8f25a9165850d88ab765f.dxil",
+      "dxilSha256": "497acd42765fef5b6be04d854a1017b29d7dd6375a2c473888b9aa8b3e0d02bc",
+      "diagnostics": "In file included from D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:10:\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl:192:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like \u0027L\u0027 or \u0027U\u0027, or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 \u003C\u003C (countbits(spineSize - 1) \u002B laneLog - 1) / laneLog * laneLog;\n                               ^\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl:197:31: warning: operator \u0027\u003C\u003C\u0027 has lower precedence than \u0027\u002B\u0027; \u0027\u002B\u0027 will be evaluated first [-Wshift-op-parentheses]\n        const uint i0 = (gtid \u002B t0 \u003C\u003C offset) - t0;\n                         ~~~~~^~~~ ~~\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders/ScanCommon.hlsl:197:31: note: place parentheses around the \u0027\u002B\u0027 expression to silence this warning\n        const uint i0 = (gtid \u002B t0 \u003C\u003C offset) - t0;\n                              ^\n                         (        )\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:44:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like \u0027L\u0027 or \u0027U\u0027, or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 \u003C\u003C (countbits(spineSize - 1) \u002B laneLog - 1) / laneLog * laneLog;\n                               ^\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:48:30: warning: operator \u0027\u003C\u003C\u0027 has lower precedence than \u0027\u002B\u0027; \u0027\u002B\u0027 will be evaluated first [-Wshift-op-parentheses]\n        const uint i = (gtid \u002B 1 \u003C\u003C offset) - 1;\n                        ~~~~~^~~ ~~\nD:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/gpu-prefix-sums/GPUPrefixSumsD3D12/Shaders\\ReduceThenScan.hlsl:48:30: note: place parentheses around the \u0027\u002B\u0027 expression to silence this warning\n        const uint i = (gtid \u002B 1 \u003C\u003C offset) - 1;\n                             ^\n                        (       )\n"
+    },
+    {
+      "shader": {
+        "id": "wave-tiled-exclusive/ResetWaveTiledState",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels/scan.hlsl",
+        "entryPoint": "ResetWaveTiledState",
+        "defines": {
+          "HLSLPERF_SCAN_WAVE_TILED": "1",
+          "HLSLPERF_SCAN_BACKEND": "3",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_GROUP_SIZE": "256",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": "4",
+          "HLSLPERF_SINGLE_PASS_GROUPS": "256",
+          "HLSLPERF_VECTOR_WIDTH": "4",
+          "HLSLPERF_WAVE_SIZE": "32",
+          "HLSLPERF_WAVE_TILED_MAX_POLLS": "4"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "ea9c49e9f29b4ad846b0188d67e8a0988b3c23eb26d81eac4fad929495bc6d59.dxil",
+      "dxilSha256": "cf88436203f172c7a66939f19983de669836578ec06f67f3219958aa8e16966a",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "wave-tiled-exclusive/SinglePassScanWaveTiled",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels/scan.hlsl",
+        "entryPoint": "SinglePassScanWaveTiled",
+        "defines": {
+          "HLSLPERF_SCAN_WAVE_TILED": "1",
+          "HLSLPERF_SCAN_BACKEND": "3",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_GROUP_SIZE": "256",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": "4",
+          "HLSLPERF_SINGLE_PASS_GROUPS": "256",
+          "HLSLPERF_VECTOR_WIDTH": "4",
+          "HLSLPERF_WAVE_SIZE": "32",
+          "HLSLPERF_WAVE_TILED_MAX_POLLS": "4"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "b7e62c18bd2e281f6027e84eb800dde52951c250883786d01caf1266658777d6.dxil",
+      "dxilSha256": "177e50cee38bd1232a54b1df96ee3ffe59b42783d4d722f5c0394a9ebe9f855c",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "wave-tiled-inclusive/ResetWaveTiledState",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels/scan.hlsl",
+        "entryPoint": "ResetWaveTiledState",
+        "defines": {
+          "HLSLPERF_SCAN_WAVE_TILED": "1",
+          "HLSLPERF_SCAN_BACKEND": "3",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_GROUP_SIZE": "256",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": "4",
+          "HLSLPERF_SINGLE_PASS_GROUPS": "256",
+          "HLSLPERF_VECTOR_WIDTH": "4",
+          "HLSLPERF_WAVE_SIZE": "32",
+          "HLSLPERF_WAVE_TILED_MAX_POLLS": "4",
+          "HLSLPERF_WAVE_TILED_INCLUSIVE": "1"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "e5092c7ccd0bda46af2fac23012642e5fd90f02c7f18ade30c383b7d4c333dd9.dxil",
+      "dxilSha256": "cf88436203f172c7a66939f19983de669836578ec06f67f3219958aa8e16966a",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "wave-tiled-inclusive/SinglePassScanWaveTiled",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels/scan.hlsl",
+        "entryPoint": "SinglePassScanWaveTiled",
+        "defines": {
+          "HLSLPERF_SCAN_WAVE_TILED": "1",
+          "HLSLPERF_SCAN_BACKEND": "3",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_GROUP_SIZE": "256",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SINGLE_PASS_ITEMS_SCALE": "4",
+          "HLSLPERF_SINGLE_PASS_GROUPS": "256",
+          "HLSLPERF_VECTOR_WIDTH": "4",
+          "HLSLPERF_WAVE_SIZE": "32",
+          "HLSLPERF_WAVE_TILED_MAX_POLLS": "4",
+          "HLSLPERF_WAVE_TILED_INCLUSIVE": "1"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "51021ff123f73aa31bf068ca112371d82d4173c92433ba00b71d4c65e1bb25e2.dxil",
+      "dxilSha256": "1e022b49b08e1039f1297e9cfd2046d3112ae1cb1d9f89aeda191b977c20b29d",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "internal-radix-1/keys/ProduceZeroFlags",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels\\radix-sort.hlsl",
+        "entryPoint": "ProduceZeroFlags",
+        "defines": {
+          "HLSLPERF_GROUP_SIZE": "256",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SCAN_BACKEND": "2",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_VECTOR_WIDTH": "1",
+          "HLSLPERF_RADIX_BITS": "1",
+          "HLSLPERF_RADIX_PAIRS": "0",
+          "HLSLPERF_WAVE_SIZE": "32"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "c1e0a599be575f3e54043542902e5c61fa068d86400fac9b086f2f3702ff49b2.dxil",
+      "dxilSha256": "9ab9ad81524964f74b3efa163a953def7e702c06fe8ae11eaac7419959dc51b3",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "internal-radix-1/keys/BlockScanPass",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels\\radix-sort.hlsl",
+        "entryPoint": "BlockScanPass",
+        "defines": {
+          "HLSLPERF_GROUP_SIZE": "256",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SCAN_BACKEND": "2",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_VECTOR_WIDTH": "1",
+          "HLSLPERF_RADIX_BITS": "1",
+          "HLSLPERF_RADIX_PAIRS": "0",
+          "HLSLPERF_WAVE_SIZE": "32"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "cf9d50c6d933820f7d63f170ab485717d2f18d7d9b9a0930b6760dfe84592932.dxil",
+      "dxilSha256": "4bc91a74a2fbd8003482ee31ca9a14296e06f8a8bc9d4e47db276ac8d9a2634b",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "internal-radix-1/keys/ScatterRadixBit",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels\\radix-sort.hlsl",
+        "entryPoint": "ScatterRadixBit",
+        "defines": {
+          "HLSLPERF_GROUP_SIZE": "256",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SCAN_BACKEND": "2",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_VECTOR_WIDTH": "1",
+          "HLSLPERF_RADIX_BITS": "1",
+          "HLSLPERF_RADIX_PAIRS": "0",
+          "HLSLPERF_WAVE_SIZE": "32"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "0db0a46c248a91818690f4c9d409dfa105c2a467a25767a59716f10153f44bf3.dxil",
+      "dxilSha256": "5bc8561d12801abf8fcda47a7ce15f54cdf3b30aa1ed00826b25baa053df171a",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "internal-radix-1/pairs/ProduceZeroFlags",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels\\radix-sort.hlsl",
+        "entryPoint": "ProduceZeroFlags",
+        "defines": {
+          "HLSLPERF_GROUP_SIZE": "128",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SCAN_BACKEND": "2",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_VECTOR_WIDTH": "1",
+          "HLSLPERF_RADIX_BITS": "1",
+          "HLSLPERF_RADIX_PAIRS": "1",
+          "HLSLPERF_WAVE_SIZE": "64"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "81f75e720e1a2a8efafd368c21aabafb98c0a3f2c35f1336c7050abb0db79a03.dxil",
+      "dxilSha256": "e58742b1789bc6b690262f43f69cc169ce5bb16cd92466d3c9b081d571d8107f",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "internal-radix-1/pairs/BlockScanPass",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels\\radix-sort.hlsl",
+        "entryPoint": "BlockScanPass",
+        "defines": {
+          "HLSLPERF_GROUP_SIZE": "128",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SCAN_BACKEND": "2",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_VECTOR_WIDTH": "1",
+          "HLSLPERF_RADIX_BITS": "1",
+          "HLSLPERF_RADIX_PAIRS": "1",
+          "HLSLPERF_WAVE_SIZE": "64"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "fac06d51837eda67969139664cc6392de3450dd511ff3f070cb8934c2e5c4699.dxil",
+      "dxilSha256": "31e2e9882efcb14a48dde68b286f56e2703c8c8108d4ccc78e07768751044662",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "internal-radix-1/pairs/ScatterRadixBit",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels\\radix-sort.hlsl",
+        "entryPoint": "ScatterRadixBit",
+        "defines": {
+          "HLSLPERF_GROUP_SIZE": "128",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SCAN_BACKEND": "2",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_VECTOR_WIDTH": "1",
+          "HLSLPERF_RADIX_BITS": "1",
+          "HLSLPERF_RADIX_PAIRS": "1",
+          "HLSLPERF_WAVE_SIZE": "64"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "5af2e06d997f428d7ce8c5fcf84240f26e493df4cb0ae34f5622ed3cba5016e9.dxil",
+      "dxilSha256": "c22c3b003389f91748cfae569e3adc6619e21b5f587fa187d85e60b7d33bec98",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "internal-radix-1/pairs/SplitRadixPairs",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels\\radix-sort.hlsl",
+        "entryPoint": "SplitRadixPairs",
+        "defines": {
+          "HLSLPERF_GROUP_SIZE": "128",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SCAN_BACKEND": "2",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_VECTOR_WIDTH": "1",
+          "HLSLPERF_RADIX_BITS": "1",
+          "HLSLPERF_RADIX_PAIRS": "1",
+          "HLSLPERF_WAVE_SIZE": "64"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "9b14cbbae4d6442d84976708a9de704810dbca2ff300d1539e499e12e66b7d32.dxil",
+      "dxilSha256": "83478a4cd87632ead06b5ea2c1df9238ff4437d9648c1a02dabe7c83927dbe10",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "amd/sum/False",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort\\ffx_parallelsort_sum_pass.hlsl",
+        "entryPoint": "CS",
+        "defines": {
+          "FFX_GPU": "1",
+          "FFX_HLSL": "1",
+          "FFX_HALF": "0",
+          "FFX_HLSL_SM": "66",
+          "FFX_PARALLELSORT_OPTION_HAS_PAYLOAD": "0",
+          "FFX_PREFER_WAVE64": "[WaveSize(64)]"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu\\parallelsort",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort"
+        ],
+        "compilerArguments": [
+          "-Wno-for-redefinition",
+          "-Wno-ambig-lit-shift"
+        ],
+        "hlslVersion": 2021,
+        "shaderModel": "6_6",
+        "enableStrictness": false
+      },
+      "file": "ebd46bc1909dbe479ee728860864ce251d7b2ecaeec0e8a9df8bd58d943f9886.dxil",
+      "dxilSha256": "2fda86db3221095bb3457157e81beae0f5b017ed36f8838bd320c2bc382208e4",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "amd/reduce/False",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort\\ffx_parallelsort_reduce_pass.hlsl",
+        "entryPoint": "CS",
+        "defines": {
+          "FFX_GPU": "1",
+          "FFX_HLSL": "1",
+          "FFX_HALF": "0",
+          "FFX_HLSL_SM": "66",
+          "FFX_PARALLELSORT_OPTION_HAS_PAYLOAD": "0",
+          "FFX_PREFER_WAVE64": "[WaveSize(64)]"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu\\parallelsort",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort"
+        ],
+        "compilerArguments": [
+          "-Wno-for-redefinition",
+          "-Wno-ambig-lit-shift"
+        ],
+        "hlslVersion": 2021,
+        "shaderModel": "6_6",
+        "enableStrictness": false
+      },
+      "file": "60eee4935e03081a7c08ffa093e33b8b6e70a940f2a04d619479b7ac53085838.dxil",
+      "dxilSha256": "f0b3e875d50062e270eb98b79d69091219a1abea02ac0dbd56772d3dd79f51b0",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "amd/scan/False",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort\\ffx_parallelsort_scan_pass.hlsl",
+        "entryPoint": "CS",
+        "defines": {
+          "FFX_GPU": "1",
+          "FFX_HLSL": "1",
+          "FFX_HALF": "0",
+          "FFX_HLSL_SM": "66",
+          "FFX_PARALLELSORT_OPTION_HAS_PAYLOAD": "0",
+          "FFX_PREFER_WAVE64": "[WaveSize(64)]"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu\\parallelsort",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort"
+        ],
+        "compilerArguments": [
+          "-Wno-for-redefinition",
+          "-Wno-ambig-lit-shift"
+        ],
+        "hlslVersion": 2021,
+        "shaderModel": "6_6",
+        "enableStrictness": false
+      },
+      "file": "14dbbbaaac870452be59a403327e21241dba21c41771cf7a4dddc9e853c5cf96.dxil",
+      "dxilSha256": "1b05a22c05da62070de4eb8766f1eb5ebe588dc535c4c4cc09030a10f5f9cd4c",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "amd/scan_add/False",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort\\ffx_parallelsort_scan_add_pass.hlsl",
+        "entryPoint": "CS",
+        "defines": {
+          "FFX_GPU": "1",
+          "FFX_HLSL": "1",
+          "FFX_HALF": "0",
+          "FFX_HLSL_SM": "66",
+          "FFX_PARALLELSORT_OPTION_HAS_PAYLOAD": "0",
+          "FFX_PREFER_WAVE64": "[WaveSize(64)]"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu\\parallelsort",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort"
+        ],
+        "compilerArguments": [
+          "-Wno-for-redefinition",
+          "-Wno-ambig-lit-shift"
+        ],
+        "hlslVersion": 2021,
+        "shaderModel": "6_6",
+        "enableStrictness": false
+      },
+      "file": "0cdadc1328850153a27e768faf52032d51896dcbf3c3a387243c8bdea379d77d.dxil",
+      "dxilSha256": "8ec7e5a03b88bf821b8a33b50984e5e74d13fae09fa5bce2b821bbc9ab1e097d",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "amd/scatter/False",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort\\ffx_parallelsort_scatter_pass.hlsl",
+        "entryPoint": "CS",
+        "defines": {
+          "FFX_GPU": "1",
+          "FFX_HLSL": "1",
+          "FFX_HALF": "0",
+          "FFX_HLSL_SM": "66",
+          "FFX_PARALLELSORT_OPTION_HAS_PAYLOAD": "0",
+          "FFX_PREFER_WAVE64": "[WaveSize(64)]"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu\\parallelsort",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort"
+        ],
+        "compilerArguments": [
+          "-Wno-for-redefinition",
+          "-Wno-ambig-lit-shift"
+        ],
+        "hlslVersion": 2021,
+        "shaderModel": "6_6",
+        "enableStrictness": false
+      },
+      "file": "761b3bfc33e60186afd1a0f42bbeb1063437a26b4e6a4fbab3ef58e70399f027.dxil",
+      "dxilSha256": "bc72cee71492ba5ab0512161de0d497e6e7ca1e70d0ffe63a866a08e08e39aea",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "amd/input-soa-adapter",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels/radix-sort.hlsl",
+        "entryPoint": "SplitRadixPairs",
+        "defines": {
+          "HLSLPERF_GROUP_SIZE": "128",
+          "HLSLPERF_ELEMENTS_PER_THREAD": "4",
+          "HLSLPERF_SCAN_BACKEND": "2",
+          "HLSLPERF_SCAN_OPERATOR": "1",
+          "HLSLPERF_VECTOR_WIDTH": "1",
+          "HLSLPERF_RADIX_BITS": "4",
+          "HLSLPERF_RADIX_PAIRS": "1"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\kernels"
+        ],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "152371e824a80b0914227eb12a74793b400ad947933486c09d6aa7c4374ce3cf.dxil",
+      "dxilSha256": "83478a4cd87632ead06b5ea2c1df9238ff4437d9648c1a02dabe7c83927dbe10",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "amd/sum/True",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort\\ffx_parallelsort_sum_pass.hlsl",
+        "entryPoint": "CS",
+        "defines": {
+          "FFX_GPU": "1",
+          "FFX_HLSL": "1",
+          "FFX_HALF": "0",
+          "FFX_HLSL_SM": "66",
+          "FFX_PARALLELSORT_OPTION_HAS_PAYLOAD": "1",
+          "FFX_PREFER_WAVE64": "[WaveSize(64)]"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu\\parallelsort",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort"
+        ],
+        "compilerArguments": [
+          "-Wno-for-redefinition",
+          "-Wno-ambig-lit-shift"
+        ],
+        "hlslVersion": 2021,
+        "shaderModel": "6_6",
+        "enableStrictness": false
+      },
+      "file": "c6ee85470384a54cdb1c8ac6dcb5bb60991218a965180d9a6ebc663ec224d645.dxil",
+      "dxilSha256": "2fda86db3221095bb3457157e81beae0f5b017ed36f8838bd320c2bc382208e4",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "amd/reduce/True",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort\\ffx_parallelsort_reduce_pass.hlsl",
+        "entryPoint": "CS",
+        "defines": {
+          "FFX_GPU": "1",
+          "FFX_HLSL": "1",
+          "FFX_HALF": "0",
+          "FFX_HLSL_SM": "66",
+          "FFX_PARALLELSORT_OPTION_HAS_PAYLOAD": "1",
+          "FFX_PREFER_WAVE64": "[WaveSize(64)]"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu\\parallelsort",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort"
+        ],
+        "compilerArguments": [
+          "-Wno-for-redefinition",
+          "-Wno-ambig-lit-shift"
+        ],
+        "hlslVersion": 2021,
+        "shaderModel": "6_6",
+        "enableStrictness": false
+      },
+      "file": "208d6c05f6f1d88583454611e53e4d59b11f6ee31667acece6c74d6ed311c2fb.dxil",
+      "dxilSha256": "f0b3e875d50062e270eb98b79d69091219a1abea02ac0dbd56772d3dd79f51b0",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "amd/scan/True",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort\\ffx_parallelsort_scan_pass.hlsl",
+        "entryPoint": "CS",
+        "defines": {
+          "FFX_GPU": "1",
+          "FFX_HLSL": "1",
+          "FFX_HALF": "0",
+          "FFX_HLSL_SM": "66",
+          "FFX_PARALLELSORT_OPTION_HAS_PAYLOAD": "1",
+          "FFX_PREFER_WAVE64": "[WaveSize(64)]"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu\\parallelsort",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort"
+        ],
+        "compilerArguments": [
+          "-Wno-for-redefinition",
+          "-Wno-ambig-lit-shift"
+        ],
+        "hlslVersion": 2021,
+        "shaderModel": "6_6",
+        "enableStrictness": false
+      },
+      "file": "0e6ef26ec86c6b5c07b6bc7b73d6c92da5f1222bcc1ae975be1ba5048aa12ef9.dxil",
+      "dxilSha256": "1b05a22c05da62070de4eb8766f1eb5ebe588dc535c4c4cc09030a10f5f9cd4c",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "amd/scan_add/True",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort\\ffx_parallelsort_scan_add_pass.hlsl",
+        "entryPoint": "CS",
+        "defines": {
+          "FFX_GPU": "1",
+          "FFX_HLSL": "1",
+          "FFX_HALF": "0",
+          "FFX_HLSL_SM": "66",
+          "FFX_PARALLELSORT_OPTION_HAS_PAYLOAD": "1",
+          "FFX_PREFER_WAVE64": "[WaveSize(64)]"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu\\parallelsort",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort"
+        ],
+        "compilerArguments": [
+          "-Wno-for-redefinition",
+          "-Wno-ambig-lit-shift"
+        ],
+        "hlslVersion": 2021,
+        "shaderModel": "6_6",
+        "enableStrictness": false
+      },
+      "file": "3fb51d8c1e56c668980050848cde24f8f932d21735df4356898bb0627f0adb78.dxil",
+      "dxilSha256": "8ec7e5a03b88bf821b8a33b50984e5e74d13fae09fa5bce2b821bbc9ab1e097d",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "amd/scatter/True",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort\\ffx_parallelsort_scatter_pass.hlsl",
+        "entryPoint": "CS",
+        "defines": {
+          "FFX_GPU": "1",
+          "FFX_HLSL": "1",
+          "FFX_HALF": "0",
+          "FFX_HLSL_SM": "66",
+          "FFX_PARALLELSORT_OPTION_HAS_PAYLOAD": "1",
+          "FFX_PREFER_WAVE64": "[WaveSize(64)]"
+        },
+        "includeDirectories": [
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/include/FidelityFX/gpu\\parallelsort",
+          "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\third_party/amd-fidelityfx-parallelsort/sdk/src/backends/dx12/shaders/parallelsort"
+        ],
+        "compilerArguments": [
+          "-Wno-for-redefinition",
+          "-Wno-ambig-lit-shift"
+        ],
+        "hlslVersion": 2021,
+        "shaderModel": "6_6",
+        "enableStrictness": false
+      },
+      "file": "6c3d83b3f102107c6260a235d5f218627c69503fcfd4e471f5d117f4bf2ab88f.dxil",
+      "dxilSha256": "8bf8228ad07f06e0e932fc1e39d1a18c0627f79cc4c624dc800ec6953702ca0a",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "native/scan-inclusive",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\benchmarks/external/native/ScanInclusive.hlsl",
+        "entryPoint": "AddInput",
+        "defines": {},
+        "includeDirectories": [],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "f9c292863cc7897cec31bae8c1afc5112948e726a2b99902b11667298a71c95b.dxil",
+      "dxilSha256": "bb922e5bd2cc92d0a7b38a880737627b01643b0d9ab67b09153b5a2dd3e47a7f",
+      "diagnostics": ""
+    },
+    {
+      "shader": {
+        "id": "native/sort-input",
+        "sourcePath": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\benchmarks/external/native/SortInput.hlsl",
+        "entryPoint": "Interleave",
+        "defines": {},
+        "includeDirectories": [],
+        "compilerArguments": [],
+        "hlslVersion": 2018,
+        "shaderModel": "6_6",
+        "enableStrictness": true
+      },
+      "file": "140898b2d8927da8bbdb32b3ffd7886fa09d408ef9332503893fe19359a14b5f.dxil",
+      "dxilSha256": "1376deb1dc9101c0b93fc8bd5b1f7a031446efe7451b64725b5ad1d695aef878",
+      "diagnostics": ""
+    }
+  ]
+}

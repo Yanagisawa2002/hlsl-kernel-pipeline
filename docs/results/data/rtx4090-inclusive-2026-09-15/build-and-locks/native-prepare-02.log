@@ -1,0 +1,42 @@
+{
+  "schema": "hlslperf.external-native-preparation.v1",
+  "performanceStatus": "Unmeasured",
+  "gpuExecuted": false,
+  "benchmarkExecuted": false,
+  "buildRequested": true,
+  "upstream": {
+    "passed": true,
+    "files": 114,
+    "lockSha256": "8d707858e69288fa6f10c9ec208d340cce3fa73b21d0240cbd3607d9b1120334",
+    "commits": {
+      "amd-fidelityfx-parallelsort": "c6efa6bf7f2027b3ec94f28578bb5965eabb9e55",
+      "gpu-prefix-sums": "98d93a4e9ed2f3c8353119515bf9be90a2e137ad",
+      "gpu-sorting": "09a6081d964b682bbb58838b83ab75aebe7f4e05"
+    }
+  },
+  "dependencyLockSha256": "fb71bc842956ee0e048a523f00ab5d88571e254b9b4221cd2da77d93c1e875fe",
+  "projects": [
+    "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-02\\scan.vcxproj"
+  ],
+  "localAdapterFiles": {
+    "HlslPerfScan.h": "dbb32c3de87dd6be0c7c405dda6981acb1f0f00d693ff37f2064bb9f470f56bc",
+    "HlslPerfSort.h": "beebb81bb64ed122d08de1631b6d4008646c482b043653c90ea7608b312e38e6",
+    "NativeKernel.h": "565de4e355b617688d92caf8a69143d46c410a5d06d7fef633de95bae91cc10e",
+    "RuntimeSupport.h": "37993948bbdb56b9c88fb5dd71671ecd9a00ee80b054bac34f3743d0dfcd1a38",
+    "scan-main.cpp": "a70fdf4aa0447bb431b5072763293e171c8dd803bdbe2df3d0ec8d98f52d4c02",
+    "ScanInclusive.hlsl": "1c67f58f5979b5bb619382a722218c8822fb37cd9eb9ee6baf5cf7af18a308e8",
+    "sort-main.cpp": "f12ec29b158627d53bb7051629a89691348bb87847691ffd1880c9c99c41ac2f",
+    "SortInput.hlsl": "f3e0cbfa8389ddd28fa71b11e9797216bdbc319312bd7739e31087b08a428922"
+  },
+  "localBuildPatches": {},
+  "binaries": {
+    "packages/Microsoft.Direct3D.D3D12/build/native/bin/arm64/d3dconfig.exe": "50a49b17d39c4baea2b1110bbf0e8f87c2c360c3d7d0fd12dcaf777dd326dfe5",
+    "packages/Microsoft.Direct3D.D3D12/build/native/bin/win32/d3dconfig.exe": "7a1547e11d94e168eaa9ac77dfcc23f61c68477d5df39af08e5f0797e400c94a",
+    "packages/Microsoft.Direct3D.D3D12/build/native/bin/x64/d3dconfig.exe": "750ccdcab25a39deb693d93e856a36367db15a5afe2f3582e8bfe54a12fa0c17",
+    "packages/Microsoft.Direct3D.DXC/build/native/bin/arm64/dxc.exe": "62888168322cb678523f623c2dce7bfe4fa70d9cc1841adff12fbfae4fd6aad6",
+    "packages/Microsoft.Direct3D.DXC/build/native/bin/x64/dxc.exe": "c1547a08c4ee0cb1d8c03a65fd2a8262002e68596d152a1915b1fd8b31ed0618",
+    "packages/Microsoft.Direct3D.DXC/build/native/bin/x86/dxc.exe": "19ebfe83f8e6298e2da0e43a01d5b32c052939a54c41b7a510e591680f17700f",
+    "scan/D3D12/d3dconfig.exe": "750ccdcab25a39deb693d93e856a36367db15a5afe2f3582e8bfe54a12fa0c17",
+    "scan/scan.exe": "1a69baeb3d31d95485a45602f579f45af81c3ea292a88d8cd07b2b2a18cd6d8a"
+  }
+}

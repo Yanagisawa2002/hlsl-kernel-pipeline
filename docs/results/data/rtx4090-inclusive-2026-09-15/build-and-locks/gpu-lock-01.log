@@ -1,0 +1,4 @@
+2026-09-15T05:14:18.9153848+00:00 PID 16828: Waiting for the shared R9700 / Unity validation lock.
+2026-09-15T05:14:18.9187470+00:00 PID 16828: Shared validation lock acquired.
+probe exit 0 totals []
+2026-09-15T05:14:28.8292139+00:00 PID 16828: Shared validation lock released.

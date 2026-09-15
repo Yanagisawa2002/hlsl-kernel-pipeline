@@ -1,0 +1,940 @@
+{
+  "complete": true,
+  "identity": {
+    "sourceCommit": "c2196851bfba3c4f9bf5279e98e829ae70a0cd48",
+    "upstream": {
+      "passed": true,
+      "files": 114,
+      "lockSha256": "8d707858e69288fa6f10c9ec208d340cce3fa73b21d0240cbd3607d9b1120334",
+      "commits": {
+        "amd-fidelityfx-parallelsort": "c6efa6bf7f2027b3ec94f28578bb5965eabb9e55",
+        "gpu-prefix-sums": "98d93a4e9ed2f3c8353119515bf9be90a2e137ad",
+        "gpu-sorting": "09a6081d964b682bbb58838b83ab75aebe7f4e05"
+      }
+    },
+    "preparationSha256": "1b7abe6dd199a8244babdd349317ef099a31437e103ecc4cb4aabc4017733635",
+    "sourceFiles": {
+      "kernels/compaction.hlsl": "cf933823c7494aa9b60d5009f4c8a354619426ecf62ba88bf63606d5dafd4609",
+      "kernels/consumer/ScanWaveTiled.compute": "9534c8287fa1afac0a961c70271ee2a7f8e49be573c4a97b24f799dbb1df3691",
+      "kernels/dynamic-compaction.hlsl": "3ccfa2d5ac34ffeddba09710a99c52bca59540bf43df28fbe554286ad061a448",
+      "kernels/histogram-prefix.hlsl": "74c09143d12f012b9ef816b011edb8137e73bc9a56948f00ffdd3f70cf7608db",
+      "kernels/include/hlslperf/scan_u32.hlsli": "2bd0d3c6e79e98c57d37aaa686c5eadce4873791548f4640b6b8a2136839ae02",
+      "kernels/include/hlslperf/scan_wave_tiled_u32.hlsli": "1159e0f40ab06c9eef9c695d3d2ed4ae1b41a79d7117d861ab3cbabb864e8ccf",
+      "kernels/radix-sort.hlsl": "fa7ba4a551d87f8dc97541ee4adb28a73a39a0fd162f9178c83fade60167e1b8",
+      "kernels/reduction.hlsl": "c8bee7570cc37b3675e93cb3c374700e5f9264c4b69f6b4e062954567c669aa3",
+      "kernels/scan.hlsl": "5e52887b4b4aee542f29e570b5aaee8d216ca78941f569f09821b955cda961a6",
+      "kernels/segmented-scan.hlsl": "ddcd04bfef7ea297a475d8785837ebba14337d5954c9ff1d6283e57ef9d041d2",
+      "kernels/transpose.hlsl": "128ece019143dc8ad52bda6b42d4b215614f0ea7180292ff5aa9cf857dceb0f7",
+      "kernels/uint-mix.hlsl": "c715765271a2a020f8adda6ef3370a46477da6ed7139e97b8cce42549e45cba3",
+      "benchmarks/external/native/HlslPerfScan.h": "dbb32c3de87dd6be0c7c405dda6981acb1f0f00d693ff37f2064bb9f470f56bc",
+      "benchmarks/external/native/HlslPerfSort.h": "beebb81bb64ed122d08de1631b6d4008646c482b043653c90ea7608b312e38e6",
+      "benchmarks/external/native/NativeKernel.h": "565de4e355b617688d92caf8a69143d46c410a5d06d7fef633de95bae91cc10e",
+      "benchmarks/external/native/RuntimeSupport.h": "37993948bbdb56b9c88fb5dd71671ecd9a00ee80b054bac34f3743d0dfcd1a38",
+      "benchmarks/external/native/scan-main.cpp": "a70fdf4aa0447bb431b5072763293e171c8dd803bdbe2df3d0ec8d98f52d4c02",
+      "benchmarks/external/native/ScanInclusive.hlsl": "1c67f58f5979b5bb619382a722218c8822fb37cd9eb9ee6baf5cf7af18a308e8",
+      "benchmarks/external/native/sort-main.cpp": "f12ec29b158627d53bb7051629a89691348bb87847691ffd1880c9c99c41ac2f",
+      "benchmarks/external/native/SortInput.hlsl": "f3e0cbfa8389ddd28fa71b11e9797216bdbc319312bd7739e31087b08a428922",
+      "src/HlslPerf.Workloads/BuiltinWorkloads.cs": "5abf413afa50cc9f537e6484d260d3a86aa7e2fc5a33d6c0c59d7169749f869b",
+      "src/HlslPerf.Workloads/CausalScanWorkloads.cs": "092c017ccdc21a543a2570ae776f5e2f34ae10a17b1e102b356d3a3c89626089",
+      "src/HlslPerf.Workloads/DynamicCompactionWorkload.cs": "903c85c5441f2b1497acdcc76fdae07c092d6bca31d39675710c7f5c83ffbe8e",
+      "src/HlslPerf.Workloads/FocusedCostWorkloads.cs": "c90a67edaf93e507ee712c6c1ce0ea2306d61fc2c788b406346b21f367583924",
+      "src/HlslPerf.Workloads/HistogramPrefixWorkload.cs": "4e50f3035c51867a6aba84815db421523e92e022cb9fd159fa2b2721e0ef1a21",
+      "src/HlslPerf.Workloads/PrimitiveOperations.cs": "1dd64c7a6a0b78df0ffac55f7b4397b446b78dc023023e4f4570b3955f017246",
+      "src/HlslPerf.Workloads/RadixSortContract.cs": "f6dd210a4871cb6065ec44beb875a1866bf02f29251fb4e6b87e1ceeca72664f",
+      "src/HlslPerf.Workloads/RadixSortWorkload.cs": "769434804945523eaf2f462ebefca789d6ff90855c59cc3baae02e93519da842",
+      "src/HlslPerf.Workloads/RadixTileLayout.cs": "212c2e7e66c05bbf46d4e06a558c1d869b57b2448cb2fd92b27d6833f40b351d",
+      "src/HlslPerf.Workloads/ReductionWorkload.cs": "dafeeffb22a28da6e0f1ee9c1052119d48aaa32bea453059ac985bd8ac7a81c0",
+      "src/HlslPerf.Workloads/ScanWorkload.cs": "f370dfc32bb0f301f1e7437f4de90d27416d085c72066c278cabc50701b2b90b",
+      "src/HlslPerf.Workloads/SegmentedScanWorkload.cs": "9fb128aa7a5751e5c38fb22825478c6ba9085e4af684425953bab4c7aaa0f941",
+      "src/HlslPerf.Workloads/StreamCompactionWorkload.cs": "a9c43728fe5114f9690b0455106900651c0e1aa22145073667b5fefc7a7a67bf",
+      "src/HlslPerf.Workloads/TransposeWorkload.cs": "509cbc72f797ae32485044db6c5e4ca5ff16fefbc9e6ee3f22e43f7ecb18dde2",
+      "src/HlslPerf.Workloads/UintMixWorkload.cs": "2f54db567eee10b9c92730696671fbbf54674849ce2cc983de25e480a174da3f",
+      "src/HlslPerf.Workloads/UnifiedWorkloads.cs": "2ec51ea3fa41161dd951bd038ec9e13fa28008134a91fef5963885f64f2fd6c7",
+      "src/HlslPerf.Workloads/WaveTiledScanCandidates.cs": "59b03aeac2fb4b2438a16c6b3cfb433b5e3b4b1576bf88887f64ec317ee4f8eb",
+      "src/HlslPerf.Workloads/WorkloadPlanUtilities.cs": "bd5da3f78ce4e7c621ecb81bf23b6eeec1d0231628a82732cb3f853f45a13bf3",
+      "src/HlslPerf.D3D12/D3D12DynamicExecution.cs": "d520d669b1d19f1e807cba8aaf42709a086ea5f0a3d4bf6d2fd0a98d53bf9398",
+      "src/HlslPerf.D3D12/D3D12OperationRecorder.cs": "5f7b0eb3f9b0f037090f0eedb8e633f3c67eae1d8d07da50fa4160803c335d40",
+      "src/HlslPerf.D3D12/D3D12PairedTuner.cs": "ef8c91f92544804c94bb1a20396f479817d68162e1c9d610d1ab22a662f51625",
+      "src/HlslPerf.D3D12/D3D12Tuner.cs": "f46c9d8f189d2bb5725881cfdcccf76948e0500f13285c977af7191f96a72978",
+      "src/HlslPerf.D3D12/D3D12Tuner.Scenarios.cs": "cd2e1417b6e5f55338f402a16e59f14e8f89fc418e65572a25694a6207df85c5",
+      "src/HlslPerf.D3D12/D3D12UnifiedOperations.cs": "275010b77642d15335dbfcf47ec6f0c98ab9fd03dddd52f2ebb16626a78078cf",
+      "tools/HlslPerf.InclusiveScanValidation/Program.cs": "6c6adb421e0b19ce0ad408a511ed1e090aad03b44a3039b53199392d68e83719"
+    },
+    "runnerSha256": "47d65eca9e0ecb4d8812c8c687b14f13fa1de6ba1c84017ca5161ef26397498f",
+    "runtimeFiles": {
+      "scan/D3D12/D3D12Core.dll": "4e00c07c20dadefd4d537e592cc40654a0f0885f989e6c3b8d9f4142d0e44476",
+      "scan/D3D12/d3d12SDKLayers.dll": "17941e7005c155ccdb046b7e1fee1c5e00e64009ea559c814dcc08d090fe5fb3",
+      "scan/D3D12/d3dconfig.exe": "750ccdcab25a39deb693d93e856a36367db15a5afe2f3582e8bfe54a12fa0c17",
+      "scan/dxcompiler.dll": "5de48b783260a1601f7dfcfe8ce2a189f6358de001b33f5207352d6385025f1e",
+      "scan/dxil.dll": "2cd75b85fc0f01f7707fe25d58cd910a1e582e96079a042dce3211680eeeb660",
+      "scan/scan.exe": "1a69baeb3d31d95485a45602f579f45af81c3ea292a88d8cd07b2b2a18cd6d8a",
+      "scan/Shaders/ChainedScanDecoupledLookback.hlsl": "9965678893cacb8c4313cbbddcf4c9f9dac1768bd09b75f8f348c8838b8b1731",
+      "scan/Shaders/ChainedScanDecoupledLookbackDecoupledFallback.hlsl": "1e76c32ecb36a76d39dbc16fc10833f30bb321067cc3d1e6c32bd2dbe38319f1",
+      "scan/Shaders/EmulatedDeadlock.hlsl": "2d0968116e182ce23f2859776a02cd24c1184ceed15c60506a76210ec73b8cf8",
+      "scan/Shaders/ReduceThenScan.hlsl": "76c32f0653cba79ab7975209fb1547cc2fa0a2937b27a329024a308fd3c7d691",
+      "scan/Shaders/ScanCommon.hlsl": "1e6feccda7db9dd3c7f1d6a6e057d40eafad973716478c607f0cd8072e51b336",
+      "scan/Shaders/Survey.hlsl": "78746fcb4f113da86da654e6cb3f3bdaffe11930d1ebeecfe854b5f562bb15f7",
+      "scan/Shaders/Utility.hlsl": "4898856674baac996de45c463ecdb1e6e41d0c8ed916a90d036503f3a3b857ed"
+    }
+  },
+  "results": [
+    {
+      "tag": "tile",
+      "mode": "test-all",
+      "arm": "tile",
+      "count": 268435456,
+      "command": [
+        "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-02\\scan\\scan.exe",
+        "test-all",
+        "tile",
+        "268435456",
+        "99768",
+        "NVIDIA GeForce RTX 4090"
+      ],
+      "cwd": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-02\\scan",
+      "startedUtc": "2026-09-15T05:17:42.986451+00:00",
+      "executableSha256": "1a69baeb3d31d95485a45602f579f45af81c3ea292a88d8cd07b2b2a18cd6d8a",
+      "pid": 48176,
+      "exitCode": 0,
+      "finishedUtc": "2026-09-15T05:17:49.379118+00:00",
+      "logSha256": "69ac32bc92f526830b9f7dbcd955466706d3cd4f589b75701688e2369a8d5a5b",
+      "events": [
+        {
+          "kind": "device",
+          "adapter": "NVIDIA GeForce RTX 4090",
+          "luid": 99768,
+          "vendorId": 4318,
+          "deviceId": 9860,
+          "driver": "32.0.15.9186",
+          "dedicatedBytes": 25310527488,
+          "waveMin": 32,
+          "waveMax": 32,
+          "shaderModel": 103,
+          "featureLevel": 49664
+        },
+        {
+          "kind": "memory",
+          "phase": "before",
+          "budget": 24505221120,
+          "usage": 7405568,
+          "requiredBytes": 3222274048
+        },
+        {
+          "kind": "arm",
+          "backend": "tile",
+          "count": 268435456,
+          "batchSize": 100,
+          "warmupIterations": 1
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 32,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 32,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 32,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 128,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 128,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 128,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 256,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 256,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 256,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4092,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4092,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4092,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4096,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4096,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4096,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4100,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4100,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4100,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 8196,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 8196,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 8196,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 1048580,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 1048580,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 1048580,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "fullSizeValidation",
+          "count": 268435456,
+          "passed": true
+        },
+        {
+          "kind": "memory",
+          "phase": "allocated",
+          "budget": 24505221120,
+          "usage": 2164371456,
+          "requiredBytes": 0
+        },
+        {
+          "kind": "memory",
+          "phase": "after",
+          "budget": 24505221120,
+          "usage": 2164371456,
+          "requiredBytes": 0
+        }
+      ],
+      "totalsSeconds": []
+    },
+    {
+      "tag": "tile-fused",
+      "mode": "test-all",
+      "arm": "tile-fused",
+      "count": 268435456,
+      "command": [
+        "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-02\\scan\\scan.exe",
+        "test-all",
+        "tile-fused",
+        "268435456",
+        "99768",
+        "NVIDIA GeForce RTX 4090"
+      ],
+      "cwd": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-02\\scan",
+      "startedUtc": "2026-09-15T05:17:49.381095+00:00",
+      "executableSha256": "1a69baeb3d31d95485a45602f579f45af81c3ea292a88d8cd07b2b2a18cd6d8a",
+      "pid": 8692,
+      "exitCode": 0,
+      "finishedUtc": "2026-09-15T05:17:55.748405+00:00",
+      "logSha256": "ec64895aefb7d615da467b9f769f4293be7bdf7476d7f386f61eaa07971c40a1",
+      "events": [
+        {
+          "kind": "device",
+          "adapter": "NVIDIA GeForce RTX 4090",
+          "luid": 99768,
+          "vendorId": 4318,
+          "deviceId": 9860,
+          "driver": "32.0.15.9186",
+          "dedicatedBytes": 25310527488,
+          "waveMin": 32,
+          "waveMax": 32,
+          "shaderModel": 103,
+          "featureLevel": 49664
+        },
+        {
+          "kind": "memory",
+          "phase": "before",
+          "budget": 24505221120,
+          "usage": 7405568,
+          "requiredBytes": 3222274048
+        },
+        {
+          "kind": "arm",
+          "backend": "tile-fused",
+          "count": 268435456,
+          "batchSize": 100,
+          "warmupIterations": 1
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 32,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 32,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 32,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 128,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 128,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 128,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 256,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 256,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 256,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4092,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4092,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4092,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4096,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4096,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4096,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4100,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4100,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4100,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 8196,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 8196,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 8196,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 1048580,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 1048580,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 1048580,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "fullSizeValidation",
+          "count": 268435456,
+          "passed": true
+        },
+        {
+          "kind": "memory",
+          "phase": "allocated",
+          "budget": 24505221120,
+          "usage": 2164436992,
+          "requiredBytes": 0
+        },
+        {
+          "kind": "memory",
+          "phase": "after",
+          "budget": 24505221120,
+          "usage": 2164436992,
+          "requiredBytes": 0
+        }
+      ],
+      "totalsSeconds": []
+    },
+    {
+      "tag": "rts",
+      "mode": "test-all",
+      "arm": "rts",
+      "count": 268435456,
+      "command": [
+        "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-02\\scan\\scan.exe",
+        "test-all",
+        "rts",
+        "268435456",
+        "99768",
+        "NVIDIA GeForce RTX 4090"
+      ],
+      "cwd": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-02\\scan",
+      "startedUtc": "2026-09-15T05:17:55.750262+00:00",
+      "executableSha256": "1a69baeb3d31d95485a45602f579f45af81c3ea292a88d8cd07b2b2a18cd6d8a",
+      "pid": 42404,
+      "exitCode": 0,
+      "finishedUtc": "2026-09-15T05:18:02.016029+00:00",
+      "logSha256": "d836595ff9a0a75f17ee9f4843b1b918f4216adacd1d24f30c15845c9f558f39",
+      "events": [
+        {
+          "kind": "device",
+          "adapter": "NVIDIA GeForce RTX 4090",
+          "luid": 99768,
+          "vendorId": 4318,
+          "deviceId": 9860,
+          "driver": "32.0.15.9186",
+          "dedicatedBytes": 25310527488,
+          "waveMin": 32,
+          "waveMax": 32,
+          "shaderModel": 103,
+          "featureLevel": 49664
+        },
+        {
+          "kind": "memory",
+          "phase": "before",
+          "budget": 24505221120,
+          "usage": 7405568,
+          "requiredBytes": 3222274048
+        },
+        {
+          "kind": "arm",
+          "backend": "rts",
+          "count": 268435456,
+          "batchSize": 100,
+          "warmupIterations": 1
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 32,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 32,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 32,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 128,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 128,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 128,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 256,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 256,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 256,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4092,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4092,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4092,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4096,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4096,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4096,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4100,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4100,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 4100,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 8196,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 8196,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 8196,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 1048580,
+          "pattern": 0,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 1048580,
+          "pattern": 1,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "correctness",
+          "operation": "scan",
+          "count": 1048580,
+          "pattern": 2,
+          "passed": true,
+          "repeats": 4
+        },
+        {
+          "kind": "fullSizeValidation",
+          "count": 268435456,
+          "passed": true
+        },
+        {
+          "kind": "memory",
+          "phase": "allocated",
+          "budget": 24505221120,
+          "usage": 2163519488,
+          "requiredBytes": 0
+        },
+        {
+          "kind": "memory",
+          "phase": "after",
+          "budget": 24505221120,
+          "usage": 2163519488,
+          "requiredBytes": 0
+        }
+      ],
+      "totalsSeconds": []
+    }
+  ]
+}

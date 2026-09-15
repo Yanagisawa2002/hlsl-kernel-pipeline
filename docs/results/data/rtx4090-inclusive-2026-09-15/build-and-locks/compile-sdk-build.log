@@ -1,0 +1,12 @@
+  正在确定要还原的项目…
+  已还原 D:\CodexWork\hlsl-scan-inclusive-20260915\tools\HlslPerf.CompileOnly\HlslPerf.CompileOnly.csproj (用时 183 毫秒)。
+  2 个项目(共 3 个)是最新的，无法还原。
+  HlslPerf.Core -> D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.Core\bin\Release\net10.0\HlslPerf.Core.dll
+  HlslPerf.Workloads -> D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.Workloads\bin\Release\net10.0\HlslPerf.Workloads.dll
+  HlslPerf.CompileOnly -> D:\CodexWork\hlsl-scan-inclusive-20260915\tools\HlslPerf.CompileOnly\bin\Release\net10.0\HlslPerf.CompileOnly.dll
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:02.63

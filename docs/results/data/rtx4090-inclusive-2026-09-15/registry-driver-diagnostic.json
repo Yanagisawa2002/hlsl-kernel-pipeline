@@ -1,0 +1,14 @@
+[
+  {
+    "Key": "0000",
+    "DriverDesc": "NVIDIA GeForce RTX 4090",
+    "MatchingDeviceId": "pci\\ven_10de&dev_2684",
+    "DriverVersion": "32.0.15.8142"
+  },
+  {
+    "Key": "0002",
+    "DriverDesc": "NVIDIA GeForce RTX 4090",
+    "MatchingDeviceId": "pci\\ven_10de&dev_2684",
+    "DriverVersion": "32.0.15.9186"
+  }
+]
