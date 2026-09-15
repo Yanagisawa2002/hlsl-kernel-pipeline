@@ -44,14 +44,14 @@ public sealed partial class D3D12Tuner
         ulong originalLimit = info.MessageCountLimit;
         try
         {
-            info.SetMessageCountLimit(2).CheckError();
+            info.MessageCountLimit = 2;
             for (int i = 0; i < 3; i++)
-                info.AddApplicationMessage(MessageSeverity.Warning, $"Expected overflow control {i}").CheckError();
+                info.AddApplicationMessage(MessageSeverity.Warning, $"Expected overflow control {i}");
             var overflow = ReadUnifiedDebugSnapshot(true);
-            info.AddApplicationMessage(MessageSeverity.Error, "Expected error rejection control").CheckError();
+            info.AddApplicationMessage(MessageSeverity.Error, "Expected error rejection control");
             var error = ReadUnifiedDebugSnapshot(true);
             return (initial, overflow, error);
         }
-        finally { info.SetMessageCountLimit(originalLimit).CheckError(); }
+        finally { info.MessageCountLimit = originalLimit; }
     }
 }
