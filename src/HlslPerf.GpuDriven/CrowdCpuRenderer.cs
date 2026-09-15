@@ -50,7 +50,7 @@ public sealed class CrowdCpuRenderer : IDisposable
             if ((Hash(seed ^ 0xd1b54a35) & scene.VisibilityMask) == 0)
                 eligible[index++] = new(seed, Hash(seed ^ 0x9e3779b9) % (uint)(scene.Width * 4),
                     Hash(seed ^ 0x85ebca6b) % (uint)scene.Height, Hash(seed ^ 0xc2b2ae35));
-        Span<uint> pixels = MemoryMarshal.Cast<byte, uint>(background);
+        Span<uint> pixels = MemoryMarshal.Cast<byte, uint>(background.AsSpan());
         for (int y = 0; y < scene.Height; y++)
         for (int x = 0; x < scene.Width; x++)
         {
