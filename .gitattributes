@@ -39,6 +39,7 @@ benchmarks/external/native/RuntimeSupport.h -text -eol
 benchmarks/external/native/scan-main.cpp -text -eol
 src/HlslPerf.Workloads/PrimitiveOperations.cs -text -eol
 src/HlslPerf.Workloads/WaveTiledScanCandidates.cs -text -eol
+src/HlslPerf.D3D12/D3D12Tuner.cs -text -eol
 tools/HlslPerf.InclusiveScanValidation/** -text -eol
 tools/run_inclusive_scan.py -text -eol
 tools/check_inclusive_control.py -text -eol

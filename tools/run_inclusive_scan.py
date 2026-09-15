@@ -35,7 +35,7 @@ def identity(native):
         raise ValueError('Executable differs from build receipt.')
     return {'sourceCommit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
         'upstream': verify(ROOT), 'preparationSha256': sha(native / 'preparation.json'),
-        'sourceFiles': {p.relative_to(ROOT).as_posix(): sha(p) for folder in ['kernels', 'benchmarks/external/native', 'src/HlslPerf.Workloads', 'tools/HlslPerf.InclusiveScanValidation']
+        'sourceFiles': {p.relative_to(ROOT).as_posix(): sha(p) for folder in ['kernels', 'benchmarks/external/native', 'src/HlslPerf.Workloads', 'src/HlslPerf.D3D12', 'tools/HlslPerf.InclusiveScanValidation']
             for p in sorted((ROOT / folder).rglob('*')) if p.is_file() and p.suffix in ('.cs', '.hlsl', '.hlsli', '.h', '.cpp', '.compute')
             and 'obj' not in p.parts and 'bin' not in p.parts},
         'runnerSha256': sha(Path(__file__)),
