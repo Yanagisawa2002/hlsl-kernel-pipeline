@@ -9,6 +9,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="../../examples/HlslPerf.CrowdExport/HlslPerf.CrowdExport.csproj" />
     <ProjectReference Include="../../src/HlslPerf.Core/HlslPerf.Core.csproj" />
     <ProjectReference Include="../../src/HlslPerf.D3D12/HlslPerf.D3D12.csproj" />
     <ProjectReference Include="../../src/HlslPerf.GpuDriven/HlslPerf.GpuDriven.csproj" />

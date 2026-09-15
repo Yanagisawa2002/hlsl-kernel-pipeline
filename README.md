@@ -14,6 +14,14 @@ reuse an existing implementation. Internal algorithms remain research candidates
 the existing internal API defaults remain compatibility baselines, not measured
 winners. Start with the [compilable CPU application example](examples/HlslPerf.PrimitiveApp/README.md).
 
+The new file-to-image caller candidate is the
+[Crowd atlas exporter](examples/HlslPerf.CrowdExport/README.md): caller-owned
+seed file → existing CPU renderer → RGBA/BMP output → hash receipt. The published
+app is designed to run outside the checkout. The single frozen validation failed
+at dependency restore, so compilation and execution of this caller remain
+unverified. GPU execution and external production adoption also remain open. See the
+[current release preparation and evidence boundaries](docs/RELEASE_READINESS_2026-09-16.md).
+
 ## Results
 
 **September 15 inclusive-scan repair:** on an RTX 4090, a fused inclusive
