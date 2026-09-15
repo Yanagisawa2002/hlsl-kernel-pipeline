@@ -16,6 +16,19 @@ winners. Start with the [compilable CPU application example](examples/HlslPerf.P
 
 ## Results
 
+**September 15 inclusive-scan repair:** on an RTX 4090, a fused inclusive
+path reduced complete GPU operation time from **6.376 to 2.904 ms (54.5%)**
+at `2^28` uint32 elements. Pinned GPUPrefixSums RTS took **3.584 ms**;
+the fused path used **19.0% less time** (paired 95% interval 18.93–19.02%).
+Six balanced rounds covered all three-arm order permutations in **18 fresh
+processes**, with 100 timed iterations per process and full numerical checks.
+The GPUPrefixSums-derived local kernel now emits inclusive output while input
+is loaded, eliminating the separate full-array conversion pass. Upstream MIT
+attribution is retained. These results describe this native D3D12 workload;
+application performance and other GPU models remain unmeasured.
+[Report and raw evidence](docs/results/RTX4090_INCLUSIVE_SCAN_2026-09-15.md) ·
+[InclusiveScan API and reproduction](docs/integration/SCAN_INCLUSIVE.md).
+
 **September 9 native GPU confirmation:** all 70 preregistered processes and
 the independent GPU correctness gates passed. Tiled 4-bit sort took 12.124 ms
 versus GPUSorting's FFX baseline at 15.038 ms on its original `2^25` pair workload
@@ -28,7 +41,9 @@ GPUSorting's vendored FFX is distinct from the SDK's FidelityFX SDK 1.1.4 adapte
 DeviceRadixSort and OneSweep are available in the native evaluation harness,
 not through `PrimitiveOperations`. No automatic winner or default promotion follows.
 
-**Current integration status (September 10):** RTS and AMD are existing explicit
+**Integration status:** the September 15 addition exposes an explicit
+`PrimitiveOperations.InclusiveScan` API. Exclusive-scan defaults and compaction
+remain unchanged. RTS and AMD are existing explicit
 SDK options; the new application example has CPU plan/selection checks and a
 compiled borrowed-resource recording path. Its GPU execution and application
 performance are unmeasured. The September 8 preparation reports describe their
@@ -92,7 +107,8 @@ AMD RGA supply compilation, API bindings and static analysis.
 
 ## Evidence and reproduction
 
-[Latest measured results](docs/results/R9700_NATIVE_CONFIRMATION_2026-09-09.md) ·
+[Latest inclusive-scan results](docs/results/RTX4090_INCLUSIVE_SCAN_2026-09-15.md) ·
+[September 9 native comparisons](docs/results/R9700_NATIVE_CONFIRMATION_2026-09-09.md) ·
 [September 10 integration changes](docs/integration/POSITIONING_2026-09-10.md) ·
 [Replay commands](docs/integration/REPLAY.md) · [SDK](docs/SDK.md) ·
 [Visual showcases and experiment history](docs/EXPERIMENT_HISTORY.md) ·
