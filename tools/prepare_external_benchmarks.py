@@ -19,7 +19,7 @@ from verify_external_sources import verify
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def prepare(output, package_cache, build=False, msbuild=None, toolset='v143'):
+def prepare(output, package_cache, build=False, msbuild=None, toolset='v143', programs=('scan', 'sort')):
     verification = verify(ROOT)
     output = output.resolve()
     if output.exists():
@@ -61,6 +61,7 @@ def prepare(output, package_cache, build=False, msbuild=None, toolset='v143'):
         return element
     for name, upstream in [('scan', ROOT / 'third_party/gpu-prefix-sums/GPUPrefixSumsD3D12'),
                            ('sort', ROOT / 'third_party/gpu-sorting/GPUSortingD3D12')]:
+        if name not in programs: continue
         main = native / (name + '-main.cpp')
         if not main.exists(): raise ValueError('Missing adapter: ' + str(main))
         project = ET.Element('{' + ns + '}Project', DefaultTargets='Build')
@@ -149,5 +150,6 @@ if __name__ == '__main__':
     parser.add_argument('--build', action='store_true', help='Compile/link only; never launch the produced program.')
     parser.add_argument('--msbuild', type=Path)
     parser.add_argument('--toolset', choices=['v143', 'v145'], default='v143')
+    parser.add_argument('--programs', nargs='+', choices=['scan', 'sort'], default=['scan', 'sort'])
     args=parser.parse_args()
-    print(json.dumps(prepare(args.output, args.package_cache, args.build, args.msbuild, args.toolset), indent=2))
+    print(json.dumps(prepare(args.output, args.package_cache, args.build, args.msbuild, args.toolset, args.programs), indent=2))

@@ -31,7 +31,7 @@ class Layout:
         return wave * self.wave * self.items + (chunk * self.wave + lane) * 4
 
 
-def local_scan(values, layout):
+def local_scan(values, layout, inclusive=False):
     """Return every prefix in original element order, plus the block reduction."""
     assert len(values) <= layout.block
     padded = list(values) + [0] * (layout.block - len(values))
@@ -45,7 +45,8 @@ def local_scan(values, layout):
                 index = layout.index(wave * layout.wave + lane, chunk)
                 x, y, z, w = padded[index:index + 4]
                 indices.append(index)
-                vector_prefixes.append([0, x, (x + y) & U32, (x + y + z) & U32])
+                vector_prefixes.append([x, (x + y) & U32, (x + y + z) & U32, (x + y + z + w) & U32]
+                                       if inclusive else [0, x, (x + y) & U32, (x + y + z) & U32])
                 vector_sums.append((x + y + z + w) & U32)
             # WavePrefixSum, with the last inclusive lane reused as the total.
             lane_prefix = 0
@@ -139,18 +140,19 @@ def lookback(block, state, values, layout, max_polls=4, after_observe=None, duri
     return suffix, trace
 
 
-def execute(values, layout, *, mask=None, state=None, order=None, publish_aggregates=False):
+def execute(values, layout, *, mask=None, state=None, order=None, publish_aggregates=False, inclusive=False):
     """One complete operation with a deterministic order of owner completion.
     Reverse order models assigned but suspended predecessors, without waiting.
     """
     values = list(values)
+    assert not (inclusive and mask is not None)
     scanned = values if mask is None else [int((value & mask) == 0) for value in values]
     count = (len(values) + layout.block - 1) // layout.block
     state = state or State(count)
     state.reset(count)
     order = list(range(count)) if order is None else list(order)
     assert sorted(order) == list(range(count))
-    locals_and_totals = [local_scan(scanned[i:i + layout.block], layout)
+    locals_and_totals = [local_scan(scanned[i:i + layout.block], layout, inclusive)
                         for i in range(0, len(values), layout.block)]
     if publish_aggregates:
         for slot, (_, total) in zip(state.slots, locals_and_totals):

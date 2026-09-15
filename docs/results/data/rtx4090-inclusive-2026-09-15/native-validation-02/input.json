@@ -1,0 +1,7 @@
+{
+  "count": 268435456,
+  "bytes": 1073741824,
+  "sha256": "3d20e9cda21f4b5dda21b48a72446c778d5aa92df8c2f5aa9a0e656a78d3093a",
+  "path": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-validation-02\\upstream-init-one-u32.bin",
+  "source": "Full GPU readback of unchanged upstream InitOne; independently checked against all-one uint32 bytes."
+}

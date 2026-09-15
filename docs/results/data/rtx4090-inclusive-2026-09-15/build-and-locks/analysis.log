@@ -1,0 +1,243 @@
+{
+  "means": {
+    "tile": {
+      "processMeanMs": [
+        6.3745899999999995,
+        6.375960000000001,
+        6.3757399999999995,
+        6.3779699999999995,
+        6.376530000000001,
+        6.3762799999999995
+      ],
+      "arithmeticMeanMs": 6.376178333333334,
+      "mean95CiMs": [
+        6.375018558963358,
+        6.377338107703309
+      ],
+      "gigaElementsPerSecond": 42.09974093677326
+    },
+    "tile-fused": {
+      "processMeanMs": [
+        2.9049199999999997,
+        2.9029700000000003,
+        2.9025499999999997,
+        2.90314,
+        2.90661,
+        2.90443
+      ],
+      "arithmeticMeanMs": 2.9041033333333335,
+      "mean95CiMs": [
+        2.902499217949026,
+        2.905707448717641
+      ],
+      "gigaElementsPerSecond": 92.4331627318128
+    },
+    "rts": {
+      "processMeanMs": [
+        3.58411,
+        3.58385,
+        3.5843000000000003,
+        3.58438,
+        3.5849900000000003,
+        3.58349
+      ],
+      "arithmeticMeanMs": 3.5841866666666666,
+      "mean95CiMs": [
+        3.5836515299452594,
+        3.584721803388074
+      ],
+      "gigaElementsPerSecond": 74.89438496506878
+    }
+  },
+  "comparisons": [
+    {
+      "baseline": "tile",
+      "candidate": "tile-fused",
+      "pairs": [
+        {
+          "round": 1,
+          "baselineMs": 6.3745899999999995,
+          "candidateMs": 2.9049199999999997,
+          "ratio": 2.1944115500598986,
+          "differenceMs": 3.46967
+        },
+        {
+          "round": 2,
+          "baselineMs": 6.375960000000001,
+          "candidateMs": 2.9029700000000003,
+          "ratio": 2.196357523501793,
+          "differenceMs": 3.4729900000000007
+        },
+        {
+          "round": 3,
+          "baselineMs": 6.3757399999999995,
+          "candidateMs": 2.9025499999999997,
+          "ratio": 2.196599541782226,
+          "differenceMs": 3.4731899999999998
+        },
+        {
+          "round": 4,
+          "baselineMs": 6.3779699999999995,
+          "candidateMs": 2.90314,
+          "ratio": 2.1969212645618192,
+          "differenceMs": 3.4748299999999994
+        },
+        {
+          "round": 5,
+          "baselineMs": 6.376530000000001,
+          "candidateMs": 2.90661,
+          "ratio": 2.1938030901978594,
+          "differenceMs": 3.4699200000000006
+        },
+        {
+          "round": 6,
+          "baselineMs": 6.3762799999999995,
+          "candidateMs": 2.90443,
+          "ratio": 2.195363634172626,
+          "differenceMs": 3.4718499999999994
+        }
+      ],
+      "geometricMeanRatio": 2.195575796564283,
+      "ratio95Ci": [
+        2.194247606813957,
+        2.196904790274931
+      ],
+      "pairedDifferenceMs": 3.472075,
+      "difference95CiMs": [
+        3.4699683170906788,
+        3.474181682909321
+      ],
+      "timeReductionPercent": 54.453861189177054,
+      "timeReduction95CiPercent": [
+        54.42629186903852,
+        54.48141383155456
+      ]
+    },
+    {
+      "baseline": "rts",
+      "candidate": "tile-fused",
+      "pairs": [
+        {
+          "round": 1,
+          "baselineMs": 3.58411,
+          "candidateMs": 2.9049199999999997,
+          "ratio": 1.2338067829750907,
+          "differenceMs": 0.6791900000000002
+        },
+        {
+          "round": 2,
+          "baselineMs": 3.58385,
+          "candidateMs": 2.9029700000000003,
+          "ratio": 1.2345459994419508,
+          "differenceMs": 0.6808799999999997
+        },
+        {
+          "round": 3,
+          "baselineMs": 3.5843000000000003,
+          "candidateMs": 2.9025499999999997,
+          "ratio": 1.234879674768738,
+          "differenceMs": 0.6817500000000005
+        },
+        {
+          "round": 4,
+          "baselineMs": 3.58438,
+          "candidateMs": 2.90314,
+          "ratio": 1.2346562687297202,
+          "differenceMs": 0.6812399999999998
+        },
+        {
+          "round": 5,
+          "baselineMs": 3.5849900000000003,
+          "candidateMs": 2.90661,
+          "ratio": 1.2333921647555055,
+          "differenceMs": 0.6783800000000002
+        },
+        {
+          "round": 6,
+          "baselineMs": 3.58349,
+          "candidateMs": 2.90443,
+          "ratio": 1.2338014687907781,
+          "differenceMs": 0.6790599999999998
+        }
+      ],
+      "geometricMeanRatio": 1.2341802748353945,
+      "ratio95Ci": [
+        1.2335589258233535,
+        1.2348019368236434
+      ],
+      "pairedDifferenceMs": 0.6800833333333334,
+      "difference95CiMs": [
+        0.6786370196277218,
+        0.6815296470389449
+      ],
+      "timeReductionPercent": 18.97455984431672,
+      "timeReduction95CiPercent": [
+        18.93374697665633,
+        19.015352164707387
+      ]
+    },
+    {
+      "baseline": "rts",
+      "candidate": "tile",
+      "pairs": [
+        {
+          "round": 1,
+          "baselineMs": 3.58411,
+          "candidateMs": 6.3745899999999995,
+          "ratio": 0.5622494936929278,
+          "differenceMs": -2.7904799999999996
+        },
+        {
+          "round": 2,
+          "baselineMs": 3.58385,
+          "candidateMs": 6.375960000000001,
+          "ratio": 0.5620879051938844,
+          "differenceMs": -2.792110000000001
+        },
+        {
+          "round": 3,
+          "baselineMs": 3.5843000000000003,
+          "candidateMs": 6.3757399999999995,
+          "ratio": 0.5621778805283779,
+          "differenceMs": -2.7914399999999993
+        },
+        {
+          "round": 4,
+          "baselineMs": 3.58438,
+          "candidateMs": 6.3779699999999995,
+          "ratio": 0.5619938632511599,
+          "differenceMs": -2.7935899999999996
+        },
+        {
+          "round": 5,
+          "baselineMs": 3.5849900000000003,
+          "candidateMs": 6.376530000000001,
+          "ratio": 0.5622164406032748,
+          "differenceMs": -2.7915400000000004
+        },
+        {
+          "round": 6,
+          "baselineMs": 3.58349,
+          "candidateMs": 6.3762799999999995,
+          "ratio": 0.5620032369971206,
+          "differenceMs": -2.7927899999999997
+        }
+      ],
+      "geometricMeanRatio": 0.562121461152325,
+      "ratio95Ci": [
+        0.562006530350213,
+        0.5622364154578815
+      ],
+      "pairedDifferenceMs": -2.7919916666666666,
+      "difference95CiMs": [
+        -2.793141216314213,
+        -2.79084211701912
+      ],
+      "timeReductionPercent": -77.89749531178596,
+      "timeReduction95CiPercent": [
+        -77.93387549729228,
+        -77.86112256453663
+      ]
+    }
+  ]
+}

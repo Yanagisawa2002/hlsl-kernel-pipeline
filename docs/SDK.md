@@ -61,9 +61,10 @@ options. Packed-flag fallback scan is excluded from this full-width SDK API.
 | Public option / surface | Current support and provenance | Evidence boundary |
 |---|---|---|
 | `ScanImplementation.GpuPrefixSumsReduceThenScan` | D3D12, SM 6.7; GPUPrefixSums `98d93a4e9ed2f3c8353119515bf9be90a2e137ad` | Existing SDK adapter; current application plan has no confirmed deployment profile |
+| `ScanImplementation.WaveTiled` / `PrimitiveOperations.InclusiveScan` | D3D12, SM 6.6, fixed wave32; local full-u32 adaptation of the same pinned GPUPrefixSums algorithms | Explicit exclusive/inclusive plans; [contract and reproduction](integration/SCAN_INCLUSIVE.md); no default or deployment-profile promotion |
 | `SortImplementation.AmdParallelSort` | D3D12, SM 6.6, wave64; FidelityFX SDK 1.1.4 `c6efa6bf7f2027b3ec94f28578bb5965eabb9e55` | Existing SDK adapter, including full32 arbitrary payloads; distinct from GPUSorting's vendored FFX |
 | DeviceRadixSort / OneSweep / GPUSorting FFX | Native evaluation harness only | September 9 native results, not `PrimitiveOperations` options |
-| Wave-tiled scan/compaction and tiled 4/8-bit sort | Explicit research/consumer or harness paths | Tested September 9 cases retain their exact evidence; no SDK default promotion |
+| Wave-tiled compaction and tiled 4/8-bit sort | Explicit research/consumer or harness paths | Tested September 9 cases retain their exact evidence; no SDK default promotion |
 
 Capability checks evaluate both plans. The scan baseline supports SM 6.6;
 the binary sort baseline uses wave32 for keys-only and wave64 for pairs.

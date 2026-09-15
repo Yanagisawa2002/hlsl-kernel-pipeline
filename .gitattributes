@@ -32,3 +32,15 @@ tools/causal_scan_protocol.py -text -eol
 kernels/scan.hlsl -text -eol
 docs/integration/causal-scan-declaration.json -text -eol
 docs/integration/causal-scan-declaration-v2.json -text -eol
+
+# Inclusive experiment sources and evidence retain their measured raw bytes.
+benchmarks/external/native/HlslPerfScan.h -text -eol
+benchmarks/external/native/RuntimeSupport.h -text -eol
+benchmarks/external/native/scan-main.cpp -text -eol
+src/HlslPerf.Workloads/PrimitiveOperations.cs -text -eol
+src/HlslPerf.Workloads/WaveTiledScanCandidates.cs -text -eol
+src/HlslPerf.D3D12/D3D12Tuner.cs -text -eol
+tools/HlslPerf.InclusiveScanValidation/** -text -eol
+tools/run_inclusive_scan.py -text -eol
+tools/check_inclusive_control.py -text -eol
+docs/results/data/rtx4090-inclusive-2026-09-15/** -text -diff

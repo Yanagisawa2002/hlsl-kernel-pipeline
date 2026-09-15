@@ -6,11 +6,11 @@
 // Local changes are confined to command recording and the extra full-width look-back state.
 class HlslPerfScan : public ReduceThenScan
 {
-    std::unique_ptr<HlslPerfNativeKernel> reset, scan, inclusive;
+    std::unique_ptr<HlslPerfNativeKernel> reset, scan, inclusive, fused;
     winrt::com_ptr<ID3D12Resource> state;
     uint32_t statePartitions = 0;
 public:
-    HlslPerfScan(winrt::com_ptr<ID3D12Device> device, GPUPrefixSums::DeviceInfo info)
+    HlslPerfScan(winrt::com_ptr<ID3D12Device> device, GPUPrefixSums::DeviceInfo info, bool fusedInclusive = false)
         : ReduceThenScan(device, info)
     {
         m_alignedSize = 0;
@@ -24,10 +24,20 @@ public:
         info.SupportedShaderModel = L"cs_6_6";
         reset = std::make_unique<HlslPerfNativeKernel>(device, info, root / "kernels/scan.hlsl", L"ResetWaveTiledState", args);
         scan = std::make_unique<HlslPerfNativeKernel>(device, info, root / "kernels/scan.hlsl", L"SinglePassScanWaveTiled", args);
-        inclusive = std::make_unique<HlslPerfNativeKernel>(device, info, root / "benchmarks/external/native/ScanInclusive.hlsl", L"AddInput", std::vector<std::wstring>{L"-HV", L"2018", L"-O3"});
+        if (fusedInclusive)
+        {
+            args.insert(args.end(), {L"-D", L"HLSLPERF_WAVE_TILED_INCLUSIVE=1"});
+            fused = std::make_unique<HlslPerfNativeKernel>(device, info, root / "kernels/scan.hlsl", L"SinglePassScanWaveTiled", args);
+        }
+        else
+            inclusive = std::make_unique<HlslPerfNativeKernel>(device, info, root / "benchmarks/external/native/ScanInclusive.hlsl", L"AddInput", std::vector<std::wstring>{L"-HV", L"2018", L"-O3"});
     }
 protected:
     void PrepareScanCmdListExclusive() override
+    {
+        PrepareWaveTiled(*scan);
+    }
+    void PrepareWaveTiled(HlslPerfNativeKernel& kernel)
     {
         uint32_t partitions = (m_alignedSize + 4095) / 4096;
         if (!state || statePartitions != partitions)
@@ -38,11 +48,16 @@ protected:
         }
         std::array<uint32_t, 8> constants = { m_alignedSize, 4096, partitions };
         reset->Dispatch(m_cmdList, nullptr, nullptr, state.get(), nullptr, constants, 1);
-        scan->Dispatch(m_cmdList, m_scanInBuffer.get(), nullptr, m_scanOutBuffer.get(), state.get(),
+        kernel.Dispatch(m_cmdList, m_scanInBuffer.get(), nullptr, m_scanOutBuffer.get(), state.get(),
             constants, std::min(partitions, 256u));
     }
     void PrepareScanCmdListInclusive() override
     {
+        if (fused)
+        {
+            PrepareWaveTiled(*fused);
+            return;
+        }
         PrepareScanCmdListExclusive();
         inclusive->Dispatch(m_cmdList, m_scanInBuffer.get(), nullptr, m_scanOutBuffer.get(), nullptr,
             {m_alignedSize}, 256);

@@ -1,0 +1,73 @@
+{
+  "tag": "round3-pos2-tile",
+  "mode": "batch-only",
+  "arm": "tile",
+  "count": 268435456,
+  "command": [
+    "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-02\\scan\\scan.exe",
+    "batch-only",
+    "tile",
+    "268435456",
+    "99768",
+    "NVIDIA GeForce RTX 4090"
+  ],
+  "cwd": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-02\\scan",
+  "startedUtc": "2026-09-15T05:18:15.354786+00:00",
+  "executableSha256": "1a69baeb3d31d95485a45602f579f45af81c3ea292a88d8cd07b2b2a18cd6d8a",
+  "pid": 53552,
+  "exitCode": 0,
+  "finishedUtc": "2026-09-15T05:18:16.583167+00:00",
+  "logSha256": "11a3e71d868ff32a6d5221b5ce7964862758866e36169769fdd8b04b33b89117",
+  "events": [
+    {
+      "kind": "device",
+      "adapter": "NVIDIA GeForce RTX 4090",
+      "luid": 99768,
+      "vendorId": 4318,
+      "deviceId": 9860,
+      "driver": "32.0.15.9186",
+      "dedicatedBytes": 25310527488,
+      "waveMin": 32,
+      "waveMax": 32,
+      "shaderModel": 103,
+      "featureLevel": 49664
+    },
+    {
+      "kind": "memory",
+      "phase": "before",
+      "budget": 24505221120,
+      "usage": 7405568,
+      "requiredBytes": 3222274048
+    },
+    {
+      "kind": "arm",
+      "backend": "tile",
+      "count": 268435456,
+      "batchSize": 100,
+      "warmupIterations": 1
+    },
+    {
+      "kind": "fullSizeValidation",
+      "count": 268435456,
+      "passed": true
+    },
+    {
+      "kind": "memory",
+      "phase": "allocated",
+      "budget": 24505221120,
+      "usage": 2164371456,
+      "requiredBytes": 0
+    },
+    {
+      "kind": "memory",
+      "phase": "after",
+      "budget": 24505221120,
+      "usage": 2164371456,
+      "requiredBytes": 0
+    }
+  ],
+  "totalsSeconds": [
+    0.637574
+  ],
+  "meanMs": 6.3757399999999995
+}

@@ -1,0 +1,10 @@
+2026-09-15T05:15:12.9965238+00:00 PID 50700: Waiting for the shared R9700 / Unity validation lock.
+2026-09-15T05:15:12.9999952+00:00 PID 50700: Shared validation lock acquired.
+tile exit 0 totals []
+tile-fused exit 0 totals []
+rts exit 0 totals []
+input-export exit 0 totals []
+tile exit 0 totals [0.642365]
+tile-fused exit 0 totals [0.290454]
+rts exit 0 totals [0.358482]
+2026-09-15T05:15:39.8755839+00:00 PID 50700: Shared validation lock released.

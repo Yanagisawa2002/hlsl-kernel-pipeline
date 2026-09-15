@@ -687,7 +687,11 @@ public sealed partial class D3D12Tuner : IDisposable
 
     private static string ReadDriverVersion(IDXGIAdapter1 adapter, AdapterDescription1 description)
     {
-        if (adapter.CheckInterfaceSupport<ID3D12Device>(out long rawVersion))
+        // DXGI rejects D3D11+ device interfaces here. Query IDXGIDevice for the
+        // active package version instead of falling through to stale registry
+        // installations with the same vendor/device IDs (observed on RTX 4090).
+        // https://learn.microsoft.com/windows/win32/api/dxgi/nf-dxgi-idxgiadapter-checkinterfacesupport
+        if (adapter.CheckInterfaceSupport<IDXGIDevice>(out long rawVersion))
         {
             ulong value = unchecked((ulong)rawVersion);
             return string.Create(

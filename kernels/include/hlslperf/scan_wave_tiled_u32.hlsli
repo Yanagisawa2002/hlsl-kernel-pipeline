@@ -5,10 +5,21 @@
 // Local modifications Copyright (c) 2026 Edwin Liu
 // The complete upstream license is retained at third_party/gpu-prefix-sums/LICENSE.
 // Local changes: raw-buffer ABI, full-u32 split state, private fallback,
-// per-operation state clear, scalar tails, parallel fixed-wave spine, compaction.
+// per-operation state clear, scalar tails, parallel fixed-wave spine, compaction,
+// and optional native inclusive output while input values are still in registers.
 // This is an opt-in local adaptation, not the unmodified upstream implementation.
 #ifndef HLSLPERF_SCAN_WAVE_TILED_U32_INCLUDED
 #define HLSLPERF_SCAN_WAVE_TILED_U32_INCLUDED
+
+#ifndef HLSLPERF_WAVE_TILED_INCLUSIVE
+#define HLSLPERF_WAVE_TILED_INCLUSIVE 0
+#endif
+#if HLSLPERF_WAVE_TILED_INCLUSIVE != 0 && HLSLPERF_WAVE_TILED_INCLUSIVE != 1
+#error Wave-tiled inclusive output must be 0 or 1.
+#endif
+#if HLSLPERF_WAVE_TILED_INCLUSIVE && HLSLPERF_WAVE_TILED_COMPACTION
+#error Compaction requires exclusive offsets; inclusive scan is a separate operation.
+#endif
 
 #if HLSLPERF_SCAN_WAVE_TILED != 1
 #error The wave-tiled entry points require explicit HLSLPERF_SCAN_WAVE_TILED=1.
@@ -293,7 +304,13 @@ void SinglePassScanWaveTiled(uint groupIndex : SV_GroupIndex)
             const uint sum = values.x + values.y + values.z + values.w;
             const uint lanePrefix = WavePrefixSum(sum);
             const uint tilePrefix = waveTotal + lanePrefix;
+#if HLSLPERF_WAVE_TILED_INCLUSIVE
+            // Same wave/partition totals and store path. No input retention or
+            // second full-array read/modify/write conversion is required.
+            prefixes[chunk] = uint4(values.x, values.x + values.y, values.x + values.y + values.z, sum) + tilePrefix;
+#else
             prefixes[chunk] = uint4(0, values.x, values.x + values.y, values.x + values.y + values.z) + tilePrefix;
+#endif
             // Reuse the completed scan for the tile total instead of a second
             // wave reduction (the upstream scan uses the same inclusive-total idea).
             waveTotal += WaveReadLaneAt(lanePrefix + sum, HLSLPERF_WAVE_SIZE - 1);

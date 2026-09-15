@@ -1,0 +1,49 @@
+{
+  "counts": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    31,
+    32,
+    33,
+    127,
+    128,
+    129,
+    255,
+    256,
+    257,
+    4095,
+    4096,
+    4097,
+    6145,
+    8193,
+    1048583,
+    4194311
+  ],
+  "patterns": [
+    "full32-xorshift",
+    "maximum-u32",
+    "extremes"
+  ],
+  "repeats": 2,
+  "poisonsPerRepeat": 2,
+  "forcedFallback": "Start ticket at last partition with all predecessor statuses empty; compare entire output including untouched sentinels.",
+  "empty": "SDK zero guard plus actual zero-count kernel dispatch preserving three sentinels",
+  "oracle": "Independent uint64 accumulator reduced modulo 2^32; every output byte compared and hashed",
+  "device": {
+    "adapterName": "NVIDIA GeForce RTX 4090",
+    "vendorId": 4318,
+    "deviceId": 9860,
+    "subsystemId": 913643994,
+    "revision": 161,
+    "adapterLuid": "99768",
+    "driverVersion": "32.0.15.9186",
+    "backend": "D3D12",
+    "shaderModel": "6_6",
+    "compilerVersion": "Vortice.Dxc/3.8.3.0",
+    "operatingSystem": "Microsoft Windows 10.0.26200"
+  }
+}

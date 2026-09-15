@@ -1,0 +1,8 @@
+2026-09-15T05:16:55.8118923+00:00 PID 58228: Waiting for the shared R9700 / Unity validation lock.
+2026-09-15T05:16:55.8152832+00:00 PID 58228: Shared validation lock acquired.
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.143s
+
+OK
+2026-09-15T05:17:01.3858839+00:00 PID 58228: Shared validation lock released.

@@ -19,6 +19,22 @@ def pattern(count):
 
 
 class WaveTiledScanModelTests(unittest.TestCase):
+    def test_inclusive_all_outputs_under_fallback_and_reused_state(self):
+        for layout in [Layout(32, 32, 4), Layout(), Layout(256, 64, 12)]:
+            state = State(5)
+            for count in [4 * layout.block + 3, 1, 0, 3, layout.block - 1, layout.block, layout.block + 1]:
+                for values in [pattern(count), [U32] * count, [0x80000000] * count, [0] * count]:
+                    expected, running = [], 0
+                    for value in values:
+                        running = (running + value) & U32
+                        expected.append(running)
+                    blocks = (count + layout.block - 1) // layout.block
+                    for order in [range(blocks), reversed(range(blocks))]:
+                        output, state, _ = execute(values, layout, state=state, order=order, inclusive=True)
+                        self.assertEqual(expected, output)
+                    exclusive, _, _ = execute(values, layout, state=state)
+                    self.assertEqual(oracle(values), exclusive)
+
     def test_mapping_is_bijective_and_adjacent_lanes_load_adjacent_vectors(self):
         for layout in [Layout(32, 32, 4), Layout(256, 32, 16), Layout(256, 64, 12), Layout(1024, 32, 4)]:
             indices = [layout.index(thread, chunk) + component

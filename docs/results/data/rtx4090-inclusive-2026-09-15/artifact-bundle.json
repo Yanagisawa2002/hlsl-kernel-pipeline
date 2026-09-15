@@ -1,0 +1,10 @@
+{
+  "name": "rtx4090-inclusive-scan-evidence.zip",
+  "path": "C:\\Users\\cgliu\\Documents\\Codex\\2026-09-15\\hlsl-scan-inclusive\\outputs\\rtx4090-inclusive-scan-evidence.zip",
+  "bytes": 24847353,
+  "sha256": "639cabc6c56c0629a000734cdc311403fe9c5a753d97eb9ee0d814d64e38838b",
+  "payloadFiles": 500,
+  "allPayloadHashesVerifiedAfterCompression": true,
+  "inputBytes": 1073741824,
+  "inputSha256": "3d20e9cda21f4b5dda21b48a72446c778d5aa92df8c2f5aa9a0e656a78d3093a"
+}

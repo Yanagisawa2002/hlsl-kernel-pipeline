@@ -1,0 +1,12 @@
+[
+  {
+    "Path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx86\\x64\\cl.exe",
+    "FileVersion": "19.44.35222.0",
+    "Sha256": "8093c7868e739767813124a1f9b9ea47b420dc90392a318782272489e1d25de6"
+  },
+  {
+    "Path": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe",
+    "FileVersion": "19.44.35222.0",
+    "Sha256": "4304307e1f0d0528ac13c513183e5cbfa20a7f8de6f0c8e5bc4293661e6d23a4"
+  }
+]

@@ -1,0 +1,1 @@
+PASS: 37 compiler contracts and static DXIL checks; no GPU dispatch or timing.

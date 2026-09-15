@@ -1,0 +1,13 @@
+  正在确定要还原的项目…
+  所有项目均是最新的，无法还原。
+  HlslPerf.Core -> D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.Core\bin\Release\net10.0\HlslPerf.Core.dll
+  HlslPerf.Rga -> D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.Rga\bin\Release\net10.0\HlslPerf.Rga.dll
+  HlslPerf.GpuDriven -> D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.GpuDriven\bin\Release\net10.0\HlslPerf.GpuDriven.dll
+  HlslPerf.Workloads -> D:\CodexWork\hlsl-scan-inclusive-20260915\src\HlslPerf.Workloads\bin\Release\net10.0\HlslPerf.Workloads.dll
+  HlslPerf.Core.Tests -> D:\CodexWork\hlsl-scan-inclusive-20260915\tests\HlslPerf.Core.Tests\bin\Release\net10.0\HlslPerf.Core.Tests.dll
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:03.78

@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace HlslPerf.Workloads;
 
-public enum ScanImplementation { InternalBaseline, GpuPrefixSumsReduceThenScan }
+public enum ScanImplementation { InternalBaseline, GpuPrefixSumsReduceThenScan, WaveTiled }
 public enum SortImplementation { InternalBinary, AmdParallelSort }
 
 /// <summary>Explicit SDK operation construction. Never measures, tunes, or creates a device.</summary>
@@ -11,6 +11,7 @@ public static class PrimitiveOperations
 {
     public static UnifiedOperationPlan ExclusiveScan(string assetRoot, ReadOnlySpan<uint> input,
         ScanImplementation implementation = ScanImplementation.InternalBaseline) =>
+        implementation == ScanImplementation.WaveTiled ? WaveTiledScan(assetRoot, input, false) :
         UnifiedWorkloads.Build(assetRoot, UnifiedWorkloads.Fixture("scan", input.Length, 0,
             explicitInput: input.ToArray()), implementation switch
         {
@@ -18,6 +19,52 @@ public static class PrimitiveOperations
             ScanImplementation.GpuPrefixSumsReduceThenScan => "gps-reduce-then-scan",
             _ => throw new ArgumentOutOfRangeException(nameof(implementation))
         });
+
+    /// <summary>Explicit SM6.6 / wave32 local adaptation with inclusive uint32 sums
+    /// modulo 2^32. Reset and scan are both part of every nonempty operation.</summary>
+    public static UnifiedOperationPlan InclusiveScan(string assetRoot, ReadOnlySpan<uint> input) =>
+        WaveTiledScan(assetRoot, input, true);
+
+    private static UnifiedOperationPlan WaveTiledScan(string assetRoot, ReadOnlySpan<uint> input, bool inclusive)
+    {
+        string root = Path.GetFullPath(assetRoot);
+        int count = input.Length;
+        byte[] data = count == 0 ? new byte[4] : WorkloadData.ToBytes(input);
+        uint[] expected = new uint[Math.Max(1, count)];
+        uint sum = 0;
+        for (int i = 0; i < count; ++i)
+        {
+            if (!inclusive) expected[i] = sum;
+            sum = unchecked(sum + input[i]);
+            if (inclusive) expected[i] = sum;
+        }
+        string semantic = (inclusive ? "inclusive" : "exclusive") + "-u32-sum-modulo-2^32";
+        string implementation = "wave-tiled-" + (inclusive ? "inclusive" : "exclusive");
+        string resetId = implementation + "/" + WaveTiledScanCandidates.ResetEntryPoint;
+        string scanId = implementation + "/" + WaveTiledScanCandidates.ScanEntryPoint;
+        var candidate = inclusive ? WaveTiledScanCandidates.CreateInclusive() : WaveTiledScanCandidates.Create();
+        WaveTiledScanCandidates.Validate(candidate, allowInclusive: inclusive);
+        int blocks = checked((int)(((long)count + 4095) / 4096));
+        var defines = candidate.Defines.ToDictionary(p => p.Key, p => p.Value.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        UnifiedShader[] shaders = count == 0 ? [] : new[] { WaveTiledScanCandidates.ResetEntryPoint, WaveTiledScanCandidates.ScanEntryPoint }
+            .Select(entry => new UnifiedShader(implementation + "/" + entry, Path.Combine(root, "kernels/scan.hlsl"), entry, defines,
+                [Path.Combine(root, "kernels")], [])).ToArray();
+        // Match the established SDK's empty guard: a four-byte zero output and
+        // one copy, with no shader dispatch or scratch reset. Logical count is zero.
+        UnifiedPass[] passes = count == 0 ?
+            [new("empty-guard", UnifiedStage.InputRestore, null, null, [], [], [])
+                { CopySource = "input", CopyDestination = "output", CopyBytes = 4 }] :
+            [new("reset", UnifiedStage.ScratchInitialization, resetId,
+                new(1), [], ["state"], [0, 0, (uint)blocks]),
+             new("scan", UnifiedStage.Algorithm, scanId,
+                new((uint)Math.Min(blocks, 256)), ["input"], ["output", "state"], [(uint)count, 4096, (uint)blocks])];
+        UnifiedOperationPlan plan = new(implementation, count, semantic, ContentHash.Sha256(data),
+            [new("input", data.Length, data), new("output", checked(expected.Length * 4)),
+             new("state", checked(8 + 12 * blocks))], shaders, passes,
+            [new("output", ContentHash.Sha256(WorkloadData.ToBytes(expected)))]) { ImmutableInputs = ["input"] };
+        plan.Validate();
+        return plan;
+    }
 
     public static UnifiedOperationPlan StableSort(string assetRoot, ReadOnlySpan<uint> keys,
         uint[]? payloads = null, SortImplementation implementation = SortImplementation.InternalBinary)
@@ -60,7 +107,7 @@ public static class PrimitiveOperations
         OperationSelection FallBack(string reason) => new(fallback, fallbackHash,
             OperationPerformanceStatus.Unmeasured, true, reason);
         if (requested.Implementation is not ("internal-scan-baseline" or "internal-radix-1" or
-            "gps-reduce-then-scan" or "amd-parallel-sort"))
+            "gps-reduce-then-scan" or "amd-parallel-sort" or "wave-tiled-exclusive"))
             return FallBack("Requested implementation has no reviewed full-width SDK contract.");
         if (!Compatible(requested, runtime)) return FallBack("Required shader model / wave capability unavailable.");
         string requestedHash;

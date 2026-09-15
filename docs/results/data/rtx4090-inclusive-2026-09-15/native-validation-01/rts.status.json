@@ -1,0 +1,286 @@
+{
+  "tag": "rts",
+  "mode": "test-all",
+  "arm": "rts",
+  "count": 268435456,
+  "command": [
+    "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-02\\scan\\scan.exe",
+    "test-all",
+    "rts",
+    "268435456",
+    "99768",
+    "NVIDIA GeForce RTX 4090"
+  ],
+  "cwd": "D:\\CodexWork\\hlsl-scan-inclusive-20260915\\.scratch\\native-02\\scan",
+  "startedUtc": "2026-09-15T05:15:26.211529+00:00",
+  "executableSha256": "1a69baeb3d31d95485a45602f579f45af81c3ea292a88d8cd07b2b2a18cd6d8a",
+  "pid": 35524,
+  "exitCode": 0,
+  "finishedUtc": "2026-09-15T05:15:32.510480+00:00",
+  "logSha256": "d836595ff9a0a75f17ee9f4843b1b918f4216adacd1d24f30c15845c9f558f39",
+  "events": [
+    {
+      "kind": "device",
+      "adapter": "NVIDIA GeForce RTX 4090",
+      "luid": 99768,
+      "vendorId": 4318,
+      "deviceId": 9860,
+      "driver": "32.0.15.9186",
+      "dedicatedBytes": 25310527488,
+      "waveMin": 32,
+      "waveMax": 32,
+      "shaderModel": 103,
+      "featureLevel": 49664
+    },
+    {
+      "kind": "memory",
+      "phase": "before",
+      "budget": 24505221120,
+      "usage": 7405568,
+      "requiredBytes": 3222274048
+    },
+    {
+      "kind": "arm",
+      "backend": "rts",
+      "count": 268435456,
+      "batchSize": 100,
+      "warmupIterations": 1
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4,
+      "pattern": 0,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4,
+      "pattern": 1,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4,
+      "pattern": 2,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 32,
+      "pattern": 0,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 32,
+      "pattern": 1,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 32,
+      "pattern": 2,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 128,
+      "pattern": 0,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 128,
+      "pattern": 1,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 128,
+      "pattern": 2,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 256,
+      "pattern": 0,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 256,
+      "pattern": 1,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 256,
+      "pattern": 2,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4092,
+      "pattern": 0,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4092,
+      "pattern": 1,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4092,
+      "pattern": 2,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4096,
+      "pattern": 0,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4096,
+      "pattern": 1,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4096,
+      "pattern": 2,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4100,
+      "pattern": 0,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4100,
+      "pattern": 1,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 4100,
+      "pattern": 2,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 8196,
+      "pattern": 0,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 8196,
+      "pattern": 1,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 8196,
+      "pattern": 2,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 1048580,
+      "pattern": 0,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 1048580,
+      "pattern": 1,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "correctness",
+      "operation": "scan",
+      "count": 1048580,
+      "pattern": 2,
+      "passed": true,
+      "repeats": 4
+    },
+    {
+      "kind": "fullSizeValidation",
+      "count": 268435456,
+      "passed": true
+    },
+    {
+      "kind": "memory",
+      "phase": "allocated",
+      "budget": 24505221120,
+      "usage": 2163519488,
+      "requiredBytes": 0
+    },
+    {
+      "kind": "memory",
+      "phase": "after",
+      "budget": 24505221120,
+      "usage": 2163519488,
+      "requiredBytes": 0
+    }
+  ],
+  "totalsSeconds": []
+}

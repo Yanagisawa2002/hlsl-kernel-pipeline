@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "measuredSourceCommit": "c2196851bfba3c4f9bf5279e98e829ae70a0cd48",
+  "sourceAndRuntimeMatchFreeze": true,
+  "nativeUpstreamFiles": 114,
+  "formalRawLogsPassed": 18,
+  "formalResultsExcluded": 0,
+  "managedFinalConfigurations": 229,
+  "managedFullOutputAssertions": 936,
+  "note": "Initial managed-01 GPU outputs passed but its legacy driver fingerprint read a stale registry entry. The IDXGIDevice query repair and final managed-02/native-validation-02 rerun preceded registration; kernel/native binary and scan parameters did not change."
+}
