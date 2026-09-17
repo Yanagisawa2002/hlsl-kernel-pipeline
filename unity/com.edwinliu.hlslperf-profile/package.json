@@ -19,6 +19,11 @@
       "displayName": "Profile Consumer",
       "description": "Resolve a profile and pass its integer defines to a project-owned sink.",
       "path": "Samples~/ProfileConsumer"
+    },
+    {
+      "displayName": "Live GPU-driven Crowd",
+      "description": "Live compute frustum culling, GPU append compaction, GPU-generated indirect instance count, and DrawMeshInstancedIndirect presentation without full-buffer readback.",
+      "path": "Samples~/LiveGpuDrivenCrowd"
     }
   ]
 }
