@@ -1,5 +1,13 @@
 # Crowd/VFX whole-task validation
 
+## Focused measured outcome
+
+The [September 16 complete-task comparison](../results/CROWD_COMPLETE_TASK_2026-09-16.md)
+finished 81 processes and 972 full-atlas checks under observed desktop load.
+Wave-tiled measured 48.04 ms per request across a 12-request lifetime, external
+RTS 48.85 ms, and the 12-worker CPU 6.98 ms. The candidate did not establish an
+external whole-task win; the conventional CPU path is preferable for this caller.
+
 ## Source and task choice (before GPU experiments)
 
 Source main: `397f0054fa92990e39f4f217f3335ea606d0222f` (2026-09-15).

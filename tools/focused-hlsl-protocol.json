@@ -1,0 +1,20 @@
+{
+  "id": "hlsl-fixed-complete-task-20260916-01",
+  "case": "confirmation-large",
+  "rounds": 9,
+  "orderSeed": 20260916,
+  "bootstrapSeed": 409016,
+  "bootstrapReplicates": 20000,
+  "arms": ["hierarchical", "fused", "wave-tiled", "rts", "cpu-frame-parallel-w1", "cpu-frame-parallel-w2", "cpu-frame-parallel-w4", "cpu-frame-parallel-w8", "cpu-frame-parallel-w12"],
+  "candidate": "wave-tiled",
+  "metric": "lifetime12PerRequestMs",
+  "familyAlpha": 0.05,
+  "minimumLatencyReductionPercent": 2,
+  "maximumReferenceDriftPercent": 10,
+  "environment": "Observed local desktop background load. Record CPU/GPU/free-VRAM before and after every process; preserve original quiet qualification labels. Include every started sample, never remove or replace a slow/interfered run. No isolated-machine claim.",
+  "task": "CPU seeds -> visibility -> exclusive scan -> stable compaction -> tile bins -> 12-frame RGBA atlas -> full CPU readback -> buffered file export. Repeat 12 actual requests per fresh process, including first-use preparation and final cleanup. Conventional CPU implementation computes identical outputs using shared immutable caches.",
+  "boundary": "Primary: (first-use + next 11 complete requests + cleanup)/12. First-use includes input generation, renderer creation, shader compile and initial upload as applicable. Excludes process/JIT startup outside the measured caller, oracle checks and validation gaps; whole process wall time is also retained as diagnostic. No durable flush, display/presentation or Unity claim.",
+  "cache": "Ordinary warm OS/filesystem/driver caches; fresh renderer/process each run, no cache purge. All request phases, including three labeled warmups, count in lifetime cost.",
+  "inference": "Nine balanced cyclic orders, each arm once per position. Eight paired mean-ratio bootstrap comparisons of fixed wave-tiled against every alternative, Bonferroni adjusted. Report first use and steady requests separately without inferring lifetime benefit from them. All conclusions conditional on this single input/session.",
+  "stop": "One 81-process cohort; maximum 15 minutes, 8 GiB output growth estimate, 30 GiB disk reserve and 4 GiB available host memory. No retry, optimizer sweep or other project follows automatically."
+}

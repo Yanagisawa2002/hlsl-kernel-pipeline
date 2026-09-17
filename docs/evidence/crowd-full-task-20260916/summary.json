@@ -1,0 +1,179 @@
+{
+  "completed": true,
+  "processCount": 81,
+  "fullAtlasChecks": 972,
+  "environment": "Observed local desktop background load. Record CPU/GPU/free-VRAM before and after every process; preserve original quiet qualification labels. Include every started sample, never remove or replace a slow/interfered run. No isolated-machine claim.",
+  "referenceDriftPercent": {
+    "rts": 2.2412416561279347,
+    "cpu-frame-parallel-w12": -1.7164070637466389
+  },
+  "driftGatePassed": true,
+  "arms": {
+    "hierarchical": {
+      "lifetime12PerRequestMs": 47.055201851851855,
+      "firstUseMs": 449.95327777777777,
+      "steadyMeanMs": 8.03179861111111,
+      "cleanupMs": 26.31887777777778,
+      "exportMeanMs": 2.221184722222222,
+      "processWallMeanMs": 900.6237333330015,
+      "quietBracketsPassed": 3
+    },
+    "fused": {
+      "lifetime12PerRequestMs": 45.12157962962963,
+      "firstUseMs": 448.8533,
+      "steadyMeanMs": 6.083052777777778,
+      "cleanupMs": 26.064655555555554,
+      "exportMeanMs": 2.2799194444444444,
+      "processWallMeanMs": 883.2157000029433,
+      "quietBracketsPassed": 2
+    },
+    "wave-tiled": {
+      "lifetime12PerRequestMs": 48.039289814814815,
+      "firstUseMs": 455.5336,
+      "steadyMeanMs": 7.561548611111111,
+      "cleanupMs": 36.18092222222222,
+      "exportMeanMs": 2.1731819444444445,
+      "processWallMeanMs": 909.5731666618829,
+      "quietBracketsPassed": 7
+    },
+    "rts": {
+      "lifetime12PerRequestMs": 48.846375,
+      "firstUseMs": 485.2762666666667,
+      "steadyMeanMs": 6.902306944444445,
+      "cleanupMs": 24.59321111111111,
+      "exportMeanMs": 2.212001388888889,
+      "processWallMeanMs": 934.4209222229741,
+      "quietBracketsPassed": 2
+    },
+    "cpu-frame-parallel-w1": {
+      "lifetime12PerRequestMs": 11.868134259259259,
+      "firstUseMs": 54.480244444444445,
+      "steadyMeanMs": 8.109690277777778,
+      "cleanupMs": 0.11864444444444444,
+      "exportMeanMs": 2.5386652777777776,
+      "processWallMeanMs": 388.94853333315245,
+      "quietBracketsPassed": 3
+    },
+    "cpu-frame-parallel-w2": {
+      "lifetime12PerRequestMs": 8.945281481481482,
+      "firstUseMs": 52.272422222222225,
+      "steadyMeanMs": 4.929418055555556,
+      "cleanupMs": 0.11567777777777778,
+      "exportMeanMs": 2.1942916666666665,
+      "processWallMeanMs": 345.4176777773278,
+      "quietBracketsPassed": 0
+    },
+    "cpu-frame-parallel-w4": {
+      "lifetime12PerRequestMs": 7.70962962962963,
+      "firstUseMs": 50.939011111111114,
+      "steadyMeanMs": 3.74865,
+      "cleanupMs": 0.1172,
+      "exportMeanMs": 2.2384208333333335,
+      "processWallMeanMs": 327.01287777712827,
+      "quietBracketsPassed": 8
+    },
+    "cpu-frame-parallel-w8": {
+      "lifetime12PerRequestMs": 7.283409259259259,
+      "firstUseMs": 51.173677777777776,
+      "steadyMeanMs": 3.2653097222222223,
+      "cleanupMs": 0.11821111111111111,
+      "exportMeanMs": 2.1786222222222222,
+      "processWallMeanMs": 331.422288887552,
+      "quietBracketsPassed": 5
+    },
+    "cpu-frame-parallel-w12": {
+      "lifetime12PerRequestMs": 6.983014814814815,
+      "firstUseMs": 49.77543333333333,
+      "steadyMeanMs": 3.0377930555555555,
+      "cleanupMs": 0.13372222222222221,
+      "exportMeanMs": 2.2099,
+      "processWallMeanMs": 322.4705222221221,
+      "quietBracketsPassed": 5
+    }
+  },
+  "comparisons": [
+    {
+      "comparator": "hierarchical",
+      "speedup": 0.9795149352382916,
+      "latencyReductionPercent": -2.0913478727840884,
+      "adjustedInterval": [
+        0.9240101879152925,
+        1.0157026325969212
+      ],
+      "clearsGainAndDrift": false
+    },
+    {
+      "comparator": "fused",
+      "speedup": 0.9392640857841035,
+      "latencyReductionPercent": -6.466329878374277,
+      "adjustedInterval": [
+        0.8830600352999528,
+        0.9828190983245133
+      ],
+      "clearsGainAndDrift": false
+    },
+    {
+      "comparator": "rts",
+      "speedup": 1.0168005228282182,
+      "latencyReductionPercent": 1.652292898265606,
+      "adjustedInterval": [
+        0.9463755560393236,
+        1.0944068311546464
+      ],
+      "clearsGainAndDrift": false
+    },
+    {
+      "comparator": "cpu-frame-parallel-w1",
+      "speedup": 0.24705057683011897,
+      "latencyReductionPercent": -304.77541596174314,
+      "adjustedInterval": [
+        0.23001714415399332,
+        0.2682107291611075
+      ],
+      "clearsGainAndDrift": false
+    },
+    {
+      "comparator": "cpu-frame-parallel-w2",
+      "speedup": 0.1862076128927878,
+      "latencyReductionPercent": -437.0349710544686,
+      "adjustedInterval": [
+        0.17863716746320848,
+        0.19170431499506072
+      ],
+      "clearsGainAndDrift": false
+    },
+    {
+      "comparator": "cpu-frame-parallel-w4",
+      "speedup": 0.1604859201572139,
+      "latencyReductionPercent": -523.1076215411222,
+      "adjustedInterval": [
+        0.15352163009842906,
+        0.16497887290024246
+      ],
+      "clearsGainAndDrift": false
+    },
+    {
+      "comparator": "cpu-frame-parallel-w8",
+      "speedup": 0.1516135914443334,
+      "latencyReductionPercent": -559.5714740832857,
+      "adjustedInterval": [
+        0.14256700846575338,
+        0.15998579063910454
+      ],
+      "clearsGainAndDrift": false
+    },
+    {
+      "comparator": "cpu-frame-parallel-w12",
+      "speedup": 0.14536049224985265,
+      "latencyReductionPercent": -587.9448359882764,
+      "adjustedInterval": [
+        0.1381494478114761,
+        0.15123174705559275
+      ],
+      "clearsGainAndDrift": false
+    }
+  ],
+  "discardedProcesses": 0,
+  "bestObservedMean": "cpu-frame-parallel-w12",
+  "note": "Best observed mean is descriptive. All eight candidate comparisons are retained; uncertainty is conditional on this background-load session."
+}
