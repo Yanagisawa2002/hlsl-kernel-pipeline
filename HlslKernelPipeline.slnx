@@ -9,6 +9,7 @@
     <Project Path="src/HlslPerf.Showcase/HlslPerf.Showcase.csproj" />
     <Project Path="src/HlslPerf.GpuDriven/HlslPerf.GpuDriven.csproj" />
     <Project Path="src/HlslPerf.GpuDrivenDemo/HlslPerf.GpuDrivenDemo.csproj" />
+    <Project Path="src/HlslPerf.GpuDrivenLiveDemo/HlslPerf.GpuDrivenLiveDemo.csproj" />
   </Folder>
   <Folder Name="/examples/">
     <Project Path="examples/HlslPerf.PrimitiveApp/HlslPerf.PrimitiveApp.csproj" />
