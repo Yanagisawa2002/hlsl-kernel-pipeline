@@ -1,0 +1,43 @@
+#pragma kernel CullAgents
+
+StructuredBuffer<float4> _Agents;
+AppendStructuredBuffer<float4> _VisibleAgents;
+
+uint _AgentCount;
+float _TimeSeconds;
+float4 _FrustumPlanes[6];
+
+float3 Animate(float4 agent, uint index)
+{
+    float3 p = agent.xyz;
+    float phase = (index & 1023u) * 0.0137;
+    p.y += sin(_TimeSeconds * 1.7 + phase) * 0.75;
+    p.x += sin(_TimeSeconds * 0.23 + phase) * 0.35;
+    return p;
+}
+
+bool SphereInsideFrustum(float3 position, float radius)
+{
+    [unroll]
+    for (uint i = 0; i < 6; ++i)
+    {
+        float4 plane = _FrustumPlanes[i];
+        if (dot(plane.xyz, position) + plane.w < -radius)
+            return false;
+    }
+    return true;
+}
+
+[numthreads(256, 1, 1)]
+void CullAgents(uint3 dispatchThreadId : SV_DispatchThreadID)
+{
+    uint index = dispatchThreadId.x;
+    if (index >= _AgentCount)
+        return;
+
+    float4 agent = _Agents[index];
+    float radius = max(agent.w, 0.05);
+    float3 position = Animate(agent, index);
+    if (SphereInsideFrustum(position, radius))
+        _VisibleAgents.Append(float4(position, radius));
+}
