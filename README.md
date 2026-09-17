@@ -20,11 +20,11 @@ A separate full-array conversion pass was removed by producing inclusive values 
 
 Workload: `2^28` uint32 elements on an RTX 4090. Six balanced rounds covered all three-arm order permutations in **18 fresh processes**, with 100 timed iterations per process and full correctness gates.
 
-At this size, the removed conversion stage logically read input and output and rewrote output: **3 GiB of full-array traffic**. That source-level accounting is a profiling hypothesis, not a fabricated hardware-counter result. The next diagnostic step is explicitly defined as an NVIDIA Nsight Graphics GPU Trace comparison of memory-system activity, occupancy, stalls and operation structure across all three arms.
+At this size, the removed conversion stage logically read input and output and rewrote output: **3 GiB of full-array traffic**. That source-level accounting is not presented as measured DRAM bytes. A later Nsight Graphics capture independently showed the old `AddInput` shader stage present in `tile` and absent in `tile-fused`; whole-capture DRAM activity fell from **71.04% to 58.55%**, with the read-side signal falling from **35.59% to 19.64%**, while occupancy/register-pressure signals did not improve. Because that trace spans multiple submits and contains background graphics activity, these counters are treated as **directional mechanism evidence**, not scan-isolated byte attribution.
 
-[Timing/correctness report](docs/results/RTX4090_INCLUSIVE_SCAN_2026-09-15.md) · [Hardware-profile diagnosis plan](docs/results/RTX4090_INCLUSIVE_SCAN_PROFILE_DIAGNOSIS.md) · [API and reproduction](docs/integration/SCAN_INCLUSIVE.md)
+[Timing/correctness report](docs/results/RTX4090_INCLUSIVE_SCAN_2026-09-15.md) · [Hardware-profile diagnosis](docs/results/RTX4090_INCLUSIVE_SCAN_PROFILE_DIAGNOSIS.md) · [Capture evidence](docs/evidence/rtx4090-scan-nsight-20260917/README.md) · [API and reproduction](docs/integration/SCAN_INCLUSIVE.md)
 
-**Engineering takeaway:** remove whole-operation work first, then use hardware counters to verify the mechanism. Do not turn a source-level traffic estimate into a counter claim.
+**Engineering takeaway:** remove whole-operation work first, then use hardware counters to test the mechanism. Keep the counter claim scoped to the range actually captured.
 
 ### 2. GPU optimization that did not pay off — complete Crowd/VFX caller
 
@@ -52,7 +52,7 @@ The run also retained an uncomfortable result instead of filtering it away: desk
 - **External baselines.** Pinned GPUPrefixSums RTS, AMD/FidelityFX-derived paths and native research baselines are compared explicitly; results where mature libraries win are retained.
 - **Correctness before speed.** Full-output validation, poison/reconstruction checks, deterministic CPU oracles and source/binary/runtime identity are used as gates around timing evidence.
 - **Noise-aware experiments.** Balanced run order, fresh processes, drift/background checks and paired intervals are used where the measurement question justifies them.
-- **Profiler-driven diagnosis.** Static RGA evidence is kept separate from runtime counters. The RTX 4090 scan case now has a preregistered Nsight Graphics counter plan rather than post-hoc claims about occupancy or bandwidth.
+- **Profiler-driven diagnosis.** Static RGA evidence is kept separate from runtime counters. The RTX 4090 scan case now includes captured Nsight Graphics memory/SM/occupancy/stall signals with explicit scope limits instead of post-hoc claims about exact DRAM bytes or occupancy.
 - **Stop decisions.** The repository records both successful optimization and negative complete-task results. A narrow benchmark win is not treated as a deployment recommendation.
 
 ## SDK and architecture
@@ -122,9 +122,9 @@ For runtime diagnosis, capture the same validated workload and compare evidence 
 - barriers, queue gaps and synchronization;
 - overlapping work from other processes.
 
-Static compiler/ISA evidence is useful but is not substituted for runtime counters. The current RGA integration therefore keeps occupancy fields nullable when the tool output cannot establish them.
+Static compiler/ISA evidence is useful but is not substituted for runtime counters. The current RGA integration therefore keeps occupancy fields nullable when the tool output cannot establish them. Runtime counter claims are likewise scoped to the exact trace range actually captured.
 
-[RGA evidence policy](docs/RGA.md) · [RTX 4090 runtime-counter plan](docs/results/RTX4090_INCLUSIVE_SCAN_PROFILE_DIAGNOSIS.md)
+[RGA evidence policy](docs/RGA.md) · [RTX 4090 runtime-counter diagnosis](docs/results/RTX4090_INCLUSIVE_SCAN_PROFILE_DIAGNOSIS.md)
 
 ## My contribution
 
