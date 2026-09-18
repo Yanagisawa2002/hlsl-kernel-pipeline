@@ -1,0 +1,9 @@
+{
+  "markerPresent": true,
+  "exitCode": 0,
+  "commandTemplateMatch": true,
+  "executableHashUnchanged": true,
+  "pixHashUnchanged": true,
+  "samplerMarkerDataNonzero": true,
+  "limitation": "Shader contributions normalized from marker active-warp metrics; per-shader stall breakdown and numeric PSO IDs are not exported. Names and shader hashes are preserved. Tiny ClearErrorCount marker contribution in tile is retained without asserting execution inside the marker."
+}

@@ -1,0 +1,9 @@
+{
+  "markerPresent": true,
+  "exitCode": 0,
+  "commandTemplateMatch": true,
+  "executableHashUnchanged": true,
+  "pixHashUnchanged": true,
+  "samplerMarkerDataNonzero": false,
+  "limitation": "All marker PC sampler values are zero despite nonzero hardware occupancy. Stall/contribution interpretation unavailable; raw zeros retained. No AddInput shader column identified, but absence of execution cannot be established from zero samples."
+}

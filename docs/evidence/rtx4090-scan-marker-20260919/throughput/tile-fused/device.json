@@ -1,0 +1,13 @@
+{
+  "kind": "device",
+  "adapter": "NVIDIA GeForce RTX 4090",
+  "luid": 743848209,
+  "vendorId": 4318,
+  "deviceId": 9860,
+  "driver": "32.0.15.9186",
+  "dedicatedBytes": 25310527488,
+  "waveMin": 32,
+  "waveMax": 32,
+  "shaderModel": 103,
+  "featureLevel": 49664
+}
