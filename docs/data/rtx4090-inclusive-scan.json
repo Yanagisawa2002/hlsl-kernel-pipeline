@@ -1,0 +1,51 @@
+{
+  "title": "Remove a pass. Measure the complete operation.",
+  "subtitle": "RTX 4090  /  268,435,456 uint32 elements",
+  "unit": "ms / complete GPU operation",
+  "decimals": 6,
+  "source_result_document": "docs/results/RTX4090_INCLUSIVE_SCAN_2026-09-15.md",
+  "source_report": "docs/results/data/rtx4090-inclusive-2026-09-15/analysis.json",
+  "source_commit": "c2196851bfba3c4f9bf5279e98e829ae70a0cd48",
+  "hardware": "NVIDIA GeForce RTX 4090",
+  "workload": {
+    "elements": 268435456,
+    "type": "uint32 inclusive scan"
+  },
+  "methodological_notes": [
+    "18 fresh processes; 6 balanced rounds; 100 timed iterations/process",
+    "Full correctness validation; paired process analysis in frozen report"
+  ],
+  "claim_boundaries": [
+    "Complete GPU operation, not application latency",
+    "3 GiB is logical source traffic, not measured DRAM bytes",
+    "Reported means; paired uncertainty is in the linked frozen report"
+  ],
+  "caption": "18 fresh processes  /  6 balanced rounds  /  100 timed iterations per process",
+  "annotation": "Fused vs original: 54.4539% less time  /  2.195576x\nFused vs RTS: 18.9746% less time  /  1.234180x",
+  "rows": [
+    {
+      "id": "tile",
+      "label": "Original + AddInput",
+      "value": 6.376178,
+      "source_pointer": "/means/tile/arithmeticMeanMs",
+      "group": "GPU",
+      "highlight": false
+    },
+    {
+      "id": "rts",
+      "label": "GPUPrefixSums RTS",
+      "value": 3.584187,
+      "source_pointer": "/means/rts/arithmeticMeanMs",
+      "group": "GPU",
+      "highlight": false
+    },
+    {
+      "id": "tile-fused",
+      "label": "Fused inclusive",
+      "value": 2.904103,
+      "source_pointer": "/means/tile-fused/arithmeticMeanMs",
+      "group": "GPU",
+      "highlight": true
+    }
+  ]
+}

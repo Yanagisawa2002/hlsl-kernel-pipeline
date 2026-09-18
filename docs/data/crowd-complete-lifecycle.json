@@ -1,0 +1,70 @@
+{
+  "title": "A faster primitive can still lose the complete task.",
+  "subtitle": "8,388,608 agents  /  CPU-input, buffered-export contract",
+  "unit": "ms / request (complete lifecycle)",
+  "decimals": 2,
+  "source_result_document": "docs/results/CROWD_COMPLETE_TASK_2026-09-16.md",
+  "source_report": "docs/evidence/crowd-full-task-20260916/summary.json",
+  "source_commit": "3b16a2de608bf938ff7c5a9b44baee36fafae910",
+  "hardware": "RTX 4090 (GPU arms); local Windows CPU (worker count shown; model not asserted by this report)",
+  "workload": {
+    "agents": 8388608,
+    "requests_per_process": 12,
+    "output": "480 x 270 x 12-frame RGBA atlas per request"
+  },
+  "methodological_notes": [
+    "81 fresh processes; 972/972 full atlas validations",
+    "First-use + next 11 requests + cleanup, divided by 12",
+    "Observed desktop background load 0-34%; all processes retained"
+  ],
+  "claim_boundaries": [
+    "This CPU-input / buffered-export caller only; not all GPU rendering",
+    "Not FPS; GPU-resident Unity uses a different contract",
+    "Point means; comparison uncertainty in frozen report",
+    "Five selected arms from the nine-configuration cohort"
+  ],
+  "caption": "81 fresh processes  /  12 requests per process  /  972 of 972 atlas validations passed",
+  "annotation": "Decision: use CPU12 for this caller.\nGPU-resident rendering needs a different workload boundary.",
+  "rows": [
+    {
+      "id": "fused",
+      "label": "Fused GPU",
+      "value": 45.12,
+      "source_pointer": "/arms/fused/lifetime12PerRequestMs",
+      "group": "GPU",
+      "highlight": false
+    },
+    {
+      "id": "wave-tiled",
+      "label": "Wave-tiled GPU",
+      "value": 48.04,
+      "source_pointer": "/arms/wave-tiled/lifetime12PerRequestMs",
+      "group": "GPU",
+      "highlight": false
+    },
+    {
+      "id": "rts",
+      "label": "GPUPrefixSums RTS",
+      "value": 48.85,
+      "source_pointer": "/arms/rts/lifetime12PerRequestMs",
+      "group": "GPU",
+      "highlight": false
+    },
+    {
+      "id": "cpu-frame-parallel-w1",
+      "label": "CPU / 1 worker",
+      "value": 11.87,
+      "source_pointer": "/arms/cpu-frame-parallel-w1/lifetime12PerRequestMs",
+      "group": "CPU",
+      "highlight": false
+    },
+    {
+      "id": "cpu-frame-parallel-w12",
+      "label": "CPU / 12 workers",
+      "value": 6.98,
+      "source_pointer": "/arms/cpu-frame-parallel-w12/lifetime12PerRequestMs",
+      "group": "CPU",
+      "highlight": true
+    }
+  ]
+}
