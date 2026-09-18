@@ -25,6 +25,8 @@ namespace HlslPerf.Crossover
         public string mode = "gpu", output = "result.json", calibration = "", runId = "", pairId = "";
         public int agents = 1000000, seed = 69501203, warmup = 300, frames = 1000;
         public double density = 0.25;
+        public string timingApi = "legacy";
+        public string gpuProfilerArea = "unchanged";
         public const float WorldX = 120, WorldY = 68, FixedDelta = 1f / 60f, Speed = 0.18f, Radius = 45;
         public static Options Parse(string[] args)
         {
@@ -39,6 +41,8 @@ namespace HlslPerf.Crossover
                 switch (k)
                 {
                     case "--mode": o.mode = v; break;
+                    case "--timing-api": o.timingApi = v; break;
+                    case "--gpu-profiler-area": o.gpuProfilerArea = v; break;
                     case "--agents": o.agents = int.Parse(v, CultureInfo.InvariantCulture); break;
                     case "--seed": o.seed = int.Parse(v, CultureInfo.InvariantCulture); break;
                     case "--density": o.density = double.Parse(v, CultureInfo.InvariantCulture); break;
@@ -52,14 +56,34 @@ namespace HlslPerf.Crossover
                     default: throw new ArgumentException("Unknown benchmark option: " + k);
                 }
             }
-            if (o.mode != "cpu" && o.mode != "gpu" && o.mode != "calibrate" && o.mode != "validation")
-                throw new ArgumentException("mode must be cpu, gpu, calibrate or validation");
+            if (o.mode != "cpu" && o.mode != "gpu" && o.mode != "calibrate" && o.mode != "validation" && o.mode != "timing-diagnostic")
+                throw new ArgumentException("Unknown mode");
+            if (o.timingApi != "legacy" && o.timingApi != "profiler-recorder") throw new ArgumentException("Unknown timing API");
+            if (o.gpuProfilerArea != "unchanged" && o.gpuProfilerArea != "enabled") throw new ArgumentException("Unknown GPU profiler area mode");
             if (o.agents < 1 || o.agents > 4000000 || o.frames < 10 || o.frames > 10000 || o.warmup < 1 ||
                 double.IsNaN(o.density) || o.density <= 0 || o.density >= 1 || string.IsNullOrWhiteSpace(o.output))
                 throw new ArgumentException("Invalid workload bounds");
-            if (o.mode != "calibrate" && string.IsNullOrWhiteSpace(o.calibration))
+            if (o.mode != "calibrate" && o.mode != "timing-diagnostic" && string.IsNullOrWhiteSpace(o.calibration))
                 throw new ArgumentException("A frozen --calibration file is required");
             return o;
+        }
+    }
+
+    public static class TimingContract
+    {
+        public const int LegacyDelay = 3;
+        public static int SubmittedUnityFrame(int availabilityUnityFrame) => availabilityUnityFrame - LegacyDelay;
+        public static int MeasuredIndex(int availabilityUnityFrame, int firstMeasuredUnityFrame, int measuredFrames)
+        {
+            int index = SubmittedUnityFrame(availabilityUnityFrame) - firstMeasuredUnityFrame;
+            return index >= 0 && index < measuredFrames ? index : -1;
+        }
+        // A diagnostic-only nonperiodic block-count code makes frame attribution falsifiable.
+        public static int DiagnosticRepetitions(int frame)
+        {
+            uint x = unchecked((uint)(frame + 1) * 747796405u + 2891336453u);
+            x = ((x >> (int)((x >> 28) + 4)) ^ x) * 277803737u;
+            return 1 + (int)(((x >> 22) ^ x) & 3);
         }
     }
 

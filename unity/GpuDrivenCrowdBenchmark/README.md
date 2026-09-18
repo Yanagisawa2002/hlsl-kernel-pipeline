@@ -1,6 +1,6 @@
 # Controlled CPU-driven / GPU-resident Crowd benchmark
 
-Read [PROTOCOL.md](PROTOCOL.md) before running. This dedicated workload leaves the live sample and the September 16 complete-task benchmark unchanged. It measures a managed all-agent CPU-single baseline and the append/count-copy GPU path with the same deterministic population, trajectory, quad shader and offscreen target.
+**Protocol-v2 checkpoint: GPU timing remains unresolved; PR #12 stays Draft.** Read [PROTOCOL_V2.md](PROTOCOL_V2.md) and the [repair stop report](../../docs/results/GPU_TIMING_REPAIR_V2_2026-09-19.md). [PROTOCOL.md](PROTOCOL.md) preserves the original v1 plan. This dedicated workload leaves the live sample and the September 16 complete-task benchmark unchanged. It measures a managed all-agent CPU-single baseline and the append/count-copy GPU path with the same deterministic population, trajectory, quad shader and offscreen target.
 
 ## Build (Windows, Unity 6000.3.13f1)
 
@@ -14,42 +14,45 @@ $env:CROSSOVER_PLAYER_PATH = 'D:/CodexValidation/crossover-player/Crossover.exe'
 
 Check build exit, log and `Crossover.exe.build.json`. The generated project/player stay outside the repository. The build embeds a hash of the benchmark C#/shader sources; source changes require rebuilding and a new evidence directory. GPU Recorder requires the Development player; no attached profiler, deep profiling or script debugger is enabled.
 
-## Run stages
+## Diagnostic and gated stages
 
-Run **serially** with an idle GPU. The runner launches hidden standalone processes while retaining D3D12 graphics; it never uses `-nographics`. Commands default to the full 18-cell matrix, 300 warmup and 1000 measured frames. For initial smoke add `--agents 100000 --densities 0.25` to each stage.
-
-```powershell
-python tools/run_crossover.py --player D:/CodexValidation/crossover-player/Crossover.exe --output D:/CodexValidation/crossover-evidence --stage calibrate
-python tools/run_crossover.py --player D:/CodexValidation/crossover-player/Crossover.exe --output D:/CodexValidation/crossover-evidence --stage validation
-python tools/run_crossover.py --player D:/CodexValidation/crossover-player/Crossover.exe --output D:/CodexValidation/crossover-evidence --stage pilot --agents 100000 --densities 0.25
-```
-
-Review pilot output for unavailable GPU queries, pacing, noise/drift and correctness. An error is a stop, not permission to continue collecting timings. After methodology is valid, the following collects **resource-cost** measurements, not an automatic end-to-end crossover:
+Build once, then compare the same binary in normal hidden standalone and hidden batchmode:
 
 ```powershell
-python tools/run_crossover.py --player D:/CodexValidation/crossover-player/Crossover.exe --output D:/CodexValidation/crossover-evidence --stage measure
-python tools/analyze_crossover.py D:/CodexValidation/crossover-evidence --output D:/CodexValidation/crossover-summary
+python tools/run_timing_diagnostic.py --player D:/CodexValidation/crossover-player/Crossover.exe --output D:/CodexValidation/crossover-v2-legacy --api legacy
 ```
 
-The analyzer emits summary JSON, Markdown and CSV. Add `--plots` (with matplotlib installed) for resource-cost plots A/C; it explicitly omits an architecture-ratio plot because no eligible critical-path metric exists.
+If stable legacy fails, repeat with `--api profiler-recorder` in a distinct output directory. The diagnostic uses three stable markers and a deterministic 1¨C4 block-count sequence over 96 frames, plus 16 drain frames. Its raw observations allow checking the documented three-frame mapping. The two API results are never averaged. These availability probes are not clean timing-quality pilots, and record background load. A bounded GPU-area check is documented in protocol v2; do not retry arbitrary configurations until something looks favorable.
 
-The full matrix uses six balanced pairs per condition (216 separate measurement processes), with conditions interleaved across rounds. The runner refuses overwrite, records command/exit/adapter snapshots, and stops on failed gates. Do not mix binaries, calibrations, interrupted runs or pilot files. Keep failed receipts as evidence and version a corrected experiment separately. Generated Unity logs can contain local paths/identifiers; review before publishing.
+Once a final-binary diagnostic has **passed**, regenerate calibration and correctness for the first cell:
 
-Direct invocation is also supported:
-
-```text
-Crossover.exe -batchmode -force-d3d12 --mode cpu --agents 1000000 --density 0.25 --seed 69501203 --warmup-frames 300 --frames 1000 --calibration frozen.json --run-id unique-id --pair-id condition-pair0 --output result.json
+```powershell
+python tools/run_crossover.py --player D:/CodexValidation/crossover-player/Crossover.exe --output D:/CodexValidation/crossover-v2 --stage calibrate --agents 100000 --densities 0.25
+python tools/run_crossover.py --player D:/CodexValidation/crossover-player/Crossover.exe --output D:/CodexValidation/crossover-v2 --stage validation --agents 100000 --densities 0.25
 ```
 
-Use `--mode gpu` for GPU-resident rendering and `--mode validation` for separate set/image checks. `--cpu-workers 1` is accepted; other worker counts are rejected. `calibrate` produces the required frozen views/counts file. Unity single-dash flags are allowed; unknown/duplicate double-dash benchmark options fail.
+The following are gated examples, **not authorization to bypass the current failed diagnostic**:
+
+```powershell
+python tools/run_crossover.py --player D:/CodexValidation/crossover-player/Crossover.exe --output D:/CodexValidation/crossover-v2 --stage pilot --agents 100000 --densities 0.25 --timing-diagnostic D:/CodexValidation/crossover-v2-legacy/legacy-normal.json --launch-mode normal
+python tools/run_crossover.py --player D:/CodexValidation/crossover-player/Crossover.exe --output D:/CodexValidation/crossover-v2 --stage pilot-pairs --agents 100000 --densities 0.25 --timing-diagnostic D:/CodexValidation/crossover-v2-legacy/legacy-normal.json --launch-mode normal
+```
+
+`pilot` launches one CPU then one GPU process, stopping immediately if either fails. `pilot-pairs` requires those two passing pilots and launches exactly three fresh pairs, CPU/GPU, GPU/CPU, CPU/GPU. All timing pilots require the same three <=5% pre-run GPU-utilization samples as formal measurement, plus correctness/identity, complete GPU mapping, final fence, pacing, GC and drift gates. Blocked receipts are retained; no automatic retries. Three pairs are a stability check, not crossover evidence.
+
+The formal `measure` stage is disabled at this checkpoint. After timing is validated, all remaining correctness cells must pass before a separately authorized formal experiment. The v1 analyzer remains for archived schema-1 data; it intentionally rejects schema 2 rather than pooling versions. `check_crossover_timing.py` supplies v2 diagnostic, batch-boundary and pacing validators.
+
+## Measurement boundary
+
+The candidate comparable metric is `batchCompletionMsPerFrame`, first measured CPU work through the final measured GPU fence observation, amortized across all frames. A separate warmup fence prevents queued warmup work entering the measured batch. No per-frame wait, count readback or forced GPU completion is introduced. After the final buffer is submitted, only fence/timing polling continues. Raw ticks/frequency, submission, last-false/first-true observation and quantization bound are recorded. This is throughput/completion, not individual-frame latency; it remains hardware-unvalidated in this delivery.
 
 ## Metrics and schema
 
-Raw JSON schema 1 contains source/calibration identities, runtime adapter/API/driver, process/pair IDs, options, full per-frame samples and validation checks. Each measured sample has CPU fused cull/list, CPU upload, submission and total durations, plus GPU cull, draw and command-range durations. GPU cull includes counter reset/copy. CPU list work is fused with the predicate; it is not falsely assigned a separate duration.
+Raw run JSON schema 2 (`protocolVersion: 2`) contains source/calibration identities, runtime adapter/API/driver, process/pair IDs, options, full per-frame samples and validation checks. Each measured sample has CPU fused cull/list, CPU upload, submission and total durations, plus GPU cull, draw and command-range durations. Stable markers are reused during warmup and measurement. Samples map to `Time.frameCount - 3`, with submission/availability IDs checked and stored; any missing/ambiguous sample fails closed. GPU cull includes counter reset/copy. CPU list work is fused with the predicate; it is not falsely assigned a separate duration.
 
 `-1` marks unavailable GPU timing, with `gpuTimingStatus`; the analyzer rejects missing samples. A CPU arm has no GPU cull stage. Timed runs intentionally have no correctness readbacks; the analyzer requires a matching **separate** validation JSON. The known visible count is a frozen oracle count, not a timed GPU telemetry measurement. Ten validation frames compare exact sorted sets, counts, non-black pixels and RGBA hashes.
 
-CPU timings describe main-thread API costs, not hidden render-thread work. GPU ranges omit CPU-arm upload copies. Update intervals are scheduling diagnostics, not completion latency. Do not compare CPU milliseconds to GPU milliseconds or add them into a fabricated critical path. The analyzer reports CPU resource relief only, with process-paired bootstrap intervals; it does not declare an architecture crossover.
+CPU timings describe main-thread API costs, not hidden render-thread work. GPU ranges omit CPU-arm upload copies. Update intervals are scheduling diagnostics, not completion latency. Do not compare CPU milliseconds to GPU milliseconds or add them into a fabricated critical path. The v1 analyzer reports only CPU resource relief. No formal v2 statistics or crossover are published at this checkpoint.
 
 ## Tests
 

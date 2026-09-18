@@ -1,9 +1,12 @@
 import copy
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 from analyze_crossover import aggregate, export, paired_ratio, validate_result, drift
 from run_crossover import balanced_schedule
+from run_crossover import launch
+from check_crossover_timing import diagnostic_status, pacing_status, quiet_status, validate_pilot_v2
 
 
 def fixture(mode='cpu', pair=0):
@@ -20,6 +23,58 @@ def fixture(mode='cpu', pair=0):
 
 
 class CrossoverAnalysisTests(unittest.TestCase):
+    def test_no_pilot_launch_when_background_gate_blocks(self):
+        import json
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp); player=root/'Crossover.exe'; player.write_bytes(b'synthetic-test-only')
+            dll=root/'Crossover_Data/Managed/Assembly-CSharp.dll'; dll.parent.mkdir(parents=True); dll.write_bytes(b'test')
+            for stage in ('pilot','pilot-pairs'):
+                out=root/stage;out.mkdir()
+                with patch('run_crossover.snapshot',return_value={'adapters':[{'utilization':33}]}), patch('run_crossover.time.sleep'), patch('run_crossover.subprocess.run') as run:
+                    with self.assertRaises(RuntimeError): launch(player,out,stage,100000,.25,mode='cpu')
+                    run.assert_not_called()
+                receipt=json.loads(next(out.glob('*.launch.json')).read_text())
+                self.assertEqual('blocked: background GPU activity',receipt['status']); self.assertEqual(3,len(receipt['before']))
+    def test_diagnostic_detects_zero_and_wrong_delay(self):
+        counts=[1+(i*i+7*i)%4 for i in range(96)]
+        rows=[]
+        for i in range(112):
+            count=counts[i-3] if 3<=i<99 else 0
+            rows.append({'availabilityUnityFrame':i+100,'submittedRepetitions':counts[i] if i<96 else 0,'blocks':[count]*3,'gpuNs':[count*100]*3})
+        d={'completed':True,'markerValid':[True]*3,'recorderValid':[True]*3,'firstSubmissionUnityFrame':100,'observations':rows}
+        self.assertTrue(diagnostic_status(d)['passed'])
+        wrong=copy.deepcopy(d)
+        for i,r in enumerate(wrong['observations']):
+            r['blocks']=[counts[i-4]]*3 if 4<=i<100 else [0]*3
+        self.assertFalse(diagnostic_status(wrong)['passed'])
+        for r in d['observations']: r['gpuNs']=[0]*3
+        self.assertFalse(diagnostic_status(d)['passed'])
+
+    def test_pacing_gate_and_quiet_load(self):
+        for hz in (60,120,144,165,240):
+            self.assertFalse(pacing_status([1000/hz]*100)['passed'])
+        self.assertTrue(pacing_status([.1,.2,.4,.6]*25)['passed'])
+        q=[{'adapters':[{'utilization':3}]} for _ in range(3)]
+        self.assertTrue(quiet_status(q)); q[1]['adapters'][0]['utilization']=33
+        self.assertFalse(quiet_status(q)); self.assertFalse(quiet_status(q[:2]))
+        with self.assertRaises(ValueError): pacing_status([0]*100)
+
+    def test_batch_completion_and_frame_mapping_schema(self):
+        r,c=fixture(); r['schema']=2; r['protocolVersion']=2
+        r['options']={'agents':100000,'density':.25,'seed':69501203,'warmup':300,'frames':1000}
+        c['options']=dict(r['options'])
+        r.update(supportsGraphicsFence=True,warmupFenceCompleted=True,batchFenceCompleted=True,
+            batchStartTicks=1000,finalSubmissionTicks=2000,firstTrueFencePollTicks=2010,lastFalseFencePollTicks=2005,
+            stopwatchFrequency=1000,batchCompletionMs=1010,batchCompletionMsPerFrame=1.01,fenceObservationBoundMsPerFrame=.005,
+            firstMeasuredUnityFrame=300,gpuMappedFrames=1000)
+        template=r['samples'][0]
+        r['samples']=[dict(template,frameIndex=i,visibleCount=25000,submissionUnityFrame=300+i,availabilityUnityFrame=303+i,updateIntervalMs=[.1,.2,.4,.6][i%4]) for i in range(1000)]
+        self.assertTrue(validate_pilot_v2(r,c)['passed'])
+        for edit in [lambda x:x.update(batchCompletionMsPerFrame=2),lambda x:x.update(fenceObservationBoundMsPerFrame=0),
+                     lambda x:x.update(batchFenceCompleted=False),lambda x:x['samples'][4].update(availabilityUnityFrame=309),
+                     lambda x:x.update(gc0Collections=1)]:
+            bad=copy.deepcopy(r);edit(bad)
+            with self.assertRaises(ValueError): validate_pilot_v2(bad,c)
     def test_schema_and_correctness_gate(self):
         r,c=fixture(); validate_result(r,c)
         for mutation in [lambda x:x.update(completed=False), lambda x:x.update(calibrationSha256='other'),

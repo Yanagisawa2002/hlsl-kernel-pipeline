@@ -5,6 +5,25 @@ namespace HlslPerf.Core.Tests;
 
 public sealed class CrossoverModelTests
 {
+    [Fact] public void TimingMappingExcludesWarmupAndDrainsFinalMeasuredFrame()
+    {
+        Assert.Equal(97, TimingContract.SubmittedUnityFrame(100));
+        Assert.Equal(-1, TimingContract.MeasuredIndex(302,300,1000));
+        Assert.Equal(0, TimingContract.MeasuredIndex(303,300,1000));
+        Assert.Equal(999, TimingContract.MeasuredIndex(1302,300,1000));
+        Assert.Equal(-1, TimingContract.MeasuredIndex(1303,300,1000));
+        var sequence=Enumerable.Range(0,96).Select(TimingContract.DiagnosticRepetitions).ToArray();
+        Assert.All(sequence,x=>Assert.InRange(x,1,4));
+        Assert.Equal(4,sequence.Distinct().Count());
+        for(int lag=1;lag<=8;lag++) Assert.False(sequence.Skip(lag).SequenceEqual(sequence.Take(96-lag)));
+    }
+    [Fact] public void DiagnosticParserDoesNotRequireCalibrationAndRejectsUnknownTimingApis()
+    {
+        var o=Options.Parse(new[]{"--mode","timing-diagnostic","--timing-api","profiler-recorder","--gpu-profiler-area","enabled"});
+        Assert.Equal("profiler-recorder",o.timingApi); Assert.Equal("enabled",o.gpuProfilerArea);
+        Assert.Throws<ArgumentException>(()=>Options.Parse(new[]{"--mode","timing-diagnostic","--timing-api","guess"}));
+        Assert.Throws<ArgumentException>(()=>Options.Parse(new[]{"--mode","timing-diagnostic","--gpu-profiler-area","guess"}));
+    }
     [Fact] public void PopulationIsRepeatableAndPrefixStable()
     {
         var a = Model.Generate(100, 69501203); var b = Model.Generate(200, 69501203);

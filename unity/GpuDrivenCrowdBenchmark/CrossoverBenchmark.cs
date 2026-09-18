@@ -22,7 +22,7 @@ namespace HlslPerf.Crossover
     }
     [Serializable] public sealed class Sample
     {
-        public int frameIndex, visibleCount;
+        public int frameIndex, visibleCount, submissionUnityFrame = -1, availabilityUnityFrame = -1;
         public double cpuCullAndListMs, cpuUploadMs, cpuSubmitMs, cpuTotalMs, updateIntervalMs;
         // -1 means unavailable, never zero-filled missing GPU measurements.
         public double gpuCullMs = -1, gpuDrawMs = -1, gpuRangeMs = -1;
@@ -35,14 +35,20 @@ namespace HlslPerf.Crossover
     }
     [Serializable] public sealed class Result
     {
-        public int schema = 1, processId, width = 1280, height = 720, vsync, targetFrameRate = -1;
+        public int schema = 2, protocolVersion = 2, processId, width = 1280, height = 720, vsync, targetFrameRate = -1;
         public string runId, pairId, mode, sourceIdentity, calibrationSha256, adapter, driver, graphicsApi, unityVersion, deviceVersion;
         public string buildConfiguration, cpu, os, error = "", gpuTimingStatus = "unavailable";
         public string cpuBaseline = "managed scalar single thread, fused predicate/list, no Burst/Jobs";
         public string visibleCountSource = "frozen full-sequence CPU oracle; selected frames checked on GPU in separate validation";
         public bool correctnessPassed, completed, gpuRecorderSupported, frameTimingEnabled;
         public bool endToEndComparable = false;
-        public string endToEndCaveat = "Update intervals include engine scheduling and are diagnostic only; no validated GPU completion latency metric.";
+        public string timingApi, timingLaunchMode;
+        public bool supportsGraphicsFence, warmupFenceCompleted, batchFenceCompleted;
+        public int firstMeasuredUnityFrame = -1, gpuMappedFrames;
+        public long stopwatchFrequency, batchStartTicks, finalSubmissionTicks, lastFalseFencePollTicks, firstTrueFencePollTicks;
+        public double batchCompletionMs = -1, batchCompletionMsPerFrame = -1, fenceObservationIntervalMs = -1, fenceObservationBoundMsPerFrame = -1;
+        public double finalSubmissionToObservationMs = -1;
+        public string endToEndCaveat = "Final-fence batch completion is a throughput/completion candidate, not individual-frame latency; requires external timing, pacing and quiet-pilot gates.";
         public Options options;
         public Sample[] samples = Array.Empty<Sample>();
         public Check[] checks = Array.Empty<Check>();
@@ -58,8 +64,11 @@ namespace HlslPerf.Crossover
         Agent[] population; uint[] cpuIds;
         ComputeBuffer agents, visible, args;
         Material material; RenderTexture target; CommandBuffer commands;
-        CustomSampler[,] samplers; Recorder[,] recorders;
-        readonly List<int> pending = new List<int>();
+        GpuTimingSource timing;
+        GraphicsFence warmupFence, finalFence;
+        bool warmupFenceInserted, finalFenceInserted;
+        long warmupFenceSubmission, lastFencePoll;
+        int mappedFrames;
         int nextFrame, drainFrames, initialGc; long lastUpdate;
         bool measuring, finished;
         static readonly double TickMs = 1000.0 / Stopwatch.Frequency;
@@ -71,6 +80,11 @@ namespace HlslPerf.Crossover
             try
             {
                 options = Options.Parse(Environment.GetCommandLineArgs());
+                if (options.mode == "timing-diagnostic")
+                {
+                    gameObject.AddComponent<TimingDiagnostic>().Initialize(options, culling, drawing);
+                    finished = true; return;
+                }
                 QualitySettings.vSyncCount = 0; Application.targetFrameRate = -1; Application.runInBackground = true;
                 result = new Result { options = options, runId = options.runId, pairId = options.pairId, mode = options.mode,
                     processId = Process.GetCurrentProcess().Id, sourceIdentity = Identity,
@@ -78,7 +92,9 @@ namespace HlslPerf.Crossover
                     graphicsApi = SystemInfo.graphicsDeviceType.ToString(), unityVersion = Application.unityVersion,
                     buildConfiguration = Debug.isDebugBuild ? "Development Mono, no script debugging/deep profiling" : "Release",
                     cpu = SystemInfo.processorType, os = SystemInfo.operatingSystem,
-                    gpuRecorderSupported = SystemInfo.supportsGpuRecorder, frameTimingEnabled = FrameTimingManager.IsFeatureEnabled() };
+                    gpuRecorderSupported = SystemInfo.supportsGpuRecorder, frameTimingEnabled = FrameTimingManager.IsFeatureEnabled(),
+                    supportsGraphicsFence = SystemInfo.supportsGraphicsFence, timingApi = options.timingApi,
+                    timingLaunchMode = Application.isBatchMode ? "batchmode" : "normal", stopwatchFrequency = Stopwatch.Frequency };
                 population = Model.Generate(options.agents, options.seed); cpuIds = new uint[options.agents];
                 if (options.mode == "calibrate") { WriteCalibration(); return; }
                 byte[] calibrationBytes = File.ReadAllBytes(options.calibration);
@@ -90,18 +106,12 @@ namespace HlslPerf.Crossover
                 Allocate();
                 if (options.mode == "validation") { StartCoroutine(ValidateSafe()); return; }
                 if (!SystemInfo.supportsGpuRecorder) throw new NotSupportedException("GPU Recorder unavailable: stop before interpreting performance.");
+                if (!SystemInfo.supportsGraphicsFence) throw new NotSupportedException("GraphicsFence unavailable");
+                if (options.gpuProfilerArea == "enabled") Profiler.SetAreaEnabled(ProfilerArea.GPU, true);
                 result.samples = new Sample[options.frames];
-                samplers = new CustomSampler[options.frames, 3]; recorders = new Recorder[options.frames, 3];
-                for (int f = 0; f < options.frames; f++)
-                {
-                    result.samples[f] = new Sample { frameIndex = f, visibleCount = calibration.views[f].visible };
-                    for (int k = 0; k < 3; k++)
-                    {
-                        samplers[f, k] = CustomSampler.Create("Crossover/" + f + "/" + k, true);
-                        recorders[f, k] = samplers[f, k].GetRecorder(); recorders[f, k].enabled = true;
-                    }
-                }
-                pending.Capacity = options.frames;
+                timing = new GpuTimingSource(options.timingApi);
+                for (int k=0;k<3;k++) if (!timing.Valid(k) || !timing.MarkerValid(k)) throw new InvalidOperationException("Invalid stable GPU marker/recorder");
+                for (int f=0;f<options.frames;f++) result.samples[f] = new Sample { frameIndex = f, visibleCount = calibration.views[f].visible };
                 nextFrame = -options.warmup; measuring = true;
             }
             catch (Exception e) { Fail(e); }
@@ -138,8 +148,8 @@ namespace HlslPerf.Crossover
 
         void Mark(int f, int k, bool begin)
         {
-            if (f < 0) return;
-            if (begin) commands.BeginSample(samplers[f,k]); else commands.EndSample(samplers[f,k]);
+            if (timing == null) return; // Correctness has no profiling or timing samples.
+            if (begin) timing.Begin(commands,k); else timing.End(commands,k);
         }
 
         void Draw(string mode, View view, int measuredFrame, Sample sample)
@@ -171,8 +181,20 @@ namespace HlslPerf.Crossover
             if (mode == "gpu") commands.DrawProceduralIndirect(Matrix4x4.identity, material, 0, MeshTopology.Triangles, args);
             else if (count > 0) commands.DrawProcedural(Matrix4x4.identity, material, 0, MeshTopology.Triangles, 6, count);
             Mark(measuredFrame, 2, false); Mark(measuredFrame, 0, false);
+            if (timing != null && nextFrame == -1)
+            {
+                warmupFence = commands.CreateGraphicsFence(GraphicsFenceType.AsyncQueueSynchronisation, SynchronisationStageFlags.AllGPUOperations);
+                warmupFenceInserted = true;
+            }
+            if (timing != null && measuredFrame == options.frames - 1)
+            {
+                finalFence = commands.CreateGraphicsFence(GraphicsFenceType.AsyncQueueSynchronisation, SynchronisationStageFlags.AllGPUOperations);
+                finalFenceInserted = true;
+            }
             Graphics.ExecuteCommandBuffer(commands);
             long end = Stopwatch.GetTimestamp();
+            if (timing != null && nextFrame == -1) warmupFenceSubmission = end;
+            if (finalFenceInserted && measuredFrame == options.frames - 1) { result.finalSubmissionTicks = end; lastFencePoll = end; }
             if (sample != null)
             {
                 sample.cpuCullAndListMs = (culled - start) * TickMs;
@@ -186,52 +208,85 @@ namespace HlslPerf.Crossover
             if (!measuring || finished) return;
             try
             {
-                Poll();
+                long now = Stopwatch.GetTimestamp();
+                if (nextFrame == 0 && !result.warmupFenceCompleted)
+                {
+                    if (!warmupFenceInserted) throw new InvalidOperationException("Missing warmup fence");
+                    if (!warmupFence.passed)
+                    {
+                        if ((now - warmupFenceSubmission) * TickMs > 30000) throw new InvalidOperationException("Warmup fence timeout");
+                        return;
+                    }
+                    result.warmupFenceCompleted = true;
+                    lastUpdate = now;
+                    return; // Start measured CPU work on the next Update, after warmup completion.
+                }
+                PollMappedTiming();
                 if (nextFrame >= options.frames)
                 {
-                    if (pending.Count == 0 || ++drainFrames > 120) FinishTiming();
+                    if (!finalFenceInserted) throw new InvalidOperationException("Missing final batch fence");
+                    if (!result.batchFenceCompleted)
+                    {
+                        if (finalFence.passed)
+                        {
+                            long observed = Stopwatch.GetTimestamp();
+                            result.batchFenceCompleted = true; result.firstTrueFencePollTicks = observed;
+                            result.batchCompletionMs = (observed - result.batchStartTicks) * TickMs;
+                            result.batchCompletionMsPerFrame = result.batchCompletionMs / options.frames;
+                            result.fenceObservationIntervalMs = (observed - lastFencePoll) * TickMs;
+                            long boundStart = result.lastFalseFencePollTicks > 0 ? result.lastFalseFencePollTicks : result.finalSubmissionTicks;
+                            result.fenceObservationBoundMsPerFrame = (observed - boundStart) * TickMs / options.frames;
+                            result.finalSubmissionToObservationMs = (observed - result.finalSubmissionTicks) * TickMs;
+                            result.gc0Collections = GC.CollectionCount(0) - initialGc;
+                        }
+                        else { result.lastFalseFencePollTicks = Stopwatch.GetTimestamp(); lastFencePoll = result.lastFalseFencePollTicks; }
+                        if ((now - result.finalSubmissionTicks) * TickMs > 30000) throw new InvalidOperationException("Batch fence timeout");
+                    }
+                    if (mappedFrames == options.frames && result.batchFenceCompleted) FinishTiming();
+                    else if (++drainFrames > 120) throw new InvalidOperationException("Incomplete GPU samples during nonblocking drain");
                     return;
                 }
                 int index = nextFrame < 0 ? (nextFrame + options.warmup) % options.frames : nextFrame;
-                if (nextFrame == 0) initialGc = GC.CollectionCount(0);
-                long now = Stopwatch.GetTimestamp();
+                if (nextFrame == 0)
+                {
+                    initialGc = GC.CollectionCount(0); result.firstMeasuredUnityFrame = Time.frameCount;
+                    result.batchStartTicks = Stopwatch.GetTimestamp();
+                }
                 var sample = nextFrame < 0 ? null : result.samples[nextFrame];
-                if (sample != null) sample.updateIntervalMs = lastUpdate == 0 ? -1 : (now - lastUpdate) * TickMs;
+                if (sample != null)
+                {
+                    sample.updateIntervalMs = (now - lastUpdate) * TickMs;
+                    sample.submissionUnityFrame = Time.frameCount;
+                }
                 lastUpdate = now;
                 Draw(options.mode, calibration.views[index], nextFrame, sample);
-                if (nextFrame >= 0) pending.Add(nextFrame);
                 nextFrame++;
             }
             catch (Exception e) { Fail(e); }
         }
 
-        void Poll()
+        void PollMappedTiming()
         {
-            // Each sample name is issued once: no assumed three-frame mapping and no reused stale query.
-            // Never wait or force GPU completion. If a sample disappears/misses the polling window, fail closed.
-            for (int p = pending.Count - 1; p >= 0; p--)
+            if (result.firstMeasuredUnityFrame < 0) return;
+            int index = TimingContract.MeasuredIndex(Time.frameCount, result.firstMeasuredUnityFrame, options.frames);
+            if (index < 0) return;
+            var s = result.samples[index];
+            if (s.submissionUnityFrame != TimingContract.SubmittedUnityFrame(Time.frameCount) || s.availabilityUnityFrame >= 0 || index != mappedFrames)
+                throw new InvalidOperationException("GPU timing frame attribution mismatch");
+            for (int k=0;k<3;k++)
             {
-                int f = pending[p]; Sample s = result.samples[f];
-                for (int k = 0; k < 3; k++)
-                {
-                    var r = recorders[f,k];
-                    if (r.gpuSampleBlockCount > 1) throw new InvalidOperationException("GPU sample executed more than once");
-                    if (r.gpuSampleBlockCount == 1 && r.gpuElapsedNanoseconds > 0)
-                    {
-                        double ms = r.gpuElapsedNanoseconds / 1e6;
-                        if (k == 0) s.gpuRangeMs = ms; else if (k == 1) s.gpuCullMs = ms; else s.gpuDrawMs = ms;
-                    }
-                }
-                if (s.gpuRangeMs >= 0 && s.gpuDrawMs >= 0 && (options.mode == "cpu" || s.gpuCullMs >= 0)) pending.RemoveAt(p);
-                else if (nextFrame - f > 120) throw new InvalidOperationException("GPU query unresolved after 120 frames; no forced synchronization fallback");
+                if (options.mode == "cpu" && k == 1) continue;
+                long count = timing.Blocks(k), ns = timing.Nanoseconds(k);
+                if (count != 1 || ns <= 0) throw new InvalidOperationException("Missing/ambiguous stable GPU timing at documented delay for frame " + index);
+                if (k==0) s.gpuRangeMs=ns/1e6; else if(k==1) s.gpuCullMs=ns/1e6; else s.gpuDrawMs=ns/1e6;
             }
+            s.availabilityUnityFrame=Time.frameCount; mappedFrames++; result.gpuMappedFrames=mappedFrames;
         }
 
         void FinishTiming()
         {
-            if (pending.Count != 0) throw new InvalidOperationException("Incomplete delayed GPU samples");
-            result.gpuTimingStatus = "complete: distinct per-frame GPU Recorder markers";
-            result.gc0Collections = GC.CollectionCount(0) - initialGc;
+            result.gpuTimingStatus = "complete: stable " + options.timingApi + "; availability frame minus three";
+            // The runner separately gates correctness, diagnostic proof, pacing, load and drift.
             result.completed = true; Finish(0);
         }
 
@@ -279,7 +334,9 @@ namespace HlslPerf.Crossover
             // Unity's graphicsDeviceVersion describes the API, not the installed driver.
             // The player writes its runtime-selected adapter driver before scene initialization.
             try {
-                string text = File.ReadAllText(Application.consoleLogPath);
+                string text;
+                using (var stream = new FileStream(Application.consoleLogPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (var reader = new StreamReader(stream)) text = reader.ReadToEnd();
                 var match = System.Text.RegularExpressions.Regex.Match(text, @"(?m)^\s*Driver:\s*([^\r\n]+)");
                 return match.Success ? match.Groups[1].Value.Trim() : "unavailable (see external launch snapshot)";
             } catch (IOException) { return "unavailable (see external launch snapshot)"; }
@@ -307,7 +364,7 @@ namespace HlslPerf.Crossover
         }
         void OnDestroy()
         {
-            agents?.Release(); visible?.Release(); args?.Release(); commands?.Release();
+            timing?.Dispose(); agents?.Release(); visible?.Release(); args?.Release(); commands?.Release();
             if (target != null) target.Release(); if (material != null) Destroy(material);
         }
     }
