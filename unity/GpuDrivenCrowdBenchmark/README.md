@@ -22,7 +22,7 @@ Build once, then compare the same binary in normal hidden standalone and hidden 
 python tools/run_timing_diagnostic.py --player D:/CodexValidation/crossover-player/Crossover.exe --output D:/CodexValidation/crossover-v2-legacy --api legacy
 ```
 
-If stable legacy fails, repeat with `--api profiler-recorder` in a distinct output directory. The diagnostic uses three stable markers and a deterministic 1¨C4 block-count sequence over 96 frames, plus 16 drain frames. Its raw observations allow checking the documented three-frame mapping. The two API results are never averaged. These availability probes are not clean timing-quality pilots, and record background load. A bounded GPU-area check is documented in protocol v2; do not retry arbitrary configurations until something looks favorable.
+If stable legacy fails, repeat with `--api profiler-recorder` in a distinct output directory. The diagnostic uses three stable markers and a deterministic 1-4 block-count sequence over 96 frames, plus 16 drain frames. Its raw observations allow checking the documented three-frame mapping. The two API results are never averaged. These availability probes are not clean timing-quality pilots, and record background load. A bounded GPU-area check is documented in protocol v2; do not retry arbitrary configurations until something looks favorable.
 
 Once a final-binary diagnostic has **passed**, regenerate calibration and correctness for the first cell:
 
