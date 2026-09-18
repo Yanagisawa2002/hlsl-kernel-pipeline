@@ -1,5 +1,10 @@
 [
   {
+    "path": ".gitattributes",
+    "bytes": 9,
+    "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+  },
+  {
     "path": "raw-traces.json",
     "bytes": 1909,
     "sha256": "0abf9a0ec7e6a9f106243e6c839d4815f4c9dfc89507c747cd825a9c224fb7cc"
