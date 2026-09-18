@@ -1,0 +1,30 @@
+
+EID 21 ID3D11DeviceContext::Dispatch()
+ID3D11DeviceContext::Dispatch type=Chunk value=0
+  Context type=ID3D11DeviceContext * value=7
+  ThreadGroupCountX type=uint32_t value=625
+  ThreadGroupCountY type=uint32_t value=1
+  ThreadGroupCountZ type=uint32_t value=1
+  DebugMessages type=DebugMessage value=0
+shader entry=main resources=['structuredbuffer0'] rw=['uav0']
+SRV ResourceId::10418 bytes=4480000
+UAV ResourceId::10421 bytes=640000
+
+EID 24 ID3D11DeviceContext::CopyStructureCount()
+ID3D11DeviceContext::CopyStructureCount type=Chunk value=0
+  Context type=ID3D11DeviceContext * value=7
+  pDstBuffer type=ID3D11Buffer * value=10424
+  DstAlignedByteOffset type=uint32_t value=4
+  pSrcView type=ID3D11UnorderedAccessView * value=10422
+copy destination=ResourceId::10424
+indirect args=(6, 11429, 0, 0)
+
+EID 852 DrawInstancedIndirect(<6, 11429>)
+ID3D11DeviceContext::DrawInstancedIndirect type=Chunk value=0
+  Context type=ID3D11DeviceContext * value=7
+  pBufferForArgs type=ID3D11Buffer * value=10424
+  AlignedByteOffsetForArgs type=uint32_t value=0
+  DebugMessages type=DebugMessage value=0
+shader entry=main resources=['structuredbuffer0', 'structuredbuffer1'] rw=[]
+SRV ResourceId::10418 bytes=4480000
+SRV ResourceId::10421 bytes=640000

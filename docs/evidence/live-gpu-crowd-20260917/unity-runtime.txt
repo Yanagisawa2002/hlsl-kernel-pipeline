@@ -1,0 +1,6 @@
+NVIDIA GeForce RTX 4090 | Direct3D11
+160k-first time=9.911065 count=160000 visible=11269 view=(-9.52, 23.86, 32.00, 18.00)
+160k-second time=12.91119 count=160000 visible=11368 view=(-30.78, 24.55, 32.00, 18.00)
+RenderDoc capture triggered
+1m-first time=34.91083 count=1000000 visible=71398 view=(45.00, -24.56, 32.00, 18.00)
+1m-second time=37.91095 count=1000000 visible=71402 view=(38.58, -23.86, 32.00, 18.00)
