@@ -1,0 +1,92 @@
+[
+  {
+    "path": "smoke-v1/calibrate-100000-0.25.json",
+    "sourceSha256": "1e84c92e4fafbd05595460129153081887f016b444cb5bf9e44e0c8a41921f93",
+    "committedSha256": "1e84c92e4fafbd05595460129153081887f016b444cb5bf9e44e0c8a41921f93",
+    "handling": "byte-for-byte"
+  },
+  {
+    "path": "smoke-v1/calibrate-100000-0.25.launch.json",
+    "sourceSha256": "47c7815ce03e74f8633c3024bf450a1d17147b9a4ae3a7d21db80d1a7d40b292",
+    "committedSha256": "47c7815ce03e74f8633c3024bf450a1d17147b9a4ae3a7d21db80d1a7d40b292",
+    "handling": "byte-for-byte"
+  },
+  {
+    "path": "smoke-v1/calibrate-100000-0.25.log",
+    "sourceSha256": "bbf0d94e35536c7260c30a09a646c296c2f12938aee878530e11a7dba3ebb78b",
+    "committedSha256": "15147c5a5a322442d1e84fef86336f32d46cfa8d427027090f6cd37782b1ba74",
+    "handling": "sanitized player identifiers; trailing whitespace trimmed"
+  },
+  {
+    "path": "smoke-v1/validation-100000-0.25.json",
+    "sourceSha256": "dc293de13909701e88a6298645810088ebe4db13504bb0be4105e701fa9151cd",
+    "committedSha256": "dc293de13909701e88a6298645810088ebe4db13504bb0be4105e701fa9151cd",
+    "handling": "byte-for-byte"
+  },
+  {
+    "path": "smoke-v1/validation-100000-0.25.launch.json",
+    "sourceSha256": "a9e11dc2f2ea2ec726f04d5cfef5df0980f485c77708ab6646f7acaa3ebadc34",
+    "committedSha256": "a9e11dc2f2ea2ec726f04d5cfef5df0980f485c77708ab6646f7acaa3ebadc34",
+    "handling": "byte-for-byte"
+  },
+  {
+    "path": "smoke-v1/validation-100000-0.25.log",
+    "sourceSha256": "c865a21bbe16a321ee3d3ed91daedb496d3f07ee49594bb6c6a096e3bcb8f3cf",
+    "committedSha256": "381206d228cc4ab01c13d526163436e8745fb9fa8c2752f6da20c72ea5c24584",
+    "handling": "sanitized player identifiers; trailing whitespace trimmed"
+  },
+  {
+    "path": "smoke-v2/calibrate-100000-0.25.json",
+    "sourceSha256": "006c641f6397dff0c5fd51e13349202847928190aa07798aa4b3be10767a7c06",
+    "committedSha256": "006c641f6397dff0c5fd51e13349202847928190aa07798aa4b3be10767a7c06",
+    "handling": "byte-for-byte"
+  },
+  {
+    "path": "smoke-v2/calibrate-100000-0.25.launch.json",
+    "sourceSha256": "fe8b6166518c68ecb6d20b7535ea1a1a3c5000b07538ce232df31b254f949911",
+    "committedSha256": "fe8b6166518c68ecb6d20b7535ea1a1a3c5000b07538ce232df31b254f949911",
+    "handling": "byte-for-byte"
+  },
+  {
+    "path": "smoke-v2/calibrate-100000-0.25.log",
+    "sourceSha256": "db5a8ccfdf258a5ebdc0f7f4feee2d1e16286e3b378c22c37005e2edf4c699ff",
+    "committedSha256": "7c765cbcf2ea2c8816a6b02f241dfd455a4e26b17eff146ce5cde359e88bf6f2",
+    "handling": "sanitized player identifiers; trailing whitespace trimmed"
+  },
+  {
+    "path": "smoke-v2/pilot-100000-0.25-pair0-cpu.json",
+    "sourceSha256": "2296e73a41978970f09799fbabe299904760e711adea381bd25f13fba3d11023",
+    "committedSha256": "2296e73a41978970f09799fbabe299904760e711adea381bd25f13fba3d11023",
+    "handling": "byte-for-byte"
+  },
+  {
+    "path": "smoke-v2/pilot-100000-0.25-pair0-cpu.launch.json",
+    "sourceSha256": "de4c8f5136be9c418dc366b70f7f9553ec61f36e3ebacedce0b3ab4495d5875a",
+    "committedSha256": "de4c8f5136be9c418dc366b70f7f9553ec61f36e3ebacedce0b3ab4495d5875a",
+    "handling": "byte-for-byte"
+  },
+  {
+    "path": "smoke-v2/pilot-100000-0.25-pair0-cpu.log",
+    "sourceSha256": "d520e2b1e83890fa85d50415f3434d1e6f25aaf2e700745f0c9d812814335a24",
+    "committedSha256": "06308e824fd485505d9aacb3d68e61c7d768baf744ff4f7279bddee4c9e5efd8",
+    "handling": "sanitized player identifiers; trailing whitespace trimmed"
+  },
+  {
+    "path": "smoke-v2/validation-100000-0.25.json",
+    "sourceSha256": "8829003552fc15b3c8dbfafd98c969b1268726b61556c564c2bf739e975a8b82",
+    "committedSha256": "8829003552fc15b3c8dbfafd98c969b1268726b61556c564c2bf739e975a8b82",
+    "handling": "byte-for-byte"
+  },
+  {
+    "path": "smoke-v2/validation-100000-0.25.launch.json",
+    "sourceSha256": "6314d8ec4d6974c38a2521ba719d508ce8650c7654fde5798bf0546b8bb0e3c2",
+    "committedSha256": "6314d8ec4d6974c38a2521ba719d508ce8650c7654fde5798bf0546b8bb0e3c2",
+    "handling": "byte-for-byte"
+  },
+  {
+    "path": "smoke-v2/validation-100000-0.25.log",
+    "sourceSha256": "42dfe5fc646e84898c5ff957e7667c2e14134a407541151bcc65567339e350f2",
+    "committedSha256": "80cf82e11a75ce4abc3216faadd64abeaa906d6234335b6eea8130329726a22e",
+    "handling": "sanitized player identifiers; trailing whitespace trimmed"
+  }
+]

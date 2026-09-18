@@ -1,0 +1,44 @@
+Mono path[0] = 'D:/CodexValidation/hlsl-crossover-player-20260919/Crossover_Data/Managed'
+Mono config path = 'D:/CodexValidation/hlsl-crossover-player-20260919/MonoBleedingEdge/etc'
+Found 3 interfaces on host : 0) 172.29.48.1 1) 169.254.83.107 2) 192.168.1.2
+[REDACTED: local player connection identifiers]
+
+[REDACTED: local player connection identifiers]
+
+[REDACTED: local player connection identifiers]
+
+[REDACTED: local player connection identifiers]
+
+[REDACTED: local player connection identifiers]
+
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Initialize engine version: 6000.3.13f1 (8c4f11e4fb20)
+[Subsystems] Discovering subsystems at path D:/CodexValidation/hlsl-crossover-player-20260919/Crossover_Data/UnitySubsystems
+Forcing GfxDevice: Direct3D 12
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+d3d12: failed to query info queue interface (0x80004002).
+Direct3D:
+    Version:         Direct3D 12 [level 12.2]
+    Renderer:        NVIDIA GeForce RTX 4090 (ID=0x2684)
+    Vendor:          NVIDIA
+    VRAM:            24138 MB
+    App VRAM Budget: 23370 MB
+    Driver:          32.0.15.9186
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.081 seconds
+- Finished resetting the current domain, in  0.002 seconds
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+UnloadTime: 0.643100 ms
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+PlayerConnection::Cleanup##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1789750301700,"processId":57492,"allocatedMemory":67500,"memoryLabels":[{"Default":136},{"NewDelete":728},{"Thread":7616},{"Manager":14835},{"GfxDevice":2112},{"Audio":752},{"Serialization":520},{"JobScheduler":32768},{"String":465},{"HashMap":5120},{"PoolAlloc":96},{"CloudService":144},{"VR":1872},{"Video":144},{"Subsystems":96},{"Accessibility":80},{"CoreBusinessMetrics":120}]}

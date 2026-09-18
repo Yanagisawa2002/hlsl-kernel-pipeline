@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "status": "STOP: no valid performance matrix",
+  "condition": {
+    "agents": 100000,
+    "targetVisibility": 0.25,
+    "actualVisibilityMean": 0.25000744
+  },
+  "correctness": {
+    "completedConditions": 1,
+    "plannedConditions": 18,
+    "selectedFrames": 10,
+    "countAndSetPasses": 10,
+    "pixelPasses": 10
+  },
+  "pilot": {
+    "attemptedProcesses": 1,
+    "completedProcesses": 0,
+    "submittedMeasuredFrames": 121,
+    "resolvedGpuRangeSamples": 0,
+    "error": "System.InvalidOperationException: GPU query unresolved after 120 frames; no forced synchronization fallback"
+  },
+  "primary": {
+    "completedProcesses": 0,
+    "plannedProcesses": 216,
+    "perConditionPerArmCompleted": 0
+  },
+  "cpuMeanMs": null,
+  "gpuMeanMs": null,
+  "architectureRatio": null,
+  "confidenceInterval": null,
+  "crossover": "not determined; insufficient valid timing evidence",
+  "plots": [],
+  "sourceIdentity": "f7365d1009a51fa8b9bcde8cf7955fafbbf7eeee0cb92dab443630b8fe2eb785"
+}
