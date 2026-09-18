@@ -6,10 +6,11 @@
 #undef main
 #include "HlslPerfScan.h"
 #include "RuntimeSupport.h"
+#include "ProfileSupport.h"
 
 int RuntimeScan(int argc, char** argv)
 {
-    if (argc < 5 || argc > 7) throw std::invalid_argument("probe|validate-only|test-all|batch-only|export-input rts|tile|tile-fused count expected-luid [exact-adapter] [input-output-file]");
+    if (argc < 5 || argc > 7) throw std::invalid_argument("probe|validate-only|test-all|batch-only|profile-once|export-input rts|tile|tile-fused count expected-luid [exact-adapter] [input-output-file]");
     std::string command = argv[1], arm = argv[2];
     uint32_t count = static_cast<uint32_t>(std::stoul(argv[3]));
     uint64_t luid = std::stoull(argv[4]);
@@ -20,6 +21,31 @@ int RuntimeScan(int argc, char** argv)
     if (command == "probe") return 0;
     if (count != (1u << 28)) throw std::invalid_argument("Use the pinned upstream 2^28 scan workload.");
     auto info = GetDeviceInfo(device.get());
+
+    if (command == "profile-once")
+    {
+        HlslPerfPixRuntime pix;
+        printf("HPJSON {\"kind\":\"arm\",\"backend\":\"%s\",\"count\":%u,\"mode\":\"profile-once\",\"marker\":\"HlslPerf.ScanInclusive.ProfileRange\"}\n", arm.c_str(), count);
+        if (arm == "rts")
+        {
+            HlslPerfProfiledScan<ReduceThenScan> operation(pix, device, info);
+            operation.ProfileOnceInclusiveInitOne(count);
+        }
+        else if (arm == "tile")
+        {
+            HlslPerfProfiledScan<HlslPerfScan> operation(pix, device, info, false);
+            operation.ProfileOnceInclusiveInitOne(count);
+        }
+        else if (arm == "tile-fused")
+        {
+            HlslPerfProfiledScan<HlslPerfScan> operation(pix, device, info, true);
+            operation.ProfileOnceInclusiveInitOne(count);
+        }
+        else throw std::invalid_argument("Unknown scan backend.");
+        HlslPerfRuntimeBudget(device.get(), "after");
+        return 0;
+    }
+
     auto run = [&](auto& operation)
     {
         if (command == "export-input") { operation.ExportInput(count, argv[6]); return; }
@@ -40,7 +66,7 @@ int RuntimeScan(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-    if (argc > 1 && (std::strcmp(argv[1], "probe") == 0 || std::strcmp(argv[1], "validate-only") == 0 || std::strcmp(argv[1], "batch-only") == 0 || std::strcmp(argv[1], "test-all") == 0 || std::strcmp(argv[1], "export-input") == 0))
+    if (argc > 1 && (std::strcmp(argv[1], "probe") == 0 || std::strcmp(argv[1], "validate-only") == 0 || std::strcmp(argv[1], "batch-only") == 0 || std::strcmp(argv[1], "profile-once") == 0 || std::strcmp(argv[1], "test-all") == 0 || std::strcmp(argv[1], "export-input") == 0))
     {
         try { return RuntimeScan(argc, argv); }
         catch (const winrt::hresult_error& error) { printf("RUNTIME_FAILED HRESULT %08x\n", uint32_t(error.code().value)); return 5; }
@@ -48,7 +74,7 @@ int main(int argc, char** argv)
     }
     if (argc == 1 || (argc == 2 && std::strcmp(argv[1], "--help") == 0))
     {
-        std::puts("Usage: scan.exe run-upstream|run-candidate (executes native GPU tests and benchmark)");
+        std::puts("Usage: scan.exe run-upstream|run-candidate or profile-once rts|tile|tile-fused count expected-luid [exact-adapter]");
         return 0;
     }
     if (argc == 2 && std::strcmp(argv[1], "run-upstream") == 0) return HlslPerfOriginalUpstreamMain();
