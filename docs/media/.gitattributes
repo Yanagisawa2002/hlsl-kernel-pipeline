@@ -1,0 +1,2 @@
+*.json -text
+capture-runtime.txt -text whitespace=cr-at-eol

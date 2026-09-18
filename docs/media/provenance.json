@@ -1,0 +1,121 @@
+{
+  "sampleSourceCommit": "5afb8d31f3159a1449efa2cf351e4218578ae0c9",
+  "presentationSource": "Captured byte hashes refer to preserved local inputs; canonicalLfSHA256 also verifies the committed sources across Git newline conversion.",
+  "captureDate": "2026-09-19",
+  "timezone": "Asia/Singapore",
+  "unityVersion": "6000.3.13f1",
+  "device": "NVIDIA GeForce RTX 4090",
+  "api": "Direct3D11",
+  "totalAgents": 1000000,
+  "visibleCount": "asynchronous telemetry; never controls draw",
+  "capture": "offscreen camera render, 288 frames at fixed offline 24fps cadence; no achieved-FPS claim",
+  "sourceFiles": {
+    "unity\\LiveGpuDrivenCrowd\\LiveGpuDrivenCrowd.cs": {
+      "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\Assets\\LiveGpuDrivenCrowd\\LiveGpuDrivenCrowd.cs",
+      "bytes": 7385,
+      "sha256": "e783076a78e48c86ff5db707b59bf5e53c21eea3fe712269d08beb0e1afd8eb1",
+      "canonicalLfSHA256": "68ae31bc3f4cd2316cc713e147f8d4edbbfd7f8c3c23cc793519d4d323ad8791"
+    },
+    "unity\\LiveGpuDrivenCrowd\\LiveGpuDrivenCrowd.compute": {
+      "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\Assets\\LiveGpuDrivenCrowd\\LiveGpuDrivenCrowd.compute",
+      "bytes": 674,
+      "sha256": "a8c205a2024c8dc23775e4ae6856162b738b9bfe893306d6bd764fb51faebf71",
+      "canonicalLfSHA256": "d865704b888d9a53bc719dff69776e95351854032847b079345b97f3901bb05d"
+    },
+    "unity\\LiveGpuDrivenCrowd\\LiveGpuDrivenCrowd.shader": {
+      "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\Assets\\LiveGpuDrivenCrowd\\LiveGpuDrivenCrowd.shader",
+      "bytes": 1775,
+      "sha256": "e54d08dfd73a088c75fbaf705364c637b8d8d96ccacf24b3bc32556891126514",
+      "canonicalLfSHA256": "5add3dcc495aa0c0b428f39d26a5ffb1d20009d36d744199c8e563c712e9d3ca"
+    },
+    "tools/portfolio-unity/PortfolioRecorder.cs": {
+      "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\Assets\\PortfolioRecorder.cs",
+      "bytes": 5090,
+      "sha256": "f3673a303dd56ec85cec67e30edc38168e8389d6c2de0ab603249ab52502f8e6",
+      "canonicalLfSHA256": "6a1fb0fb54d5be53b90a35433aa778c5223895e83c48101be7095564043a2a51"
+    },
+    "tools/portfolio-unity/Editor/PortfolioBuild.cs": {
+      "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\Assets\\Editor\\PortfolioBuild.cs",
+      "bytes": 2661,
+      "sha256": "ad6bce08f673a9d7c73a50eb06b8ba4a8c32279edd95c23f6890c7853ef1399b",
+      "canonicalLfSHA256": "ad6bce08f673a9d7c73a50eb06b8ba4a8c32279edd95c23f6890c7853ef1399b"
+    }
+  },
+  "player": {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\Build\\Crowd.exe",
+    "bytes": 667648,
+    "sha256": "ebf712514c29be1e27d805fcf8bc81d5bbabed155e0de9f4ebc03f28731b0980"
+  },
+  "rawFramesDirectory": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero",
+  "logs": [
+    {
+      "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\build-hero.log",
+      "bytes": 145295,
+      "sha256": "992a7bd8dff8edfa2a00fb03ffd6a0313ca237a67682e175aaaf793515dc0948"
+    },
+    {
+      "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\player-hero.log",
+      "bytes": 1803,
+      "sha256": "0a7e1337fe370941fd2ec54947a78056fbf04043c4ca1a05c13e8da40a4ca014"
+    }
+  ],
+  "transformationCommands": [
+    [
+      "ffmpeg",
+      "-framerate",
+      "24",
+      "-i",
+      "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-%04d.png",
+      "-c:v",
+      "libx264",
+      "-crf",
+      "18",
+      "-preset",
+      "slow",
+      "-pix_fmt",
+      "yuv420p",
+      "-movflags",
+      "+faststart",
+      "docs/media/gpu-driven-crowd-hero.mp4"
+    ],
+    [
+      "ffmpeg",
+      "-i",
+      "docs/media/gpu-driven-crowd-hero.mp4",
+      "-filter_complex",
+      "[0:v]fps=8,scale=768:432:flags=lanczos,split[a][b];[a]palettegen=max_colors=64:stats_mode=diff[p];[b][p]paletteuse=dither=none",
+      "-loop",
+      "0",
+      "docs/media/gpu-driven-crowd-hero.gif"
+    ]
+  ],
+  "outputs": [
+    {
+      "path": "D:\\CodexWork\\hlsl-portfolio-packaging-20260919\\docs\\media\\gpu-driven-crowd-hero.gif",
+      "bytes": 13791113,
+      "sha256": "f7b4f627ffa95e3581248dfcd92b858ba578f4cf3f110cceb09dba5aa0df4891"
+    },
+    {
+      "path": "D:\\CodexWork\\hlsl-portfolio-packaging-20260919\\docs\\media\\gpu-driven-crowd-hero.mp4",
+      "bytes": 10173200,
+      "sha256": "d90b52cd3112b8dde5b79d79827d565fa4a29ee6e87d5eef76aac74571441ac6"
+    }
+  ],
+  "claimBoundary": "architecture execution only; not controlled performance or one million drawn agents",
+  "mediaProperties": {
+    "gif": {
+      "width": 768,
+      "height": 432,
+      "frames": 96,
+      "durationMs": 12010,
+      "nominalPlaybackFps": 8
+    },
+    "mp4": {
+      "width": 960,
+      "height": 540,
+      "frames": 288,
+      "durationMs": 12000,
+      "playbackFps": 24
+    }
+  }
+}

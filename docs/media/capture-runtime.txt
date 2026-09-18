@@ -1,0 +1,18 @@
+Unity=6000.3.13f1
+GPU=NVIDIA GeForce RTX 4090
+API=Direct3D11
+TotalAgents=1000000
+VisibleCount=asynchronous telemetry only
+CaptureCadence=24 frames/s (offline)
+frame=0; visible=4503; view=(19.68, 1.44, 8.00, 4.50)
+frame=24; visible=4538; view=(19.43, 1.92, 8.00, 4.50)
+frame=48; visible=4538; view=(19.11, 2.39, 8.00, 4.50)
+frame=72; visible=4513; view=(18.72, 2.86, 8.00, 4.50)
+frame=96; visible=4524; view=(18.26, 3.32, 8.00, 4.50)
+frame=120; visible=4481; view=(17.74, 3.78, 8.00, 4.50)
+frame=144; visible=4476; view=(17.15, 4.22, 8.00, 4.50)
+frame=168; visible=4476; view=(16.51, 4.67, 8.00, 4.50)
+frame=192; visible=4513; view=(15.80, 5.10, 8.00, 4.50)
+frame=216; visible=4458; view=(15.04, 5.52, 8.00, 4.50)
+frame=240; visible=4442; view=(14.22, 5.93, 8.00, 4.50)
+frame=264; visible=4421; view=(13.35, 6.33, 8.00, 4.50)

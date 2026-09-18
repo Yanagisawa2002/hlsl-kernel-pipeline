@@ -1,0 +1,1442 @@
+[
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0000.png",
+    "bytes": 112886,
+    "sha256": "b55bb1014bfea6a377661a3201ab7627d28c6b0279f7678ef5ad28fa45cd86bb"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0001.png",
+    "bytes": 112948,
+    "sha256": "17e2c7d4f7c96a159d6f66fdf73e4b2f92866963d5bab60a429c717b2c1754fb"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0002.png",
+    "bytes": 113324,
+    "sha256": "2d9fe4d2c7cca782c6b94379a7809819e1dca7352d8553e3d0b8699caaedff56"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0003.png",
+    "bytes": 112427,
+    "sha256": "eb89567d530c4ea3c0780787be790a90de579526dde926baa8e0ddbe6fac535d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0004.png",
+    "bytes": 112652,
+    "sha256": "fe9ad267aeee583a2a89d349089289ea7c183ade52312c7d46f5662d0479f2c1"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0005.png",
+    "bytes": 113070,
+    "sha256": "a57587a4ccb3a22ac9099784fb2cf7a010536ad30b9847aca318bfa9ce3e9417"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0006.png",
+    "bytes": 112994,
+    "sha256": "babb303effcec3fcd85ff884c15828a03462f97a10cf8b1f15c1292ef2c97253"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0007.png",
+    "bytes": 113728,
+    "sha256": "1f3bee742cf7e19eba79fe10bdf48b9a9c46c668caf39d0047bef1b79c7884f9"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0008.png",
+    "bytes": 112976,
+    "sha256": "89492f1c2b50ebae72de206e0c8774b9375ca1fc95e9c5bf59abc8262cb1f508"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0009.png",
+    "bytes": 113038,
+    "sha256": "3871f2a5055824c01162e5636cc464a9a29cf58cfc26d2c65c8978ab6829dba3"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0010.png",
+    "bytes": 113202,
+    "sha256": "ead0cff3c73afe4eed1e213d32ae9772649017a224e3d5df3b593b9d25fe3c4a"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0011.png",
+    "bytes": 113054,
+    "sha256": "065aaa7c888a38664cca58fad021e6833c6f29714e0842933ed1f3cecfb1ea42"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0012.png",
+    "bytes": 113591,
+    "sha256": "27025f7ad20afa02ba37617eab832441dce1c1fd202363187403b1bc83d456a1"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0013.png",
+    "bytes": 113298,
+    "sha256": "68b3ee171a7753f4118c4d2b37faa3ea1a58bf44288665e447e9d1ee70931f4e"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0014.png",
+    "bytes": 112304,
+    "sha256": "0e34dac75620c454bf54b48943e4f235459259d753aeb5141057872851dddfe9"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0015.png",
+    "bytes": 112805,
+    "sha256": "aabe0ee7f6e0a39747a141f066501a9e7b5e5097f663ee6c02682783362aefe5"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0016.png",
+    "bytes": 112941,
+    "sha256": "f82123acc1c3df97a83b919de768584b65bd2c0ef1968883b4d39e5362cbedc6"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0017.png",
+    "bytes": 112661,
+    "sha256": "ab9ddd5a95c61a3aec5950f8fb1acb46a7e9e1edbbe1fa6e4d31307eabcb0fbf"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0018.png",
+    "bytes": 113322,
+    "sha256": "29f16f4560b6fe697e6a96182160f515a733cb7d67e3fb3f0e141e2983b9a348"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0019.png",
+    "bytes": 112373,
+    "sha256": "697a8993e6c567e65e0baa5e961700ccb77630497d4651a7e80c78f99b7c4bcf"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0020.png",
+    "bytes": 112415,
+    "sha256": "dd85853fa29f78e5d3413daa979b4282d5377009a810ca99d27d3b752db6911c"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0021.png",
+    "bytes": 113202,
+    "sha256": "e5e636154727b7fce81673708ef9e5d0e24a5c93ddfd7933f4e0ec6faf98a618"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0022.png",
+    "bytes": 113504,
+    "sha256": "0f1dd64da3ee4871a705206ab48e9815691ce71676cee1401855ee003527f217"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0023.png",
+    "bytes": 113040,
+    "sha256": "9f5924365aa84f8c65ea1db27541811ddb048d3838813648a11e6dbc24715943"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0024.png",
+    "bytes": 112869,
+    "sha256": "397def53f3749dfb68d3305d4b1dcd34b5b0c0ec2d84eb6042ee8c3ac348c4f7"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0025.png",
+    "bytes": 112936,
+    "sha256": "5d288466ae5c8eda3a29463f92585f1b779966f49b05f96a2d440da8554102dd"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0026.png",
+    "bytes": 112672,
+    "sha256": "366aa5754109b8f13cf35290e82c7dace82211ae298e9feb5aee7de26f6dcab3"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0027.png",
+    "bytes": 113323,
+    "sha256": "894f0e1593ce4b375ce612b9ed262b261f28c8f10d1c622508a8d7594f5912ed"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0028.png",
+    "bytes": 113603,
+    "sha256": "67f3191b70bc097a0695a4170387a291b4b7d874be59db53f498c5d9c695a95d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0029.png",
+    "bytes": 113001,
+    "sha256": "873d5005ec939a0919cbde871256a093b89a61812e32b4dbc0ae1d2fd7544fb7"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0030.png",
+    "bytes": 112338,
+    "sha256": "93a7789fbe0c08328ae58854667e54baa0f9491a73552d49a84ac1c1309a83c2"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0031.png",
+    "bytes": 112241,
+    "sha256": "08b2ced77939a91035faf03e5bd103215e28ba5dfae5c7ff69c07a64d4354df6"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0032.png",
+    "bytes": 113056,
+    "sha256": "219a39079c2247b44419de15f78a8ccff3b3112710a17136cc1f6f62c92bde3b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0033.png",
+    "bytes": 113196,
+    "sha256": "a0be9df9543484b3b88fc77daf13b1e4d7186fcce3a8b1b23b5d56207a65e1fc"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0034.png",
+    "bytes": 113105,
+    "sha256": "0ee6d3a11a12fa8580dfcf7eceb6490f60adc80e1dc47b60d249f98c5e59dce7"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0035.png",
+    "bytes": 112499,
+    "sha256": "d7f482e5ae53ca9ce6f91b8419be8e40e656f1429486b93deb0441ecd0e2715f"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0036.png",
+    "bytes": 112541,
+    "sha256": "e78dca2fc62513ee15d336872b50ce5b3f0742ec798c5e253722213474479d94"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0037.png",
+    "bytes": 112765,
+    "sha256": "2feb2d811bfa3ed098bb282f0cda4c48d3123afcf6f94ac68c75eecba279731d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0038.png",
+    "bytes": 113175,
+    "sha256": "1b1ff4498d884aa4ae4d519cb1211733b8cff3f9042a2afcc59c6b1a5dac4fbf"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0039.png",
+    "bytes": 113053,
+    "sha256": "941f783832ec448b9542e16de6a459b335994009fa2f0bbb1a94065b244d2a10"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0040.png",
+    "bytes": 112709,
+    "sha256": "1df2ce0d9c774193017ece91331f344abcc393caf767d129f92fa40b51c402d8"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0041.png",
+    "bytes": 112336,
+    "sha256": "c2bb137fa4a78fe053ba8863e558a53040a24d37c8e76eac5699bcf0a415dd8b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0042.png",
+    "bytes": 112090,
+    "sha256": "684227f9551a91e24cb8eaeb460b3078344cb98e1af98017e3096d62105234a8"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0043.png",
+    "bytes": 112913,
+    "sha256": "7381403377aa76adff4de07a62351ebceed985b0cfb2bce1a51b225660c3caaa"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0044.png",
+    "bytes": 113090,
+    "sha256": "cf11378d2f4b1e171f190b7e9d47f30b15f19ea4baecf9892376eb07f45f068b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0045.png",
+    "bytes": 113486,
+    "sha256": "a33b676f8f7a63d2c6c5c8fceedf24503a652fd4e2d2afb37e230acf27e1d15f"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0046.png",
+    "bytes": 112989,
+    "sha256": "be1682d957c19e51e424fa184fe41a5e212a48ccfcdcb12c01fb9e617e80ff4f"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0047.png",
+    "bytes": 112371,
+    "sha256": "521c2fa69c763fa881af99c0c2f261d0e7e2a1cec463986a2b7bf1abfb98f489"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0048.png",
+    "bytes": 112347,
+    "sha256": "5dc68ff3945bc72f53e854fa06d9b4bbc6925593e16a6d2c76398259b3cd492e"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0049.png",
+    "bytes": 113132,
+    "sha256": "df3733eaed7364c839c3301802e5dd3e78a2049a253b24111916bda37fb5ced8"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0050.png",
+    "bytes": 113034,
+    "sha256": "e82d910b9d1ddefd88d040c4afed63d6965a087537babb5b5e0e71786aaacbeb"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0051.png",
+    "bytes": 113261,
+    "sha256": "b5a5ac7b403560cacfd6c901b91d3d173df7353eaa3193a11f591c79b634fdc0"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0052.png",
+    "bytes": 112861,
+    "sha256": "c32e827463123d5627b7cd5ff722601a9a1b3bf3fea802616342fa9bcd9f1fb6"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0053.png",
+    "bytes": 112608,
+    "sha256": "2a14ea3a905876a39bdddf38affd93cb22da658770179594adef4a99893cdeb9"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0054.png",
+    "bytes": 112589,
+    "sha256": "b5c2a6953e6d371bd0419cebbe40fc6ff287cff5bb6793f9c739abb560b416f3"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0055.png",
+    "bytes": 112990,
+    "sha256": "d1b4997c6975a3c9c792a0fac7827c865be14d7d1f5d1bc2efa4869e041b1d85"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0056.png",
+    "bytes": 113262,
+    "sha256": "84bec66311bbfda6200cebc5fc2acdf2ce8803ab2cfcc92a5c42957972e7c086"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0057.png",
+    "bytes": 113262,
+    "sha256": "e3c29f7497ee1ea922c642d94c8acbdd6ef734b4e8e86d5c7542a7b3295ea999"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0058.png",
+    "bytes": 112497,
+    "sha256": "8a8220e1800870435ca24d6083928e744b1e058e27b751d52a874b21e9010642"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0059.png",
+    "bytes": 112134,
+    "sha256": "b86133469bae05e49646de89b8f64caca91b27a8ff7395721b7ddabfacbbde97"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0060.png",
+    "bytes": 112225,
+    "sha256": "43a81175630186ffddad486c3deeae6dfa66297f74fa4a6aab305351061fc9ba"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0061.png",
+    "bytes": 113012,
+    "sha256": "b85f3320d5416ff6300e6f3c625ed2383afc97fb7c0343649c37a0600cbbeb59"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0062.png",
+    "bytes": 113419,
+    "sha256": "4528d0d0298cd49f914082a18c7c362210724a14f0689bdb7a1ff2e0da4cec85"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0063.png",
+    "bytes": 112803,
+    "sha256": "640f8b47fea78d52cf82f1a47f36cbde161c3156d22f036a3b278be58207f363"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0064.png",
+    "bytes": 112448,
+    "sha256": "0683cef9bfe1976130f782a71d8a3a3a0d3e64331a98f8f3764ba3dc7a08379b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0065.png",
+    "bytes": 111843,
+    "sha256": "48b523db841d049cd507bdf3ab25cc855212408cd2807f65a0dcaab9d656e883"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0066.png",
+    "bytes": 111995,
+    "sha256": "b00341e6ccd425ecdd4e762178bc846333ad8122e8d932f612808d4cf968efae"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0067.png",
+    "bytes": 112635,
+    "sha256": "9941db69db6176d23103325b3403b349cf27f2195b30aac623b9728e62d94a1d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0068.png",
+    "bytes": 113231,
+    "sha256": "9d7b7a4b7727c09fa2801b2b31638a3e1019888e1258d9b75e8b5479a0b4129f"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0069.png",
+    "bytes": 112894,
+    "sha256": "ddaa1638bf449c36eb4db345dbe541176ef4779ba9c32d23b08e6eb3b2f2ac4e"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0070.png",
+    "bytes": 112323,
+    "sha256": "5f036893c9cbaff3ad82778ccb53899dded48a2470c3d7a674ba6df24f9f984f"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0071.png",
+    "bytes": 112340,
+    "sha256": "78eb018ef36c3fe4725d11e25b3d5461d2b220dba0ed87985088bb6df69fb2e6"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0072.png",
+    "bytes": 112630,
+    "sha256": "005ea5a2285da619e8e71aef7917c7dfaf28f7d8d92870a34c37b58eed844470"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0073.png",
+    "bytes": 113085,
+    "sha256": "f8d36575270274cb63cdc1a821ef7059a84189bc7749b469aa06f19c8a906761"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0074.png",
+    "bytes": 113405,
+    "sha256": "f27529b16b20bf6434430582099af382cc17bf8cecc617fbc89458328fd3845b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0075.png",
+    "bytes": 113215,
+    "sha256": "a9b7df21acc00aa8477a0a60b5de1c4c03b57fbcf1ce60fbc2aa013a2ad4f86c"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0076.png",
+    "bytes": 112874,
+    "sha256": "fad353ac6443a018b5d1d2fd76bb629c32657c6300e15bd0965c4c1c5145c833"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0077.png",
+    "bytes": 112877,
+    "sha256": "d3c7810c1c390f9366506570c360fda600305c9367c5b3266864e7ec1d5deb80"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0078.png",
+    "bytes": 112768,
+    "sha256": "4bed1590c6a4dba5fa416b0af1cfd9fbd1b9bc4b5ae5b200f6d12822a38ba5d0"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0079.png",
+    "bytes": 113214,
+    "sha256": "ff5a271a832701902227a8098d6f2d79c421898826a2b5ded35dc426e20399a9"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0080.png",
+    "bytes": 112839,
+    "sha256": "bb2a3c45e641a7a19118348897b3f155ceddf8d791780f6cf0fe9161337823a1"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0081.png",
+    "bytes": 112852,
+    "sha256": "e5eda4f287add02c087bab5c9b8051764382fb2c1ae27475c8293e0432392d2e"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0082.png",
+    "bytes": 112705,
+    "sha256": "6f2e224b178f8fe27c9157a2ba6cd78c1b542fff83b666a58c2ffe56184b692d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0083.png",
+    "bytes": 112495,
+    "sha256": "2dd7c4ac7d10b0e4df45d60118fc2ef1fc5e8bf0732551a173dd017ae865ced4"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0084.png",
+    "bytes": 112622,
+    "sha256": "2ffcc9f9cc78951f74addb34eef0693b77a6d385fcc9e07a51e98dcac04e8268"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0085.png",
+    "bytes": 112978,
+    "sha256": "0354286af83f3055f3176ccb388bf237ae9026d65f5a95e07b33473f9c4cb91e"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0086.png",
+    "bytes": 113300,
+    "sha256": "4ae6ff85576467fec0bb7a46681e1d40f125d3aed61e4009781789e28fbe2ed9"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0087.png",
+    "bytes": 113223,
+    "sha256": "1cb2218ccc0b99b434a838521a50628e77e1b0a763ab2e7d4cb1cfe9fe8d0023"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0088.png",
+    "bytes": 112796,
+    "sha256": "13b01690e18dc042b7dcd1dbde4e9243ad67ad85fe100b9068229202943f5323"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0089.png",
+    "bytes": 112594,
+    "sha256": "d4d9f78891edee7b1bdda198e2502d23ab17651f96ebc62c6d8444da73a9e50b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0090.png",
+    "bytes": 112422,
+    "sha256": "2a9fcbe3ec725fd08325bf4515ad0ee84da52863132f3048e2e5f4ed528d5a75"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0091.png",
+    "bytes": 112722,
+    "sha256": "c53213c24b34b9b77aa33a696615dbdac0643e3e4f6031ac409b7a54bce6731e"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0092.png",
+    "bytes": 113068,
+    "sha256": "3784052bfb6953b175c84eb993e55b464473de90baf7af07f9300c2eef612438"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0093.png",
+    "bytes": 113017,
+    "sha256": "b088461f530164a749d790797855611a9343665fc786e03a1dccd6c2605f2c64"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0094.png",
+    "bytes": 113270,
+    "sha256": "c11ad5a0e14324c9b0a1043134613b62acd2fc794e96792fbb4682eab8f3a666"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0095.png",
+    "bytes": 112789,
+    "sha256": "e3d045843e1f5e11689cd36bc6aeb0d8ee36e9c1f7432071db0f953aee5b5a17"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0096.png",
+    "bytes": 112927,
+    "sha256": "2a689ca8a0b2ded5d5e1268de322d3c3fbdd6eb2d7c58f901dd8552ff2f78db8"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0097.png",
+    "bytes": 112468,
+    "sha256": "9ed368c5e8e666e31be0cce4c574c82ee42ae03b3de00b697c83064d651bb3cb"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0098.png",
+    "bytes": 112712,
+    "sha256": "0cb2ac7d3505463ddd7487fd1e01a6483a5351a9bf3501d94c0370e551d75eaa"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0099.png",
+    "bytes": 113205,
+    "sha256": "f054ee937b96cb1c76f33ec57d18a84ceebe31fec6944769064d867e1c94f827"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0100.png",
+    "bytes": 113477,
+    "sha256": "3138e090e96931768b728a2dad5177a60e45a99bdb5c24381f9b475f4aa9dd2b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0101.png",
+    "bytes": 113227,
+    "sha256": "f7cdabcc130e1db81b4633c9b450ff1c3020e44f8947f898a915f67af18c76bd"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0102.png",
+    "bytes": 113073,
+    "sha256": "968a752872119ccde18cdde7d0fe14f7d5d5023f2b2129d1a126a67b37ce4565"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0103.png",
+    "bytes": 113014,
+    "sha256": "c0e97381ef9b2d515caae177134083726911916b44dc4dd754230fc38eb9a6c9"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0104.png",
+    "bytes": 112886,
+    "sha256": "3b09eef86cce8d2499df65aaa43110869ec9c8e1040113d4fe6857d44f09c2c6"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0105.png",
+    "bytes": 113031,
+    "sha256": "4818175bc0195cf412678e83e168c099d6dc1f3e288027200b500f196f5932d1"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0106.png",
+    "bytes": 113469,
+    "sha256": "2676bbb1031435f3eea033e785b438c97997485c511935823718ef03e5cc3e8f"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0107.png",
+    "bytes": 113716,
+    "sha256": "ef46288363ef3392dfc38612150aed412784b4c2b990a074ec6fd8e93ff88543"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0108.png",
+    "bytes": 113607,
+    "sha256": "50d31d73d93acebcb73703a04dc8f84527805ee5fa03e85fc5cf6943f77e3c0b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0109.png",
+    "bytes": 113264,
+    "sha256": "cf09c71412ec26510112069c0ffebc47247ec8cb103ed8b279b19b52cfaed91e"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0110.png",
+    "bytes": 113326,
+    "sha256": "bbc265c0044745955db4ab83207f88e133f422d009a2e0545f7842f0fd7f5742"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0111.png",
+    "bytes": 113065,
+    "sha256": "cabd72d099bf7574c588aa514ed0c6a778197591a23c8c2f7e937e62c6776056"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0112.png",
+    "bytes": 112956,
+    "sha256": "da8cc1e8c11c088d82ee5170664e1a0692eb436cb11bf45cf4110fe3a15d4bb8"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0113.png",
+    "bytes": 113516,
+    "sha256": "56ca02d68c908e66d7c91e695b2f3f5764e9ec2717ee13ae5fbdee1718a43f49"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0114.png",
+    "bytes": 113687,
+    "sha256": "34db144ea6e4f99f87dcfb817345a9bf745e6442261b60792bc2edea04810de8"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0115.png",
+    "bytes": 113491,
+    "sha256": "e85984293923b5687cbe01047e391a44270ee1863f3eb57ab3db53f4e97cfce1"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0116.png",
+    "bytes": 113565,
+    "sha256": "43b617ce9203be36918d3f70395b1b9ba64e5378017835d4de84923861584167"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0117.png",
+    "bytes": 113386,
+    "sha256": "d3388dc82a58156d3b7fe1c589c15645d70b2fd7c9e8806e29dbc647f3ef1c5a"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0118.png",
+    "bytes": 113396,
+    "sha256": "ce393ef000f0d84fbbd83540146aad41936d3c532835bcf9c4f726feccfd08ef"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0119.png",
+    "bytes": 113783,
+    "sha256": "be80fb4b1d5d83d796f009463e837f974213fcb833c6fbab0d0182e85df3b976"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0120.png",
+    "bytes": 113547,
+    "sha256": "61a46e028ad3a5f7b06526400570a7db4f2304d200943492141f0b372c051065"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0121.png",
+    "bytes": 113463,
+    "sha256": "3231ee0a212d0b81e7cb17e82a30c3ec3c432a4a8641893b1626e39de7d9608a"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0122.png",
+    "bytes": 114256,
+    "sha256": "64178813410ceb0052b332e4d8c73a1e5213e9e5eadceb863af191c6cfe652e6"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0123.png",
+    "bytes": 113666,
+    "sha256": "967eb9a749c42ac43a0400f53269d1c1b834a700007f9acea7436c8d361a1c74"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0124.png",
+    "bytes": 113663,
+    "sha256": "780dae4f79d8cf6e0bc2788eb51ac42afa3a4bbffffd5b9e60fb89e72b72a19d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0125.png",
+    "bytes": 113362,
+    "sha256": "822efecbba207ffe0ea29ae3ae6e6bf32e2802e8fee831ce4721cbca2180dd5f"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0126.png",
+    "bytes": 113299,
+    "sha256": "fdf1510324bc6f057902bc80d7d9064a252e8f4a7f3948c56fa3e00e3ce9429d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0127.png",
+    "bytes": 113748,
+    "sha256": "46819964733b02ffcb3220667694e5dfafb2bd6c1d4a7611f945403b5aff3378"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0128.png",
+    "bytes": 113632,
+    "sha256": "1e3a9a27bdd8947d6a4dc7aa5cb469c003c0083b0082bb8d452b8b9e8e456eb8"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0129.png",
+    "bytes": 113594,
+    "sha256": "7e497459029c39e0f25c993e1f01c430e77b10324d05774425884291f6f2fc54"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0130.png",
+    "bytes": 113656,
+    "sha256": "f3713e692d6dfb6106f1346c3ec0c65fe589071588e367c7f5a4bcdcb689e09b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0131.png",
+    "bytes": 113561,
+    "sha256": "915adc0d3dd605d5784312d006cacdc6353516fe4277d0ae20114a529805c762"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0132.png",
+    "bytes": 113119,
+    "sha256": "3f34ecc8d966ce788cbedc9391f82059bdcbd78d2c68bff53e890d0919de640c"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0133.png",
+    "bytes": 113498,
+    "sha256": "fbbbef4120aa19ac366ad8d9d045a19c206f3d0cd834aa5e676dc3794e7b6ae6"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0134.png",
+    "bytes": 112465,
+    "sha256": "63da34c9c9ad4c5899d2164b3854441c5168976db14c433c47d4be45b95068d1"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0135.png",
+    "bytes": 113398,
+    "sha256": "5943d804c9096719cdef94c21550e91822c75bfab73b8388489ec511869da47a"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0136.png",
+    "bytes": 113225,
+    "sha256": "f7708e47eddb207ca9756785f239225f88263efcabf906bee60dc114ab2b1b29"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0137.png",
+    "bytes": 113106,
+    "sha256": "f8caf8c123937b474ed80ae182d9fafbe31c9fe0e857e504bfdc216fe6023e83"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0138.png",
+    "bytes": 112989,
+    "sha256": "9336af6603dca490dc8da28c89823b00a733bed50c2372f84aa0049753ccfded"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0139.png",
+    "bytes": 113701,
+    "sha256": "4990be27e9377fcae4094ce60bd78c7fadc33e208683b7bacfa73fa9ed0bb7d3"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0140.png",
+    "bytes": 113125,
+    "sha256": "b0bd9a934a60a80021d826f7a4c02aa8640d08bade69e6f64a8fe1607766c1d8"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0141.png",
+    "bytes": 113413,
+    "sha256": "3d21cb5706e9ef830ceab4a068e9348e5a2e90f03e2438c6ce28953e8d60842c"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0142.png",
+    "bytes": 113143,
+    "sha256": "39b6ddf414babcbac22237258943deb19bea1b894ce356f86c20e95ddf2c13de"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0143.png",
+    "bytes": 113474,
+    "sha256": "2e22a81eed44251a957e37c1eae3ed7be570ad6402817ee629dc2c41756a0d17"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0144.png",
+    "bytes": 113354,
+    "sha256": "79fd12960a35f99a66248644da75a53169a6f46ae96eb84ca62dc15b047f5a06"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0145.png",
+    "bytes": 113717,
+    "sha256": "d9cf2919d87fd11cdc3277878a54f8e45419f3a7fad6d3c3a923116e89f9df16"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0146.png",
+    "bytes": 113156,
+    "sha256": "8c2f50e711ac2b946fb562924cec46e307dcc57e0304d02d9464df78049f9c43"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0147.png",
+    "bytes": 113810,
+    "sha256": "8d0d4030e1414563596cd5857f0ea66fea4b3eeef47074e2164a4516e1fb2c0d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0148.png",
+    "bytes": 113326,
+    "sha256": "9339f072ab70951b6f65463585f4d43d1a07ae96388266a22beee7438ad56445"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0149.png",
+    "bytes": 113167,
+    "sha256": "0c0876091193701510418866db038e0ee21cb7c1eaac6b7e9c105baac286c6de"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0150.png",
+    "bytes": 113097,
+    "sha256": "9d115da7b9e81de844e67f4a8f8b306cc28ce1dd59ae4943773ddc5445271ad9"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0151.png",
+    "bytes": 112830,
+    "sha256": "df210355163f445c406260e4577028e8331e98170fc1059cb7c53e11fa495aa7"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0152.png",
+    "bytes": 113250,
+    "sha256": "ecb44f2356d7f4dafc0c96494b70a436a3c1236ae4668444c0d33f4cd2e7e2bf"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0153.png",
+    "bytes": 113345,
+    "sha256": "6eb827779caedd54cd6cfe0ee2f90365e3880bb9ea23708fe81a90b4182728e9"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0154.png",
+    "bytes": 113563,
+    "sha256": "1d745943785b80f78d84d882958fc3659fba289f56d570acefc799db6dec3b4b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0155.png",
+    "bytes": 113407,
+    "sha256": "1aecf9e8e6b19eaabca9d21fc021cde728725fac4bd20b9e59e578f0d283f3de"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0156.png",
+    "bytes": 113162,
+    "sha256": "75ed3194473d75e056311bb9b5a7a2cb5af20b5d0f4acca8b8dfaa1a8a8ff81d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0157.png",
+    "bytes": 113424,
+    "sha256": "c8fe8d4b8d76e41aa7c42b89aa156f37980a28df332a15d985b2559c7fb479dc"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0158.png",
+    "bytes": 113249,
+    "sha256": "407b9be4ce7f541f7fbb67072cfa3c5d61cd4bef914f6e16b4abda8a68b768bf"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0159.png",
+    "bytes": 113231,
+    "sha256": "78b1c484daa347702bb91756681c51f204d34e95c443e98b92dad8d68d5f6e3a"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0160.png",
+    "bytes": 113638,
+    "sha256": "1cdc9f30d0028e140b27792d2a5cbd7b056fe008b202e28a7521519bdff71374"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0161.png",
+    "bytes": 113721,
+    "sha256": "89277c15ff2e4089a126f775c6349b2a2e82391e542bf9007708063bc95341f0"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0162.png",
+    "bytes": 113805,
+    "sha256": "dedfd12ca3d3a797bd30cf1e6a7df1e0b302cd4f54034bafbecab2c625e9e666"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0163.png",
+    "bytes": 114198,
+    "sha256": "0342f5786f5f74f4c9f354ddf6e7564873bab2cd5a934c0a3fa245994949a338"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0164.png",
+    "bytes": 113790,
+    "sha256": "72c9a2d43ddca18f156dd235f939d19c0ce18f90a051c323dc443960c700b9d5"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0165.png",
+    "bytes": 113976,
+    "sha256": "953d9e925e2f6ce4ba9a6953b7d61feadf694a4f37f598a8064870b4070d4bf8"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0166.png",
+    "bytes": 113455,
+    "sha256": "95b47930b458efe0f26b962cb9618ed1ecfcdcf3eb967e26aec1b2fb4804ecdf"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0167.png",
+    "bytes": 113626,
+    "sha256": "fb1f8ec93c137a5c8a1365809d9dcc95980ca4db8143c13592d581a10de6370d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0168.png",
+    "bytes": 113619,
+    "sha256": "941ff3a27ed14c637f4f1796009253ad18a685ec1214183a3a024f167804ef0a"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0169.png",
+    "bytes": 113684,
+    "sha256": "9e875fbda5a7f5cff31a53c067fc46767dd1708aaf8ac569510e1e48855eb26d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0170.png",
+    "bytes": 113181,
+    "sha256": "bf862e7bff3392d207ac48b1578163d353c321691216170c039b46a44b9dab82"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0171.png",
+    "bytes": 113966,
+    "sha256": "cf86fe489142aad38a20a6b30399f5a0129e5f167145dbf58a564719986e2cc1"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0172.png",
+    "bytes": 114186,
+    "sha256": "c61f264b0995b91a6e8fbc1f761df0091dc05c6f485a7d06cb20403a35f3dabc"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0173.png",
+    "bytes": 114156,
+    "sha256": "ffa1f0c2b84754ed717ea4959118ec522592c243b4f306950d38b6842fb2f036"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0174.png",
+    "bytes": 113968,
+    "sha256": "93982f9e74ebed658fac935e8541b12a601f849bdcfba356d701309eec48f786"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0175.png",
+    "bytes": 113570,
+    "sha256": "a284145fe8bfc82b36dc8eb9d44bc025fe2be85d03a477d31409dcaaef8098ba"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0176.png",
+    "bytes": 113981,
+    "sha256": "e0ed0d9aaabe724017f6b83d8fb8a30354a5b1744bdd43f16310922eda99a43d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0177.png",
+    "bytes": 113336,
+    "sha256": "7eacaa380a32e89c8bcc5769e12e580c59ab23ec4e865885a330e8c5aab1abdf"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0178.png",
+    "bytes": 113312,
+    "sha256": "2748bcc82acc9fb96936f23f7026855f132ab96cd0a4b71b15839a53e1724b74"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0179.png",
+    "bytes": 113777,
+    "sha256": "b27aba3841291d32be9cbc66da3775c5d01fdb67b84a3bb22fde6da879c6bd87"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0180.png",
+    "bytes": 114084,
+    "sha256": "74a7e60c8f70c03e82553022d84d2555678aea8aa657a11c69781341615f7645"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0181.png",
+    "bytes": 113907,
+    "sha256": "09994a00c686f83ce9571467244960d61e5c32709b58cfc9333b45e39a6b5a71"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0182.png",
+    "bytes": 113937,
+    "sha256": "83cdef69c9e5f9fdf37047ae80d0c12d9e66ed3cf69d8076e4bdafdc6b6b39dc"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0183.png",
+    "bytes": 113872,
+    "sha256": "9db829cb4d0bd533e3a5142268a54e1e4d2833110f46eddf7a79578a77db0475"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0184.png",
+    "bytes": 114087,
+    "sha256": "d49a80b8c4051a151dc61792dd5eb3a0a7a8bd5375dc3135edbdfa43442f8a0e"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0185.png",
+    "bytes": 114234,
+    "sha256": "8fd733bc249d2d389355d4fdfbd5c1832ce09362d7d06343a2589749dc7c7223"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0186.png",
+    "bytes": 113865,
+    "sha256": "3599ef20c61b5e606b559764cc7826b55f28b5adc4dd6a814d15d39e42ad888b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0187.png",
+    "bytes": 113540,
+    "sha256": "8dbdaa556d2e67e62e4373aaa0bedaca649f73210699ec1c73c8675452455909"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0188.png",
+    "bytes": 113647,
+    "sha256": "d22660ba1a849ba44de7b5805ae876ef45b76e25e8e5fbfc906cb92bf590f25f"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0189.png",
+    "bytes": 113935,
+    "sha256": "9a5ce7675939a4fb2fb286ac82627600f2eec57a564eb0f49016d83179b73fee"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0190.png",
+    "bytes": 113368,
+    "sha256": "54d450e6dc0fa7b4b7a1d1ed12d3d558f1153d7c75ee564cd29916ac4e4f536c"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0191.png",
+    "bytes": 113529,
+    "sha256": "0bda8893271b39bb351934d9ee1afea6328902dd31478e8f2e230a10a404513b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0192.png",
+    "bytes": 113105,
+    "sha256": "ffafe7beffecb6f2cf2dd302029e6c957358da2b725657bbb00c836bdde3251c"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0193.png",
+    "bytes": 113712,
+    "sha256": "e329632a84e02a071047c3808e98d221858e38b0a56701f6e0bdb972f6501445"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0194.png",
+    "bytes": 113777,
+    "sha256": "7b8d6500c5583da4ea50e48ddda0a9a8704d048b380d3eef02aeab24b96c315e"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0195.png",
+    "bytes": 113828,
+    "sha256": "091c0ba2a5bf90ee44edcc783fc583893371e57fc87076ce6fe58fc574aa5208"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0196.png",
+    "bytes": 113810,
+    "sha256": "1e28ff6c5dd236227e98c7fb6bebdee736af2821bdc42f283090256db58aaa62"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0197.png",
+    "bytes": 113749,
+    "sha256": "cc4ffaff9ea1df9694412c25ab8811026eb85179f9fc09a3591f1baa5d802928"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0198.png",
+    "bytes": 113858,
+    "sha256": "acbb3857a03f56593f4ae53f47f257cba6a773d2912f237ab6e4cb43104d6175"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0199.png",
+    "bytes": 113662,
+    "sha256": "50de7b81d470be23f9df55d0bc48296f2deb52d94758defffc2edc01cacccd27"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0200.png",
+    "bytes": 113526,
+    "sha256": "af4b0a5582b87f9d8373d03f8dc03eaa9309c12efa940b7ee02b14e3d70998e3"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0201.png",
+    "bytes": 113333,
+    "sha256": "2b5a679195e0930bcf33e9bdeb17b449a345c94c5bc19cf8d78b3e4c5bc2b09f"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0202.png",
+    "bytes": 113361,
+    "sha256": "b2c15d1ed6647be64ccbf7540b9e25d1c4b87917e84ef4df2e89b8e8865ea641"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0203.png",
+    "bytes": 113385,
+    "sha256": "8fb39f335c2f9eae17605ca5c8714b062edfc06bfe7e4dd4526ccb42f67aeef7"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0204.png",
+    "bytes": 113663,
+    "sha256": "5f3091a7cee3a1f8196e9bc94fe16f8a9b0c6228cf3a9ed2ac84b23c9bd43cfb"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0205.png",
+    "bytes": 113949,
+    "sha256": "8802040ea066910df031bd1e110bb9d2c606778918b5fa62342400525db2daa1"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0206.png",
+    "bytes": 113522,
+    "sha256": "25cc98f4f115a9ffdac3f91a6d479a1748377bcb416fcc79b915808295240531"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0207.png",
+    "bytes": 113464,
+    "sha256": "2aaaa5f7d97c0a6b36176fa92115094d8d3363ad497b085203e273eadb8607fe"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0208.png",
+    "bytes": 113581,
+    "sha256": "0817c06b327a5e6e931cc3e20160c98443a1d6331f4e6ae4f59bd567355ef5a2"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0209.png",
+    "bytes": 113562,
+    "sha256": "f698d0f6d4123181a2293ecefd28eb1aba741faa9bb831efbfdffb0a3ff53681"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0210.png",
+    "bytes": 113577,
+    "sha256": "271aeb09ff729cd31eb73c3fa3ec185979202a32716701a6c62f7d771dbfaae6"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0211.png",
+    "bytes": 113558,
+    "sha256": "d98d929fc958ca9663b1b683ee9a4c3e2029195dd97e36461379bc5ae4c7c231"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0212.png",
+    "bytes": 113726,
+    "sha256": "3137de3c8d0233fc484a3501053cd2e959cff6e1b4859904431646cdb2a721f7"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0213.png",
+    "bytes": 113787,
+    "sha256": "1031f9c359617a434f5c6859d9a4a3189b275b6ebbe0edc6b4daab9b7f3ac07a"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0214.png",
+    "bytes": 113583,
+    "sha256": "d90cad231b081e6e53d526fdd081c34525686da9b76d39a8de0590c7fe9f8f68"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0215.png",
+    "bytes": 113719,
+    "sha256": "874c0f51f305a044d90b11826e6ef1d690af2ca3153c1bb727c79799caf8aac2"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0216.png",
+    "bytes": 113709,
+    "sha256": "459fc03976bd2987aaf73ab912c39c622b5c0d85464e46e116334e82cf77d3ec"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0217.png",
+    "bytes": 113687,
+    "sha256": "6da9e789b9b3c865c95e0d1ce47d9471794b188d27f520e2a3fa805583109560"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0218.png",
+    "bytes": 113780,
+    "sha256": "4c103543d5ec5260dca970255232c62e4fd4b40e6e7e265392042bf7a30b8088"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0219.png",
+    "bytes": 113603,
+    "sha256": "6fee65b1983b5ce953147eaf25d288453804858b845c265343dc311432a658a5"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0220.png",
+    "bytes": 113652,
+    "sha256": "75098938ce3e199209b5a192d6b55e312b591fc278194f2f2da2d43112faf9c5"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0221.png",
+    "bytes": 113687,
+    "sha256": "3434d690bba50982d6ffa74b6179bf5f65ad5f3051a3a777778ab8b3b26e07ec"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0222.png",
+    "bytes": 113354,
+    "sha256": "aa1433bacc47b8942929ec190bda2a3de548b8748f384d7fa2d35373dd583db9"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0223.png",
+    "bytes": 113574,
+    "sha256": "fe65231d2fff7baf913397c1f43f2f230d2e33864b8a276fc9335a4d943aa88d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0224.png",
+    "bytes": 113430,
+    "sha256": "8c15578dbe53007da4c5890b2f3446c50a9c87a66e003c54c3a115274cf038f0"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0225.png",
+    "bytes": 113482,
+    "sha256": "b2aada70678b286b90409f320aecba41b2ffa9ab159782cd0f54ea8338bbdde8"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0226.png",
+    "bytes": 113195,
+    "sha256": "9db09c5b3d24cba874ee0ae9c7872fa8e5f3a33f5134f72a98bd64bc7531ee29"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0227.png",
+    "bytes": 113140,
+    "sha256": "637ea779759d934556e671dad469d6210ae8140dfa6337fc1101f647dbda808b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0228.png",
+    "bytes": 113207,
+    "sha256": "6f75123cfcc8f26a9a240121da43c164a135588232999c65023d75f1d4eccd2c"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0229.png",
+    "bytes": 113308,
+    "sha256": "314991d7adedcf33ac81144c3ab4a039d2adbd6fee2b2c0ef2388fe3944d1ee7"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0230.png",
+    "bytes": 113048,
+    "sha256": "5cda9282118d3b263d8b88b7dcf694c41a7f83cd52433203f4d171a2234dd71a"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0231.png",
+    "bytes": 113070,
+    "sha256": "997c9cf9590b7c5bf6d9d41274f3d2bd9f305662ecbf85a919073a262673feaf"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0232.png",
+    "bytes": 112930,
+    "sha256": "99d224c36f667d0c8dc9aa5c88011784bf17854e7fdb66070515402f56ded1bd"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0233.png",
+    "bytes": 112764,
+    "sha256": "72ef8a3b1c81609c06495b2015680d46cb0c33cee7d680a876fe86c31829c9cf"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0234.png",
+    "bytes": 112806,
+    "sha256": "764abbac445ab5c14ca74d0a37fdb0f1fc627625ea6573ec90450995a6eb64c4"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0235.png",
+    "bytes": 112864,
+    "sha256": "2c7dc21083684648d9827eb2ea7459dff1af9b5109dbcf18123d4ee7a8cbe28b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0236.png",
+    "bytes": 113020,
+    "sha256": "e0893ba68db641a972f19b3fdc4635312bf3075fc347deafd9505cb02254359f"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0237.png",
+    "bytes": 112517,
+    "sha256": "362d87f77d376c5014f4072bcb69324a717e5de2d9af3a8a3f252dc82ee59c5a"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0238.png",
+    "bytes": 112671,
+    "sha256": "53bc0a56033baeee907ca36465ae5e248f05111a2ec1a08775b2270c8c7200ef"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0239.png",
+    "bytes": 112591,
+    "sha256": "cecfeba8cc2716a9792c7d6bbc629553961c5f0010c20e16b520f14882041d4d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0240.png",
+    "bytes": 112612,
+    "sha256": "8e98eb592b60e46d97f772594c5de1d3670c05aee0c90c9c09cb3cc319157e4b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0241.png",
+    "bytes": 112371,
+    "sha256": "61ae0ba64d0d2a11ae17437976cc8474b904c23bd9a72c034f836eaa410fe7d7"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0242.png",
+    "bytes": 112577,
+    "sha256": "b2701a700938725d491772b3eb68382f12b50f49dac564924332c591bbd984c3"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0243.png",
+    "bytes": 112616,
+    "sha256": "33ffe2bedbf2349b332f36f11b92293ad71a439337907d70dd394e621b904f0d"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0244.png",
+    "bytes": 112849,
+    "sha256": "4c80256c999366798dfdadb11e3fe8ec86b2cbc4048faba4a789eaa8b6a8277a"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0245.png",
+    "bytes": 112430,
+    "sha256": "a7a8d3d75bd40ab18fecd4bd4d5d047b53d471e3e3cc7e5bb89c54f8e5ab8814"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0246.png",
+    "bytes": 112506,
+    "sha256": "69f4db60bb7a912cae6c7e07b25399c117c7cf1890ef0e9b962336029ef41ca0"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0247.png",
+    "bytes": 112422,
+    "sha256": "403851f3985ae0375eb45008f7d409063b9dcc5a7d948958ce3d8120a8defbac"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0248.png",
+    "bytes": 112385,
+    "sha256": "a59471e52de6d3da617cd59a856625acc85155c943847ac05f35f5a8926a0718"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0249.png",
+    "bytes": 112902,
+    "sha256": "018bd79eb301a437374075eebd0e2539da067e081b9b38f49165f54700e9d219"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0250.png",
+    "bytes": 112625,
+    "sha256": "a92b19a7988437bc7c137c4a69ba510761aa849e6909d9f326badadcdd76fadb"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0251.png",
+    "bytes": 112798,
+    "sha256": "21118201b02dbf05838742b21e6e3714509e7c02e632358d61b67b971c164519"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0252.png",
+    "bytes": 112152,
+    "sha256": "96a10f63b9d3e837a52347c4b8302440893c4534a0058a9569257bf55b985729"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0253.png",
+    "bytes": 112213,
+    "sha256": "9c7b0e1d8a3c7a0ae715cd8b7801da617b902bafb38152a0c908748b494b7b0c"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0254.png",
+    "bytes": 111982,
+    "sha256": "ff84f6735fd5c389fad7a2db4d554ef183bb0bed7ca7a3d67ae2ee2cda13bfa9"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0255.png",
+    "bytes": 112566,
+    "sha256": "440facfe4a089669a9474be8952b7c56efd2f36a73c76e20332620be41148cb2"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0256.png",
+    "bytes": 112464,
+    "sha256": "43586534b231607de992f63afdbcf4922b13bfcdafe280914e65a13b08142ca4"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0257.png",
+    "bytes": 112332,
+    "sha256": "ed626d0e17f7d737a95772696a3fb9571616c9ba9f71b1f96c9ba3c48ea09d79"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0258.png",
+    "bytes": 112066,
+    "sha256": "075eb74919cbb9b8eb016aa1dd50da819639cc8c4038fa2c4153014f80ec0db1"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0259.png",
+    "bytes": 112018,
+    "sha256": "9ec508d5dcb156c535927b1e8d8e15bd1e47335472b9cccda45e5647250a561f"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0260.png",
+    "bytes": 112488,
+    "sha256": "8a8074bd2c336ad76fbabea58b191746e8ba600bef4f1c0d5d10f294d3e93587"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0261.png",
+    "bytes": 112519,
+    "sha256": "7fb1ecc6accbbcfdf00192d2a1241a9860d7f3b69d5495be0fc0d4362f54ebbd"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0262.png",
+    "bytes": 112232,
+    "sha256": "a050cf7d341129622c5473a185d1fa03bd280df734fde50a4babed0ff70346cb"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0263.png",
+    "bytes": 112335,
+    "sha256": "083dee3f99a92afb5210e46b58e2d13b4eec86d49a593189c9301ac3a3c6f9be"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0264.png",
+    "bytes": 112153,
+    "sha256": "e64627fe0cb5e3bfd75257254c6597986f0c6ba1b0580341c70a8c589ed8a0d5"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0265.png",
+    "bytes": 112485,
+    "sha256": "7e356c4905dda0dd706138ee9ab9c25f5e2996a60abe02ff94a33cfc4fa31d1c"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0266.png",
+    "bytes": 112479,
+    "sha256": "2971e5b9dc671cfb1f8179ef2c4b2f076248fdb55e6b7117cc76b71f66f7fcf3"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0267.png",
+    "bytes": 112256,
+    "sha256": "fbdbe2b185bd88fa4466dc1154e343c057b1fca9efe0417ab5cc5ac0d2467009"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0268.png",
+    "bytes": 111971,
+    "sha256": "7c6a613a9ee8443b6bb33f4ba3ec67fcc0c391d316f178c559028049a58eb9ae"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0269.png",
+    "bytes": 112512,
+    "sha256": "e9567754867e59b4a5cf651db2850ca7616cb15048cc5c9309432dd9d0979dd1"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0270.png",
+    "bytes": 112339,
+    "sha256": "272f0a2e5d0388b39a6ebb29ce9394f7ca479dfde4ab80d06e8e576249fc8ec0"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0271.png",
+    "bytes": 112160,
+    "sha256": "6236efc2fc22b4999b112f9efc00b71893486d8764a0d5ac63338aa42d424ad2"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0272.png",
+    "bytes": 112217,
+    "sha256": "726b1076dd6e81bc6a88a51c7856ac97ecbde4a8982bc25bcf930ef7a09eb1eb"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0273.png",
+    "bytes": 112524,
+    "sha256": "8fe58aee7e5f932b9466a1741af23274fcf0dfe504ed28b4d1e89d6868434241"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0274.png",
+    "bytes": 111987,
+    "sha256": "71eccd635487481b4e236b8f1be4a9a478fca19478af4a52f0106bd8c28bda48"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0275.png",
+    "bytes": 111596,
+    "sha256": "fe290d003c423de5088dae49c61919f23516a9d0b0218cbd49d258084b067b41"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0276.png",
+    "bytes": 111967,
+    "sha256": "1a887a3783539365bc36913421accf26c8e6dee76f4363e54553b944e11cbe16"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0277.png",
+    "bytes": 111614,
+    "sha256": "7adda2d63cc4f5629b518fc6e659f201b6dd07dd97a4268e379362147c28a7e4"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0278.png",
+    "bytes": 111300,
+    "sha256": "6b34621dac299e4ecbdf73f45946444f96592e44ebf3c36278f951813b935165"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0279.png",
+    "bytes": 111536,
+    "sha256": "cc925f30f3d62d3a7af339a94f309cfa670a9664c94d1663d4b79096a9cd097c"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0280.png",
+    "bytes": 111802,
+    "sha256": "e352dcd74bae1952a13778693b048deedde4690916e59a468ad28ecd1f269926"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0281.png",
+    "bytes": 111148,
+    "sha256": "a3bef45fffd70fe0cbe7492b16c1cede4cb80ba42acd058158aa21069e2d055b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0282.png",
+    "bytes": 111303,
+    "sha256": "c3e5e57cfff3582c677fa0091e8af3269bca63c87972a6ae09ccc912e2b765b4"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0283.png",
+    "bytes": 111738,
+    "sha256": "9216a834677979ecf883e2126454870b08c20f75edc1d49b5b8dd546bd9d73f6"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0284.png",
+    "bytes": 111485,
+    "sha256": "cbcdaa517f13713812deefdc4ae7f5545e5c438d24104976519ee3a1438ee07b"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0285.png",
+    "bytes": 111496,
+    "sha256": "7231d3a51639ae5eb8c4d4a5a86dfb4b074d42402db3c42335ae98a6e6618897"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0286.png",
+    "bytes": 111971,
+    "sha256": "2c90e66760de267028219a5c527f6b5e1b2a746b15e9e7a303a07e7991241bb8"
+  },
+  {
+    "path": "D:\\CodexValidation\\hlsl-portfolio-capture-20260919\\frames-hero\\frame-0287.png",
+    "bytes": 111551,
+    "sha256": "5610062755cf7bd60a514d9b7c0a334ca2e4a75df7c4384f2668ef34b40a55be"
+  }
+]
