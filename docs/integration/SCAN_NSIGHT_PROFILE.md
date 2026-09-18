@@ -66,15 +66,23 @@ $device.luid
 
 ## Preflight each arm outside Nsight
 
+The native host inherits upstream relative shader-path assumptions, so **the process working directory must be the directory containing `scan.exe`**. Launching the executable from the repository root can fail with `HRESULT 80070003` even when the executable path itself is absolute.
+
 Run these once from PowerShell before profiling. Each successful process must print an `HPJSON` `profileRange` record with `validated:true`.
 
 ```powershell
-& $exe profile-once tile       268435456 $device.luid $device.adapter
-& $exe profile-once tile-fused 268435456 $device.luid $device.adapter
-& $exe profile-once rts        268435456 $device.luid $device.adapter
+Push-Location (Split-Path $exe)
+try {
+    & $exe profile-once tile       268435456 $device.luid $device.adapter
+    & $exe profile-once tile-fused 268435456 $device.luid $device.adapter
+    & $exe profile-once rts        268435456 $device.luid $device.adapter
+}
+finally {
+    Pop-Location
+}
 ```
 
-Do not continue if any arm reports `RUNTIME_FAILED`, validation failure, a different adapter, or a missing PIX runtime.
+Do not continue if any arm reports `RUNTIME_FAILED`, validation failure, a different adapter, or a missing PIX runtime. Nsight must use the same `scan.exe` directory as its Working Directory.
 
 ## Nsight Graphics capture
 
