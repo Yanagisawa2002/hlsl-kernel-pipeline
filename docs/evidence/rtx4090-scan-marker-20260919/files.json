@@ -1,0 +1,442 @@
+[
+  {
+    "path": ".gitattributes",
+    "bytes": 9,
+    "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+  },
+  {
+    "path": "raw-traces.json",
+    "bytes": 1909,
+    "sha256": "0abf9a0ec7e6a9f106243e6c839d4815f4c9dfc89507c747cd825a9c224fb7cc"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1375,
+    "sha256": "e994c540f1451bf699bc713725d890b18fe9117e0b3205489ed4b21aeea99154"
+  },
+  {
+    "path": "rsp/rts/BASE/D3DPERF_EVENTS.xls",
+    "bytes": 65,
+    "sha256": "ad8b8b8744d5cb7a48067d930dfa08c84b55584953b3c3110f90342292b4fe4e"
+  },
+  {
+    "path": "rsp/rts/BASE/FRAME.xls",
+    "bytes": 22,
+    "sha256": "566bf497ffd61c85faa684feff5b05929f1c3acdae5220e5ebb178147c5100bd"
+  },
+  {
+    "path": "rsp/rts/BASE/GPUTRACE_FRAME.xls",
+    "bytes": 18473,
+    "sha256": "b2f2716023f2b147911c51fef9a068ce483d3af6dacf09c17ea1c74d9cda5181"
+  },
+  {
+    "path": "rsp/rts/BASE/GPUTRACE_REGIMES.xls",
+    "bytes": 17931,
+    "sha256": "5c57ac4236f8756a8b0a4ff38f3411bbc62a488a1cca469edaa8d9228126b0bf"
+  },
+  {
+    "path": "rsp/rts/BASE/REPRO_INFO.xls",
+    "bytes": 1538,
+    "sha256": "15fcb720232e0924ca7a23b29a4e51b2d58624ca294fc07b1511a4d7b768aeee"
+  },
+  {
+    "path": "rsp/rts/command.ps1",
+    "bytes": 685,
+    "sha256": "d171a41b80100e78312a139dc281885bf9b6b777fe35b1faf061604c77854b81"
+  },
+  {
+    "path": "rsp/rts/device.json",
+    "bytes": 279,
+    "sha256": "69d2f2b2d6694ebec7638a0507c32819f773e000a5272a0b4d6d506fa7206d3d"
+  },
+  {
+    "path": "rsp/rts/exit-status.json",
+    "bytes": 73,
+    "sha256": "081ecce213ec5a6f6973095743d0483f121a203a912bb0499ed4abd2ebc3d54a"
+  },
+  {
+    "path": "rsp/rts/marker-metrics.json",
+    "bytes": 20038,
+    "sha256": "d3c4455e316d953f1756028708757b6383875d9a7a63b55dcf36dddec13b288a"
+  },
+  {
+    "path": "rsp/rts/ngfx-version.txt",
+    "bytes": 129,
+    "sha256": "112d504ad88aa8156005501f44a14a37f1ec770e773eeeb2a9db3acfb3e3727b"
+  },
+  {
+    "path": "rsp/rts/ngfx.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "rsp/rts/ngfx.stdout.log",
+    "bytes": 4193,
+    "sha256": "275afbc56360dfaa43f083207f29f21d65bfbea2dcdb56ec91de1f4bfabed99f"
+  },
+  {
+    "path": "rsp/rts/provenance.json",
+    "bytes": 1476,
+    "sha256": "e7151fb8fb5c7e587127ad4d657ac58ea9d0c1ba09e74b532b14a1dfa7038d73"
+  },
+  {
+    "path": "rsp/rts/shader-contributions.json",
+    "bytes": 2108,
+    "sha256": "c7335d814219e7ebc46394f165ff52184bf0289543d696c9c241a79dccbdc05b"
+  },
+  {
+    "path": "rsp/rts/verification.json",
+    "bytes": 479,
+    "sha256": "0248c4a94f0e8ece928e08caa78e6cbbd6434a7f0c536fee0ae2b115b2562b5a"
+  },
+  {
+    "path": "rsp/tile/BASE/D3DPERF_EVENTS.xls",
+    "bytes": 65,
+    "sha256": "497514807152bdc6062061234c8cbcc1a018718e8d63d8f698c9387a5aa2b036"
+  },
+  {
+    "path": "rsp/tile/BASE/FRAME.xls",
+    "bytes": 22,
+    "sha256": "85a8d6dd23bd5ac2aac69eb58e42cbed3c5b95e19d11c79374925fd247662d77"
+  },
+  {
+    "path": "rsp/tile/BASE/GPUTRACE_FRAME.xls",
+    "bytes": 18258,
+    "sha256": "304ae3f5cf93ddfa8a324ebafd0a230942a65df1bcbb8419d1f42702d55248e2"
+  },
+  {
+    "path": "rsp/tile/BASE/GPUTRACE_REGIMES.xls",
+    "bytes": 18012,
+    "sha256": "0fc0addd4d3d098587a33a35f8b528f399afb3abd5f3bd07fcb9b5b4f6aa808c"
+  },
+  {
+    "path": "rsp/tile/BASE/REPRO_INFO.xls",
+    "bytes": 1539,
+    "sha256": "a96663b51aa19c6124924c62500b141bcc75d3fc9073b180b2ac90aef201c497"
+  },
+  {
+    "path": "rsp/tile/command.ps1",
+    "bytes": 687,
+    "sha256": "17cb772c8545d62ca6cbe360f0b641f60d38be4bce37da45ec42a4187b6f9186"
+  },
+  {
+    "path": "rsp/tile/device.json",
+    "bytes": 279,
+    "sha256": "69d2f2b2d6694ebec7638a0507c32819f773e000a5272a0b4d6d506fa7206d3d"
+  },
+  {
+    "path": "rsp/tile/exit-status.json",
+    "bytes": 73,
+    "sha256": "fd25aba610a938a8fdd0b2331938da8146514e097165ea003178d380ceddcf34"
+  },
+  {
+    "path": "rsp/tile/marker-metrics.json",
+    "bytes": 20119,
+    "sha256": "1fe27890a1404503c249bc6ac15c2718da353fb35ae4aaae097f0fb0121979f2"
+  },
+  {
+    "path": "rsp/tile/ngfx-version.txt",
+    "bytes": 129,
+    "sha256": "112d504ad88aa8156005501f44a14a37f1ec770e773eeeb2a9db3acfb3e3727b"
+  },
+  {
+    "path": "rsp/tile/ngfx.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "rsp/tile/ngfx.stdout.log",
+    "bytes": 4099,
+    "sha256": "469c0f57c5bc11815e80bf290c538a08ba4d1e5f16bf2c1f87815f41309e244c"
+  },
+  {
+    "path": "rsp/tile/provenance.json",
+    "bytes": 1478,
+    "sha256": "9d6a94336642a3a8c7f4addb0cdd2eec60d455b4e2cf16c02447cd779ed545dc"
+  },
+  {
+    "path": "rsp/tile/shader-contributions.json",
+    "bytes": 2187,
+    "sha256": "8073d701f9b519cb6840ce1558e5707fbb87bcec1ec9209603ce1a1416387178"
+  },
+  {
+    "path": "rsp/tile/verification.json",
+    "bytes": 479,
+    "sha256": "0248c4a94f0e8ece928e08caa78e6cbbd6434a7f0c536fee0ae2b115b2562b5a"
+  },
+  {
+    "path": "rsp/tile-fused/BASE/D3DPERF_EVENTS.xls",
+    "bytes": 65,
+    "sha256": "39e135237ee9fdc9d2cce4120ce6f8ff281c2cc865e4894f1cd86deb184bc150"
+  },
+  {
+    "path": "rsp/tile-fused/BASE/FRAME.xls",
+    "bytes": 21,
+    "sha256": "0e911a5b0213062262baec4366bb97d4f296e5b365122fed4ae80fe03657fde9"
+  },
+  {
+    "path": "rsp/tile-fused/BASE/GPUTRACE_FRAME.xls",
+    "bytes": 17655,
+    "sha256": "da653fac2672ae85c8c97448fcc0e74e81307de1a83adab3f851f090bfb749ad"
+  },
+  {
+    "path": "rsp/tile-fused/BASE/GPUTRACE_REGIMES.xls",
+    "bytes": 17472,
+    "sha256": "40277ee32f32964bb9c32fb1a21b3dba95863d44d9430532b9dca5e3263ea0e5"
+  },
+  {
+    "path": "rsp/tile-fused/BASE/REPRO_INFO.xls",
+    "bytes": 1545,
+    "sha256": "f11ebc94b24e48ec77fa53cd3a2cd9090287296c995581a5ce51e28c55e5a1dc"
+  },
+  {
+    "path": "rsp/tile-fused/command.ps1",
+    "bytes": 699,
+    "sha256": "80e42ebbad937b9d027b1c83ab99feeb53a49eac7c02fa56eb75ce87115845d7"
+  },
+  {
+    "path": "rsp/tile-fused/device.json",
+    "bytes": 279,
+    "sha256": "69d2f2b2d6694ebec7638a0507c32819f773e000a5272a0b4d6d506fa7206d3d"
+  },
+  {
+    "path": "rsp/tile-fused/exit-status.json",
+    "bytes": 73,
+    "sha256": "22901672807f619edf2e068564703527991e223e55c8cd8c8c64b5ee9b0fba46"
+  },
+  {
+    "path": "rsp/tile-fused/marker-metrics.json",
+    "bytes": 19561,
+    "sha256": "953f7f64f842e8b16d7d8d4741268f4a04cd2ab8f56d771cdfb5a273cdde355c"
+  },
+  {
+    "path": "rsp/tile-fused/ngfx-version.txt",
+    "bytes": 129,
+    "sha256": "112d504ad88aa8156005501f44a14a37f1ec770e773eeeb2a9db3acfb3e3727b"
+  },
+  {
+    "path": "rsp/tile-fused/ngfx.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "rsp/tile-fused/ngfx.stdout.log",
+    "bytes": 4230,
+    "sha256": "78c3b20eca68e01d9483641d723f102c1e3a5dd31420129706071dd979adef23"
+  },
+  {
+    "path": "rsp/tile-fused/provenance.json",
+    "bytes": 1490,
+    "sha256": "1fb41447fb27028987004dbdb6c4f1890cad92de3d2373b5825f38199d4b26dd"
+  },
+  {
+    "path": "rsp/tile-fused/shader-contributions.json",
+    "bytes": 1787,
+    "sha256": "1952130b575e404982cd381f9c1de05ab7e678e26fd55bb5d7f3f91916dc5af6"
+  },
+  {
+    "path": "rsp/tile-fused/verification.json",
+    "bytes": 448,
+    "sha256": "f4eebfb7ada6b06d90ad5144cd332df6e43c0dc5f6faf5ecbe4a8e118c3f3475"
+  },
+  {
+    "path": "throughput/rts/BASE/D3DPERF_EVENTS.xls",
+    "bytes": 65,
+    "sha256": "674da23a50a3870057997bc15ce097d6cc48688e2bbed6134013ba9fd01ce4f5"
+  },
+  {
+    "path": "throughput/rts/BASE/FRAME.xls",
+    "bytes": 22,
+    "sha256": "d1c0427df12b7a22d3eb944a7b8fa181b85341a3749e4308f7f0d33c9d2a4183"
+  },
+  {
+    "path": "throughput/rts/BASE/GPUTRACE_FRAME.xls",
+    "bytes": 11178,
+    "sha256": "a9fa462495100d575cbf745b6a622a039d23506186978e56fc037bd671173822"
+  },
+  {
+    "path": "throughput/rts/BASE/GPUTRACE_REGIMES.xls",
+    "bytes": 11061,
+    "sha256": "71f51738bed08ea78d3612ee2e3b223fc853096487eaad59f2a0118fdf730547"
+  },
+  {
+    "path": "throughput/rts/BASE/REPRO_INFO.xls",
+    "bytes": 1570,
+    "sha256": "8ae712c6dc127b68f7083030665c65b34ee46cb1decc21d2e3d59611a8a84661"
+  },
+  {
+    "path": "throughput/rts/command.ps1",
+    "bytes": 653,
+    "sha256": "564c6f7658b5dd9bdbe074e45341b5147d5ebd1e5d6f76a8e30082a104ad93b0"
+  },
+  {
+    "path": "throughput/rts/device.json",
+    "bytes": 279,
+    "sha256": "69d2f2b2d6694ebec7638a0507c32819f773e000a5272a0b4d6d506fa7206d3d"
+  },
+  {
+    "path": "throughput/rts/exit-status.json",
+    "bytes": 73,
+    "sha256": "e1f107a6df3d808b07d0e8b65f66ef113c27fb9fab95e45196cfdf4f0bb00ca2"
+  },
+  {
+    "path": "throughput/rts/marker-metrics.json",
+    "bytes": 12403,
+    "sha256": "1e04e2d085fb2fcd18d90efa602f432ba51d1b3c9f0acfa7d88a68c25d9dcab2"
+  },
+  {
+    "path": "throughput/rts/ngfx-version.txt",
+    "bytes": 129,
+    "sha256": "112d504ad88aa8156005501f44a14a37f1ec770e773eeeb2a9db3acfb3e3727b"
+  },
+  {
+    "path": "throughput/rts/ngfx.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "throughput/rts/ngfx.stdout.log",
+    "bytes": 4021,
+    "sha256": "619cdbaa2a5c6b0dd84a41fc87f9810f22f910ac7444ede29aee617313822a2e"
+  },
+  {
+    "path": "throughput/rts/provenance.json",
+    "bytes": 1436,
+    "sha256": "65034962d23a6ee09c7e06ad066ac91122d6bd99fe27e4324fa9d926ade6af26"
+  },
+  {
+    "path": "throughput/tile/BASE/D3DPERF_EVENTS.xls",
+    "bytes": 65,
+    "sha256": "bc6d9650ba2500cb3d18bc8a0dc84bd6809f81e59e75e6b412642498ec96860b"
+  },
+  {
+    "path": "throughput/tile/BASE/FRAME.xls",
+    "bytes": 22,
+    "sha256": "081b1ec54a58b36fa86d76eaa8897ffd38216a340403e4bf344dc192f13e928d"
+  },
+  {
+    "path": "throughput/tile/BASE/GPUTRACE_FRAME.xls",
+    "bytes": 11185,
+    "sha256": "18c8cb006bcd4683542c5c6a184df8555bf2e2aed6df9752a4e852b99b9a0608"
+  },
+  {
+    "path": "throughput/tile/BASE/GPUTRACE_REGIMES.xls",
+    "bytes": 11074,
+    "sha256": "d82dfaa2651c3fac51ab8ed9eae80e76f0f117da27e992d22801af7ca584a53e"
+  },
+  {
+    "path": "throughput/tile/BASE/REPRO_INFO.xls",
+    "bytes": 1571,
+    "sha256": "18f4dccc9773d890cd6dc0bcf613049304bc73cae7b66c21c48f596903c81697"
+  },
+  {
+    "path": "throughput/tile/command.ps1",
+    "bytes": 655,
+    "sha256": "e68cf770b98b92f14348f7315f26ed49fa54ac84e869490275ca9881cdd6c286"
+  },
+  {
+    "path": "throughput/tile/device.json",
+    "bytes": 279,
+    "sha256": "69d2f2b2d6694ebec7638a0507c32819f773e000a5272a0b4d6d506fa7206d3d"
+  },
+  {
+    "path": "throughput/tile/exit-status.json",
+    "bytes": 73,
+    "sha256": "ae0341fb71b2e9e4191523d0cdb5aa50afdbe057ccec98fc1e7b6f9f31e909d5"
+  },
+  {
+    "path": "throughput/tile/marker-metrics.json",
+    "bytes": 12416,
+    "sha256": "fe5e9c5c4809ffd797f77dfcff787305c432d40aa055c99e9bb145b9b508943c"
+  },
+  {
+    "path": "throughput/tile/ngfx-version.txt",
+    "bytes": 129,
+    "sha256": "112d504ad88aa8156005501f44a14a37f1ec770e773eeeb2a9db3acfb3e3727b"
+  },
+  {
+    "path": "throughput/tile/ngfx.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "throughput/tile/ngfx.stdout.log",
+    "bytes": 4017,
+    "sha256": "6ea336b8b9d1fb2c46b193f31b6326ec8b14e4d448f950df79249dfa2c730a22"
+  },
+  {
+    "path": "throughput/tile/provenance.json",
+    "bytes": 1438,
+    "sha256": "5f70e0239bf28b3571608abb7c713955e6a0bb028203bba8abf2090a016dcb59"
+  },
+  {
+    "path": "throughput/tile-fused/BASE/D3DPERF_EVENTS.xls",
+    "bytes": 65,
+    "sha256": "7a6d6c4845dad08bb3771a4e19af1fa01e6d4f047e2007bfbbf1ee94bca6500b"
+  },
+  {
+    "path": "throughput/tile-fused/BASE/FRAME.xls",
+    "bytes": 21,
+    "sha256": "7430d3d087e90c3cf08f0ebfa8f57e1df07a244dc29e7ed9fe400a33579e8915"
+  },
+  {
+    "path": "throughput/tile-fused/BASE/GPUTRACE_FRAME.xls",
+    "bytes": 11161,
+    "sha256": "37b6c0e793cdda2055194a443bc8c6414e7c562652970054e0ae252444b23c1f"
+  },
+  {
+    "path": "throughput/tile-fused/BASE/GPUTRACE_REGIMES.xls",
+    "bytes": 10675,
+    "sha256": "337075c7897989f56a330e93efe0506a55c4549771b7af58e6d46c77692905ec"
+  },
+  {
+    "path": "throughput/tile-fused/BASE/REPRO_INFO.xls",
+    "bytes": 1577,
+    "sha256": "fdba444d9996d14ffd48277d0fe6b1e26b193d52f8c0340575334cb53f81580f"
+  },
+  {
+    "path": "throughput/tile-fused/command.ps1",
+    "bytes": 665,
+    "sha256": "1c0f9ed22759812f4417806af9f721a76a71f868b2193fccaebda354a1940d70"
+  },
+  {
+    "path": "throughput/tile-fused/device.json",
+    "bytes": 279,
+    "sha256": "69d2f2b2d6694ebec7638a0507c32819f773e000a5272a0b4d6d506fa7206d3d"
+  },
+  {
+    "path": "throughput/tile-fused/exit-status.json",
+    "bytes": 73,
+    "sha256": "8765556776906d46eed04bedecf352b1a9a5e096a237dc0236562966d617aca6"
+  },
+  {
+    "path": "throughput/tile-fused/marker-metrics.json",
+    "bytes": 12019,
+    "sha256": "2fe8bb188a2b3103a0ec59424772911aa680737088dea7aaca352fdb40c44eaf"
+  },
+  {
+    "path": "throughput/tile-fused/ngfx-version.txt",
+    "bytes": 129,
+    "sha256": "112d504ad88aa8156005501f44a14a37f1ec770e773eeeb2a9db3acfb3e3727b"
+  },
+  {
+    "path": "throughput/tile-fused/ngfx.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "throughput/tile-fused/ngfx.stdout.log",
+    "bytes": 4131,
+    "sha256": "03e73751f47cf5edd1758fa2572133f22f96e9aaff8ad316f9bc50e66a9f6b5f"
+  },
+  {
+    "path": "throughput/tile-fused/provenance.json",
+    "bytes": 1450,
+    "sha256": "cf71a78154a7e99f7f62e58eccd79f004fd830ea826e51c791ecd7b3c566af3e"
+  },
+  {
+    "path": "throughput/tile-fused/verification.json",
+    "bytes": 763,
+    "sha256": "476da80d5ecfd4019908a9538ab33bdc3b6be86a89bccb8fee27eb3179958fed"
+  }
+]

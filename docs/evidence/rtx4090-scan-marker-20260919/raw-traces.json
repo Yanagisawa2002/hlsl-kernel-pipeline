@@ -1,0 +1,50 @@
+[
+  {
+    "mode": "throughput",
+    "arm": "tile",
+    "localTrace": "D:\\CodexWork\\hlsl-gputrace-20260917\\.scratch\\nsight-isolated\\tile\\scan_2026_09_18_20_11_23.ngfx-gputrace",
+    "bytes": 613351,
+    "sha256": "49bcb96b1d11573892e91e351e79220ad8a6b4f0c0a15cea45f3154283260d33",
+    "exitCode": 0
+  },
+  {
+    "mode": "throughput",
+    "arm": "tile-fused",
+    "localTrace": "D:\\CodexWork\\hlsl-gputrace-20260917\\.scratch\\nsight-isolated\\tile-fused\\scan_2026_09_18_19_46_23.ngfx-gputrace",
+    "bytes": 539367,
+    "sha256": "e2e686bebd6fd3cc25e07a6c0dc4abadd71efc833b475a64abff819bc1a9e5bc",
+    "exitCode": 0
+  },
+  {
+    "mode": "throughput",
+    "arm": "rts",
+    "localTrace": "D:\\CodexWork\\hlsl-gputrace-20260917\\.scratch\\nsight-isolated\\rts\\scan_2026_09_18_20_11_30.ngfx-gputrace",
+    "bytes": 488971,
+    "sha256": "495c2038debc1430b5c49803b01a7c16aa15a033afab66bb9419de99c3ed4002",
+    "exitCode": 0
+  },
+  {
+    "mode": "rsp",
+    "arm": "tile",
+    "localTrace": "D:\\CodexWork\\hlsl-gputrace-20260917\\.scratch\\nsight-isolated-rsp\\tile\\scan_2026_09_19_03_19_02.ngfx-gputrace",
+    "bytes": 6808008,
+    "sha256": "396a523ea40ea6e5145f850a9712b3d9e3fa0c751332449ef237784c77129717",
+    "exitCode": 0
+  },
+  {
+    "mode": "rsp",
+    "arm": "tile-fused",
+    "localTrace": "D:\\CodexWork\\hlsl-gputrace-20260917\\.scratch\\nsight-isolated-rsp\\tile-fused\\scan_2026_09_19_03_19_08.ngfx-gputrace",
+    "bytes": 5159079,
+    "sha256": "8118b1da0c6c22ddc79272a202cbc76add19d1ccc5cee0860e720db8be68b829",
+    "exitCode": 0
+  },
+  {
+    "mode": "rsp",
+    "arm": "rts",
+    "localTrace": "D:\\CodexWork\\hlsl-gputrace-20260917\\.scratch\\nsight-isolated-rsp\\rts\\scan_2026_09_19_03_19_15.ngfx-gputrace",
+    "bytes": 6807861,
+    "sha256": "39843fee00110db7031b2b171db8f59b8d6d2cd5434d9404c0812460120598ef",
+    "exitCode": 0
+  }
+]

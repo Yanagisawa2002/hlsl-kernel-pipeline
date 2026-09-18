@@ -1,0 +1,15 @@
+{
+  "sourceStatusAfter": [],
+  "executableSHA256After": "230179D2CC2E5B5A344D9E6190A95E691E4CF5A0995331EC0E674494F45C3568",
+  "marker": "HlslPerf.ScanInclusive.ProfileRange",
+  "durationMs": 3.39322,
+  "metricSource": "BASE/GPUTRACE_REGIMES.xls (named marker row only)",
+  "durationSource": "BASE/D3DPERF_EVENTS.xls",
+  "ngfxExitCode": 0,
+  "notes": [
+    "Platform Windows was rejected before launch; successful attempt uses installed CLI platform Windows (x86_64).",
+    "HES unsupported on Ada message was emitted.",
+    "After successful save/export, teardown logged Activity session destroyed, connection error encountered; final Running result and process exit were 0.",
+    "Source was not modified; no rebuild; tile and rts not run."
+  ]
+}

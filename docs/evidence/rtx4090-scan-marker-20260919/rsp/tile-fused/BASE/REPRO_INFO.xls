@@ -1,0 +1,39 @@
+Computer Name	EDWINYNG
+Operating System	Windows 11 (25H2)
+Operating System Build	10.0.26200
+Processor	Intel(R) Core(TM) Ultra 7 265K
+RAM Usage	25460 MiB / 32122 MiB (79.3%)
+Device Name	NVIDIA GeForce RTX 4090
+Chip Name	AD102
+Driver Version	591.86
+Hardware Scheduling	Enabled
+VRAM Requested	14 MiB / 23370 MiB (0.1%)
+VRAM Committed	18 MiB / 23370 MiB (0.1%)
+VRAM Bytes Demoted	0 MiB
+Product Version	2026.3.1.0 (build 38722833) (public-release)
+Process File Name	D:\CodexWork\hlsl-gputrace-20260917\.scratch\native-profile\scan\scan.exe
+Command Line	"D:\CodexWork\hlsl-gputrace-20260917\.scratch\native-profile\scan\scan.exe" profile-once tile-fused 268435456 743848209 "NVIDIA GeForce RTX 4090"
+API	Direct3D 12
+Troubleshooting Collection Controls	API Timestamps, metrics, sampling oldest, instrumented, CB timestamps, FECS, warp state sampling control=6
+Start After	2 Submits
+Max Duration 	1000 ms
+Limited To	4 Submits
+Allocated Event Buffer Memory (kB)	20000
+Allocated Timestamps	100000
+V-Sync Mode	Enforced Off
+GPU Clocks	Locked to Base
+Force Repaint	No
+Force D3D12 Background Optimizations	No
+Max Vulkan SC Internal CBs per Queue	24
+Max Vulkan SC Internal CB Memory (kB)	16
+Collect Screenshot	Yes
+Time Every Action	No
+Trace Shader Bindings	Yes
+Collect Shader Pipelines	Yes
+Collect External Shader Debug Info	Yes
+Warp State Sampling Interval	2048
+Enable NVTX Ranges	Yes
+Recompile Cached Vulkan Shader Modules	Yes
+Metric Set	Throughput Metrics
+Real-Time Shader Profiler	Enabled
+Multi-Pass Metrics	Disabled

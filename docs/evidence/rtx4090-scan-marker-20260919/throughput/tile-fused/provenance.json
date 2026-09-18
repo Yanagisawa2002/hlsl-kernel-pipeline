@@ -1,0 +1,28 @@
+{
+  "sourceCommit": "b8df865819662f0f0b57f4c90b1d3def2898d3f3",
+  "sourceStatus": [],
+  "executable": "D:\\CodexWork\\hlsl-gputrace-20260917\\.scratch\\native-profile\\scan\\scan.exe",
+  "executableSHA256": "230179D2CC2E5B5A344D9E6190A95E691E4CF5A0995331EC0E674494F45C3568",
+  "pixRuntimeSHA256": "81ADCFD8253C3489BE720DA7E30F16004DC9A1F02A8B418C6C3AEF4993032E6D",
+  "nsight": "D:\\NGFX263\\ProgramFiles64Folder\\NVIDIA Corporation\\Nsight Graphics 2026.3.1\\host\\windows-desktop-nomad-x64\\ngfx.exe",
+  "nsightFileVersion": "2026.3 built on 2026-08-12 at 08:15 UTC",
+  "adapter": "NVIDIA GeForce RTX 4090",
+  "luid": 743848209,
+  "workingDirectory": "D:\\CodexWork\\hlsl-gputrace-20260917\\.scratch\\native-profile\\scan",
+  "arguments": [
+    "--activity=GPU Trace Profiler",
+    "--platform=Windows (x86_64)",
+    "--metric-set-name=Throughput Metrics",
+    "--architecture=Ada",
+    "--set-gpu-clocks=base",
+    "--start-after-submits=2",
+    "--limit-to-submits=4",
+    "--auto-export",
+    "--verbose",
+    "--output-dir=D:\\CodexWork\\hlsl-gputrace-20260917\\.scratch\\nsight-isolated\\tile-fused",
+    "--exe=D:\\CodexWork\\hlsl-gputrace-20260917\\.scratch\\native-profile\\scan\\scan.exe",
+    "--dir=D:\\CodexWork\\hlsl-gputrace-20260917\\.scratch\\native-profile\\scan",
+    "--args=profile-once tile-fused 268435456 743848209 \"NVIDIA GeForce RTX 4090\""
+  ],
+  "startedUtc": "2026-09-18T11:46:15.3008282Z"
+}
