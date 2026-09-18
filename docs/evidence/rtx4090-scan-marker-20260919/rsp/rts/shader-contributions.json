@@ -1,0 +1,48 @@
+{
+  "normalization": "100 * shader marker active-warp metric / sum of all named shader marker active-warp metrics; not raw sample counts or duration shares",
+  "sumNamedShaderPctPeak": 90.69348126,
+  "shaders": [
+    {
+      "name": "ClearErrorCount",
+      "shaderHash": "0x0fecd3cdf21b7e05",
+      "markerActiveWarpPctPeakRaw": "0",
+      "metric": "GPUTrace.PCSampler.tpc__warps_active_shader_node_ClearErrorCount_0x0fecd3cdf21b7e05.avg.pct_of_peak_sustained_elapsed",
+      "relativeContributionPct": 0.0
+    },
+    {
+      "name": "InitOne",
+      "shaderHash": "0x5ca1d4584f974a0c",
+      "markerActiveWarpPctPeakRaw": "0",
+      "metric": "GPUTrace.PCSampler.tpc__warps_active_shader_node_InitOne_0x5ca1d4584f974a0c.avg.pct_of_peak_sustained_elapsed",
+      "relativeContributionPct": 0.0
+    },
+    {
+      "name": "PropagateInclusive",
+      "shaderHash": "0xe54982ecfebc14d5",
+      "markerActiveWarpPctPeakRaw": "59.8092",
+      "metric": "GPUTrace.PCSampler.tpc__warps_active_shader_node_PropagateInclusive_0xe54982ecfebc14d5.avg.pct_of_peak_sustained_elapsed",
+      "relativeContributionPct": 65.94652578010434
+    },
+    {
+      "name": "Reduce",
+      "shaderHash": "0xa9c62cc972c5d945",
+      "markerActiveWarpPctPeakRaw": "30.8797",
+      "metric": "GPUTrace.PCSampler.tpc__warps_active_shader_node_Reduce_0xa9c62cc972c5d945.avg.pct_of_peak_sustained_elapsed",
+      "relativeContributionPct": 34.04842285353906
+    },
+    {
+      "name": "Scan",
+      "shaderHash": "0xe086a782cc29f0a1",
+      "markerActiveWarpPctPeakRaw": "0.00458126",
+      "metric": "GPUTrace.PCSampler.tpc__warps_active_shader_node_Scan_0xe086a782cc29f0a1.avg.pct_of_peak_sustained_elapsed",
+      "relativeContributionPct": 0.005051366356603346
+    },
+    {
+      "name": "ValidateOneInclusive",
+      "shaderHash": "0x78f4c9f9bc7ffbe5",
+      "markerActiveWarpPctPeakRaw": "0",
+      "metric": "GPUTrace.PCSampler.tpc__warps_active_shader_node_ValidateOneInclusive_0x78f4c9f9bc7ffbe5.avg.pct_of_peak_sustained_elapsed",
+      "relativeContributionPct": 0.0
+    }
+  ]
+}

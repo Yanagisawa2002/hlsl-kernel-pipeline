@@ -1,0 +1,98 @@
+Parsed general options:
+    hostname --> localhost
+    project --> 
+    output-dir --> D:\CodexWork\hlsl-gputrace-20260917\.scratch\nsight-isolated-rsp\rts
+    activity --> GPU Trace Profiler
+    platform --> Windows (x86_64)
+    verbose --> 1
+    exe --> D:\CodexWork\hlsl-gputrace-20260917\.scratch\native-profile\scan\scan.exe
+    dir --> D:\CodexWork\hlsl-gputrace-20260917\.scratch\native-profile\scan
+    args --> profile-once rts 268435456 743848209 "NVIDIA GeForce RTX 4090"
+    env --> 
+HES is not supported on architecture 'Ada'.
+Parsed GPU Trace Profiler activity options:
+    start-after-frames --> 0
+    start-after-submits --> 2
+    start-after-ms --> 0
+    start-after-hotkey --> 0
+    limit-to-frames --> 0
+    limit-to-submits --> 4
+    max-duration-ms --> 1000
+    start-with-ngfx-sdk --> 0
+    stop-with-ngfx-sdk --> 0
+    start-on-replay-begin --> 0
+    stop-on-replay-end --> 0
+    allocated-event-buffer-memory-kb --> 20000
+    hes-enabled --> 1
+    allocated-hes-buffer-memory-kb --> 2000
+    per-line-active-threads-per-warp --> 0
+    allocated-timestamps --> 100000
+    auto-export --> 1
+    per-arch-config-path --> 
+    architecture --> Ada
+    metric-set-id --> 0
+    metric-set-name --> Throughput Metrics
+    set-gpu-clocks --> base
+    disable-force-recompile-cached-vk-shader-stage-modules --> 0
+    disable-d3d12-debug-layer --> 1
+    enable-intrusive-d3d12-background-processing --> 0
+    disable-nvtx-ranges --> 0
+    collect-screenshot --> 1
+    disable-collect-shader-pipelines --> 0
+    disable-collect-external-shader-debug-info --> 0
+    pc-samples-per-pm-interval-per-sm --> 0
+    pm-bandwidth-limit --> 0
+    disable-trace-shader-bindings --> 0
+    allow-tracing-replay-reset --> 0
+    keep-going --> 0
+    trace-timeout --> 240
+Launching process...
+Preparing to launch the GPU Trace Profiler activity on localhost...
+Launched process: scan.exe (pid: 11100)
+D:/CodexWork/hlsl-gputrace-20260917/.scratch/native-profile/scan/scan.exe profile-once rts 268435456 743848209 "NVIDIA GeForce RTX 4090"
+
+Attempting to automatically connect...
+Searching for attachable processes on localhost:49152-49215...
+Attachable process detected: scan.exe (pid: 11100)
+- Status: Process created
+- Uptime: 0.406s
+Searching for attachable processes on localhost:49152-49215...
+Attachable process updated: scan.exe (pid: 11100)
+- Status: Presenting
+- Uptime: 1.96s
+Connecting to scan.exe (pid: 11100)...
+Session established. Starting activity...
+Waiting for target ready...
+INFO: Sample duration = 6781ns; Warp State Sampling Interval = 2048; GPU PMA Buffer Size (MB) = 4000; SOC PMA Buffer Size (MB) = 0 
+Waiting for generated GPU Trace report...
+Generating a trace after 2 submits with a max duration of 1000ms, limited to 4 submits...
+-- Data transfer progress (30)
+-- Data transfer progress (100)
+GPU Trace report saved to D:\CodexWork\hlsl-gputrace-20260917\.scratch\nsight-isolated-rsp\rts\scan_2026_09_19_03_19_15.ngfx-gputrace
+Opening generated GPU Trace report...
+-- Loading progress (100)
+-- Loading progress (100)
+-- Loading progress (100)
+-- Loading progress (100)
+-- Loading progress (100)
+-- Loading progress (100)
+-- Loading progress (10)
+-- Loading progress (20)
+-- Loading progress (30)
+-- Loading progress (40)
+-- Loading progress (50)
+-- Loading progress (60)
+-- Loading progress (70)
+-- Loading progress (80)
+-- Loading progress (90)
+-- Loading progress (100)
+Succeeded to export data:
+    D:\CodexWork\hlsl-gputrace-20260917\.scratch\nsight-isolated-rsp\rts\ReportGeneratorTags.txt
+    D:\CodexWork\hlsl-gputrace-20260917\.scratch\nsight-isolated-rsp\rts\BASE\REPRO_INFO.xls
+    D:\CodexWork\hlsl-gputrace-20260917\.scratch\nsight-isolated-rsp\rts\BASE\D3DPERF_EVENTS.xls
+    D:\CodexWork\hlsl-gputrace-20260917\.scratch\nsight-isolated-rsp\rts\BASE\FRAME.xls
+    D:\CodexWork\hlsl-gputrace-20260917\.scratch\nsight-isolated-rsp\rts\BASE\GPUTRACE_FRAME.xls
+    D:\CodexWork\hlsl-gputrace-20260917\.scratch\nsight-isolated-rsp\rts\BASE\GPUTRACE_REGIMES.xls
+Terminating process...
+Activity session destroyed, connection error encountered.
+Running result: 0
