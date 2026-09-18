@@ -44,3 +44,7 @@ tools/HlslPerf.InclusiveScanValidation/** -text -eol
 tools/run_inclusive_scan.py -text -eol
 tools/check_inclusive_control.py -text -eol
 docs/results/data/rtx4090-inclusive-2026-09-15/** -text -diff
+
+# Crossover calibration/receipts have SHA-256 identities; preserve raw bytes.
+docs/evidence/gpu-resident-crossover-20260919/**/*.json -text -eol whitespace=cr-at-eol
+docs/evidence/gpu-resident-crossover-20260919/**/*.log -text -eol
