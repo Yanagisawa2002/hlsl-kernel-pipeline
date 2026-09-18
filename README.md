@@ -46,6 +46,29 @@ The run also retained an uncomfortable result instead of filtering it away: desk
 
 **Engineering takeaway:** a faster primitive is not automatically a faster product path. For this CPU-input / buffered-export contract, the decision is to stop further scan tuning and use the CPU path unless the caller changes materially, such as becoming GPU-resident.
 
+### GPU-resident follow-up — architecture validated on hardware
+
+The primitive optimization paid off, but the complete CPU-output caller still favored CPU12. Rather than tune the scan further under that losing contract, the follow-up changed the workload boundary and built a separate GPU-resident Unity path.
+
+The GPU-resident follow-up was hardware-validated in Unity at **160k and 1M total agents**. A RenderDoc capture confirmed compute culling → GPU append/compact → `CopyStructureCount` into indirect arguments → `DrawInstancedIndirect`, with the draw consuming the GPU-produced visible-ID buffer. The render path therefore does not require a CPU visibility list or CPU instance-count decision; asynchronous readback supplies telemetry only.
+
+**This is architecture evidence, not a CPU-vs-GPU performance claim.** The earlier complete-task CPU12 result is unchanged; total agent counts do not imply that all agents are simultaneously visible.
+
+[Hardware validation report](docs/results/LIVE_GPU_DRIVEN_VALIDATION_2026-09-17.md) · [Evidence package](docs/evidence/live-gpu-crowd-20260917/README.md) · [Unity live sample](unity/LiveGpuDrivenCrowd/README.md)
+
+<details>
+<summary>Hardware evidence: Unity view and captured GPU command chain</summary>
+
+Unity at 160,000 total agents; the overlay reports the visible subset via asynchronous telemetry.
+
+![Unity GPU-resident Crowd at 160,000 total agents](docs/evidence/live-gpu-crowd-20260917/unity-160000.png)
+
+A separate captured frame shows `CullAgents`, `CopyStructureCount` and an indirect draw of 11,429 instances.
+
+![RenderDoc captured compute-to-indirect-draw chain](docs/evidence/live-gpu-crowd-20260917/renderdoc-gpu-chain.png)
+
+</details>
+
 ## What this project demonstrates
 
 - **Whole-operation measurement.** Timings include the GPU work required by the operation rather than presenting an isolated kernel dispatch as the final answer.
@@ -132,13 +155,21 @@ I implemented the primitive adapters and execution ABI, D3D12 executor and borro
 
 ## Quick start
 
-The CPU-side plan/example path requires .NET 10. Actual D3D12 recording and GPU evaluation require a supported Windows GPU.
+Install the .NET SDK **10.0.302** pinned by `global.json` for the CPU-side plan/example and native live-demo paths. Actual D3D12 recording and GPU evaluation require a supported Windows GPU.
 
 ```powershell
 dotnet restore examples/HlslPerf.PrimitiveApp/HlslPerf.PrimitiveApp.csproj --configfile examples/HlslPerf.PrimitiveApp/NuGet.offline.config -p:NuGetAudit=false
 dotnet build examples/HlslPerf.PrimitiveApp/HlslPerf.PrimitiveApp.csproj -c Release --no-restore
 dotnet run --project examples/HlslPerf.PrimitiveApp -c Release --no-build --no-restore -- . --check
 ```
+
+Native D3D12 live preview (Windows GPU):
+
+```powershell
+dotnet run --project src/HlslPerf.GpuDrivenLiveDemo -- --arm fused --agents 1048576
+```
+
+For GPU-resident indirect rendering, follow the [Unity live sample setup](unity/LiveGpuDrivenCrowd/README.md). The native preview reads back its output for presentation; the Unity sample keeps the render path GPU-resident.
 
 Optional GPU evaluation examples:
 

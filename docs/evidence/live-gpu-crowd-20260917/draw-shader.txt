@@ -1,0 +1,30 @@
+Shader hash b9b66833-4921a578-e48402d1-9e970717
+
+vs_5_0
+      dcl_globalFlags refactoringAllowed
+      dcl_immediateConstantBuffer {
+			{ -1.000000, -1.000000, 0, 0},
+			{ -1.000000, 1.000000, 0, 0},
+			{ 1.000000, 1.000000, 0, 0},
+			{ -1.000000, -1.000000, 0, 0},
+			{ 1.000000, 1.000000, 0, 0},
+			{ 1.000000, -1.000000, 0, 0} }
+      dcl_constantbuffer cb0[3], immediateIndexed
+      dcl_resource_structured t0, 28
+      dcl_resource_structured t1, 4
+      dcl_input_sgv v0.x, vertexid
+      dcl_input_sgv v1.x, instanceid
+      dcl_output_siv o0.xyzw, position
+      dcl_output o1.xyzw
+      dcl_temps 3
+   0: mov r0.x, v0.x
+   1: ld_structured_indexable(structured_buffer, stride=4)(mixed,mixed,mixed,mixed) r0.y, v1.x, l(0), t1.xxxx
+   2: ld_structured_indexable(structured_buffer, stride=28)(mixed,mixed,mixed,mixed) r1.xyzw, r0.y, l(0), t0.xyzw
+   3: ld_structured_indexable(structured_buffer, stride=28)(mixed,mixed,mixed,mixed) r2.xyz, r0.y, l(16), t0.xyzx
+   4: mad r0.xy, icb[r0.x + 0].xyxx, r1.zzzz, r1.xyxx
+   5: mov r2.w, r1.w
+   6: mov o1.xyzw, r2.wxyz
+   7: add r0.xy, r0.xyxx, -cb0[2].xyxx
+   8: div o0.xy, r0.xyxx, cb0[2].zwzz
+   9: mov o0.zw, l(0.000000, 0.000000, 0.000000, 1.000000)
+  10: ret
