@@ -1,82 +1,67 @@
 # HLSL Kernel Pipeline
 
-**GPU performance engineering in HLSL/D3D12: optimize complete operations, validate them, compare against mature baselines, and know when to stop.**
+GPU performance engineering from shader kernels to complete application architecture: optimize complete operations, validate correctness, profile the mechanism, and know when the GPU is the wrong answer.
 
-This repository is an engine-neutral GPU performance lab and reusable D3D12 primitive SDK. It contains scan, compaction, histogram/prefix, radix-sort, reduction and transpose research workloads; explicit integrations of mature external implementations; correctness gates; paired benchmark tooling; and application-level GPU/CPU comparisons.
+![Real Unity GPU-driven Crowd with 1,000,000 total agents and asynchronous visible-count telemetry](docs/media/gpu-driven-crowd-hero.gif)
 
-The main engineering question is not “can this shader benchmark faster?” It is **whether a change improves the complete operation or caller under a fixed contract, with enough evidence to justify using it.**
+**1,000,000 total-agent Unity sample:** GPU culling → append/compact visible IDs → GPU-written indirect args → indirect rendering. Only the visible subset is drawn.
 
-## Flagship performance cases
+**Architecture validation — not a CPU-vs-GPU performance claim.** [Higher-quality clip](docs/media/gpu-driven-crowd-hero.mp4) · [Capture provenance and limits](docs/media/README.md)
 
-### 1. GPU optimization that paid off — RTX 4090 inclusive scan
+## Three performance-engineering cases
 
-A separate full-array conversion pass was removed by producing inclusive values while the scan input vector was already loaded.
+### 1. Optimization paid off
 
-| Implementation | Complete GPU operation | Relative result |
-| --- | ---: | ---: |
-| Original exclusive scan + AddInput conversion | 6.376 ms | baseline |
-| **Native-inclusive fused path** | **2.904 ms** | **54.45% less time** |
-| Pinned GPUPrefixSums RTS | 3.584 ms | fused used **18.97% less time** |
+![Complete RTX 4090 scan latency: original 6.376178 ms, RTS 3.584187 ms, fused 2.904103 ms](docs/figures/rtx4090-inclusive-scan.svg)
 
-Workload: `2^28` uint32 elements on an RTX 4090. Six balanced rounds covered all three-arm order permutations in **18 fresh processes**, with 100 timed iterations per process and full correctness gates.
+**6.376 ms → 2.904 ms: 54.45% less complete-operation time, or 2.20x.** The GPUPrefixSums-derived local adaptation produces inclusive values directly, eliminating a redundant full-array `AddInput` conversion pass. Fused also uses 18.97% less time than pinned GPUPrefixSums RTS for this `2^28` uint32 workload on RTX 4090.
 
-At this size, the removed conversion stage logically read input and output and rewrote output: **3 GiB of full-array traffic**. That source-level accounting is not presented as measured DRAM bytes. A later Nsight Graphics capture independently showed the old `AddInput` shader stage present in `tile` and absent in `tile-fused`; whole-capture DRAM activity fell from **71.04% to 58.55%**, with the read-side signal falling from **35.59% to 19.64%**, while occupancy/register-pressure signals did not improve. Because that trace spans multiple submits and contains background graphics activity, these counters are treated as **directional mechanism evidence**, not scan-isolated byte attribution.
+The frozen experiment used **18 fresh processes, six balanced rounds and 100 timed iterations/process**, with full correctness validation. Later marker-isolated Nsight Throughput captures reproduce the direction and approximate magnitude: **7.30486 → 3.39322 ms (~53.55% less time)**. These single captures are not replacements for the paired benchmark.
 
-[Timing/correctness report](docs/results/RTX4090_INCLUSIVE_SCAN_2026-09-15.md) · [Hardware-profile diagnosis](docs/results/RTX4090_INCLUSIVE_SCAN_PROFILE_DIAGNOSIS.md) · [Capture evidence](docs/evidence/rtx4090-scan-nsight-20260917/README.md) · [API and reproduction](docs/integration/SCAN_INCLUSIVE.md)
+Marker read-side DRAM activity falls from **44.1089% to 31.4464% of peak sustained elapsed**; compute active-warps stay roughly flat (**31.1459% → 33.0528%**). RSP identifies `AddInput` at **~50.5% of named-shader active-warp contribution** in the original path — **not a duration share**. The fused RSP run's all-zero marker sampling fields are unavailable for stall interpretation. The removed **3 GiB** is logical source-level traffic, not measured physical DRAM savings.
 
-**Engineering takeaway:** remove whole-operation work first, then use hardware counters to test the mechanism. Keep the counter claim scoped to the range actually captured.
+[Timing and correctness](docs/results/RTX4090_INCLUSIVE_SCAN_2026-09-15.md) · [Marker-isolated profiling](docs/results/RTX4090_INCLUSIVE_SCAN_PROFILE_DIAGNOSIS.md) · [Raw profiler evidence](docs/evidence/rtx4090-scan-marker-20260919/README.md) · [API and reproduction](docs/integration/SCAN_INCLUSIVE.md)
 
-### 2. GPU optimization that did not pay off — complete Crowd/VFX caller
+### 2. Optimization did not pay off
 
-Primitive-level scan improvements did not survive the complete application contract. The benchmark compares four GPU paths, including pinned GPUPrefixSums RTS, against conventional CPU rendering for the same deterministic 8,388,608-agent Crowd/VFX task.
+![Complete Crowd lifecycle latency: GPU paths 45–49 ms per request; CPU12 6.98 ms](docs/figures/crowd-complete-lifecycle.svg)
 
-| Implementation | Lifecycle cost / request | Reused request mean |
-| --- | ---: | ---: |
-| Fused GPU | 45.12 ms | 6.08 ms |
-| **Wave-tiled GPU** | **48.04 ms** | **7.56 ms** |
-| External GPUPrefixSums RTS | 48.85 ms | 6.90 ms |
-| CPU, 1 worker | 11.87 ms | 8.11 ms |
-| **CPU, 12 workers** | **6.98 ms** | **3.04 ms** |
+**GPU paths: ~45–49 ms/request. CPU12: 6.98 ms/request.** A faster GPU primitive did not produce a faster complete application path under this **CPU-input / buffered-export contract**. The decision was to stop further scan tuning for this caller and use the CPU path.
 
-The lifecycle metric charges first-use preparation, 12 complete requests, upload/render/readback/export and cleanup. Across **81 fresh processes** in nine balanced orders, all **972 complete atlas checks passed**. Wave-tiled versus RTS did not establish a win; CPU12 was 6.88x lower complete lifecycle cost than wave-tiled for this caller.
+The cohort covers **8,388,608 agents, 12 requests/process, 81 fresh processes and 972/972 complete atlas validations**. The lifecycle charges preparation, upload/render/readback/export and cleanup. It excludes display/presentation: this is not a rendering FPS comparison. GPU desktop background snapshots ranged from 0–34%; all processes were retained.
 
-The run also retained an uncomfortable result instead of filtering it away: desktop GPU background snapshots ranged from 0–34%, and only 35/81 processes passed both strict quiet brackets. All samples were retained and the limitation is part of the conclusion.
+This negative result is intentional. It does not imply that GPU-driven rendering is generally slower than CPU rendering.
 
-[PR #4 — complete Crowd/VFX benchmark](https://github.com/Yanagisawa2002/hlsl-kernel-pipeline/pull/4)
+[Complete-task result and uncertainty](docs/results/CROWD_COMPLETE_TASK_2026-09-16.md) · [Raw cohort](docs/evidence/crowd-full-task-20260916/summary.json) · [Reproduction](docs/integration/CROWD_REPRODUCTION.md)
 
-**Engineering takeaway:** a faster primitive is not automatically a faster product path. For this CPU-input / buffered-export contract, the decision is to stop further scan tuning and use the CPU path unless the caller changes materially, such as becoming GPU-resident.
+### 3. Change the architecture
 
-### GPU-resident follow-up — architecture validated on hardware
+Instead of forcing GPU acceleration into a CPU-oriented caller, the follow-up changed data residency and the consumer boundary:
 
-The primitive optimization paid off, but the complete CPU-output caller still favored CPU12. Rather than tune the scan further under that losing contract, the follow-up changed the workload boundary and built a separate GPU-resident Unity path.
+```text
+GPU-resident agents → compute culling → AppendStructuredBuffer visible IDs
+                    → CopyStructureCount → GPU-written indirect args
+                    → DrawInstancedIndirect
+```
 
-The GPU-resident follow-up was hardware-validated in Unity at **160k and 1M total agents**. A RenderDoc capture confirmed compute culling → GPU append/compact → `CopyStructureCount` into indirect arguments → `DrawInstancedIndirect`, with the draw consuming the GPU-produced visible-ID buffer. The render path therefore does not require a CPU visibility list or CPU instance-count decision; asynchronous readback supplies telemetry only.
+![RenderDoc evidence of compute culling, GPU-written instance count and indirect draw](docs/evidence/live-gpu-crowd-20260917/renderdoc-gpu-chain.png)
 
-**This is architecture evidence, not a CPU-vs-GPU performance claim.** The earlier complete-task CPU12 result is unchanged; total agent counts do not imply that all agents are simultaneously visible.
+This real RenderDoc frame records **11,429 drawn instances out of 160,000 total agents**; it is separate from the 1M hero run. The draw consumes the GPU-produced visible-ID buffer. CPU readback supplies low-frequency asynchronous telemetry only; it does not choose visible instances or the draw count.
 
-[Hardware validation report](docs/results/LIVE_GPU_DRIVEN_VALIDATION_2026-09-17.md) · [Evidence package](docs/evidence/live-gpu-crowd-20260917/README.md) · [Unity live sample](unity/LiveGpuDrivenCrowd/README.md)
+The Unity sample was hardware-validated at **160k and 1M total agents**. **This proves architecture execution, not a new CPU-vs-GPU benchmark or controlled scalability claim.** One million total agents does not mean one million simultaneously visible or drawn.
 
-<details>
-<summary>Hardware evidence: Unity view and captured GPU command chain</summary>
-
-Unity at 160,000 total agents; the overlay reports the visible subset via asynchronous telemetry.
-
-![Unity GPU-resident Crowd at 160,000 total agents](docs/evidence/live-gpu-crowd-20260917/unity-160000.png)
-
-A separate captured frame shows `CullAgents`, `CopyStructureCount` and an indirect draw of 11,429 instances.
-
-![RenderDoc captured compute-to-indirect-draw chain](docs/evidence/live-gpu-crowd-20260917/renderdoc-gpu-chain.png)
-
-</details>
+[Unity hardware validation](docs/results/LIVE_GPU_DRIVEN_VALIDATION_2026-09-17.md) · [Unity screenshots and RenderDoc extraction](docs/evidence/live-gpu-crowd-20260917/README.md) · [Live sample](unity/LiveGpuDrivenCrowd/README.md) · [Hero capture](docs/media/README.md)
 
 ## What this project demonstrates
 
-- **Whole-operation measurement.** Timings include the GPU work required by the operation rather than presenting an isolated kernel dispatch as the final answer.
-- **External baselines.** Pinned GPUPrefixSums RTS, AMD/FidelityFX-derived paths and native research baselines are compared explicitly; results where mature libraries win are retained.
-- **Correctness before speed.** Full-output validation, poison/reconstruction checks, deterministic CPU oracles and source/binary/runtime identity are used as gates around timing evidence.
-- **Noise-aware experiments.** Balanced run order, fresh processes, drift/background checks and paired intervals are used where the measurement question justifies them.
-- **Profiler-driven diagnosis.** Static RGA evidence is kept separate from runtime counters. The RTX 4090 scan case now includes captured Nsight Graphics memory/SM/occupancy/stall signals with explicit scope limits instead of post-hoc claims about exact DRAM bytes or occupancy.
-- **Stop decisions.** The repository records both successful optimization and negative complete-task results. A narrow benchmark win is not treated as a deployment recommendation.
+- Complete-operation measurement, not isolated dispatch marketing.
+- Correctness before speed, including full-output validation.
+- Mature, pinned external baselines with upstream attribution.
+- Marker-isolated GPU profiling with explicit denominator and sampling limits.
+- Negative-result retention, including background-load limitations.
+- Architecture and workload-boundary reasoning.
+- Explicit stop decisions when the caller does not benefit.
+
 
 ## SDK and architecture
 
@@ -124,7 +109,7 @@ The standalone GPU-driven Crowd/VFX demo adds an application-shaped path: visibi
 
 ## Additional measured evidence
 
-The two cases above are the portfolio entry points. The repository keeps the broader history for auditability rather than presenting every result as equally important.
+The three cases above are the portfolio entry points. The repository keeps the broader history for auditability rather than presenting every result as equally important.
 
 - **Radeon AI PRO R9700, September 9:** all 70 preregistered processes and independent GPU correctness gates passed. Tiled 4-bit sort measured 12.124 ms versus a GPUSorting FFX baseline at 15.038 ms on its exact `2^25` pair workload; the other six external comparisons favored RTS, DeviceRadixSort, OneSweep or FFX over the tested candidate. [Native confirmation report](docs/results/R9700_NATIVE_CONFIRMATION_2026-09-09.md).
 - **R9700, September 7:** the internal single-pass scan showed a 1.4782x–1.5254x gain over its declared in-repository baseline at 16,777,216 elements, while separate external comparisons showed the internal scan and sort losing to mature libraries. [vNext integration report](docs/results/R9700_VNEXT_INTEGRATION_2026-09-07.md) · [external comparison](docs/integration/UNIFIED_BENCHMARK_RESULTS.md).
@@ -153,7 +138,9 @@ Static compiler/ISA evidence is useful but is not substituted for runtime counte
 
 I implemented the primitive adapters and execution ABI, D3D12 executor and borrowed-resource recorder, paired calibration/confirmation tooling, source-aware caching, profile validation for Unity, application benchmark harnesses and internal research kernels. External RTS/AMD shader algorithms retain their upstream attribution; DXC, Vortice, RGA and profiler tools are external dependencies/tooling rather than reimplemented components.
 
-## Quick start
+## Reproduction and evidence
+
+### Quick start
 
 Install the .NET SDK **10.0.302** pinned by `global.json` for the CPU-side plan/example and native live-demo paths. Actual D3D12 recording and GPU evaluation require a supported Windows GPU.
 
@@ -189,6 +176,30 @@ dotnet run --project src/HlslPerf.Cli -c Release --no-build -- tune manifests/sc
 GPU timing is never cached. Compilation cache identity includes source/compiler/options/entry point/defines, and profile compatibility includes device, driver, backend, shader model, compiler, manifest hash and transitive kernel hash.
 
 [Replay commands](docs/integration/REPLAY.md) · [inclusive scan reproduction](docs/integration/SCAN_INCLUSIVE.md) · [Unity adapter](docs/UNITY_ADAPTER.md)
+
+### Reproduce the portfolio figures
+
+```powershell
+python -m pip install -r tools/requirements-portfolio.txt
+python tools/generate_portfolio_figures.py --check
+python tools/generate_portfolio_figures.py
+```
+
+The generator reads only the two checked-in [structured data files](docs/data/README.md); `--check` independently compares their numbers with frozen source JSON. [SVG/PNG figures and methodology](docs/figures/README.md) · [Real Unity capture procedure](docs/media/README.md).
+
+### Complete-task detail retained
+
+| Implementation | Lifecycle ms/request | Reused request mean ms |
+|---|---:|---:|
+| Fused GPU | 45.12 | 6.08 |
+| Wave-tiled GPU | 48.04 | 7.56 |
+| GPUPrefixSums RTS | 48.85 | 6.90 |
+| CPU / 1 worker | 11.87 | 8.11 |
+| CPU / 12 workers | 6.98 | 3.04 |
+
+Only 35/81 processes passed both strict quiet brackets. Nine balanced orders and all 972 full atlas checks are retained; wave-tiled versus RTS did not establish a win. CPU12 had 6.88x lower lifecycle cost than wave-tiled in this cohort. [Original PR #4](https://github.com/Yanagisawa2002/hlsl-kernel-pipeline/pull/4) and [frozen report](docs/results/CROWD_COMPLETE_TASK_2026-09-16.md) retain the exact contract, process-level uncertainty and stop decision.
+
+The [September 17 whole-capture profiler evidence](docs/evidence/rtx4090-scan-nsight-20260917/README.md) remains historical context; the marker-specific report above is the current attribution reference.
 
 ## Scope and provenance
 
