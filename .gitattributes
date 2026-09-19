@@ -67,3 +67,6 @@ docs/evidence/gpu-quiet-window-20260919/**/*.json -text -eol whitespace=cr-at-eo
 
 # Isolated draw-drift diagnostic metadata preserves evidence byte identities.
 docs/evidence/draw-drift-diagnostic-20260919/**/*.json -text -eol whitespace=cr-at-eol
+
+# State-stability blocked receipts and build identities retain exact bytes.
+docs/evidence/state-stability-diagnostic-20260919/**/*.json -text -eol whitespace=cr-at-eol

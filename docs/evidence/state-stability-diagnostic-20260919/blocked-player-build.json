@@ -1,0 +1,17 @@
+{
+  "diagnosticOnly": true,
+  "eligibleForPerformanceAcceptance": false,
+  "originalReceipt": {
+    "unity": "6000.3.13f1",
+    "result": "Succeeded",
+    "sourceIdentity": "7e8f184ccdd6a6dd0eef1398538f3a4e51602761f633e157d5e6887cca3a1474",
+    "development": true,
+    "graphicsJobs": false,
+    "autoconnect": false,
+    "graphicsApis": [
+      "Direct3D12",
+      "Direct3D11"
+    ],
+    "d3d11Scope": "diagnostic override only; benchmark remains D3D12"
+  }
+}

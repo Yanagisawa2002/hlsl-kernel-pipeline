@@ -1,0 +1,9 @@
+{
+  "diagnosticOnly": true,
+  "eligibleForPerformanceAcceptance": false,
+  "diagnosticIdentity": "7ca415fb4092dea4896cd688785d6fa60067919a93c94793a81311058303a899",
+  "generatedSha256": "9cbb36e0d7fe177d5b3b845586f2342905ad2b2389225e3d15c2cdfd4f9cdd10",
+  "originalTimestampDllSha256": "cf0557d4bfc1ee96115c06915c9bc638113d12418447bc3c7ed734b3fab91526",
+  "frameCap": 2000000,
+  "durationSeconds": 30
+}

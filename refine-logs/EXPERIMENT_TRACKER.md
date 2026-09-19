@@ -52,3 +52,7 @@ Rejected ON quarter shift 0.055357440 ms (89.998002%); draw accounts for 99.9852
 ## 2026-09-19 isolated draw/state diagnostic
 
 StageA96 then forward/frozen/reverse1000 each exactly once; pipeline stats + persistent100ms NVML sidecars. All IDs/stats resolve, ring maxima2/3/2/3. Matched view pixel/proxy work identical; frozen PS133598 constant but P0->P5 clock transition accompanies draw increase. Strongest association B (GPU state), historical cause not proven; retain v4 blocked, no acceptance retry. Formal source unchanged. See `docs/results/DRAW_DRIFT_DIAGNOSTIC_2026-09-19.md`.
+
+## 2026-09-19 isolated state-stability diagnostic
+
+Prospective cyclic real-arm30-second diagnostic implemented; two Unity builds and64 Python tests pass. First CPU preflight34/34/35% blocked before Player/sidecar. STOP:0 valid,1 blocked,5 not attempted; no retry. Settling/frame300 metrics unavailable; choice C, no warmup duration/V5/acceptance. Formal V4 and old evidence unchanged. See `docs/results/GPU_STATE_STABILITY_2026-09-19.md`.
