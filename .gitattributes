@@ -61,3 +61,6 @@ docs/evidence/gpu-timing-integrated-v4-20260919/**/*.json -text -eol whitespace=
 
 # Quality acceptance raw receipts retain their original byte identities.
 docs/evidence/gpu-timing-quality-20260919/**/*.json -text -eol whitespace=cr-at-eol
+
+# Quiet-window continuation receipts retain raw byte identities.
+docs/evidence/gpu-quiet-window-20260919/**/*.json -text -eol whitespace=cr-at-eol

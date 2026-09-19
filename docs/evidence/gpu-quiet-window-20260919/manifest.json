@@ -1,0 +1,17 @@
+{
+  "baselineHead": "4e37b0f876807f373b2a92b09cc661de662bc603",
+  "sourceIdentity": "7e8f184ccdd6a6dd0eef1398538f3a4e51602761f633e157d5e6887cca3a1474",
+  "pluginSha256": "cf0557d4bfc1ee96115c06915c9bc638113d12418447bc3c7ed734b3fab91526",
+  "preservedAcceptedOff": "../gpu-timing-quality-20260919/overhead-cpu-0-off.json",
+  "preservedAcceptedOffSha256": "3a7eab09456807eb55835b4c76a14f7520f13fbc3de7687ca314a9f918080bf6",
+  "prerequisites": "../gpu-timing-integrated-v4-20260919",
+  "compressedOnRawSha256": "b31c3d83f4ed3f09f70843f5979faaa124d9d3cee235e3de55ca182f10ca8441",
+  "compression": "gzip mtime=0; decompressed bytes equal unmodified Player JSON",
+  "files": {
+    "operational-summary.json": "14fbd73ae7f92b92f96c2341e99d053058bb0ef32d44ae535b252f39c22a1c74",
+    "overhead-cpu-0-on.diagnostic-summary.json": "8b9d74e28dd262cb40f0ff99b1c4f1a6cb647d2dd63bcbec3fd438e72ec44a02",
+    "overhead-cpu-0-on.json.gz": "892a7988e1e048f03b3d750d35d4a4a2b44287e2dd92fdc05259173f76c5e379",
+    "overhead-cpu-0-on.launch.json": "6702b0247dfce21bab0218821af5739f76ccdb2ce02ca5a591d85808c0b95706"
+  },
+  "decision": "STOP: GPU drift; ON run invalid for instrumentation-effect acceptance; no retry"
+}

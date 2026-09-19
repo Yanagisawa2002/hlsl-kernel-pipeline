@@ -40,3 +40,7 @@
 ## 2026-09-19 quality acceptance checkpoint
 
 One fresh attempt: CPU timestamps OFF passed (quiet 1/0/1%, 1000 frames); CPU ON blocked before launch (12/7/17%). STOP, no retry or pilots. Native architecture/binary unchanged. Ring validation rejects 32/32. See `docs/results/GPU_TIMING_QUALITY_2026-09-19.md`. PR #12 remains Draft; formal matrix and cleanup deferred.
+
+## 2026-09-19 quiet-window continuation
+
+Observer found ten consecutive 0% observations. Formal CPU ON gate passed 0/0/0%; 1000/1000 native triplets, ring max 3, but GPU drift 89.998% >15% invalidated entire process. STOP; no retry or subsequent controls. Existing OFF preserved. See `docs/results/GPU_QUIET_WINDOW_2026-09-19.md`.

@@ -1,0 +1,50 @@
+{
+  "kind": "operational console observation summary; NOT formal quality evidence",
+  "startUtc": "2026-09-19T04:25:35.549543+00:00",
+  "lastObservationUtc": "2026-09-19T04:28:05.735256+00:00",
+  "observations": 143,
+  "elapsedSeconds": 150.238,
+  "candidateWindowsObserved": 1,
+  "candidateSamples": 10,
+  "candidateFirstUtc": "2026-09-19T04:27:56.231010+00:00",
+  "candidateLastUtc": "2026-09-19T04:28:05.735256+00:00",
+  "candidateUtilizationPercent": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "candidateTemperatureC": [
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45,
+    45
+  ],
+  "candidateSampleSpanSeconds": 9.504246,
+  "windowTotalDuration": "unknown; observer exits at success; discrete samples do not establish uninterrupted quiet",
+  "observedUtilizationRangePercent": [
+    0,
+    38
+  ],
+  "observedTemperatureRangeC": [
+    45,
+    46
+  ],
+  "sourceAttribution": "unavailable; Windows GPU Engine counter buffer error; no process inventory retained",
+  "formalLaunchesThisContinuation": 1,
+  "formalPrelaunchBlocksThisContinuation": 0,
+  "formalQualityFailuresThisContinuation": 1,
+  "priorPrelaunchBlocks": 2
+}
