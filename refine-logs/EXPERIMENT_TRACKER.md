@@ -44,3 +44,7 @@ One fresh attempt: CPU timestamps OFF passed (quiet 1/0/1%, 1000 frames); CPU ON
 ## 2026-09-19 quiet-window continuation
 
 Observer found ten consecutive 0% observations. Formal CPU ON gate passed 0/0/0%; 1000/1000 native triplets, ring max 3, but GPU drift 89.998% >15% invalidated entire process. STOP; no retry or subsequent controls. Existing OFF preserved. See `docs/results/GPU_QUIET_WINDOW_2026-09-19.md`.
+
+## 2026-09-19 offline GPU drift methodology decision
+
+Rejected ON quarter shift 0.055357440 ms (89.998002%); draw accounts for 99.9852%, rank trend 0.974677. Shift is 1.825779% of batch/frame; primary CPU is stable. All three hypothetical scale-aware policies flag it. Retain v4; no v5, validator/native changes or hardware run. See `docs/results/GPU_DRIFT_FORENSICS_2026-09-19.md`; old evidence unchanged.

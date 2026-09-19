@@ -1,0 +1,529 @@
+{
+  "kind": "offline forensics only; not acceptance; no hardware launch",
+  "preservedStatus": "REJECTED UNDER V4",
+  "rejection": "GPU drift",
+  "sourceIdentity": "7e8f184ccdd6a6dd0eef1398538f3a4e51602761f633e157d5e6887cca3a1474",
+  "pluginSha256": "cf0557d4bfc1ee96115c06915c9bc638113d12418447bc3c7ed734b3fab91526",
+  "rawSha256": "b31c3d83f4ed3f09f70843f5979faaa124d9d3cee235e3de55ca182f10ca8441",
+  "integrity": {
+    "samples": 1000,
+    "submitted": 1000,
+    "resolved": 1000,
+    "invalid": 0,
+    "maxRingOccupancy": 3,
+    "timestampFrequencyUnique": [
+      1000000000
+    ],
+    "submissionSequenceValid": true,
+    "resolvedSequenceValid": true,
+    "duplicateSubmissionIds": 0,
+    "duplicateResolvedIds": 0,
+    "ringSlotFailures": 0,
+    "orderingFailures": 0,
+    "fenceFailures": 0,
+    "timestampFrequencyMismatch": 0,
+    "crossSubmissionBackwardTicks": 0,
+    "duplicateRawTriplets": 0,
+    "cpuCullAllNull": true
+  },
+  "quarterDrifts": {
+    "gpuRangeMs": {
+      "firstQuarterMeanMs": 0.061509632,
+      "lastQuarterMeanMs": 0.116867072,
+      "signedShiftMs": 0.05535744,
+      "absoluteDriftMs": 0.05535744,
+      "relativeDrift": 0.8999800226410068,
+      "relativeStatus": "finite",
+      "architectureFraction": 0.018257789883357804
+    },
+    "gpuDrawMs": {
+      "firstQuarterMeanMs": 0.061509632,
+      "lastQuarterMeanMs": 0.11685888,
+      "signedShiftMs": 0.055349248,
+      "absoluteDriftMs": 0.055349248,
+      "relativeDrift": 0.8998468402477191,
+      "relativeStatus": "finite",
+      "architectureFraction": 0.01825508802765919
+    },
+    "cpuTotalMs": {
+      "firstQuarterMeanMs": 2.6774948000000003,
+      "lastQuarterMeanMs": 2.6668732,
+      "signedShiftMs": -0.010621600000000342,
+      "absoluteDriftMs": 0.010621600000000342,
+      "relativeDrift": 0.003966991831319433,
+      "relativeStatus": "finite",
+      "architectureFraction": 0.003503177549848394
+    },
+    "cpuCullAndListMs": {
+      "firstQuarterMeanMs": 2.6107608,
+      "lastQuarterMeanMs": 2.6093872,
+      "signedShiftMs": -0.0013735999999999748,
+      "absoluteDriftMs": 0.0013735999999999748,
+      "relativeDrift": 0.0005261301609860158,
+      "relativeStatus": "finite",
+      "architectureFraction": 0.00045303576508920603
+    },
+    "cpuUploadMs": {
+      "firstQuarterMeanMs": 0.0215448,
+      "lastQuarterMeanMs": 0.019573200000000002,
+      "signedShiftMs": -0.001971599999999997,
+      "absoluteDriftMs": 0.001971599999999997,
+      "relativeDrift": 0.09151164085997532,
+      "relativeStatus": "finite",
+      "architectureFraction": 0.0006502659540258398
+    },
+    "cpuSubmitMs": {
+      "firstQuarterMeanMs": 0.0451892,
+      "lastQuarterMeanMs": 0.0379128,
+      "signedShiftMs": -0.007276399999999995,
+      "absoluteDriftMs": 0.007276399999999995,
+      "relativeDrift": 0.16102077487541266,
+      "relativeStatus": "finite",
+      "architectureFraction": 0.0023998758307332245
+    },
+    "updateIntervalMs": {
+      "firstQuarterMeanMs": 2.9991964,
+      "lastQuarterMeanMs": 2.9643076,
+      "signedShiftMs": -0.03488880000000005,
+      "absoluteDriftMs": 0.03488880000000005,
+      "relativeDrift": 0.011632716016863776,
+      "relativeStatus": "finite",
+      "architectureFraction": 0.011506897350789608
+    }
+  },
+  "distributions": {
+    "gpuRangeMs": {
+      "min": 0.052224,
+      "p10": 0.058368,
+      "median": 0.095232,
+      "mean": 0.09107968,
+      "p90": 0.116736,
+      "p95": 0.11776,
+      "p99": 0.119808,
+      "max": 0.120832,
+      "stddev": 0.022226744421475673,
+      "CV": 0.2440362594760508
+    },
+    "gpuDrawMs": {
+      "min": 0.052224,
+      "p10": 0.058368,
+      "median": 0.095232,
+      "mean": 0.091075584,
+      "p90": 0.116736,
+      "p95": 0.11776,
+      "p99": 0.119808,
+      "max": 0.120832,
+      "stddev": 0.02222545986752454,
+      "CV": 0.2440331304109402
+    },
+    "cpuTotalMs": {
+      "min": 2.5128,
+      "p10": 2.60679,
+      "median": 2.6748000000000003,
+      "mean": 2.6889599,
+      "p90": 2.78425,
+      "p95": 2.82889,
+      "p99": 2.951004,
+      "max": 3.0584000000000002,
+      "stddev": 0.07524202962433962,
+      "CV": 0.027981834025988868
+    },
+    "updateIntervalMs": {
+      "min": 0.41750000000000004,
+      "p10": 2.86879,
+      "median": 3.0118,
+      "mean": 3.0293734000000003,
+      "p90": 3.1999,
+      "p95": 3.282025,
+      "p99": 3.4220050000000004,
+      "max": 5.7068,
+      "stddev": 0.18894359098005944,
+      "CV": 0.062370518926474834
+    }
+  },
+  "trends": {
+    "gpuRangeMs": {
+      "slopeMsPerFrame": 7.539649702849704e-05,
+      "fittedEndToEndShiftMs": 0.07532110053146854,
+      "linearR2": 0.9588903448242283,
+      "spearmanFrameRank": 0.9746767860588078,
+      "firstHalfMeanMs": 0.07098368000000001,
+      "secondHalfMeanMs": 0.11117568
+    },
+    "gpuDrawMs": {
+      "slopeMsPerFrame": 7.539136063936063e-05,
+      "fittedEndToEndShiftMs": 0.07531596927872126,
+      "linearR2": 0.958870529520876,
+      "spearmanFrameRank": 0.9747451776645313,
+      "firstHalfMeanMs": 0.070979584,
+      "secondHalfMeanMs": 0.111171584
+    },
+    "cpuTotalMs": {
+      "slopeMsPerFrame": -8.973073173073187e-06,
+      "fittedEndToEndShiftMs": -0.008964100099900113,
+      "linearR2": 0.0011851675020741696,
+      "spearmanFrameRank": -0.04297099100402935,
+      "firstHalfMeanMs": 2.6919842000000003,
+      "secondHalfMeanMs": 2.6859356
+    },
+    "cpuCullAndListMs": {
+      "slopeMsPerFrame": 5.013258813258778e-06,
+      "fittedEndToEndShiftMs": 0.00500824555444552,
+      "linearR2": 0.0004862169633061486,
+      "spearmanFrameRank": 0.00839712528968568,
+      "firstHalfMeanMs": 2.6180090000000003,
+      "secondHalfMeanMs": 2.6204268
+    },
+    "cpuUploadMs": {
+      "slopeMsPerFrame": -3.063109263109263e-06,
+      "fittedEndToEndShiftMs": -0.003060046153846154,
+      "linearR2": 0.014482976321733428,
+      "spearmanFrameRank": -0.13853959344992556,
+      "firstHalfMeanMs": 0.022584800000000002,
+      "secondHalfMeanMs": 0.020752200000000002
+    },
+    "cpuSubmitMs": {
+      "slopeMsPerFrame": -1.0923222723222723e-05,
+      "fittedEndToEndShiftMs": -0.0109122995004995,
+      "linearR2": 0.02763168136443272,
+      "spearmanFrameRank": -0.16728034932058597,
+      "firstHalfMeanMs": 0.0513904,
+      "secondHalfMeanMs": 0.0447566
+    },
+    "updateIntervalMs": {
+      "slopeMsPerFrame": -5.288895968895968e-05,
+      "fittedEndToEndShiftMs": -0.05283607072927072,
+      "linearR2": 0.006529561831004641,
+      "spearmanFrameRank": -0.10672779755348194,
+      "firstHalfMeanMs": 3.049014,
+      "secondHalfMeanMs": 3.0097328
+    }
+  },
+  "blocks": [
+    {
+      "startFrame": 0,
+      "endFrame": 99,
+      "gpuRangeMsMean": 0.0559104,
+      "gpuDrawMsMean": 0.0559104,
+      "cpuTotalMsMean": 2.6659680000000003,
+      "updateIntervalMsMean": 2.95893,
+      "visibleCountMean": 25332.62,
+      "gpuRangeMsMedian": 0.057344
+    },
+    {
+      "startFrame": 100,
+      "endFrame": 199,
+      "gpuRangeMsMean": 0.06366208,
+      "gpuDrawMsMean": 0.06366208,
+      "cpuTotalMsMean": 2.6755430000000002,
+      "updateIntervalMsMean": 2.993998,
+      "visibleCountMean": 25255.97,
+      "gpuRangeMsMedian": 0.062464
+    },
+    {
+      "startFrame": 200,
+      "endFrame": 299,
+      "gpuRangeMsMean": 0.0708096,
+      "gpuDrawMsMean": 0.0708096,
+      "cpuTotalMsMean": 2.710874,
+      "updateIntervalMsMean": 3.112356,
+      "visibleCountMean": 25143.24,
+      "gpuRangeMsMedian": 0.072192
+    },
+    {
+      "startFrame": 300,
+      "endFrame": 399,
+      "gpuRangeMsMean": 0.07835647999999999,
+      "gpuDrawMsMean": 0.07834624,
+      "cpuTotalMsMean": 2.705206,
+      "updateIntervalMsMean": 3.096765,
+      "visibleCountMean": 25061.14,
+      "gpuRangeMsMedian": 0.0768
+    },
+    {
+      "startFrame": 400,
+      "endFrame": 499,
+      "gpuRangeMsMean": 0.08617984000000001,
+      "gpuDrawMsMean": 0.0861696,
+      "cpuTotalMsMean": 2.7023300000000003,
+      "updateIntervalMsMean": 3.083021,
+      "visibleCountMean": 24923.21,
+      "gpuRangeMsMedian": 0.08704
+    },
+    {
+      "startFrame": 500,
+      "endFrame": 599,
+      "gpuRangeMsMean": 0.09868288,
+      "gpuDrawMsMean": 0.09868288,
+      "cpuTotalMsMean": 2.680355,
+      "updateIntervalMsMean": 3.0190170000000003,
+      "visibleCountMean": 24844.44,
+      "gpuRangeMsMedian": 0.09728
+    },
+    {
+      "startFrame": 600,
+      "endFrame": 699,
+      "gpuRangeMsMean": 0.10717184,
+      "gpuDrawMsMean": 0.10717184,
+      "cpuTotalMsMean": 2.712955,
+      "updateIntervalMsMean": 3.060696,
+      "visibleCountMean": 24824.84,
+      "gpuRangeMsMedian": 0.10752
+    },
+    {
+      "startFrame": 700,
+      "endFrame": 799,
+      "gpuRangeMsMean": 0.11616256,
+      "gpuDrawMsMean": 0.11615232,
+      "cpuTotalMsMean": 2.71232,
+      "updateIntervalMsMean": 3.066367,
+      "visibleCountMean": 24807.46,
+      "gpuRangeMsMedian": 0.115712
+    },
+    {
+      "startFrame": 800,
+      "endFrame": 899,
+      "gpuRangeMsMean": 0.11727872,
+      "gpuDrawMsMean": 0.11727872,
+      "cpuTotalMsMean": 2.664502,
+      "updateIntervalMsMean": 2.974329,
+      "visibleCountMean": 24918.03,
+      "gpuRangeMsMedian": 0.116736
+    },
+    {
+      "startFrame": 900,
+      "endFrame": 999,
+      "gpuRangeMsMean": 0.1165824,
+      "gpuDrawMsMean": 0.11657216000000001,
+      "cpuTotalMsMean": 2.659546,
+      "updateIntervalMsMean": 2.928255,
+      "visibleCountMean": 24896.49,
+      "gpuRangeMsMedian": 0.116736
+    }
+  ],
+  "gap": {
+    "distribution": {
+      "min": 0.0,
+      "p10": 0.0,
+      "median": 0.0,
+      "mean": 4.095999999999999e-06,
+      "p90": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "max": 0.001024,
+      "stddev": 6.463378980069171e-05,
+      "CV": 15.779733838059503
+    },
+    "quarterDrift": {
+      "firstQuarterMeanMs": 0.0,
+      "lastQuarterMeanMs": 8.191999999999999e-06,
+      "signedShiftMs": 8.191999999999999e-06,
+      "absoluteDriftMs": 8.191999999999999e-06,
+      "relativeDrift": null,
+      "relativeStatus": "infinite: zero first/nonzero last",
+      "architectureFraction": 2.701855698610107e-06
+    },
+    "nonzeroSamples": 4
+  },
+  "architectureScale": {
+    "batchCompletionMsPerFrame": 3.0319902,
+    "meanCpuTotalMs": 2.6889599,
+    "absoluteGpuShiftMs": 0.05535744,
+    "fractionOfBatch": 0.018257789883357804,
+    "fractionOfMeanCpu": 0.02058693400373877
+  },
+  "candidateComparisons": {
+    "v4_cpu96": {
+      "path": "docs/evidence/gpu-timing-integrated-v4-20260919/runs/integration-cpu.json",
+      "n": 96,
+      "architectureMs": 2.7939843750000004,
+      "primaryDrift": {
+        "firstQuarterMeanMs": 2.5954958333333336,
+        "lastQuarterMeanMs": 2.6046708333333335,
+        "signedShiftMs": 0.009174999999999933,
+        "absoluteDriftMs": 0.009174999999999933,
+        "relativeDrift": 0.0035349700362325986,
+        "relativeStatus": "finite",
+        "architectureFraction": null
+      },
+      "stageCandidates": {
+        "diagnostic": {
+          "firstQuarterMeanMs": 0.059861333333333336,
+          "lastQuarterMeanMs": 0.064256,
+          "signedShiftMs": 0.004394666666666658,
+          "absoluteDriftMs": 0.004394666666666658,
+          "relativeDrift": 0.07341411261582298,
+          "relativeStatus": "finite",
+          "architectureFraction": 0.001572903093513777
+        },
+        "v4StageCriterionTriggers": false,
+        "AStageTriggers": false,
+        "BStageTriggers": false,
+        "CStageTriggers": false,
+        "primaryCpuCriterionTriggers": false,
+        "diagnosticOnly": true
+      },
+      "repetitionsUnique": [
+        1
+      ],
+      "notAcceptance": true
+    },
+    "v4_gpu96": {
+      "path": "docs/evidence/gpu-timing-integrated-v4-20260919/runs/integration-gpu.json",
+      "n": 96,
+      "architectureMs": 0.11556250000000001,
+      "primaryDrift": {
+        "firstQuarterMeanMs": 0.010983333333333335,
+        "lastQuarterMeanMs": 0.013758333333333334,
+        "signedShiftMs": 0.0027749999999999997,
+        "absoluteDriftMs": 0.0027749999999999997,
+        "relativeDrift": 0.25265553869499247,
+        "relativeStatus": "finite",
+        "architectureFraction": null
+      },
+      "stageCandidates": {
+        "diagnostic": {
+          "firstQuarterMeanMs": 0.030421333333333335,
+          "lastQuarterMeanMs": 0.030506666666666668,
+          "signedShiftMs": 8.53333333333331e-05,
+          "absoluteDriftMs": 8.53333333333331e-05,
+          "relativeDrift": 0.0028050490883591017,
+          "relativeStatus": "finite",
+          "architectureFraction": 0.0007384171624301403
+        },
+        "v4StageCriterionTriggers": false,
+        "AStageTriggers": false,
+        "BStageTriggers": false,
+        "CStageTriggers": false,
+        "primaryCpuCriterionTriggers": true,
+        "diagnosticOnly": true
+      },
+      "repetitionsUnique": [
+        1
+      ],
+      "notAcceptance": true
+    },
+    "v4_cpu_off1000": {
+      "path": "docs/evidence/gpu-timing-quality-20260919/overhead-cpu-0-off.json",
+      "n": 1000,
+      "architectureMs": 2.8749335,
+      "primaryDrift": {
+        "firstQuarterMeanMs": 2.6410560000000003,
+        "lastQuarterMeanMs": 2.6334016,
+        "signedShiftMs": -0.007654400000000283,
+        "absoluteDriftMs": 0.007654400000000283,
+        "relativeDrift": 0.0028982346455358465,
+        "relativeStatus": "finite",
+        "architectureFraction": null
+      },
+      "stageCandidates": null,
+      "repetitionsUnique": [
+        1
+      ],
+      "notAcceptance": true
+    },
+    "v4_cpu_on1000_rejected": {
+      "path": "docs/evidence/gpu-quiet-window-20260919/overhead-cpu-0-on.json.gz",
+      "n": 1000,
+      "architectureMs": 3.0319902,
+      "primaryDrift": {
+        "firstQuarterMeanMs": 2.6774948000000003,
+        "lastQuarterMeanMs": 2.6668732,
+        "signedShiftMs": -0.010621600000000342,
+        "absoluteDriftMs": 0.010621600000000342,
+        "relativeDrift": 0.003966991831319433,
+        "relativeStatus": "finite",
+        "architectureFraction": null
+      },
+      "stageCandidates": {
+        "diagnostic": {
+          "firstQuarterMeanMs": 0.061509632,
+          "lastQuarterMeanMs": 0.116867072,
+          "signedShiftMs": 0.05535744,
+          "absoluteDriftMs": 0.05535744,
+          "relativeDrift": 0.8999800226410068,
+          "relativeStatus": "finite",
+          "architectureFraction": 0.018257789883357804
+        },
+        "v4StageCriterionTriggers": true,
+        "AStageTriggers": true,
+        "BStageTriggers": true,
+        "CStageTriggers": true,
+        "primaryCpuCriterionTriggers": false,
+        "diagnosticOnly": true
+      },
+      "repetitionsUnique": [
+        1
+      ],
+      "notAcceptance": true
+    },
+    "v3_native_normal": {
+      "path": "docs/evidence/gpu-timing-v3-20260919/native-final/normal.json",
+      "n": 96,
+      "architectureMs": null,
+      "primaryDrift": null,
+      "stageCandidates": {
+        "diagnostic": {
+          "firstQuarterMeanMs": 0.041088,
+          "lastQuarterMeanMs": 0.045056,
+          "signedShiftMs": 0.003967999999999999,
+          "absoluteDriftMs": 0.003967999999999999,
+          "relativeDrift": 0.09657320872274133,
+          "relativeStatus": "finite",
+          "architectureFraction": null
+        },
+        "v4StageCriterionTriggers": false,
+        "AStageTriggers": false,
+        "BStageTriggers": null,
+        "CStageTriggers": null,
+        "primaryCpuCriterionTriggers": null,
+        "diagnosticOnly": true
+      },
+      "repetitionsUnique": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "notAcceptance": true
+    },
+    "v3_native_batch": {
+      "path": "docs/evidence/gpu-timing-v3-20260919/native-final/batch.json",
+      "n": 96,
+      "architectureMs": null,
+      "primaryDrift": null,
+      "stageCandidates": {
+        "diagnostic": {
+          "firstQuarterMeanMs": 0.03746133333333333,
+          "lastQuarterMeanMs": 0.038997333333333335,
+          "signedShiftMs": 0.0015360000000000026,
+          "absoluteDriftMs": 0.0015360000000000026,
+          "relativeDrift": 0.0410022779043282,
+          "relativeStatus": "finite",
+          "architectureFraction": null
+        },
+        "v4StageCriterionTriggers": false,
+        "AStageTriggers": false,
+        "BStageTriggers": null,
+        "CStageTriggers": null,
+        "primaryCpuCriterionTriggers": null,
+        "diagnosticOnly": true
+      },
+      "repetitionsUnique": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "notAcceptance": true
+    }
+  },
+  "inputsSha256": {
+    "docs/evidence/gpu-timing-integrated-v4-20260919/runs/integration-cpu.json": "d187b3b603876895a56fdc72f42606aa078cdae7991c1ccd8fd591f6614865ce",
+    "docs/evidence/gpu-timing-integrated-v4-20260919/runs/integration-gpu.json": "45242be02e10cea0a4239f216d14e9e3c74953e2a3e81dad5300bd3679752714",
+    "docs/evidence/gpu-timing-quality-20260919/overhead-cpu-0-off.json": "3a7eab09456807eb55835b4c76a14f7520f13fbc3de7687ca314a9f918080bf6",
+    "docs/evidence/gpu-quiet-window-20260919/overhead-cpu-0-on.json.gz": "892a7988e1e048f03b3d750d35d4a4a2b44287e2dd92fdc05259173f76c5e379",
+    "docs/evidence/gpu-timing-v3-20260919/native-final/normal.json": "56a151f5098ee132c0617746c3e7a7448777ea552a3bcbd1b8f885e4633bd939",
+    "docs/evidence/gpu-timing-v3-20260919/native-final/batch.json": "ab85098e52cf544ea8be6125ac71bf236e561d4b156dd7529f6668cfba9b5b43"
+  }
+}
