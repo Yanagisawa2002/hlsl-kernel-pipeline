@@ -48,3 +48,7 @@ Observer found ten consecutive 0% observations. Formal CPU ON gate passed 0/0/0%
 ## 2026-09-19 offline GPU drift methodology decision
 
 Rejected ON quarter shift 0.055357440 ms (89.998002%); draw accounts for 99.9852%, rank trend 0.974677. Shift is 1.825779% of batch/frame; primary CPU is stable. All three hypothetical scale-aware policies flag it. Retain v4; no v5, validator/native changes or hardware run. See `docs/results/GPU_DRIFT_FORENSICS_2026-09-19.md`; old evidence unchanged.
+
+## 2026-09-19 isolated draw/state diagnostic
+
+StageA96 then forward/frozen/reverse1000 each exactly once; pipeline stats + persistent100ms NVML sidecars. All IDs/stats resolve, ring maxima2/3/2/3. Matched view pixel/proxy work identical; frozen PS133598 constant but P0->P5 clock transition accompanies draw increase. Strongest association B (GPU state), historical cause not proven; retain v4 blocked, no acceptance retry. Formal source unchanged. See `docs/results/DRAW_DRIFT_DIAGNOSTIC_2026-09-19.md`.

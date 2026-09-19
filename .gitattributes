@@ -64,3 +64,6 @@ docs/evidence/gpu-timing-quality-20260919/**/*.json -text -eol whitespace=cr-at-
 
 # Quiet-window continuation receipts retain raw byte identities.
 docs/evidence/gpu-quiet-window-20260919/**/*.json -text -eol whitespace=cr-at-eol
+
+# Isolated draw-drift diagnostic metadata preserves evidence byte identities.
+docs/evidence/draw-drift-diagnostic-20260919/**/*.json -text -eol whitespace=cr-at-eol

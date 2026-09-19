@@ -1,0 +1,103 @@
+{
+  "diagnosticOnly": true,
+  "eligibleForPerformanceAcceptance": false,
+  "baselineHead": "2662c4e1775bafcab2e81c59a5be7ad2a7011862",
+  "order": [
+    "short",
+    "forward",
+    "frozen",
+    "reverse"
+  ],
+  "files": {
+    "short.json.gz": {
+      "sha256": "7e911d5dc9d730822effcbdae8d43e1d3531928e149a99c101166c2a1ab12b20",
+      "uncompressedSha256": "2b3478575978a6bc9a380a7f4a7afd7cf6c4725fe757353fb830f07036f8cb75"
+    },
+    "short.telemetry.json.gz": {
+      "sha256": "6bc3b56d1c56029fcfbbfb86d4441b4faa15962d1e21ad3ba3f22116bea43645",
+      "uncompressedSha256": "f8c06f132b0e918c3fee7f3a4276018e34d82f4bd03c7bd27e81e95dea63ad3a"
+    },
+    "short.launch.json.gz": {
+      "sha256": "81a48f2b62d1b20ec95c340dc650b2d8217e753ed98cea500ca62487b5931900",
+      "uncompressedSha256": "9a161a1a28d559ca1c434e29c37ffc0622845c694a6fb91fe406efb169ffdfcc"
+    },
+    "short.assessment.json.gz": {
+      "sha256": "da354a422e522c6a7555a73ab4503781e8a36d1fcc4fda500846e770e0b1b724",
+      "uncompressedSha256": "1a95b07eaf28bbec6e2d8494afcfc6f360f0012eda089a55b4a41405df9df74a"
+    },
+    "forward.json.gz": {
+      "sha256": "d7eef6897cc26cd9014c8b74d73d23b35a7a0fb996db2077850d2b811a232114",
+      "uncompressedSha256": "a7949a95c22c7f2ed40912244ca677b81a7061674933af9c5fffce75d9d49e49"
+    },
+    "forward.telemetry.json.gz": {
+      "sha256": "999407a4c0db5777850060b7af7cc48bbf567e023c1c67345bf21c4e811f8167",
+      "uncompressedSha256": "6a66064e575a2e61e8d583be0cbf0ae73cd9aefaf75342a5ea0775880d5b5b93"
+    },
+    "forward.launch.json.gz": {
+      "sha256": "713c32d8a8da4acb3845033801070f3f6c5c1506fca25e6b6fed8f634c882abd",
+      "uncompressedSha256": "9be2d2900c4429f08ced403fc31db82e7ade62cef53df1c5d9d28b8d27fc93c5"
+    },
+    "forward.assessment.json.gz": {
+      "sha256": "154b4fb26ad4e91709c6e101cf7a6ff83bd2cf9cf485befe3bae3b0e9381e2e5",
+      "uncompressedSha256": "1faf2caf7c84b93aded1b652c9a21426eb6b5c0652866a3507eb8f2a175d54de"
+    },
+    "frozen.json.gz": {
+      "sha256": "628edf6c2fc71011ea51d4c8cd28aaea239056fab285ff21474c5706012c6178",
+      "uncompressedSha256": "f49b4ae07d01a39c06e7740f2e8152e0514030ebe702f1ddc2eb24164bd5fc78"
+    },
+    "frozen.telemetry.json.gz": {
+      "sha256": "30aedf39682f77df81002b3b70787fa7f599a873c30ba932a39be77fd50bdb25",
+      "uncompressedSha256": "cbd6a9b9ad57a3c3164228c082aabdc9ccbf43067502e8afe28e2acdf134562d"
+    },
+    "frozen.launch.json.gz": {
+      "sha256": "3f060c1c30314211c86eb414f6cb7c9d256e8a5dacb73410da0eb4119c3f0d9e",
+      "uncompressedSha256": "671e5ff0121395e296ed080846effdc12ffb71fbb6796553e2c91ed0a29a8c72"
+    },
+    "frozen.assessment.json.gz": {
+      "sha256": "35562900033fd2e59388a317820af286c760c16caf7fe2f064d7261e6f755934",
+      "uncompressedSha256": "bf5ff93db0dba1e023cd5b40053ec87fcd5680e2fa449f1eeb181660c3a30345"
+    },
+    "reverse.json.gz": {
+      "sha256": "e8807176228b2f485449301045bd8265d0d9c6046118b18d72d63d5925c9dab3",
+      "uncompressedSha256": "d9e49a5dd33177085d6bdf2b80e857ddbc903ac4ac811fc20fe799b755d7bcf9"
+    },
+    "reverse.telemetry.json.gz": {
+      "sha256": "84627f07288669006ec59b0bb94447e9149806244eb508bb099cb33a1fe78c82",
+      "uncompressedSha256": "a136cfd309f74f832d5b07aa217ed73227553d92bf2a2dc3e76d9be4b565507e"
+    },
+    "reverse.launch.json.gz": {
+      "sha256": "8e2bfe7a86484056c49092aa4b960d7c452f43d7dd40b9b85fa7008222b5527e",
+      "uncompressedSha256": "1a8f8bd2b28f69205c3f82b082aa4fee87f9c42d5282a1d7e586eb431d0be670"
+    },
+    "reverse.assessment.json.gz": {
+      "sha256": "154b4fb26ad4e91709c6e101cf7a6ff83bd2cf9cf485befe3bae3b0e9381e2e5",
+      "uncompressedSha256": "1faf2caf7c84b93aded1b652c9a21426eb6b5c0652866a3507eb8f2a175d54de"
+    },
+    "DrawDriftTimestamp.cpp.gz": {
+      "sha256": "6fcb0d34932326558660783c1b1bde90cc49a78dc6aa271d71681e7ea04df74f",
+      "uncompressedSha256": "746ff77d13ea8a501cc4e9cb2c5266679c3ef0f7ed63c534499cc3160eb25796"
+    },
+    "CrossoverBenchmark.cs.gz": {
+      "sha256": "d4c2007490488e2908833581fd22238e3443010c6d1c958a6ffb48618dabc2db",
+      "uncompressedSha256": "2286be3f2026c3bf2d13ccff86eccc67c90e3f24973a7d79f9221d9dd58f37b3"
+    },
+    "NativeTimingBackend.cs.gz": {
+      "sha256": "51ee095f1c3841983b1a9c0b4fdd1be3fd2e7becc30ff3d659883dacb347fae2",
+      "uncompressedSha256": "a16b572a6f91aaf37c9c3614232ced2742c7bc41e420352c48af3807335231b3"
+    },
+    "analysis.json.gz": {
+      "sha256": "7361d973af59fc2085f93ceee22ee46fa751251187444dd4c149eeed9116bfea",
+      "uncompressedSha256": "85524650af71ca3930b11d264fe8577bd82f5bbcf57c499cd41041bfa3a26cfc"
+    },
+    "native-build.json": {
+      "sha256": "81f27a840024bf5576e2bde4b5c0fa30d5b6d45d1fa0dc2d6c269490eb52ffcc"
+    },
+    "player-build.json": {
+      "sha256": "15b6350f34d6141073b26eb24f70f557e2c9ded7f7e8a8e14f6454433e47776f"
+    }
+  },
+  "unchangedCalibration": {
+    "path": "../gpu-timing-integrated-v4-20260919/runs/calibrate-100000-0.25-1000.json",
+    "sha256": "c8c8a5c37230b232cad5ea01bb7b87e64e63ee59dd4edc506a4d6fd2ad11f655"
+  }
+}
