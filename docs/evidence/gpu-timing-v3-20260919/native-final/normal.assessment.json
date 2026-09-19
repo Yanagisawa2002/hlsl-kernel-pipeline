@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "resolved": 96,
+  "frequency": 1000000000,
+  "minDelayFrames": 1,
+  "maxDelayFrames": 7
+}

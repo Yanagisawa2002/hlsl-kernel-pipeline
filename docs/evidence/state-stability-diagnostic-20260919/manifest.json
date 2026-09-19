@@ -1,0 +1,30 @@
+{
+  "diagnosticOnly": true,
+  "eligibleForPerformanceAcceptance": false,
+  "baseHead": "9b572131cefc3b6de8d763469c83cb5fd40bf627",
+  "status": "blocked before first Player; sequence stopped without retry",
+  "acceptedDiagnostics": 0,
+  "blockedDiagnostics": 1,
+  "notAttemptedPositions": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "originalTimestampDllSha256": "cf0557d4bfc1ee96115c06915c9bc638113d12418447bc3c7ed734b3fab91526",
+  "notes": [
+    "Blocked receipt references blocked-build artifacts, not final-build artifacts.",
+    "After STOP, offline denominator/failure-array hardening was rebuilt successfully; neither Player was launched.",
+    "Generated source gzip files preserve exact build input bytes; no runtime samples or NVML sidecars exist."
+  ],
+  "files": {
+    "01-cpu.launch.json": "b18f6416305097e13ca1a12cf30b62cd3c5f62db3f04717a7fb69f2bc4b3ff77",
+    "blocked-build-input.json": "8d7a0b722e91c665afe23363e8bfb67bd945eafb582aed682ddd233775bcf99e",
+    "blocked-generated.cs.gz": "329a34af89e6c4447fcacbd287b7d44dd08e497d3599d668ded434a0ff9b0cf0",
+    "blocked-player-build.json": "15b6350f34d6141073b26eb24f70f557e2c9ded7f7e8a8e14f6454433e47776f",
+    "final-build-input.json": "de01374a9763475fc58e539ea5fe9fa8ca1a530ccded7ffb1ccc3c5fad302c92",
+    "final-generated.cs.gz": "71a14916e3c59d81790fa6af7cefd3d56589eb4f67fccf983e21f22f19167979",
+    "final-player-build.json": "4c0b2d05790085b8ff1ac2db22e1a69e95fb95ac0acfcb09f6a6ae3eda2fa17e"
+  }
+}

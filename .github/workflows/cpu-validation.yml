@@ -40,6 +40,16 @@ jobs:
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           python -m unittest discover -s tests -p test_wave_tiled_scan.py
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -m unittest discover -s tools -p test_crossover.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -m unittest discover -s tools -p test_watch_gpu_quiet.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -m unittest discover -s tools -p test_crossover_drift.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -m unittest discover -s tools -p test_draw_drift.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python -m unittest discover -s tools -p test_state_stability.py
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
       - name: Application primitive plans and selection (CPU only)
         run: dotnet run --project examples/HlslPerf.PrimitiveApp -c Release --no-build --no-restore -- . --check
       - name: Compile SDK shader plans without a device

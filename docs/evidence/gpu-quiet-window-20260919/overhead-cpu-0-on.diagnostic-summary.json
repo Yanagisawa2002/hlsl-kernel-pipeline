@@ -1,0 +1,96 @@
+{
+  "batchCompletionMsPerFrame": 3.0319902,
+  "fenceObservationBoundMsPerFrame": 0.00047999999999999996,
+  "pacing": {
+    "passed": true,
+    "p10Ms": 2.8689600000000004,
+    "medianMs": 3.0119000000000002,
+    "p90Ms": 3.1999,
+    "p95Ms": 3.28205,
+    "cv": 0.05606869855840744,
+    "strongestRefreshHz": 334,
+    "clusterFraction": 0.5425425425425425,
+    "reason": "no preregistered pacing concentration detected",
+    "meanMs": 3.031987887887888,
+    "stddevMs": 0.16999961491872845
+  },
+  "timestampResolved": 1000,
+  "maxRingOccupancy": 3,
+  "cpuCullAndListMs": {
+    "min": 2.4129,
+    "max": 2.9816000000000003,
+    "stddev": 0.06563178749348521,
+    "mean": 2.6192179,
+    "median": 2.6061500000000004,
+    "p10": 2.56479,
+    "p90": 2.6985200000000003,
+    "p95": 2.7418
+  },
+  "cpuUploadMs": {
+    "min": 0.0083,
+    "max": 0.0882,
+    "stddev": 0.00734755318116174,
+    "mean": 0.0216685,
+    "median": 0.02055,
+    "p10": 0.01399,
+    "p90": 0.03141000000000001,
+    "p95": 0.034505
+  },
+  "cpuSubmitMs": {
+    "min": 0.0085,
+    "max": 0.1778,
+    "stddev": 0.018969517857605134,
+    "mean": 0.048073500000000005,
+    "median": 0.0473,
+    "p10": 0.025900000000000003,
+    "p90": 0.0682,
+    "p95": 0.07602499999999998
+  },
+  "cpuTotalMs": {
+    "min": 2.5128,
+    "max": 3.0584000000000002,
+    "stddev": 0.07524202962433962,
+    "mean": 2.6889599,
+    "median": 2.6748000000000003,
+    "p10": 2.60679,
+    "p90": 2.78425,
+    "p95": 2.82889
+  },
+  "gpuCullMs": null,
+  "gpuDrawMs": {
+    "min": 0.052224,
+    "max": 0.120832,
+    "stddev": 0.02222545986752454,
+    "mean": 0.091075584,
+    "median": 0.095232,
+    "p10": 0.058368,
+    "p90": 0.116736,
+    "p95": 0.11776
+  },
+  "gpuRangeMs": {
+    "min": 0.052224,
+    "max": 0.120832,
+    "stddev": 0.022226744421475673,
+    "mean": 0.09107968,
+    "median": 0.095232,
+    "p10": 0.058368,
+    "p90": 0.116736,
+    "p95": 0.11776
+  },
+  "timestampResolveDelayFrames": {
+    "min": 1,
+    "max": 3,
+    "stddev": 0.24526720123163634,
+    "mean": 1.938,
+    "median": 2.0,
+    "p10": 2.0,
+    "p90": 2.0,
+    "p95": 2.0
+  },
+  "qualityAccepted": false,
+  "failure": "GPU drift",
+  "cpuDrift": 0.003966991831319433,
+  "gpuDrift": 0.8999800226410068,
+  "batchCompletionMs": 3031.9902,
+  "gc0Collections": 0
+}

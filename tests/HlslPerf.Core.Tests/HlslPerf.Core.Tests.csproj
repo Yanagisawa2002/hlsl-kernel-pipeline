@@ -9,6 +9,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="../../unity/GpuDrivenCrowdBenchmark/BenchmarkModel.cs" Link="Crossover/BenchmarkModel.cs" />
     <ProjectReference Include="../../src/HlslPerf.Core/HlslPerf.Core.csproj" />
     <ProjectReference Include="../../src/HlslPerf.D3D12/HlslPerf.D3D12.csproj" />
     <ProjectReference Include="../../src/HlslPerf.GpuDriven/HlslPerf.GpuDriven.csproj" />

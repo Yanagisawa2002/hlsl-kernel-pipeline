@@ -1,0 +1,46 @@
+{
+  "protocolVersion": 2,
+  "command": [
+    "D:\\CodexValidation\\hlsl-crossover-player-v2-20260919\\Crossover.exe",
+    "-force-d3d12",
+    "-screen-fullscreen",
+    "0",
+    "-screen-width",
+    "1280",
+    "-screen-height",
+    "720",
+    "-logFile",
+    "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\profiler-recorder-normal.log",
+    "--mode",
+    "timing-diagnostic",
+    "--timing-api",
+    "profiler-recorder",
+    "--output",
+    "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\profiler-recorder-normal.json"
+  ],
+  "scope": "availability/attribution only, not quiet performance evidence",
+  "assemblySha256": "f63e3c605664b2c7eaf3649213a49ce7f4a8d3976be202330128b0a4c1595489",
+  "before": {
+    "time": 1789759949.3327515,
+    "adapters": [
+      {
+        "name": "NVIDIA GeForce RTX 4090",
+        "driver": "591.86",
+        "temperature": 41.0,
+        "utilization": 32.0
+      }
+    ]
+  },
+  "after": {
+    "time": 1789759952.8626807,
+    "adapters": [
+      {
+        "name": "NVIDIA GeForce RTX 4090",
+        "driver": "591.86",
+        "temperature": 41.0,
+        "utilization": 11.0
+      }
+    ]
+  },
+  "returnCode": 0
+}

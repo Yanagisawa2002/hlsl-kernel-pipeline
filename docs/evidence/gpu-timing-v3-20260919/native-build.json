@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "compiler": "MSVC /O2 /W4 /WX",
+  "files": [
+    {
+      "path": "D:\\CodexValidation\\hlsl-crossover-20260919\\unity\\GpuDrivenCrowdBenchmark\\Native\\CrossoverTimestamp.cpp",
+      "sha256": "f70597a4654534280d5a1a3398b9f2ab7939eebc8a4d0fa5b953937b0713d9ea"
+    },
+    {
+      "path": "D:\\CodexValidation\\hlsl-crossover-native-v3\\CrossoverTimestamp.dll",
+      "sha256": "0596a6898852746f1488f284e7746734d02034ee42e01ec80b0f17484156d7c0"
+    },
+    {
+      "path": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.3.13f1\\Editor\\Data\\PluginAPI\\IUnityInterface.h",
+      "sha256": "e23e267b57c049b438307542d62c30fbcd3fa77b6dac3b08842eae0df10b8239"
+    },
+    {
+      "path": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.3.13f1\\Editor\\Data\\PluginAPI\\IUnityGraphics.h",
+      "sha256": "524ca42ff0274feec5aea17a5275b774ffc1a031bdc9378f3e3eb2be787a7fa6"
+    },
+    {
+      "path": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.3.13f1\\Editor\\Data\\PluginAPI\\IUnityGraphicsD3D12.h",
+      "sha256": "275bf9e6dc0781255a8b12defa85e4a1cbd4e8327f56f861949c19baf46c525a"
+    }
+  ]
+}

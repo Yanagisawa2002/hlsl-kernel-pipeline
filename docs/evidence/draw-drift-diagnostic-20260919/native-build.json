@@ -1,0 +1,21 @@
+{
+  "diagnosticOnly": true,
+  "eligibleForPerformanceAcceptance": false,
+  "originalReceipt": {
+    "diagnosticOnly": true,
+    "eligibleForPerformanceAcceptance": false,
+    "baseSourceIdentity": "7e8f184ccdd6a6dd0eef1398538f3a4e51602761f633e157d5e6887cca3a1474",
+    "diagnosticIdentity": "2e18e6d6c0e20139b44aa4112b41bae95a6f0ad3dfd5f36c96fa5d5ff3768fc0",
+    "files": {
+      "D:\\CodexValidation\\hlsl-crossover-20260919\\tools\\prepare_draw_drift.py": "1be533b04115219678a6520f139363c153d21c045345524045f3cfb3265e2ea3",
+      "D:\\CodexValidation\\hlsl-crossover-20260919\\unity\\DrawDriftDiagnostic\\DrawDriftSupport.cs": "d2bd4d7257309baed830236453014aeb6e7dab132d635f5d8ac403ac9d8d2e67",
+      "D:\\CodexValidation\\hlsl-crossover-20260919\\unity\\DrawDriftDiagnostic\\PROTOCOL.md": "2a17b7a0468d3dab5d5ac073c1af65a1d3c10525f0c8b64d3dcff0720e96c42a",
+      "D:\\CodexValidation\\draw-drift-native\\DrawDriftTimestamp.cpp": "746ff77d13ea8a501cc4e9cb2c5266679c3ef0f7ed63c534499cc3160eb25796",
+      "D:\\CodexValidation\\draw-drift-native\\CrossoverTimestamp.dll": "23d09b1a49759686e0a03b0d926bd62a86ab46a193c876a310d672efb4612fb5",
+      "D:\\CodexValidation\\draw-drift-project\\Assets\\GpuDrivenCrowdBenchmark\\CrossoverBenchmark.cs": "2286be3f2026c3bf2d13ccff86eccc67c90e3f24973a7d79f9221d9dd58f37b3",
+      "D:\\CodexValidation\\draw-drift-project\\Assets\\GpuDrivenCrowdBenchmark\\NativeTimingBackend.cs": "a16b572a6f91aaf37c9c3614232ced2742c7bc41e420352c48af3807335231b3",
+      "D:\\CodexValidation\\draw-drift-project\\Assets\\GpuDrivenCrowdBenchmark\\BenchmarkModel.cs": "762fb6cebb5508b07960c051fa0bd24592ea778486ac56d75bfcda86524ce003",
+      "D:\\CodexValidation\\draw-drift-project\\Assets\\GpuDrivenCrowdBenchmark\\Crowd.shader": "f2babe15f3c72ba2d7538439c407cc8c8590f9720a6d792ad921b2604465c867"
+    }
+  }
+}

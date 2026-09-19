@@ -44,3 +44,29 @@ tools/HlslPerf.InclusiveScanValidation/** -text -eol
 tools/run_inclusive_scan.py -text -eol
 tools/check_inclusive_control.py -text -eol
 docs/results/data/rtx4090-inclusive-2026-09-15/** -text -diff
+
+# Crossover calibration/receipts have SHA-256 identities; preserve raw bytes.
+docs/evidence/gpu-resident-crossover-20260919/**/*.json -text -eol whitespace=cr-at-eol
+docs/evidence/gpu-resident-crossover-20260919/**/*.log -text -eol
+
+# Protocol-v2 raw receipts retain measured byte identities.
+docs/evidence/gpu-timing-repair-v2-20260919/**/*.json -text -eol whitespace=cr-at-eol
+
+# Protocol-v3 raw diagnostic receipts and extracted hierarchy preserve bytes.
+docs/evidence/gpu-timing-v3-20260919/**/*.json -text -eol whitespace=cr-at-eol
+docs/evidence/gpu-timing-v3-20260919/**/*.csv -text -eol whitespace=cr-at-eol
+
+# Integrated v4 raw evidence remains byte-identical to capture/run receipts.
+docs/evidence/gpu-timing-integrated-v4-20260919/**/*.json -text -eol whitespace=cr-at-eol
+
+# Quality acceptance raw receipts retain their original byte identities.
+docs/evidence/gpu-timing-quality-20260919/**/*.json -text -eol whitespace=cr-at-eol
+
+# Quiet-window continuation receipts retain raw byte identities.
+docs/evidence/gpu-quiet-window-20260919/**/*.json -text -eol whitespace=cr-at-eol
+
+# Isolated draw-drift diagnostic metadata preserves evidence byte identities.
+docs/evidence/draw-drift-diagnostic-20260919/**/*.json -text -eol whitespace=cr-at-eol
+
+# State-stability blocked receipts and build identities retain exact bytes.
+docs/evidence/state-stability-diagnostic-20260919/**/*.json -text -eol whitespace=cr-at-eol

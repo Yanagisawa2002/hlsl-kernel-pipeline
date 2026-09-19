@@ -1,0 +1,290 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "path": "jobs-off/legacy-batch.assessment.json",
+      "sha256": "ec43299e2abbf3a7d74e430c9421363edc08f11056858ff2a189382cd5275d5d",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-jobs-off\\legacy-batch.assessment.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "jobs-off/legacy-batch.json",
+      "sha256": "4fce9beb691d379a2a9a6d7a2582838bf34aaf0ee307dd532c624a18358a9008",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-jobs-off\\legacy-batch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "jobs-off/legacy-batch.launch.json",
+      "sha256": "cda75533ad4620ca52d8bc15209812118708024c5b9e4d76539bf8a0131a26d7",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-jobs-off\\legacy-batch.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "jobs-off/legacy-normal.assessment.json",
+      "sha256": "2f6ee48e4b3e0b6ddeb7fae1532a928125e0c0868210096bd83a3afccd5bad11",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-jobs-off\\legacy-normal.assessment.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "jobs-off/legacy-normal.json",
+      "sha256": "6e0682a4dc69f18ef9d95ed1293c6d13b61bc3ee6d92e394729be051f159f735",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-jobs-off\\legacy-normal.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "jobs-off/legacy-normal.launch.json",
+      "sha256": "1ab36427811b98d01fb17b88c60ab37a65df88f1728562cf74d93ee919aa8d66",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-jobs-off\\legacy-normal.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d12/legacy-batch.assessment.json",
+      "sha256": "bee59969416104a5f009b024ba69c40f4f4a843bd62320e490801f01936360bc",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d12\\legacy-batch.assessment.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d12/legacy-batch.json",
+      "sha256": "eb42fab460aa3b01e5f216958fdd5e97d7b836cc07619fd68d358291b0031a02",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d12\\legacy-batch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d12/legacy-batch.launch.json",
+      "sha256": "c4b794a678c2b84143c91eed934d1ee02feda4e31e4a42ab3c2e2e9ce40bbb12",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d12\\legacy-batch.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d12/legacy-batch.raw.hierarchy.csv",
+      "sha256": "1a6b6649f55f81a2c4f796d082f4d2d70618989d6a597c23b18ae9d2d72fb699",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d12\\legacy-batch.raw.hierarchy.csv",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d12/legacy-normal.assessment.json",
+      "sha256": "0db81d6c677606aff6018f983db2123d50b89a15e73c4edbc2686af90af5e722",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d12\\legacy-normal.assessment.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d12/legacy-normal.json",
+      "sha256": "a4a555c122de1c2e1f9b73ea23ce5b70ee3b46314e7111b42cfeac21b325e051",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d12\\legacy-normal.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d12/legacy-normal.launch.json",
+      "sha256": "d594fdd1f702c17246af10dcec61dab78b00cb6959731b8a6e36eb37e8384861",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d12\\legacy-normal.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d11/legacy-batch.assessment.json",
+      "sha256": "8e6e35914a4611482316bde9859249565eee9ae399021e75d75d288c85549bc3",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d11\\legacy-batch.assessment.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d11/legacy-batch.json",
+      "sha256": "7ab5ae6ad51095acac835a3171ddb841074a70a6d25ed80e7e4f0669fdcb3e5b",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d11\\legacy-batch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d11/legacy-batch.launch.json",
+      "sha256": "311ae6f5342510e197dc2c00195023b0e4c5737dcc73277918b20cce731d62f5",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d11\\legacy-batch.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d11/legacy-batch.raw.hierarchy.csv",
+      "sha256": "3541675a3e3aa5bebecd78167af65e1969741092988354f18d61af8a1988a9f4",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d11\\legacy-batch.raw.hierarchy.csv",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d11/legacy-normal.assessment.json",
+      "sha256": "b89a3dcc1747b27f34099899931bcd86dcb48f4cc61149d7f66868356f715dc1",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d11\\legacy-normal.assessment.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d11/legacy-normal.json",
+      "sha256": "5a1ef8cd3ee9bdb28cff82420c6f5cc945b61b513fc09d3e5e336b7bb47d8fef",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d11\\legacy-normal.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "startup-d3d11/legacy-normal.launch.json",
+      "sha256": "a690e78b395a7f8c7f938a8e01f55e7b4863e0c9efea42ad94690ac39d20e2ea",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d11\\legacy-normal.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "autoconnect-d3d12/editor.raw.hierarchy.csv",
+      "sha256": "6d2cb6d20c4479630d8723b66d8c1ff73791cae19456bd82ebdfdda0f5d82355",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-autoconnect-d3d12\\editor.raw.hierarchy.csv",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "autoconnect-d3d12/editor.raw.setup.json",
+      "sha256": "957fbb7908fbbe5f57d69d5d05c050b5def22a8fec50fc1b01491766eba6d7cd",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-autoconnect-d3d12\\editor.raw.setup.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "autoconnect-d3d12/result.assessment.json",
+      "sha256": "504130c995a4a57bfa4fde08de958e40c93da4288a787223ed0ebbbac88aa021",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-autoconnect-d3d12\\result.assessment.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "autoconnect-d3d12/result.json",
+      "sha256": "5b304f4df2777ea3cf768ab242aa63f0f2d531955a25e56e196ca39d49a1360f",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-autoconnect-d3d12\\result.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-initial/batch.assessment.json",
+      "sha256": "b0519ec739c280e624a09262fc075e84dc335e0a52e339c629c55395c6055582",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-probe-v3\\batch.assessment.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-initial/batch.json",
+      "sha256": "6c305ae61d6c39252a4a334fe9b1166d6bcf0739ea2cf2ed0c87bcae90cdbcf9",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-probe-v3\\batch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-initial/batch.launch.json",
+      "sha256": "32f6c38e629c13111c75ad080791ccc89a8e448aff220d11d4ed3e77a379ca59",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-probe-v3\\batch.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-initial/normal.assessment.json",
+      "sha256": "2101d4d46584713cd0820579e2b5668581c99288f385abeda3723c436bbcb4af",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-probe-v3\\normal.assessment.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-initial/normal.json",
+      "sha256": "e349377a41efefdedab7ae27410f88dbe393a8d338c2a295c7e3452d1fc060ea",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-probe-v3\\normal.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-initial/normal.launch.json",
+      "sha256": "0819dc215fb6d6cbac1e2f0426cef67d781949383be50a03c6c1e2eb4bbfe7ad",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-probe-v3\\normal.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-final/batch.assessment.json",
+      "sha256": "2101d4d46584713cd0820579e2b5668581c99288f385abeda3723c436bbcb4af",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-final-probe-v3\\batch.assessment.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-final/batch.json",
+      "sha256": "ab85098e52cf544ea8be6125ac71bf236e561d4b156dd7529f6668cfba9b5b43",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-final-probe-v3\\batch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-final/batch.launch.json",
+      "sha256": "a736e5c2780269240e394c4ae583840897ec5f3e694ae5edb6f8ac7887ab7caf",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-final-probe-v3\\batch.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-final/normal.assessment.json",
+      "sha256": "af8aab26815638c2ff38fbb0f12764565a01cb3b78e92e0ad06872cf525e905b",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-final-probe-v3\\normal.assessment.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-final/normal.json",
+      "sha256": "56a151f5098ee132c0617746c3e7a7448777ea552a3bcbd1b8f885e4633bd939",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-final-probe-v3\\normal.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-final/normal.launch.json",
+      "sha256": "e38998dabbc366e6e2a38e757d9e8dbc7b7c4bcfdc42be54be61ea3a57219273",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-final-probe-v3\\normal.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "correctness-final/calibrate-100000-0.25.json",
+      "sha256": "df78d61324ee2099a6934c573dc8b47f1118374f3ee45ece2ecef5bd3d3e97c4",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-final-correctness\\calibrate-100000-0.25.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "correctness-final/calibrate-100000-0.25.launch.json",
+      "sha256": "ae11370f875b95464b980f8de1697127ae847a3c62e5c81c4bb685be0781fd69",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-final-correctness\\calibrate-100000-0.25.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "correctness-final/validation-100000-0.25.json",
+      "sha256": "8986ea9317d073c4578560108dac2b30c790e8ef35665df89e8221378acb2339",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-final-correctness\\validation-100000-0.25.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "correctness-final/validation-100000-0.25.launch.json",
+      "sha256": "77a16ededfbb1f1cf8802679ee5115750341f505410a97d91e9f18ca089943e7",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v3-final-correctness\\validation-100000-0.25.launch.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "native-build.json",
+      "sha256": "6c502864e13aacb21b8fcacb70e3c6d8768c1694194d28f295e6f341e5cd379f",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-v3\\build.json",
+      "handling": "byte-for-byte"
+    },
+    {
+      "path": "player-build.json",
+      "sha256": "652925701e5d75acd1384724dfd1136ede921f3750a0698c6fe8cca633ac7584",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-player-native-v3-final\\Crossover.exe.build.json",
+      "handling": "byte-for-byte"
+    }
+  ],
+  "localRawCaptures": [
+    {
+      "path": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d12\\legacy-batch.raw",
+      "sha256": "12fda464d12fd9b72486f607af73c7152fbb2011f3b72173aaf1e69cf752ae11",
+      "bytes": 3434345,
+      "handling": "local only; extracted GPU hierarchy retained where available"
+    },
+    {
+      "path": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d12\\legacy-normal.raw",
+      "sha256": "7dfd051b4faf9d4f7fe5245a4570c7b9ca98ddb1d72b9ac3dddf75a46a3bdd33",
+      "bytes": 1603796620,
+      "handling": "local only; extracted GPU hierarchy retained where available"
+    },
+    {
+      "path": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d11\\legacy-batch.raw",
+      "sha256": "d8d5a7ff0487e497941fbcfef0455499bf828c0cc59a6473cb9c8abdcfae4c9b",
+      "bytes": 3205637,
+      "handling": "local only; extracted GPU hierarchy retained where available"
+    },
+    {
+      "path": "D:\\CodexValidation\\hlsl-crossover-v3-startup-d3d11\\legacy-normal.raw",
+      "sha256": "2df4a0a4e2f7d349d4c2a0d583910e787749ca83059c2ce5cceba1799a33d6fb",
+      "bytes": 1674258045,
+      "handling": "local only; extracted GPU hierarchy retained where available"
+    },
+    {
+      "path": "D:\\CodexValidation\\hlsl-crossover-v3-autoconnect-d3d12\\editor.raw",
+      "sha256": "d507bf3bf0543fc2c43394e267047ffc0fe9b51ac7cfb95d71fa4e7fe58bfdf6",
+      "bytes": 8765904,
+      "handling": "local only; extracted GPU hierarchy retained where available"
+    }
+  ],
+  "scope": "Diagnostic availability/attribution only, not benchmark performance. Broad profiler raw captures remain local; no binary/Player/editor logs committed."
+}

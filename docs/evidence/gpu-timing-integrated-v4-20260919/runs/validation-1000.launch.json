@@ -1,0 +1,64 @@
+{
+  "protocolVersion": 4,
+  "command": [
+    "D:\\CodexValidation\\hlsl-crossover-player-v4\\Crossover.exe",
+    "-force-d3d12",
+    "-screen-fullscreen",
+    "0",
+    "-screen-width",
+    "1280",
+    "-screen-height",
+    "720",
+    "-logFile",
+    "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\validation-1000.log",
+    "--mode",
+    "validation",
+    "--agents",
+    "100000",
+    "--density",
+    "0.25",
+    "--seed",
+    "69501203",
+    "--frames",
+    "1000",
+    "--warmup-frames",
+    "300",
+    "--timing-api",
+    "native",
+    "--timestamps",
+    "on",
+    "--run-id",
+    "ef9a7cc7-5e9e-483f-934d-b05f0779c22b",
+    "--output",
+    "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\validation-1000.json",
+    "--calibration",
+    "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\calibrate-100000-0.25-1000.json"
+  ],
+  "status": "accepted",
+  "quality": false,
+  "before": [
+    {
+      "time": 1789789493.2959964,
+      "adapters": [
+        {
+          "name": "NVIDIA GeForce RTX 4090",
+          "driver": "591.86",
+          "temperature": 44.0,
+          "utilization": 13.0
+        }
+      ]
+    }
+  ],
+  "returnCode": 0,
+  "after": {
+    "time": 1789789497.2979026,
+    "adapters": [
+      {
+        "name": "NVIDIA GeForce RTX 4090",
+        "driver": "591.86",
+        "temperature": 44.0,
+        "utilization": 20.0
+      }
+    ]
+  }
+}

@@ -1,0 +1,2385 @@
+{
+    "schema": 2,
+    "protocolVersion": 2,
+    "firstSubmissionUnityFrame": 1,
+    "submissionFrames": 96,
+    "timingApi": "profiler-recorder",
+    "sourceIdentity": "6b14c7352e9512bbdedb6a72f93394f8ed8f8f18584281b51f2c23b78eb5b85e",
+    "adapter": "NVIDIA GeForce RTX 4090",
+    "deviceVersion": "Direct3D 12 [level 12.2]",
+    "unityVersion": "6000.3.13f1",
+    "graphicsApi": "Direct3D12",
+    "error": "",
+    "development": true,
+    "batchmode": false,
+    "supportsGpuRecorder": true,
+    "supportsGraphicsFence": true,
+    "profilerEnabled": false,
+    "gpuProfilerAreaEnabled": false,
+    "markerValid": [
+        true,
+        true,
+        true
+    ],
+    "recorderValid": [
+        true,
+        true,
+        true
+    ],
+    "observations": [
+        {
+            "availabilityUnityFrame": 1,
+            "expectedSubmissionUnityFrame": -2,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": -1.0,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 2,
+            "expectedSubmissionUnityFrame": -1,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 81.4554,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 3,
+            "expectedSubmissionUnityFrame": 0,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 1.1248,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 4,
+            "expectedSubmissionUnityFrame": 1,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.7528,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 5,
+            "expectedSubmissionUnityFrame": 2,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.4218,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 6,
+            "expectedSubmissionUnityFrame": 3,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 1.0212,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 7,
+            "expectedSubmissionUnityFrame": 4,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1638,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 8,
+            "expectedSubmissionUnityFrame": 5,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.085,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 9,
+            "expectedSubmissionUnityFrame": 6,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.0698,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 10,
+            "expectedSubmissionUnityFrame": 7,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.0912,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 11,
+            "expectedSubmissionUnityFrame": 8,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.3465,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 12,
+            "expectedSubmissionUnityFrame": 9,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.0589,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 13,
+            "expectedSubmissionUnityFrame": 10,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.0418,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 14,
+            "expectedSubmissionUnityFrame": 11,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.0323,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 15,
+            "expectedSubmissionUnityFrame": 12,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.2286,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 16,
+            "expectedSubmissionUnityFrame": 13,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.0882,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 17,
+            "expectedSubmissionUnityFrame": 14,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1185,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 18,
+            "expectedSubmissionUnityFrame": 15,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.1365,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 19,
+            "expectedSubmissionUnityFrame": 16,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.0574,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 20,
+            "expectedSubmissionUnityFrame": 17,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.0705,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 21,
+            "expectedSubmissionUnityFrame": 18,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1369,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 22,
+            "expectedSubmissionUnityFrame": 19,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.0924,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 23,
+            "expectedSubmissionUnityFrame": 20,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.0859,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 24,
+            "expectedSubmissionUnityFrame": 21,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.0592,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 25,
+            "expectedSubmissionUnityFrame": 22,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.6899,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 26,
+            "expectedSubmissionUnityFrame": 23,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1065,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 27,
+            "expectedSubmissionUnityFrame": 24,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.042,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 28,
+            "expectedSubmissionUnityFrame": 25,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.0933,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 29,
+            "expectedSubmissionUnityFrame": 26,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.0932,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 30,
+            "expectedSubmissionUnityFrame": 27,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1345,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 31,
+            "expectedSubmissionUnityFrame": 28,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.0993,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 32,
+            "expectedSubmissionUnityFrame": 29,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.3982,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 33,
+            "expectedSubmissionUnityFrame": 30,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1201,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 34,
+            "expectedSubmissionUnityFrame": 31,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.1122,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 35,
+            "expectedSubmissionUnityFrame": 32,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.0828,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 36,
+            "expectedSubmissionUnityFrame": 33,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.9827,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 37,
+            "expectedSubmissionUnityFrame": 34,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.1088,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 38,
+            "expectedSubmissionUnityFrame": 35,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1234,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 39,
+            "expectedSubmissionUnityFrame": 36,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.1181,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 40,
+            "expectedSubmissionUnityFrame": 37,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.075,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 41,
+            "expectedSubmissionUnityFrame": 38,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1628,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 42,
+            "expectedSubmissionUnityFrame": 39,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.092,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 43,
+            "expectedSubmissionUnityFrame": 40,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.0645,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 44,
+            "expectedSubmissionUnityFrame": 41,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.0523,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 45,
+            "expectedSubmissionUnityFrame": 42,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1949,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 46,
+            "expectedSubmissionUnityFrame": 43,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.1363,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 47,
+            "expectedSubmissionUnityFrame": 44,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.1066,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 48,
+            "expectedSubmissionUnityFrame": 45,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.2116,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 49,
+            "expectedSubmissionUnityFrame": 46,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.2508,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 50,
+            "expectedSubmissionUnityFrame": 47,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1277,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 51,
+            "expectedSubmissionUnityFrame": 48,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1763,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 52,
+            "expectedSubmissionUnityFrame": 49,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1867,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 53,
+            "expectedSubmissionUnityFrame": 50,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.1394,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 54,
+            "expectedSubmissionUnityFrame": 51,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1278,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 55,
+            "expectedSubmissionUnityFrame": 52,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.2399,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 56,
+            "expectedSubmissionUnityFrame": 53,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1351,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 57,
+            "expectedSubmissionUnityFrame": 54,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1683,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 58,
+            "expectedSubmissionUnityFrame": 55,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.1762,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 59,
+            "expectedSubmissionUnityFrame": 56,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1173,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 60,
+            "expectedSubmissionUnityFrame": 57,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.0995,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 61,
+            "expectedSubmissionUnityFrame": 58,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.1332,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 62,
+            "expectedSubmissionUnityFrame": 59,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.149,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 63,
+            "expectedSubmissionUnityFrame": 60,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.0623,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 64,
+            "expectedSubmissionUnityFrame": 61,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1692,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 65,
+            "expectedSubmissionUnityFrame": 62,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.3629,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 66,
+            "expectedSubmissionUnityFrame": 63,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1277,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 67,
+            "expectedSubmissionUnityFrame": 64,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.5618,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 68,
+            "expectedSubmissionUnityFrame": 65,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.1534,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 69,
+            "expectedSubmissionUnityFrame": 66,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1228,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 70,
+            "expectedSubmissionUnityFrame": 67,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.7929,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 71,
+            "expectedSubmissionUnityFrame": 68,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.1275,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 72,
+            "expectedSubmissionUnityFrame": 69,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1149,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 73,
+            "expectedSubmissionUnityFrame": 70,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.075,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 74,
+            "expectedSubmissionUnityFrame": 71,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.1522,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 75,
+            "expectedSubmissionUnityFrame": 72,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1555,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 76,
+            "expectedSubmissionUnityFrame": 73,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.1235,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 77,
+            "expectedSubmissionUnityFrame": 74,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.108,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 78,
+            "expectedSubmissionUnityFrame": 75,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.1174,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 79,
+            "expectedSubmissionUnityFrame": 76,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.1271,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 80,
+            "expectedSubmissionUnityFrame": 77,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.1182,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 81,
+            "expectedSubmissionUnityFrame": 78,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.0897,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 82,
+            "expectedSubmissionUnityFrame": 79,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1142,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 83,
+            "expectedSubmissionUnityFrame": 80,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.1495,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 84,
+            "expectedSubmissionUnityFrame": 81,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.1926,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 85,
+            "expectedSubmissionUnityFrame": 82,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.1806,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 86,
+            "expectedSubmissionUnityFrame": 83,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.1644,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 87,
+            "expectedSubmissionUnityFrame": 84,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1897,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 88,
+            "expectedSubmissionUnityFrame": 85,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1269,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 89,
+            "expectedSubmissionUnityFrame": 86,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1498,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 90,
+            "expectedSubmissionUnityFrame": 87,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1132,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 91,
+            "expectedSubmissionUnityFrame": 88,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1678,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 92,
+            "expectedSubmissionUnityFrame": 89,
+            "submittedRepetitions": 3,
+            "updateIntervalMs": 0.1856,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 93,
+            "expectedSubmissionUnityFrame": 90,
+            "submittedRepetitions": 1,
+            "updateIntervalMs": 0.1134,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 94,
+            "expectedSubmissionUnityFrame": 91,
+            "submittedRepetitions": 4,
+            "updateIntervalMs": 0.1165,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 95,
+            "expectedSubmissionUnityFrame": 92,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.1495,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 96,
+            "expectedSubmissionUnityFrame": 93,
+            "submittedRepetitions": 2,
+            "updateIntervalMs": 0.0755,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 97,
+            "expectedSubmissionUnityFrame": 94,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.2722,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 98,
+            "expectedSubmissionUnityFrame": 95,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.0931,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 99,
+            "expectedSubmissionUnityFrame": 96,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.1032,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 100,
+            "expectedSubmissionUnityFrame": 97,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.352,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 101,
+            "expectedSubmissionUnityFrame": 98,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.2319,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 102,
+            "expectedSubmissionUnityFrame": 99,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.1669,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 103,
+            "expectedSubmissionUnityFrame": 100,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.1195,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 104,
+            "expectedSubmissionUnityFrame": 101,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.6753,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 105,
+            "expectedSubmissionUnityFrame": 102,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.0495,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 106,
+            "expectedSubmissionUnityFrame": 103,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.0253,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 107,
+            "expectedSubmissionUnityFrame": 104,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.0257,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 108,
+            "expectedSubmissionUnityFrame": 105,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.0982,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 109,
+            "expectedSubmissionUnityFrame": 106,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.0565,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 110,
+            "expectedSubmissionUnityFrame": 107,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.0311,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 111,
+            "expectedSubmissionUnityFrame": 108,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.0245,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "availabilityUnityFrame": 112,
+            "expectedSubmissionUnityFrame": 109,
+            "submittedRepetitions": 0,
+            "updateIntervalMs": 0.0246,
+            "gpuNs": [
+                0,
+                0,
+                0
+            ],
+            "blocks": [
+                0,
+                0,
+                0
+            ],
+            "cpuBlocks": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ],
+    "completed": true,
+    "interpretation": "API availability/frame attribution diagnostic only; not a clean performance pilot"
+}

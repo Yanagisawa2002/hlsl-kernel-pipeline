@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "scope": "API availability failures and final correctness only; no valid timing pilots",
+  "files": [
+    {
+      "path": "stable-markers/legacy-batch.assessment.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\legacy-batch.assessment.json",
+      "sha256": "063f8b47f5cf876ba87e6056cb5a4e9b04b641c2c37571b7ea91561a577bda5f",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "stable-markers/legacy-batch.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\legacy-batch.json",
+      "sha256": "6ab6a899ad897bf84246f2ab326effcd867fad175ada5be0f861072b9ef67531",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "stable-markers/legacy-batch.launch.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\legacy-batch.launch.json",
+      "sha256": "417d91bb66387b703c60d5e6528374bbe851c1a25790ea1a31d2b50a85346e9e",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "stable-markers/legacy-normal.assessment.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\legacy-normal.assessment.json",
+      "sha256": "a95b159cdccc89c698a941178045c8a59df86af0ea774a953314b5336b387685",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "stable-markers/legacy-normal.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\legacy-normal.json",
+      "sha256": "1c70e410fe2b14ceabc93a6568288224cf37d6e3a829f86fd1fd20dfc3c9f8d5",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "stable-markers/legacy-normal.launch.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\legacy-normal.launch.json",
+      "sha256": "538ab53e7fa3ead0f17e61f2144e8133cd7fe05cb4355c68dcd07a54a1a08404",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "stable-markers/profiler-recorder-batch.assessment.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\profiler-recorder-batch.assessment.json",
+      "sha256": "006df9753825a37e42b8e83f006bf9c60152e0b8c054653e0dd2c26a9a5026fa",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "stable-markers/profiler-recorder-batch.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\profiler-recorder-batch.json",
+      "sha256": "a92c416320d36d880ab306c581c45448beef4cf8663ce8e5c0a3023ed4ab914e",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "stable-markers/profiler-recorder-batch.launch.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\profiler-recorder-batch.launch.json",
+      "sha256": "d10a4fc584535ee17061520eba045a2566667bf2791deb3d72d10baa0f3667ef",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "stable-markers/profiler-recorder-normal.assessment.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\profiler-recorder-normal.assessment.json",
+      "sha256": "7107baf05527dc6e42cdfbd926937470b387e11cb6b2763aba4134ee44264948",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "stable-markers/profiler-recorder-normal.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\profiler-recorder-normal.json",
+      "sha256": "32af330d3858788811934bb76cf2ca71f94fa32bcc996ae4f291661b25597623",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "stable-markers/profiler-recorder-normal.launch.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-20260919\\profiler-recorder-normal.launch.json",
+      "sha256": "20c97c676b5b628834117093f667b089ae20aaf0768a2d3098cc1ceed45959d8",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "gpu-area-enabled/legacy-batch.assessment.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-area-20260919\\legacy-batch.assessment.json",
+      "sha256": "ba2b16d39e5459ac37fb546b46b8ae1a9b0548008216912094c97ca6a0e2d609",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "gpu-area-enabled/legacy-batch.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-area-20260919\\legacy-batch.json",
+      "sha256": "9e982a54ad0889ce0e4dc0a622d933fccc22b914df422c3a21ca59e36bd11ccb",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "gpu-area-enabled/legacy-batch.launch.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-area-20260919\\legacy-batch.launch.json",
+      "sha256": "9bb3aa99badd9fb2fa63fb372594cd206eac6834d8e64acc87aec2f2a1b8709f",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "gpu-area-enabled/legacy-normal.assessment.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-area-20260919\\legacy-normal.assessment.json",
+      "sha256": "45a699b97d68cd8317d98ad8d3302ee8446825ff06c7fe33492e162d84d56455",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "gpu-area-enabled/legacy-normal.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-area-20260919\\legacy-normal.json",
+      "sha256": "654db79904bed95f44051efb41791603679b8e75132299e15d3253c4497cd371",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "gpu-area-enabled/legacy-normal.launch.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-timing-v2-area-20260919\\legacy-normal.launch.json",
+      "sha256": "521ee30d7b3d44f9bd616833d62e9dfd57f7322d711cdd5e72e15e56e9012412",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "final-correctness/calibrate-100000-0.25.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v2-final-correctness-20260919\\calibrate-100000-0.25.json",
+      "sha256": "71118fe94f724aecad6ade01a3bed67e704a088fd1d8ae0f466d0d197a33ff01",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "final-correctness/calibrate-100000-0.25.launch.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v2-final-correctness-20260919\\calibrate-100000-0.25.launch.json",
+      "sha256": "33410db75a71ce68d94846d3d97c2f80d4e788cde44670a0fae6bf2f61a18d7a",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "final-correctness/validation-100000-0.25.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v2-final-correctness-20260919\\validation-100000-0.25.json",
+      "sha256": "3de39709dec14d7882f57151899fce5255c1f2b0a0368845af7b3dcab878d097",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "final-correctness/validation-100000-0.25.launch.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v2-final-correctness-20260919\\validation-100000-0.25.launch.json",
+      "sha256": "369235b89083715443105d463279280fb163488f01ff1b3743cf03353682bbed",
+      "handling": "byte-for-byte copy"
+    },
+    {
+      "path": "final-correctness/player-build.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-player-v2-final-20260919\\Crossover.exe.build.json",
+      "sha256": "a1219ffd56ebd5768b69383fbac4d57f8b0b1be406f7dc4e927c414528a08f18",
+      "handling": "byte-for-byte copy"
+    }
+  ],
+  "omitted": "Player/editor logs and binaries remain local; JSON observations, launch commands, hashes, load snapshots and assessments retained."
+}

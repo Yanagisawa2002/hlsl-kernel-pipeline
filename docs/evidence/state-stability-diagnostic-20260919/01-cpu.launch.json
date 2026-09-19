@@ -1,0 +1,87 @@
+{
+  "diagnosticOnly": true,
+  "eligibleForPerformanceAcceptance": false,
+  "order": [
+    "cpu",
+    "gpu",
+    "gpu",
+    "cpu",
+    "cpu",
+    "gpu"
+  ],
+  "position": 1,
+  "arm": "cpu",
+  "runId": "e7370163-d576-4f99-8e96-d6cf5c4d328a",
+  "command": [
+    "D:\\CodexValidation\\state-stability-player\\StateStability.exe",
+    "-force-d3d12",
+    "-screen-fullscreen",
+    "0",
+    "-screen-width",
+    "1280",
+    "-screen-height",
+    "720",
+    "-logFile",
+    "D:\\CodexValidation\\state-stability-runs\\01-cpu.log",
+    "--mode",
+    "cpu",
+    "--agents",
+    "100000",
+    "--density",
+    "0.25",
+    "--seed",
+    "69501203",
+    "--warmup-frames",
+    "300",
+    "--frames",
+    "1000",
+    "--timestamps",
+    "on",
+    "--timing-api",
+    "native",
+    "--run-id",
+    "e7370163-d576-4f99-8e96-d6cf5c4d328a",
+    "--calibration",
+    "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\calibrate-100000-0.25-1000.json",
+    "--output",
+    "D:\\CodexValidation\\state-stability-runs\\01-cpu.json"
+  ],
+  "status": "blocked: initial GPU utilization",
+  "playerSha256": "47b23bfad0dbb1200a41daae299396c49924b87c0222e2e4258687a3505334a0",
+  "calibrationSha256": "c8c8a5c37230b232cad5ea01bb7b87e64e63ee59dd4edc506a4d6fd2ad11f655",
+  "before": [
+    {
+      "time": 1789828208.126721,
+      "adapters": [
+        {
+          "name": "NVIDIA GeForce RTX 4090",
+          "driver": "591.86",
+          "temperature": 44.0,
+          "utilization": 34.0
+        }
+      ]
+    },
+    {
+      "time": 1789828209.1844194,
+      "adapters": [
+        {
+          "name": "NVIDIA GeForce RTX 4090",
+          "driver": "591.86",
+          "temperature": 44.0,
+          "utilization": 34.0
+        }
+      ]
+    },
+    {
+      "time": 1789828210.2425067,
+      "adapters": [
+        {
+          "name": "NVIDIA GeForce RTX 4090",
+          "driver": "591.86",
+          "temperature": 44.0,
+          "utilization": 35.0
+        }
+      ]
+    }
+  ]
+}

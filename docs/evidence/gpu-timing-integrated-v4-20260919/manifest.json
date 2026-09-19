@@ -1,0 +1,183 @@
+{
+  "schema": 1,
+  "scope": "v4 real-workload integration/placement diagnostics; performance blocked before first overhead process",
+  "files": [
+    {
+      "path": "runs/calibrate-100000-0.25-1000.json",
+      "sha256": "c8c8a5c37230b232cad5ea01bb7b87e64e63ee59dd4edc506a4d6fd2ad11f655",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\calibrate-100000-0.25-1000.json"
+    },
+    {
+      "path": "runs/calibrate-100000-0.25-1000.launch.json",
+      "sha256": "6a310d27d342183bb6cf75a1f5bd04bf15967b23027977841113a2fcd1ccafad",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\calibrate-100000-0.25-1000.launch.json"
+    },
+    {
+      "path": "runs/calibrate-100000-0.25-96.json",
+      "sha256": "8cabc59fc277568b51bd047418a6986ae29696433606f215eba6c7f08895f137",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\calibrate-100000-0.25-96.json"
+    },
+    {
+      "path": "runs/calibrate-100000-0.25-96.launch.json",
+      "sha256": "64ac6a0ac9edd5a65ed54370d10bb72b67c4bf0a3f59858a21446752cd049cdd",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\calibrate-100000-0.25-96.launch.json"
+    },
+    {
+      "path": "runs/integration-cpu.json",
+      "sha256": "d187b3b603876895a56fdc72f42606aa078cdae7991c1ccd8fd591f6614865ce",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\integration-cpu.json"
+    },
+    {
+      "path": "runs/integration-cpu.launch.json",
+      "sha256": "151198d71b1d717d9ab2f0e84645d1859724247d0ff3fb2d55ef4e173df18b28",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\integration-cpu.launch.json"
+    },
+    {
+      "path": "runs/integration-cpu.summary.json",
+      "sha256": "dbf9367d65f32fd754b1cabf01848425ff683691060cf667cd50b3897c0df90e",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\integration-cpu.summary.json"
+    },
+    {
+      "path": "runs/integration-gpu.json",
+      "sha256": "45242be02e10cea0a4239f216d14e9e3c74953e2a3e81dad5300bd3679752714",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\integration-gpu.json"
+    },
+    {
+      "path": "runs/integration-gpu.launch.json",
+      "sha256": "b42604919d4443b746b8d94d63c71449ea0aab3d045fd1bbcc1e5119b72c4f98",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\integration-gpu.launch.json"
+    },
+    {
+      "path": "runs/integration-gpu.summary.json",
+      "sha256": "854f9be82c5c06a058c1c225541e81c73d4b595e80c24724133ef5d4858379f1",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\integration-gpu.summary.json"
+    },
+    {
+      "path": "runs/overhead-cpu-0-off.launch.json",
+      "sha256": "4af873b955f2c23e4bd9511d989c892829c6a8dabb5808fab283d4e6a2018d7d",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\overhead-cpu-0-off.launch.json"
+    },
+    {
+      "path": "runs/placement-assessment.json",
+      "sha256": "c649c88012e3f836f90e9130aafdecd61920f5de799c225772511cedd1da463c",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\placement-assessment.json"
+    },
+    {
+      "path": "runs/validation-1000.json",
+      "sha256": "a8f0871ed1dfe9d65dc9be15f80c9c00aa33f78e3b60d6e8dbaea8f981d5003c",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\validation-1000.json"
+    },
+    {
+      "path": "runs/validation-1000.launch.json",
+      "sha256": "e2803eb48cb97a8f432f877070857e6846031b9203f094dc0a7f925f76f184d5",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\validation-1000.launch.json"
+    },
+    {
+      "path": "runs/validation-96.json",
+      "sha256": "f2a77a51dc37c699aab3b2b5e1a1137105756edfab41e9ec51e2207840ebb0bd",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\validation-96.json"
+    },
+    {
+      "path": "runs/validation-96.launch.json",
+      "sha256": "9a0ece3632cdc01fe8a47c804b19faf4cbb44dacf099e3d36136de7d612557e4",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-integrated-v4\\validation-96.launch.json"
+    },
+    {
+      "path": "placement/cpu-capture.json",
+      "sha256": "3217d2caea336f9c014c31f5ae6696487655ca1779eec724f79177df0e7b9ce9",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement-real\\cpu-capture.json"
+    },
+    {
+      "path": "placement/cpu-commands.json",
+      "sha256": "c2304f1465b9728e92962998baf23ee3689b9945ddff16966acb2f44e274cc7f",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement-real\\cpu-commands.json"
+    },
+    {
+      "path": "placement/cpu.json",
+      "sha256": "dc78ab5d4bee24d91a8ff1a487dd47b61fd74e23ee6f026cd86fcfd30aaee856",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement-real\\cpu.json"
+    },
+    {
+      "path": "placement/gpu-capture.json",
+      "sha256": "052d61351ce208841546e1aa7f170bc18996266b186543934bff53210efd8ffb",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement-real\\gpu-capture.json"
+    },
+    {
+      "path": "placement/gpu-commands.json",
+      "sha256": "240553986df45b3493de2d1aedd003c9367d286dba7494858ac544dbe009737e",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement-real\\gpu-commands.json"
+    },
+    {
+      "path": "placement/gpu.json",
+      "sha256": "35297fe9763c2f927d4e3d61bd7d086ef49507132b428df25bd563c2e5d3ff85",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement-real\\gpu.json"
+    },
+    {
+      "path": "placement-startup-miss/cpu-capture.json",
+      "sha256": "26eb58bf03f3759b0042a38b5a03aa0a425e230d3718cd19a16d697a63a95e62",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement\\cpu-capture.json"
+    },
+    {
+      "path": "placement-startup-miss/cpu-commands.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement\\cpu-commands.json"
+    },
+    {
+      "path": "placement-startup-miss/cpu.json",
+      "sha256": "d7654e3e49c0870b8ca1dbcf68c16dd65de6887f1563dfd94530f402f6a8e972",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement\\cpu.json"
+    },
+    {
+      "path": "placement-startup-miss/gpu-capture.json",
+      "sha256": "ea0bf642f87ccfc8384cddd13a4ebc7bb746fd4732787a91b9881e4fda2bca1d",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement\\gpu-capture.json"
+    },
+    {
+      "path": "placement-startup-miss/gpu-commands.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement\\gpu-commands.json"
+    },
+    {
+      "path": "placement-startup-miss/gpu.json",
+      "sha256": "56724961b2c577e0fc51880f04e9b6c68fca23743fa7087ce3c05b1673d0402f",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement\\gpu.json"
+    },
+    {
+      "path": "placement-startup-miss/gpu_frame320.rdc.structure.json",
+      "sha256": "8abcea032ad8025b1bb606ced6401354b9ccf99f6b3d70d81b2b24fdd0a64316",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-v4-placement\\gpu_frame320.rdc.structure.json"
+    },
+    {
+      "path": "native-build.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-native-v4\\build.json",
+      "sha256": "06a6eeb9f238a04d2ef1da5b75ca92a46b98c81d3c79f40311867d739bc38e08"
+    },
+    {
+      "path": "player-build.json",
+      "sourcePath": "D:\\CodexValidation\\hlsl-crossover-player-v4\\Crossover.exe.build.json",
+      "sha256": "34b20d0980d41afdcbea7d46d722c1861dc2561f1a599d1f7cd95f0651d628db"
+    }
+  ],
+  "localCaptures": [
+    {
+      "path": "D:\\CodexValidation\\hlsl-crossover-v4-placement-real\\cpu_frame14134.rdc",
+      "bytes": 15918910,
+      "sha256": "8d183b84f01979fbdf56a6e1e82182ecb41bfdec919d58fbdf09b1d4d2291e09"
+    },
+    {
+      "path": "D:\\CodexValidation\\hlsl-crossover-v4-placement-real\\gpu_frame18220.rdc",
+      "bytes": 15865517,
+      "sha256": "aadb5a81992d60ccded6ee1df924a53f874d138d656f2891dbbecf3df88d6a75"
+    },
+    {
+      "path": "D:\\CodexValidation\\hlsl-crossover-v4-placement\\cpu_frame320.rdc",
+      "bytes": 5805810,
+      "sha256": "9b1649735d6495309ce42c2f3630dfdeb2cf22e9cb10728e3161d4403c2f5f03"
+    },
+    {
+      "path": "D:\\CodexValidation\\hlsl-crossover-v4-placement\\gpu_frame320.rdc",
+      "bytes": 5807014,
+      "sha256": "660a6b19bdfa3638805a39f32280725201aa68602b7be49c1e4648c5a521c157"
+    }
+  ]
+}

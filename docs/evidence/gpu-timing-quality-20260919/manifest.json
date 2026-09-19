@@ -1,0 +1,17 @@
+{
+  "attempt": "one explicit quality attempt; stopped before CPU ON launch; no retry",
+  "baselineHead": "767567d836f115481e0b531c6f398c2e5c8385ce",
+  "sourceIdentity": "7e8f184ccdd6a6dd0eef1398538f3a4e51602761f633e157d5e6887cca3a1474",
+  "previousBlockedReceipt": "../gpu-timing-integrated-v4-20260919/runs/overhead-cpu-0-off.launch.json",
+  "prerequisiteEvidence": "../gpu-timing-integrated-v4-20260919",
+  "files": {
+    "overhead-cpu-0-off.json": "3a7eab09456807eb55835b4c76a14f7520f13fbc3de7687ca314a9f918080bf6",
+    "overhead-cpu-0-off.launch.json": "a0d10119b37ddecd46a260b1b48a9d3f163900806c9f03900595be41489590d5",
+    "overhead-cpu-0-off.summary.json": "273431bf6764535483a57ed763de8a10b4d861b44318516c46e3b1e36c2f690d",
+    "overhead-cpu-0-on.launch.json": "750ddda8efa81ae41834fd647891948afb081768d9b7bc5c91064c408381be49"
+  },
+  "binarySha256": {
+    "Crossover.exe": "47b23bfad0dbb1200a41daae299396c49924b87c0222e2e4258687a3505334a0",
+    "CrossoverTimestamp.dll": "cf0557d4bfc1ee96115c06915c9bc638113d12418447bc3c7ed734b3fab91526"
+  }
+}

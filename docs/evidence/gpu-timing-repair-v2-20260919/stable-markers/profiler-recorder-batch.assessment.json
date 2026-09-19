@@ -1,0 +1,65 @@
+{
+  "passed": false,
+  "reason": "zero/missing/misattributed GPU samples",
+  "submittedFrames": 96,
+  "nonzero": [
+    0,
+    0,
+    0
+  ],
+  "matchesByDelay": {
+    "1": [
+      0,
+      0,
+      0
+    ],
+    "2": [
+      0,
+      0,
+      0
+    ],
+    "3": [
+      0,
+      0,
+      0
+    ],
+    "4": [
+      0,
+      0,
+      0
+    ],
+    "5": [
+      0,
+      0,
+      0
+    ],
+    "6": [
+      0,
+      0,
+      0
+    ],
+    "7": [
+      0,
+      0,
+      0
+    ],
+    "8": [
+      0,
+      0,
+      0
+    ]
+  },
+  "batchmode": true,
+  "timingApi": "profiler-recorder",
+  "pacingDiagnosticOnly": {
+    "passed": true,
+    "p10Ms": 0.0226,
+    "medianMs": 0.1214,
+    "p90Ms": 0.2132,
+    "p95Ms": 0.7455499999999999,
+    "cv": 3.7179277635911685,
+    "strongestRefreshHz": 101,
+    "clusterFraction": 0.009009009009009009,
+    "reason": "no preregistered pacing concentration detected"
+  }
+}

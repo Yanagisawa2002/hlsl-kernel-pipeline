@@ -1,0 +1,13 @@
+{
+    "unity": "6000.3.13f1",
+    "result": "Succeeded",
+    "sourceIdentity": "1d8fdd893205a289cab222471e5352a7949184f1159bae05b5c19bebebf7997f",
+    "development": true,
+    "graphicsJobs": false,
+    "autoconnect": false,
+    "graphicsApis": [
+        "Direct3D12",
+        "Direct3D11"
+    ],
+    "d3d11Scope": "diagnostic override only; benchmark remains D3D12"
+}

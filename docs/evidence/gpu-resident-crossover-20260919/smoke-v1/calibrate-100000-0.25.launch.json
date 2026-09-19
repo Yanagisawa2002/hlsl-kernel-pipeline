@@ -1,0 +1,59 @@
+{
+  "command": [
+    "D:\\CodexValidation\\hlsl-crossover-player-20260919\\Crossover.exe",
+    "-batchmode",
+    "-force-d3d12",
+    "-screen-width",
+    "1280",
+    "-screen-height",
+    "720",
+    "-logFile",
+    "D:\\CodexValidation\\hlsl-crossover-smoke-20260919\\calibrate-100000-0.25.log",
+    "--mode",
+    "calibrate",
+    "--agents",
+    "100000",
+    "--density",
+    "0.25",
+    "--seed",
+    "69501203",
+    "--frames",
+    "1000",
+    "--warmup-frames",
+    "300",
+    "--output",
+    "D:\\CodexValidation\\hlsl-crossover-smoke-20260919\\calibrate-100000-0.25.json",
+    "--run-id",
+    "39a4f341-cfb2-495a-a58b-25a25e3cb0b8",
+    "--pair-id",
+    "100000-0.25-pair0"
+  ],
+  "stage": "calibrate",
+  "playerSha256": "47b23bfad0dbb1200a41daae299396c49924b87c0222e2e4258687a3505334a0",
+  "before": [
+    {
+      "time": 1789750298.1034722,
+      "adapters": [
+        {
+          "name": "NVIDIA GeForce RTX 4090",
+          "driver": "591.86",
+          "temperature": 43.0,
+          "utilization": 35.0
+        }
+      ]
+    }
+  ],
+  "after": {
+    "time": 1789750301.8106458,
+    "adapters": [
+      {
+        "name": "NVIDIA GeForce RTX 4090",
+        "driver": "591.86",
+        "temperature": 44.0,
+        "utilization": 32.0
+      }
+    ]
+  },
+  "returnCode": 0,
+  "status": "exited"
+}

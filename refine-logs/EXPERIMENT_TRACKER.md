@@ -1,0 +1,58 @@
+# Experiment tracker
+
+| Stage | Purpose | Status |
+|---|---|---|
+| Model and analysis | Determinism, predicate, parser, sets, schema, paired analysis | v1: 218 C# and 24 Python tests passed; hosted CI passed at b119e01 |
+| Player build | Standalone Development Mono D3D12 | Built; diagnostics in local build log |
+| Smoke v1 | 100k / 25%, correctness | Stopped: sets equal but black output; no timings collected |
+| Corrected smoke | Fix logical far-depth clear handling; new source identity | 100k/25%: 10/10 sets/counts and non-black images passed |
+| Full correctness matrix | All 18 conditions, 10 frames each | Stopped before remaining 17; timing feasibility first |
+| Timing pilot | Delayed GPU queries, pacing and drift | STOP: 121 submitted measured frames, zero resolved GPU ranges; background GPU load also present |
+| Primary measurements | 216 independent processes, balanced order | 0 complete; not started |
+| Report | Evidence-backed costs/crossover or explicit stop | [Stop report](../docs/results/GPU_RESIDENT_CROSSOVER_2026-09-19.md); no performance/crossover claim |
+
+## Protocol-v2 repair checkpoint
+
+- Stable legacy and modern marker APIs: both normal/batch A/Bs completed with zero GPU samples. Explicit GPU-area legacy A/B also returned zero. Six retained availability probes; no API selected.
+- Nonblocking final-fence completion boundary implemented and built, but hardware timing/pacing validation remains unavailable.
+- Final-binary 100k/25% correctness: 10/10 sets/counts/images passed. Remaining 17 cells deferred while timing is unresolved.
+- Local validation: 220 C# and 28 Python CI-suite tests passed; final standalone build succeeded. Current hosted CI/head tracked in Draft PR #12.
+- No v2 CPU/GPU pilot, no three-pair pilot and no formal matrix. Not infrastructure-merge-ready.
+- [Second stop report](../docs/results/GPU_TIMING_REPAIR_V2_2026-09-19.md) and [protocol v2](../unity/GpuDrivenCrowdBenchmark/PROTOCOL_V2.md).
+
+## Protocol-v3 diagnostic checkpoint
+
+- Graphics Jobs explicitly off; runtime normal MultiThreaded, batch SingleThreaded. D3D11 stays diagnostic-only.
+- Startup D3D11/D3D12 raw hierarchy: positive GPU timing despite zero Recorder. Autoconnect Recorder: 96 nonzero observations, but only 68/96 match lag 3.
+- Native D3D12 explicit-ID/frame-fence diagnostic: final normal and batch each pass 96/96 with profiler off; 32-slot reuse exercised. Not integrated into timed CPU/GPU runner yet.
+- Final binary correctness: 100k/25%, 10/10 passed. No benchmark pilots or full matrix.
+- [V3 report](../docs/results/GPU_TIMING_V3_2026-09-19.md). PR remains Draft, not infrastructure-merge-ready.
+
+## Protocol-v4 real-workload integration
+
+- Native three-query timestamps now bracket real CPU/GPU commands; CPU gpuCullMs is null; ID/fence association replaces lag guesses.
+- Final-binary 100k/25% correctness 10/10; actual CPU and GPU short runs each 96/96, max ring occupancy 2 and 3.
+- RenderDoc API chunks verify T0/dispatch/T1/copy/indirect/T2 and CPU direct draw placement. Initial splash-screen captures retained as invalid placement attempts.
+- STOP before first overhead process: three background samples 20%, 16%, 11%, threshold <=5%. No retry or subsequent pilots/pairs/matrix.
+- Local tests: 222 C#, 32 Python; native and Unity builds pass. Hosted CI/head tracked in Draft PR #12.
+- [Integration checkpoint report](../docs/results/GPU_TIMING_INTEGRATED_V4_2026-09-19.md). Not infrastructure-merge-ready; no evidence deletion.
+
+## 2026-09-19 quality acceptance checkpoint
+
+One fresh attempt: CPU timestamps OFF passed (quiet 1/0/1%, 1000 frames); CPU ON blocked before launch (12/7/17%). STOP, no retry or pilots. Native architecture/binary unchanged. Ring validation rejects 32/32. See `docs/results/GPU_TIMING_QUALITY_2026-09-19.md`. PR #12 remains Draft; formal matrix and cleanup deferred.
+
+## 2026-09-19 quiet-window continuation
+
+Observer found ten consecutive 0% observations. Formal CPU ON gate passed 0/0/0%; 1000/1000 native triplets, ring max 3, but GPU drift 89.998% >15% invalidated entire process. STOP; no retry or subsequent controls. Existing OFF preserved. See `docs/results/GPU_QUIET_WINDOW_2026-09-19.md`.
+
+## 2026-09-19 offline GPU drift methodology decision
+
+Rejected ON quarter shift 0.055357440 ms (89.998002%); draw accounts for 99.9852%, rank trend 0.974677. Shift is 1.825779% of batch/frame; primary CPU is stable. All three hypothetical scale-aware policies flag it. Retain v4; no v5, validator/native changes or hardware run. See `docs/results/GPU_DRIFT_FORENSICS_2026-09-19.md`; old evidence unchanged.
+
+## 2026-09-19 isolated draw/state diagnostic
+
+StageA96 then forward/frozen/reverse1000 each exactly once; pipeline stats + persistent100ms NVML sidecars. All IDs/stats resolve, ring maxima2/3/2/3. Matched view pixel/proxy work identical; frozen PS133598 constant but P0->P5 clock transition accompanies draw increase. Strongest association B (GPU state), historical cause not proven; retain v4 blocked, no acceptance retry. Formal source unchanged. See `docs/results/DRAW_DRIFT_DIAGNOSTIC_2026-09-19.md`.
+
+## 2026-09-19 isolated state-stability diagnostic
+
+Prospective cyclic real-arm30-second diagnostic implemented; two Unity builds and64 Python tests pass. First CPU preflight34/34/35% blocked before Player/sidecar. STOP:0 valid,1 blocked,5 not attempted; no retry. Settling/frame300 metrics unavailable; choice C, no warmup duration/V5/acceptance. Formal V4 and old evidence unchanged. See `docs/results/GPU_STATE_STABILITY_2026-09-19.md`.

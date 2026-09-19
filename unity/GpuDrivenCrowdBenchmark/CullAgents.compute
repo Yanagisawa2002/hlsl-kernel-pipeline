@@ -1,0 +1,28 @@
+#pragma kernel CullAgents
+#pragma target 5.0
+
+struct Agent
+{
+    float2 position;
+    float size;
+    float4 color;
+};
+
+StructuredBuffer<Agent> _Agents;
+AppendStructuredBuffer<uint> _VisibleAgents;
+uint _AgentCount;
+float4 _ViewRect; // center.xy, half extents.zw
+
+[numthreads(256, 1, 1)]
+void CullAgents(uint3 dispatchThreadId : SV_DispatchThreadID)
+{
+    uint index = dispatchThreadId.x;
+    if (index >= _AgentCount)
+        return;
+
+    Agent agent = _Agents[index];
+    float2 delta = abs(agent.position - _ViewRect.xy);
+    float2 padded = _ViewRect.zw + agent.size.xx;
+    if (all(delta <= padded))
+        _VisibleAgents.Append(index);
+}

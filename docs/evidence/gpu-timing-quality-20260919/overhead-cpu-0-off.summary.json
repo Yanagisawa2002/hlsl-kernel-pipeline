@@ -1,0 +1,63 @@
+{
+  "batchCompletionMsPerFrame": 2.8749335,
+  "fenceObservationBoundMsPerFrame": 0.0004219,
+  "pacing": {
+    "passed": true,
+    "p10Ms": 2.7601400000000003,
+    "medianMs": 2.8591,
+    "p90Ms": 2.9909200000000005,
+    "p95Ms": 3.05298,
+    "cv": 0.036732770856252935,
+    "strongestRefreshHz": 349,
+    "clusterFraction": 0.6626626626626627,
+    "reason": "no preregistered pacing concentration detected",
+    "meanMs": 2.8748604604604604,
+    "stddevMs": 0.10560159053779589
+  },
+  "timestampResolved": 0,
+  "maxRingOccupancy": 0,
+  "cpuCullAndListMs": {
+    "min": 2.5309,
+    "max": 2.9306,
+    "stddev": 0.04084810849953765,
+    "mean": 2.6036101,
+    "median": 2.593,
+    "p10": 2.5697,
+    "p90": 2.6471,
+    "p95": 2.673815
+  },
+  "cpuUploadMs": {
+    "min": 0.009000000000000001,
+    "max": 0.0427,
+    "stddev": 0.006982257685734608,
+    "mean": 0.016281900000000002,
+    "median": 0.0135,
+    "p10": 0.0105,
+    "p90": 0.029310000000000006,
+    "p95": 0.031405
+  },
+  "cpuSubmitMs": {
+    "min": 0.0058000000000000005,
+    "max": 0.0645,
+    "stddev": 0.011208521454232937,
+    "mean": 0.023220900000000003,
+    "median": 0.0213,
+    "p10": 0.010100000000000001,
+    "p90": 0.038940000000000016,
+    "p95": 0.044105
+  },
+  "cpuTotalMs": {
+    "min": 2.5712,
+    "max": 2.9689,
+    "stddev": 0.051031322573396036,
+    "mean": 2.6431129,
+    "median": 2.6302000000000003,
+    "p10": 2.59429,
+    "p90": 2.7058000000000004,
+    "p95": 2.73515
+  },
+  "gpuCullMs": null,
+  "gpuDrawMs": null,
+  "gpuRangeMs": null,
+  "timestampResolveDelayFrames": null
+}

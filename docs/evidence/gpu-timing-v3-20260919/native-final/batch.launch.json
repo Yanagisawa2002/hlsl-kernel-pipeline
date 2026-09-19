@@ -1,0 +1,40 @@
+{
+  "command": [
+    "D:\\CodexValidation\\hlsl-crossover-player-native-v3-final\\Crossover.exe",
+    "-batchmode",
+    "-force-d3d12",
+    "-screen-fullscreen",
+    "0",
+    "-logFile",
+    "D:\\CodexValidation\\hlsl-crossover-native-final-probe-v3\\batch.log",
+    "--mode",
+    "native-diagnostic",
+    "--output",
+    "D:\\CodexValidation\\hlsl-crossover-native-final-probe-v3\\batch.json"
+  ],
+  "before": {
+    "time": 1789788289.4553764,
+    "adapters": [
+      {
+        "name": "NVIDIA GeForce RTX 4090",
+        "driver": "591.86",
+        "temperature": 46.0,
+        "utilization": 23.0
+      }
+    ]
+  },
+  "scope": "availability/ID/fence only, not performance",
+  "assemblySha256": "4f778959c7ce104ffa4032b069e8aa7b646009ea519cabb01e02de665824327c",
+  "returnCode": 0,
+  "after": {
+    "time": 1789788290.5531096,
+    "adapters": [
+      {
+        "name": "NVIDIA GeForce RTX 4090",
+        "driver": "591.86",
+        "temperature": 46.0,
+        "utilization": 28.0
+      }
+    ]
+  }
+}
