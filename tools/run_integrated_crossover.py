@@ -73,7 +73,7 @@ def main():
                 results[arm]={'pairedRelativeShifts':shifts,'passed':all(abs(x)<=.02 for x in shifts)};write(out/'overhead-assessment.json',results)
                 require(abs(shift)<=.02,'material instrumentation shift; STOP')
         return
-    
+
     for arm in ('cpu','gpu'):
         for pair in range(2):
             for switch in ('off','on'):prerequisite(out,f'overhead-{arm}-{pair}-{switch}')
