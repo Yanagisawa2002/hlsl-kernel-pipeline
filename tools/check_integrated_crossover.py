@@ -8,14 +8,14 @@ def require(ok,message):
 
 def distribution(xs):
     require(bool(xs) and all(math.isfinite(x) for x in xs),'nonfinite/empty distribution')
-    return dict(mean=statistics.mean(xs),median=statistics.median(xs),p10=percentile(xs,.1),p90=percentile(xs,.9),p95=percentile(xs,.95))
+    return dict(min=min(xs),max=max(xs),stddev=statistics.pstdev(xs),mean=statistics.mean(xs),median=statistics.median(xs),p10=percentile(xs,.1),p90=percentile(xs,.9),p95=percentile(xs,.95))
 
 def validate(d,quality=False):
     require(d['schema']==4 and d['completed'] and not d['error'],'incomplete v4 process')
     o=d['options'];n=o['frames'];on=o['timestamps']=='on';cpu=d['mode']=='cpu';samples=d['samples']
     require(d['graphicsApi']=='Direct3D12' and d['renderingThreadingMode']=='MultiThreaded' and not d['profilerEnabled'],'runtime contract')
     require(d['timingApi']=='native' and d['nativeTimingVersion']=='4','wrong native backend')
-    require(len(samples)==n and d['timestampInvalid']==0 and d['maxRingOccupancy']<=32,'missing sample/ring failure')
+    require(len(samples)==n and d['timestampInvalid']==0 and 0<=d['maxRingOccupancy']<32,'missing sample/ring failure')
     require(d['batchFenceCompleted'] and d['warmupFenceCompleted'],'batch fence incomplete')
     start,end=d['batchStartTicks'],d['firstTrueFencePollTicks'];frequency=d['stopwatchFrequency']
     require(0<start<d['finalSubmissionTicks']<=end and frequency>0,'invalid batch ticks')
@@ -39,7 +39,9 @@ def validate(d,quality=False):
         for k,value in [('gpuDrawMs',(t2-t1)*1000/f),('gpuRangeMs',(t2-t0)*1000/f)]:require(math.isclose(s[k],value,rel_tol=1e-7,abs_tol=1e-9),'GPU unit mismatch')
         if cpu:require(s['gpuCullMs'] is None,'CPU GPU cull must be null')
         else:require(math.isclose(s['gpuCullMs'],(t1-t0)*1000/f,rel_tol=1e-7,abs_tol=1e-9) and math.isclose(s['gpuCullMs']+s['gpuDrawMs'],s['gpuRangeMs'],rel_tol=1e-7,abs_tol=1e-9),'GPU stage inconsistency')
-    pacing=pacing_status([s['updateIntervalMs'] for s in samples[1:]])
+    intervals=[s['updateIntervalMs'] for s in samples[1:]]
+    pacing=pacing_status(intervals)
+    pacing.update(meanMs=statistics.mean(intervals),stddevMs=statistics.pstdev(intervals))
     summary={'batchCompletionMsPerFrame':d['batchCompletionMsPerFrame'],'fenceObservationBoundMsPerFrame':bound,'pacing':pacing,'timestampResolved':d['timestampResolved'],'maxRingOccupancy':d['maxRingOccupancy']}
     for k in ['cpuCullAndListMs','cpuUploadMs','cpuSubmitMs','cpuTotalMs','gpuCullMs','gpuDrawMs','gpuRangeMs','timestampResolveDelayFrames']:
         xs=[s[k] for s in samples if s[k] is not None and (on or not k.startswith(('gpu','timestamp')))];summary[k]=distribution(xs) if xs else None

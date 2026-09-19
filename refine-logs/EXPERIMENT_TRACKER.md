@@ -36,3 +36,7 @@
 - STOP before first overhead process: three background samples 20%, 16%, 11%, threshold <=5%. No retry or subsequent pilots/pairs/matrix.
 - Local tests: 222 C#, 32 Python; native and Unity builds pass. Hosted CI/head tracked in Draft PR #12.
 - [Integration checkpoint report](../docs/results/GPU_TIMING_INTEGRATED_V4_2026-09-19.md). Not infrastructure-merge-ready; no evidence deletion.
+
+## 2026-09-19 quality acceptance checkpoint
+
+One fresh attempt: CPU timestamps OFF passed (quiet 1/0/1%, 1000 frames); CPU ON blocked before launch (12/7/17%). STOP, no retry or pilots. Native architecture/binary unchanged. Ring validation rejects 32/32. See `docs/results/GPU_TIMING_QUALITY_2026-09-19.md`. PR #12 remains Draft; formal matrix and cleanup deferred.

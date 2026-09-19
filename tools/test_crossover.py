@@ -57,7 +57,7 @@ class CrossoverAnalysisTests(unittest.TestCase):
         for arm in ('cpu','gpu'):
             d=json.loads((root/f'integration-{arm}.json').read_text(encoding='utf-8'))
             self.assertEqual(96,validate(d)['timestampResolved'])
-            for edit in [lambda x:x.update(timestampResolved=95),lambda x:x.update(maxRingOccupancy=33),
+            for edit in [lambda x:x.update(timestampResolved=95),lambda x:x.update(maxRingOccupancy=32),lambda x:x.update(maxRingOccupancy=33),
                          lambda x:x['samples'][4].update(resolvedSubmissionId=301),lambda x:x['samples'][4].update(timestampRingSlot=999),
                          lambda x:x['samples'][4].update(completedFence=0),lambda x:x['samples'][4].update(gpuTimestampFrequency=0),
                          lambda x:x['samples'][4].update(gpuTimestampT0=0),lambda x:x['samples'][4].update(gpuDrawMs=900),

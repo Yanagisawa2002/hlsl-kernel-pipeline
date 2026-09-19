@@ -58,3 +58,6 @@ docs/evidence/gpu-timing-v3-20260919/**/*.csv -text -eol whitespace=cr-at-eol
 
 # Integrated v4 raw evidence remains byte-identical to capture/run receipts.
 docs/evidence/gpu-timing-integrated-v4-20260919/**/*.json -text -eol whitespace=cr-at-eol
+
+# Quality acceptance raw receipts retain their original byte identities.
+docs/evidence/gpu-timing-quality-20260919/**/*.json -text -eol whitespace=cr-at-eol
