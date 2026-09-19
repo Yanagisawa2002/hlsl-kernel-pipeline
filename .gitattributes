@@ -51,3 +51,7 @@ docs/evidence/gpu-resident-crossover-20260919/**/*.log -text -eol
 
 # Protocol-v2 raw receipts retain measured byte identities.
 docs/evidence/gpu-timing-repair-v2-20260919/**/*.json -text -eol whitespace=cr-at-eol
+
+# Protocol-v3 raw diagnostic receipts and extracted hierarchy preserve bytes.
+docs/evidence/gpu-timing-v3-20260919/**/*.json -text -eol whitespace=cr-at-eol
+docs/evidence/gpu-timing-v3-20260919/**/*.csv -text -eol whitespace=cr-at-eol

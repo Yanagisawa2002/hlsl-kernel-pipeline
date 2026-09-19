@@ -13,13 +13,16 @@ def main():
     p=argparse.ArgumentParser(description=__doc__); p.add_argument('--player',type=Path,required=True); p.add_argument('--output',type=Path,required=True)
     p.add_argument('--api',choices=['legacy','profiler-recorder'],required=True)
     p.add_argument('--gpu-profiler-area',choices=['unchanged','enabled'],default='unchanged')
+    p.add_argument('--graphics-api',choices=['d3d12','d3d11'],default='d3d12')
+    p.add_argument('--startup-profiler',action='store_true')
     a=p.parse_args(); player=a.player.resolve(); out=a.output.resolve(); out.mkdir(parents=True,exist_ok=True)
     for batch in (False,True):
         name=a.api+('-batch' if batch else '-normal'); result=out/(name+'.json'); receipt=out/(name+'.launch.json')
         if result.exists() or receipt.exists(): raise ValueError('No overwrite/retry: '+name)
-        command=[str(player),'-force-d3d12','-screen-fullscreen','0','-screen-width','1280','-screen-height','720','-logFile',str(out/(name+'.log')),
+        command=[str(player),'-force-'+a.graphics_api,'-screen-fullscreen','0','-screen-width','1280','-screen-height','720','-logFile',str(out/(name+'.log')),
                  '--mode','timing-diagnostic','--timing-api',a.api,'--gpu-profiler-area',a.gpu_profiler_area,'--output',str(result)]
         if batch: command.insert(1,'-batchmode')
+        if a.startup_profiler: command += ['-profiler-enable','-profiler-log-file',str(out/(name+'.raw')),'-profiler-capture-frame-count','160']
         record={'protocolVersion':2,'command':command,'scope':'availability/attribution only, not quiet performance evidence',
                 'assemblySha256':hashlib.sha256((player.parent/(player.stem+'_Data/Managed/Assembly-CSharp.dll')).read_bytes()).hexdigest(),
                 'before':snapshot(),'after':None,'returnCode':None}

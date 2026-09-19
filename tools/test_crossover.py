@@ -50,6 +50,22 @@ class CrossoverAnalysisTests(unittest.TestCase):
         for r in d['observations']: r['gpuNs']=[0]*3
         self.assertFalse(diagnostic_status(d)['passed'])
 
+    def test_native_explicit_ids_fences_and_timestamp_units(self):
+        from run_native_timing_diagnostic import validate
+        d=dict(completed=True,error='',submitted=96,resolved=96,graphicsApi='Direct3D12',ringCapacity=32,
+               renderingThreadingMode='MultiThreaded',profilerEnabled=False,samples=[])
+        for i in range(96):
+            d['samples'].append(dict(id=i+1,t0=100,t1=200,t2=500,frequency=1000000,requiredFence=i+1,completedFence=i+1,
+                submissionUnityFrame=i+100,availabilityUnityFrame=i+103,gpuCullMs=.1,gpuDrawMs=.3,gpuRangeMs=.4))
+        self.assertTrue(validate(d)['passed'])
+        single=copy.deepcopy(d);single['renderingThreadingMode']='SingleThreaded';self.assertTrue(validate(single)['passed'])
+        for edit in [lambda r:r['samples'][32].update(id=1),lambda r:r['samples'][3].update(completedFence=0),
+                     lambda r:r['samples'][3].update(t1=0),lambda r:r['samples'][3].update(frequency=0),
+                     lambda r:r['samples'][3].update(gpuRangeMs=400),lambda r:r.update(profilerEnabled=True),lambda r:r.update(renderingThreadingMode='NativeGraphicsJobs'),
+                     lambda r:r.update(resolved=95),lambda r:r['samples'][3].update(submissionUnityFrame=555)]:
+            bad=copy.deepcopy(d);edit(bad)
+            with self.assertRaises(ValueError):validate(bad)
+
     def test_pacing_gate_and_quiet_load(self):
         for hz in (60,120,144,165,240):
             self.assertFalse(pacing_status([1000/hz]*100)['passed'])

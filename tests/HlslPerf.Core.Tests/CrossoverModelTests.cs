@@ -88,4 +88,11 @@ public sealed class CrossoverModelTests
         Assert.Equal(0, Model.CheckFrames(1000)[0]); Assert.Equal(999, Model.CheckFrames(1000)[^1]);
         Assert.Equal(10, Model.CheckFrames(1000).Distinct().Count());
     }
+    [Fact] public void NativeDiagnosticDoesNotRequireCalibrationOrChangeBenchmarkDefault()
+    {
+        Assert.Equal("native-diagnostic", Options.Parse(new[] { "--mode", "native-diagnostic" }).mode);
+        Assert.Equal("legacy", Options.Parse(new[] { "--mode", "native-diagnostic" }).timingApi);
+        Assert.Throws<ArgumentException>(() => Options.Parse(new[] { "--mode", "gpu" }));
+    }
+
 }

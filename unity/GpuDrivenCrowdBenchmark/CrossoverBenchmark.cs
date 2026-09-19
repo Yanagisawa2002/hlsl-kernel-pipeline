@@ -42,6 +42,7 @@ namespace HlslPerf.Crossover
         public string visibleCountSource = "frozen full-sequence CPU oracle; selected frames checked on GPU in separate validation";
         public bool correctnessPassed, completed, gpuRecorderSupported, frameTimingEnabled;
         public bool endToEndComparable = false;
+        public string renderingThreadingMode;
         public string timingApi, timingLaunchMode;
         public bool supportsGraphicsFence, warmupFenceCompleted, batchFenceCompleted;
         public int firstMeasuredUnityFrame = -1, gpuMappedFrames;
@@ -80,6 +81,7 @@ namespace HlslPerf.Crossover
             try
             {
                 options = Options.Parse(Environment.GetCommandLineArgs());
+                if (options.mode == "native-diagnostic") { gameObject.AddComponent<NativeTimingDiagnostic>().Initialize(options,culling,drawing); finished=true;return; }
                 if (options.mode == "timing-diagnostic")
                 {
                     gameObject.AddComponent<TimingDiagnostic>().Initialize(options, culling, drawing);
@@ -89,7 +91,7 @@ namespace HlslPerf.Crossover
                 result = new Result { options = options, runId = options.runId, pairId = options.pairId, mode = options.mode,
                     processId = Process.GetCurrentProcess().Id, sourceIdentity = Identity,
                     adapter = SystemInfo.graphicsDeviceName, driver = RuntimeDriver(), deviceVersion = SystemInfo.graphicsDeviceVersion,
-                    graphicsApi = SystemInfo.graphicsDeviceType.ToString(), unityVersion = Application.unityVersion,
+                    renderingThreadingMode = SystemInfo.renderingThreadingMode.ToString(), graphicsApi = SystemInfo.graphicsDeviceType.ToString(), unityVersion = Application.unityVersion,
                     buildConfiguration = Debug.isDebugBuild ? "Development Mono, no script debugging/deep profiling" : "Release",
                     cpu = SystemInfo.processorType, os = SystemInfo.operatingSystem,
                     gpuRecorderSupported = SystemInfo.supportsGpuRecorder, frameTimingEnabled = FrameTimingManager.IsFeatureEnabled(),

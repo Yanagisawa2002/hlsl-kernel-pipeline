@@ -19,3 +19,11 @@
 - Local validation: 220 C# and 28 Python CI-suite tests passed; final standalone build succeeded. Current hosted CI/head tracked in Draft PR #12.
 - No v2 CPU/GPU pilot, no three-pair pilot and no formal matrix. Not infrastructure-merge-ready.
 - [Second stop report](../docs/results/GPU_TIMING_REPAIR_V2_2026-09-19.md) and [protocol v2](../unity/GpuDrivenCrowdBenchmark/PROTOCOL_V2.md).
+
+## Protocol-v3 diagnostic checkpoint
+
+- Graphics Jobs explicitly off; runtime normal MultiThreaded, batch SingleThreaded. D3D11 stays diagnostic-only.
+- Startup D3D11/D3D12 raw hierarchy: positive GPU timing despite zero Recorder. Autoconnect Recorder: 96 nonzero observations, but only 68/96 match lag 3.
+- Native D3D12 explicit-ID/frame-fence diagnostic: final normal and batch each pass 96/96 with profiler off; 32-slot reuse exercised. Not integrated into timed CPU/GPU runner yet.
+- Final binary correctness: 100k/25%, 10/10 passed. No benchmark pilots or full matrix.
+- [V3 report](../docs/results/GPU_TIMING_V3_2026-09-19.md). PR remains Draft, not infrastructure-merge-ready.

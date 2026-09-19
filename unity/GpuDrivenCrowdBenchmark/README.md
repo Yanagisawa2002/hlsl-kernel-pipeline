@@ -1,6 +1,6 @@
 # Controlled CPU-driven / GPU-resident Crowd benchmark
 
-**Protocol-v2 checkpoint: GPU timing remains unresolved; PR #12 stays Draft.** Read [PROTOCOL_V2.md](PROTOCOL_V2.md) and the [repair stop report](../../docs/results/GPU_TIMING_REPAIR_V2_2026-09-19.md). [PROTOCOL.md](PROTOCOL.md) preserves the original v1 plan. This dedicated workload leaves the live sample and the September 16 complete-task benchmark unchanged. It measures a managed all-agent CPU-single baseline and the append/count-copy GPU path with the same deterministic population, trajectory, quad shader and offscreen target.
+**Protocol-v3 checkpoint: native timestamp IDs/fences pass short GPU diagnostics; timed CPU/GPU integration remains pending and PR #12 stays Draft.** Read the [v3 findings](../../docs/results/GPU_TIMING_V3_2026-09-19.md) and [PROTOCOL_V3.md](PROTOCOL_V3.md). Read [PROTOCOL_V2.md](PROTOCOL_V2.md) and the [repair stop report](../../docs/results/GPU_TIMING_REPAIR_V2_2026-09-19.md). [PROTOCOL.md](PROTOCOL.md) preserves the original v1 plan. This dedicated workload leaves the live sample and the September 16 complete-task benchmark unchanged. It measures a managed all-agent CPU-single baseline and the append/count-copy GPU path with the same deterministic population, trajectory, quad shader and offscreen target.
 
 ## Build (Windows, Unity 6000.3.13f1)
 
@@ -57,3 +57,20 @@ CPU timings describe main-thread API costs, not hidden render-thread work. GPU r
 ## Tests
 
 The repository xUnit project links the exact `BenchmarkModel.cs` used by Unity and tests deterministic generation, boundary predicates, full-scan/list output, calibration, parsing and set comparison. `python -m unittest discover -s tools -p test_crossover.py` tests schema rejection, paired analysis and balanced scheduling. Both run in existing CPU CI. Unity shader compilation and GPU set/image/timing checks additionally require a local player build; the hosted CPU CI cannot establish those hardware properties.
+
+## Native diagnostic (Windows D3D12 only)
+
+Uses installed Unity PluginAPI headers and MSVC. DLL binaries stay outside the repository. Normal builds explicitly disable Graphics Jobs; D3D11 is an optional diagnostic override, not a benchmark change.
+
+```powershell
+python tools/build_crossover_native.py --unity "C:/Program Files/Unity/Hub/Editor/6000.3.13f1/Editor" --output D:/CodexValidation/crossover-native
+python tools/prepare_crossover_project.py --project D:/CodexValidation/crossover-native-project --native-plugin D:/CodexValidation/crossover-native/CrossoverTimestamp.dll
+$env:CROSSOVER_PLAYER_PATH = 'D:/CodexValidation/crossover-native-player/Crossover.exe'
+$env:CROSSOVER_AUTOCONNECT = '0'
+& 'C:/Program Files/Unity/Hub/Editor/6000.3.13f1/Editor/Unity.exe' -batchmode -quit -projectPath D:/CodexValidation/crossover-native-project -executeMethod HlslPerf.Crossover.BuildCrossover.Build -logFile D:/CodexValidation/crossover-native-build.log
+python tools/run_native_timing_diagnostic.py --player D:/CodexValidation/crossover-native-player/Crossover.exe --output D:/CodexValidation/crossover-native-probe
+```
+
+Check the build receipt/process before invoking the runner. It runs two fresh 96-submission processes and validates explicit IDs, fence completion, timestamp conversion and source/DLL hashes. This mode requires no calibration and does not enable the profiler. It is not a CPU/GPU timing pilot.
+
+Legacy activation diagnostics additionally support `--startup-profiler` and `--graphics-api d3d11` on `run_timing_diagnostic.py`. Set `CROSSOVER_AUTOCONNECT=1` only for a separate connection-diagnostic build. `ProfileCapture.Autoconnect` takes `CROSSOVER_PLAYER_PATH`, `CROSSOVER_PLAYER_ARGS` and `CROSSOVER_PROFILE_RAW`, configures Editor GPU profiling before starting its child, and saves capture on completion. `ProfileCapture.InspectMany` takes semicolon-separated `CROSSOVER_PROFILE_INPUTS` and exports GPU hierarchy CSVs using Unity Editor APIs. These internal hierarchy columns are Unity-version-dependent; raw files must be retained. No GUI acceptance is inferred from the controller alone.

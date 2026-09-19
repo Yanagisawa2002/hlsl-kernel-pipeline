@@ -55,6 +55,7 @@ namespace HlslPerf.Crossover
     [Serializable] public sealed class TimingDiagnosticResult
     {
         public int schema = 2, protocolVersion = 2, firstSubmissionUnityFrame, submissionFrames = 96;
+        public string renderingThreadingMode;
         public string timingApi, sourceIdentity, adapter, deviceVersion, unityVersion, graphicsApi, error = "";
         public bool development, batchmode, supportsGpuRecorder, supportsGraphicsFence, profilerEnabled, gpuProfilerAreaEnabled;
         public bool gpuProfilerAreaBefore;
@@ -75,7 +76,7 @@ namespace HlslPerf.Crossover
             result = new TimingDiagnosticResult { timingApi = o.timingApi,
                 sourceIdentity = Resources.Load<TextAsset>("crossover-source-identity").text.Trim(),
                 adapter = SystemInfo.graphicsDeviceName, deviceVersion = SystemInfo.graphicsDeviceVersion,
-                graphicsApi = SystemInfo.graphicsDeviceType.ToString(), unityVersion = Application.unityVersion,
+                renderingThreadingMode = SystemInfo.renderingThreadingMode.ToString(), graphicsApi = SystemInfo.graphicsDeviceType.ToString(), unityVersion = Application.unityVersion,
                 development = UnityEngine.Debug.isDebugBuild, batchmode = Application.isBatchMode,
                 supportsGpuRecorder = SystemInfo.supportsGpuRecorder, supportsGraphicsFence = SystemInfo.supportsGraphicsFence,
                 profilerEnabled = Profiler.enabled, gpuProfilerAreaBefore = Profiler.GetAreaEnabled(ProfilerArea.GPU), gpuProfilerAreaRequest = o.gpuProfilerArea };

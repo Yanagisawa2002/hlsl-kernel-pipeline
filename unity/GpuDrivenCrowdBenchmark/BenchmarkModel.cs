@@ -56,14 +56,14 @@ namespace HlslPerf.Crossover
                     default: throw new ArgumentException("Unknown benchmark option: " + k);
                 }
             }
-            if (o.mode != "cpu" && o.mode != "gpu" && o.mode != "calibrate" && o.mode != "validation" && o.mode != "timing-diagnostic")
+            if (o.mode != "cpu" && o.mode != "gpu" && o.mode != "calibrate" && o.mode != "validation" && o.mode != "timing-diagnostic" && o.mode != "native-diagnostic")
                 throw new ArgumentException("Unknown mode");
             if (o.timingApi != "legacy" && o.timingApi != "profiler-recorder") throw new ArgumentException("Unknown timing API");
             if (o.gpuProfilerArea != "unchanged" && o.gpuProfilerArea != "enabled") throw new ArgumentException("Unknown GPU profiler area mode");
             if (o.agents < 1 || o.agents > 4000000 || o.frames < 10 || o.frames > 10000 || o.warmup < 1 ||
                 double.IsNaN(o.density) || o.density <= 0 || o.density >= 1 || string.IsNullOrWhiteSpace(o.output))
                 throw new ArgumentException("Invalid workload bounds");
-            if (o.mode != "calibrate" && o.mode != "timing-diagnostic" && string.IsNullOrWhiteSpace(o.calibration))
+            if (o.mode != "calibrate" && o.mode != "timing-diagnostic" && o.mode != "native-diagnostic" && string.IsNullOrWhiteSpace(o.calibration))
                 throw new ArgumentException("A frozen --calibration file is required");
             return o;
         }
