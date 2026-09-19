@@ -1,0 +1,6 @@
+{
+  "args": "-force-d3d12 -screen-fullscreen 0 -logFile D:/CodexValidation/hlsl-crossover-v4-placement-real/gpu.log --mode gpu --agents 100000 --density 0.25 --seed 69501203 --frames 96 --warmup-frames 50000 --timing-api native --timestamps on --calibration D:/CodexValidation/hlsl-crossover-integrated-v4/calibrate-100000-0.25-96.json --output D:/CodexValidation/hlsl-crossover-v4-placement-real/gpu.json",
+  "captures": [
+    "D:\\CodexValidation\\hlsl-crossover-v4-placement-real\\gpu_frame18220.rdc"
+  ]
+}

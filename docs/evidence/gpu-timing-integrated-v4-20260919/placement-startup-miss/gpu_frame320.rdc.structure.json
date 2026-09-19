@@ -1,0 +1,221 @@
+{
+  "chunks": [
+    "Internal::Driver Initialisation Parameters",
+    "ID3D12Device::CreateCommandQueue",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateCommandQueue",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateCommandQueue",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateCommandQueue",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateCommandQueue",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateCommandQueue",
+    "ID3D12Device::CreateHeap",
+    "ID3D12Device::CreateDescriptorHeap",
+    "ID3D12Device::CreateDescriptorHeap",
+    "ID3D12Device::CreateDescriptorHeap",
+    "ID3D12Device::CreateFence",
+    "ID3D12Device::CreateFence",
+    "ID3D12Device::CreateCommittedResource",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateDescriptorHeap",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateDescriptorHeap",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateDescriptorHeap",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateDescriptorHeap",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreatePlacedResource",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateHeap",
+    "ID3D12Device::CreatePlacedResource",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateCommittedResource",
+    "ID3D12Resource::SetName",
+    "IDXGISwapChain::GetBuffer",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateCommittedResource",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateRootSignature",
+    "ID3D12Device::CreateGraphicsPipeline",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreatePlacedResource",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreatePlacedResource",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreatePlacedResource",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateRootSignature",
+    "ID3D12Device::CreateGraphicsPipeline",
+    "ID3D12Resource::SetName",
+    "ID3D12Device::CreateCommandAllocator",
+    "ID3D12Device::CreateCommandList",
+    "ID3D12Device::CreateCommandAllocator",
+    "ID3D12Device::CreateCommandList",
+    "ID3D12Resource::SetName",
+    "Internal::Initial Contents",
+    "Internal::Initial Contents",
+    "Internal::Initial Contents",
+    "Internal::Initial Contents",
+    "Internal::Initial Contents",
+    "Internal::Initial Contents",
+    "Internal::Initial Contents",
+    "Internal::Initial Contents",
+    "Internal::Initial Contents",
+    "Internal::Initial Contents",
+    "Internal::Initial Contents",
+    "Internal::Initial Contents",
+    "Internal::List of Initial Contents Resources",
+    "Internal::Frame Metadata",
+    "Internal::Beginning of Capture",
+    "ID3D12GraphicsCommandList::Reset",
+    "ID3D12CommandQueue::Signal",
+    "ID3D12CommandQueue::Signal",
+    "ID3D12GraphicsCommandList::Reset",
+    "ID3D12GraphicsCommandList::EndEvent",
+    "ID3D12GraphicsCommandList::BeginEvent",
+    "ID3D12GraphicsCommandList::EndEvent",
+    "ID3D12GraphicsCommandList::BeginEvent",
+    "ID3D12Device::CreateDepthStencilView",
+    "ID3D12Device::CreateRenderTargetView",
+    "ID3D12GraphicsCommandList::OMSetRenderTargets",
+    "ID3D12GraphicsCommandList::RSSetScissorRects",
+    "ID3D12GraphicsCommandList::RSSetViewports",
+    "ID3D12GraphicsCommandList::OMSetStencilRef",
+    "ID3D12GraphicsCommandList::ClearDepthStencilView",
+    "ID3D12GraphicsCommandList::ClearRenderTargetView",
+    "ID3D12GraphicsCommandList::BeginEvent",
+    "ID3D12GraphicsCommandList::SetGraphicsRootSignature",
+    "ID3D12GraphicsCommandList::SetPipelineState",
+    "ID3D12GraphicsCommandList::SetDescriptorHeaps",
+    "ID3D12GraphicsCommandList::SetGraphicsRootConstantBufferView",
+    "ID3D12GraphicsCommandList::SetGraphicsRootConstantBufferView",
+    "ID3D12GraphicsCommandList::SetGraphicsRootConstantBufferView",
+    "ID3D12GraphicsCommandList::SetGraphicsRootDescriptorTable",
+    "ID3D12Device::CopyDescriptorsSimple",
+    "ID3D12Device::CopyDescriptorsSimple",
+    "ID3D12GraphicsCommandList::SetGraphicsRootDescriptorTable",
+    "ID3D12GraphicsCommandList::IASetVertexBuffers",
+    "ID3D12GraphicsCommandList::IASetIndexBuffer",
+    "ID3D12GraphicsCommandList::IASetPrimitiveTopology",
+    "ID3D12GraphicsCommandList::DrawIndexedInstanced",
+    "ID3D12GraphicsCommandList::EndEvent",
+    "ID3D12GraphicsCommandList::BeginEvent",
+    "ID3D12GraphicsCommandList::SetGraphicsRootSignature",
+    "ID3D12GraphicsCommandList::SetPipelineState",
+    "ID3D12GraphicsCommandList::SetGraphicsRootConstantBufferView",
+    "ID3D12GraphicsCommandList::SetGraphicsRootConstantBufferView",
+    "ID3D12GraphicsCommandList::SetGraphicsRootConstantBufferView",
+    "ID3D12GraphicsCommandList::SetGraphicsRootConstantBufferView",
+    "ID3D12GraphicsCommandList::SetGraphicsRootDescriptorTable",
+    "ID3D12Device::CopyDescriptorsSimple",
+    "ID3D12Device::CopyDescriptorsSimple",
+    "ID3D12GraphicsCommandList::SetGraphicsRootDescriptorTable",
+    "ID3D12GraphicsCommandList::IASetVertexBuffers",
+    "ID3D12GraphicsCommandList::IASetIndexBuffer",
+    "ID3D12GraphicsCommandList::DrawIndexedInstanced",
+    "ID3D12GraphicsCommandList::EndEvent",
+    "ID3D12GraphicsCommandList::ResourceBarrier",
+    "ID3D12GraphicsCommandList::ResourceBarrier",
+    "ID3D12GraphicsCommandList::Close",
+    "ID3D12GraphicsCommandList::Close",
+    "Internal::Coherent Mapped Memory Write",
+    "ID3D12CommandQueue::ExecuteCommandLists",
+    "IDXGISwapChain::Present",
+    "Internal::End of Capture"
+  ],
+  "actions": [
+    {
+      "event": 11,
+      "name": "=> ExecuteCommandLists(2)[0]: Reset(ResourceId::1096)",
+      "children": []
+    },
+    {
+      "event": 13,
+      "name": "=> ExecuteCommandLists(2)[0]: Close(ResourceId::1096)",
+      "children": []
+    },
+    {
+      "event": 14,
+      "name": "=> ExecuteCommandLists(2)[1]: Reset(ResourceId::1098)",
+      "children": []
+    },
+    {
+      "event": 15,
+      "name": "ID3D12GraphicsCommandList::EndEvent()",
+      "children": []
+    },
+    {
+      "event": 16,
+      "name": "WaitForRenderJobs",
+      "children": [
+        {
+          "event": 17,
+          "name": "ID3D12GraphicsCommandList::EndEvent()",
+          "children": []
+        }
+      ]
+    },
+    {
+      "event": 18,
+      "name": "SplashScreenRender",
+      "children": [
+        {
+          "event": 23,
+          "name": "ID3D12GraphicsCommandList::ClearDepthStencilView()",
+          "children": []
+        },
+        {
+          "event": 24,
+          "name": "ID3D12GraphicsCommandList::ClearRenderTargetView()",
+          "children": []
+        },
+        {
+          "event": 25,
+          "name": "SplashScreenRenderBackground",
+          "children": [
+            {
+              "event": 37,
+              "name": "ID3D12GraphicsCommandList::DrawIndexedInstanced()",
+              "children": []
+            },
+            {
+              "event": 38,
+              "name": "ID3D12GraphicsCommandList::EndEvent()",
+              "children": []
+            }
+          ]
+        },
+        {
+          "event": 39,
+          "name": "SplashScreenRenderForeground",
+          "children": [
+            {
+              "event": 50,
+              "name": "ID3D12GraphicsCommandList::DrawIndexedInstanced()",
+              "children": []
+            },
+            {
+              "event": 51,
+              "name": "ID3D12GraphicsCommandList::EndEvent()",
+              "children": []
+            }
+          ]
+        },
+        {
+          "event": 53,
+          "name": "=> ExecuteCommandLists(2)[1]: Close(ResourceId::1098)",
+          "children": []
+        },
+        {
+          "event": 54,
+          "name": "Present(ResourceId::423)",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

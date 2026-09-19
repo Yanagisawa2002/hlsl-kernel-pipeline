@@ -1,0 +1,410 @@
+[
+  {
+    "index": 168,
+    "name": "ID3D12GraphicsCommandList::EndQuery",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Index",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "69",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 169,
+    "name": "ID3D12GraphicsCommandList::CopyBufferRegion",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pDstBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "DstOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "0",
+        "children": []
+      },
+      {
+        "name": "pSrcBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "SrcOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "1376256",
+        "children": []
+      },
+      {
+        "name": "NumBytes",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "4",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 179,
+    "name": "ID3D12GraphicsCommandList::Dispatch",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "ThreadGroupCountX",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "391",
+        "children": []
+      },
+      {
+        "name": "ThreadGroupCountY",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "1",
+        "children": []
+      },
+      {
+        "name": "ThreadGroupCountZ",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "1",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 180,
+    "name": "ID3D12GraphicsCommandList::EndQuery",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Index",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "70",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 183,
+    "name": "ID3D12GraphicsCommandList::CopyBufferRegion",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pDstBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "DstOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "4",
+        "children": []
+      },
+      {
+        "name": "pSrcBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "SrcOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "0",
+        "children": []
+      },
+      {
+        "name": "NumBytes",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "4",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 197,
+    "name": "ID3D12GraphicsCommandList::ExecuteIndirect",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pCommandSignature",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "MaxCommandCount",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "1",
+        "children": []
+      },
+      {
+        "name": "pArgumentBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "ArgumentBufferOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "0",
+        "children": []
+      },
+      {
+        "name": "pCountBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "CountBufferOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "0",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 198,
+    "name": "ID3D12GraphicsCommandList::EndQuery",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Index",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "71",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 199,
+    "name": "ID3D12GraphicsCommandList::ResolveQueryData",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "StartIndex",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "69",
+        "children": []
+      },
+      {
+        "name": "NumQueries",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "3",
+        "children": []
+      },
+      {
+        "name": "pDestinationBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "AlignedDestinationBufferOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "552",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 207,
+    "name": "ID3D12GraphicsCommandList::EndQuery",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Index",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "3630",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 233,
+    "name": "ID3D12GraphicsCommandList::EndQuery",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Index",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "3631",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 235,
+    "name": "ID3D12GraphicsCommandList::ResolveQueryData",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "StartIndex",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "3630",
+        "children": []
+      },
+      {
+        "name": "NumQueries",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "2",
+        "children": []
+      },
+      {
+        "name": "pDestinationBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "AlignedDestinationBufferOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "29040",
+        "children": []
+      }
+    ]
+  }
+]

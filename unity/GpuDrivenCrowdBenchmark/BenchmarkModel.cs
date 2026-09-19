@@ -25,7 +25,8 @@ namespace HlslPerf.Crossover
         public string mode = "gpu", output = "result.json", calibration = "", runId = "", pairId = "";
         public int agents = 1000000, seed = 69501203, warmup = 300, frames = 1000;
         public double density = 0.25;
-        public string timingApi = "legacy";
+        public string timingApi = "native";
+        public string timestamps = "on";
         public string gpuProfilerArea = "unchanged";
         public const float WorldX = 120, WorldY = 68, FixedDelta = 1f / 60f, Speed = 0.18f, Radius = 45;
         public static Options Parse(string[] args)
@@ -41,6 +42,7 @@ namespace HlslPerf.Crossover
                 switch (k)
                 {
                     case "--mode": o.mode = v; break;
+                    case "--timestamps": o.timestamps=v; break;
                     case "--timing-api": o.timingApi = v; break;
                     case "--gpu-profiler-area": o.gpuProfilerArea = v; break;
                     case "--agents": o.agents = int.Parse(v, CultureInfo.InvariantCulture); break;
@@ -58,7 +60,8 @@ namespace HlslPerf.Crossover
             }
             if (o.mode != "cpu" && o.mode != "gpu" && o.mode != "calibrate" && o.mode != "validation" && o.mode != "timing-diagnostic" && o.mode != "native-diagnostic")
                 throw new ArgumentException("Unknown mode");
-            if (o.timingApi != "legacy" && o.timingApi != "profiler-recorder") throw new ArgumentException("Unknown timing API");
+            if (o.timestamps!="on" && o.timestamps!="off") throw new ArgumentException("Invalid timestamp switch");
+            if (o.timingApi != "native" && o.timingApi != "legacy" && o.timingApi != "profiler-recorder") throw new ArgumentException("Unknown timing API");
             if (o.gpuProfilerArea != "unchanged" && o.gpuProfilerArea != "enabled") throw new ArgumentException("Unknown GPU profiler area mode");
             if (o.agents < 1 || o.agents > 4000000 || o.frames < 10 || o.frames > 10000 || o.warmup < 1 ||
                 double.IsNaN(o.density) || o.density <= 0 || o.density >= 1 || string.IsNullOrWhiteSpace(o.output))

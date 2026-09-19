@@ -55,3 +55,6 @@ docs/evidence/gpu-timing-repair-v2-20260919/**/*.json -text -eol whitespace=cr-a
 # Protocol-v3 raw diagnostic receipts and extracted hierarchy preserve bytes.
 docs/evidence/gpu-timing-v3-20260919/**/*.json -text -eol whitespace=cr-at-eol
 docs/evidence/gpu-timing-v3-20260919/**/*.csv -text -eol whitespace=cr-at-eol
+
+# Integrated v4 raw evidence remains byte-identical to capture/run receipts.
+docs/evidence/gpu-timing-integrated-v4-20260919/**/*.json -text -eol whitespace=cr-at-eol

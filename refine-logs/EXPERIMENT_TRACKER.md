@@ -27,3 +27,12 @@
 - Native D3D12 explicit-ID/frame-fence diagnostic: final normal and batch each pass 96/96 with profiler off; 32-slot reuse exercised. Not integrated into timed CPU/GPU runner yet.
 - Final binary correctness: 100k/25%, 10/10 passed. No benchmark pilots or full matrix.
 - [V3 report](../docs/results/GPU_TIMING_V3_2026-09-19.md). PR remains Draft, not infrastructure-merge-ready.
+
+## Protocol-v4 real-workload integration
+
+- Native three-query timestamps now bracket real CPU/GPU commands; CPU gpuCullMs is null; ID/fence association replaces lag guesses.
+- Final-binary 100k/25% correctness 10/10; actual CPU and GPU short runs each 96/96, max ring occupancy 2 and 3.
+- RenderDoc API chunks verify T0/dispatch/T1/copy/indirect/T2 and CPU direct draw placement. Initial splash-screen captures retained as invalid placement attempts.
+- STOP before first overhead process: three background samples 20%, 16%, 11%, threshold <=5%. No retry or subsequent pilots/pairs/matrix.
+- Local tests: 222 C#, 32 Python; native and Unity builds pass. Hosted CI/head tracked in Draft PR #12.
+- [Integration checkpoint report](../docs/results/GPU_TIMING_INTEGRATED_V4_2026-09-19.md). Not infrastructure-merge-ready; no evidence deletion.

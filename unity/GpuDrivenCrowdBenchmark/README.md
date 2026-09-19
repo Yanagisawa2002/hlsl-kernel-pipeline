@@ -1,6 +1,6 @@
 # Controlled CPU-driven / GPU-resident Crowd benchmark
 
-**Protocol-v3 checkpoint: native timestamp IDs/fences pass short GPU diagnostics; timed CPU/GPU integration remains pending and PR #12 stays Draft.** Read the [v3 findings](../../docs/results/GPU_TIMING_V3_2026-09-19.md) and [PROTOCOL_V3.md](PROTOCOL_V3.md). Read [PROTOCOL_V2.md](PROTOCOL_V2.md) and the [repair stop report](../../docs/results/GPU_TIMING_REPAIR_V2_2026-09-19.md). [PROTOCOL.md](PROTOCOL.md) preserves the original v1 plan. This dedicated workload leaves the live sample and the September 16 complete-task benchmark unchanged. It measures a managed all-agent CPU-single baseline and the append/count-copy GPU path with the same deterministic population, trajectory, quad shader and offscreen target.
+**Protocol-v4 checkpoint: native timestamps are integrated into the real CPU/GPU workload.** Both short diagnostics and command-placement captures pass; overhead preflight is blocked by background load. PR #12 remains Draft. Read [PROTOCOL_V4.md](PROTOCOL_V4.md) and the [integration report](../../docs/results/GPU_TIMING_INTEGRATED_V4_2026-09-19.md). Earlier protocols/reports remain diagnostic provenance.
 
 ## Build (Windows, Unity 6000.3.13f1)
 
@@ -74,3 +74,11 @@ python tools/run_native_timing_diagnostic.py --player D:/CodexValidation/crossov
 Check the build receipt/process before invoking the runner. It runs two fresh 96-submission processes and validates explicit IDs, fence completion, timestamp conversion and source/DLL hashes. This mode requires no calibration and does not enable the profiler. It is not a CPU/GPU timing pilot.
 
 Legacy activation diagnostics additionally support `--startup-profiler` and `--graphics-api d3d11` on `run_timing_diagnostic.py`. Set `CROSSOVER_AUTOCONNECT=1` only for a separate connection-diagnostic build. `ProfileCapture.Autoconnect` takes `CROSSOVER_PLAYER_PATH`, `CROSSOVER_PLAYER_ARGS` and `CROSSOVER_PROFILE_RAW`, configures Editor GPU profiling before starting its child, and saves capture on completion. `ProfileCapture.InspectMany` takes semicolon-separated `CROSSOVER_PROFILE_INPUTS` and exports GPU hierarchy CSVs using Unity Editor APIs. These internal hierarchy columns are Unity-version-dependent; raw files must be retained. No GUI acceptance is inferred from the controller alone.
+
+## Selected real-workload v4 runner
+
+Build with the native DLL as described above, Graphics Jobs off, Autoconnect off. Actual CPU/GPU runs now require `--timing-api native`; legacy timing remains diagnostic-only. ON writes three timestamps in both arms; CPU gpuCullMs is JSON null. OFF is only an overhead-control arm.
+
+Use `tools/run_integrated_crossover.py --player <absolute Player path> --output <new evidence directory> --stage <stage>`. Stage order is `prepare`, `integration`, `overhead`, `cpu`, `gpu`, `pairs`, `correctness-matrix`. Every dependent stage requires accepted current-source receipts. `prepare` calibrates/checks 1000-frame and 96-frame views separately; `integration` runs the real CPU/GPU paths for 96 measured frames. A current-source `placement-assessment.json` for both arms is required before overhead. The capture helper `tools/capture_crossover_placement.py` runs through `qrenderdoc --python` using environment variables `CROSSOVER_CAPTURE_PLAYER`, `CROSSOVER_CAPTURE_CALIBRATION`, `CROSSOVER_CAPTURE_OUTPUT`, and `CROSSOVER_CAPTURE_ARM`; its extended warmup and durations are capture-only. `check_integrated_crossover.validate_placement` validates the exported API chunks. Keep raw captures and record hashes.
+
+The first overhead attempt is already blocked in the committed evidence. Do not silently retry or use diagnostic costs as pilot results. The old runner's pilot stages now reject with a migration message, and no v4 stage launches the formal matrix. Historical instructions above describe archived diagnostics, not permission to bypass v4 gates.

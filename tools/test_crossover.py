@@ -1,3 +1,4 @@
+import json
 import copy
 import tempfile
 import unittest
@@ -49,6 +50,46 @@ class CrossoverAnalysisTests(unittest.TestCase):
         self.assertFalse(diagnostic_status(wrong)['passed'])
         for r in d['observations']: r['gpuNs']=[0]*3
         self.assertFalse(diagnostic_status(d)['passed'])
+
+    def test_integrated_native_recordings_and_fail_closed_mutations(self):
+        from check_integrated_crossover import validate
+        root=Path(__file__).resolve().parents[1]/'docs/evidence/gpu-timing-integrated-v4-20260919/runs'
+        for arm in ('cpu','gpu'):
+            d=json.loads((root/f'integration-{arm}.json').read_text(encoding='utf-8'))
+            self.assertEqual(96,validate(d)['timestampResolved'])
+            for edit in [lambda x:x.update(timestampResolved=95),lambda x:x.update(maxRingOccupancy=33),
+                         lambda x:x['samples'][4].update(resolvedSubmissionId=301),lambda x:x['samples'][4].update(timestampRingSlot=999),
+                         lambda x:x['samples'][4].update(completedFence=0),lambda x:x['samples'][4].update(gpuTimestampFrequency=0),
+                         lambda x:x['samples'][4].update(gpuTimestampT0=0),lambda x:x['samples'][4].update(gpuDrawMs=900),
+                         lambda x:x.update(batchCompletionMsPerFrame=900),lambda x:x.update(timestampInvalid=1)]:
+                bad=copy.deepcopy(d);edit(bad)
+                with self.assertRaises(ValueError):validate(bad)
+            if arm=='cpu':
+                self.assertIsNone(d['samples'][0]['gpuCullMs'])
+                d['samples'][0]['gpuCullMs']=0
+                with self.assertRaises(ValueError):validate(d)
+
+    def test_real_capture_placement_and_copy_boundary(self):
+        from check_integrated_crossover import validate_placement
+        root=Path(__file__).resolve().parents[1]/'docs/evidence/gpu-timing-integrated-v4-20260919/placement'
+        for arm in ('cpu','gpu'):
+            chunks=json.loads((root/f'{arm}-commands.json').read_text(encoding='utf-8'))
+            result=validate_placement(chunks,arm);self.assertTrue(result['passed'])
+            bad=copy.deepcopy(chunks)
+            for c in bad:
+                if c['index']==result['T1Chunk']:c['index']=result['T2Chunk']+1
+            with self.assertRaises(ValueError):validate_placement(bad,arm)
+
+    def test_overhead_gate_retains_block_and_never_launches(self):
+        import run_integrated_crossover as runner
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as temp:
+            directory=Path(temp)
+            with patch.object(runner,'snapshot',return_value={'adapters':[{'utilization':20}]}), patch.object(runner.time,'sleep'), patch.object(runner.subprocess,'run') as process:
+                with self.assertRaises(RuntimeError):runner.launch(directory/'fake.exe',directory,'overhead-cpu-0-off','cpu',timestamps='off',quality=True)
+                process.assert_not_called()
+            receipt=json.loads((directory/'overhead-cpu-0-off.launch.json').read_text())
+            self.assertEqual(3,len(receipt['before']));self.assertIn('blocked',receipt['status'])
 
     def test_native_explicit_ids_fences_and_timestamp_units(self):
         from run_native_timing_diagnostic import validate

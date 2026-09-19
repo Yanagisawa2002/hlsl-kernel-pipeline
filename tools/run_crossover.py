@@ -98,6 +98,7 @@ def main():
     p.add_argument('--launch-mode',choices=['normal','batchmode'],default='batchmode')
     a = p.parse_args(); a.output = a.output.resolve(); a.player = a.player.resolve(); a.output.mkdir(parents=True, exist_ok=True)
     conditions = list(itertools.product(a.agents, a.densities))
+    if a.stage in ('pilot','pilot-pairs'): raise ValueError('Use run_integrated_crossover.py for the selected native v4 benchmark; legacy pilot gates are archived')
     if a.stage == 'measure': raise ValueError('Formal matrix disabled at protocol-v2 checkpoint; separate explicit authorization required')
     timing_api='legacy'; gpu_area='unchanged'
     if a.stage in ('pilot','pilot-pairs'):

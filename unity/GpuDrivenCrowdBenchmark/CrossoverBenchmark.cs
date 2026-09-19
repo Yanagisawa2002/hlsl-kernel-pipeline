@@ -22,6 +22,8 @@ namespace HlslPerf.Crossover
     }
     [Serializable] public sealed class Sample
     {
+        public ulong submissionId,resolvedSubmissionId,gpuTimestampT0,gpuTimestampT1,gpuTimestampT2,gpuTimestampFrequency,requiredFence,completedFence;
+        public int timestampResolveDelayFrames=-1,timestampRingSlot=-1;
         public int frameIndex, visibleCount, submissionUnityFrame = -1, availabilityUnityFrame = -1;
         public double cpuCullAndListMs, cpuUploadMs, cpuSubmitMs, cpuTotalMs, updateIntervalMs;
         // -1 means unavailable, never zero-filled missing GPU measurements.
@@ -35,13 +37,18 @@ namespace HlslPerf.Crossover
     }
     [Serializable] public sealed class Result
     {
-        public int schema = 2, protocolVersion = 2, processId, width = 1280, height = 720, vsync, targetFrameRate = -1;
+        public int schema = 4, protocolVersion = 4, processId, width = 1280, height = 720, vsync, targetFrameRate = -1;
         public string runId, pairId, mode, sourceIdentity, calibrationSha256, adapter, driver, graphicsApi, unityVersion, deviceVersion;
         public string buildConfiguration, cpu, os, error = "", gpuTimingStatus = "unavailable";
         public string cpuBaseline = "managed scalar single thread, fused predicate/list, no Burst/Jobs";
         public string visibleCountSource = "frozen full-sequence CPU oracle; selected frames checked on GPU in separate validation";
         public bool correctnessPassed, completed, gpuRecorderSupported, frameTimingEnabled;
         public bool endToEndComparable = false;
+        public string nativeTimingBackend="D3D12 timestamp query",nativeTimingVersion="4",pluginSha256;
+        public ulong timestampFrequency;
+        public int timestampSubmitted,timestampResolved,timestampInvalid,maxRingOccupancy;
+        public bool profilerEnabled;
+        public string presentWaitStatus="unavailable";
         public string renderingThreadingMode;
         public string timingApi, timingLaunchMode;
         public bool supportsGraphicsFence, warmupFenceCompleted, batchFenceCompleted;
@@ -65,7 +72,7 @@ namespace HlslPerf.Crossover
         Agent[] population; uint[] cpuIds;
         ComputeBuffer agents, visible, args;
         Material material; RenderTexture target; CommandBuffer commands;
-        GpuTimingSource timing;
+        NativeTimingBackend native; double initializationDeadline;
         GraphicsFence warmupFence, finalFence;
         bool warmupFenceInserted, finalFenceInserted;
         long warmupFenceSubmission, lastFencePoll;
@@ -88,7 +95,7 @@ namespace HlslPerf.Crossover
                     finished = true; return;
                 }
                 QualitySettings.vSyncCount = 0; Application.targetFrameRate = -1; Application.runInBackground = true;
-                result = new Result { options = options, runId = options.runId, pairId = options.pairId, mode = options.mode,
+                result = new Result { options = options, profilerEnabled=Profiler.enabled, pluginSha256=Resources.Load<TextAsset>("crossover-plugin-identity")?.text.Trim() ?? "unavailable", runId = options.runId, pairId = options.pairId, mode = options.mode,
                     processId = Process.GetCurrentProcess().Id, sourceIdentity = Identity,
                     adapter = SystemInfo.graphicsDeviceName, driver = RuntimeDriver(), deviceVersion = SystemInfo.graphicsDeviceVersion,
                     renderingThreadingMode = SystemInfo.renderingThreadingMode.ToString(), graphicsApi = SystemInfo.graphicsDeviceType.ToString(), unityVersion = Application.unityVersion,
@@ -107,12 +114,11 @@ namespace HlslPerf.Crossover
                 result.calibrationSha256 = Hash(calibrationBytes); result.actualVisibilityMean = calibration.actualVisibilityMean;
                 Allocate();
                 if (options.mode == "validation") { StartCoroutine(ValidateSafe()); return; }
-                if (!SystemInfo.supportsGpuRecorder) throw new NotSupportedException("GPU Recorder unavailable: stop before interpreting performance.");
-                if (!SystemInfo.supportsGraphicsFence) throw new NotSupportedException("GraphicsFence unavailable");
-                if (options.gpuProfilerArea == "enabled") Profiler.SetAreaEnabled(ProfilerArea.GPU, true);
+                if(options.timingApi!="native") throw new InvalidOperationException("Actual benchmark requires native timing");
+                if(SystemInfo.graphicsDeviceType!=GraphicsDeviceType.Direct3D12 || Profiler.enabled) throw new InvalidOperationException("Require D3D12 without attached/startup profiler");
+                if(!SystemInfo.supportsGraphicsFence) throw new NotSupportedException("GraphicsFence unavailable");
                 result.samples = new Sample[options.frames];
-                timing = new GpuTimingSource(options.timingApi);
-                for (int k=0;k<3;k++) if (!timing.Valid(k) || !timing.MarkerValid(k)) throw new InvalidOperationException("Invalid stable GPU marker/recorder");
+                native=new NativeTimingBackend(commands);initializationDeadline=Time.realtimeSinceStartupAsDouble+30;
                 for (int f=0;f<options.frames;f++) result.samples[f] = new Sample { frameIndex = f, visibleCount = calibration.views[f].visible };
                 nextFrame = -options.warmup; measuring = true;
             }
@@ -148,15 +154,9 @@ namespace HlslPerf.Crossover
             Write(options.output, JsonUtility.ToJson(c, true)); finished = true; Application.Quit(0);
         }
 
-        void Mark(int f, int k, bool begin)
-        {
-            if (timing == null) return; // Correctness has no profiling or timing samples.
-            if (begin) timing.Begin(commands,k); else timing.End(commands,k);
-        }
-
         void Draw(string mode, View view, int measuredFrame, Sample sample)
         {
-            long start = Stopwatch.GetTimestamp(); int count = 0;
+            long start = Stopwatch.GetTimestamp(); if(sample!=null && measuredFrame==0)result.batchStartTicks=start; int count = 0;
             if (mode == "cpu") count = Model.Cull(population, view, cpuIds);
             long culled = Stopwatch.GetTimestamp();
             if (mode == "cpu" && count > 0) visible.SetData(cpuIds, 0, 0, count);
@@ -169,33 +169,35 @@ namespace HlslPerf.Crossover
             commands.SetViewport(new Rect(0, 0, 1280, 720));
             var rect = new Vector4(view.x, view.y, view.halfX, view.halfY);
             material.SetVector("_ViewRect", rect);
-            Mark(measuredFrame, 0, true);
+            ulong id=0;
+            if(native!=null && options.timestamps=="on") {id=native.Reserve();if(sample!=null) {sample.submissionId=id;sample.timestampRingSlot=(int)((id-1)%32);result.timestampSubmitted++;}native.Stamp(commands,id,0);}
+            result.maxRingOccupancy=native==null?0:native.MaxOccupancy;
             if (mode == "gpu")
             {
-                Mark(measuredFrame, 1, true);
+
                 commands.SetBufferCounterValue(visible, 0);
                 commands.SetComputeVectorParam(culling, "_ViewRect", rect);
                 commands.DispatchCompute(culling, 0, (options.agents + 255) / 256, 1, 1);
-                commands.CopyCounterValue(visible, args, 4);
-                Mark(measuredFrame, 1, false);
+
             }
-            Mark(measuredFrame, 2, true);
+            if(id!=0) native.Stamp(commands,id,1);
+            if(mode=="gpu") commands.CopyCounterValue(visible,args,4);
             if (mode == "gpu") commands.DrawProceduralIndirect(Matrix4x4.identity, material, 0, MeshTopology.Triangles, args);
             else if (count > 0) commands.DrawProcedural(Matrix4x4.identity, material, 0, MeshTopology.Triangles, 6, count);
-            Mark(measuredFrame, 2, false); Mark(measuredFrame, 0, false);
-            if (timing != null && nextFrame == -1)
+            if(id!=0) native.Stamp(commands,id,2);
+            if (native != null && nextFrame == -1)
             {
                 warmupFence = commands.CreateGraphicsFence(GraphicsFenceType.AsyncQueueSynchronisation, SynchronisationStageFlags.AllGPUOperations);
                 warmupFenceInserted = true;
             }
-            if (timing != null && measuredFrame == options.frames - 1)
+            if (native != null && measuredFrame == options.frames - 1)
             {
                 finalFence = commands.CreateGraphicsFence(GraphicsFenceType.AsyncQueueSynchronisation, SynchronisationStageFlags.AllGPUOperations);
                 finalFenceInserted = true;
             }
             Graphics.ExecuteCommandBuffer(commands);
             long end = Stopwatch.GetTimestamp();
-            if (timing != null && nextFrame == -1) warmupFenceSubmission = end;
+            if (native != null && nextFrame == -1) warmupFenceSubmission = end;
             if (finalFenceInserted && measuredFrame == options.frames - 1) { result.finalSubmissionTicks = end; lastFencePoll = end; }
             if (sample != null)
             {
@@ -210,7 +212,9 @@ namespace HlslPerf.Crossover
             if (!measuring || finished) return;
             try
             {
+                if(!native.Ready) {if(Time.realtimeSinceStartupAsDouble>initializationDeadline)throw new TimeoutException("Native initialization");return;}
                 long now = Stopwatch.GetTimestamp();
+                PollMappedTiming();
                 if (nextFrame == 0 && !result.warmupFenceCompleted)
                 {
                     if (!warmupFenceInserted) throw new InvalidOperationException("Missing warmup fence");
@@ -223,12 +227,12 @@ namespace HlslPerf.Crossover
                     lastUpdate = now;
                     return; // Start measured CPU work on the next Update, after warmup completion.
                 }
-                PollMappedTiming();
                 if (nextFrame >= options.frames)
                 {
                     if (!finalFenceInserted) throw new InvalidOperationException("Missing final batch fence");
                     if (!result.batchFenceCompleted)
                     {
+                        long pollStarted=Stopwatch.GetTimestamp();
                         if (finalFence.passed)
                         {
                             long observed = Stopwatch.GetTimestamp();
@@ -241,10 +245,10 @@ namespace HlslPerf.Crossover
                             result.finalSubmissionToObservationMs = (observed - result.finalSubmissionTicks) * TickMs;
                             result.gc0Collections = GC.CollectionCount(0) - initialGc;
                         }
-                        else { result.lastFalseFencePollTicks = Stopwatch.GetTimestamp(); lastFencePoll = result.lastFalseFencePollTicks; }
+                        else { result.lastFalseFencePollTicks = pollStarted; lastFencePoll = result.lastFalseFencePollTicks; }
                         if ((now - result.finalSubmissionTicks) * TickMs > 30000) throw new InvalidOperationException("Batch fence timeout");
                     }
-                    if (mappedFrames == options.frames && result.batchFenceCompleted) FinishTiming();
+                    if ((options.timestamps=="off" || mappedFrames == options.frames) && result.batchFenceCompleted) FinishTiming();
                     else if (++drainFrames > 120) throw new InvalidOperationException("Incomplete GPU samples during nonblocking drain");
                     return;
                 }
@@ -252,7 +256,7 @@ namespace HlslPerf.Crossover
                 if (nextFrame == 0)
                 {
                     initialGc = GC.CollectionCount(0); result.firstMeasuredUnityFrame = Time.frameCount;
-                    result.batchStartTicks = Stopwatch.GetTimestamp();
+
                 }
                 var sample = nextFrame < 0 ? null : result.samples[nextFrame];
                 if (sample != null)
@@ -269,25 +273,22 @@ namespace HlslPerf.Crossover
 
         void PollMappedTiming()
         {
-            if (result.firstMeasuredUnityFrame < 0) return;
-            int index = TimingContract.MeasuredIndex(Time.frameCount, result.firstMeasuredUnityFrame, options.frames);
-            if (index < 0) return;
-            var s = result.samples[index];
-            if (s.submissionUnityFrame != TimingContract.SubmittedUnityFrame(Time.frameCount) || s.availabilityUnityFrame >= 0 || index != mappedFrames)
-                throw new InvalidOperationException("GPU timing frame attribution mismatch");
-            for (int k=0;k<3;k++)
-            {
-                if (options.mode == "cpu" && k == 1) continue;
-                long count = timing.Blocks(k), ns = timing.Nanoseconds(k);
-                if (count != 1 || ns <= 0) throw new InvalidOperationException("Missing/ambiguous stable GPU timing at documented delay for frame " + index);
-                if (k==0) s.gpuRangeMs=ns/1e6; else if(k==1) s.gpuCullMs=ns/1e6; else s.gpuDrawMs=ns/1e6;
+            if(options.timestamps=="off") return;
+            while(native.TryRead(out ulong[] data)) {
+                result.timestampFrequency=data[4];
+                int index=checked((int)data[0]-1-options.warmup);if(index<0)continue;
+                if(index>=options.frames || index!=mappedFrames)throw new InvalidOperationException("Duplicate/missing resolution");
+                var sample=result.samples[index];if(sample.submissionId!=data[0] || sample.resolvedSubmissionId!=0)throw new InvalidOperationException("Submission ID mismatch");
+                sample.resolvedSubmissionId=data[0];sample.gpuTimestampT0=data[1];sample.gpuTimestampT1=data[2];sample.gpuTimestampT2=data[3];sample.gpuTimestampFrequency=data[4];sample.requiredFence=data[5];sample.completedFence=data[6];
+                sample.gpuCullMs=options.mode=="cpu"?-1:(data[2]-data[1])*1000.0/data[4];sample.gpuDrawMs=(data[3]-data[2])*1000.0/data[4];sample.gpuRangeMs=(data[3]-data[1])*1000.0/data[4];
+                sample.availabilityUnityFrame=Time.frameCount;sample.timestampResolveDelayFrames=Time.frameCount-sample.submissionUnityFrame;
+                mappedFrames++;result.timestampResolved=mappedFrames;result.gpuMappedFrames=mappedFrames;
             }
-            s.availabilityUnityFrame=Time.frameCount; mappedFrames++; result.gpuMappedFrames=mappedFrames;
         }
 
         void FinishTiming()
         {
-            result.gpuTimingStatus = "complete: stable " + options.timingApi + "; availability frame minus three";
+            result.gpuTimingStatus = options.timestamps=="off"?"disabled: overhead control":"complete: native explicit submission ID and completion fence";
             // The runner separately gates correctness, diagnostic proof, pacing, load and drift.
             result.completed = true; Finish(0);
         }
@@ -355,18 +356,21 @@ namespace HlslPerf.Crossover
         void Fail(Exception e)
         {
             Debug.LogException(e);
+            if(result!=null && native!=null)result.timestampInvalid++;
             if (result == null) result = new Result(); result.error = e.ToString();
             Finish(2);
         }
         void Finish(int code)
         {
             finished = true; measuring = false;
-            Write(options == null ? "argument-error.json" : options.output, JsonUtility.ToJson(result, true));
+            string json=JsonUtility.ToJson(result,true);
+            json=System.Text.RegularExpressions.Regex.Replace(json,@"(""gpu(?:Cull|Draw|Range)Ms""\s*:\s*)-1(?:\.0)?(?=\s*[,}])","$1null");
+            Write(options == null ? "argument-error.json" : options.output,json);
             Application.Quit(code);
         }
         void OnDestroy()
         {
-            timing?.Dispose(); agents?.Release(); visible?.Release(); args?.Release(); commands?.Release();
+            agents?.Release(); visible?.Release(); args?.Release(); commands?.Release();
             if (target != null) target.Release(); if (material != null) Destroy(material);
         }
     }

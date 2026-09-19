@@ -1,0 +1,30 @@
+{
+  "sourceIdentity": "7e8f184ccdd6a6dd0eef1398538f3a4e51602761f633e157d5e6887cca3a1474",
+  "scope": "same Draw method during extended capture-only warmup; no timing statistics",
+  "cpu": {
+    "passed": true,
+    "T0Chunk": 88,
+    "T1Chunk": 89,
+    "T2Chunk": 99,
+    "resolveChunk": 100,
+    "queryIndices": [
+      30,
+      31,
+      32
+    ],
+    "commandsSha256": "c2304f1465b9728e92962998baf23ee3689b9945ddff16966acb2f44e274cc7f"
+  },
+  "gpu": {
+    "passed": true,
+    "T0Chunk": 168,
+    "T1Chunk": 180,
+    "T2Chunk": 198,
+    "resolveChunk": 199,
+    "queryIndices": [
+      69,
+      70,
+      71
+    ],
+    "commandsSha256": "240553986df45b3493de2d1aedd003c9367d286dba7494858ac544dbe009737e"
+  }
+}

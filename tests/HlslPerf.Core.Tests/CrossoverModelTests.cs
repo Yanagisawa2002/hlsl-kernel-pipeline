@@ -91,8 +91,15 @@ public sealed class CrossoverModelTests
     [Fact] public void NativeDiagnosticDoesNotRequireCalibrationOrChangeBenchmarkDefault()
     {
         Assert.Equal("native-diagnostic", Options.Parse(new[] { "--mode", "native-diagnostic" }).mode);
-        Assert.Equal("legacy", Options.Parse(new[] { "--mode", "native-diagnostic" }).timingApi);
+        Assert.Equal("native", Options.Parse(new[] { "--mode", "native-diagnostic" }).timingApi);
         Assert.Throws<ArgumentException>(() => Options.Parse(new[] { "--mode", "gpu" }));
+    }
+
+    [Fact] public void IntegratedTimingDefaultsNativeAndValidatesOverheadSwitch()
+    {
+        var on=Options.Parse(new[]{"--mode","cpu","--calibration","x.json"});Assert.Equal("native",on.timingApi);Assert.Equal("on",on.timestamps);
+        Assert.Equal("off",Options.Parse(new[]{"--mode","gpu","--calibration","x.json","--timestamps","off"}).timestamps);
+        Assert.Throws<ArgumentException>(()=>Options.Parse(new[]{"--mode","native-diagnostic","--timestamps","guess"}));
     }
 
 }

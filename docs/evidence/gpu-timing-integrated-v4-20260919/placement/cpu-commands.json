@@ -1,0 +1,326 @@
+[
+  {
+    "index": 78,
+    "name": "ID3D12GraphicsCommandList::CopyBufferRegion",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pDstBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "DstOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "0",
+        "children": []
+      },
+      {
+        "name": "pSrcBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "SrcOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "655360",
+        "children": []
+      },
+      {
+        "name": "NumBytes",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "99984",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 88,
+    "name": "ID3D12GraphicsCommandList::EndQuery",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Index",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "30",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 89,
+    "name": "ID3D12GraphicsCommandList::EndQuery",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Index",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "31",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 98,
+    "name": "ID3D12GraphicsCommandList::DrawInstanced",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "VertexCountPerInstance",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "6",
+        "children": []
+      },
+      {
+        "name": "InstanceCount",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "24996",
+        "children": []
+      },
+      {
+        "name": "StartVertexLocation",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "0",
+        "children": []
+      },
+      {
+        "name": "StartInstanceLocation",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "0",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 99,
+    "name": "ID3D12GraphicsCommandList::EndQuery",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Index",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "32",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 100,
+    "name": "ID3D12GraphicsCommandList::ResolveQueryData",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "StartIndex",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "30",
+        "children": []
+      },
+      {
+        "name": "NumQueries",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "3",
+        "children": []
+      },
+      {
+        "name": "pDestinationBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "AlignedDestinationBufferOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "240",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 108,
+    "name": "ID3D12GraphicsCommandList::EndQuery",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Index",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "1108",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 134,
+    "name": "ID3D12GraphicsCommandList::EndQuery",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Index",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "1109",
+        "children": []
+      }
+    ]
+  },
+  {
+    "index": 136,
+    "name": "ID3D12GraphicsCommandList::ResolveQueryData",
+    "children": [
+      {
+        "name": "pCommandList",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "pQueryHeap",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "Type",
+        "type": "SDBasic.Enum",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "StartIndex",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "1108",
+        "children": []
+      },
+      {
+        "name": "NumQueries",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "2",
+        "children": []
+      },
+      {
+        "name": "pDestinationBuffer",
+        "type": "SDBasic.Resource",
+        "value": "",
+        "children": []
+      },
+      {
+        "name": "AlignedDestinationBufferOffset",
+        "type": "SDBasic.UnsignedInteger",
+        "value": "8864",
+        "children": []
+      }
+    ]
+  }
+]

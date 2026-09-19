@@ -14,7 +14,7 @@ struct Slot { std::atomic<int> state{0}; uint64_t id=0,fence=0; unsigned stage=0
 Slot slots[Capacity];
 IUnityGraphics* graphics=nullptr; IUnityGraphicsD3D12v7* api=nullptr;
 ComPtr<ID3D12QueryHeap> heap; ComPtr<ID3D12Resource> readback; ComPtr<ID3D12Fence> fence;
-uint64_t* mapped=nullptr; uint64_t frequency=0; std::atomic<int> ready{0},error{0};
+uint64_t* mapped=nullptr; uint64_t frequency=0,lastReserved=0,lastRead=0; std::atomic<int> ready{0},error{0};
 void Fail(int code) { int expected=0; error.compare_exchange_strong(expected,code); }
 void UNITY_INTERFACE_API DeviceEvent(UnityGfxDeviceEventType event) {
  if(event==kUnityGfxDeviceEventShutdown) { ready=0; mapped=nullptr;readback.Reset();heap.Reset();fence.Reset(); }
@@ -63,17 +63,18 @@ UNITY_INTERFACE_EXPORT UnityRenderingEventAndData UNITY_INTERFACE_API CrossoverE
 UNITY_INTERFACE_EXPORT int UNITY_INTERFACE_API CrossoverStatus() {return error.load() ? -error.load() : ready.load();}
 UNITY_INTERFACE_EXPORT int UNITY_INTERFACE_API CrossoverReserve(uint64_t id) {
  if(!id || !ready.load() || error.load()) return -1;
+ if(id!=lastReserved+1) {Fail(15);return -15;}
  Slot& s=slots[(id-1)%Capacity];if(s.state.load()!=0)return 0;
- s.id=id;s.fence=0;s.stage=0;s.state.store(1,std::memory_order_release);return 1;
+ lastReserved=id;s.id=id;s.fence=0;s.stage=0;s.state.store(1,std::memory_order_release);return 1;
 }
 // Called by the sole main-thread consumer. No wait, fence signal, or queue submission.
 UNITY_INTERFACE_EXPORT int UNITY_INTERFACE_API CrossoverRead(uint64_t id,uint64_t* output) {
- if(error.load())return -error.load();Slot& s=slots[(id-1)%Capacity];
+ if(error.load())return -error.load();if(id!=lastRead+1) {Fail(16);return -16;}Slot& s=slots[(id-1)%Capacity];
  if(s.state.load(std::memory_order_acquire)!=2 || s.id!=id)return 0;
  uint64_t completed=fence->GetCompletedValue();if(completed==UINT64_MAX) {Fail(13);return -13;}if(completed<s.fence)return 0;
  unsigned base=static_cast<unsigned>((id-1)%Capacity)*3;
  output[0]=id;output[1]=mapped[base];output[2]=mapped[base+1];output[3]=mapped[base+2];output[4]=frequency;output[5]=s.fence;output[6]=completed;
- if(!(output[1]<output[2] && output[2]<output[3])) {Fail(14);return -14;}
- s.state.store(0,std::memory_order_release);return 1;
+ if(!(output[1]>0 && output[1]<=output[2] && output[2]<=output[3])) {Fail(14);return -14;}
+ lastRead=id;s.state.store(0,std::memory_order_release);return 1;
 }
 }
