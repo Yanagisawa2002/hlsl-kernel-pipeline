@@ -44,3 +44,10 @@ tools/HlslPerf.InclusiveScanValidation/** -text -eol
 tools/run_inclusive_scan.py -text -eol
 tools/check_inclusive_control.py -text -eol
 docs/results/data/rtx4090-inclusive-2026-09-15/** -text -diff
+# Keep the frozen application bundle byte-stable across Windows checkouts.
+unity/FluidScanBenchmark/** text eol=lf
+# Existing upstream trailing spaces are part of the pinned/copy-preserved sources.
+unity/FluidScanBenchmark/ThirdParty/** whitespace=-blank-at-eol
+unity/FluidScanBenchmark/Overlay/Assets/Scripts/** whitespace=-blank-at-eol
+tools/*fluid_benchmark.py text eol=lf
+docs/evidence/fluid-scan-static-20261005.json -text

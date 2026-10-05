@@ -107,6 +107,12 @@ The standalone GPU-driven Crowd/VFX demo adds an application-shaped path: visibi
 
 [GPU-driven demo](gpu-driven-demo/README.md) · [experiment history](docs/EXPERIMENT_HISTORY.md)
 
+An experimental [Unity fluid application scan benchmark](unity/FluidScanBenchmark/README.md)
+adds the author-provided water/foam scene with original, local wave-tiled and pinned
+GPUPrefixSums RTS exclusive scans in the same spatial count sorter. Code preparation
+and offline compilation are separate from Unity import and GPU execution;
+**application performance remains unmeasured**.
+
 ## Additional measured evidence
 
 The three cases above are the portfolio entry points. The repository keeps the broader history for auditability rather than presenting every result as equally important.
