@@ -33,7 +33,8 @@
 #if HLSLPERF_GROUP_SIZE < HLSLPERF_WAVE_SIZE || HLSLPERF_GROUP_SIZE > 1024 || (HLSLPERF_GROUP_SIZE & (HLSLPERF_GROUP_SIZE - 1)) != 0
 #error Wave-tiled scan requires a power-of-two group containing complete waves, at most 1024 threads.
 #endif
-#if HLSLPERF_SINGLE_PASS_ITEMS_PER_THREAD < 4 || HLSLPERF_SINGLE_PASS_ITEMS_PER_THREAD > 64 || (HLSLPERF_SINGLE_PASS_ITEMS_PER_THREAD % 4) != 0
+// Unity's shader preprocessor rejects modulo in #if; this is equivalent for uint counts.
+#if HLSLPERF_SINGLE_PASS_ITEMS_PER_THREAD < 4 || HLSLPERF_SINGLE_PASS_ITEMS_PER_THREAD > 64 || (HLSLPERF_SINGLE_PASS_ITEMS_PER_THREAD & 3) != 0
 #error Wave-tiled scan requires 4..64 items per thread, divisible by four.
 #endif
 #if HLSLPERF_SCAN_DIAGNOSTIC_COUNTERS
@@ -264,6 +265,15 @@ void FusedCompactWaveTiled(uint groupIndex : SV_GroupIndex)
 void SinglePassScanWaveTiled(uint groupIndex : SV_GroupIndex)
 #endif
 {
+#if HLSLPERF_WAVE_TILED_GUARD_NATIVE_WAVE
+    // Unity DXC uses SM6.0. Its adapter checks native wave32 instead of requesting SM6.6 WaveSize.
+    // Refuse incompatible wave widths; there is no alternate scan implementation.
+    if (WaveGetLaneCount() != HLSLPERF_WAVE_SIZE)
+    {
+        Output1.Store(0, WaveGetLaneCount());
+        return;
+    }
+#endif
     // Native adapters may dispatch one empty group with at least a 4-byte output.
     // The existing ABI-v1 workload builder still requires a positive item count.
     if (ElementCount == 0)

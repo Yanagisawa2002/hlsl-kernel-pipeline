@@ -20,6 +20,13 @@ namespace HlslPerf.FluidBenchmark
         {
             var receipt = new ValidationReceipt { arm = arm.ToString(), device = SystemInfo.graphicsDeviceName,
                 api = SystemInfo.graphicsDeviceType.ToString() };
+            string fatalLog = null;
+            Application.LogCallback captureLog = (message, trace, type) =>
+            {
+                if (type == LogType.Error || type == LogType.Exception || type == LogType.Assert)
+                    fatalLog = message + "\n" + trace;
+            };
+            Application.logMessageReceived += captureLog;
             try
             {
                 if (!SystemInfo.supportsComputeShaders || SystemInfo.graphicsDeviceType != GraphicsDeviceType.Direct3D12)
@@ -90,9 +97,11 @@ namespace HlslPerf.FluidBenchmark
                     }
                     finally { sort.Release(); }
                 }
+                if (fatalLog != null) throw new InvalidOperationException("GPU validation logged an error: " + fatalLog);
                 receipt.status = "passed"; receipt.fullOutputValidated = true;
             }
             catch (Exception error) { receipt.failure = error.ToString(); }
+            finally { Application.logMessageReceived -= captureLog; }
             return receipt;
         }
 

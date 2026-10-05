@@ -78,10 +78,11 @@ def main():
             # Preserve vendor/upstream bytes. Their existing compiler warnings stay in diagnostics.
             # Our bridge and wave wrapper retain warnings-as-errors.
             warnings_as_errors = index in (0, 1)
-            checked([str(dxc), "-T", "cs_6_6", "-HV", "2018", "-Ges", *(["-WX"] if warnings_as_errors else []),
+            target = "cs_6_0" if index == 1 else "cs_6_6"
+            checked([str(dxc), "-T", target, "-HV", "2018", "-Ges", *(["-WX"] if warnings_as_errors else []),
                      "-O3", "-E", entry, "-Fo", str(binary), str(source)],
                     output / f"shader-{index}-{entry}.diagnostics.txt")
-            records.append({"source": relative, "entry": entry, "dxilSha256": sha(binary), "warningsAsErrors": warnings_as_errors})
+            records.append({"source": relative, "entry": entry, "target": target, "dxilSha256": sha(binary), "warningsAsErrors": warnings_as_errors})
     receipt = {
         "schema": "hlslperf.fluid-scan.static-validation.v1", "status": "passed",
         "gpuDispatchExecuted": False, "unityInvoked": False, "unityImportExecuted": False,

@@ -7,6 +7,7 @@ import tempfile
 import unittest
 
 import analyze_fluid_benchmark as analysis
+import compare_fluid_benchmark as comparison
 import prepare_fluid_benchmark as preparation
 
 
@@ -68,6 +69,54 @@ class FluidChecks(unittest.TestCase):
             with tempfile.TemporaryDirectory() as directory:
                 with self.assertRaises(ValueError):
                     analysis.summarize(self.fixture(directory, rows))
+
+    def cohort_fixture(self, directory):
+        folders = []
+        for index in range(9):
+            folder = Path(directory) / str(index)
+            folder.mkdir()
+            rows = "".join(f"{frame+3},{frame},{metric},{1+index/100},"
+                           f"{1 if metric in ('wall_frame', 'simulation_complete') else 3},native_frame_fence_validated\n"
+                           for frame in (10, 11) for metric in comparison.METRICS)
+            self.fixture(folder, rows)
+            run = json.loads((folder / "run.json").read_text())
+            run.update(device="fixture", api="Direct3D12", unity="fixture", width=1920, height=1080,
+                       particles=100, foamCapacity=1000, fixedTimestep=1/60,
+                       gpuTimingMethod="d3d12_query_frame_fence", gpuDelayValidated=True,
+                       nativeTimingBuild="fixture", provenance=json.dumps({"payloadSha256": "fixture"}))
+            run["settings"].update(arm=index//3, seed=42, spawnDensity=600, warmupFrames=120, nativeGpuTiming=True)
+            (folder / "run.json").write_text(json.dumps(run))
+            folders.append(folder)
+        return folders
+
+    def test_cohort_requires_balanced_independent_repeats(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folders = self.cohort_fixture(directory)
+            result = comparison.compare(folders)
+            self.assertEqual(result["arms"]["original"]["repeats"], 3)
+            self.assertAlmostEqual(result["arms"]["original"]["metrics"]["wall_frame"]["medianOfRunP50Ms"], 1.01)
+            with self.assertRaisesRegex(ValueError, "equally repeated"):
+                comparison.compare(folders[:-1])
+            with self.assertRaisesRegex(ValueError, "Duplicate process evidence"):
+                comparison.compare(folders + folders[:1])
+            # Renaming a copied run does not turn it into independent evidence.
+            (folders[-1] / "observations.csv").write_bytes((folders[0] / "observations.csv").read_bytes())
+            with self.assertRaisesRegex(ValueError, "Duplicate process evidence"):
+                comparison.compare(folders)
+
+    def test_cohort_rejects_changed_configuration_or_source(self):
+        for field in ("seed", "payloadSha256"):
+            with tempfile.TemporaryDirectory() as directory:
+                folders = self.cohort_fixture(directory)
+                run_file = folders[-1] / "run.json"
+                run = json.loads(run_file.read_text())
+                if field == "seed":
+                    run["settings"][field] += 1
+                else:
+                    run["provenance"] = json.dumps({field: "different"})
+                run_file.write_text(json.dumps(run))
+                with self.assertRaisesRegex(ValueError, "configuration/source mismatch"):
+                    comparison.compare(folders)
 
 
 if __name__ == "__main__":

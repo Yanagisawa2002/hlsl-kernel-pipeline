@@ -107,11 +107,13 @@ The standalone GPU-driven Crowd/VFX demo adds an application-shaped path: visibi
 
 [GPU-driven demo](gpu-driven-demo/README.md) · [experiment history](docs/EXPERIMENT_HISTORY.md)
 
-An experimental [Unity fluid application scan benchmark](unity/FluidScanBenchmark/README.md)
+The [Unity fluid application scan benchmark](unity/FluidScanBenchmark/README.md)
 adds the author-provided water/foam scene with original, local wave-tiled and pinned
-GPUPrefixSums RTS exclusive scans in the same spatial count sorter. Code preparation
-and offline compilation are separate from Unity import and GPU execution;
-**application performance remains unmeasured**.
+GPUPrefixSums RTS exclusive scans in the same spatial count sorter. On the RTX 4090
+at 410,758 particles, complete-scan p50/frame was 0.0512 ms original, 0.058368 ms
+local and 0.037888 ms external RTS. The local adaptation took 14% more time;
+**no clear whole-frame improvement was established**. [Measured results and raw
+evidence](docs/results/fluid-scan-rtx4090-20261005.md) preserve this negative result.
 
 ## Additional measured evidence
 

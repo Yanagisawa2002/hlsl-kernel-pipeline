@@ -20,6 +20,8 @@ namespace HlslPerf.FluidBenchmark
         private long previousTick;
         private bool finished;
         private string fatalLog;
+        private FluidTimingCalibration calibration;
+        private int nextGpuFrame, nativeFramesRead;
         private readonly List<string> observations = new List<string>();
         private readonly List<string> frameTimings = new List<string>();
         private readonly HashSet<ulong> timingIds = new HashSet<ulong>();
@@ -85,10 +87,18 @@ namespace HlslPerf.FluidBenchmark
                 QualitySettings.vSyncCount = 0; Application.targetFrameRate = -1;
                 Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
                 if (Camera.main != null)
-                    foreach (var script in Camera.main.GetComponents<MonoBehaviour>()) script.enabled = false;
+                    foreach (var script in Camera.main.GetComponents<Seb.Fluid.Demo.OrbitCam>()) script.enabled = false;
+                if (settings.captureOnly)
+                {
+                    new GameObject("Fluid Offline Capture").AddComponent<FluidFrameCapture>().sim = sim;
+                    return;
+                }
                 FluidGpuSamples.Enable();
                 var host = new GameObject("Fluid Benchmark Collector");
-                host.AddComponent<FluidBenchmarkRunner>().sim = sim;
+                var collector = host.AddComponent<FluidBenchmarkRunner>();
+                collector.sim = sim;
+                collector.calibration = new FluidTimingCalibration();
+                if (settings.nativeGpuTiming) FluidNativeTiming.Active = new FluidNativeTiming();
             }
             catch (Exception error)
             {
@@ -114,7 +124,7 @@ namespace HlslPerf.FluidBenchmark
         }
 
         private void OnEnable() { Application.logMessageReceived += CaptureError; }
-        private void OnDisable() { Application.logMessageReceived -= CaptureError; }
+        private void OnDisable() { Application.logMessageReceived -= CaptureError; calibration?.Dispose(); }
         private void CaptureError(string condition, string stackTrace, LogType type)
         {
             if (type == LogType.Error || type == LogType.Assert || type == LogType.Exception)
@@ -132,8 +142,10 @@ namespace HlslPerf.FluidBenchmark
                 lastFrame = firstFrame + settings.warmupFrames + settings.measureFrames - 1;
                 observations.Add("observed_unity_frame,source_unity_frame,metric,ms,sample_blocks,status");
                 frameTimings.Add("observed_unity_frame,frame_start_timestamp,cpu_frame_ms,gpu_frame_ms,window_status");
+                nextGpuFrame = firstFrame + settings.warmupFrames;
             }
             int start = firstFrame + settings.warmupFrames;
+            if (frame - firstFrame <= 96 && frame < start) calibration.Tick(frame, firstFrame);
             // Wall intervals span complete consecutive LateUpdates, including rendering/presentation.
             if (previousTick != 0 && frame - 1 >= start && frame - 1 <= lastFrame)
                 Add(frame, frame - 1, "wall_frame", (tick - previousTick) * 1000.0 / Stopwatch.Frequency, 1);
@@ -141,8 +153,18 @@ namespace HlslPerf.FluidBenchmark
 
             // Unity Recorder documents a three-frame GPU delay. Keep the source frame explicit.
             // A future hardware run must verify this association and the expected block counts.
-            int gpuSource = frame - 3;
-            if (gpuSource >= start && gpuSource <= lastFrame)
+            int gpuSource = frame - calibration.result.delayFrames;
+            if (settings.nativeGpuTiming)
+            {
+                string[] names = { "scan_complete", "count_sort_complete", "spatial_hash_complete", "simulation_complete" };
+                while (nextGpuFrame <= lastFrame && nextGpuFrame < frame && FluidNativeTiming.Active.Read(nextGpuFrame))
+                {
+                    for (int metric = 0; metric < 4; ++metric)
+                        Add(frame, nextGpuFrame, names[metric], FluidNativeTiming.Active.ms[metric], FluidNativeTiming.Active.blocks[metric]);
+                    ++nextGpuFrame; ++nativeFramesRead;
+                }
+            }
+            else if (gpuSource >= start && gpuSource <= lastFrame)
             {
                 ReadGpu(frame, gpuSource, "scan_complete", FluidGpuSamples.Scan, sim.iterationsPerFrame);
                 ReadGpu(frame, gpuSource, "count_sort_complete", FluidGpuSamples.Sort, sim.iterationsPerFrame);
@@ -175,7 +197,8 @@ namespace HlslPerf.FluidBenchmark
         {
             string number = Number(ms);
             observations.Add(observed + "," + source + "," + metric + "," + number + "," + blocks + "," +
-                (number.Length == 0 ? "unavailable" : metric == "wall_frame" ? "observed" : "requires_gpu_delay_validation"));
+                (number.Length == 0 ? "unavailable" : metric == "wall_frame" ? "observed" :
+                    FluidBenchmarkSettings.Active.nativeGpuTiming ? "native_frame_fence_validated" : "requires_gpu_delay_validation"));
         }
 
         private static string Number(double value)
@@ -189,6 +212,7 @@ namespace HlslPerf.FluidBenchmark
             var settings = FluidBenchmarkSettings.Active;
             File.WriteAllLines(Path.Combine(settings.outputDirectory, "observations.csv"), observations);
             File.WriteAllLines(Path.Combine(settings.outputDirectory, "frame-timing-diagnostics.csv"), frameTimings);
+            File.WriteAllText(Path.Combine(settings.outputDirectory, "gpu-delay.json"), JsonUtility.ToJson(calibration.result, true));
             var metadata = new RunMetadata
             {
                 settings = settings, device = SystemInfo.graphicsDeviceName, driver = SystemInfo.graphicsDeviceVersion,
@@ -198,6 +222,12 @@ namespace HlslPerf.FluidBenchmark
                 iterationsPerFrame = sim.iterationsPerFrame, width = Screen.width, height = Screen.height,
                 firstMeasuredUnityFrame = firstFrame + settings.warmupFrames, lastMeasuredUnityFrame = lastFrame,
                 fixedTimestep = settings.fixedDeltaTime,
+                gpuDelayValidated = settings.nativeGpuTiming ? nativeFramesRead == settings.measureFrames : calibration.result.validated,
+                appliedGpuRecorderDelayFrames = settings.nativeGpuTiming ? -1 : calibration.result.delayFrames,
+                gpuTimingMethod = settings.nativeGpuTiming ? "d3d12_query_frame_fence" : "unity_recorder",
+                gpuTimestampFrequency = settings.nativeGpuTiming ? FluidNativeTiming.FgpFrequency().ToString(CultureInfo.InvariantCulture) : "",
+                nativeTimingBuild = settings.nativeGpuTiming ? Resources.Load<TextAsset>("FluidGpuTimingBuild")?.text : null,
+                supportsGpuRecorder = SystemInfo.supportsGpuRecorder, gpuProfilerAreaEnabled = Profiler.GetAreaEnabled(ProfilerArea.GPU),
                 provenance = Resources.Load<TextAsset>("FluidBenchmarkProvenance")?.text
             };
             File.WriteAllText(Path.Combine(settings.outputDirectory, "run.json"), JsonUtility.ToJson(metadata, true));
@@ -212,6 +242,9 @@ namespace HlslPerf.FluidBenchmark
             public string performanceStatus = "raw_observations_require_hardware_review";
             public bool gpuDispatchExecuted = true, correctnessPassed = true, gpuDelayValidated = false;
             public int documentedGpuRecorderDelayFrames = 3;
+            public int appliedGpuRecorderDelayFrames = 3;
+            public string gpuTimingMethod, gpuTimestampFrequency, nativeTimingBuild;
+            public bool supportsGpuRecorder, gpuProfilerAreaEnabled;
             public string device, driver, api, unity, provenance;
             public int vendorId, deviceId, particles, foamCapacity, iterationsPerFrame, width, height;
             public int firstMeasuredUnityFrame, lastMeasuredUnityFrame;

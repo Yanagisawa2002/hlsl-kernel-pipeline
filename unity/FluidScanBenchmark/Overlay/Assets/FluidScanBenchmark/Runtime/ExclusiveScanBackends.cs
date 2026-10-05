@@ -111,8 +111,17 @@ namespace HlslPerf.FluidBenchmark
             public WaveTiledScan()
             {
                 if (SystemInfo.graphicsDeviceType != GraphicsDeviceType.Direct3D12)
-                    throw new NotSupportedException("HLSL wave-tiled requires D3D12, DXC, SM6.6 and fixed wave32 support. No fallback is substituted.");
-                shader = Load("FluidWaveTiled", "ResetWaveTiledState", "SinglePassScanWaveTiled");
+                    throw new NotSupportedException("HLSL wave-tiled requires D3D12, DXC and validated native wave32. No fallback is substituted.");
+                shader = Load("FluidWaveTiled", "ResetWaveTiledState", "SinglePassScanWaveTiled", "ProbeNativeWaveSize");
+                using (var probe = new ComputeBuffer(256, 4, ComputeBufferType.Raw))
+                {
+                    int kernel = shader.FindKernel("ProbeNativeWaveSize");
+                    shader.SetBuffer(kernel, "Output0", probe);
+                    shader.Dispatch(kernel, 1, 1, 1);
+                    var widths = new uint[256]; probe.GetData(widths);
+                    foreach (uint width in widths)
+                        if (width != 32) throw new NotSupportedException("Native GPU wave width is not 32. No fallback is substituted.");
+                }
                 reset = shader.FindKernel("ResetWaveTiledState");
                 scan = shader.FindKernel("SinglePassScanWaveTiled");
             }

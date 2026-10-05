@@ -5,12 +5,14 @@ using System.IO;
 
 namespace HlslPerf.FluidBenchmark
 {
+    [Serializable]
     public sealed class FluidBenchmarkSettings
     {
         public static FluidBenchmarkSettings Active { get; private set; }
         public static bool Enabled => Active != null && !Active.validateOnly;
         public ScanArm arm;
-        public bool validateOnly;
+        public bool validateOnly, captureOnly;
+        public bool nativeGpuTiming;
         public int seed = 42, warmupFrames = 120, measureFrames = 600, spawnDensity = 600;
         public float fixedDeltaTime = 1f / 60f;
         public string outputDirectory;
@@ -19,22 +21,24 @@ namespace HlslPerf.FluidBenchmark
         {
             bool benchmark = Array.IndexOf(args, "--fluid-benchmark") >= 0;
             bool validate = Array.IndexOf(args, "--fluid-validate-only") >= 0;
-            if (!benchmark && !validate) return null;
-            if (benchmark && validate) throw new ArgumentException("Choose benchmark or validation-only, not both.");
+            bool capture = Array.IndexOf(args, "--fluid-capture") >= 0;
+            if (!benchmark && !validate && !capture) return null;
+            if ((benchmark ? 1 : 0) + (validate ? 1 : 0) + (capture ? 1 : 0) != 1)
+                throw new ArgumentException("Choose exactly one of benchmark, validation-only or capture.");
             var options = new Dictionary<string, string>(StringComparer.Ordinal);
             var known = new HashSet<string> { "--fluid-arm", "--fluid-output", "--fluid-seed", "--fluid-warmup",
-                "--fluid-frames", "--fluid-spawn-density", "--fluid-dt" };
+                "--fluid-frames", "--fluid-spawn-density", "--fluid-dt", "--fluid-gpu-timing" };
             for (int i = 0; i < args.Length; i++)
             {
                 string key = args[i];
-                if (!key.StartsWith("--fluid-", StringComparison.Ordinal) || key == "--fluid-benchmark" || key == "--fluid-validate-only") continue;
+                if (!key.StartsWith("--fluid-", StringComparison.Ordinal) || key == "--fluid-benchmark" || key == "--fluid-validate-only" || key == "--fluid-capture") continue;
                 if (!known.Contains(key) || i + 1 == args.Length || args[i + 1].StartsWith("--", StringComparison.Ordinal) || options.ContainsKey(key))
                     throw new ArgumentException("Unknown, duplicate or missing fluid option: " + key);
                 options.Add(key, args[++i]);
             }
             if (!options.TryGetValue("--fluid-arm", out string armName) || !options.TryGetValue("--fluid-output", out string destination))
                 throw new ArgumentException("Explicit --fluid-arm and a new --fluid-output directory are required.");
-            var settings = new FluidBenchmarkSettings { validateOnly = validate, outputDirectory = Path.GetFullPath(destination) };
+            var settings = new FluidBenchmarkSettings { validateOnly = validate, captureOnly = capture, outputDirectory = Path.GetFullPath(destination) };
             switch (armName)
             {
                 case "original": settings.arm = ScanArm.Original; break;
@@ -46,6 +50,12 @@ namespace HlslPerf.FluidBenchmark
             settings.warmupFrames = Integer(options, "--fluid-warmup", settings.warmupFrames);
             settings.measureFrames = Integer(options, "--fluid-frames", settings.measureFrames);
             settings.spawnDensity = Integer(options, "--fluid-spawn-density", settings.spawnDensity);
+            if (options.TryGetValue("--fluid-gpu-timing", out string timing))
+            {
+                if (timing != "recorder" && timing != "d3d12-query") throw new ArgumentException("Unknown GPU timing method.");
+                settings.nativeGpuTiming = timing == "d3d12-query";
+                if (settings.nativeGpuTiming && (capture || validate)) throw new ArgumentException("GPU timing is only available in benchmark mode.");
+            }
             if (options.TryGetValue("--fluid-dt", out string dt)) settings.fixedDeltaTime = float.Parse(dt, CultureInfo.InvariantCulture);
             if (settings.warmupFrames < 10 || settings.measureFrames < 1 || settings.measureFrames > 100000 ||
                 settings.spawnDensity < 1 || float.IsNaN(settings.fixedDeltaTime) || float.IsInfinity(settings.fixedDeltaTime) ||

@@ -50,4 +50,7 @@ unity/FluidScanBenchmark/** text eol=lf
 unity/FluidScanBenchmark/ThirdParty/** whitespace=-blank-at-eol
 unity/FluidScanBenchmark/Overlay/Assets/Scripts/** whitespace=-blank-at-eol
 tools/*fluid_benchmark.py text eol=lf
+tools/build_fluid_timing.py text eol=lf
 docs/evidence/fluid-scan-static-20261005.json -text
+docs/evidence/fluid-scan-rtx4090-20261005.zip -text -diff
+docs/results/data/fluid-scan-20261005/** -text -diff

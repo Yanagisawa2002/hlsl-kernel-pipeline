@@ -1,4 +1,11 @@
-# Fluid application scan benchmark (code prepared; performance unmeasured)
+# Fluid application scan benchmark
+
+[RTX 4090 hardware results, October 5](../../docs/results/fluid-scan-rtx4090-20261005.md):
+410,758 particles, 1080p, three independent runs per arm. Complete-scan p50/frame
+is 0.0512 ms original, 0.058368 ms local wave-tiled, 0.037888 ms external RTS.
+The local adaptation is **14% slower** at this size. Whole-frame p50 is 6.9119,
+6.9579 and 6.9893 ms respectively; no clear whole-frame gain is established.
+This scene currently fails the gate for a local-scan acceleration showcase.
 
 This integration uses Sebastian Lague's **Fluid ScreenSpace 2** scene: two colliding
 volumes of water with screen-space water rendering and foam/spray. It substitutes
@@ -40,22 +47,27 @@ Pins:
 - GPUPrefixSums: `98d93a4e9ed2f3c8353119515bf9be90a2e137ad`, MIT.
 - The wave-tiled header comes from this checkout, with its upstream attribution intact.
 
-The original project targets Unity 2022.3.46f1. C# API compilation is checked
-against installed Unity 2022.3 references without invoking the editor. The HLSL
-arm additionally requires a Unity DXC importer capable of SM6.6/fixed wave32.
-Offline DXC compilation does **not** establish Unity import or device support.
+The original project targets Unity 2022.3.46f1. Hardware runs use Unity
+6000.3.13f1 and D3D12, common to all arms. Unity's DXC importer targets SM6.0:
+the generated wrapper omits the SM6.6 WaveSize attribute, probes all 256 lanes
+for native width 32, and guards the actual shared scan entry against other widths.
+It retains the same wave32 algorithm and provides no alternate scan fallback.
+The ordinary repository SM6.6 consumer remains unchanged. The vendored RTS files
+remain pinned; its generated root declares the VULKAN keyword because Unity
+ignores its pragma in an ordinary include. Upstream kernel and host operations
+are retained. Offline DXC compilation alone does **not** establish runtime support.
 All arms must use the same editor/player version and D3D12 backend when eventually
 built. Unsupported kernels fail explicitly; no alternate backend is relabeled.
 
-## Deferred build and execution
+## Build and execution
 
-The following commands are instructions for a later authorized hardware session.
+The following commands are instructions for an explicit hardware session.
 They are never executed by the installer or the static checker.
 
 Build a Windows Development Player with only the author-provided scene:
 
 ```powershell
-& 'C:/Program Files/Unity/Hub/Editor/2022.3.62f3/Editor/Unity.exe' `
+& 'C:/Program Files/Unity/Hub/Editor/6000.3.13f1/Editor/Unity.exe' `
   -batchmode -quit -projectPath "$PWD/.scratch/FluidScanApp" `
   -executeMethod HlslPerf.FluidBenchmark.Editor.FluidBenchmarkBuild.Build `
   --fluid-build-output "$PWD/.scratch/FluidScanPlayer/FluidScan.exe" `
@@ -70,11 +82,48 @@ or GPU correctness invocation requires explicit mode, arm and a fresh output pat
 & .scratch/FluidScanPlayer/FluidScan.exe -force-d3d12 `
   --fluid-validate-only --fluid-arm hlsl-wave-tiled --fluid-output .scratch/fluid-validation
 
-# A future single-arm raw measurement, after hardware execution is authorized.
+# A single-arm raw measurement with the optional Unity Recorder path.
 & .scratch/FluidScanPlayer/FluidScan.exe -force-d3d12 `
   --fluid-benchmark --fluid-arm original --fluid-output .scratch/fluid-original-01 `
   --fluid-seed 42 --fluid-dt 0.016666667 --fluid-warmup 120 --fluid-frames 600 --fluid-spawn-density 600
 ```
+
+The Player must have a visible, unobscured backbuffer for complete rendering.
+Hidden-window runs are pilot records and are excluded from the reported cohort.
+Graphics Jobs are disabled for all arms. The build retains the three hidden blur
+shaders used by the author's Shader.Find helpers. All Unity error/assert/exception
+logs fail the correctness or measurement gate.
+
+### Explicit native GPU timestamps and offline visual export
+
+Unity Recorder returned no GPU samples on the tested built-in pipeline. To use
+the measured D3D12 query path, build the small native plugin explicitly first
+(Windows x64, Visual Studio C++ Build Tools and installed Unity PluginAPI headers):
+
+```powershell
+python tools/build_fluid_timing.py --unity-editor 'C:/Program Files/Unity/Hub/Editor/6000.3.13f1/Editor' --output .scratch/fluid-timing
+python tools/prepare_fluid_benchmark.py --fluid-source C:/path/to/Fluid-Sim --timing-plugin .scratch/fluid-timing/FluidGpuTiming.dll --output .scratch/FluidScanNative
+# Build the above project, then run the Player normally with:
+# --fluid-benchmark --fluid-arm original --fluid-output NEW_DIRECTORY --fluid-gpu-timing d3d12-query
+# The other arms use exactly the same Player and timing method.
+```
+
+The plugin records 20 D3D12 timestamps per simulation frame on Unity's active
+graphics command list. Four nested operation boundaries accumulate three scan,
+sort and spatial calls and one simulation call. It resolves to a 128-frame ring,
+reads only after the corresponding Unity frame fence completes, and stores the
+source frame explicitly. It does not submit a separate queue, flush GPU work or
+block for timing readback. Frequency comes from the same graphics queue. In this
+mode `gpuDelayValidated` is the legacy field for completed source-frame association;
+`gpuTimingMethod` identifies the query path and `appliedGpuRecorderDelayFrames=-1`.
+Native errors abort the run; unavailable samples never become zero milliseconds.
+
+For separate visual exports after measurements, use `--fluid-capture` instead of
+`--fluid-benchmark`, with the same arm/output/seed/density/timestep flags.
+`--fluid-frames 600` exports 600 PNGs plus `capture.json` from the initial state,
+without performance samples. These are fixed-step offline frames; playback at
+60 fps is not a measured frame-rate claim. Encode each arm separately and compose
+the split screen afterward. Recorders and native timing are disabled in capture mode.
 
 Run each arm in a fresh process; balance/repeat the order and retain failures.
 Initial spawn jitter uses a fixed seed. Camera input, simulation input and VSync
@@ -117,16 +166,16 @@ empty/singleton, odd lengths, 512/3072/4096 boundaries, tails, full uint32 wrapa
 zeros, repeated growth/shrink and guard-word preservation. Eighteen complete sorter
 cases check every key/index, the permutation and every spatial offset, including all-equal/max keys.
 Failure writes `correctness.json`/`failure.txt`, stops scene scripts and exits 2.
-This gate is implemented but **not executed** in the code-preparation task.
+All three arms passed this gate on the RTX 4090 hardware session linked above.
 
-Successful future measurement exports:
+Successful measurement exports:
 
 - `correctness.json`: selected-arm full-output GPU checks, outside timing.
 - `observations.csv`: wall frame intervals and delayed GPU sample observations.
 - `frame-timing-diagnostics.csv`: deduplicated FrameTimingManager diagnostics.
 - `run.json`: device/API/driver, scene settings, measurement interval and source identity.
 
-The GPU Recorder API documents a three-frame delay. Rows retain both observed and
+For the optional Unity Recorder path, its API documents a three-frame delay. Rows retain both observed and
 assumed source Unity frame; block counts must equal the expected substep count.
 After the measured simulation stops, the collector drains eight frames. Missing,
 zero or mismatched GPU fields are blank/`unavailable`, never reported as zero time.
@@ -148,6 +197,11 @@ Those require a balanced cohort and consistent actual resolution/quality. Record
 arms separately and compose the split screen afterward, so two simulations do
 not compete during timing.
 
+`tools/compare_fluid_benchmark.py RUN_DIRS... --output NEW_JSON` checks identical
+settings/source/timing identities, complete accepted samples, independent records
+and at least three equal repeats per arm. It reports median per-run p50, repeat
+ranges and median per-run p95, without inferring significance or particle capacity.
+
 ## Static checks (no Unity/GPU)
 
 ```powershell
@@ -167,7 +221,7 @@ scan/sort compute entries with DXC. It never instantiates Unity classes, opens a
 GPU device, imports a Unity project, builds a Player or dispatches a kernel.
 
 The [frozen October 5 static receipt](../../docs/evidence/fluid-scan-static-20261005.json)
-records 30 C# sources, 29 compute entries, 16 pure settings checks, seven harness
+is the earlier preparation snapshot: 30 C# sources, 29 compute entries, 16 pure settings checks, seven harness
 tests and 12 existing deterministic wave-model tests. It retains the author's
 unused-field warning and the unmodified RTS compiler warnings. The bridge/wave
 entries compile with warnings-as-errors. Every GPU/Unity execution field remains false.

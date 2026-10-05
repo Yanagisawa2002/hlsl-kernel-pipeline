@@ -39,7 +39,7 @@ def archive_files(data):
     return files
 
 
-def prepare(output, fluid_source):
+def prepare(output, fluid_source, timing_plugin=None):
     output = Path(output).resolve()
     if output.exists():
         raise ValueError("Choose a new output directory; existing projects are never overwritten.")
@@ -68,12 +68,34 @@ def prepare(output, fluid_source):
         else:
             destination = "Assets/FluidScanBenchmark/ThirdParty/GPUPrefixSums/" + path
         files[destination] = (vendor / path).read_bytes()
+        if path.endswith(".compute"):
+            # Unity ignores pragmas in ordinary includes. Declare the vendor header's
+            # VULKAN variant at the root without changing upstream kernel/host operations.
+            files[destination] = b"#pragma multi_compile __ VULKAN\n" + files[destination]
     wrapper = (ROOT / "kernels/consumer/ScanWaveTiled.compute").read_text(encoding="utf-8")
     wrapper = wrapper.replace('#include "../include/hlslperf/scan_wave_tiled_u32.hlsli"',
                               '#include "WaveTiled/scan_wave_tiled_u32.hlsli"')
     wrapper = wrapper.replace("#pragma use_dxc", "#pragma use_dxc\n#pragma require wavebasic")
+    # Unity's DXC importer targets SM6.0 and rejects the SM6.6 WaveSize attribute.
+    # Retain the actual shared wave32 algorithm, with an explicit native-width GPU gate.
+    # The repository's ordinary SM6.6 consumer is unchanged.
+    wrapper = wrapper.replace("#pragma multi_compile UNITY_DEVICE_SUPPORTS_WAVE_32", "")
+    wrapper = wrapper.replace("#define HLSLPERF_WAVE_ATTRIBUTE [WaveSize(32)]",
+                              "#define HLSLPERF_WAVE_ATTRIBUTE\n#define HLSLPERF_WAVE_TILED_GUARD_NATIVE_WAVE 1")
+    wrapper = wrapper.replace("// Requires SM6.6 and wave32 support; DXC validation is not Unity import validation.",
+                              "// Unity native-wave32 adapter; GPU width probe and full-output gates are required.")
+    wrapper += "\n#pragma kernel ProbeNativeWaveSize\n[numthreads(256, 1, 1)]\nvoid ProbeNativeWaveSize(uint thread : SV_GroupIndex)\n{\n    Output0.Store(thread * 4, WaveGetLaneCount());\n}\n"
     files[resources + "FluidWaveTiled.compute"] = wrapper.encode()
     files[resources + "WaveTiled/scan_wave_tiled_u32.hlsli"] = (ROOT / "kernels/include/hlslperf/scan_wave_tiled_u32.hlsli").read_bytes()
+    files["Assets/FluidScanBenchmark/Native/FluidGpuTiming.cpp"] = (BUNDLE / "Native/FluidGpuTiming.cpp").read_bytes()
+    if timing_plugin is not None:
+        plugin = Path(timing_plugin).resolve()
+        receipt = plugin.with_name("FluidGpuTimingBuild.json")
+        native_build = json.loads(receipt.read_text())
+        if native_build["sourceSha256"] != digest((BUNDLE / "Native/FluidGpuTiming.cpp").read_bytes()) or native_build["dllSha256"] != digest(plugin.read_bytes()):
+            raise ValueError("Native plugin/source build identity mismatch")
+        files["Assets/Plugins/x86_64/FluidGpuTiming.dll"] = plugin.read_bytes()
+        files[resources + "FluidGpuTimingBuild.json"] = receipt.read_bytes()
     files["Assets/FluidScanBenchmark/LICENSE-HLSLPERF.md"] = (ROOT / "LICENSE.md").read_bytes()
     files["Assets/FluidScanBenchmark/LICENSE-GPUPREFIXSUMS.md"] = (ROOT / "third_party/gpu-prefix-sums/LICENSE").read_bytes()
     files["FLUID-BENCHMARK-README.md"] = (BUNDLE / "README.md").read_bytes()
@@ -112,6 +134,7 @@ def prepare(output, fluid_source):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--timing-plugin", type=Path, help="Optional explicitly built native GPU timestamp DLL")
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--fluid-source", type=Path, help="Local repository containing the pinned upstream commit")
     group.add_argument("--download", action="store_true", help="Download source code only; does not run a benchmark")
@@ -121,9 +144,9 @@ def main():
         with tempfile.TemporaryDirectory(prefix="fluid-source-") as temporary:
             source = Path(temporary) / "Fluid-Sim"
             subprocess.run(["git", "clone", "--no-checkout", lock["fluid"]["url"], str(source)], check=True)
-            receipt = prepare(args.output, source)
+            receipt = prepare(args.output, source, args.timing_plugin)
     else:
-        receipt = prepare(args.output, args.fluid_source.resolve())
+        receipt = prepare(args.output, args.fluid_source.resolve(), args.timing_plugin)
     print(json.dumps({k: v for k, v in receipt.items() if k != "payloadFiles"}, indent=2))
 
 
