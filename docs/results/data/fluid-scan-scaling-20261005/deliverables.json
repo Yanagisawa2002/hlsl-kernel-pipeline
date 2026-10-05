@@ -1,0 +1,10 @@
+{
+  "FluidScanBenchmark-scaling-evidence.zip": {
+    "bytes": 5158670,
+    "sha256": "1a7783bc5f31f21ec7d26249e0535081071894f927189e2579cfc23ebf02216d"
+  },
+  "FluidScanBenchmark-scaling-source-20261005.zip": {
+    "bytes": 374416,
+    "sha256": "d81ad68a91f0ff2d11346989d4e2a3240d96779b20e82da2521710a077e05091"
+  }
+}

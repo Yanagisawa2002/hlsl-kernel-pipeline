@@ -1,0 +1,4805 @@
+{
+  "schema": "hlslperf.fluid-scan.sweep-cohort.v1",
+  "configuration": {
+    "device": "NVIDIA GeForce RTX 4090",
+    "api": "Direct3D12",
+    "unity": "6000.3.13f1",
+    "timingMethod": "d3d12_query_frame_fence",
+    "inputPattern": "uint32(index * 747796405 + 2891336453), regenerated before every operation outside scan ranges",
+    "coreBoundary": "complete scan algorithm including required reset; excludes pack/unpack",
+    "nativeTimingBuild": "{\r\n  \"schema\": \"hlslperf.fluid-scan.native-build.v1\",\r\n  \"sourceSha256\": \"751f84458d7ab96d4d74b07b4e9fc1006c05a95b3f32dbb2b985e71ee9b26c3b\",\r\n  \"compilerSha256\": \"4304307e1f0d0528ac13c513183e5cbfa20a7f8de6f0c8e5bc4293661e6d23a4\",\r\n  \"dllSha256\": \"791de4be9086256bd1bb22341284973b5d4d6c808a5a8cdc5211e339fc2380d9\",\r\n  \"unityApiHeaders\": {\r\n    \"IUnityEventQueue.h\": \"c5fb4ae77af4eadce668cff88a576bae8d203aee72477cf913ecdda826bc7bb3\",\r\n    \"IUnityGraphics.h\": \"524ca42ff0274feec5aea17a5275b774ffc1a031bdc9378f3e3eb2be787a7fa6\",\r\n    \"IUnityGraphicsD3D11.h\": \"873389c2bc367b7ef7be4809059133b692a1c03eb268cfebf5bcb290c511bace\",\r\n    \"IUnityGraphicsD3D12.h\": \"275bf9e6dc0781255a8b12defa85e4a1cbd4e8327f56f861949c19baf46c525a\",\r\n    \"IUnityGraphicsMetal.h\": \"7d56510757a1f1c1653137d1f901c14a132779841f03427dcfa20efdca521090\",\r\n    \"IUnityGraphicsVulkan.h\": \"de4c4c2a712ad996371ca9bbf513eff1ae31e68b5bc9548c7af68798a1ff72ea\",\r\n    \"IUnityInterface.h\": \"e23e267b57c049b438307542d62c30fbcd3fa77b6dac3b08842eae0df10b8239\",\r\n    \"IUnityLog.h\": \"899d7ddd3b717aca2adf7e42afe40157ef5db8b3dfbaaaa20dc09e6e1e049608\",\r\n    \"IUnityMemoryManager.h\": \"3be41c07857f900436d5c0011541c61d7f771fd5a2fb446ea2c869ea560f2a63\",\r\n    \"IUnityPhysicsBackendSystem.h\": \"f663cf90c25e4096801bc7adec1eb4203558084ea87c3634d3af6edc099e8af9\",\r\n    \"IUnityProfiler.h\": \"76c97ce10c1e4368bfcdc06bd27a39f68b8a3a368b6b534c15e64b1ad13354c8\",\r\n    \"IUnityProfilerCallbacks.h\": \"4a2690c419ef0c9930f57955310d81b3a6fff58ac108dcf7afdaebf15ad7c638\",\r\n    \"IUnityRenderingExtensions.h\": \"dbcb270c5065d9ce98492b4e35d5be91f0f2cfea37be08619c3e03a12604fc37\",\r\n    \"IUnityShaderCompilerAccess.h\": \"6584d7506fa96386ef4694e1629a788e780735ace4f60e5757ebcb7b0a184ff7\",\r\n    \"IUnityXRTime.h\": \"b4b65b649df4d4ff4e29ee3b619716ece8d856436682c791fb92f336cf857938\"\r\n  },\r\n  \"timing\": \"D3D12 timestamp queries with explicit source frame and completed Unity frame fence\",\r\n  \"timestampProtocol\": \"five metrics, up to 32 calls per frame, enabled-range resolves v2\",\r\n  \"gpuDispatchExecuted\": false\r\n}\r\n",
+    "gpuTimestampFrequency": "1000000000",
+    "scanBatch": 32,
+    "warmupFrames": 60,
+    "measureFrames": 120,
+    "seed": 42,
+    "lengths": [
+      32768,
+      65536,
+      131072,
+      262144,
+      410758,
+      524288,
+      1048576,
+      2097152,
+      4194304,
+      8388608,
+      16000000
+    ],
+    "payloadSha256": "2e71b144164b5b805a8803f04733ca1a57446752af0ed2c33278d4343788d6da"
+  },
+  "lengths": {
+    "32768": {
+      "original": {
+        "core": {
+          "medianOfRunP50Ms": 0.007456,
+          "minRunP50Ms": 0.007424,
+          "maxRunP50Ms": 0.007456,
+          "meanOfRunMeanMs": 0.007687541666666666
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.007632,
+          "minRunP50Ms": 0.007584,
+          "maxRunP50Ms": 0.007648,
+          "meanOfRunMeanMs": 0.007884208333333333
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00016000000000000042,
+          "minRunP50Ms": 0.00016000000000000042,
+          "maxRunP50Ms": 0.00022399999999999937,
+          "meanOfRunMeanMs": 0.0001966666666666666
+        }
+      },
+      "hlsl-wave-tiled": {
+        "core": {
+          "medianOfRunP50Ms": 0.008168,
+          "minRunP50Ms": 0.008128,
+          "maxRunP50Ms": 0.008224,
+          "meanOfRunMeanMs": 0.0081856
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.012272,
+          "minRunP50Ms": 0.012192,
+          "maxRunP50Ms": 0.012352,
+          "meanOfRunMeanMs": 0.012287333333333334
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00408,
+          "minRunP50Ms": 0.004064,
+          "maxRunP50Ms": 0.004128,
+          "meanOfRunMeanMs": 0.004101733333333333
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 0.9377580717684946,
+            "pointwise95Interval": [
+              0.8439037907716609,
+              1.0420503033442419
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.6405858693403006,
+            "pointwise95Interval": [
+              0.5751026979945076,
+              0.7135251798147322
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "gpuprefixsums-rts": {
+        "core": {
+          "medianOfRunP50Ms": 0.00728,
+          "minRunP50Ms": 0.007264,
+          "maxRunP50Ms": 0.007328,
+          "meanOfRunMeanMs": 0.0072918666666666665
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.011359999999999999,
+          "minRunP50Ms": 0.011328,
+          "maxRunP50Ms": 0.011392,
+          "meanOfRunMeanMs": 0.011373066666666666
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.004064000000000001,
+          "minRunP50Ms": 0.004064,
+          "maxRunP50Ms": 0.004095999999999999,
+          "meanOfRunMeanMs": 0.0040812
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.0526852277157206,
+            "pointwise95Interval": [
+              0.9501389936933874,
+              1.1662990320429902
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.6920755973509986,
+            "pointwise95Interval": [
+              0.6219525093163122,
+              0.770104831597597
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "hlsl-wave-tiled-direct": {
+        "core": {
+          "medianOfRunP50Ms": 0.008296,
+          "minRunP50Ms": 0.008096,
+          "maxRunP50Ms": 0.008384,
+          "meanOfRunMeanMs": 0.008278133333333333
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.008480000000000001,
+          "minRunP50Ms": 0.00832,
+          "maxRunP50Ms": 0.008576,
+          "meanOfRunMeanMs": 0.008483866666666666
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00019199999999999946,
+          "minRunP50Ms": 0.00019199999999999946,
+          "maxRunP50Ms": 0.0001920000000000012,
+          "meanOfRunMeanMs": 0.00020573333333333328
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 0.9273334885625365,
+            "pointwise95Interval": [
+              0.8494471740535775,
+              1.0123612453801916
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.9278348103618667,
+            "pointwise95Interval": [
+              0.8475498925544775,
+              1.015724788454158
+            ],
+            "supportedFaster": false
+          }
+        },
+        "relativeToAdapted": {
+          "baselineOverCandidate": 1.4484159810102988,
+          "pointwise95Interval": [
+            1.4048984982248758,
+            1.493281441112498
+          ],
+          "supportedFaster": true
+        },
+        "coreRelativeToRts": {
+          "baselineOverCandidate": 0.8809219167773527,
+          "pointwise95Interval": [
+            0.8563342932173811,
+            0.9062155160726361
+          ],
+          "supportedFaster": false
+        }
+      }
+    },
+    "65536": {
+      "original": {
+        "core": {
+          "medianOfRunP50Ms": 0.0076,
+          "minRunP50Ms": 0.007552,
+          "maxRunP50Ms": 0.007648,
+          "meanOfRunMeanMs": 0.008312666666666666
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.007776,
+          "minRunP50Ms": 0.007744,
+          "maxRunP50Ms": 0.00784,
+          "meanOfRunMeanMs": 0.008516533333333333
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00016000000000000042,
+          "minRunP50Ms": 0.00016000000000000042,
+          "maxRunP50Ms": 0.00019199999999999946,
+          "meanOfRunMeanMs": 0.00020386666666666673
+        }
+      },
+      "hlsl-wave-tiled": {
+        "core": {
+          "medianOfRunP50Ms": 0.009128,
+          "minRunP50Ms": 0.009088,
+          "maxRunP50Ms": 0.009184,
+          "meanOfRunMeanMs": 0.010240266666666666
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.01336,
+          "minRunP50Ms": 0.013344,
+          "maxRunP50Ms": 0.013504,
+          "meanOfRunMeanMs": 0.015426933333333333
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.004224,
+          "minRunP50Ms": 0.004223999999999999,
+          "maxRunP50Ms": 0.004287999999999999,
+          "meanOfRunMeanMs": 0.005186666666666667
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 0.804166059454907,
+            "pointwise95Interval": [
+              0.6540602933558316,
+              0.9887208530290875
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.5465203739831841,
+            "pointwise95Interval": [
+              0.43145467240573976,
+              0.6922732288731287
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "gpuprefixsums-rts": {
+        "core": {
+          "medianOfRunP50Ms": 0.00736,
+          "minRunP50Ms": 0.007328,
+          "maxRunP50Ms": 0.00736,
+          "meanOfRunMeanMs": 0.0073546666666666665
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.011536000000000001,
+          "minRunP50Ms": 0.011488,
+          "maxRunP50Ms": 0.011552,
+          "meanOfRunMeanMs": 0.011527333333333334
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.0041600000000000005,
+          "minRunP50Ms": 0.00416,
+          "maxRunP50Ms": 0.0041600000000000005,
+          "meanOfRunMeanMs": 0.0041726666666666665
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.118810792276299,
+            "pointwise95Interval": [
+              0.866830770524914,
+              1.444039172900985
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.731008914018213,
+            "pointwise95Interval": [
+              0.56348022922938,
+              0.9483456644164804
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "hlsl-wave-tiled-direct": {
+        "core": {
+          "medianOfRunP50Ms": 0.009136,
+          "minRunP50Ms": 0.009056,
+          "maxRunP50Ms": 0.009216,
+          "meanOfRunMeanMs": 0.009143133333333333
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.009328,
+          "minRunP50Ms": 0.00928,
+          "maxRunP50Ms": 0.009424,
+          "meanOfRunMeanMs": 0.009346
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.0001920000000000012,
+          "minRunP50Ms": 0.00019199999999999946,
+          "maxRunP50Ms": 0.00022400000000000024,
+          "meanOfRunMeanMs": 0.0002028666666666667
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 0.8999850791380788,
+            "pointwise95Interval": [
+              0.6923106900539722,
+              1.1699561400792884
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.9016460953287848,
+            "pointwise95Interval": [
+              0.6892698897873861,
+              1.1794591541963535
+            ],
+            "supportedFaster": false
+          }
+        },
+        "relativeToAdapted": {
+          "baselineOverCandidate": 1.6497941124451612,
+          "pointwise95Interval": [
+            1.5587117080805653,
+            1.746198863682388
+          ],
+          "supportedFaster": true
+        },
+        "coreRelativeToRts": {
+          "baselineOverCandidate": 0.8044122253298933,
+          "pointwise95Interval": [
+            0.7913641533664616,
+            0.8176754348898898
+          ],
+          "supportedFaster": false
+        }
+      }
+    },
+    "131072": {
+      "original": {
+        "core": {
+          "medianOfRunP50Ms": 0.008384,
+          "minRunP50Ms": 0.008272,
+          "maxRunP50Ms": 0.015424,
+          "meanOfRunMeanMs": 0.009318287500000001
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.008552,
+          "minRunP50Ms": 0.00848,
+          "maxRunP50Ms": 0.015568,
+          "meanOfRunMeanMs": 0.009521020833333333
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.0001919999999999986,
+          "minRunP50Ms": 0.00016000000000000042,
+          "maxRunP50Ms": 0.00019199999999999946,
+          "meanOfRunMeanMs": 0.00020273333333333335
+        }
+      },
+      "hlsl-wave-tiled": {
+        "core": {
+          "medianOfRunP50Ms": 0.010616,
+          "minRunP50Ms": 0.010528,
+          "maxRunP50Ms": 0.01072,
+          "meanOfRunMeanMs": 0.012716333333333333
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.0152,
+          "minRunP50Ms": 0.015104,
+          "maxRunP50Ms": 0.015312,
+          "meanOfRunMeanMs": 0.018001200000000002
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.004608,
+          "minRunP50Ms": 0.004592,
+          "maxRunP50Ms": 0.004608000000000001,
+          "meanOfRunMeanMs": 0.005284866666666667
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 0.7234205043353847,
+            "pointwise95Interval": [
+              0.5563867534966275,
+              0.9405997227718588
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.522017518859407,
+            "pointwise95Interval": [
+              0.4018425517428384,
+              0.6781319917819972
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "gpuprefixsums-rts": {
+        "core": {
+          "medianOfRunP50Ms": 0.007328,
+          "minRunP50Ms": 0.007296,
+          "maxRunP50Ms": 0.007328,
+          "meanOfRunMeanMs": 0.007327666666666666
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.011744,
+          "minRunP50Ms": 0.011712,
+          "maxRunP50Ms": 0.011744,
+          "meanOfRunMeanMs": 0.011751866666666666
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.004416,
+          "minRunP50Ms": 0.004416,
+          "maxRunP50Ms": 0.004416000000000001,
+          "meanOfRunMeanMs": 0.0044242
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.2535376129449052,
+            "pointwise95Interval": [
+              0.927020177442611,
+              1.6950618608998818
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.7987614081803411,
+            "pointwise95Interval": [
+              0.591620331227977,
+              1.0784277576701211
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "hlsl-wave-tiled-direct": {
+        "core": {
+          "medianOfRunP50Ms": 0.010656,
+          "minRunP50Ms": 0.010528,
+          "maxRunP50Ms": 0.010752,
+          "meanOfRunMeanMs": 0.010667266666666666
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.010848,
+          "minRunP50Ms": 0.01072,
+          "maxRunP50Ms": 0.010944,
+          "meanOfRunMeanMs": 0.010864333333333333
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00019199999999999946,
+          "minRunP50Ms": 0.00019199999999999946,
+          "maxRunP50Ms": 0.00019199999999999946,
+          "meanOfRunMeanMs": 0.00019706666666666667
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 0.8611195639064599,
+            "pointwise95Interval": [
+              0.6365229578470081,
+              1.164964899067603
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.8640410185228289,
+            "pointwise95Interval": [
+              0.6398621399829063,
+              1.1667620805161434
+            ],
+            "supportedFaster": false
+          }
+        },
+        "relativeToAdapted": {
+          "baselineOverCandidate": 1.6551954432692861,
+          "pointwise95Interval": [
+            1.5366707226820904,
+            1.78286207642299
+          ],
+          "supportedFaster": true
+        },
+        "coreRelativeToRts": {
+          "baselineOverCandidate": 0.6869515162640017,
+          "pointwise95Interval": [
+            0.676219101801955,
+            0.6978542671153611
+          ],
+          "supportedFaster": false
+        }
+      }
+    },
+    "262144": {
+      "original": {
+        "core": {
+          "medianOfRunP50Ms": 0.009944,
+          "minRunP50Ms": 0.009888,
+          "maxRunP50Ms": 0.017072,
+          "meanOfRunMeanMs": 0.0110877
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.010136,
+          "minRunP50Ms": 0.01008,
+          "maxRunP50Ms": 0.01728,
+          "meanOfRunMeanMs": 0.0112867
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00019199999999999946,
+          "minRunP50Ms": 0.00019199999999999946,
+          "maxRunP50Ms": 0.00019199999999999946,
+          "meanOfRunMeanMs": 0.000199
+        }
+      },
+      "hlsl-wave-tiled": {
+        "core": {
+          "medianOfRunP50Ms": 0.012528000000000001,
+          "minRunP50Ms": 0.01248,
+          "maxRunP50Ms": 0.012736,
+          "meanOfRunMeanMs": 0.015369133333333333
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.022496000000000002,
+          "minRunP50Ms": 0.018288,
+          "maxRunP50Ms": 0.024896,
+          "meanOfRunMeanMs": 0.022075466666666668
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.005680000000000001,
+          "minRunP50Ms": 0.005632000000000002,
+          "maxRunP50Ms": 0.0057280000000000005,
+          "meanOfRunMeanMs": 0.006706333333333333
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 0.7115188073884703,
+            "pointwise95Interval": [
+              0.545965744384474,
+              0.9272724863686665
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.5040769155180645,
+            "pointwise95Interval": [
+              0.3785869227069694,
+              0.671163005159788
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "gpuprefixsums-rts": {
+        "core": {
+          "medianOfRunP50Ms": 0.0077280000000000005,
+          "minRunP50Ms": 0.007712,
+          "maxRunP50Ms": 0.0077599999999999995,
+          "meanOfRunMeanMs": 0.008978979166666666
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.012992,
+          "minRunP50Ms": 0.01296,
+          "maxRunP50Ms": 0.013024,
+          "meanOfRunMeanMs": 0.015319133333333334
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.005272,
+          "minRunP50Ms": 0.005248,
+          "maxRunP50Ms": 0.005312,
+          "meanOfRunMeanMs": 0.006340154166666667
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.2172930593362448,
+            "pointwise95Interval": [
+              0.9149591532442855,
+              1.6195284642532746
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.7263686515319493,
+            "pointwise95Interval": [
+              0.5445641787641715,
+              0.9688691223240178
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "hlsl-wave-tiled-direct": {
+        "core": {
+          "medianOfRunP50Ms": 0.012648,
+          "minRunP50Ms": 0.012544,
+          "maxRunP50Ms": 0.012768,
+          "meanOfRunMeanMs": 0.015299741666666667
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.012832,
+          "minRunP50Ms": 0.012736,
+          "maxRunP50Ms": 0.012992,
+          "meanOfRunMeanMs": 0.015553141666666666
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.0001920000000000012,
+          "minRunP50Ms": 0.00019199999999999946,
+          "maxRunP50Ms": 0.0001920000000000012,
+          "meanOfRunMeanMs": 0.0002534000000000001
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 0.7149220029949461,
+            "pointwise95Interval": [
+              0.5333867379160651,
+              0.9582418047423138
+            ],
+            "supportedFaster": false
+          },
+          "complete": {
+            "baselineOverCandidate": 0.7158859996681187,
+            "pointwise95Interval": [
+              0.5362477620960954,
+              0.9557014513544639
+            ],
+            "supportedFaster": false
+          }
+        },
+        "relativeToAdapted": {
+          "baselineOverCandidate": 1.4201919937800915,
+          "pointwise95Interval": [
+            1.319481886940133,
+            1.5285888492750364
+          ],
+          "supportedFaster": true
+        },
+        "coreRelativeToRts": {
+          "baselineOverCandidate": 0.5873047558365055,
+          "pointwise95Interval": [
+            0.5514969256428285,
+            0.6254375322693382
+          ],
+          "supportedFaster": false
+        }
+      }
+    },
+    "410758": {
+      "original": {
+        "core": {
+          "medianOfRunP50Ms": 0.020232,
+          "minRunP50Ms": 0.016736,
+          "maxRunP50Ms": 0.023696000000000002,
+          "meanOfRunMeanMs": 0.02102893125
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.020384,
+          "minRunP50Ms": 0.016896,
+          "maxRunP50Ms": 0.02384,
+          "meanOfRunMeanMs": 0.021207952083333332
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.0001519999999999985,
+          "minRunP50Ms": 0.0001280000000000031,
+          "maxRunP50Ms": 0.00016000000000000042,
+          "meanOfRunMeanMs": 0.00017902083333333333
+        }
+      },
+      "hlsl-wave-tiled": {
+        "core": {
+          "medianOfRunP50Ms": 0.017896,
+          "minRunP50Ms": 0.014112,
+          "maxRunP50Ms": 0.021232,
+          "meanOfRunMeanMs": 0.017757866666666667
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.027648,
+          "minRunP50Ms": 0.027168,
+          "maxRunP50Ms": 0.027744,
+          "meanOfRunMeanMs": 0.025331133333333332
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.0063279999999999986,
+          "minRunP50Ms": 0.0063040000000000014,
+          "maxRunP50Ms": 0.006336,
+          "meanOfRunMeanMs": 0.007573266666666667
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.1848108488101081,
+            "pointwise95Interval": [
+              1.0946591342943406,
+              1.282387095196586
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 0.8367550993225532,
+            "pointwise95Interval": [
+              0.7906831702046595,
+              0.8855115710393425
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "gpuprefixsums-rts": {
+        "core": {
+          "medianOfRunP50Ms": 0.008192,
+          "minRunP50Ms": 0.00816,
+          "maxRunP50Ms": 0.008192,
+          "meanOfRunMeanMs": 0.0101562
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.014304,
+          "minRunP50Ms": 0.014272,
+          "maxRunP50Ms": 0.014352,
+          "meanOfRunMeanMs": 0.017335733333333332
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00608,
+          "minRunP50Ms": 0.00608,
+          "maxRunP50Ms": 0.006080000000000001,
+          "meanOfRunMeanMs": 0.007179533333333333
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 2.069298196540021,
+            "pointwise95Interval": [
+              1.8726677458951562,
+              2.2865748799218744
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.2224882739410592,
+            "pointwise95Interval": [
+              1.1363637777901563,
+              1.3151401066563773
+            ],
+            "supportedFaster": true
+          }
+        }
+      },
+      "hlsl-wave-tiled-direct": {
+        "core": {
+          "medianOfRunP50Ms": 0.014464,
+          "minRunP50Ms": 0.014176,
+          "maxRunP50Ms": 0.014544,
+          "meanOfRunMeanMs": 0.016715852083333333
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.014672000000000001,
+          "minRunP50Ms": 0.0144,
+          "maxRunP50Ms": 0.014768,
+          "meanOfRunMeanMs": 0.016973870833333335
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00019999999999999966,
+          "minRunP50Ms": 0.0001920000000000012,
+          "maxRunP50Ms": 0.00020799999999999985,
+          "meanOfRunMeanMs": 0.00025801875
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.2572633188749351,
+            "pointwise95Interval": [
+              1.1509593949145538,
+              1.3733855946375653
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.2486267256259254,
+            "pointwise95Interval": [
+              1.1434049756160405,
+              1.3635314986340072
+            ],
+            "supportedFaster": true
+          }
+        },
+        "relativeToAdapted": {
+          "baselineOverCandidate": 1.492224817795348,
+          "pointwise95Interval": [
+            1.4013055017461602,
+            1.5890431487421093
+          ],
+          "supportedFaster": true
+        },
+        "coreRelativeToRts": {
+          "baselineOverCandidate": 0.6075795750352209,
+          "pointwise95Interval": [
+            0.5821374164556874,
+            0.6341336762847982
+          ],
+          "supportedFaster": false
+        }
+      }
+    },
+    "524288": {
+      "original": {
+        "core": {
+          "medianOfRunP50Ms": 0.024632,
+          "minRunP50Ms": 0.018944000000000003,
+          "maxRunP50Ms": 0.024815999999999998,
+          "meanOfRunMeanMs": 0.022238935416666668
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.024808,
+          "minRunP50Ms": 0.024736,
+          "maxRunP50Ms": 0.024935,
+          "meanOfRunMeanMs": 0.022449335416666667
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00014400000000000003,
+          "minRunP50Ms": 0.00012799999999999964,
+          "maxRunP50Ms": 0.00016000000000000042,
+          "meanOfRunMeanMs": 0.00021039999999999996
+        }
+      },
+      "hlsl-wave-tiled": {
+        "core": {
+          "medianOfRunP50Ms": 0.01576,
+          "minRunP50Ms": 0.015439999999999999,
+          "maxRunP50Ms": 0.02224,
+          "meanOfRunMeanMs": 0.018934666666666666
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.029272,
+          "minRunP50Ms": 0.029184,
+          "maxRunP50Ms": 0.029472,
+          "meanOfRunMeanMs": 0.0273804
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.0069759999999999996,
+          "minRunP50Ms": 0.0069120000000000015,
+          "maxRunP50Ms": 0.007071999999999998,
+          "meanOfRunMeanMs": 0.008445733333333334
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.174465445318441,
+            "pointwise95Interval": [
+              1.0938625242689135,
+              1.2610077149950354
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 0.8196807405661357,
+            "pointwise95Interval": [
+              0.7708871089731283,
+              0.8715627860868395
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "gpuprefixsums-rts": {
+        "core": {
+          "medianOfRunP50Ms": 0.008368,
+          "minRunP50Ms": 0.008352,
+          "maxRunP50Ms": 0.008384,
+          "meanOfRunMeanMs": 0.010253785416666666
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.01508,
+          "minRunP50Ms": 0.015072,
+          "maxRunP50Ms": 0.015104,
+          "meanOfRunMeanMs": 0.018384933333333332
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00664,
+          "minRunP50Ms": 0.006624,
+          "maxRunP50Ms": 0.006672000000000001,
+          "meanOfRunMeanMs": 0.008131147916666666
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 2.1691466569447946,
+            "pointwise95Interval": [
+              2.0032871839475335,
+              2.348738242343794
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.2207395721074883,
+            "pointwise95Interval": [
+              1.158327205248734,
+              1.2865148087315912
+            ],
+            "supportedFaster": true
+          }
+        }
+      },
+      "hlsl-wave-tiled-direct": {
+        "core": {
+          "medianOfRunP50Ms": 0.015504,
+          "minRunP50Ms": 0.015408,
+          "maxRunP50Ms": 0.015872,
+          "meanOfRunMeanMs": 0.01864518125
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.015744,
+          "minRunP50Ms": 0.015712,
+          "maxRunP50Ms": 0.016079999999999997,
+          "meanOfRunMeanMs": 0.01892918125
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00020000000000000052,
+          "minRunP50Ms": 0.0001920000000000012,
+          "maxRunP50Ms": 0.00022400000000000024,
+          "meanOfRunMeanMs": 0.00028399999999999986
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.1927538175250563,
+            "pointwise95Interval": [
+              1.1438770776974663,
+              1.2437190122598663
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.1860786194140853,
+            "pointwise95Interval": [
+              1.1290556838332788,
+              1.2459814972588672
+            ],
+            "supportedFaster": true
+          }
+        },
+        "relativeToAdapted": {
+          "baselineOverCandidate": 1.44700071712663,
+          "pointwise95Interval": [
+            1.3669453339453435,
+            1.5317445572762758
+          ],
+          "supportedFaster": true
+        },
+        "coreRelativeToRts": {
+          "baselineOverCandidate": 0.5498723720253333,
+          "pointwise95Interval": [
+            0.5243051175855917,
+            0.5766863899958158
+          ],
+          "supportedFaster": false
+        }
+      }
+    },
+    "1048576": {
+      "original": {
+        "core": {
+          "medianOfRunP50Ms": 0.030928,
+          "minRunP50Ms": 0.030752,
+          "maxRunP50Ms": 0.031087999999999998,
+          "meanOfRunMeanMs": 0.029774083333333333
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.031072000000000002,
+          "minRunP50Ms": 0.030912,
+          "maxRunP50Ms": 0.0312,
+          "meanOfRunMeanMs": 0.029964683333333332
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00014400000000000003,
+          "minRunP50Ms": 0.00012799999999999964,
+          "maxRunP50Ms": 0.00016000000000000042,
+          "meanOfRunMeanMs": 0.0001905999999999998
+        }
+      },
+      "hlsl-wave-tiled": {
+        "core": {
+          "medianOfRunP50Ms": 0.023216,
+          "minRunP50Ms": 0.020208,
+          "maxRunP50Ms": 0.026176,
+          "meanOfRunMeanMs": 0.0233914
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.036248,
+          "minRunP50Ms": 0.035776,
+          "maxRunP50Ms": 0.036704,
+          "meanOfRunMeanMs": 0.03570453333333333
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.010072000000000001,
+          "minRunP50Ms": 0.009407999999999998,
+          "maxRunP50Ms": 0.010879999999999999,
+          "meanOfRunMeanMs": 0.012313133333333334
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.2729205688512113,
+            "pointwise95Interval": [
+              1.2269446694816848,
+              1.3206192707035342
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 0.839210363254694,
+            "pointwise95Interval": [
+              0.8160022226911394,
+              0.8630785728394351
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "gpuprefixsums-rts": {
+        "core": {
+          "medianOfRunP50Ms": 0.010336000000000001,
+          "minRunP50Ms": 0.010304,
+          "maxRunP50Ms": 0.0104,
+          "meanOfRunMeanMs": 0.0122414
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.026175999999999998,
+          "minRunP50Ms": 0.021248,
+          "maxRunP50Ms": 0.02624,
+          "meanOfRunMeanMs": 0.023427175
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.009007999999999999,
+          "minRunP50Ms": 0.008976000000000001,
+          "maxRunP50Ms": 0.009055999999999998,
+          "meanOfRunMeanMs": 0.011185775
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 2.4328264132605026,
+            "pointwise95Interval": [
+              2.2909484370712327,
+              2.583490863995353
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.279018945257763,
+            "pointwise95Interval": [
+              1.229471754896702,
+              1.3305628663797364
+            ],
+            "supportedFaster": true
+          }
+        }
+      },
+      "hlsl-wave-tiled-direct": {
+        "core": {
+          "medianOfRunP50Ms": 0.0264,
+          "minRunP50Ms": 0.023952,
+          "maxRunP50Ms": 0.02704,
+          "meanOfRunMeanMs": 0.0242074
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.026543999999999998,
+          "minRunP50Ms": 0.024144,
+          "maxRunP50Ms": 0.027248,
+          "meanOfRunMeanMs": 0.024434733333333333
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00016000000000000042,
+          "minRunP50Ms": 0.00016000000000000042,
+          "maxRunP50Ms": 0.00019199999999999946,
+          "meanOfRunMeanMs": 0.00022733333333333335
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.2298570449784139,
+            "pointwise95Interval": [
+              1.1956305859205325,
+              1.2650632803262596
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.2262430908428137,
+            "pointwise95Interval": [
+              1.192376077567834,
+              1.2610720276331555
+            ],
+            "supportedFaster": true
+          }
+        },
+        "relativeToAdapted": {
+          "baselineOverCandidate": 1.4611867828789646,
+          "pointwise95Interval": [
+            1.4215234564248196,
+            1.5019567948811379
+          ],
+          "supportedFaster": true
+        },
+        "coreRelativeToRts": {
+          "baselineOverCandidate": 0.5055260162726304,
+          "pointwise95Interval": [
+            0.48121583779249505,
+            0.5310643022490757
+          ],
+          "supportedFaster": false
+        }
+      }
+    },
+    "2097152": {
+      "original": {
+        "core": {
+          "medianOfRunP50Ms": 0.043536,
+          "minRunP50Ms": 0.043392,
+          "maxRunP50Ms": 0.04496,
+          "meanOfRunMeanMs": 0.043511666666666664
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.043696,
+          "minRunP50Ms": 0.043552,
+          "maxRunP50Ms": 0.045088,
+          "meanOfRunMeanMs": 0.04370513333333333
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00014400000000000177,
+          "minRunP50Ms": 0.00012799999999999617,
+          "maxRunP50Ms": 0.00016000000000000042,
+          "meanOfRunMeanMs": 0.0001934666666666667
+        }
+      },
+      "hlsl-wave-tiled": {
+        "core": {
+          "medianOfRunP50Ms": 0.037352,
+          "minRunP50Ms": 0.031456,
+          "maxRunP50Ms": 0.03872,
+          "meanOfRunMeanMs": 0.0359434
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.052872,
+          "minRunP50Ms": 0.051616,
+          "maxRunP50Ms": 0.0544,
+          "meanOfRunMeanMs": 0.05311946666666666
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.01492,
+          "minRunP50Ms": 0.014159999999999999,
+          "maxRunP50Ms": 0.0224,
+          "meanOfRunMeanMs": 0.017176066666666667
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.2122174366283818,
+            "pointwise95Interval": [
+              1.124092689683789,
+              1.3072508407462835
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 0.8228793868817657,
+            "pointwise95Interval": [
+              0.8079684052972312,
+              0.8380655492411381
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "gpuprefixsums-rts": {
+        "core": {
+          "medianOfRunP50Ms": 0.01424,
+          "minRunP50Ms": 0.013856,
+          "maxRunP50Ms": 0.014688,
+          "meanOfRunMeanMs": 0.0167544
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.034103999999999995,
+          "minRunP50Ms": 0.034016,
+          "maxRunP50Ms": 0.03424,
+          "meanOfRunMeanMs": 0.033299466666666666
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.014624000000000002,
+          "minRunP50Ms": 0.013344,
+          "maxRunP50Ms": 0.014719999999999999,
+          "meanOfRunMeanMs": 0.016545066666666667
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 2.5968155595163918,
+            "pointwise95Interval": [
+              2.5278823950276617,
+              2.667628471724311
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.3124329009151108,
+            "pointwise95Interval": [
+              1.2793471417833342,
+              1.3463743054159776
+            ],
+            "supportedFaster": true
+          }
+        }
+      },
+      "hlsl-wave-tiled-direct": {
+        "core": {
+          "medianOfRunP50Ms": 0.03748,
+          "minRunP50Ms": 0.03152,
+          "maxRunP50Ms": 0.038015999999999994,
+          "meanOfRunMeanMs": 0.03620967916666667
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.037632,
+          "minRunP50Ms": 0.031648,
+          "maxRunP50Ms": 0.03816,
+          "meanOfRunMeanMs": 0.0363930125
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00016000000000000042,
+          "minRunP50Ms": 0.0001280000000000031,
+          "maxRunP50Ms": 0.00016000000000000042,
+          "meanOfRunMeanMs": 0.0001833333333333333
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.2021666290935442,
+            "pointwise95Interval": [
+              1.1532078773305592,
+              1.2532038954255922
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.2014562645185332,
+            "pointwise95Interval": [
+              1.1517492379223484,
+              1.2533085397605872
+            ],
+            "supportedFaster": true
+          }
+        },
+        "relativeToAdapted": {
+          "baselineOverCandidate": 1.460063629824723,
+          "pointwise95Interval": [
+            1.3897727919749134,
+            1.5339095825207565
+          ],
+          "supportedFaster": true
+        },
+        "coreRelativeToRts": {
+          "baselineOverCandidate": 0.46293878080329476,
+          "pointwise95Interval": [
+            0.4333745264096411,
+            0.49451987071585596
+          ],
+          "supportedFaster": false
+        }
+      }
+    },
+    "4194304": {
+      "original": {
+        "core": {
+          "medianOfRunP50Ms": 0.068944,
+          "minRunP50Ms": 0.06872,
+          "maxRunP50Ms": 0.070544,
+          "meanOfRunMeanMs": 0.07024066666666667
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.06912,
+          "minRunP50Ms": 0.068864,
+          "maxRunP50Ms": 0.070656,
+          "meanOfRunMeanMs": 0.0703898
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.0001439999999999983,
+          "minRunP50Ms": 0.0001280000000000031,
+          "maxRunP50Ms": 0.00015999999999999348,
+          "meanOfRunMeanMs": 0.00014913333333333345
+        }
+      },
+      "hlsl-wave-tiled": {
+        "core": {
+          "medianOfRunP50Ms": 0.060023999999999994,
+          "minRunP50Ms": 0.059616,
+          "maxRunP50Ms": 0.060399999999999995,
+          "meanOfRunMeanMs": 0.05899246666666667
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.08566399999999999,
+          "minRunP50Ms": 0.084576,
+          "maxRunP50Ms": 0.087024,
+          "meanOfRunMeanMs": 0.0868872
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.025368,
+          "minRunP50Ms": 0.024480000000000002,
+          "maxRunP50Ms": 0.026160000000000003,
+          "meanOfRunMeanMs": 0.02789473333333333
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.1905293502904326,
+            "pointwise95Interval": [
+              1.1410700103983216,
+              1.2421324905455986
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 0.8100605370551681,
+            "pointwise95Interval": [
+              0.7844317241777069,
+              0.8365266899193522
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "gpuprefixsums-rts": {
+        "core": {
+          "medianOfRunP50Ms": 0.023440000000000003,
+          "minRunP50Ms": 0.022816,
+          "maxRunP50Ms": 0.030176,
+          "meanOfRunMeanMs": 0.026586533333333332
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.055088,
+          "minRunP50Ms": 0.05392,
+          "maxRunP50Ms": 0.055904,
+          "meanOfRunMeanMs": 0.0550552
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.025984,
+          "minRunP50Ms": 0.024191999999999998,
+          "maxRunP50Ms": 0.031136,
+          "meanOfRunMeanMs": 0.028468666666666666
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 2.6425655700925788,
+            "pointwise95Interval": [
+              2.5488109606566467,
+              2.739768817707711
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.2785389229439654,
+            "pointwise95Interval": [
+              1.2306507903739734,
+              1.3282905193486854
+            ],
+            "supportedFaster": true
+          }
+        }
+      },
+      "hlsl-wave-tiled-direct": {
+        "core": {
+          "medianOfRunP50Ms": 0.059072,
+          "minRunP50Ms": 0.058864,
+          "maxRunP50Ms": 0.059536000000000006,
+          "meanOfRunMeanMs": 0.05875986666666667
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.0592,
+          "minRunP50Ms": 0.058976,
+          "maxRunP50Ms": 0.05968,
+          "meanOfRunMeanMs": 0.058921666666666664
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00014400000000000003,
+          "minRunP50Ms": 0.0001280000000000031,
+          "maxRunP50Ms": 0.00016000000000000042,
+          "meanOfRunMeanMs": 0.00016179999999999979
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.1954146189573018,
+            "pointwise95Interval": [
+              1.123130810762542,
+              1.2723505557172017
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.1946589418396443,
+            "pointwise95Interval": [
+              1.1230007590204052,
+              1.2708896016796778
+            ],
+            "supportedFaster": true
+          }
+        },
+        "relativeToAdapted": {
+          "baselineOverCandidate": 1.4747773619273141,
+          "pointwise95Interval": [
+            1.423834771639068,
+            1.5275425987451774
+          ],
+          "supportedFaster": true
+        },
+        "coreRelativeToRts": {
+          "baselineOverCandidate": 0.4523689525385825,
+          "pointwise95Interval": [
+            0.42077461344075745,
+            0.486335588422247
+          ],
+          "supportedFaster": false
+        }
+      }
+    },
+    "8388608": {
+      "original": {
+        "core": {
+          "medianOfRunP50Ms": 0.119592,
+          "minRunP50Ms": 0.119296,
+          "maxRunP50Ms": 0.121136,
+          "meanOfRunMeanMs": 0.12225413333333333
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.11973600000000001,
+          "minRunP50Ms": 0.119456,
+          "maxRunP50Ms": 0.121264,
+          "meanOfRunMeanMs": 0.12240380000000001
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00015199999999999936,
+          "minRunP50Ms": 0.000128000000000017,
+          "maxRunP50Ms": 0.00015999999999999348,
+          "meanOfRunMeanMs": 0.00014966666666666646
+        }
+      },
+      "hlsl-wave-tiled": {
+        "core": {
+          "medianOfRunP50Ms": 0.106072,
+          "minRunP50Ms": 0.105216,
+          "maxRunP50Ms": 0.10660800000000001,
+          "meanOfRunMeanMs": 0.10725286666666667
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.153728,
+          "minRunP50Ms": 0.152432,
+          "maxRunP50Ms": 0.15472,
+          "meanOfRunMeanMs": 0.15748993333333333
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.047968,
+          "minRunP50Ms": 0.047248,
+          "maxRunP50Ms": 0.048128,
+          "meanOfRunMeanMs": 0.05023706666666666
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.1399799693968753,
+            "pointwise95Interval": [
+              1.1121958194814008,
+              1.1684582048079106
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 0.7771982630223098,
+            "pointwise95Interval": [
+              0.7692915670382481,
+              0.7851862231772826
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "gpuprefixsums-rts": {
+        "core": {
+          "medianOfRunP50Ms": 0.042039999999999994,
+          "minRunP50Ms": 0.040336,
+          "maxRunP50Ms": 0.047504000000000005,
+          "meanOfRunMeanMs": 0.045863133333333334
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.105952,
+          "minRunP50Ms": 0.1052,
+          "maxRunP50Ms": 0.10664,
+          "meanOfRunMeanMs": 0.108487
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.06424,
+          "minRunP50Ms": 0.057104,
+          "maxRunP50Ms": 0.0648,
+          "meanOfRunMeanMs": 0.06262386666666667
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 2.6664704123702805,
+            "pointwise95Interval": [
+              2.5506911902459053,
+              2.787505005402348
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.1282707299426473,
+            "pointwise95Interval": [
+              1.1183472030712087,
+              1.138282312102549
+            ],
+            "supportedFaster": true
+          }
+        }
+      },
+      "hlsl-wave-tiled-direct": {
+        "core": {
+          "medianOfRunP50Ms": 0.10352,
+          "minRunP50Ms": 0.102528,
+          "maxRunP50Ms": 0.103936,
+          "meanOfRunMeanMs": 0.10453933333333333
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.103656,
+          "minRunP50Ms": 0.102688,
+          "maxRunP50Ms": 0.104128,
+          "meanOfRunMeanMs": 0.10473206666666666
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00016000000000000042,
+          "minRunP50Ms": 0.00015999999999999348,
+          "maxRunP50Ms": 0.00016000000000000736,
+          "meanOfRunMeanMs": 0.00019273333333333354
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.1694824485187656,
+            "pointwise95Interval": [
+              1.1459119211120974,
+              1.193537803556592
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.168759526642565,
+            "pointwise95Interval": [
+              1.1455164522761017,
+              1.192474214057389
+            ],
+            "supportedFaster": true
+          }
+        },
+        "relativeToAdapted": {
+          "baselineOverCandidate": 1.5038112953284037,
+          "pointwise95Interval": [
+            1.4746139017790558,
+            1.5335867980282534
+          ],
+          "supportedFaster": true
+        },
+        "coreRelativeToRts": {
+          "baselineOverCandidate": 0.43858819625123413,
+          "pointwise95Interval": [
+            0.4245761165799744,
+            0.453062709792527
+          ],
+          "supportedFaster": false
+        }
+      }
+    },
+    "16000000": {
+      "original": {
+        "core": {
+          "medianOfRunP50Ms": 0.220352,
+          "minRunP50Ms": 0.21854400000000002,
+          "maxRunP50Ms": 0.220912,
+          "meanOfRunMeanMs": 0.2219322
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.22060000000000002,
+          "minRunP50Ms": 0.218704,
+          "maxRunP50Ms": 0.22104000000000001,
+          "meanOfRunMeanMs": 0.22213053333333332
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00020799999999999985,
+          "minRunP50Ms": 0.000128000000000017,
+          "maxRunP50Ms": 0.00022400000000000198,
+          "meanOfRunMeanMs": 0.00019833333333333278
+        }
+      },
+      "hlsl-wave-tiled": {
+        "core": {
+          "medianOfRunP50Ms": 0.203704,
+          "minRunP50Ms": 0.202848,
+          "maxRunP50Ms": 0.20407999999999998,
+          "meanOfRunMeanMs": 0.20357526666666667
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.466592,
+          "minRunP50Ms": 0.463456,
+          "maxRunP50Ms": 0.468912,
+          "meanOfRunMeanMs": 0.46529466666666663
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.25951199999999996,
+          "minRunP50Ms": 0.258256,
+          "maxRunP50Ms": 0.26704,
+          "meanOfRunMeanMs": 0.2617194
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.0901552617634793,
+            "pointwise95Interval": [
+              1.072568560826631,
+              1.1080303284618631
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 0.47738401137573416,
+            "pointwise95Interval": [
+              0.4696927203865367,
+              0.4852012484452367
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "gpuprefixsums-rts": {
+        "core": {
+          "medianOfRunP50Ms": 0.156072,
+          "minRunP50Ms": 0.148368,
+          "maxRunP50Ms": 0.157136,
+          "meanOfRunMeanMs": 0.156451
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.430112,
+          "minRunP50Ms": 0.425424,
+          "maxRunP50Ms": 0.43432,
+          "meanOfRunMeanMs": 0.43002473333333335
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.272192,
+          "minRunP50Ms": 0.269552,
+          "maxRunP50Ms": 0.275136,
+          "meanOfRunMeanMs": 0.27357373333333335
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.4186777296437996,
+            "pointwise95Interval": [
+              1.3944127329158877,
+              1.443364975862344
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 0.51655814113069,
+            "pointwise95Interval": [
+              0.5093244761399096,
+              0.5238945420229439
+            ],
+            "supportedFaster": false
+          }
+        }
+      },
+      "hlsl-wave-tiled-direct": {
+        "core": {
+          "medianOfRunP50Ms": 0.19917600000000002,
+          "minRunP50Ms": 0.19752,
+          "maxRunP50Ms": 0.199552,
+          "meanOfRunMeanMs": 0.1992356
+        },
+        "complete": {
+          "medianOfRunP50Ms": 0.199376,
+          "minRunP50Ms": 0.197632,
+          "maxRunP50Ms": 0.199744,
+          "meanOfRunMeanMs": 0.19942379999999998
+        },
+        "adaptation": {
+          "medianOfRunP50Ms": 0.00019199999999999773,
+          "minRunP50Ms": 0.00015999999999999348,
+          "maxRunP50Ms": 0.00022400000000000198,
+          "meanOfRunMeanMs": 0.00018820000000000024
+        },
+        "relativeToOriginal": {
+          "core": {
+            "baselineOverCandidate": 1.1138912374802588,
+            "pointwise95Interval": [
+              1.096068645365223,
+              1.1320036333325352
+            ],
+            "supportedFaster": true
+          },
+          "complete": {
+            "baselineOverCandidate": 1.113834544285414,
+            "pointwise95Interval": [
+              1.0962246340980708,
+              1.1317273426027632
+            ],
+            "supportedFaster": true
+          }
+        },
+        "relativeToAdapted": {
+          "baselineOverCandidate": 2.3332045433937867,
+          "pointwise95Interval": [
+            2.2979702973654677,
+            2.368979027951127
+          ],
+          "supportedFaster": true
+        },
+        "coreRelativeToRts": {
+          "baselineOverCandidate": 0.7851615727836467,
+          "pointwise95Interval": [
+            0.7644077103524817,
+            0.8064789078223986
+          ],
+          "supportedFaster": false
+        }
+      }
+    }
+  },
+  "processes": {
+    "original": {
+      "1": {
+        "run": "sweep-r01-original",
+        "observationsSha256": "83c5f7fd449617a37a29c9f46e131d8d519d0f476bccd0212b4aadd7bf6b974b",
+        "metrics": {
+          "32768": {
+            "core": {
+              "p50Ms": 0.007456,
+              "p95Ms": 0.014817599999999998,
+              "meanMs": 0.0084315
+            },
+            "complete": {
+              "p50Ms": 0.007648,
+              "p95Ms": 0.015232,
+              "meanMs": 0.008690966666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.00022399999999999937,
+              "p95Ms": 0.0005136000000000001,
+              "meanMs": 0.00025946666666666656
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.007648,
+              "p95Ms": 0.0156832,
+              "meanMs": 0.010469866666666666
+            },
+            "complete": {
+              "p50Ms": 0.00784,
+              "p95Ms": 0.0158416,
+              "meanMs": 0.010776
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.00028800000000000006,
+              "meanMs": 0.0003061333333333333
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.015424,
+              "p95Ms": 0.016193600000000002,
+              "meanMs": 0.012211816666666667
+            },
+            "complete": {
+              "p50Ms": 0.015568,
+              "p95Ms": 0.0164176,
+              "meanMs": 0.012459016666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999773,
+              "p95Ms": 0.00032000000000000084,
+              "meanMs": 0.00024720000000000015
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.017072,
+              "p95Ms": 0.017409599999999997,
+              "meanMs": 0.0145348
+            },
+            "complete": {
+              "p50Ms": 0.01728,
+              "p95Ms": 0.0175392,
+              "meanMs": 0.014780399999999999
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.00028800000000000006,
+              "meanMs": 0.0002456
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.023696000000000002,
+              "p95Ms": 0.0308496,
+              "meanMs": 0.022403191666666666
+            },
+            "complete": {
+              "p50Ms": 0.02384,
+              "p95Ms": 0.03104,
+              "meanMs": 0.022612608333333332
+            },
+            "adaptation": {
+              "p50Ms": 0.00015999999999999695,
+              "p95Ms": 0.0002559999999999993,
+              "meanMs": 0.0002094166666666667
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.024815999999999998,
+              "p95Ms": 0.025002149999999997,
+              "meanMs": 0.023218591666666667
+            },
+            "complete": {
+              "p50Ms": 0.024935,
+              "p95Ms": 0.025185600000000002,
+              "meanMs": 0.023419658333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00012799999999999964,
+              "p95Ms": 0.00028800000000000006,
+              "meanMs": 0.00020106666666666668
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.031008,
+              "p95Ms": 0.031264,
+              "meanMs": 0.030373066666666667
+            },
+            "complete": {
+              "p50Ms": 0.031168,
+              "p95Ms": 0.031488,
+              "meanMs": 0.030528800000000002
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00028800000000000006,
+              "meanMs": 0.00015573333333333318
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.043584,
+              "p95Ms": 0.043910399999999995,
+              "meanMs": 0.043072
+            },
+            "complete": {
+              "p50Ms": 0.043744,
+              "p95Ms": 0.0440368,
+              "meanMs": 0.0432896
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00028800000000000353,
+              "meanMs": 0.00021760000000000009
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.068928,
+              "p95Ms": 0.06998239999999996,
+              "meanMs": 0.0689944
+            },
+            "complete": {
+              "p50Ms": 0.069104,
+              "p95Ms": 0.07011199999999998,
+              "meanMs": 0.06914853333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00015999999999999348,
+              "p95Ms": 0.00022400000000000198,
+              "meanMs": 0.00015413333333333374
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.119296,
+              "p95Ms": 0.1359712,
+              "meanMs": 0.12097226666666666
+            },
+            "complete": {
+              "p50Ms": 0.119456,
+              "p95Ms": 0.1361936,
+              "meanMs": 0.12112453333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00015999999999999348,
+              "p95Ms": 0.0002879999999999973,
+              "meanMs": 0.0001522666666666672
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.220256,
+              "p95Ms": 0.2534544,
+              "meanMs": 0.22368666666666667
+            },
+            "complete": {
+              "p50Ms": 0.220528,
+              "p95Ms": 0.2537408,
+              "meanMs": 0.22391653333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00022400000000000198,
+              "p95Ms": 0.00041599999999997336,
+              "meanMs": 0.00022986666666666595
+            }
+          }
+        }
+      },
+      "2": {
+        "run": "sweep-r02-original",
+        "observationsSha256": "7d89fb0f5d9d5264523bd111a66f0f824fd8e1cdc56a3ac2430699abe2ee36fd",
+        "metrics": {
+          "16000000": {
+            "core": {
+              "p50Ms": 0.21854400000000002,
+              "p95Ms": 0.2335808,
+              "meanMs": 0.21888453333333333
+            },
+            "complete": {
+              "p50Ms": 0.218704,
+              "p95Ms": 0.2337728,
+              "meanMs": 0.21907093333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999773,
+              "p95Ms": 0.00028800000000001047,
+              "meanMs": 0.00018639999999999838
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.119552,
+              "p95Ms": 0.13612639999999998,
+              "meanMs": 0.12231386666666667
+            },
+            "complete": {
+              "p50Ms": 0.119712,
+              "p95Ms": 0.13628479999999998,
+              "meanMs": 0.1224616
+            },
+            "adaptation": {
+              "p50Ms": 0.00014400000000000523,
+              "p95Ms": 0.0002560000000000062,
+              "meanMs": 0.00014773333333333258
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.06872,
+              "p95Ms": 0.0767392,
+              "meanMs": 0.06959946666666667
+            },
+            "complete": {
+              "p50Ms": 0.068864,
+              "p95Ms": 0.0768736,
+              "meanMs": 0.069752
+            },
+            "adaptation": {
+              "p50Ms": 0.0001280000000000031,
+              "p95Ms": 0.0002879999999999973,
+              "meanMs": 0.00015253333333333416
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.043392,
+              "p95Ms": 0.04992,
+              "meanMs": 0.043149599999999996
+            },
+            "complete": {
+              "p50Ms": 0.043552,
+              "p95Ms": 0.050054400000000006,
+              "meanMs": 0.043356
+            },
+            "adaptation": {
+              "p50Ms": 0.0001280000000000031,
+              "p95Ms": 0.0002559999999999993,
+              "meanMs": 0.00020640000000000017
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.030752,
+              "p95Ms": 0.03210239999999999,
+              "meanMs": 0.029529666666666666
+            },
+            "complete": {
+              "p50Ms": 0.030912,
+              "p95Ms": 0.03216959999999999,
+              "meanMs": 0.0297958
+            },
+            "adaptation": {
+              "p50Ms": 0.00015999999999999695,
+              "p95Ms": 0.00025600000000000275,
+              "meanMs": 0.00026613333333333304
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.024688,
+              "p95Ms": 0.026081599999999996,
+              "meanMs": 0.022128533333333332
+            },
+            "complete": {
+              "p50Ms": 0.024848000000000002,
+              "p95Ms": 0.0262448,
+              "meanMs": 0.022275466666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.00015999999999999695,
+              "p95Ms": 0.00028800000000000006,
+              "meanMs": 0.00014693333333333326
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.023407999999999998,
+              "p95Ms": 0.02496,
+              "meanMs": 0.020933066666666666
+            },
+            "complete": {
+              "p50Ms": 0.023600000000000003,
+              "p95Ms": 0.0250624,
+              "meanMs": 0.021139466666666665
+            },
+            "adaptation": {
+              "p50Ms": 0.0001280000000000031,
+              "p95Ms": 0.0002576000000000025,
+              "meanMs": 0.00020640000000000014
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.009984,
+              "p95Ms": 0.010208,
+              "meanMs": 0.0099944
+            },
+            "complete": {
+              "p50Ms": 0.010192,
+              "p95Ms": 0.010368,
+              "meanMs": 0.010185066666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.00032000000000000084,
+              "meanMs": 0.00019066666666666662
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.008384,
+              "p95Ms": 0.008544,
+              "meanMs": 0.008387200000000001
+            },
+            "complete": {
+              "p50Ms": 0.00856,
+              "p95Ms": 0.008736,
+              "meanMs": 0.008574133333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.0002895999999999999,
+              "meanMs": 0.00018693333333333326
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.007584,
+              "p95Ms": 0.007776,
+              "meanMs": 0.007602666666666666
+            },
+            "complete": {
+              "p50Ms": 0.007776,
+              "p95Ms": 0.007905599999999999,
+              "meanMs": 0.007769333333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00025600000000000015,
+              "meanMs": 0.00016666666666666672
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.007456,
+              "p95Ms": 0.007616,
+              "meanMs": 0.007454133333333333
+            },
+            "complete": {
+              "p50Ms": 0.007616,
+              "p95Ms": 0.007744,
+              "meanMs": 0.0076226666666666665
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00028800000000000006,
+              "meanMs": 0.00016853333333333327
+            }
+          }
+        }
+      },
+      "3": {
+        "run": "sweep-r03-original",
+        "observationsSha256": "9a390efbb23df060e4d50ed921854b7c0946a1f7538bd55d8eafa8ff99f1e672",
+        "metrics": {
+          "410758": {
+            "core": {
+              "p50Ms": 0.017056,
+              "p95Ms": 0.0249616,
+              "meanMs": 0.020449066666666668
+            },
+            "complete": {
+              "p50Ms": 0.017168,
+              "p95Ms": 0.025089599999999997,
+              "meanMs": 0.020600533333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.0002559999999999993,
+              "meanMs": 0.00015146666666666656
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.024576,
+              "p95Ms": 0.025985599999999998,
+              "meanMs": 0.021886483333333335
+            },
+            "complete": {
+              "p50Ms": 0.024768,
+              "p95Ms": 0.0261136,
+              "meanMs": 0.022100083333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.0001280000000000031,
+              "p95Ms": 0.00025599999999999945,
+              "meanMs": 0.00021359999999999996
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.030848,
+              "p95Ms": 0.031776,
+              "meanMs": 0.029191466666666666
+            },
+            "complete": {
+              "p50Ms": 0.030976,
+              "p95Ms": 0.031873599999999995,
+              "meanMs": 0.029390933333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00012799999999999964,
+              "p95Ms": 0.0002880000000000002,
+              "meanMs": 0.00019946666666666646
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.043488,
+              "p95Ms": 0.0498928,
+              "meanMs": 0.0430712
+            },
+            "complete": {
+              "p50Ms": 0.043648,
+              "p95Ms": 0.0500528,
+              "meanMs": 0.043266399999999997
+            },
+            "adaptation": {
+              "p50Ms": 0.00012799999999999617,
+              "p95Ms": 0.0002879999999999966,
+              "meanMs": 0.00019519999999999954
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.06896,
+              "p95Ms": 0.07593920000000001,
+              "meanMs": 0.070212
+            },
+            "complete": {
+              "p50Ms": 0.069136,
+              "p95Ms": 0.07604000000000001,
+              "meanMs": 0.07036293333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00015999999999999348,
+              "p95Ms": 0.00025599999999999305,
+              "meanMs": 0.00015093333333333295
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.119632,
+              "p95Ms": 0.12716639999999999,
+              "meanMs": 0.12206426666666667
+            },
+            "complete": {
+              "p50Ms": 0.11976,
+              "p95Ms": 0.1272304,
+              "meanMs": 0.12221653333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00015999999999999348,
+              "p95Ms": 0.00028799999999998336,
+              "meanMs": 0.00015226666666666582
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.220448,
+              "p95Ms": 0.2369056,
+              "meanMs": 0.22204
+            },
+            "complete": {
+              "p50Ms": 0.220672,
+              "p95Ms": 0.2371056,
+              "meanMs": 0.22226666666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.00022400000000000198,
+              "p95Ms": 0.0003536000000000177,
+              "meanMs": 0.00022666666666666622
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.007456,
+              "p95Ms": 0.007616,
+              "meanMs": 0.007454133333333333
+            },
+            "complete": {
+              "p50Ms": 0.007648,
+              "p95Ms": 0.007776,
+              "meanMs": 0.007637866666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00028800000000000006,
+              "meanMs": 0.00018373333333333335
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.007616,
+              "p95Ms": 0.007776,
+              "meanMs": 0.007622133333333334
+            },
+            "complete": {
+              "p50Ms": 0.007776,
+              "p95Ms": 0.007936,
+              "meanMs": 0.007787466666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00025600000000000015,
+              "meanMs": 0.00016533333333333336
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.008384,
+              "p95Ms": 0.008512,
+              "meanMs": 0.0083808
+            },
+            "complete": {
+              "p50Ms": 0.008544,
+              "p95Ms": 0.008705599999999999,
+              "meanMs": 0.008575466666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.0003199999999999991,
+              "meanMs": 0.0001946666666666665
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.009904,
+              "p95Ms": 0.0101136,
+              "meanMs": 0.009913333333333333
+            },
+            "complete": {
+              "p50Ms": 0.01008,
+              "p95Ms": 0.01024,
+              "meanMs": 0.0100928
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.00028800000000000006,
+              "meanMs": 0.00017946666666666676
+            }
+          }
+        }
+      },
+      "4": {
+        "run": "sweep-r04-original",
+        "observationsSha256": "d9b61fe358f4299380461d2d1e21fb9809eb3c72500d6489ab3eb80e82ed9fd0",
+        "metrics": {
+          "262144": {
+            "core": {
+              "p50Ms": 0.009888,
+              "p95Ms": 0.0100816,
+              "meanMs": 0.009908266666666667
+            },
+            "complete": {
+              "p50Ms": 0.01008,
+              "p95Ms": 0.0102416,
+              "meanMs": 0.010088533333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.00028800000000000006,
+              "meanMs": 0.0001802666666666667
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.008272,
+              "p95Ms": 0.008448,
+              "meanMs": 0.008293333333333333
+            },
+            "complete": {
+              "p50Ms": 0.00848,
+              "p95Ms": 0.008608,
+              "meanMs": 0.008475466666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.0003519999999999999,
+              "meanMs": 0.00018213333333333347
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.007552,
+              "p95Ms": 0.00768,
+              "meanMs": 0.007556
+            },
+            "complete": {
+              "p50Ms": 0.007744,
+              "p95Ms": 0.00784,
+              "meanMs": 0.007733333333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00028800000000000006,
+              "meanMs": 0.00017733333333333351
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.007424,
+              "p95Ms": 0.007552,
+              "meanMs": 0.0074104
+            },
+            "complete": {
+              "p50Ms": 0.007584,
+              "p95Ms": 0.007744,
+              "meanMs": 0.007585333333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00025760000000000003,
+              "meanMs": 0.0001749333333333332
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.220912,
+              "p95Ms": 0.243608,
+              "meanMs": 0.2231176
+            },
+            "complete": {
+              "p50Ms": 0.22104000000000001,
+              "p95Ms": 0.24376639999999997,
+              "meanMs": 0.223268
+            },
+            "adaptation": {
+              "p50Ms": 0.000128000000000017,
+              "p95Ms": 0.0002879999999999827,
+              "meanMs": 0.00015040000000000054
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.121136,
+              "p95Ms": 0.1320624,
+              "meanMs": 0.12366613333333333
+            },
+            "complete": {
+              "p50Ms": 0.121264,
+              "p95Ms": 0.1321712,
+              "meanMs": 0.12381253333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.000128000000000017,
+              "p95Ms": 0.00025599999999999305,
+              "meanMs": 0.00014640000000000022
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.070544,
+              "p95Ms": 0.08379840000000001,
+              "meanMs": 0.07215680000000001
+            },
+            "complete": {
+              "p50Ms": 0.070656,
+              "p95Ms": 0.08402720000000001,
+              "meanMs": 0.07229573333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.0001280000000000031,
+              "p95Ms": 0.0002560000000000062,
+              "meanMs": 0.00013893333333333293
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.04496,
+              "p95Ms": 0.0516496,
+              "meanMs": 0.04475386666666667
+            },
+            "complete": {
+              "p50Ms": 0.045088,
+              "p95Ms": 0.0518128,
+              "meanMs": 0.044908533333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.0002559999999999993,
+              "meanMs": 0.00015466666666666697
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.031087999999999998,
+              "p95Ms": 0.032929599999999996,
+              "meanMs": 0.030002133333333333
+            },
+            "complete": {
+              "p50Ms": 0.0312,
+              "p95Ms": 0.033089600000000004,
+              "meanMs": 0.0301432
+            },
+            "adaptation": {
+              "p50Ms": 0.0001280000000000031,
+              "p95Ms": 0.0002559999999999993,
+              "meanMs": 0.0001410666666666665
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.018944000000000003,
+              "p95Ms": 0.026323199999999998,
+              "meanMs": 0.021722133333333334
+            },
+            "complete": {
+              "p50Ms": 0.024736,
+              "p95Ms": 0.026424,
+              "meanMs": 0.022002133333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00028800000000000006,
+              "meanMs": 0.00028
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.016736,
+              "p95Ms": 0.02496,
+              "meanMs": 0.0203304
+            },
+            "complete": {
+              "p50Ms": 0.016896,
+              "p95Ms": 0.025056,
+              "meanMs": 0.0204792
+            },
+            "adaptation": {
+              "p50Ms": 0.00014400000000000003,
+              "p95Ms": 0.0002559999999999993,
+              "meanMs": 0.00014879999999999988
+            }
+          }
+        }
+      }
+    },
+    "hlsl-wave-tiled": {
+      "1": {
+        "run": "sweep-r01-hlsl-wave-tiled",
+        "observationsSha256": "bd5268c8855ee990137d4e8f9d8b060ce6add999aa9a3a56bf70c4ad9dfafea2",
+        "metrics": {
+          "32768": {
+            "core": {
+              "p50Ms": 0.008128,
+              "p95Ms": 0.008289600000000001,
+              "meanMs": 0.0081408
+            },
+            "complete": {
+              "p50Ms": 0.012192,
+              "p95Ms": 0.012704,
+              "meanMs": 0.012256533333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.004064000000000001,
+              "p95Ms": 0.004416,
+              "meanMs": 0.004115733333333333
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.009104000000000001,
+              "p95Ms": 0.0173776,
+              "meanMs": 0.010782666666666666
+            },
+            "complete": {
+              "p50Ms": 0.013344,
+              "p95Ms": 0.0216656,
+              "meanMs": 0.015878666666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.0042239999999999995,
+              "p95Ms": 0.012449600000000002,
+              "meanMs": 0.005096
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.01072,
+              "p95Ms": 0.018944,
+              "meanMs": 0.013362133333333333
+            },
+            "complete": {
+              "p50Ms": 0.015312,
+              "p95Ms": 0.023521599999999997,
+              "meanMs": 0.0188352
+            },
+            "adaptation": {
+              "p50Ms": 0.004608000000000001,
+              "p95Ms": 0.012447999999999999,
+              "meanMs": 0.005473066666666667
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.012512,
+              "p95Ms": 0.020768,
+              "meanMs": 0.015983466666666668
+            },
+            "complete": {
+              "p50Ms": 0.024896,
+              "p95Ms": 0.026465600000000002,
+              "meanMs": 0.0223984
+            },
+            "adaptation": {
+              "p50Ms": 0.005632000000000002,
+              "p95Ms": 0.012739200000000001,
+              "meanMs": 0.006414933333333333
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.021232,
+              "p95Ms": 0.022593600000000002,
+              "meanMs": 0.0186392
+            },
+            "complete": {
+              "p50Ms": 0.02768,
+              "p95Ms": 0.0289616,
+              "meanMs": 0.025907733333333332
+            },
+            "adaptation": {
+              "p50Ms": 0.006335999999999998,
+              "p95Ms": 0.013352000000000001,
+              "meanMs": 0.007268533333333333
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.015439999999999999,
+              "p95Ms": 0.023144,
+              "meanMs": 0.018869066666666667
+            },
+            "complete": {
+              "p50Ms": 0.029184,
+              "p95Ms": 0.0303392,
+              "meanMs": 0.0269728
+            },
+            "adaptation": {
+              "p50Ms": 0.0069120000000000015,
+              "p95Ms": 0.014726399999999999,
+              "meanMs": 0.008103733333333333
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.026176,
+              "p95Ms": 0.027553599999999998,
+              "meanMs": 0.023928
+            },
+            "complete": {
+              "p50Ms": 0.035888,
+              "p95Ms": 0.03767839999999998,
+              "meanMs": 0.03553573333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.009424,
+              "p95Ms": 0.0167088,
+              "meanMs": 0.011607733333333333
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.037344,
+              "p95Ms": 0.042572799999999994,
+              "meanMs": 0.035945866666666666
+            },
+            "complete": {
+              "p50Ms": 0.051616,
+              "p95Ms": 0.058496,
+              "meanMs": 0.0522296
+            },
+            "adaptation": {
+              "p50Ms": 0.014159999999999999,
+              "p95Ms": 0.0213456,
+              "meanMs": 0.01628373333333333
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.059616,
+              "p95Ms": 0.066472,
+              "meanMs": 0.05921386666666667
+            },
+            "complete": {
+              "p50Ms": 0.084768,
+              "p95Ms": 0.10052159999999999,
+              "meanMs": 0.08643146666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.024736,
+              "p95Ms": 0.038340799999999994,
+              "meanMs": 0.027217599999999998
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.106048,
+              "p95Ms": 0.1146304,
+              "meanMs": 0.10618106666666667
+            },
+            "complete": {
+              "p50Ms": 0.15352,
+              "p95Ms": 0.1702704,
+              "meanMs": 0.15708533333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.047248,
+              "p95Ms": 0.060768,
+              "meanMs": 0.05090426666666667
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.203584,
+              "p95Ms": 0.213752,
+              "meanMs": 0.20388426666666667
+            },
+            "complete": {
+              "p50Ms": 0.467808,
+              "p95Ms": 0.47866400000000003,
+              "meanMs": 0.4633293333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.25835199999999997,
+              "p95Ms": 0.2746063999999999,
+              "meanMs": 0.25944506666666667
+            }
+          }
+        }
+      },
+      "2": {
+        "run": "sweep-r02-hlsl-wave-tiled",
+        "observationsSha256": "a4757efa25a495daacb0b0e0564d990023ba3276d57b273ffc26955f2c78edb4",
+        "metrics": {
+          "16000000": {
+            "core": {
+              "p50Ms": 0.202848,
+              "p95Ms": 0.2127104,
+              "meanMs": 0.2024832
+            },
+            "complete": {
+              "p50Ms": 0.463456,
+              "p95Ms": 0.48064160000000006,
+              "meanMs": 0.46473786666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.260672,
+              "p95Ms": 0.27621280000000004,
+              "meanMs": 0.2622546666666667
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.106096,
+              "p95Ms": 0.1213792,
+              "meanMs": 0.10932346666666666
+            },
+            "complete": {
+              "p50Ms": 0.15393600000000002,
+              "p95Ms": 0.1693136,
+              "meanMs": 0.157892
+            },
+            "adaptation": {
+              "p50Ms": 0.047888,
+              "p95Ms": 0.05527200000000001,
+              "meanMs": 0.04856853333333333
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.060208,
+              "p95Ms": 0.067152,
+              "meanMs": 0.059426933333333334
+            },
+            "complete": {
+              "p50Ms": 0.08656,
+              "p95Ms": 0.0942208,
+              "meanMs": 0.08799546666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.026000000000000002,
+              "p95Ms": 0.0334736,
+              "meanMs": 0.028568533333333333
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.031456,
+              "p95Ms": 0.03881760000000001,
+              "meanMs": 0.03359226666666667
+            },
+            "complete": {
+              "p50Ms": 0.054048,
+              "p95Ms": 0.060768,
+              "meanMs": 0.053279466666666664
+            },
+            "adaptation": {
+              "p50Ms": 0.0224,
+              "p95Ms": 0.0233632,
+              "meanMs": 0.0196872
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.020208,
+              "p95Ms": 0.028099199999999998,
+              "meanMs": 0.022917066666666666
+            },
+            "complete": {
+              "p50Ms": 0.036608,
+              "p95Ms": 0.0451312,
+              "meanMs": 0.03619466666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.010879999999999999,
+              "p95Ms": 0.0181168,
+              "meanMs": 0.0132776
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.01568,
+              "p95Ms": 0.023587200000000003,
+              "meanMs": 0.0183952
+            },
+            "complete": {
+              "p50Ms": 0.029472,
+              "p95Ms": 0.0318768,
+              "meanMs": 0.027566933333333335
+            },
+            "adaptation": {
+              "p50Ms": 0.007071999999999998,
+              "p95Ms": 0.0151792,
+              "meanMs": 0.009171733333333333
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.014735999999999999,
+              "p95Ms": 0.0222768,
+              "meanMs": 0.017764
+            },
+            "complete": {
+              "p50Ms": 0.027616,
+              "p95Ms": 0.029025600000000002,
+              "meanMs": 0.025332533333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00632,
+              "p95Ms": 0.0139232,
+              "meanMs": 0.007568533333333334
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.012736,
+              "p95Ms": 0.020462400000000002,
+              "meanMs": 0.0147472
+            },
+            "complete": {
+              "p50Ms": 0.020096000000000003,
+              "p95Ms": 0.026529599999999997,
+              "meanMs": 0.0220072
+            },
+            "adaptation": {
+              "p50Ms": 0.005696000000000001,
+              "p95Ms": 0.0135376,
+              "meanMs": 0.00726
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.010688,
+              "p95Ms": 0.01888,
+              "meanMs": 0.013268266666666667
+            },
+            "complete": {
+              "p50Ms": 0.015264,
+              "p95Ms": 0.023488,
+              "meanMs": 0.018432266666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.004592,
+              "p95Ms": 0.012006399999999999,
+              "meanMs": 0.005164
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.009152,
+              "p95Ms": 0.017409599999999997,
+              "meanMs": 0.010158666666666667
+            },
+            "complete": {
+              "p50Ms": 0.013376,
+              "p95Ms": 0.021792,
+              "meanMs": 0.0155768
+            },
+            "adaptation": {
+              "p50Ms": 0.004223999999999999,
+              "p95Ms": 0.012449600000000002,
+              "meanMs": 0.0054181333333333335
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.008208,
+              "p95Ms": 0.008384,
+              "meanMs": 0.008218933333333333
+            },
+            "complete": {
+              "p50Ms": 0.01232,
+              "p95Ms": 0.01248,
+              "meanMs": 0.012301866666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.004095999999999999,
+              "p95Ms": 0.0041919999999999995,
+              "meanMs": 0.0040829333333333336
+            }
+          }
+        }
+      },
+      "3": {
+        "run": "sweep-r03-hlsl-wave-tiled",
+        "observationsSha256": "c00c30cb5f2c7589241c781ff41aa5b5fdd86bcf2ee34065e4ca75f22e297208",
+        "metrics": {
+          "410758": {
+            "core": {
+              "p50Ms": 0.014112,
+              "p95Ms": 0.021827199999999998,
+              "meanMs": 0.016330666666666667
+            },
+            "complete": {
+              "p50Ms": 0.027168,
+              "p95Ms": 0.028704,
+              "meanMs": 0.024494133333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.0063040000000000014,
+              "p95Ms": 0.0142448,
+              "meanMs": 0.008163466666666666
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.02224,
+              "p95Ms": 0.0234096,
+              "meanMs": 0.0196824
+            },
+            "complete": {
+              "p50Ms": 0.029248,
+              "p95Ms": 0.0303744,
+              "meanMs": 0.027595733333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.0069120000000000015,
+              "p95Ms": 0.014112,
+              "meanMs": 0.007913333333333333
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.026176,
+              "p95Ms": 0.027296,
+              "meanMs": 0.023658933333333333
+            },
+            "complete": {
+              "p50Ms": 0.035776,
+              "p95Ms": 0.036931200000000004,
+              "meanMs": 0.03514373333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.009407999999999998,
+              "p95Ms": 0.016737600000000002,
+              "meanMs": 0.0114848
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.037360000000000004,
+              "p95Ms": 0.0383296,
+              "meanMs": 0.03518106666666666
+            },
+            "complete": {
+              "p50Ms": 0.051696,
+              "p95Ms": 0.0582432,
+              "meanMs": 0.05193813333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.014192000000000001,
+              "p95Ms": 0.0214096,
+              "meanMs": 0.016757066666666667
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.05984,
+              "p95Ms": 0.0666688,
+              "meanMs": 0.05894666666666667
+            },
+            "complete": {
+              "p50Ms": 0.084576,
+              "p95Ms": 0.0915232,
+              "meanMs": 0.08563493333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.024480000000000002,
+              "p95Ms": 0.0382096,
+              "meanMs": 0.026688266666666665
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.105216,
+              "p95Ms": 0.11962239999999999,
+              "meanMs": 0.10503546666666666
+            },
+            "complete": {
+              "p50Ms": 0.152432,
+              "p95Ms": 0.17083199999999998,
+              "meanMs": 0.1567736
+            },
+            "adaptation": {
+              "p50Ms": 0.048128,
+              "p95Ms": 0.06119039999999999,
+              "meanMs": 0.05173813333333333
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.20407999999999998,
+              "p95Ms": 0.2160576,
+              "meanMs": 0.2055104
+            },
+            "complete": {
+              "p50Ms": 0.465376,
+              "p95Ms": 0.4837584,
+              "meanMs": 0.465028
+            },
+            "adaptation": {
+              "p50Ms": 0.258256,
+              "p95Ms": 0.2762384,
+              "meanMs": 0.2595176
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.008224,
+              "p95Ms": 0.008384,
+              "meanMs": 0.008238133333333333
+            },
+            "complete": {
+              "p50Ms": 0.012352,
+              "p95Ms": 0.012576,
+              "meanMs": 0.012370933333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.004128,
+              "p95Ms": 0.004288,
+              "meanMs": 0.0041328
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.009184,
+              "p95Ms": 0.0169344,
+              "meanMs": 0.009661333333333333
+            },
+            "complete": {
+              "p50Ms": 0.013504,
+              "p95Ms": 0.0217648,
+              "meanMs": 0.014578666666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.004287999999999999,
+              "p95Ms": 0.0123616,
+              "meanMs": 0.0049173333333333335
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.010544,
+              "p95Ms": 0.0186592,
+              "meanMs": 0.011643466666666666
+            },
+            "complete": {
+              "p50Ms": 0.015136,
+              "p95Ms": 0.0233936,
+              "meanMs": 0.0166584
+            },
+            "adaptation": {
+              "p50Ms": 0.004608000000000001,
+              "p95Ms": 0.005302399999999981,
+              "meanMs": 0.005014933333333333
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.01248,
+              "p95Ms": 0.02048,
+              "meanMs": 0.014999466666666666
+            },
+            "complete": {
+              "p50Ms": 0.018288,
+              "p95Ms": 0.026288,
+              "meanMs": 0.0216608
+            },
+            "adaptation": {
+              "p50Ms": 0.0057280000000000005,
+              "p95Ms": 0.013416,
+              "meanMs": 0.006661333333333333
+            }
+          }
+        }
+      },
+      "4": {
+        "run": "sweep-r04-hlsl-wave-tiled",
+        "observationsSha256": "21b9ebb60928e84d6dee5fbbe0eccbd79d37c919845791f802cfeb07d18d2955",
+        "metrics": {
+          "262144": {
+            "core": {
+              "p50Ms": 0.012544,
+              "p95Ms": 0.0206112,
+              "meanMs": 0.0157464
+            },
+            "complete": {
+              "p50Ms": 0.024896,
+              "p95Ms": 0.0264,
+              "meanMs": 0.022235466666666665
+            },
+            "adaptation": {
+              "p50Ms": 0.005664,
+              "p95Ms": 0.0136368,
+              "meanMs": 0.006489066666666666
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.010528,
+              "p95Ms": 0.018593600000000002,
+              "meanMs": 0.012591466666666667
+            },
+            "complete": {
+              "p50Ms": 0.015104,
+              "p95Ms": 0.0233616,
+              "meanMs": 0.018078933333333335
+            },
+            "adaptation": {
+              "p50Ms": 0.004607999999999999,
+              "p95Ms": 0.0124816,
+              "meanMs": 0.005487466666666667
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.009088,
+              "p95Ms": 0.017408,
+              "meanMs": 0.0103584
+            },
+            "complete": {
+              "p50Ms": 0.013344,
+              "p95Ms": 0.021633599999999996,
+              "meanMs": 0.0156736
+            },
+            "adaptation": {
+              "p50Ms": 0.004224,
+              "p95Ms": 0.012479999999999998,
+              "meanMs": 0.0053152
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.008128,
+              "p95Ms": 0.008256,
+              "meanMs": 0.008144533333333334
+            },
+            "complete": {
+              "p50Ms": 0.012224,
+              "p95Ms": 0.012352,
+              "meanMs": 0.01222
+            },
+            "adaptation": {
+              "p50Ms": 0.004064,
+              "p95Ms": 0.0041919999999999995,
+              "meanMs": 0.004075466666666667
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.203824,
+              "p95Ms": 0.21423359999999997,
+              "meanMs": 0.2024232
+            },
+            "complete": {
+              "p50Ms": 0.468912,
+              "p95Ms": 0.4884352,
+              "meanMs": 0.46808346666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.26704,
+              "p95Ms": 0.2847792,
+              "meanMs": 0.26566026666666664
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.10660800000000001,
+              "p95Ms": 0.1195856,
+              "meanMs": 0.10847146666666667
+            },
+            "complete": {
+              "p50Ms": 0.15472,
+              "p95Ms": 0.16914719999999997,
+              "meanMs": 0.1582088
+            },
+            "adaptation": {
+              "p50Ms": 0.048047999999999993,
+              "p95Ms": 0.0551712,
+              "meanMs": 0.049737333333333335
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.060399999999999995,
+              "p95Ms": 0.0674256,
+              "meanMs": 0.0583824
+            },
+            "complete": {
+              "p50Ms": 0.087024,
+              "p95Ms": 0.0938976,
+              "meanMs": 0.08748693333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.026160000000000003,
+              "p95Ms": 0.0335712,
+              "meanMs": 0.029104533333333335
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.03872,
+              "p95Ms": 0.03936,
+              "meanMs": 0.0390544
+            },
+            "complete": {
+              "p50Ms": 0.0544,
+              "p95Ms": 0.05561439999999999,
+              "meanMs": 0.055030666666666665
+            },
+            "adaptation": {
+              "p50Ms": 0.015648,
+              "p95Ms": 0.015907200000000003,
+              "meanMs": 0.015976266666666666
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.020256,
+              "p95Ms": 0.027587200000000003,
+              "meanMs": 0.0230616
+            },
+            "complete": {
+              "p50Ms": 0.036704,
+              "p95Ms": 0.045286400000000004,
+              "meanMs": 0.035944
+            },
+            "adaptation": {
+              "p50Ms": 0.01072,
+              "p95Ms": 0.019454399999999986,
+              "meanMs": 0.0128824
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.01584,
+              "p95Ms": 0.0233984,
+              "meanMs": 0.018792
+            },
+            "complete": {
+              "p50Ms": 0.029296000000000003,
+              "p95Ms": 0.0315872,
+              "meanMs": 0.027386133333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.0070399999999999985,
+              "p95Ms": 0.015489599999999997,
+              "meanMs": 0.008594133333333333
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.021056,
+              "p95Ms": 0.0226592,
+              "meanMs": 0.0182976
+            },
+            "complete": {
+              "p50Ms": 0.027744,
+              "p95Ms": 0.0297408,
+              "meanMs": 0.025590133333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.006336,
+              "p95Ms": 0.014148799999999998,
+              "meanMs": 0.0072925333333333335
+            }
+          }
+        }
+      }
+    },
+    "gpuprefixsums-rts": {
+      "1": {
+        "run": "sweep-r01-gpuprefixsums-rts",
+        "observationsSha256": "7edbe663c3a1ee0d87081fcfadec255f7a425a7e03f1e153638572932fc9b0d5",
+        "metrics": {
+          "32768": {
+            "core": {
+              "p50Ms": 0.007264,
+              "p95Ms": 0.007424,
+              "meanMs": 0.007272266666666667
+            },
+            "complete": {
+              "p50Ms": 0.011328,
+              "p95Ms": 0.01168,
+              "meanMs": 0.011354933333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.004064000000000001,
+              "p95Ms": 0.0042256,
+              "meanMs": 0.004082666666666667
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.00736,
+              "p95Ms": 0.0074896,
+              "meanMs": 0.007357333333333334
+            },
+            "complete": {
+              "p50Ms": 0.01152,
+              "p95Ms": 0.011712,
+              "meanMs": 0.011533866666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.0041600000000000005,
+              "p95Ms": 0.004287999999999999,
+              "meanMs": 0.004176533333333334
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.007328,
+              "p95Ms": 0.0074576,
+              "meanMs": 0.007330666666666667
+            },
+            "complete": {
+              "p50Ms": 0.011744,
+              "p95Ms": 0.0119056,
+              "meanMs": 0.011754666666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.004416,
+              "p95Ms": 0.004575999999999999,
+              "meanMs": 0.004424
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.007744,
+              "p95Ms": 0.0160032,
+              "meanMs": 0.009124266666666667
+            },
+            "complete": {
+              "p50Ms": 0.013024,
+              "p95Ms": 0.02144,
+              "meanMs": 0.0155112
+            },
+            "adaptation": {
+              "p50Ms": 0.005312,
+              "p95Ms": 0.013663999999999999,
+              "meanMs": 0.006386933333333333
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.00816,
+              "p95Ms": 0.016321600000000002,
+              "meanMs": 0.009908266666666667
+            },
+            "complete": {
+              "p50Ms": 0.014272,
+              "p95Ms": 0.022528,
+              "meanMs": 0.017281066666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.00608,
+              "p95Ms": 0.014305600000000002,
+              "meanMs": 0.0073728
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.008352,
+              "p95Ms": 0.016576,
+              "meanMs": 0.010033866666666667
+            },
+            "complete": {
+              "p50Ms": 0.015072,
+              "p95Ms": 0.023264,
+              "meanMs": 0.018281866666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.006655999999999999,
+              "p95Ms": 0.014849600000000001,
+              "meanMs": 0.008248
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.010304,
+              "p95Ms": 0.018016,
+              "meanMs": 0.012376266666666667
+            },
+            "complete": {
+              "p50Ms": 0.026128,
+              "p95Ms": 0.027232,
+              "meanMs": 0.0233895
+            },
+            "adaptation": {
+              "p50Ms": 0.008976000000000001,
+              "p95Ms": 0.0164512,
+              "meanMs": 0.011013233333333334
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.013856,
+              "p95Ms": 0.0212496,
+              "meanMs": 0.016463466666666666
+            },
+            "complete": {
+              "p50Ms": 0.034016,
+              "p95Ms": 0.035779200000000004,
+              "meanMs": 0.033063466666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.014624000000000002,
+              "p95Ms": 0.021796799999999998,
+              "meanMs": 0.0166
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.022816,
+              "p95Ms": 0.030432,
+              "meanMs": 0.025525866666666668
+            },
+            "complete": {
+              "p50Ms": 0.054416,
+              "p95Ms": 0.0614784,
+              "meanMs": 0.054312
+            },
+            "adaptation": {
+              "p50Ms": 0.031136,
+              "p95Ms": 0.032838400000000004,
+              "meanMs": 0.028786133333333335
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.040336,
+              "p95Ms": 0.054049599999999996,
+              "meanMs": 0.04402826666666667
+            },
+            "complete": {
+              "p50Ms": 0.105632,
+              "p95Ms": 0.1131696,
+              "meanMs": 0.10756933333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.0648,
+              "p95Ms": 0.0721472,
+              "meanMs": 0.06354106666666667
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.157136,
+              "p95Ms": 0.1764064,
+              "meanMs": 0.15906266666666666
+            },
+            "complete": {
+              "p50Ms": 0.434256,
+              "p95Ms": 0.44907040000000004,
+              "meanMs": 0.4344128
+            },
+            "adaptation": {
+              "p50Ms": 0.275136,
+              "p95Ms": 0.29165759999999996,
+              "meanMs": 0.27535013333333336
+            }
+          }
+        }
+      },
+      "2": {
+        "run": "sweep-r02-gpuprefixsums-rts",
+        "observationsSha256": "11eb16d7472a06f85c6ee1f0adffcd4de494ae4c1ca9d5cbf129e544bfc8f73b",
+        "metrics": {
+          "16000000": {
+            "core": {
+              "p50Ms": 0.148368,
+              "p95Ms": 0.16832799999999998,
+              "meanMs": 0.1524168
+            },
+            "complete": {
+              "p50Ms": 0.425424,
+              "p95Ms": 0.4416624,
+              "meanMs": 0.4251725333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.27017599999999997,
+              "p95Ms": 0.2901888000000001,
+              "meanMs": 0.2727557333333333
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.041696,
+              "p95Ms": 0.0618064,
+              "meanMs": 0.0464416
+            },
+            "complete": {
+              "p50Ms": 0.10664,
+              "p95Ms": 0.1220448,
+              "meanMs": 0.10927173333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.06425600000000001,
+              "p95Ms": 0.07164799999999999,
+              "meanMs": 0.06283013333333333
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.023856,
+              "p95Ms": 0.03167359999999999,
+              "meanMs": 0.027163733333333332
+            },
+            "complete": {
+              "p50Ms": 0.055760000000000004,
+              "p95Ms": 0.0644432,
+              "meanMs": 0.0563464
+            },
+            "adaptation": {
+              "p50Ms": 0.02664,
+              "p95Ms": 0.03907839999999999,
+              "meanMs": 0.029182666666666666
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.014528,
+              "p95Ms": 0.021955199999999998,
+              "meanMs": 0.016807466666666666
+            },
+            "complete": {
+              "p50Ms": 0.034176,
+              "p95Ms": 0.043744,
+              "meanMs": 0.033745066666666663
+            },
+            "adaptation": {
+              "p50Ms": 0.014719999999999999,
+              "p95Ms": 0.0221136,
+              "meanMs": 0.0169376
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.010304,
+              "p95Ms": 0.0181296,
+              "meanMs": 0.011804266666666667
+            },
+            "complete": {
+              "p50Ms": 0.021248,
+              "p95Ms": 0.0275216,
+              "meanMs": 0.023045333333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.009023999999999999,
+              "p95Ms": 0.0170272,
+              "meanMs": 0.011241066666666667
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.008384,
+              "p95Ms": 0.016672,
+              "meanMs": 0.010803733333333333
+            },
+            "complete": {
+              "p50Ms": 0.015072,
+              "p95Ms": 0.02336,
+              "meanMs": 0.018522933333333335
+            },
+            "adaptation": {
+              "p50Ms": 0.0066240000000000005,
+              "p95Ms": 0.0148512,
+              "meanMs": 0.0077192
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.008192,
+              "p95Ms": 0.016387199999999998,
+              "meanMs": 0.010170933333333333
+            },
+            "complete": {
+              "p50Ms": 0.014272,
+              "p95Ms": 0.022593600000000002,
+              "meanMs": 0.017592533333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00608,
+              "p95Ms": 0.014273600000000001,
+              "meanMs": 0.0074215999999999996
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.007712,
+              "p95Ms": 0.01584,
+              "meanMs": 0.008964183333333334
+            },
+            "complete": {
+              "p50Ms": 0.01296,
+              "p95Ms": 0.021312,
+              "meanMs": 0.015340533333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00528,
+              "p95Ms": 0.013473600000000002,
+              "meanMs": 0.00637635
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.007328,
+              "p95Ms": 0.007456,
+              "meanMs": 0.007325866666666667
+            },
+            "complete": {
+              "p50Ms": 0.011744,
+              "p95Ms": 0.011872,
+              "meanMs": 0.011748
+            },
+            "adaptation": {
+              "p50Ms": 0.004416,
+              "p95Ms": 0.004575999999999999,
+              "meanMs": 0.004422133333333333
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.00736,
+              "p95Ms": 0.007552,
+              "meanMs": 0.0073568
+            },
+            "complete": {
+              "p50Ms": 0.011552,
+              "p95Ms": 0.011776,
+              "meanMs": 0.011533066666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.0041600000000000005,
+              "p95Ms": 0.004256,
+              "meanMs": 0.004176266666666667
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.007296,
+              "p95Ms": 0.007392,
+              "meanMs": 0.007291466666666666
+            },
+            "complete": {
+              "p50Ms": 0.011392,
+              "p95Ms": 0.0115216,
+              "meanMs": 0.0113872
+            },
+            "adaptation": {
+              "p50Ms": 0.004095999999999999,
+              "p95Ms": 0.004192,
+              "meanMs": 0.004095733333333333
+            }
+          }
+        }
+      },
+      "3": {
+        "run": "sweep-r03-gpuprefixsums-rts",
+        "observationsSha256": "f54dc9df399a6c424c3c8453b37ad17350997ef606fce489371f893d7bf9af82",
+        "metrics": {
+          "410758": {
+            "core": {
+              "p50Ms": 0.008192,
+              "p95Ms": 0.0163856,
+              "meanMs": 0.010145866666666666
+            },
+            "complete": {
+              "p50Ms": 0.014352,
+              "p95Ms": 0.022593600000000002,
+              "meanMs": 0.017414666666666665
+            },
+            "adaptation": {
+              "p50Ms": 0.006080000000000001,
+              "p95Ms": 0.014336,
+              "meanMs": 0.0072688
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.008352,
+              "p95Ms": 0.016481600000000002,
+              "meanMs": 0.0101304
+            },
+            "complete": {
+              "p50Ms": 0.015088,
+              "p95Ms": 0.023264,
+              "meanMs": 0.018573866666666668
+            },
+            "adaptation": {
+              "p50Ms": 0.006624,
+              "p95Ms": 0.014943999999999999,
+              "meanMs": 0.008443466666666666
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.010368,
+              "p95Ms": 0.0183088,
+              "meanMs": 0.012682666666666667
+            },
+            "complete": {
+              "p50Ms": 0.02624,
+              "p95Ms": 0.027553599999999998,
+              "meanMs": 0.023821866666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.008992,
+              "p95Ms": 0.0168448,
+              "meanMs": 0.0111392
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.013952,
+              "p95Ms": 0.0211872,
+              "meanMs": 0.016857333333333332
+            },
+            "complete": {
+              "p50Ms": 0.034032,
+              "p95Ms": 0.034688,
+              "meanMs": 0.03271333333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.013344,
+              "p95Ms": 0.020671999999999996,
+              "meanMs": 0.015856
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.023024000000000003,
+              "p95Ms": 0.0303696,
+              "meanMs": 0.026329866666666667
+            },
+            "complete": {
+              "p50Ms": 0.05392,
+              "p95Ms": 0.0608992,
+              "meanMs": 0.05401653333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.024191999999999998,
+              "p95Ms": 0.032100799999999985,
+              "meanMs": 0.027686666666666665
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.047504000000000005,
+              "p95Ms": 0.054884799999999984,
+              "meanMs": 0.04729253333333333
+            },
+            "complete": {
+              "p50Ms": 0.1052,
+              "p95Ms": 0.1245472,
+              "meanMs": 0.10802293333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.057104,
+              "p95Ms": 0.0710768,
+              "meanMs": 0.0607304
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.15672,
+              "p95Ms": 0.1738016,
+              "meanMs": 0.15800373333333334
+            },
+            "complete": {
+              "p50Ms": 0.43432,
+              "p95Ms": 0.4518784,
+              "meanMs": 0.43373626666666665
+            },
+            "adaptation": {
+              "p50Ms": 0.274208,
+              "p95Ms": 0.29513920000000005,
+              "meanMs": 0.2757325333333333
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.007328,
+              "p95Ms": 0.007456,
+              "meanMs": 0.007328533333333333
+            },
+            "complete": {
+              "p50Ms": 0.011392,
+              "p95Ms": 0.011552,
+              "meanMs": 0.0113984
+            },
+            "adaptation": {
+              "p50Ms": 0.004064,
+              "p95Ms": 0.0041919999999999995,
+              "meanMs": 0.004069866666666666
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.00736,
+              "p95Ms": 0.007553599999999999,
+              "meanMs": 0.0073712
+            },
+            "complete": {
+              "p50Ms": 0.011552,
+              "p95Ms": 0.011776,
+              "meanMs": 0.0115432
+            },
+            "adaptation": {
+              "p50Ms": 0.0041600000000000005,
+              "p95Ms": 0.004257600000000001,
+              "meanMs": 0.004172
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.007328,
+              "p95Ms": 0.007456,
+              "meanMs": 0.007333866666666667
+            },
+            "complete": {
+              "p50Ms": 0.011744,
+              "p95Ms": 0.011904,
+              "meanMs": 0.011762133333333332
+            },
+            "adaptation": {
+              "p50Ms": 0.004416000000000001,
+              "p95Ms": 0.004544,
+              "meanMs": 0.0044282666666666665
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.0077599999999999995,
+              "p95Ms": 0.016096,
+              "meanMs": 0.008981866666666666
+            },
+            "complete": {
+              "p50Ms": 0.012992,
+              "p95Ms": 0.0213776,
+              "meanMs": 0.015315466666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.005264,
+              "p95Ms": 0.0134736,
+              "meanMs": 0.0063336
+            }
+          }
+        }
+      },
+      "4": {
+        "run": "sweep-r04-gpuprefixsums-rts",
+        "observationsSha256": "f5ab8aed5c3025fc88a4c2bacbcbfb27fc6754bbb1ec9b391eb0edd4a7e44f00",
+        "metrics": {
+          "262144": {
+            "core": {
+              "p50Ms": 0.007712,
+              "p95Ms": 0.015936,
+              "meanMs": 0.0088456
+            },
+            "complete": {
+              "p50Ms": 0.012992,
+              "p95Ms": 0.021408,
+              "meanMs": 0.015109333333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.005248,
+              "p95Ms": 0.0135712,
+              "meanMs": 0.006263733333333334
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.007296,
+              "p95Ms": 0.007456,
+              "meanMs": 0.007320266666666667
+            },
+            "complete": {
+              "p50Ms": 0.011712,
+              "p95Ms": 0.0119056,
+              "meanMs": 0.011742666666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.004416,
+              "p95Ms": 0.004576,
+              "meanMs": 0.0044224
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.007328,
+              "p95Ms": 0.00752,
+              "meanMs": 0.007333333333333333
+            },
+            "complete": {
+              "p50Ms": 0.011488,
+              "p95Ms": 0.011744,
+              "meanMs": 0.0114992
+            },
+            "adaptation": {
+              "p50Ms": 0.00416,
+              "p95Ms": 0.004257600000000001,
+              "meanMs": 0.004165866666666667
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.007264,
+              "p95Ms": 0.007392,
+              "meanMs": 0.0072752
+            },
+            "complete": {
+              "p50Ms": 0.011328,
+              "p95Ms": 0.011489599999999999,
+              "meanMs": 0.011351733333333332
+            },
+            "adaptation": {
+              "p50Ms": 0.004064000000000001,
+              "p95Ms": 0.0041919999999999995,
+              "meanMs": 0.004076533333333333
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.155424,
+              "p95Ms": 0.1731008,
+              "meanMs": 0.1563208
+            },
+            "complete": {
+              "p50Ms": 0.425968,
+              "p95Ms": 0.444432,
+              "meanMs": 0.42677733333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.269552,
+              "p95Ms": 0.2895504,
+              "meanMs": 0.27045653333333336
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.042384,
+              "p95Ms": 0.0553632,
+              "meanMs": 0.045690133333333334
+            },
+            "complete": {
+              "p50Ms": 0.106272,
+              "p95Ms": 0.1251808,
+              "meanMs": 0.109084
+            },
+            "adaptation": {
+              "p50Ms": 0.064224,
+              "p95Ms": 0.0771536,
+              "meanMs": 0.06339386666666667
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.030176,
+              "p95Ms": 0.0312656,
+              "meanMs": 0.027326666666666666
+            },
+            "complete": {
+              "p50Ms": 0.055904,
+              "p95Ms": 0.0627536,
+              "meanMs": 0.055545866666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.025328000000000003,
+              "p95Ms": 0.033025599999999995,
+              "meanMs": 0.0282192
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.014688,
+              "p95Ms": 0.0220208,
+              "meanMs": 0.016889333333333333
+            },
+            "complete": {
+              "p50Ms": 0.03424,
+              "p95Ms": 0.03752319999999999,
+              "meanMs": 0.033676
+            },
+            "adaptation": {
+              "p50Ms": 0.014624000000000002,
+              "p95Ms": 0.0221824,
+              "meanMs": 0.01678666666666667
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.0104,
+              "p95Ms": 0.018016,
+              "meanMs": 0.0121024
+            },
+            "complete": {
+              "p50Ms": 0.026223999999999997,
+              "p95Ms": 0.0273696,
+              "meanMs": 0.023452
+            },
+            "adaptation": {
+              "p50Ms": 0.009055999999999998,
+              "p95Ms": 0.016839999999999997,
+              "meanMs": 0.0113496
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.008384,
+              "p95Ms": 0.0162624,
+              "meanMs": 0.010047141666666667
+            },
+            "complete": {
+              "p50Ms": 0.015104,
+              "p95Ms": 0.0231104,
+              "meanMs": 0.018161066666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.006672000000000001,
+              "p95Ms": 0.014545449999999998,
+              "meanMs": 0.008113925
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.008192,
+              "p95Ms": 0.0164176,
+              "meanMs": 0.010399733333333333
+            },
+            "complete": {
+              "p50Ms": 0.014336,
+              "p95Ms": 0.022531199999999998,
+              "meanMs": 0.017054666666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.00608,
+              "p95Ms": 0.013574400000000002,
+              "meanMs": 0.006654933333333333
+            }
+          }
+        }
+      }
+    },
+    "hlsl-wave-tiled-direct": {
+      "1": {
+        "run": "sweep-r01-hlsl-wave-tiled-direct",
+        "observationsSha256": "80d696a6e8192c0a467c186a322f2e34f3e03f5fd4200659af3eebf87b9b171e",
+        "metrics": {
+          "32768": {
+            "core": {
+              "p50Ms": 0.008384,
+              "p95Ms": 0.008545599999999999,
+              "meanMs": 0.008390933333333333
+            },
+            "complete": {
+              "p50Ms": 0.008576,
+              "p95Ms": 0.0089296,
+              "meanMs": 0.008618933333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.00048159999999999945,
+              "meanMs": 0.00022799999999999988
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.009088,
+              "p95Ms": 0.009185599999999999,
+              "meanMs": 0.009089333333333333
+            },
+            "complete": {
+              "p50Ms": 0.00928,
+              "p95Ms": 0.009408,
+              "meanMs": 0.009281866666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.0003199999999999992,
+              "meanMs": 0.00019253333333333332
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.010656,
+              "p95Ms": 0.010848,
+              "meanMs": 0.0106728
+            },
+            "complete": {
+              "p50Ms": 0.010848,
+              "p95Ms": 0.011009600000000001,
+              "meanMs": 0.010871466666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.0003519999999999999,
+              "meanMs": 0.0001986666666666666
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.012544,
+              "p95Ms": 0.020704,
+              "meanMs": 0.015536158333333333
+            },
+            "complete": {
+              "p50Ms": 0.012736,
+              "p95Ms": 0.02094925,
+              "meanMs": 0.015813491666666665
+            },
+            "adaptation": {
+              "p50Ms": 0.0001920000000000012,
+              "p95Ms": 0.00035199999999999815,
+              "meanMs": 0.00027733333333333353
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.014464,
+              "p95Ms": 0.02256,
+              "meanMs": 0.016413866666666665
+            },
+            "complete": {
+              "p50Ms": 0.014656,
+              "p95Ms": 0.0227552,
+              "meanMs": 0.016691275
+            },
+            "adaptation": {
+              "p50Ms": 0.00020799999999999812,
+              "p95Ms": 0.00038560000000000054,
+              "meanMs": 0.0002774083333333333
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.015408,
+              "p95Ms": 0.023457600000000002,
+              "meanMs": 0.018986666666666666
+            },
+            "complete": {
+              "p50Ms": 0.01576,
+              "p95Ms": 0.023649599999999996,
+              "meanMs": 0.019256533333333332
+            },
+            "adaptation": {
+              "p50Ms": 0.00020799999999999985,
+              "p95Ms": 0.0003520000000000016,
+              "meanMs": 0.00026986666666666654
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.026383999999999998,
+              "p95Ms": 0.027744,
+              "meanMs": 0.02412
+            },
+            "complete": {
+              "p50Ms": 0.026528,
+              "p95Ms": 0.027969599999999997,
+              "meanMs": 0.024359733333333335
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00028959999999999983,
+              "meanMs": 0.00023973333333333332
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.037488,
+              "p95Ms": 0.0452944,
+              "meanMs": 0.0367291
+            },
+            "complete": {
+              "p50Ms": 0.037632,
+              "p95Ms": 0.0455136,
+              "meanMs": 0.0368811
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.0002559999999999993,
+              "meanMs": 0.00015200000000000012
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.058864,
+              "p95Ms": 0.0666016,
+              "meanMs": 0.05998506666666667
+            },
+            "complete": {
+              "p50Ms": 0.058976,
+              "p95Ms": 0.06664,
+              "meanMs": 0.06012186666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.0001280000000000031,
+              "p95Ms": 0.00025599999999999267,
+              "meanMs": 0.00013679999999999977
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.102528,
+              "p95Ms": 0.1030432,
+              "meanMs": 0.1030368
+            },
+            "complete": {
+              "p50Ms": 0.102688,
+              "p95Ms": 0.103264,
+              "meanMs": 0.10320346666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000736,
+              "p95Ms": 0.0002560000000000062,
+              "meanMs": 0.00016666666666666715
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.19952,
+              "p95Ms": 0.2137008,
+              "meanMs": 0.20054026666666666
+            },
+            "complete": {
+              "p50Ms": 0.19974399999999998,
+              "p95Ms": 0.2138928,
+              "meanMs": 0.20074613333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00022400000000000198,
+              "p95Ms": 0.00031999999999998837,
+              "meanMs": 0.00020586666666666694
+            }
+          }
+        }
+      },
+      "2": {
+        "run": "sweep-r02-hlsl-wave-tiled-direct",
+        "observationsSha256": "185113dadaa434352390efdeccf6b3c810c2f920ff42de398e95af083dbf90d6",
+        "metrics": {
+          "16000000": {
+            "core": {
+              "p50Ms": 0.198832,
+              "p95Ms": 0.215232,
+              "meanMs": 0.19905466666666666
+            },
+            "complete": {
+              "p50Ms": 0.199008,
+              "p95Ms": 0.21548960000000003,
+              "meanMs": 0.19921946666666668
+            },
+            "adaptation": {
+              "p50Ms": 0.00015999999999999348,
+              "p95Ms": 0.00028800000000001047,
+              "meanMs": 0.00016479999999999967
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.103936,
+              "p95Ms": 0.11308479999999999,
+              "meanMs": 0.10579893333333333
+            },
+            "complete": {
+              "p50Ms": 0.104128,
+              "p95Ms": 0.11330879999999997,
+              "meanMs": 0.1059624
+            },
+            "adaptation": {
+              "p50Ms": 0.00015999999999999348,
+              "p95Ms": 0.0002560000000000062,
+              "meanMs": 0.0001634666666666664
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.059536000000000006,
+              "p95Ms": 0.060408,
+              "meanMs": 0.05964986666666667
+            },
+            "complete": {
+              "p50Ms": 0.05968,
+              "p95Ms": 0.0604752,
+              "meanMs": 0.0597992
+            },
+            "adaptation": {
+              "p50Ms": 0.00015999999999999695,
+              "p95Ms": 0.0002559999999999993,
+              "meanMs": 0.00014933333333333292
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.03152,
+              "p95Ms": 0.039270400000000004,
+              "meanMs": 0.034835733333333334
+            },
+            "complete": {
+              "p50Ms": 0.031648,
+              "p95Ms": 0.0394256,
+              "meanMs": 0.03497653333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.0001280000000000031,
+              "p95Ms": 0.0002559999999999993,
+              "meanMs": 0.00014079999999999987
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.023952,
+              "p95Ms": 0.028007999999999998,
+              "meanMs": 0.0239976
+            },
+            "complete": {
+              "p50Ms": 0.024144,
+              "p95Ms": 0.0282592,
+              "meanMs": 0.024172266666666668
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.0003216000000000006,
+              "meanMs": 0.00017466666666666683
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.015872,
+              "p95Ms": 0.0238112,
+              "meanMs": 0.0191592
+            },
+            "complete": {
+              "p50Ms": 0.016079999999999997,
+              "p95Ms": 0.024033600000000002,
+              "meanMs": 0.019537066666666665
+            },
+            "adaptation": {
+              "p50Ms": 0.0001920000000000012,
+              "p95Ms": 0.0003520000000000016,
+              "meanMs": 0.00037786666666666667
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.014544,
+              "p95Ms": 0.022660800000000002,
+              "meanMs": 0.017075733333333332
+            },
+            "complete": {
+              "p50Ms": 0.014768,
+              "p95Ms": 0.022849599999999998,
+              "meanMs": 0.017283466666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.0001920000000000012,
+              "p95Ms": 0.0003519999999999999,
+              "meanMs": 0.00020773333333333333
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.012768,
+              "p95Ms": 0.0209296,
+              "meanMs": 0.016032533333333335
+            },
+            "complete": {
+              "p50Ms": 0.012992,
+              "p95Ms": 0.021152,
+              "meanMs": 0.016232
+            },
+            "adaptation": {
+              "p50Ms": 0.0001920000000000012,
+              "p95Ms": 0.0003216000000000006,
+              "meanMs": 0.00019946666666666673
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.010656,
+              "p95Ms": 0.010816,
+              "meanMs": 0.010710933333333334
+            },
+            "complete": {
+              "p50Ms": 0.010848,
+              "p95Ms": 0.010977599999999999,
+              "meanMs": 0.010910666666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.00032000000000000084,
+              "meanMs": 0.00019973333333333314
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.009184,
+              "p95Ms": 0.0093136,
+              "meanMs": 0.009187466666666666
+            },
+            "complete": {
+              "p50Ms": 0.009376,
+              "p95Ms": 0.009568,
+              "meanMs": 0.0093864
+            },
+            "adaptation": {
+              "p50Ms": 0.0001920000000000012,
+              "p95Ms": 0.00038399999999999903,
+              "meanMs": 0.00019893333333333344
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.008256,
+              "p95Ms": 0.008448,
+              "meanMs": 0.008262666666666666
+            },
+            "complete": {
+              "p50Ms": 0.008448,
+              "p95Ms": 0.00864,
+              "meanMs": 0.0084664
+            },
+            "adaptation": {
+              "p50Ms": 0.0001920000000000012,
+              "p95Ms": 0.0003216000000000007,
+              "meanMs": 0.0002037333333333334
+            }
+          }
+        }
+      },
+      "3": {
+        "run": "sweep-r03-hlsl-wave-tiled-direct",
+        "observationsSha256": "3c938a8f628e317886c93427b8c3f193c60caac53ae0d00d60d3098861955689",
+        "metrics": {
+          "410758": {
+            "core": {
+              "p50Ms": 0.014176,
+              "p95Ms": 0.0224,
+              "meanMs": 0.016919825
+            },
+            "complete": {
+              "p50Ms": 0.0144,
+              "p95Ms": 0.022625599999999996,
+              "meanMs": 0.017198225
+            },
+            "adaptation": {
+              "p50Ms": 0.00020799999999999985,
+              "p95Ms": 0.0003536000000000014,
+              "meanMs": 0.0002783999999999999
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.015488,
+              "p95Ms": 0.0233344,
+              "meanMs": 0.018540458333333332
+            },
+            "complete": {
+              "p50Ms": 0.015728,
+              "p95Ms": 0.023555200000000002,
+              "meanMs": 0.018818325
+            },
+            "adaptation": {
+              "p50Ms": 0.00022400000000000024,
+              "p95Ms": 0.00032000000000000084,
+              "meanMs": 0.0002778666666666665
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.026416000000000002,
+              "p95Ms": 0.0278096,
+              "meanMs": 0.024189333333333334
+            },
+            "complete": {
+              "p50Ms": 0.02656,
+              "p95Ms": 0.028067199999999997,
+              "meanMs": 0.0244312
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00032000000000000084,
+              "meanMs": 0.00024186666666666662
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.037472,
+              "p95Ms": 0.0382912,
+              "meanMs": 0.03534188333333333
+            },
+            "complete": {
+              "p50Ms": 0.037632,
+              "p95Ms": 0.03848,
+              "meanMs": 0.035552016666666665
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.0002896,
+              "meanMs": 0.00021013333333333334
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.059264,
+              "p95Ms": 0.06573119999999999,
+              "meanMs": 0.05788293333333333
+            },
+            "complete": {
+              "p50Ms": 0.059408,
+              "p95Ms": 0.06589120000000001,
+              "meanMs": 0.05810506666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.00028800000000000353,
+              "meanMs": 0.00022213333333333344
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.103824,
+              "p95Ms": 0.11122879999999999,
+              "meanMs": 0.10529093333333334
+            },
+            "complete": {
+              "p50Ms": 0.103968,
+              "p95Ms": 0.11132959999999999,
+              "meanMs": 0.10550586666666667
+            },
+            "adaptation": {
+              "p50Ms": 0.00015999999999999348,
+              "p95Ms": 0.0002879999999999973,
+              "meanMs": 0.00021493333333333364
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.199552,
+              "p95Ms": 0.2167424,
+              "meanMs": 0.19939893333333333
+            },
+            "complete": {
+              "p50Ms": 0.199744,
+              "p95Ms": 0.2169344,
+              "meanMs": 0.19959093333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999773,
+              "p95Ms": 0.0002896000000000092,
+              "meanMs": 0.00019199999999999935
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.008096,
+              "p95Ms": 0.008224,
+              "meanMs": 0.00812
+            },
+            "complete": {
+              "p50Ms": 0.00832,
+              "p95Ms": 0.008449600000000002,
+              "meanMs": 0.008326133333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.0003519999999999999,
+              "meanMs": 0.00020613333333333316
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.009056,
+              "p95Ms": 0.009216,
+              "meanMs": 0.009068
+            },
+            "complete": {
+              "p50Ms": 0.00928,
+              "p95Ms": 0.00944,
+              "meanMs": 0.0092824
+            },
+            "adaptation": {
+              "p50Ms": 0.00022400000000000024,
+              "p95Ms": 0.0003519999999999999,
+              "meanMs": 0.00021439999999999993
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.010528,
+              "p95Ms": 0.010656,
+              "meanMs": 0.010530133333333334
+            },
+            "complete": {
+              "p50Ms": 0.01072,
+              "p95Ms": 0.01088,
+              "meanMs": 0.010724
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.00032000000000000084,
+              "meanMs": 0.00019386666666666678
+            }
+          },
+          "262144": {
+            "core": {
+              "p50Ms": 0.01256,
+              "p95Ms": 0.0207696,
+              "meanMs": 0.015269475
+            },
+            "complete": {
+              "p50Ms": 0.012736,
+              "p95Ms": 0.020992,
+              "meanMs": 0.015474541666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.0001920000000000012,
+              "p95Ms": 0.00032000000000000084,
+              "meanMs": 0.00020506666666666684
+            }
+          }
+        }
+      },
+      "4": {
+        "run": "sweep-r04-hlsl-wave-tiled-direct",
+        "observationsSha256": "bb652cbab9e88dc3c9714c1b382a0700e03e0ed9aaa0c2aa56b14692f6a4270e",
+        "metrics": {
+          "262144": {
+            "core": {
+              "p50Ms": 0.012736,
+              "p95Ms": 0.0209936,
+              "meanMs": 0.0143608
+            },
+            "complete": {
+              "p50Ms": 0.012928,
+              "p95Ms": 0.0211232,
+              "meanMs": 0.014692533333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.0003215999999999991,
+              "meanMs": 0.00033173333333333334
+            }
+          },
+          "131072": {
+            "core": {
+              "p50Ms": 0.010752,
+              "p95Ms": 0.0108816,
+              "meanMs": 0.0107552
+            },
+            "complete": {
+              "p50Ms": 0.010944,
+              "p95Ms": 0.011105599999999998,
+              "meanMs": 0.0109512
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.00032000000000000084,
+              "meanMs": 0.0001960000000000002
+            }
+          },
+          "65536": {
+            "core": {
+              "p50Ms": 0.009216,
+              "p95Ms": 0.009344,
+              "meanMs": 0.009227733333333333
+            },
+            "complete": {
+              "p50Ms": 0.009424,
+              "p95Ms": 0.0096,
+              "meanMs": 0.009433333333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.0001920000000000012,
+              "p95Ms": 0.00032000000000000084,
+              "meanMs": 0.00020560000000000015
+            }
+          },
+          "32768": {
+            "core": {
+              "p50Ms": 0.008336,
+              "p95Ms": 0.00848,
+              "meanMs": 0.008338933333333333
+            },
+            "complete": {
+              "p50Ms": 0.008512,
+              "p95Ms": 0.008704,
+              "meanMs": 0.008524
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.0003199999999999992,
+              "meanMs": 0.0001850666666666667
+            }
+          },
+          "16000000": {
+            "core": {
+              "p50Ms": 0.19752,
+              "p95Ms": 0.21506240000000001,
+              "meanMs": 0.19794853333333334
+            },
+            "complete": {
+              "p50Ms": 0.197632,
+              "p95Ms": 0.2153232,
+              "meanMs": 0.19813866666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999773,
+              "p95Ms": 0.00031999999999998696,
+              "meanMs": 0.00019013333333333496
+            }
+          },
+          "8388608": {
+            "core": {
+              "p50Ms": 0.103216,
+              "p95Ms": 0.11071519999999999,
+              "meanMs": 0.10403066666666666
+            },
+            "complete": {
+              "p50Ms": 0.10334399999999999,
+              "p95Ms": 0.11087839999999999,
+              "meanMs": 0.10425653333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000736,
+              "p95Ms": 0.0002879999999999966,
+              "meanMs": 0.00022586666666666693
+            }
+          },
+          "4194304": {
+            "core": {
+              "p50Ms": 0.05888,
+              "p95Ms": 0.0679824,
+              "meanMs": 0.0575216
+            },
+            "complete": {
+              "p50Ms": 0.058992,
+              "p95Ms": 0.06802240000000001,
+              "meanMs": 0.05766053333333333
+            },
+            "adaptation": {
+              "p50Ms": 0.0001280000000000031,
+              "p95Ms": 0.00022400000000000198,
+              "meanMs": 0.000138933333333333
+            }
+          },
+          "2097152": {
+            "core": {
+              "p50Ms": 0.038015999999999994,
+              "p95Ms": 0.0464352,
+              "meanMs": 0.037932
+            },
+            "complete": {
+              "p50Ms": 0.03816,
+              "p95Ms": 0.0466304,
+              "meanMs": 0.0381624
+            },
+            "adaptation": {
+              "p50Ms": 0.00016000000000000042,
+              "p95Ms": 0.0002896000000000029,
+              "meanMs": 0.00023039999999999988
+            }
+          },
+          "1048576": {
+            "core": {
+              "p50Ms": 0.02704,
+              "p95Ms": 0.0281696,
+              "meanMs": 0.02452266666666667
+            },
+            "complete": {
+              "p50Ms": 0.027248,
+              "p95Ms": 0.0283872,
+              "meanMs": 0.024775733333333334
+            },
+            "adaptation": {
+              "p50Ms": 0.00019199999999999946,
+              "p95Ms": 0.0003216000000000006,
+              "meanMs": 0.0002530666666666667
+            }
+          },
+          "524288": {
+            "core": {
+              "p50Ms": 0.01552,
+              "p95Ms": 0.023395199999999998,
+              "meanMs": 0.0178944
+            },
+            "complete": {
+              "p50Ms": 0.015712,
+              "p95Ms": 0.023648,
+              "meanMs": 0.0181048
+            },
+            "adaptation": {
+              "p50Ms": 0.0001920000000000012,
+              "p95Ms": 0.00032160000000000077,
+              "meanMs": 0.00021039999999999977
+            }
+          },
+          "410758": {
+            "core": {
+              "p50Ms": 0.014464,
+              "p95Ms": 0.0225968,
+              "meanMs": 0.016453983333333335
+            },
+            "complete": {
+              "p50Ms": 0.014688,
+              "p95Ms": 0.022849599999999998,
+              "meanMs": 0.016722516666666666
+            },
+            "adaptation": {
+              "p50Ms": 0.0001920000000000012,
+              "p95Ms": 0.0003216000000000006,
+              "meanMs": 0.0002685333333333333
+            }
+          }
+        }
+      }
+    }
+  },
+  "statistic": "p50 summarized descriptively; mean equally weights four process means; paired process-mean log-ratio Student-t intervals df=3, pointwise only",
+  "limitation": "fixed regenerated full32 input and hot sequential GPU workload; no cold-cache, application or simultaneous confidence-band claim"
+}

@@ -26,6 +26,13 @@ internal static class SettingsChecks
         Require(FluidBenchmarkSettings.Parse(new[] { "--fluid-benchmark", "--fluid-arm", "gpuprefixsums-rts", "--fluid-output", path }).arm == ScanArm.GpuPrefixSumsRts);
         Require(FluidBenchmarkSettings.Parse(new[] { "--fluid-capture", "--fluid-arm", "original", "--fluid-output", path }).captureOnly);
         Reject("--fluid-benchmark", "--fluid-capture", "--fluid-arm", "original", "--fluid-output", path);
+        Require(FluidBenchmarkSettings.Parse(new[] { "--fluid-benchmark", "--fluid-arm", "hlsl-wave-tiled-direct", "--fluid-output", path }).arm == ScanArm.HlslWaveTiledDirect);
+        Require(FluidBenchmarkSettings.Parse(new[] { "--fluid-scan-sweep", "--fluid-arm", "original", "--fluid-output", path, "--fluid-gpu-timing", "d3d12-query", "--fluid-lengths", "32768,16000000" }).scanLengths.Length == 2);
+        Reject("--fluid-scan-sweep", "--fluid-arm", "original", "--fluid-output", path);
+        Reject("--fluid-scan-sweep", "--fluid-arm", "original", "--fluid-output", path, "--fluid-gpu-timing", "d3d12-query", "--fluid-lengths", "1,1");
+        Reject("--fluid-scan-sweep", "--fluid-arm", "original", "--fluid-output", path, "--fluid-gpu-timing", "d3d12-query", "--fluid-lengths", "16777216");
+        Reject("--fluid-benchmark", "--fluid-arm", "original", "--fluid-output", path, "--fluid-lengths", "32768");
+        Reject("--fluid-scan-sweep", "--fluid-arm", "original", "--fluid-output", path, "--fluid-gpu-timing", "d3d12-query", "--fluid-scan-batch", "33");
         Reject("--fluid-benchmark");
         Reject("--fluid-benchmark", "--fluid-arm", "unknown", "--fluid-output", path);
         Reject("--fluid-benchmark", "--fluid-validate-only", "--fluid-arm", "original", "--fluid-output", path);

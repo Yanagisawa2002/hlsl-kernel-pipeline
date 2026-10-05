@@ -18,6 +18,7 @@ namespace Seb.GPUSorting
 
 		readonly Scan scan = new();
 		IExclusiveScan benchmarkScan;
+        ComputeShader rawCountsShader;
 		ScanArm? benchmarkArm;
 		readonly ComputeShader cs = ComputeHelper.LoadComputeShader("CountSort");
 
@@ -88,33 +89,43 @@ namespace Seb.GPUSorting
             if (benchmarkScan == null) { benchmarkScan = ScanBackends.Create(arm); benchmarkArm = arm; }
             ComputeHelper.CreateStructuredBuffer<uint>(ref sortedItemsBuffer, count);
             ComputeHelper.CreateStructuredBuffer<uint>(ref sortedValuesBuffer, count);
-            ComputeHelper.CreateStructuredBuffer<uint>(ref countsBuffer, count);
+            bool direct = arm == ScanArm.HlslWaveTiledDirect;
+            if (direct)
+            {
+                if (countsBuffer == null || countsBuffer.count != count)
+                {
+                    countsBuffer?.Release(); countsBuffer = new ComputeBuffer(count, 4, ComputeBufferType.Raw);
+                }
+                if (rawCountsShader == null) rawCountsShader = ScanBackends.Load("FluidCountSortRaw", "ClearCounts", "CalculateCounts", "ScatterOutput", "CopyBack");
+            }
+            else ComputeHelper.CreateStructuredBuffer<uint>(ref countsBuffer, count);
+            var shader = direct ? rawCountsShader : cs;
 
             FluidGpuSamples.Begin(cmd, FluidGpuSamples.Sort);
-            cmd.SetComputeIntParam(cs, ID_NumInputs, count);
-            cmd.SetComputeBufferParam(cs, ClearCountsKernel, ID_Counts, countsBuffer);
-            cmd.SetComputeBufferParam(cs, ClearCountsKernel, ID_InputItems, items);
-            cmd.SetComputeBufferParam(cs, CountKernel, ID_Counts, countsBuffer);
-            cmd.SetComputeBufferParam(cs, CountKernel, ID_InputSortKeys, keys);
+            cmd.SetComputeIntParam(shader, ID_NumInputs, count);
+            cmd.SetComputeBufferParam(shader, ClearCountsKernel, ID_Counts, countsBuffer);
+            cmd.SetComputeBufferParam(shader, ClearCountsKernel, ID_InputItems, items);
+            cmd.SetComputeBufferParam(shader, CountKernel, ID_Counts, countsBuffer);
+            cmd.SetComputeBufferParam(shader, CountKernel, ID_InputSortKeys, keys);
             int groups = (count + 255) / 256;
-            cmd.DispatchCompute(cs, ClearCountsKernel, groups, 1, 1);
-            cmd.DispatchCompute(cs, CountKernel, groups, 1, 1);
+            cmd.DispatchCompute(shader, ClearCountsKernel, groups, 1, 1);
+            cmd.DispatchCompute(shader, CountKernel, groups, 1, 1);
 
             FluidGpuSamples.Begin(cmd, FluidGpuSamples.Scan);
-            benchmarkScan.Record(cmd, countsBuffer, count);
+            var scanResult = benchmarkScan.Record(cmd, countsBuffer, count);
             FluidGpuSamples.End(cmd, FluidGpuSamples.Scan);
 
-            cmd.SetComputeBufferParam(cs, ScatterOutputsKernel, ID_Counts, countsBuffer);
-            cmd.SetComputeBufferParam(cs, ScatterOutputsKernel, ID_InputItems, items);
-            cmd.SetComputeBufferParam(cs, ScatterOutputsKernel, ID_InputSortKeys, keys);
-            cmd.SetComputeBufferParam(cs, ScatterOutputsKernel, ID_SortedItems, sortedItemsBuffer);
-            cmd.SetComputeBufferParam(cs, ScatterOutputsKernel, ID_SortedKeys, sortedValuesBuffer);
-            cmd.DispatchCompute(cs, ScatterOutputsKernel, groups, 1, 1);
-            cmd.SetComputeBufferParam(cs, CopyBackKernel, ID_InputItems, items);
-            cmd.SetComputeBufferParam(cs, CopyBackKernel, ID_InputSortKeys, keys);
-            cmd.SetComputeBufferParam(cs, CopyBackKernel, ID_SortedItems, sortedItemsBuffer);
-            cmd.SetComputeBufferParam(cs, CopyBackKernel, ID_SortedKeys, sortedValuesBuffer);
-            cmd.DispatchCompute(cs, CopyBackKernel, groups, 1, 1);
+            cmd.SetComputeBufferParam(shader, ScatterOutputsKernel, ID_Counts, scanResult);
+            cmd.SetComputeBufferParam(shader, ScatterOutputsKernel, ID_InputItems, items);
+            cmd.SetComputeBufferParam(shader, ScatterOutputsKernel, ID_InputSortKeys, keys);
+            cmd.SetComputeBufferParam(shader, ScatterOutputsKernel, ID_SortedItems, sortedItemsBuffer);
+            cmd.SetComputeBufferParam(shader, ScatterOutputsKernel, ID_SortedKeys, sortedValuesBuffer);
+            cmd.DispatchCompute(shader, ScatterOutputsKernel, groups, 1, 1);
+            cmd.SetComputeBufferParam(shader, CopyBackKernel, ID_InputItems, items);
+            cmd.SetComputeBufferParam(shader, CopyBackKernel, ID_InputSortKeys, keys);
+            cmd.SetComputeBufferParam(shader, CopyBackKernel, ID_SortedItems, sortedItemsBuffer);
+            cmd.SetComputeBufferParam(shader, CopyBackKernel, ID_SortedKeys, sortedValuesBuffer);
+            cmd.DispatchCompute(shader, CopyBackKernel, groups, 1, 1);
             FluidGpuSamples.End(cmd, FluidGpuSamples.Sort);
         }
 
@@ -123,6 +134,7 @@ namespace Seb.GPUSorting
 			ComputeHelper.Release(sortedItemsBuffer, sortedValuesBuffer, countsBuffer);
 			scan.Release();
 			benchmarkScan?.Dispose();
+            if (rawCountsShader != null) UnityEngine.Object.Destroy(rawCountsShader);
 		}
 	}
 }

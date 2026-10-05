@@ -35,7 +35,7 @@ def main():
         compilerSha256=sha(compiler), dllSha256=sha(destination/'FluidGpuTiming.dll'),
         unityApiHeaders={p.name:sha(p) for p in headers.glob('IUnity*.h')},
         timing='D3D12 timestamp queries with explicit source frame and completed Unity frame fence',
-        gpuDispatchExecuted=False)
+        timestampProtocol='five metrics, up to 32 calls per frame, enabled-range resolves v2', gpuDispatchExecuted=False)
     (destination / 'FluidGpuTimingBuild.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps(receipt,indent=2))
 if __name__ == '__main__': main()

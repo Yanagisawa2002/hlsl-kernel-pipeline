@@ -45,13 +45,22 @@ namespace HlslPerf.FluidBenchmark
                         uint[] expected = (uint[])input.Clone();
                         uint prefix = 0;
                         for (int i = 0; i < count; i++) { expected[i] = prefix; prefix = unchecked(prefix + input[i]); }
-                        using (var buffer = new ComputeBuffer(input.Length, 4))
+                        bool direct = arm == ScanArm.HlslWaveTiledDirect;
+                        using (var buffer = new ComputeBuffer(input.Length, 4, direct ? ComputeBufferType.Raw : ComputeBufferType.Default))
                         {
-                            buffer.SetData(input); cmd.Clear(); scan.Record(cmd, buffer, count);
+                            buffer.SetData(input); cmd.Clear(); var result = scan.Record(cmd, buffer, count);
+                            // Poison only output guards before submission, including reused/shrunk allocations.
+                            result.SetData(new uint[] { 0xa5a5a5a5, 0xa5a5a5a5, 0xa5a5a5a5, 0xa5a5a5a5 }, 0, count, 4);
                             Graphics.ExecuteCommandBuffer(cmd);
-                            uint[] actual = new uint[input.Length]; buffer.GetData(actual);
+                            uint[] actual = new uint[input.Length]; result.GetData(actual, 0, 0, actual.Length);
                             for (int i = 0; i < actual.Length; i++)
                                 if (actual[i] != expected[i]) throw new InvalidOperationException("Scan mismatch: N=" + count + ", pattern=" + pattern + ", index=" + i);
+                            if (direct)
+                            {
+                                buffer.GetData(actual);
+                                for (int i = 0; i < input.Length; ++i)
+                                    if (actual[i] != input[i]) throw new InvalidOperationException("Direct scan modified its input or guards.");
+                            }
                         }
                         receipt.scanCases++;
                     }

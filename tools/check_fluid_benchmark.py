@@ -69,6 +69,8 @@ def main():
         "Assets/Scripts/Helpers/GPU Sort/CountSort/Resources/CountSort.compute",
         "Assets/Scripts/Helpers/SpatialHash/Offsets/Resources/SpatialOffsets.compute",
         "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+        "Assets/FluidScanBenchmark/Resources/FluidCountSortRaw.compute",
+        "Assets/FluidScanBenchmark/Resources/FluidScanSweepInit.compute",
     ]
     records = []
     for index, relative in enumerate(shader_paths):
@@ -77,7 +79,7 @@ def main():
             binary = output / f"shader-{index}-{entry}.dxil"
             # Preserve vendor/upstream bytes. Their existing compiler warnings stay in diagnostics.
             # Our bridge and wave wrapper retain warnings-as-errors.
-            warnings_as_errors = index in (0, 1)
+            warnings_as_errors = index in (0, 1, 7, 8)
             target = "cs_6_0" if index == 1 else "cs_6_6"
             checked([str(dxc), "-T", target, "-HV", "2018", "-Ges", *(["-WX"] if warnings_as_errors else []),
                      "-O3", "-E", entry, "-Fo", str(binary), str(source)],

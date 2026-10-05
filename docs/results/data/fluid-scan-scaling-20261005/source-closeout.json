@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "measuredPayloadSha256": "2e71b144164b5b805a8803f04733ca1a57446752af0ed2c33278d4343788d6da",
+  "closeoutPayloadSha256": "c4c387085c991d888baddda4c0c968995bae56fa7631628694385797d3e4fe9a",
+  "changedFiles": [
+    "FLUID-BENCHMARK-README.md"
+  ],
+  "runtimeKernelPluginInputsByteIdentical": true
+}

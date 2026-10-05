@@ -80,6 +80,15 @@ namespace HlslPerf.FluidBenchmark
                 {
                     StopScene(scene, mode); Application.Quit(0); return;
                 }
+                if (settings.scanSweep)
+                {
+                    StopScene(scene, mode);
+                    foreach (var camera in Object.FindObjectsOfType<Camera>()) camera.enabled = false;
+                    foreach (var renderer in Object.FindObjectsOfType<Renderer>()) renderer.enabled = false;
+                    QualitySettings.vSyncCount = 0; Application.targetFrameRate = -1;
+                    new GameObject("Fluid Scan Length Sweep").AddComponent<FluidScanSweep>();
+                    return;
+                }
                 var sim = sims[0];
                 sim.spawner.particleSpawnDensity = settings.spawnDensity;
                 sim.normalTimeScale = 1;
@@ -156,10 +165,10 @@ namespace HlslPerf.FluidBenchmark
             int gpuSource = frame - calibration.result.delayFrames;
             if (settings.nativeGpuTiming)
             {
-                string[] names = { "scan_complete", "count_sort_complete", "spatial_hash_complete", "simulation_complete" };
+                string[] names = { "scan_complete", "count_sort_complete", "spatial_hash_complete", "simulation_complete", "scan_core" };
                 while (nextGpuFrame <= lastFrame && nextGpuFrame < frame && FluidNativeTiming.Active.Read(nextGpuFrame))
                 {
-                    for (int metric = 0; metric < 4; ++metric)
+                    for (int metric = 0; metric < 5; ++metric)
                         Add(frame, nextGpuFrame, names[metric], FluidNativeTiming.Active.ms[metric], FluidNativeTiming.Active.blocks[metric]);
                     ++nextGpuFrame; ++nativeFramesRead;
                 }
@@ -170,6 +179,7 @@ namespace HlslPerf.FluidBenchmark
                 ReadGpu(frame, gpuSource, "count_sort_complete", FluidGpuSamples.Sort, sim.iterationsPerFrame);
                 ReadGpu(frame, gpuSource, "spatial_hash_complete", FluidGpuSamples.Spatial, sim.iterationsPerFrame);
                 ReadGpu(frame, gpuSource, "simulation_complete", FluidGpuSamples.Simulation, 1);
+                ReadGpu(frame, gpuSource, "scan_core", FluidGpuSamples.Core, sim.iterationsPerFrame);
             }
             FrameTimingManager.CaptureFrameTimings();
             uint available = FrameTimingManager.GetLatestTimings((uint)timings.Length, timings);
@@ -210,6 +220,12 @@ namespace HlslPerf.FluidBenchmark
         {
             finished = true;
             var settings = FluidBenchmarkSettings.Active;
+            // Outside measured frames and after timing drain: reject non-finite large-scale solver output.
+            var positions = new Unity.Mathematics.float3[sim.positionBuffer.count];
+            sim.positionBuffer.GetData(positions);
+            foreach (var position in positions)
+                if (!Unity.Mathematics.math.all(Unity.Mathematics.math.isfinite(position)))
+                    throw new InvalidOperationException("Application produced non-finite particle positions.");
             File.WriteAllLines(Path.Combine(settings.outputDirectory, "observations.csv"), observations);
             File.WriteAllLines(Path.Combine(settings.outputDirectory, "frame-timing-diagnostics.csv"), frameTimings);
             File.WriteAllText(Path.Combine(settings.outputDirectory, "gpu-delay.json"), JsonUtility.ToJson(calibration.result, true));
@@ -245,6 +261,7 @@ namespace HlslPerf.FluidBenchmark
             public int appliedGpuRecorderDelayFrames = 3;
             public string gpuTimingMethod, gpuTimestampFrequency, nativeTimingBuild;
             public bool supportsGpuRecorder, gpuProfilerAreaEnabled;
+            public bool coreTimingEnabled = true, positionFiniteValidated = true;
             public string device, driver, api, unity, provenance;
             public int vendorId, deviceId, particles, foamCapacity, iterationsPerFrame, width, height;
             public int firstMeasuredUnityFrame, lastMeasuredUnityFrame;

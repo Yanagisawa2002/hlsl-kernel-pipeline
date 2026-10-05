@@ -5,11 +5,12 @@ using GPUPrefixSums.Runtime;
 
 namespace HlslPerf.FluidBenchmark
 {
-    public enum ScanArm { Original, HlslWaveTiled, GpuPrefixSumsRts }
+    public enum ScanArm { Original, HlslWaveTiled, GpuPrefixSumsRts, HlslWaveTiledDirect }
 
     public interface IExclusiveScan : IDisposable
     {
-        void Record(CommandBuffer cmd, ComputeBuffer values, int count);
+        // Direct mode leaves input unchanged and returns a distinct raw result buffer.
+        ComputeBuffer Record(CommandBuffer cmd, ComputeBuffer values, int count);
     }
 
     public static class ScanBackends
@@ -23,6 +24,7 @@ namespace HlslPerf.FluidBenchmark
                 case ScanArm.Original: return new OriginalScan();
                 case ScanArm.HlslWaveTiled: return new WaveTiledScan();
                 case ScanArm.GpuPrefixSumsRts: return new RtsScan();
+                case ScanArm.HlslWaveTiledDirect: return new WaveTiledScan(true);
                 default: throw new ArgumentOutOfRangeException(nameof(arm));
             }
         }
@@ -52,10 +54,13 @@ namespace HlslPerf.FluidBenchmark
         private sealed class OriginalScan : IExclusiveScan
         {
             private readonly Seb.GPUSorting.Scan scan = new Seb.GPUSorting.Scan();
-            public void Record(CommandBuffer cmd, ComputeBuffer values, int count)
+            public ComputeBuffer Record(CommandBuffer cmd, ComputeBuffer values, int count)
             {
                 Check(values, count);
+                FluidGpuSamples.Begin(cmd, FluidGpuSamples.Core);
                 scan.Record(cmd, values, count);
+                FluidGpuSamples.End(cmd, FluidGpuSamples.Core);
+                return values;
             }
             public void Dispose() { scan.Release(); }
         }
@@ -68,22 +73,25 @@ namespace HlslPerf.FluidBenchmark
             protected ComputeBuffer input, output;
             protected int capacity;
 
-            public void Record(CommandBuffer cmd, ComputeBuffer values, int count)
+            public ComputeBuffer Record(CommandBuffer cmd, ComputeBuffer values, int count)
             {
                 Check(values, count);
-                if (count == 0) return;
+                if (count == 0) return values;
                 Ensure(count);
                 RecordCore(cmd, values, count);
+                return Result(values);
             }
+
+            protected virtual ComputeBuffer Result(ComputeBuffer values) { return values; }
 
             protected abstract void Ensure(int count);
             protected abstract void RecordCore(CommandBuffer cmd, ComputeBuffer values, int count);
 
-            protected void Bridge(CommandBuffer cmd, string entry, ComputeBuffer values, int count, int dispatchCount)
+            protected void Bridge(CommandBuffer cmd, string entry, ComputeBuffer values, int count, int dispatchCount, int paddedCount = -1)
             {
                 int kernel = bridge.FindKernel(entry);
                 cmd.SetComputeIntParam(bridge, "LogicalCount", count);
-                cmd.SetComputeIntParam(bridge, "PaddedCount", capacity);
+                cmd.SetComputeIntParam(bridge, "PaddedCount", paddedCount < 0 ? capacity : paddedCount);
                 cmd.SetComputeBufferParam(bridge, kernel, "Values", values);
                 bool raw = entry.EndsWith("Raw", StringComparison.Ordinal);
                 bool packing = entry.StartsWith("Pack", StringComparison.Ordinal);
@@ -107,9 +115,11 @@ namespace HlslPerf.FluidBenchmark
             private readonly ComputeShader shader;
             private readonly int reset, scan;
             private ComputeBuffer scratch;
+            private readonly bool direct;
 
-            public WaveTiledScan()
+            public WaveTiledScan(bool direct = false)
             {
+                this.direct = direct;
                 if (SystemInfo.graphicsDeviceType != GraphicsDeviceType.Direct3D12)
                     throw new NotSupportedException("HLSL wave-tiled requires D3D12, DXC and validated native wave32. No fallback is substituted.");
                 shader = Load("FluidWaveTiled", "ResetWaveTiledState", "SinglePassScanWaveTiled", "ProbeNativeWaveSize");
@@ -130,27 +140,31 @@ namespace HlslPerf.FluidBenchmark
             {
                 if (count <= capacity) return;
                 ReleaseData(); scratch?.Release(); capacity = count;
-                input = new ComputeBuffer(capacity, 4, ComputeBufferType.Raw);
-                output = new ComputeBuffer(capacity, 4, ComputeBufferType.Raw);
+                if (!direct) input = new ComputeBuffer(capacity, 4, ComputeBufferType.Raw);
+                output = new ComputeBuffer(capacity + 4, 4, ComputeBufferType.Raw);
                 scratch = new ComputeBuffer(2 + 3 * ((capacity + 4095) / 4096), 4, ComputeBufferType.Raw);
             }
 
             protected override void RecordCore(CommandBuffer cmd, ComputeBuffer values, int count)
             {
-                Bridge(cmd, "PackRaw", values, count, count);
+                if (!direct) Bridge(cmd, "PackRaw", values, count, count);
+                FluidGpuSamples.Begin(cmd, FluidGpuSamples.Core);
                 int blocks = (count + 4095) / 4096;
                 cmd.SetComputeIntParam(shader, "ElementCount", count);
                 cmd.SetComputeIntParam(shader, "ElementsPerBlock", 4096);
                 cmd.SetComputeIntParam(shader, "LogicalBlockCount", blocks);
                 cmd.SetComputeBufferParam(shader, reset, "Output0", scratch);
                 cmd.DispatchCompute(shader, reset, 1, 1, 1);
-                cmd.SetComputeBufferParam(shader, scan, "Input0", input);
+                cmd.SetComputeBufferParam(shader, scan, "Input0", direct ? values : input);
                 cmd.SetComputeBufferParam(shader, scan, "Output0", output);
                 cmd.SetComputeBufferParam(shader, scan, "Output1", scratch);
                 // One graphics queue. Unity owns the dispatch dependencies/UAV barriers.
                 cmd.DispatchCompute(shader, scan, Math.Min(blocks, 256), 1, 1);
-                Bridge(cmd, "UnpackRaw", values, count, count);
+                FluidGpuSamples.End(cmd, FluidGpuSamples.Core);
+                if (!direct) Bridge(cmd, "UnpackRaw", values, count, count);
             }
+
+            protected override ComputeBuffer Result(ComputeBuffer values) { return direct ? output : values; }
 
             public override void Dispose()
             {
@@ -178,9 +192,13 @@ namespace HlslPerf.FluidBenchmark
 
             protected override void RecordCore(CommandBuffer cmd, ComputeBuffer values, int count)
             {
-                Bridge(cmd, "PackVectors", values, count, capacity / 4);
-                rts.PrefixSumExclusive(cmd, capacity, input, output, reductions);
-                Bridge(cmd, "UnpackVectors", values, count, count);
+                // Allocation can stay large after shrinking, but actual work follows this logical length.
+                int padded = Math.Max(4, (count + 3) & ~3);
+                Bridge(cmd, "PackVectors", values, count, padded / 4, padded);
+                FluidGpuSamples.Begin(cmd, FluidGpuSamples.Core);
+                rts.PrefixSumExclusive(cmd, padded, input, output, reductions);
+                FluidGpuSamples.End(cmd, FluidGpuSamples.Core);
+                Bridge(cmd, "UnpackVectors", values, count, count, padded);
             }
 
             public override void Dispose()

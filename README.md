@@ -115,6 +115,13 @@ local and 0.037888 ms external RTS. The local adaptation took 14% more time;
 **no clear whole-frame improvement was established**. [Measured results and raw
 evidence](docs/results/fluid-scan-rtx4090-20261005.md) preserve this negative result.
 
+The [scale and compatible-buffer follow-up](docs/results/fluid-scan-scaling-rtx4090-20261005.md)
+separates core scan, adaptation and whole-frame cost across 32,768–16,000,000
+elements and seven fluid particle counts. At 16M elements, direct local buffers
+reduce complete scan from 0.4653 to 0.1994 ms, below original at 0.2221 ms;
+external RTS core remains faster at 0.1565 ms. The measured comfort region is
+relative to the author baseline and does not establish a universal algorithm win.
+
 ## Additional measured evidence
 
 The three cases above are the portfolio entry points. The repository keeps the broader history for auditability rather than presenting every result as equally important.

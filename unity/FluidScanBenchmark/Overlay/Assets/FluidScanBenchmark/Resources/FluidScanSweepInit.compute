@@ -1,0 +1,16 @@
+#pragma kernel FillStructured
+#pragma kernel FillRaw
+RWStructuredBuffer<uint> StructuredValues;
+RWByteAddressBuffer RawValues;
+uint LogicalCount;
+uint Value(uint index) { return index * 747796405u + 2891336453u; }
+[numthreads(256, 1, 1)]
+void FillStructured(uint id : SV_DispatchThreadID)
+{
+    if (id < LogicalCount) StructuredValues[id] = Value(id);
+}
+[numthreads(256, 1, 1)]
+void FillRaw(uint id : SV_DispatchThreadID)
+{
+    if (id < LogicalCount) RawValues.Store(id * 4, Value(id));
+}

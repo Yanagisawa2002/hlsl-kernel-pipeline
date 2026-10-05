@@ -1,0 +1,13 @@
+{
+  "schema": "hlslperf.fluid-scan.build-closeout.v1",
+  "status": "passed",
+  "unity": "6000.3.13f1",
+  "buildLogSha256": "76c44e14d3b066ccfbd022be8446e04b33ab7d9da97b1d32d4a9b2499a31a562",
+  "buildLogReportsExitCode": 0,
+  "buildLogReportsSuccessfulBatchmode": true,
+  "playerSha256": "47b23bfad0dbb1200a41daae299396c49924b87c0222e2e4258687a3505334a0",
+  "nativeSourceSha256": "751f84458d7ab96d4d74b07b4e9fc1006c05a95b3f32dbb2b985e71ee9b26c3b",
+  "nativeDllSha256": "791de4be9086256bd1bb22341284973b5d4d6c808a5a8cdc5211e339fc2380d9",
+  "rawBuildLogPublished": false,
+  "reason": "Local build log includes license and private path diagnostics; raw log remains local. Runtime execution/correctness is separately proved by process/run receipts."
+}

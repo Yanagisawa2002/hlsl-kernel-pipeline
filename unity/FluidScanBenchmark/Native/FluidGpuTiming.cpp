@@ -11,9 +11,9 @@
 #include "IUnityGraphicsD3D12.h"
 using Microsoft::WRL::ComPtr;
 namespace {
-constexpr unsigned Slots = 128, Queries = 20;
-constexpr unsigned Offsets[4] = {0, 6, 12, 18};
-struct Slot { uint64_t frame = 0, fence = 0; unsigned begun[4]{}, ended[4]{}; };
+constexpr unsigned Slots = 128, Metrics = 5, MaxCalls = 32, Queries = 258;
+constexpr unsigned Offsets[Metrics] = {0, 64, 128, 256, 192};
+struct Slot { uint64_t frame = 0, fence = 0; unsigned begun[Metrics]{}, ended[Metrics]{}; };
 std::array<Slot, Slots> slots;
 std::mutex mutex;
 IUnityGraphics* graphics = nullptr;
@@ -24,6 +24,8 @@ ComPtr<ID3D12Resource> readback;
 uint64_t* mapped = nullptr;
 uint64_t frequency = 0;
 int baseEvent = 0, errorCode = 0;
+unsigned calls = 3, metricMask = 31;
+unsigned Expected(unsigned metric) { return (metricMask & (1u << metric)) ? (metric == 3 ? 1u : calls) : 0u; }
 
 void Initialize() {
     if (!api || heap) return;
@@ -40,13 +42,14 @@ void Initialize() {
     D3D12_RANGE range{0, size_t(rd.Width)};
     if (FAILED(readback->Map(0, &range, reinterpret_cast<void**>(&mapped)))) { errorCode = 4; return; }
     frameFence = api->GetFrameFence();
+    if (!frameFence) errorCode = 14;
 }
 
 void UNITY_INTERFACE_API Event(int event, void* data) {
     std::lock_guard<std::mutex> lock(mutex);
     event -= baseEvent;
-    if (event == 8) { Initialize(); return; }
-    if (!api || event < 0 || event >= 8) { errorCode = 5; return; }
+    if (event == 10) { Initialize(); return; }
+    if (!api || event < 0 || event >= 10) { errorCode = 5; return; }
     // Initialization runs on the submission thread; an early warmup frame can precede it.
     if (!mapped) return;
     UnityGraphicsD3D12RecordingState state{};
@@ -60,15 +63,17 @@ void UNITY_INTERFACE_API Event(int event, void* data) {
     }
     if (slot.frame != frame) { errorCode = 8; return; }
     unsigned occurrence = end ? slot.ended[metric]++ : slot.begun[metric]++;
-    if (occurrence >= (metric == 3 ? 1u : 3u) || (end && slot.ended[metric] > slot.begun[metric])) { errorCode = 9; return; }
+    if (occurrence >= Expected(metric) || (end && slot.ended[metric] > slot.begun[metric])) { errorCode = 9; return; }
     unsigned query = unsigned(frame % Slots) * Queries + Offsets[metric] + occurrence * 2 + end;
     state.commandList->EndQuery(heap.Get(), D3D12_QUERY_TYPE_TIMESTAMP, query);
     if (metric == 3 && end) {
-        for (unsigned m = 0; m < 4; ++m)
-            if (slot.begun[m] != (m == 3 ? 1u : 3u) || slot.ended[m] != slot.begun[m]) { errorCode = 10; return; }
+        for (unsigned m = 0; m < Metrics; ++m)
+            if (slot.begun[m] != Expected(m) || slot.ended[m] != slot.begun[m]) { errorCode = 10; return; }
         unsigned start = unsigned(frame % Slots) * Queries;
-        state.commandList->ResolveQueryData(heap.Get(), D3D12_QUERY_TYPE_TIMESTAMP, start, Queries,
-            readback.Get(), uint64_t(start) * sizeof(uint64_t));
+        // Resolve only initialized queries; disabled metrics and unused batch capacity are not queried.
+        for (unsigned m = 0; m < Metrics; ++m)
+            if (Expected(m)) state.commandList->ResolveQueryData(heap.Get(), D3D12_QUERY_TYPE_TIMESTAMP,
+                start + Offsets[m], 2 * Expected(m), readback.Get(), uint64_t(start + Offsets[m]) * sizeof(uint64_t));
         slot.fence = api->GetNextFrameFenceValue();
     }
 }
@@ -77,10 +82,10 @@ void UNITY_INTERFACE_API Event(int event, void* data) {
 extern "C" void UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API UnityPluginLoad(IUnityInterfaces* interfaces) {
     graphics = interfaces->Get<IUnityGraphics>(); api = interfaces->Get<IUnityGraphicsD3D12v7>();
     if (!graphics || !api) { errorCode = 11; return; }
-    baseEvent = graphics->ReserveEventIDRange(9);
-    for (int i = 0; i < 9; ++i) {
+    baseEvent = graphics->ReserveEventIDRange(11);
+    for (int i = 0; i < 11; ++i) {
         UnityD3D12PluginEventConfig config{};
-        config.graphicsQueueAccess = i == 8 ? kUnityD3D12GraphicsQueueAccess_Allow : kUnityD3D12GraphicsQueueAccess_DontCare;
+        config.graphicsQueueAccess = i == 10 ? kUnityD3D12GraphicsQueueAccess_Allow : kUnityD3D12GraphicsQueueAccess_DontCare;
         // Timestamp queries do not alter render/descriptor/resource state. No flush flags.
         config.flags = 0; config.ensureActiveRenderTextureIsBound = false;
         api->ConfigureEvent(baseEvent + i, &config);
@@ -93,6 +98,11 @@ extern "C" void UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API UnityPluginUnload() {
 }
 extern "C" __declspec(dllexport) void* FgpEvent() { return reinterpret_cast<void*>(Event); }
 extern "C" __declspec(dllexport) int FgpBase() { return baseEvent; }
+extern "C" __declspec(dllexport) int FgpConfigure(int count, int mask) {
+    std::lock_guard<std::mutex> lock(mutex);
+    if (heap || count < 1 || count > int(MaxCalls) || mask < 0 || mask > 31 || !(mask & 8)) return -15;
+    calls = unsigned(count); metricMask = unsigned(mask); return 1;
+}
 extern "C" __declspec(dllexport) uint64_t FgpFrequency() { std::lock_guard<std::mutex> lock(mutex); return frequency; }
 extern "C" __declspec(dllexport) int FgpRead(uint64_t frame, double* ms, int* blocks) {
     std::lock_guard<std::mutex> lock(mutex);
@@ -103,7 +113,7 @@ extern "C" __declspec(dllexport) int FgpRead(uint64_t frame, double* ms, int* bl
     if (completed == UINT64_MAX) return -13;
     if (completed < slot.fence) return 0;
     const uint64_t* times = mapped + (frame % Slots) * Queries;
-    for (unsigned metric = 0; metric < 4; ++metric) {
+    for (unsigned metric = 0; metric < Metrics; ++metric) {
         uint64_t ticks = 0;
         for (unsigned i = 0; i < slot.ended[metric]; ++i) {
             uint64_t begin = times[Offsets[metric] + i * 2], end = times[Offsets[metric] + i * 2 + 1];

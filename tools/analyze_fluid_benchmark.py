@@ -29,6 +29,7 @@ def summarize(folder):
         raise ValueError("Inconsistent measurement interval.")
     metrics = {key: {"values": [], "frames": set(), "unavailable": 0} for key in
                ("wall_frame", "scan_complete", "count_sort_complete", "spatial_hash_complete", "simulation_complete")}
+    if run.get("coreTimingEnabled", False): metrics["scan_core"] = {"values": [], "frames": set(), "unavailable": 0}
     with (folder / "observations.csv").open(encoding="utf-8", newline="") as stream:
         for row in csv.DictReader(stream):
             name = row["metric"]

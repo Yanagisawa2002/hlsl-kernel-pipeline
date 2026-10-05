@@ -54,3 +54,9 @@ tools/build_fluid_timing.py text eol=lf
 docs/evidence/fluid-scan-static-20261005.json -text
 docs/evidence/fluid-scan-rtx4090-20261005.zip -text -diff
 docs/results/data/fluid-scan-20261005/** -text -diff
+tools/*fluid_sweep.py text eol=lf
+tools/*fluid_application_scaling.py text eol=lf
+tools/run_fluid_scaling.py text eol=lf
+tools/generate_fluid_scaling_figures.py text eol=lf
+docs/results/data/fluid-scan-scaling-20261005/** -text -diff
+docs/evidence/fluid-scan-scaling-20261005.zip -text -diff

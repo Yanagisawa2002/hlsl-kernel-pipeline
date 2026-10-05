@@ -12,19 +12,21 @@ namespace HlslPerf.FluidBenchmark
         [DllImport("FluidGpuTiming", CallingConvention = CallingConvention.Cdecl)] private static extern int FgpBase();
         [DllImport("FluidGpuTiming", CallingConvention = CallingConvention.Cdecl)] public static extern ulong FgpFrequency();
         [DllImport("FluidGpuTiming", CallingConvention = CallingConvention.Cdecl)] private static extern int FgpRead(ulong frame, [Out] double[] ms, [Out] int[] blocks);
+        [DllImport("FluidGpuTiming", CallingConvention = CallingConvention.Cdecl)] private static extern int FgpConfigure(int calls, int mask);
         private readonly IntPtr callback;
         private readonly int baseEvent;
-        public readonly double[] ms = new double[4];
-        public readonly int[] blocks = new int[4];
+        public readonly double[] ms = new double[5];
+        public readonly int[] blocks = new int[5];
 
-        public FluidNativeTiming()
+        public FluidNativeTiming(int calls = 3, int mask = 31)
         {
             if (SystemInfo.graphicsDeviceType != GraphicsDeviceType.Direct3D12)
                 throw new NotSupportedException("Native GPU timestamps require D3D12.");
             callback = FgpEvent(); baseEvent = FgpBase();
+            if (FgpConfigure(calls, mask) != 1) throw new InvalidOperationException("Native timestamp configuration rejected.");
             using (var cmd = new CommandBuffer())
             {
-                cmd.IssuePluginEventAndData(callback, baseEvent + 8, IntPtr.Zero);
+                cmd.IssuePluginEventAndData(callback, baseEvent + 10, IntPtr.Zero);
                 Graphics.ExecuteCommandBuffer(cmd);
             }
         }
