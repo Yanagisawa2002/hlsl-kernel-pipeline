@@ -60,3 +60,11 @@ tools/run_fluid_scaling.py text eol=lf
 tools/generate_fluid_scaling_figures.py text eol=lf
 docs/results/data/fluid-scan-scaling-20261005/** -text -diff
 docs/evidence/fluid-scan-scaling-20261005.zip -text -diff
+# Ultra-scale experiment identities and interrupted-stage evidence are byte-stable.
+benchmarks/external/native/UltraScanSupport.h -text -eol
+tools/run_ultra_scan.py -text -eol
+tools/test_ultra_scan.py text eol=lf
+tools/package_ultra_scan_evidence.py text eol=lf
+docs/integration/ULTRA_SCAN_PROTOCOL.md text eol=lf
+docs/results/data/rtx4090-ultra-scan-20261006/** -text -diff
+docs/evidence/rtx4090-ultra-scan-20261006.zip -text -diff

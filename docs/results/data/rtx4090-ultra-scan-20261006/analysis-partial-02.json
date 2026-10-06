@@ -1,0 +1,659 @@
+{
+  "schema": "hlslperf.ultra-scan.analysis.v1",
+  "complete": false,
+  "device": {
+    "kind": "device",
+    "adapter": "NVIDIA GeForce RTX 4090",
+    "luid": 19743252,
+    "vendorId": 4318,
+    "deviceId": 9860,
+    "driver": "32.0.16.1714",
+    "dedicatedBytes": 25310527488,
+    "waveMin": 32,
+    "waveMax": 32,
+    "shaderModel": 103,
+    "featureLevel": 49664
+  },
+  "processes": 66,
+  "planSha256": "5c7932d7ceefb9e390be7bbd0d88570848c60f5632bbde8dd45964a9c4987fd9",
+  "cells": [
+    {
+      "count": 67108864,
+      "operation": "inclusive",
+      "processMeanMs": {
+        "rts": 0.94192432,
+        "tile-fused": 0.7546912
+      },
+      "ratios": [
+        1.2582915722849315,
+        1.2467715125395207,
+        1.2726988927661032,
+        1.237459109505385,
+        1.2419949556719911,
+        1.23148715744903
+      ],
+      "rtsOverLocalRatio": 1.2480416149852829,
+      "ratio95Ci": [
+        1.232368434903105,
+        1.2639141255330353
+      ],
+      "timeReductionPercent": 19.874466685007764,
+      "timeReduction95CiPercent": [
+        18.85543546247799,
+        20.88070069014647
+      ],
+      "processMeanCv": {
+        "rts": 0.018550148720443863,
+        "tile-fused": 0.01579297566675784
+      },
+      "processP50MeanMs": {
+        "rts": 0.9004746666666666,
+        "tile-fused": 0.733792
+      },
+      "processP95MeanMs": {
+        "rts": 1.1850053333333332,
+        "tile-fused": 0.8471370666666667
+      },
+      "maximumWithinProcessCv": {
+        "rts": 0.22896156339354898,
+        "tile-fused": 0.2275072389404511
+      },
+      "favorablePointwiseInterval": true,
+      "independentRounds": 6
+    },
+    {
+      "count": 67108864,
+      "operation": "exclusive",
+      "processMeanMs": {
+        "rts": 0.92305248,
+        "tile-fused": 0.7766984533333333
+      },
+      "ratios": [
+        1.2038544442866332,
+        1.1847341179510602,
+        1.195565827196817,
+        1.136587690062331,
+        1.220172131801917,
+        1.1932558206098558
+      ],
+      "rtsOverLocalRatio": 1.1887421536265792,
+      "ratio95Ci": [
+        1.1590140295457192,
+        1.2192327890652295
+      ],
+      "timeReductionPercent": 15.877467880714946,
+      "timeReduction95CiPercent": [
+        13.71976744820298,
+        17.98120843135399
+      ],
+      "processMeanCv": {
+        "rts": 0.008409325031562508,
+        "tile-fused": 0.02679614444875009
+      },
+      "processP50MeanMs": {
+        "rts": 0.8983706666666667,
+        "tile-fused": 0.7513253333333334
+      },
+      "processP95MeanMs": {
+        "rts": 0.9608922666666667,
+        "tile-fused": 0.7540272
+      },
+      "maximumWithinProcessCv": {
+        "rts": 0.1577287006244058,
+        "tile-fused": 0.19108494560388894
+      },
+      "favorablePointwiseInterval": true,
+      "independentRounds": 6
+    },
+    {
+      "count": 134217728,
+      "operation": "inclusive",
+      "processMeanMs": {
+        "rts": 1.87046272,
+        "tile-fused": 1.5063546133333334
+      },
+      "ratios": [
+        1.2639694439912297,
+        1.218033635795597,
+        1.2570156907500774,
+        1.2920278030298753,
+        1.236552460527224,
+        1.185492109210323
+      ],
+      "rtsOverLocalRatio": 1.2417093119749565,
+      "ratio95Ci": [
+        1.2028974174775005,
+        1.281773485455304
+      ],
+      "timeReductionPercent": 19.46585321088672,
+      "timeReduction95CiPercent": [
+        16.867391560535584,
+        21.983095192144198
+      ],
+      "processMeanCv": {
+        "rts": 0.016014304961097722,
+        "tile-fused": 0.01571662520895007
+      },
+      "processP50MeanMs": {
+        "rts": 1.7903226666666667,
+        "tile-fused": 1.4519013333333333
+      },
+      "processP95MeanMs": {
+        "rts": 2.4364218666666666,
+        "tile-fused": 2.085265066666667
+      },
+      "maximumWithinProcessCv": {
+        "rts": 0.14490978833344847,
+        "tile-fused": 0.15787426371883886
+      },
+      "favorablePointwiseInterval": true,
+      "independentRounds": 6
+    },
+    {
+      "count": 134217728,
+      "operation": "exclusive",
+      "processMeanMs": {
+        "rts": 1.8514863466666667,
+        "tile-fused": 1.5076894933333334
+      },
+      "ratios": [
+        1.2390596914805172,
+        1.221950875526095,
+        1.2384819673690557,
+        1.2242606913930099,
+        1.2092111428515522,
+        1.2354878189075753
+      ],
+      "rtsOverLocalRatio": 1.2280282649188337,
+      "ratio95Ci": [
+        1.21571580589546,
+        1.2404654213809239
+      ],
+      "timeReductionPercent": 18.568649552533312,
+      "timeReduction95CiPercent": [
+        17.743933643814902,
+        19.385096693241998
+      ],
+      "processMeanCv": {
+        "rts": 0.005870738486228908,
+        "tile-fused": 0.005749409618652069
+      },
+      "processP50MeanMs": {
+        "rts": 1.7902746666666667,
+        "tile-fused": 1.4705279999999998
+      },
+      "processP95MeanMs": {
+        "rts": 2.4608066666666666,
+        "tile-fused": 1.610788
+      },
+      "maximumWithinProcessCv": {
+        "rts": 0.12261851017666739,
+        "tile-fused": 0.12242943173945896
+      },
+      "favorablePointwiseInterval": true,
+      "independentRounds": 6
+    }
+  ],
+  "resourceSummary": {
+    "minimumHostPhysicalBytes": 8477511680,
+    "minimumHostCommitBytes": 5349568512,
+    "maximumSampledGpuUsedBytes": 2485125120,
+    "maximumNativeDxgiUsageBytes": 1627238400,
+    "maximumGpuTemperatureC": 48
+  },
+  "incompleteCells": [
+    {
+      "count": 201326592,
+      "operation": "inclusive",
+      "completedProcessesByArm": {
+        "rts": 5,
+        "tile-fused": 5
+      },
+      "status": "not-confirmed"
+    },
+    {
+      "count": 201326592,
+      "operation": "exclusive",
+      "completedProcessesByArm": {
+        "rts": 4,
+        "tile-fused": 4
+      },
+      "status": "not-confirmed"
+    },
+    {
+      "count": 268435456,
+      "operation": "inclusive",
+      "completedProcessesByArm": {
+        "rts": 0,
+        "tile-fused": 0
+      },
+      "status": "not-confirmed"
+    },
+    {
+      "count": 268435456,
+      "operation": "exclusive",
+      "completedProcessesByArm": {
+        "rts": 0,
+        "tile-fused": 0
+      },
+      "status": "not-confirmed"
+    }
+  ],
+  "rejectedPreflights": [
+    {
+      "tag": "n201326592-r05-exclusive-rts",
+      "count": 201326592,
+      "operation": "exclusive",
+      "arm": "rts",
+      "repeat": 5,
+      "position": 1,
+      "mode": "ultra-batch",
+      "command": [
+        "C:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\ultra-scan-20261006\\native-02\\scan\\scan.exe",
+        "ultra-batch",
+        "rts",
+        "201326592",
+        "19743252",
+        "NVIDIA GeForce RTX 4090",
+        "exclusive"
+      ],
+      "cwd": "C:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\ultra-scan-20261006\\native-02\\scan",
+      "executableSha256": "58cf00e7898709cbcb925f605605efbc85b706be0375baf53091c9193ed39cb9",
+      "startedUtc": "2026-10-06T01:53:38.726957+00:00",
+      "telemetry": [
+        {
+          "utc": "2026-10-06T01:53:38.726972+00:00",
+          "phase": "before",
+          "host": {
+            "load": 75,
+            "totalPhysical": 33682857984,
+            "availablePhysical": 8414552064,
+            "totalCommit": 57997828096,
+            "availableCommit": 6765793280,
+            "totalVirtual": 140737488224256,
+            "availableVirtual": 140733061373952,
+            "availableExtendedVirtual": 0
+          },
+          "gpu": {
+            "adapter": "NVIDIA GeForce RTX 4090",
+            "totalBytes": 25757220864,
+            "usedBytes": 2485125120,
+            "freeBytes": 22826450944,
+            "temperatureC": 45,
+            "powerW": 119.39,
+            "utilizationPercent": 12,
+            "driver": "617.14"
+          }
+        }
+      ],
+      "preflightRejected": true,
+      "stopReason": "Stop: host commit reserve would fall below 4 GiB.",
+      "finishedUtc": "2026-10-06T01:53:38.728823+00:00"
+    }
+  ],
+  "pendingCases": [
+    {
+      "tag": "n201326592-r05-exclusive-tile-fused",
+      "count": 201326592,
+      "operation": "exclusive",
+      "arm": "tile-fused",
+      "repeat": 5,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n201326592-r06-exclusive-tile-fused",
+      "count": 201326592,
+      "operation": "exclusive",
+      "arm": "tile-fused",
+      "repeat": 6,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n201326592-r06-exclusive-rts",
+      "count": 201326592,
+      "operation": "exclusive",
+      "arm": "rts",
+      "repeat": 6,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n201326592-r06-inclusive-tile-fused",
+      "count": 201326592,
+      "operation": "inclusive",
+      "arm": "tile-fused",
+      "repeat": 6,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n201326592-r06-inclusive-rts",
+      "count": 201326592,
+      "operation": "inclusive",
+      "arm": "rts",
+      "repeat": 6,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r01-inclusive-rts",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "rts",
+      "repeat": 1,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r01-inclusive-tile-fused",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "tile-fused",
+      "repeat": 1,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r01-exclusive-rts",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "rts",
+      "repeat": 1,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r01-exclusive-tile-fused",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "tile-fused",
+      "repeat": 1,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r02-exclusive-tile-fused",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "tile-fused",
+      "repeat": 2,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r02-exclusive-rts",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "rts",
+      "repeat": 2,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r02-inclusive-tile-fused",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "tile-fused",
+      "repeat": 2,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r02-inclusive-rts",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "rts",
+      "repeat": 2,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r03-inclusive-rts",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "rts",
+      "repeat": 3,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r03-inclusive-tile-fused",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "tile-fused",
+      "repeat": 3,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r03-exclusive-rts",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "rts",
+      "repeat": 3,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r03-exclusive-tile-fused",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "tile-fused",
+      "repeat": 3,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r04-exclusive-tile-fused",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "tile-fused",
+      "repeat": 4,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r04-exclusive-rts",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "rts",
+      "repeat": 4,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r04-inclusive-tile-fused",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "tile-fused",
+      "repeat": 4,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r04-inclusive-rts",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "rts",
+      "repeat": 4,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r05-inclusive-rts",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "rts",
+      "repeat": 5,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r05-inclusive-tile-fused",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "tile-fused",
+      "repeat": 5,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r05-exclusive-rts",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "rts",
+      "repeat": 5,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r05-exclusive-tile-fused",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "tile-fused",
+      "repeat": 5,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r06-exclusive-tile-fused",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "tile-fused",
+      "repeat": 6,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r06-exclusive-rts",
+      "count": 268435456,
+      "operation": "exclusive",
+      "arm": "rts",
+      "repeat": 6,
+      "position": 2,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r06-inclusive-tile-fused",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "tile-fused",
+      "repeat": 6,
+      "position": 1,
+      "mode": "ultra-batch"
+    },
+    {
+      "tag": "n268435456-r06-inclusive-rts",
+      "count": 268435456,
+      "operation": "inclusive",
+      "arm": "rts",
+      "repeat": 6,
+      "position": 2,
+      "mode": "ultra-batch"
+    }
+  ],
+  "stopReason": "RuntimeError('Stop: host commit reserve would fall below 4 GiB.')",
+  "policy": {
+    "minimumHostPhysicalBytes": 4294967296,
+    "minimumHostCommitBytes": 4294967296,
+    "minimumGpuFreeBytes": 8589934592,
+    "maximumGpuUsedBytes": 12884901888,
+    "maximumGpuTemperatureC": 80,
+    "maximumCount": 268435456,
+    "processTimeoutSeconds": 60,
+    "maximumSingleGpuMs": 100,
+    "measuredIterations": 100,
+    "warmupIterations": 8,
+    "changeTdr": false,
+    "changePowerOrClocks": false,
+    "recording": false
+  },
+  "sourceIdentity": {
+    "sourceCommit": "6b44d2f50afa7cdf2bc71dd9c327ca9368e96dd2",
+    "upstream": {
+      "passed": true,
+      "files": 114,
+      "lockSha256": "8d707858e69288fa6f10c9ec208d340cce3fa73b21d0240cbd3607d9b1120334",
+      "commits": {
+        "amd-fidelityfx-parallelsort": "c6efa6bf7f2027b3ec94f28578bb5965eabb9e55",
+        "gpu-prefix-sums": "98d93a4e9ed2f3c8353119515bf9be90a2e137ad",
+        "gpu-sorting": "09a6081d964b682bbb58838b83ab75aebe7f4e05"
+      }
+    },
+    "preparationSha256": "2ed30690098643092b8aab0cc422eb6e753bd0f2053019fd636a225df50f49ac",
+    "sourceFiles": {
+      "kernels/compaction.hlsl": "cf933823c7494aa9b60d5009f4c8a354619426ecf62ba88bf63606d5dafd4609",
+      "kernels/consumer/ScanWaveTiled.compute": "9534c8287fa1afac0a961c70271ee2a7f8e49be573c4a97b24f799dbb1df3691",
+      "kernels/dynamic-compaction.hlsl": "3ccfa2d5ac34ffeddba09710a99c52bca59540bf43df28fbe554286ad061a448",
+      "kernels/histogram-prefix.hlsl": "74c09143d12f012b9ef816b011edb8137e73bc9a56948f00ffdd3f70cf7608db",
+      "kernels/include/hlslperf/scan_u32.hlsli": "2bd0d3c6e79e98c57d37aaa686c5eadce4873791548f4640b6b8a2136839ae02",
+      "kernels/include/hlslperf/scan_wave_tiled_u32.hlsli": "145975eb14f5f1198c0d109473342bdd760ed51084ae413be401dd91d2c71791",
+      "kernels/radix-sort.hlsl": "fa7ba4a551d87f8dc97541ee4adb28a73a39a0fd162f9178c83fade60167e1b8",
+      "kernels/reduction.hlsl": "c8bee7570cc37b3675e93cb3c374700e5f9264c4b69f6b4e062954567c669aa3",
+      "kernels/scan.hlsl": "5e52887b4b4aee542f29e570b5aaee8d216ca78941f569f09821b955cda961a6",
+      "kernels/segmented-scan.hlsl": "ddcd04bfef7ea297a475d8785837ebba14337d5954c9ff1d6283e57ef9d041d2",
+      "kernels/transpose.hlsl": "128ece019143dc8ad52bda6b42d4b215614f0ea7180292ff5aa9cf857dceb0f7",
+      "kernels/uint-mix.hlsl": "c715765271a2a020f8adda6ef3370a46477da6ed7139e97b8cce42549e45cba3",
+      "benchmarks/external/native/HlslPerfScan.h": "dbb32c3de87dd6be0c7c405dda6981acb1f0f00d693ff37f2064bb9f470f56bc",
+      "benchmarks/external/native/HlslPerfSort.h": "beebb81bb64ed122d08de1631b6d4008646c482b043653c90ea7608b312e38e6",
+      "benchmarks/external/native/NativeKernel.h": "565de4e355b617688d92caf8a69143d46c410a5d06d7fef633de95bae91cc10e",
+      "benchmarks/external/native/ProfileSupport.h": "4efcda64521cf9988327c3c98125653b5ed759c7ac5298fb46992c430efb1a8a",
+      "benchmarks/external/native/RuntimeSupport.h": "37993948bbdb56b9c88fb5dd71671ecd9a00ee80b054bac34f3743d0dfcd1a38",
+      "benchmarks/external/native/scan-main.cpp": "82695de3350466e0a72595f1f816063a196bf93260e6ce381dee4a53cb1dda36",
+      "benchmarks/external/native/ScanInclusive.hlsl": "1c67f58f5979b5bb619382a722218c8822fb37cd9eb9ee6baf5cf7af18a308e8",
+      "benchmarks/external/native/sort-main.cpp": "f12ec29b158627d53bb7051629a89691348bb87847691ffd1880c9c99c41ac2f",
+      "benchmarks/external/native/SortInput.hlsl": "f3e0cbfa8389ddd28fa71b11e9797216bdbc319312bd7739e31087b08a428922",
+      "benchmarks/external/native/UltraScanSupport.h": "fcd3c546954b41ae4a08c0fdc30c5f7569d533d7c5aa09f58539249637e64dff",
+      "src/HlslPerf.Workloads/BuiltinWorkloads.cs": "5abf413afa50cc9f537e6484d260d3a86aa7e2fc5a33d6c0c59d7169749f869b",
+      "src/HlslPerf.Workloads/CausalScanWorkloads.cs": "092c017ccdc21a543a2570ae776f5e2f34ae10a17b1e102b356d3a3c89626089",
+      "src/HlslPerf.Workloads/DynamicCompactionWorkload.cs": "903c85c5441f2b1497acdcc76fdae07c092d6bca31d39675710c7f5c83ffbe8e",
+      "src/HlslPerf.Workloads/FocusedCostWorkloads.cs": "c90a67edaf93e507ee712c6c1ce0ea2306d61fc2c788b406346b21f367583924",
+      "src/HlslPerf.Workloads/HistogramPrefixWorkload.cs": "4e50f3035c51867a6aba84815db421523e92e022cb9fd159fa2b2721e0ef1a21",
+      "src/HlslPerf.Workloads/PrimitiveOperations.cs": "1dd64c7a6a0b78df0ffac55f7b4397b446b78dc023023e4f4570b3955f017246",
+      "src/HlslPerf.Workloads/RadixSortContract.cs": "f6dd210a4871cb6065ec44beb875a1866bf02f29251fb4e6b87e1ceeca72664f",
+      "src/HlslPerf.Workloads/RadixSortWorkload.cs": "769434804945523eaf2f462ebefca789d6ff90855c59cc3baae02e93519da842",
+      "src/HlslPerf.Workloads/RadixTileLayout.cs": "212c2e7e66c05bbf46d4e06a558c1d869b57b2448cb2fd92b27d6833f40b351d",
+      "src/HlslPerf.Workloads/ReductionWorkload.cs": "dafeeffb22a28da6e0f1ee9c1052119d48aaa32bea453059ac985bd8ac7a81c0",
+      "src/HlslPerf.Workloads/ScanWorkload.cs": "f370dfc32bb0f301f1e7437f4de90d27416d085c72066c278cabc50701b2b90b",
+      "src/HlslPerf.Workloads/SegmentedScanWorkload.cs": "9fb128aa7a5751e5c38fb22825478c6ba9085e4af684425953bab4c7aaa0f941",
+      "src/HlslPerf.Workloads/StreamCompactionWorkload.cs": "a9c43728fe5114f9690b0455106900651c0e1aa22145073667b5fefc7a7a67bf",
+      "src/HlslPerf.Workloads/TransposeWorkload.cs": "509cbc72f797ae32485044db6c5e4ca5ff16fefbc9e6ee3f22e43f7ecb18dde2",
+      "src/HlslPerf.Workloads/UintMixWorkload.cs": "2f54db567eee10b9c92730696671fbbf54674849ce2cc983de25e480a174da3f",
+      "src/HlslPerf.Workloads/UnifiedWorkloads.cs": "2ec51ea3fa41161dd951bd038ec9e13fa28008134a91fef5963885f64f2fd6c7",
+      "src/HlslPerf.Workloads/WaveTiledScanCandidates.cs": "59b03aeac2fb4b2438a16c6b3cfb433b5e3b4b1576bf88887f64ec317ee4f8eb",
+      "src/HlslPerf.Workloads/WorkloadPlanUtilities.cs": "bd5da3f78ce4e7c621ecb81bf23b6eeec1d0231628a82732cb3f853f45a13bf3",
+      "src/HlslPerf.D3D12/D3D12CpuOutput.cs": "0bc627e6284b54adaeba8bdf8639086867e57f4725231ca97c0e698c39aa3362",
+      "src/HlslPerf.D3D12/D3D12DebugEvidence.cs": "b334c264b162bcf2809fd099fe7aa500e37b414781a9727d8445bf555c049ab5",
+      "src/HlslPerf.D3D12/D3D12DynamicExecution.cs": "d520d669b1d19f1e807cba8aaf42709a086ea5f0a3d4bf6d2fd0a98d53bf9398",
+      "src/HlslPerf.D3D12/D3D12OperationRecorder.cs": "5f7b0eb3f9b0f037090f0eedb8e633f3c67eae1d8d07da50fa4160803c335d40",
+      "src/HlslPerf.D3D12/D3D12PairedTuner.cs": "ef8c91f92544804c94bb1a20396f479817d68162e1c9d610d1ab22a662f51625",
+      "src/HlslPerf.D3D12/D3D12Tuner.cs": "f46c9d8f189d2bb5725881cfdcccf76948e0500f13285c977af7191f96a72978",
+      "src/HlslPerf.D3D12/D3D12Tuner.Scenarios.cs": "cd2e1417b6e5f55338f402a16e59f14e8f89fc418e65572a25694a6207df85c5",
+      "src/HlslPerf.D3D12/D3D12UnifiedLive.cs": "691a0ed34d323a8ea8817672f7ba574396d317dc88e4773fb8d3b632065e88e0",
+      "src/HlslPerf.D3D12/D3D12UnifiedOperations.cs": "9d4d1d0363f96aa24b139a9ed20a2023d783390be21f2ebaecb2336d6dec0963",
+      "tools/HlslPerf.InclusiveScanValidation/Program.cs": "6c6adb421e0b19ce0ad408a511ed1e090aad03b44a3039b53199392d68e83719"
+    },
+    "runnerSha256": "47d65eca9e0ecb4d8812c8c687b14f13fa1de6ba1c84017ca5161ef26397498f",
+    "runtimeFiles": {
+      "scan/D3D12/D3D12Core.dll": "4e00c07c20dadefd4d537e592cc40654a0f0885f989e6c3b8d9f4142d0e44476",
+      "scan/D3D12/d3d12SDKLayers.dll": "17941e7005c155ccdb046b7e1fee1c5e00e64009ea559c814dcc08d090fe5fb3",
+      "scan/D3D12/d3dconfig.exe": "750ccdcab25a39deb693d93e856a36367db15a5afe2f3582e8bfe54a12fa0c17",
+      "scan/dxcompiler.dll": "5de48b783260a1601f7dfcfe8ce2a189f6358de001b33f5207352d6385025f1e",
+      "scan/dxil.dll": "2cd75b85fc0f01f7707fe25d58cd910a1e582e96079a042dce3211680eeeb660",
+      "scan/scan.exe": "58cf00e7898709cbcb925f605605efbc85b706be0375baf53091c9193ed39cb9",
+      "scan/Shaders/ChainedScanDecoupledLookback.hlsl": "9965678893cacb8c4313cbbddcf4c9f9dac1768bd09b75f8f348c8838b8b1731",
+      "scan/Shaders/ChainedScanDecoupledLookbackDecoupledFallback.hlsl": "1e76c32ecb36a76d39dbc16fc10833f30bb321067cc3d1e6c32bd2dbe38319f1",
+      "scan/Shaders/EmulatedDeadlock.hlsl": "2d0968116e182ce23f2859776a02cd24c1184ceed15c60506a76210ec73b8cf8",
+      "scan/Shaders/ReduceThenScan.hlsl": "76c32f0653cba79ab7975209fb1547cc2fa0a2937b27a329024a308fd3c7d691",
+      "scan/Shaders/ScanCommon.hlsl": "1e6feccda7db9dd3c7f1d6a6e057d40eafad973716478c607f0cd8072e51b336",
+      "scan/Shaders/Survey.hlsl": "78746fcb4f113da86da654e6cb3f3bdaffe11930d1ebeecfe854b5f562bb15f7",
+      "scan/Shaders/Utility.hlsl": "4898856674baac996de45c463ecdb1e6e41d0c8ed916a90d036503f3a3b857ed"
+    },
+    "ultraRunnerSha256": "4efb2b46bdedc3b9dc1a64057d0caf54b5fe3c922be3c17bf589e34384ce87ff"
+  },
+  "statistics": "Six fresh processes per arm/cell; balanced paired orders; pointwise nominal 95% Student-t df5 log-ratio intervals; no multiplicity adjustment or exclusions.",
+  "boundary": "Inherited TimeScan complete GPU operation (reset, dependencies, scan); input generation, compile, allocation, validation, CPU submit/fence/readback excluded. Single operations, not a giant queued batch.",
+  "scope": "Pinned upstream all-one uint32 inputs, RTX 4090, inclusive/exclusive, 2^26..2^28; no application-frame, mixed-input timing, cross-GPU or continuous-range claim."
+}

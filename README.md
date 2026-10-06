@@ -22,6 +22,15 @@ Marker read-side DRAM activity falls from **44.1089% to 31.4464% of peak sustain
 
 [Timing and correctness](docs/results/RTX4090_INCLUSIVE_SCAN_2026-09-15.md) · [Marker-isolated profiling](docs/results/RTX4090_INCLUSIVE_SCAN_PROFILE_DIAGNOSIS.md) · [Raw profiler evidence](docs/evidence/rtx4090-scan-marker-20260919/README.md) · [API and reproduction](docs/integration/SCAN_INCLUSIVE.md)
 
+The [October 6 ultra-scale follow-up](docs/results/rtx4090-ultra-scan-20261006.md)
+has six fresh processes per arm/cell at **67,108,864 and 134,217,728 elements**:
+native inclusive/exclusive complete GPU scan means use **15.88–19.87% less time
+than pinned RTS** on RTX 4090 with all-one uint32 inputs. The planned four-size
+campaign stopped on host commit-memory safety checks; 201M/268M have successful
+pilots but no complete six-round confirmation. Both interrupted stages are
+retained. This does not establish a continuous advantage range or application
+frame-time improvement.
+
 ### 2. Optimization did not pay off
 
 ![Complete Crowd lifecycle latency: GPU paths 45–49 ms per request; CPU12 6.98 ms](docs/figures/crowd-complete-lifecycle.svg)

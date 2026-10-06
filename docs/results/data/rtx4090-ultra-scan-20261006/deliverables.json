@@ -1,0 +1,25 @@
+{
+  "schema": "hlslperf.ultra-scan.deliverables.v1",
+  "evidenceSha256": "8e11face3e026727d5556d846a0c0af5b40a8ae09643179c6ca6101db6ada35e",
+  "evidenceBytes": 536587,
+  "sourceBase": "6b44d2f50afa7cdf2bc71dd9c327ca9368e96dd2",
+  "measurementRunnerSha256": "4efb2b46bdedc3b9dc1a64057d0caf54b5fe3c922be3c17bf589e34384ce87ff",
+  "resourceRecoveryRunnerSha256": "7bc6dff2677974d3ed132f9be24af9b61749cd2fa9f528dd3c3988f925aa6e8f",
+  "executableSha256": "58cf00e7898709cbcb925f605605efbc85b706be0375baf53091c9193ed39cb9",
+  "confirmationPlanSha256": "5c7932d7ceefb9e390be7bbd0d88570848c60f5632bbde8dd45964a9c4987fd9",
+  "sourceFilesVerified": true,
+  "archiveCrcPassed": true,
+  "archiveEntries": 258,
+  "stageCompletedProcesses": {
+    "gate-01": 4,
+    "pilot-01": 16,
+    "confirmation-01": 66,
+    "gate-02": 4,
+    "pilot-02": 16,
+    "confirmation-02": 0
+  },
+  "firstCampaignComplete": false,
+  "secondCampaignComplete": false,
+  "completeCells": 4,
+  "fullFourSizeConfirmation": false
+}
