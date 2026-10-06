@@ -72,3 +72,11 @@ docs/evidence/rtx4090-ultra-scan-20261006.zip -text -diff
 tools/package_ultra_scan_formal.py text eol=lf
 docs/results/data/rtx4090-ultra-scan-formal-20261006/** -text -diff
 docs/evidence/rtx4090-ultra-scan-formal-20261006.zip -text -diff
+
+tools/run_fluid_frame_confirmation.py -text -eol
+tools/analyze_fluid_frame_confirmation.py text eol=lf
+tools/package_fluid_frame_confirmation.py text eol=lf
+tools/test_fluid_frame_confirmation.py text eol=lf
+docs/integration/FLUID_FRAME_CONFIRMATION.md text eol=lf
+docs/results/data/fluid-frame-confirmation-20261006/** -text -diff
+docs/evidence/fluid-frame-confirmation-20261006.zip -text -diff

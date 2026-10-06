@@ -133,6 +133,16 @@ reduce complete scan from 0.4653 to 0.1994 ms, below original at 0.2221 ms;
 external RTS core remains faster at 0.1565 ms. The measured comfort region is
 relative to the author baseline and does not establish a universal algorithm win.
 
+The [independent whole-frame confirmation](docs/results/fluid-frame-confirmation-20261006.md)
+retains six complete process pairs at 1,024,000 particles: original/local-direct
+wall means are 15.640 / 15.823 ms, with no confirmed improvement. The 15,761,198
+load completed four pairs (314.810 / 314.933 ms, descriptive only) before the
+80 C thermal guard stopped the next own process; the planned stage remains
+incomplete. Original scan occupies about 0.48% / 0.20% of these wall-frame budgets.
+The failed receipt, source snapshot and missing rejected-temperature-sample
+limitation are preserved. This application does not establish a frame-time gain
+from the independently measured native ultra-scale scan advantage.
+
 ## Additional measured evidence
 
 The three cases above are the portfolio entry points. The repository keeps the broader history for auditability rather than presenting every result as equally important.
