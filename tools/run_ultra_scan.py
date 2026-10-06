@@ -43,6 +43,14 @@ def counts(text):
 def extra_bytes(n): return n * 12 + (64 << 20) if n else 0
 
 
+def validate_policy(policy):
+    if {k:v for k,v in policy.items() if k!='interProcessRestSeconds'} != BASE_POLICY:
+        raise ValueError('Resource/timing policy changed.')
+    rest=policy.get('interProcessRestSeconds')
+    if rest is not None and (type(rest) is not int or not 5 <= rest <= 30):
+        raise ValueError('Process rest must be an integer between 5 and 30 seconds.')
+
+
 def check_resources(host, gpu, n=0):
     extra = extra_bytes(n)
     if host['availablePhysical'] < POLICY['minimumHostPhysicalBytes'] + extra:
@@ -215,7 +223,8 @@ def analyze(folder, output, partial=False):
     complete = bool(completion and completion['complete'] and completion['planSha256'] == sha(folder/'plan.json'))
     if plan['stage'] != 'confirm' or not complete and not (partial and failure and failure['complete'] is False):
         raise ValueError('Incomplete/changed confirmation plan. Use explicit partial audit only for a retained resource preflight stop.')
-    if plan['policy'] not in (BASE_POLICY,POLICY) or plan['schedule'] != schedule('confirm', plan['counts']): raise ValueError('Changed schedule/policy.')
+    validate_policy(plan['policy'])
+    if plan['schedule'] != schedule('confirm', plan['counts']): raise ValueError('Changed schedule.')
     rows = []; previous = None; pending=[]; rejected=[]; incomplete_tail=False
     for case in plan['schedule']:
         path = folder/(case['tag']+'.json')
@@ -241,6 +250,8 @@ def analyze(folder, output, partial=False):
         if any(row[k] != v for k, v in parsed.items()): raise ValueError('Receipt/raw-log mismatch.')
         start, finish = datetime.fromisoformat(row['startedUtc']), datetime.fromisoformat(row['finishedUtc'])
         if finish <= start or previous and start < previous: raise ValueError('Processes overlap.')
+        if previous and (start-previous).total_seconds()+.1 < plan['policy'].get('interProcessRestSeconds',0):
+            raise ValueError('Observed process rest is shorter than the declared interval.')
         previous = finish
         # Retained telemetry is part of acceptance, not a decorative attachment.
         if not row['telemetry'] or row['telemetry'][0]['phase'] != 'before' or row['telemetry'][-1]['phase'] != 'after':
@@ -306,7 +317,9 @@ def main():
     p.add_argument('--gate',type=Path);p.add_argument('--pilot',type=Path);p.add_argument('--partial',action='store_true')
     p.add_argument('--msbuild',type=Path);p.add_argument('--package-cache',type=Path,default=ROOT/'.scratch/native-packages')
     p.add_argument('--toolset',choices=['v143','v145'],default='v143')
+    p.add_argument('--rest-seconds',type=int,default=5,help='Increase inter-process rest within 5..30 seconds; resource guards are unchanged.')
     a=p.parse_args();out=a.output.resolve();sizes=counts(a.counts)
+    POLICY['interProcessRestSeconds']=a.rest_seconds;validate_policy(POLICY)
     if out.exists():raise FileExistsError('Preserve existing attempt: '+str(out))
     if a.stage=='analyze':analyze(a.evidence.resolve(),out,a.partial);return
     with shared_lock():

@@ -1,0 +1,26 @@
+{
+  "schema": "hlslperf.ultra-scan.deliverables.v2",
+  "cohortComplete": true,
+  "counts": [
+    201326592,
+    268435456
+  ],
+  "confirmationProcesses": 48,
+  "completeCells": 4,
+  "stageCompletedProcesses": {
+    "gate-03": 4,
+    "pilot-03": 8,
+    "confirmation-03": 48
+  },
+  "sourceBase": "ee37fd4c702a2970843e4e67cc284b7c357c95de",
+  "measurementRunnerSha256": "503790e21d18a6fdebe7615fde6f09ba0589c5938a90f29d94b5cb0818752951",
+  "executableSha256": "58cf00e7898709cbcb925f605605efbc85b706be0375baf53091c9193ed39cb9",
+  "confirmationPlanSha256": "fe5cf4e6709a649e7e36d4210f3564f90ab45b12aa131225a6a1f7e9244de955",
+  "sourceFilesVerified": true,
+  "archiveCrcPassed": true,
+  "archiveEntries": 203,
+  "evidenceSha256": "5ad4777398c74e9860cf0957d411e5fd3df7666e31b32bfaaa7a746d722f3211",
+  "evidenceBytes": 461559,
+  "priorCohortsPooled": false,
+  "interProcessRestSeconds": 10
+}

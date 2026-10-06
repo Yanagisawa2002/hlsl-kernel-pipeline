@@ -8,10 +8,18 @@ import math
 from pathlib import Path
 import tempfile
 import unittest
-from run_ultra_scan import ARMS, COUNTS, GIB, POLICY, analyze, check_resources, counts, parse_log, save, schedule, sha
+from run_ultra_scan import ARMS, BASE_POLICY, COUNTS, GIB, POLICY, analyze, check_resources, counts, parse_log, save, schedule, sha, validate_policy
 
 
 class UltraScanTests(unittest.TestCase):
+    def test_rest_can_increase_without_relaxing_resource_guards(self):
+        validate_policy(BASE_POLICY)
+        validate_policy(dict(**BASE_POLICY,interProcessRestSeconds=10))
+        for rest in [0,4,31,True,5.5]:
+            with self.assertRaises(ValueError):validate_policy(dict(**BASE_POLICY,interProcessRestSeconds=rest))
+        bad=dict(POLICY);bad['minimumHostCommitBytes']=0
+        with self.assertRaises(ValueError):validate_policy(bad)
+
     def test_refuse_unsafe_resource_forecasts(self):
         host=dict(availablePhysical=12*GIB,availableCommit=12*GIB)
         gpu=dict(freeBytes=20*GIB,usedBytes=2*GIB,temperatureC=45)
@@ -87,8 +95,8 @@ class UltraScanTests(unittest.TestCase):
             host=dict(availablePhysical=12*GIB,availableCommit=12*GIB)
             gpu=dict(freeBytes=20*GIB,usedBytes=2*GIB,temperatureC=45)
             row=dict(**case,exitCode=0,executableSha256='a'*64,logSha256=sha(log),
-                     startedUtc=(start+timedelta(seconds=index*2)).isoformat(),
-                     finishedUtc=(start+timedelta(seconds=index*2+1)).isoformat(),
+                     startedUtc=(start+timedelta(seconds=index*20)).isoformat(),
+                     finishedUtc=(start+timedelta(seconds=index*20+1)).isoformat(),
                      telemetry=[dict(phase=phase,host=host,gpu=gpu) for phase in ['before','after']],
                      **parse_log(log.read_text(),case,device))
             save(folder/(case['tag']+'.json'),row)
@@ -129,6 +137,14 @@ class UltraScanTests(unittest.TestCase):
             self.assertEqual(len(result['incompleteCells']),2)
             self.assertEqual(len(result['rejectedPreflights']),1)
             self.assertEqual(result['processes'],30)
+
+    def test_declared_rest_is_audited_from_process_timestamps(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder=Path(directory);cases=self.analysis_fixture(folder)
+            previous=json.loads((folder/(cases[0]['tag']+'.json')).read_text())
+            path=folder/(cases[1]['tag']+'.json');row=json.loads(path.read_text())
+            row['startedUtc']=previous['finishedUtc'];save(path,row)
+            with self.assertRaisesRegex(ValueError,'Observed process rest'):analyze(folder,folder/'rejected.json')
 
 
 if __name__=='__main__':unittest.main()

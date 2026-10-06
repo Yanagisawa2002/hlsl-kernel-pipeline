@@ -75,6 +75,12 @@ python tools/run_ultra_scan.py analyze --evidence .scratch/ultra-confirmation --
 ```
 
 Use fresh output paths on reruns; historical evidence is never overwritten.
+To complete only the two previously unfinished scales, pass
+`--counts 201326592,268435456 --rest-seconds 10` consistently to new gate,
+pilot and confirmation stages. This declares 48 fresh confirmation processes;
+it is a separate cohort and is not pooled with the older interrupted stage.
+Rest can be increased within 5..30 seconds, but resource/timing guards cannot be
+relaxed. The analyzer verifies the declared interval against process timestamps.
 If a resource check rejects a child before launch and the stage stops, an explicit
 CPU-only `analyze --partial` audit can retain cells with all six pairs. It verifies
 the rejection against recorded telemetry, marks the campaign incomplete, rejects
