@@ -1,0 +1,20 @@
+{
+  "schema": "hlslperf.fluid-frame.deliverables.v1",
+  "complete": false,
+  "formalProcesses": 20,
+  "plannedFormalProcesses": 24,
+  "failedOwnProcesses": 1,
+  "pendingProcesses": 3,
+  "pilotProcesses": 4,
+  "confirmedCells": 1,
+  "sourceBase": "bc3fd41f199766b048646694e7b4b07c3d390a37",
+  "measurementRunnerSha256": "d070ce5c80380c66795cf61f11f33cc9d3fe9b4d1802dd92984e2bfd9d53892a",
+  "postStopLoggingFixRunnerSha256": "b3a05506add97183af4f1dccb043f3f30bba79521212a8137943cbfcd1f4ba03",
+  "playerSha256": "47b23bfad0dbb1200a41daae299396c49924b87c0222e2e4258687a3505334a0",
+  "evidenceSha256": "b07777709dfafd3530e9a82eab2f0cf6f5eb0033fbc2f16d4771b28d13fe5d3d",
+  "evidenceBytes": 930397,
+  "archiveEntries": 246,
+  "archiveCrcAndSha256Passed": true,
+  "priorApplicationOrNativeCohortsPooled": false,
+  "recording": false
+}

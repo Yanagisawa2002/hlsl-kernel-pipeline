@@ -1,0 +1,263 @@
+{
+  "schema": "hlslperf.fluid-scan.static-validation.v1",
+  "status": "passed",
+  "gpuDispatchExecuted": false,
+  "unityInvoked": false,
+  "unityImportExecuted": false,
+  "playerBuildExecuted": false,
+  "performanceStatus": "Unmeasured",
+  "csharpSourceCount": 30,
+  "csharpSourceSha256": {
+    "Assets\\FluidScanBenchmark\\Editor\\FluidBenchmarkBuild.cs": "45eaa051dd91d3c0191e4a4ad53a97940e58a3cd64ac780e26fd0fe5826b02e1",
+    "Assets\\FluidScanBenchmark\\Runtime\\ExclusiveScanBackends.cs": "0064e0df5e85adc0490337a57fc84ff95071598c2a266c045dc7b2724f6dc932",
+    "Assets\\FluidScanBenchmark\\Runtime\\FluidBenchmarkRunner.cs": "59457e91559ad341cc4de08ebaeba59fb5588de21bb1bfb141117f5e13edf754",
+    "Assets\\FluidScanBenchmark\\Runtime\\FluidBenchmarkSettings.cs": "0e382b4e0d881169f283f8c5869c5ee167cc74e9d8c73ab091fdb1095632fce5",
+    "Assets\\FluidScanBenchmark\\Runtime\\FluidGpuSamples.cs": "7422092217c6959d3c1cb63135837840bd142b0352ef4cd329a1b24c679d0f90",
+    "Assets\\FluidScanBenchmark\\Runtime\\FluidScanValidation.cs": "9db94474d108e3409645f2fee1cada8be70fa3247030fbcc34aaf0c9f6c4b44f",
+    "Assets\\FluidScanBenchmark\\ThirdParty\\GPUPrefixSums\\Runtime\\GPUPrefixSumsBase.cs": "1a97b28d16e69c2ba778c399603ebfd94ec4d43771548e59f93548bad77c407d",
+    "Assets\\FluidScanBenchmark\\ThirdParty\\GPUPrefixSums\\Runtime\\ReduceThenScan.cs": "56fffa27e231bcafc390e4efe9ad3672724c710ddee26ac07318b0a7e77a449e",
+    "Assets\\Scripts\\Demo\\OrbitCam.cs": "7e73d0d0cc860b613500076efeecc13c6791e2e028c47ae18112ec17d5032aa9",
+    "Assets\\Scripts\\Helpers\\ComputeHelper.cs": "f03081075a7141a94de8537df9ff4be6543348fbcd3e485fa86068e59500ad9e",
+    "Assets\\Scripts\\Helpers\\GPU Sort\\CountSort\\GPUCountSort.cs": "e8c52350dfc4466e426ba9d04386eae63c3700b1e5e5ee1c1194126adc319766",
+    "Assets\\Scripts\\Helpers\\GPU Sort\\CountSort\\Scan\\Scan.cs": "cd07ef39f17ffeab59cc347b328d7f6bfe7ff903db478e1ae8328fd6950ea292",
+    "Assets\\Scripts\\Helpers\\SpatialHash\\Offsets\\SpatialOffsetCalculator.cs": "9a83900af9e8baef310070156f6a713c8edc7379adb91f49d1cb0ec610531e93",
+    "Assets\\Scripts\\Helpers\\SpatialHash\\SpatialHash.cs": "4c64817466bcdcb8999721d7dc133067dae41b31a4e1d8f2e52de76aea1de1a2",
+    "Assets\\Scripts\\Rendering\\Foam\\FoamRenderTest.cs": "cb0c8f2b15c661a8d5f00fb7776146538e4946b9365d8815eda737d4c8aaf25f",
+    "Assets\\Scripts\\Rendering\\Marching Cubes\\Core\\MarchingCubes.cs": "2de02176b18048ac487b225c66fb1f49b448cfb93062dc7a7ac824a98dcc26c0",
+    "Assets\\Scripts\\Rendering\\Marching Cubes\\MarchingCubesFluidRenderer.cs": "498a0fb0113c6da904c0e28330a22f59d19b9a21caba5e23637236752ebb0c4b",
+    "Assets\\Scripts\\Rendering\\MeshHelpers\\QuadGenerator.cs": "42872269c06c795550911d0eb7f6e2a138fccada773b0ab3824ce02d3c76bd41",
+    "Assets\\Scripts\\Rendering\\MeshHelpers\\SphereGenerator.cs": "c8be6dba8578aa200d942da876593e4005a7dc0ae7025ab6af208256e74f8156",
+    "Assets\\Scripts\\Rendering\\Particles\\ParticleDisplay3D.cs": "7efa84353e42ac9f5f7e0f7ef2854889f298dc591f6385b0c84cc635fbdd24f4",
+    "Assets\\Scripts\\Rendering\\Raymarch\\RayMarchingTest.cs": "dbe589ede30153f33a2bd2c060dd4685faf993551a218a2ac0afc77185a946cc",
+    "Assets\\Scripts\\Rendering\\ScreenSpace\\FluidRenderTest.cs": "896d8f8e3b9375c4f032a292caa856ebce909e879e23217d9bd85879fc34e51f",
+    "Assets\\Scripts\\Rendering\\ScreenSpace\\Smoothing\\Bilateral_1D\\Bilateral1D.cs": "e7671138a41540d24aa128786150b6ca33743263ee273c5aec644cd91443c591",
+    "Assets\\Scripts\\Rendering\\ScreenSpace\\Smoothing\\Bilateral_2D\\BilateralSmooth2D.cs": "a7e89bd5ff809d93a321cacb3591223c935ae2bc8cd7b3d1cfbd2a25e509d637",
+    "Assets\\Scripts\\Rendering\\ScreenSpace\\Smoothing\\GaussSmooth\\GaussSmooth.cs": "2eab6a90b9039eda2bd272d40f00361ee4e7fe1546f99ed7d8be1d6f80fcf9bf",
+    "Assets\\Scripts\\Sim2D\\Display\\ParticleDisplay2D.cs": "7b31227bf4220a813d1f60c1c9f4af41a94a10ae7e856c9c6d151859a3a3a03d",
+    "Assets\\Scripts\\Sim2D\\FluidSim2D.cs": "346a2161058a553ad3e56e37329717ba867f6c870c1dffe6a37d33667bd6bb24",
+    "Assets\\Scripts\\Sim2D\\Spawner2D.cs": "e0a902ee3713614feb0890a52c8a9c85bc94f0b740f812fe63033030ff35528b",
+    "Assets\\Scripts\\Simulation\\FluidSim.cs": "9741fb175e08baffd407e46a63cad27325d165e93be6c6818da7658150794cab",
+    "Assets\\Scripts\\Simulation\\Spawner3D.cs": "4a17f3cf09a68770346b074ed86591402a8a355765f87e5fa425e7b2faa0838d"
+  },
+  "unityReferenceSha256": "9ac427b73dfda8d44d8179b614e8928ad92d459e83cdbe053f0c5c3266385c37",
+  "cscSha256": "149fd48d7ad64c5ba9658572c8c59ab27a1b40e0834f764ab54f4584b7e8ac1a",
+  "dxcSha256": "229ae849be475d13d397921c2c6361559f07584d02b54424825ae80758cd8d67",
+  "settingsChecks": "16 CPU settings checks passed; no Unity/GPU invoked.",
+  "shaderEntries": [
+    {
+      "source": "Assets/FluidScanBenchmark/Resources/FluidScanBridge.compute",
+      "entry": "PackRaw",
+      "dxilSha256": "966f7998d37f8770bf9d9ac855eb6c0e5d0b0dc8e7c3210619ab0444201a7f3a",
+      "warningsAsErrors": true
+    },
+    {
+      "source": "Assets/FluidScanBenchmark/Resources/FluidScanBridge.compute",
+      "entry": "UnpackRaw",
+      "dxilSha256": "f916fe72abdbce1d26c6cef522a940ffcd24245a0c84da0a2175323842054ee3",
+      "warningsAsErrors": true
+    },
+    {
+      "source": "Assets/FluidScanBenchmark/Resources/FluidScanBridge.compute",
+      "entry": "PackVectors",
+      "dxilSha256": "fd8f6b45e4fc2705dbb02a91c2a631f262ec14ddbcd41e42c97ab78c4b1c4253",
+      "warningsAsErrors": true
+    },
+    {
+      "source": "Assets/FluidScanBenchmark/Resources/FluidScanBridge.compute",
+      "entry": "UnpackVectors",
+      "dxilSha256": "36c7dd099e6d661f38a41c811bb2f56ab1193180afb12aa6110f38baa8f94c35",
+      "warningsAsErrors": true
+    },
+    {
+      "source": "Assets/FluidScanBenchmark/Resources/FluidWaveTiled.compute",
+      "entry": "ResetWaveTiledState",
+      "dxilSha256": "8a7c009c95c22323f8aa6dcff1ce7a9d4ea94efa9de47b8bc8c9f0b712a91576",
+      "warningsAsErrors": true
+    },
+    {
+      "source": "Assets/FluidScanBenchmark/Resources/FluidWaveTiled.compute",
+      "entry": "SinglePassScanWaveTiled",
+      "dxilSha256": "f879bec5248a6c96e8d2a83519dd134ba3e946bd36706219cc492ef027197cd1",
+      "warningsAsErrors": true
+    },
+    {
+      "source": "Assets/FluidScanBenchmark/Resources/FluidRts.compute",
+      "entry": "Reduce",
+      "dxilSha256": "67cb8a2cc6b406e3127f6e5758e15b6509fa9fde55485be70de26bf71c7113a4",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/FluidScanBenchmark/Resources/FluidRts.compute",
+      "entry": "Scan",
+      "dxilSha256": "b1a1d9f90156eb4b134e4a0f88602098f737175291b3169db1d3dcdc372c641f",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/FluidScanBenchmark/Resources/FluidRts.compute",
+      "entry": "PropagateInclusive",
+      "dxilSha256": "96b84cf0027d3e0b5c5fbcaca7e0c8275b9d4fd1bd5fe782a76681acce63eebf",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/FluidScanBenchmark/Resources/FluidRts.compute",
+      "entry": "PropagateExclusive",
+      "dxilSha256": "96596143fd709353229d40e9276ff8ed13d665cc950f6e9e730c81c539ce6dbe",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Helpers/GPU Sort/CountSort/Scan/Resources/ScanTest.compute",
+      "entry": "BlockScan",
+      "dxilSha256": "53be2f95b6705f90aae72845bb5f480a0a0221e94dece8312fbf9c175d43e4d5",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Helpers/GPU Sort/CountSort/Scan/Resources/ScanTest.compute",
+      "entry": "BlockCombine",
+      "dxilSha256": "5f3a910dfe5252d63a954c884390b99d347ba80d029676dedd5902a67959dadd",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Helpers/GPU Sort/CountSort/Resources/CountSort.compute",
+      "entry": "ClearCounts",
+      "dxilSha256": "3c893e078c0cfcb40f59f3da1886b19694f87f4336770a6f3df88a57a938c388",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Helpers/GPU Sort/CountSort/Resources/CountSort.compute",
+      "entry": "CalculateCounts",
+      "dxilSha256": "25bd0be63f8ce645643ea4c594a62387bee1f741504b8d79db44a8c81223e0ee",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Helpers/GPU Sort/CountSort/Resources/CountSort.compute",
+      "entry": "ScatterOutput",
+      "dxilSha256": "004e9f9137a98a7ecaf4c2b8d9aa0eb8c8d507fda5be7fc0360fd88a36a48405",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Helpers/GPU Sort/CountSort/Resources/CountSort.compute",
+      "entry": "CopyBack",
+      "dxilSha256": "cb47cd0542c018935e94d5079f8bf367b6d32e0b67e7bfee77fff9ea12cbf8d4",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Helpers/SpatialHash/Offsets/Resources/SpatialOffsets.compute",
+      "entry": "InitializeOffsets",
+      "dxilSha256": "cf63ffd7b4f2e898aebe8f9a121e7013be462e44389a9820d0483a2d2c6c0db5",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Helpers/SpatialHash/Offsets/Resources/SpatialOffsets.compute",
+      "entry": "CalculateOffsets",
+      "dxilSha256": "663011cf5c73bb0f7453f13ec13efa7d5a6932d254989dc1e334528b395f54f5",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+      "entry": "ExternalForces",
+      "dxilSha256": "d989e70c2c669d15c6bc76a615565c924ce14226893013ba396b2b3acc20c73e",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+      "entry": "UpdateSpatialHash",
+      "dxilSha256": "18c4f0465d2ddf52c9471252325f1f32b61f3fbc28c15f0afecf7d5316d7c1f5",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+      "entry": "Reorder",
+      "dxilSha256": "2050bdd7df82d8b7e313bda9d2db359689d43c8a438ea17038f925334a2d9378",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+      "entry": "ReorderCopyBack",
+      "dxilSha256": "30ccdb4b9266e4328bb86a02a6113958c752efc8845a21a5c6a282fd97f70620",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+      "entry": "CalculateDensities",
+      "dxilSha256": "7662c65622f2f365ce9322ec6383f317993cb503b928ab3300ae6898d2f3804a",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+      "entry": "CalculatePressureForce",
+      "dxilSha256": "a0dfca16b22990f76e371a4aa10a3bf2c0d2e0df55890c3e223d349837f879a8",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+      "entry": "CalculateViscosity",
+      "dxilSha256": "aca5876a90c6459230ec77ea9272144df1799820bbd12f402d4b32fc88e13d24",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+      "entry": "UpdatePositions",
+      "dxilSha256": "0d1a4d0a99aee278e66fb94af6932833d37eaf8d6fa45919f0c66bc3cf0dbd52",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+      "entry": "UpdateDensityTexture",
+      "dxilSha256": "618670c890ad3a6c0b249f59199daab10c9dd95d05cfb40a052a79094e4b4fa3",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+      "entry": "UpdateWhiteParticles",
+      "dxilSha256": "81e4044d45dfcb757e716be7cb94d736b53ed00de9cdbbb36588b0b7f8b2020c",
+      "warningsAsErrors": false
+    },
+    {
+      "source": "Assets/Scripts/Simulation/Compute/FluidSim.compute",
+      "entry": "WhiteParticlePrepareNextFrame",
+      "dxilSha256": "b8feec9db84651536aa0b1ab2d54a59cd35af93554a0a64a8d89e8333874770c",
+      "warningsAsErrors": false
+    }
+  ],
+  "preparedProjectProvenanceSha256": "b9c5031fbdbab9ce8321d8d4bcdb00af0365f1374445f8273f6b14716705329d",
+  "cpuHarnessTests": {
+    "count": 7,
+    "status": "passed",
+    "stdout": "",
+    "stderr": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.019s\n\nOK\n"
+  },
+  "existingWaveModelTests": {
+    "count": 12,
+    "status": "passed",
+    "gpuDispatchExecuted": false,
+    "sourceSha256": "0200c9599b15ea0471619b826ccb4f99f6e76dc68cebf85f0eb86310f88d0625"
+  },
+  "toolSources": {
+    "tools/prepare_fluid_benchmark.py": "f20f08d61217367ec810e14589fbd2c8bafe3dc40c43c28162ab031f94484cda",
+    "tools/check_fluid_benchmark.py": "c0f3700b47811b562d3664999ea9af0ed103146eab0d55846b47bb5d0c26e81b",
+    "tools/analyze_fluid_benchmark.py": "96f8b3d85db4a7ed16384b2fc41205990ad297699f6107666ca66b23a5baf761",
+    "tools/test_fluid_benchmark.py": "9600a794cf4be8bb173dab3585deef1e007b2499e391946d917abe0fa98e65c5"
+  },
+  "diagnostics": {
+    "FluidBenchmarkScripts.diagnostics.txt": "C:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\Scripts\\Rendering\\ScreenSpace\\FluidRenderTest.cs(41,15): warning CS0169: 从不使用字段“FluidRenderTest.displayModeOld”\n",
+    "shader-2-PropagateExclusive.diagnostics.txt": "In file included from C:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:10:\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:204:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like 'L' or 'U', or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 << (countbits(spineSize - 1) + laneLog - 1) / laneLog * laneLog;\n                               ^\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:209:31: warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]\n        const uint i0 = (gtid + t0 << offset) - t0;\n                         ~~~~~^~~~ ~~\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:209:31: note: place parentheses around the '+' expression to silence this warning\n        const uint i0 = (gtid + t0 << offset) - t0;\n                              ^\n                         (        )\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:54:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like 'L' or 'U', or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 << (countbits(spineSize - 1) + laneLog - 1) / laneLog * laneLog;\n                               ^\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:58:30: warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]\n        const uint i = (gtid + 1 << offset) - 1;\n                        ~~~~~^~~ ~~\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:58:30: note: place parentheses around the '+' expression to silence this warning\n        const uint i = (gtid + 1 << offset) - 1;\n                             ^\n                        (       )\n\n",
+    "shader-2-PropagateInclusive.diagnostics.txt": "In file included from C:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:10:\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:204:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like 'L' or 'U', or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 << (countbits(spineSize - 1) + laneLog - 1) / laneLog * laneLog;\n                               ^\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:209:31: warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]\n        const uint i0 = (gtid + t0 << offset) - t0;\n                         ~~~~~^~~~ ~~\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:209:31: note: place parentheses around the '+' expression to silence this warning\n        const uint i0 = (gtid + t0 << offset) - t0;\n                              ^\n                         (        )\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:54:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like 'L' or 'U', or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 << (countbits(spineSize - 1) + laneLog - 1) / laneLog * laneLog;\n                               ^\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:58:30: warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]\n        const uint i = (gtid + 1 << offset) - 1;\n                        ~~~~~^~~ ~~\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:58:30: note: place parentheses around the '+' expression to silence this warning\n        const uint i = (gtid + 1 << offset) - 1;\n                             ^\n                        (       )\n\n",
+    "shader-2-Reduce.diagnostics.txt": "In file included from C:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:10:\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:204:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like 'L' or 'U', or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 << (countbits(spineSize - 1) + laneLog - 1) / laneLog * laneLog;\n                               ^\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:209:31: warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]\n        const uint i0 = (gtid + t0 << offset) - t0;\n                         ~~~~~^~~~ ~~\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:209:31: note: place parentheses around the '+' expression to silence this warning\n        const uint i0 = (gtid + t0 << offset) - t0;\n                              ^\n                         (        )\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:54:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like 'L' or 'U', or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 << (countbits(spineSize - 1) + laneLog - 1) / laneLog * laneLog;\n                               ^\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:58:30: warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]\n        const uint i = (gtid + 1 << offset) - 1;\n                        ~~~~~^~~ ~~\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:58:30: note: place parentheses around the '+' expression to silence this warning\n        const uint i = (gtid + 1 << offset) - 1;\n                             ^\n                        (       )\n\n",
+    "shader-2-Scan.diagnostics.txt": "In file included from C:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:10:\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:204:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like 'L' or 'U', or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 << (countbits(spineSize - 1) + laneLog - 1) / laneLog * laneLog;\n                               ^\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:209:31: warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]\n        const uint i0 = (gtid + t0 << offset) - t0;\n                         ~~~~~^~~~ ~~\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources/ScanCommon.hlsl:209:31: note: place parentheses around the '+' expression to silence this warning\n        const uint i0 = (gtid + t0 << offset) - t0;\n                              ^\n                         (        )\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:54:32: warning: ambiguous type for bit shift; use a type suffix on literal values, like 'L' or 'U', or a cast [-Wambig-lit-shift]\n    const uint alignedSize = 1 << (countbits(spineSize - 1) + laneLog - 1) / laneLog * laneLog;\n                               ^\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:58:30: warning: operator '<<' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]\n        const uint i = (gtid + 1 << offset) - 1;\n                        ~~~~~^~~ ~~\nC:\\Users\\cgliu\\Documents\\Codex\\2026-10-05\\zhe\\work\\FluidScanApp-final-check\\Assets\\FluidScanBenchmark\\Resources\\FluidRts.compute:58:30: note: place parentheses around the '+' expression to silence this warning\n        const uint i = (gtid + 1 << offset) - 1;\n                             ^\n                        (       )\n\n"
+  },
+  "validationDate": "2026-10-05",
+  "scope": "Offline API/compiler and CPU checks only. No Unity editor, project import, Player build, GPU device, GPU dispatch, performance timing or capture.",
+  "preparedSourceIdentity": {
+    "schema": "hlslperf.fluid-scan.prepared.v1",
+    "performanceStatus": "Unmeasured",
+    "gpuDispatchExecuted": false,
+    "unityInvoked": false,
+    "hlslBaseCommit": "cfcd8443d1c21f4df370639ea2702972dd9c4313",
+    "hlslWorkingTreeModified": true,
+    "fluidCommit": "4717b7259718d349b0001c82836f24ce5fec81d7",
+    "fluidSnapshotSha256": "6b46bd8ba9d629ab4acc352be53b7b371929a39b31ad803e243ea4137f03857c",
+    "gpuPrefixSumsCommit": "98d93a4e9ed2f3c8353119515bf9be90a2e137ad",
+    "payloadSha256": "34a782b92f30f7fd49a48c3d429561d3420640e52fc9e8416fd54645582e91b8",
+    "verification": "Preparation/source identity only. Unity import, Player build, GPU correctness and performance remain unvalidated."
+  }
+}

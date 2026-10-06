@@ -1,0 +1,678 @@
+{
+  "schema": "hlslperf.fluid-scan.cohort.v1",
+  "configuration": {
+    "device": "NVIDIA GeForce RTX 4090",
+    "api": "Direct3D12",
+    "unity": "6000.3.13f1",
+    "width": 1920,
+    "height": 1080,
+    "particles": 410758,
+    "foamCapacity": 1024000,
+    "iterationsPerFrame": 3,
+    "fixedTimestep": 0.01666666753590107,
+    "gpuTimingMethod": "d3d12_query_frame_fence",
+    "seed": 42,
+    "spawnDensity": 600,
+    "warmupFrames": 120,
+    "measureFrames": 600,
+    "nativeGpuTiming": true,
+    "payloadSha256": "8eee83384275069f595ac9ba5b8434a669207326835e0887b68af8e68d7bcf91",
+    "nativeTimingBuild": "{\r\n  \"schema\": \"hlslperf.fluid-scan.native-build.v1\",\r\n  \"sourceSha256\": \"cd08c87113d44ab3e430074454c505c1338b180f3a07781f5fd0a2f13d4d14d5\",\r\n  \"compilerSha256\": \"4304307e1f0d0528ac13c513183e5cbfa20a7f8de6f0c8e5bc4293661e6d23a4\",\r\n  \"dllSha256\": \"e2e98f8e83ff7bec3b8b1dd1f629fca64cb405c0be0b142dc123c45d7300ce4f\",\r\n  \"unityApiHeaders\": {\r\n    \"IUnityEventQueue.h\": \"c5fb4ae77af4eadce668cff88a576bae8d203aee72477cf913ecdda826bc7bb3\",\r\n    \"IUnityGraphics.h\": \"524ca42ff0274feec5aea17a5275b774ffc1a031bdc9378f3e3eb2be787a7fa6\",\r\n    \"IUnityGraphicsD3D11.h\": \"873389c2bc367b7ef7be4809059133b692a1c03eb268cfebf5bcb290c511bace\",\r\n    \"IUnityGraphicsD3D12.h\": \"275bf9e6dc0781255a8b12defa85e4a1cbd4e8327f56f861949c19baf46c525a\",\r\n    \"IUnityGraphicsMetal.h\": \"7d56510757a1f1c1653137d1f901c14a132779841f03427dcfa20efdca521090\",\r\n    \"IUnityGraphicsVulkan.h\": \"de4c4c2a712ad996371ca9bbf513eff1ae31e68b5bc9548c7af68798a1ff72ea\",\r\n    \"IUnityInterface.h\": \"e23e267b57c049b438307542d62c30fbcd3fa77b6dac3b08842eae0df10b8239\",\r\n    \"IUnityLog.h\": \"899d7ddd3b717aca2adf7e42afe40157ef5db8b3dfbaaaa20dc09e6e1e049608\",\r\n    \"IUnityMemoryManager.h\": \"3be41c07857f900436d5c0011541c61d7f771fd5a2fb446ea2c869ea560f2a63\",\r\n    \"IUnityPhysicsBackendSystem.h\": \"f663cf90c25e4096801bc7adec1eb4203558084ea87c3634d3af6edc099e8af9\",\r\n    \"IUnityProfiler.h\": \"76c97ce10c1e4368bfcdc06bd27a39f68b8a3a368b6b534c15e64b1ad13354c8\",\r\n    \"IUnityProfilerCallbacks.h\": \"4a2690c419ef0c9930f57955310d81b3a6fff58ac108dcf7afdaebf15ad7c638\",\r\n    \"IUnityRenderingExtensions.h\": \"dbcb270c5065d9ce98492b4e35d5be91f0f2cfea37be08619c3e03a12604fc37\",\r\n    \"IUnityShaderCompilerAccess.h\": \"6584d7506fa96386ef4694e1629a788e780735ace4f60e5757ebcb7b0a184ff7\",\r\n    \"IUnityXRTime.h\": \"b4b65b649df4d4ff4e29ee3b619716ece8d856436682c791fb92f336cf857938\"\r\n  },\r\n  \"timing\": \"D3D12 timestamp queries with explicit source frame and completed Unity frame fence\",\r\n  \"gpuDispatchExecuted\": false\r\n}\r\n"
+  },
+  "arms": {
+    "original": {
+      "repeats": 3,
+      "metrics": {
+        "scan_complete": {
+          "medianOfRunP50Ms": 0.0512,
+          "minRunP50Ms": 0.050176,
+          "maxRunP50Ms": 0.0512,
+          "medianOfRunP95Ms": 0.05632,
+          "medianOfRunMeanMs": 0.054813013333333334
+        },
+        "count_sort_complete": {
+          "medianOfRunP50Ms": 0.128,
+          "minRunP50Ms": 0.128,
+          "maxRunP50Ms": 0.129024,
+          "medianOfRunP95Ms": 0.3492351999999999,
+          "medianOfRunMeanMs": 0.14239269333333335
+        },
+        "spatial_hash_complete": {
+          "medianOfRunP50Ms": 0.141312,
+          "minRunP50Ms": 0.141312,
+          "maxRunP50Ms": 0.141312,
+          "medianOfRunP95Ms": 0.3656192,
+          "medianOfRunMeanMs": 0.15826592
+        },
+        "simulation_complete": {
+          "medianOfRunP50Ms": 5.10208,
+          "minRunP50Ms": 5.058047999999999,
+          "maxRunP50Ms": 5.114879999999999,
+          "medianOfRunP95Ms": 6.03264,
+          "medianOfRunMeanMs": 5.130238293333333
+        },
+        "wall_frame": {
+          "medianOfRunP50Ms": 6.9119,
+          "minRunP50Ms": 6.9064,
+          "maxRunP50Ms": 6.969250000000001,
+          "medianOfRunP95Ms": 7.91358,
+          "medianOfRunMeanMs": 6.9503466666666665
+        }
+      },
+      "runs": [
+        {
+          "run": "perf-01-original-08-visible",
+          "metrics": {
+            "wall_frame": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 6.916964833333333,
+              "p50Ms": 6.9064,
+              "p95Ms": 7.79212
+            },
+            "scan_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.05689173333333333,
+              "p50Ms": 0.050176,
+              "p95Ms": 0.05632
+            },
+            "count_sort_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.14044672,
+              "p50Ms": 0.128,
+              "p95Ms": 0.15426559999999104
+            },
+            "spatial_hash_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.15324501333333335,
+              "p50Ms": 0.141312,
+              "p95Ms": 0.16650239999999109
+            },
+            "simulation_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 5.130238293333333,
+              "p50Ms": 5.10208,
+              "p95Ms": 5.962342399999998
+            }
+          },
+          "observationsSha256": "523a9a9a54df5f5401e6a6b38893d59ef09d4d2921c4cffac1735d5680d1a4ab"
+        },
+        {
+          "run": "perf-02-original-08-visible",
+          "metrics": {
+            "wall_frame": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 7.017610333333334,
+              "p50Ms": 6.969250000000001,
+              "p95Ms": 7.977945
+            },
+            "scan_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.05462528,
+              "p50Ms": 0.0512,
+              "p95Ms": 0.05632
+            },
+            "count_sort_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.14619866666666667,
+              "p50Ms": 0.128,
+              "p95Ms": 0.355328
+            },
+            "spatial_hash_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.16049834666666665,
+              "p50Ms": 0.141312,
+              "p95Ms": 0.3697151999999999
+            },
+            "simulation_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 5.19064064,
+              "p50Ms": 5.114879999999999,
+              "p95Ms": 6.0705279999999995
+            }
+          },
+          "observationsSha256": "81b604bc9271ae819e0f8f55f8a43336a1a942a3a2ad9b699dd5691316c4ece6"
+        },
+        {
+          "run": "perf-03-original-08-visible",
+          "metrics": {
+            "wall_frame": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 6.9503466666666665,
+              "p50Ms": 6.9119,
+              "p95Ms": 7.91358
+            },
+            "scan_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.054813013333333334,
+              "p50Ms": 0.0512,
+              "p95Ms": 0.05632
+            },
+            "count_sort_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.14239269333333335,
+              "p50Ms": 0.129024,
+              "p95Ms": 0.3492351999999999
+            },
+            "spatial_hash_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.15826592,
+              "p50Ms": 0.141312,
+              "p95Ms": 0.3656192
+            },
+            "simulation_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 5.130170026666667,
+              "p50Ms": 5.058047999999999,
+              "p95Ms": 6.03264
+            }
+          },
+          "observationsSha256": "61b78845e9783e973cc2e43aefcfdf59017c0dfe6128fa628801c8472fd58597"
+        }
+      ],
+      "relativeToOriginal": {
+        "scan_complete": {
+          "millisecondsSaved": 0.0,
+          "timeChangePercent": 0.0
+        },
+        "count_sort_complete": {
+          "millisecondsSaved": 0.0,
+          "timeChangePercent": 0.0
+        },
+        "spatial_hash_complete": {
+          "millisecondsSaved": 0.0,
+          "timeChangePercent": 0.0
+        },
+        "simulation_complete": {
+          "millisecondsSaved": 0.0,
+          "timeChangePercent": 0.0
+        },
+        "wall_frame": {
+          "millisecondsSaved": 0.0,
+          "timeChangePercent": 0.0
+        }
+      }
+    },
+    "hlsl-wave-tiled": {
+      "repeats": 3,
+      "metrics": {
+        "scan_complete": {
+          "medianOfRunP50Ms": 0.058368,
+          "minRunP50Ms": 0.057344,
+          "maxRunP50Ms": 0.058368,
+          "medianOfRunP95Ms": 0.063488,
+          "medianOfRunMeanMs": 0.06584661333333333
+        },
+        "count_sort_complete": {
+          "medianOfRunP50Ms": 0.136192,
+          "minRunP50Ms": 0.135168,
+          "maxRunP50Ms": 0.136192,
+          "medianOfRunP95Ms": 0.360448,
+          "medianOfRunMeanMs": 0.15052634666666667
+        },
+        "spatial_hash_complete": {
+          "medianOfRunP50Ms": 0.149504,
+          "minRunP50Ms": 0.147456,
+          "maxRunP50Ms": 0.149504,
+          "medianOfRunP95Ms": 0.376832,
+          "medianOfRunMeanMs": 0.16489813333333334
+        },
+        "simulation_complete": {
+          "medianOfRunP50Ms": 5.1266560000000005,
+          "minRunP50Ms": 5.074432,
+          "maxRunP50Ms": 5.172224,
+          "medianOfRunP95Ms": 6.028748799999999,
+          "medianOfRunMeanMs": 5.1818752
+        },
+        "wall_frame": {
+          "medianOfRunP50Ms": 6.9579,
+          "minRunP50Ms": 6.9019,
+          "maxRunP50Ms": 6.9901,
+          "medianOfRunP95Ms": 7.958529999999998,
+          "medianOfRunMeanMs": 7.002398166666667
+        }
+      },
+      "runs": [
+        {
+          "run": "perf-01-hlsl-wave-tiled-08-visible",
+          "metrics": {
+            "wall_frame": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 6.935308166666666,
+              "p50Ms": 6.9019,
+              "p95Ms": 7.874655
+            },
+            "scan_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.06341466666666666,
+              "p50Ms": 0.057344,
+              "p95Ms": 0.063488
+            },
+            "count_sort_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.14657365333333333,
+              "p50Ms": 0.135168,
+              "p95Ms": 0.1569279999999998
+            },
+            "spatial_hash_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.16061098666666668,
+              "p50Ms": 0.147456,
+              "p95Ms": 0.35973119999999975
+            },
+            "simulation_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 5.123150506666667,
+              "p50Ms": 5.074432,
+              "p95Ms": 6.014207999999999
+            }
+          },
+          "observationsSha256": "e71d84db7927bb90bf751eb7716b4522cdb57e065b0f3215ed7c0395a3e1d427"
+        },
+        {
+          "run": "perf-02-hlsl-wave-tiled-08-visible",
+          "metrics": {
+            "wall_frame": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 7.005672,
+              "p50Ms": 6.9579,
+              "p95Ms": 7.958529999999998
+            },
+            "scan_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.06726576,
+              "p50Ms": 0.058368,
+              "p95Ms": 0.063488
+            },
+            "count_sort_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.15342389333333334,
+              "p50Ms": 0.136192,
+              "p95Ms": 0.36352
+            },
+            "spatial_hash_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.16976181333333334,
+              "p50Ms": 0.149504,
+              "p95Ms": 0.3799552
+            },
+            "simulation_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 5.1818752,
+              "p50Ms": 5.1266560000000005,
+              "p95Ms": 6.1113856
+            }
+          },
+          "observationsSha256": "540c52b07c3e05c457b3e8f3c6e1b5f0587b6c3e9120dc3ac2d5df5e3c34eb54"
+        },
+        {
+          "run": "perf-03-hlsl-wave-tiled-08-visible",
+          "metrics": {
+            "wall_frame": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 7.002398166666667,
+              "p50Ms": 6.9901,
+              "p95Ms": 7.96046
+            },
+            "scan_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.06584661333333333,
+              "p50Ms": 0.058368,
+              "p95Ms": 0.063488
+            },
+            "count_sort_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.15052634666666667,
+              "p50Ms": 0.136192,
+              "p95Ms": 0.360448
+            },
+            "spatial_hash_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.16489813333333334,
+              "p50Ms": 0.149504,
+              "p95Ms": 0.376832
+            },
+            "simulation_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 5.18379008,
+              "p50Ms": 5.172224,
+              "p95Ms": 6.028748799999999
+            }
+          },
+          "observationsSha256": "65ea76d3fc637d4e9a8fbb9244b4f2d3355c06b3bf819dc9eb3a50c64a1b339e"
+        }
+      ],
+      "relativeToOriginal": {
+        "scan_complete": {
+          "millisecondsSaved": -0.007168000000000001,
+          "timeChangePercent": 13.99999999999999
+        },
+        "count_sort_complete": {
+          "millisecondsSaved": -0.008192000000000005,
+          "timeChangePercent": 6.400000000000006
+        },
+        "spatial_hash_complete": {
+          "millisecondsSaved": -0.008192000000000005,
+          "timeChangePercent": 5.797101449275366
+        },
+        "simulation_complete": {
+          "millisecondsSaved": -0.024576000000000597,
+          "timeChangePercent": 0.48168590065229555
+        },
+        "wall_frame": {
+          "millisecondsSaved": -0.04600000000000026,
+          "timeChangePercent": 0.6655188877153995
+        }
+      }
+    },
+    "gpuprefixsums-rts": {
+      "repeats": 3,
+      "metrics": {
+        "scan_complete": {
+          "medianOfRunP50Ms": 0.037888,
+          "minRunP50Ms": 0.037888,
+          "maxRunP50Ms": 0.037888,
+          "medianOfRunP95Ms": 0.044032,
+          "medianOfRunMeanMs": 0.04183381333333333
+        },
+        "count_sort_complete": {
+          "medianOfRunP50Ms": 0.115712,
+          "minRunP50Ms": 0.114688,
+          "maxRunP50Ms": 0.115712,
+          "medianOfRunP95Ms": 0.333824,
+          "medianOfRunMeanMs": 0.12850858666666667
+        },
+        "spatial_hash_complete": {
+          "medianOfRunP50Ms": 0.128,
+          "minRunP50Ms": 0.128,
+          "maxRunP50Ms": 0.128,
+          "medianOfRunP95Ms": 0.3534847999999998,
+          "medianOfRunMeanMs": 0.14369450666666667
+        },
+        "simulation_complete": {
+          "medianOfRunP50Ms": 5.128192,
+          "minRunP50Ms": 5.101056,
+          "maxRunP50Ms": 5.135872,
+          "medianOfRunP95Ms": 6.0525056,
+          "medianOfRunMeanMs": 5.186331306666666
+        },
+        "wall_frame": {
+          "medianOfRunP50Ms": 6.9893,
+          "minRunP50Ms": 6.9096,
+          "maxRunP50Ms": 6.992,
+          "medianOfRunP95Ms": 7.943309999999999,
+          "medianOfRunMeanMs": 7.018048
+        }
+      },
+      "runs": [
+        {
+          "run": "perf-01-gpuprefixsums-rts-08-visible",
+          "metrics": {
+            "wall_frame": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 7.018048,
+              "p50Ms": 6.9893,
+              "p95Ms": 7.903925
+            },
+            "scan_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.04183381333333333,
+              "p50Ms": 0.037888,
+              "p95Ms": 0.044032
+            },
+            "count_sort_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.12848810666666666,
+              "p50Ms": 0.114688,
+              "p95Ms": 0.1465343999999999
+            },
+            "spatial_hash_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.14282922666666667,
+              "p50Ms": 0.128,
+              "p95Ms": 0.3482112
+            },
+            "simulation_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 5.186331306666666,
+              "p50Ms": 5.128192,
+              "p95Ms": 6.0525056
+            }
+          },
+          "observationsSha256": "837b37e5c17df1d8a116d86d86e3f04074b4cd25fbd800269a67c7dda814857a"
+        },
+        {
+          "run": "perf-02-gpuprefixsums-rts-08-visible",
+          "metrics": {
+            "wall_frame": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 6.9638975,
+              "p50Ms": 6.9096,
+              "p95Ms": 7.943309999999999
+            },
+            "scan_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.04327424,
+              "p50Ms": 0.037888,
+              "p95Ms": 0.044032
+            },
+            "count_sort_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.12850858666666667,
+              "p50Ms": 0.115712,
+              "p95Ms": 0.333824
+            },
+            "spatial_hash_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.14369450666666667,
+              "p50Ms": 0.128,
+              "p95Ms": 0.3534847999999998
+            },
+            "simulation_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 5.144603306666666,
+              "p50Ms": 5.101056,
+              "p95Ms": 6.035558399999999
+            }
+          },
+          "observationsSha256": "882afccca239911091b0d0402cf14eee80eb30f659de169d217ab7d3f09ec581"
+        },
+        {
+          "run": "perf-03-gpuprefixsums-rts-08-visible",
+          "metrics": {
+            "wall_frame": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 7.0191895,
+              "p50Ms": 6.992,
+              "p95Ms": 7.977889999999999
+            },
+            "scan_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.0411136,
+              "p50Ms": 0.037888,
+              "p95Ms": 0.043008
+            },
+            "count_sort_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.12971146666666666,
+              "p50Ms": 0.115712,
+              "p95Ms": 0.3338752
+            },
+            "spatial_hash_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 0.14442805333333333,
+              "p50Ms": 0.128,
+              "p95Ms": 0.356352
+            },
+            "simulation_complete": {
+              "status": "observed",
+              "validSamples": 600,
+              "expectedSamples": 600,
+              "unavailableSamples": 0,
+              "meanMs": 5.200331093333333,
+              "p50Ms": 5.135872,
+              "p95Ms": 6.097049599999999
+            }
+          },
+          "observationsSha256": "07d279db40208a0091de763d3fe2f8eecef4705c6949a26bb8c008e0226fd716"
+        }
+      ],
+      "relativeToOriginal": {
+        "scan_complete": {
+          "millisecondsSaved": 0.013312000000000004,
+          "timeChangePercent": -26.00000000000001
+        },
+        "count_sort_complete": {
+          "millisecondsSaved": 0.012288000000000007,
+          "timeChangePercent": -9.600000000000009
+        },
+        "spatial_hash_complete": {
+          "millisecondsSaved": 0.01331199999999999,
+          "timeChangePercent": -9.420289855072461
+        },
+        "simulation_complete": {
+          "millisecondsSaved": -0.026112000000000357,
+          "timeChangePercent": 0.5117912694430515
+        },
+        "wall_frame": {
+          "millisecondsSaved": -0.07739999999999991,
+          "timeChangePercent": 1.119807867590672
+        }
+      }
+    }
+  },
+  "statistic": "median of independent per-process p50 values; p95 values are median per-process p95",
+  "scanBoundary": "complete adaptation including pack, reset, scan, unpack; three calls accumulated per simulation frame",
+  "inference": "descriptive cohort only; small whole-frame differences are not a statistical speedup claim"
+}

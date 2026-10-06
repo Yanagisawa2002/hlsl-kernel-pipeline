@@ -1,0 +1,25 @@
+{
+  "schema": "hlslperf.fluid-scan.dependencies.v1",
+  "fluid": {
+    "url": "https://github.com/SebLague/Fluid-Sim.git",
+    "commit": "4717b7259718d349b0001c82836f24ce5fec81d7",
+    "patchedInputs": {
+      "Assets/Scripts/Simulation/FluidSim.cs": "df82715916686ca7a7a17204b07687756a91c2f1d68e8fb5f56878a0a5b22305",
+      "Assets/Scripts/Helpers/SpatialHash/SpatialHash.cs": "473644d784f26f5aed16be0a0c2322a0fded020a92a6f30e4bb505eaae8c0f61",
+      "Assets/Scripts/Helpers/SpatialHash/Offsets/SpatialOffsetCalculator.cs": "8cf6fe9affca8029a71af189813a00503903ef4dd3155213b9a8141c9dcbf6f9",
+      "Assets/Scripts/Helpers/GPU Sort/CountSort/GPUCountSort.cs": "57f8d84116aa7659e23c3870425d979f05867b2f973700f1a3dfed6c1e78135d",
+      "Assets/Scripts/Helpers/GPU Sort/CountSort/Scan/Scan.cs": "ad020a141483b3fe1158a81351c94518e3292e5784631980ca3440197cbad60a"
+    }
+  },
+  "gpuPrefixSums": {
+    "url": "https://github.com/b0nes164/GPUPrefixSums",
+    "commit": "98d93a4e9ed2f3c8353119515bf9be90a2e137ad",
+    "files": {
+      "LICENSE": "64232431772f4f106b73a4c973183a05ac208db9672465d6eb6e5dfda5d5efed",
+      "Runtime/GPUPrefixSumsBase.cs": "1a97b28d16e69c2ba778c399603ebfd94ec4d43771548e59f93548bad77c407d",
+      "Runtime/ReduceThenScan.cs": "56fffa27e231bcafc390e4efe9ad3672724c710ddee26ac07318b0a7e77a449e",
+      "Shaders/ScanCommon.hlsl": "a64538d3290539fe865c719c7bae1a1103d82a4015cd2d22ef0b175312d23325",
+      "Shaders/ReduceThenScan.compute": "ed0d10f77262fee84a2effe0b96e6928d58cdbd8e834e62483e5fda801b17c65"
+    }
+  }
+}

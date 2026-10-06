@@ -44,3 +44,39 @@ tools/HlslPerf.InclusiveScanValidation/** -text -eol
 tools/run_inclusive_scan.py -text -eol
 tools/check_inclusive_control.py -text -eol
 docs/results/data/rtx4090-inclusive-2026-09-15/** -text -diff
+# Keep the frozen application bundle byte-stable across Windows checkouts.
+unity/FluidScanBenchmark/** text eol=lf
+# Existing upstream trailing spaces are part of the pinned/copy-preserved sources.
+unity/FluidScanBenchmark/ThirdParty/** whitespace=-blank-at-eol
+unity/FluidScanBenchmark/Overlay/Assets/Scripts/** whitespace=-blank-at-eol
+tools/*fluid_benchmark.py text eol=lf
+tools/build_fluid_timing.py text eol=lf
+docs/evidence/fluid-scan-static-20261005.json -text
+docs/evidence/fluid-scan-rtx4090-20261005.zip -text -diff
+docs/results/data/fluid-scan-20261005/** -text -diff
+tools/*fluid_sweep.py text eol=lf
+tools/*fluid_application_scaling.py text eol=lf
+tools/run_fluid_scaling.py text eol=lf
+tools/generate_fluid_scaling_figures.py text eol=lf
+docs/results/data/fluid-scan-scaling-20261005/** -text -diff
+docs/evidence/fluid-scan-scaling-20261005.zip -text -diff
+# Ultra-scale experiment identities and interrupted-stage evidence are byte-stable.
+benchmarks/external/native/UltraScanSupport.h -text -eol
+tools/run_ultra_scan.py -text -eol
+tools/test_ultra_scan.py text eol=lf
+tools/package_ultra_scan_evidence.py text eol=lf
+docs/integration/ULTRA_SCAN_PROTOCOL.md text eol=lf
+docs/results/data/rtx4090-ultra-scan-20261006/** -text -diff
+docs/evidence/rtx4090-ultra-scan-20261006.zip -text -diff
+
+tools/package_ultra_scan_formal.py text eol=lf
+docs/results/data/rtx4090-ultra-scan-formal-20261006/** -text -diff
+docs/evidence/rtx4090-ultra-scan-formal-20261006.zip -text -diff
+
+tools/run_fluid_frame_confirmation.py -text -eol
+tools/analyze_fluid_frame_confirmation.py text eol=lf
+tools/package_fluid_frame_confirmation.py text eol=lf
+tools/test_fluid_frame_confirmation.py text eol=lf
+docs/integration/FLUID_FRAME_CONFIRMATION.md text eol=lf
+docs/results/data/fluid-frame-confirmation-20261006/** -text -diff
+docs/evidence/fluid-frame-confirmation-20261006.zip -text -diff

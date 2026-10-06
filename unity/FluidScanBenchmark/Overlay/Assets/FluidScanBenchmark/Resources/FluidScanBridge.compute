@@ -1,0 +1,39 @@
+#pragma kernel PackRaw
+#pragma kernel UnpackRaw
+#pragma kernel PackVectors
+#pragma kernel UnpackVectors
+
+RWStructuredBuffer<uint> Values;
+RWByteAddressBuffer RawValues;
+RWStructuredBuffer<uint4> Vectors;
+uint LogicalCount;
+uint PaddedCount;
+
+[numthreads(256, 1, 1)]
+void PackRaw(uint id : SV_DispatchThreadID)
+{
+    if (id < LogicalCount) RawValues.Store(id * 4, Values[id]);
+}
+
+[numthreads(256, 1, 1)]
+void UnpackRaw(uint id : SV_DispatchThreadID)
+{
+    if (id < LogicalCount) Values[id] = RawValues.Load(id * 4);
+}
+
+[numthreads(256, 1, 1)]
+void PackVectors(uint id : SV_DispatchThreadID)
+{
+    uint first = id * 4;
+    if (first >= PaddedCount) return;
+    uint4 v = 0;
+    [unroll] for (uint i = 0; i < 4; i++)
+        if (first + i < LogicalCount) v[i] = Values[first + i];
+    Vectors[id] = v;
+}
+
+[numthreads(256, 1, 1)]
+void UnpackVectors(uint id : SV_DispatchThreadID)
+{
+    if (id < LogicalCount) Values[id] = Vectors[id / 4][id % 4];
+}

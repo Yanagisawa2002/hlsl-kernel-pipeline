@@ -22,6 +22,17 @@ Marker read-side DRAM activity falls from **44.1089% to 31.4464% of peak sustain
 
 [Timing and correctness](docs/results/RTX4090_INCLUSIVE_SCAN_2026-09-15.md) · [Marker-isolated profiling](docs/results/RTX4090_INCLUSIVE_SCAN_PROFILE_DIAGNOSIS.md) · [Raw profiler evidence](docs/evidence/rtx4090-scan-marker-20260919/README.md) · [API and reproduction](docs/integration/SCAN_INCLUSIVE.md)
 
+The [completed October 6 ultra-scale confirmation](docs/results/rtx4090-ultra-scan-formal-20261006.md)
+has **48 fresh formal processes** at **201,326,592 and 268,435,456 elements**,
+six per arm/cell. Native inclusive/exclusive complete GPU scan means use
+**16.70–18.51% less time than pinned RTS** on RTX 4090 with all-one uint32 inputs;
+all four pointwise nominal 95% intervals favor the local implementation.
+[Earlier complete cells](docs/results/rtx4090-ultra-scan-20261006.md) at
+67,108,864 / 134,217,728 use 15.88–19.87% less time. Both earlier interrupted
+campaigns and their resource stops remain preserved, and these separate cohorts
+are not pooled. This does not establish a continuous advantage range or
+application frame-time improvement.
+
 ### 2. Optimization did not pay off
 
 ![Complete Crowd lifecycle latency: GPU paths 45–49 ms per request; CPU12 6.98 ms](docs/figures/crowd-complete-lifecycle.svg)
@@ -106,6 +117,31 @@ The current workload pack is intentionally broad enough; the project is not tryi
 The standalone GPU-driven Crowd/VFX demo adds an application-shaped path: visibility classification → stable compaction → tile histogram/prefix → tile-seed scatter → deterministic tiled compute rasterization → full atlas validation.
 
 [GPU-driven demo](gpu-driven-demo/README.md) · [experiment history](docs/EXPERIMENT_HISTORY.md)
+
+The [Unity fluid application scan benchmark](unity/FluidScanBenchmark/README.md)
+adds the author-provided water/foam scene with original, local wave-tiled and pinned
+GPUPrefixSums RTS exclusive scans in the same spatial count sorter. On the RTX 4090
+at 410,758 particles, complete-scan p50/frame was 0.0512 ms original, 0.058368 ms
+local and 0.037888 ms external RTS. The local adaptation took 14% more time;
+**no clear whole-frame improvement was established**. [Measured results and raw
+evidence](docs/results/fluid-scan-rtx4090-20261005.md) preserve this negative result.
+
+The [scale and compatible-buffer follow-up](docs/results/fluid-scan-scaling-rtx4090-20261005.md)
+separates core scan, adaptation and whole-frame cost across 32,768–16,000,000
+elements and seven fluid particle counts. At 16M elements, direct local buffers
+reduce complete scan from 0.4653 to 0.1994 ms, below original at 0.2221 ms;
+external RTS core remains faster at 0.1565 ms. The measured comfort region is
+relative to the author baseline and does not establish a universal algorithm win.
+
+The [independent whole-frame confirmation](docs/results/fluid-frame-confirmation-20261006.md)
+retains six complete process pairs at 1,024,000 particles: original/local-direct
+wall means are 15.640 / 15.823 ms, with no confirmed improvement. The 15,761,198
+load completed four pairs (314.810 / 314.933 ms, descriptive only) before the
+80 C thermal guard stopped the next own process; the planned stage remains
+incomplete. Original scan occupies about 0.48% / 0.20% of these wall-frame budgets.
+The failed receipt, source snapshot and missing rejected-temperature-sample
+limitation are preserved. This application does not establish a frame-time gain
+from the independently measured native ultra-scale scan advantage.
 
 ## Additional measured evidence
 

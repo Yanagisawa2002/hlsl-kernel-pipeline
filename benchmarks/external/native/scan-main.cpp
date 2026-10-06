@@ -7,6 +7,7 @@
 #include "HlslPerfScan.h"
 #include "RuntimeSupport.h"
 #include "ProfileSupport.h"
+#include "UltraScanSupport.h"
 
 int RuntimeScan(int argc, char** argv)
 {
@@ -66,6 +67,13 @@ int RuntimeScan(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
+    if (argc > 1 && (std::strcmp(argv[1], "ultra-gate") == 0 || std::strcmp(argv[1], "ultra-batch") == 0))
+    {
+        setvbuf(stdout, nullptr, _IONBF, 0);
+        try { return RuntimeUltraScan(argc, argv); }
+        catch (const winrt::hresult_error& error) { printf("RUNTIME_FAILED HRESULT %08x\n", uint32_t(error.code().value)); return 5; }
+        catch (const std::exception& error) { printf("RUNTIME_FAILED %s\n", error.what()); return 5; }
+    }
     if (argc > 1 && (std::strcmp(argv[1], "probe") == 0 || std::strcmp(argv[1], "validate-only") == 0 || std::strcmp(argv[1], "batch-only") == 0 || std::strcmp(argv[1], "profile-once") == 0 || std::strcmp(argv[1], "test-all") == 0 || std::strcmp(argv[1], "export-input") == 0))
     {
         try { return RuntimeScan(argc, argv); }
